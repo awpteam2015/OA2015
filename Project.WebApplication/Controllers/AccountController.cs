@@ -31,7 +31,7 @@ namespace Project.WebApplication.Controllers
         }
 
         public JsonResult GetData()
-        {
+        {  
             //var t = new JsonResult();
             //t.Data = new { success = true, Message = "成功！", unAuthorizedRequest = false, targetUrl="http://www.baidu.com" };
             //return t;
