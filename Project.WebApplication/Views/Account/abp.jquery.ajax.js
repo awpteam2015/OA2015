@@ -1,0 +1,7 @@
+﻿(function ($) {
+
+    $.fn.ajax = function() {
+        
+
+    };
+})
