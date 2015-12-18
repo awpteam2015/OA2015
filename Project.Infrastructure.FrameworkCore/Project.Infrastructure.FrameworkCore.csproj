@@ -30,6 +30,17 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="FluentNHibernate, Version=2.0.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\FluentNHibernate.2.0.3.0\lib\net40\FluentNHibernate.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="HibernatingRhinos.Profiler.Appender.v4.0">
+      <HintPath>..\Lib\HibernatingRhinos.Profiler.Appender.v4.0.dll</HintPath>
+    </Reference>
+    <Reference Include="Iesi.Collections, Version=4.0.0.0, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Iesi.Collections.4.0.0.4000\lib\net40\Iesi.Collections.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
       <Private>True</Private>
@@ -38,8 +49,13 @@
       <HintPath>..\packages\Newtonsoft.Json.8.0.1-beta3\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="NHibernate, Version=4.0.0.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
+      <HintPath>..\packages\NHibernate.4.0.4.4000\lib\net40\NHibernate.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data.OracleClient" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.Helpers.dll</HintPath>
@@ -72,11 +88,48 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
+    <Compile Include="DataNhibernate\Helpers\CustomDialect.cs" />
+    <Compile Include="DataNhibernate\Helpers\HqlGeneratorForMethodExtend.cs" />
+    <Compile Include="DataNhibernate\Helpers\NhExpansion.cs" />
+    <Compile Include="DataNhibernate\Helpers\NHibernateContractResolver.cs" />
+    <Compile Include="DataNhibernate\Helpers\PredicateBuilder.cs" />
+    <Compile Include="DataNhibernate\SessionFactoryManager.cs" />
+    <Compile Include="DataNhibernate\SessionStorage\HttpSessionContainer.cs" />
+    <Compile Include="DataNhibernate\SessionStorage\ISessionStorageContainer.cs" />
+    <Compile Include="DataNhibernate\SessionStorage\SessionStorageFactory.cs" />
+    <Compile Include="DataNhibernate\SessionStorage\ThreadSessionStorageContainer.cs" />
+    <Compile Include="DataNhibernate\TransactionHelper.cs" />
+    <Compile Include="Domain\Entities\Auditing\Abstract\AuditedEntity.cs" />
+    <Compile Include="Domain\Entities\Auditing\Abstract\FullAuditedEntity.cs" />
+    <Compile Include="Domain\Entities\Auditing\Abstract\ModificationAuditedEntity.cs" />
+    <Compile Include="Domain\Entities\Auditing\Abstract\CreationAuditedEntity.cs" />
+    <Compile Include="Domain\Entities\Component\IHasCreationTime.cs" />
+    <Compile Include="Domain\Entities\Component\IMustHaveSiteCode.cs" />
+    <Compile Include="Domain\Entities\FullAuditedEntity.cs" />
+    <Compile Include="Domain\Entities\CreationAuditedEntity.cs" />
+    <Compile Include="Domain\Entities\Auditing\Interface\IAudited.cs" />
+    <Compile Include="Domain\Entities\Auditing\Interface\ICreationAudited.cs" />
+    <Compile Include="Domain\Entities\Auditing\Interface\IDeletionAudited.cs" />
+    <Compile Include="Domain\Entities\Auditing\Interface\IFullAudited.cs" />
+    <Compile Include="Domain\Entities\Auditing\Interface\IModificationAudited.cs" />
+    <Compile Include="Domain\Entities\Component\ISoftDelete.cs" />
+    <Compile Include="Domain\Entities\ModificationAuditedEntity.cs" />
+    <Compile Include="DataNhibernate\EntityMappings\BaseMap.cs" />
+    <Compile Include="Domain\Entities\Entity.cs" />
+    <Compile Include="DataNhibernate\EntityMappings\NhMappingExtensions.cs" />
+    <Compile Include="Domain\Repositories\Interface\IRepositoryBase.cs" />
+    <Compile Include="Domain\Repositories\Interface\IRepositoryBaseExtendOracle.cs" />
+    <Compile Include="Domain\Repositories\Interface\IRepositoryBaseExtendSql.cs" />
+    <Compile Include="Domain\Repositories\RepositoryBase.cs" />
+    <Compile Include="Domain\Repositories\RepositoryBaseOracle.cs" />
+    <Compile Include="Domain\Repositories\RepositoryBaseSql.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Domain\Services\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

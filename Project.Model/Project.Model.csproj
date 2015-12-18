@@ -40,7 +40,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="PermissionManager\PermissionFunctionEntity.cs" />
+    <Compile Include="PermissionManager\UserInfoEntity.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Project.Infrastructure.FrameworkCore\Project.Infrastructure.FrameworkCore.csproj">
+      <Project>{1C2392AD-A0F8-4378-9C54-3DCD1FB5D1DB}</Project>
+      <Name>Project.Infrastructure.FrameworkCore</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

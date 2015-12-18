@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Project.Repository
+namespace Project.Model.PermissionManager
 {
-    public class Class1
+    public class UserInfoEntity
     {
+
     }
 }

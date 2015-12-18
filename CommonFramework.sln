@@ -19,6 +19,15 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Project.Repository", "Proje
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Project.Mvc", "Project.Mvc\Project.Mvc.csproj", "{28697EFA-5FC7-4454-AE92-6DF284882EF8}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Lib", "Lib", "{9123F07D-16C6-44DA-A42B-DE99A9DC80DD}"
+	ProjectSection(SolutionItems) = preProject
+		Lib\HibernatingRhinos.Profiler.Appender.v4.0.dll = Lib\HibernatingRhinos.Profiler.Appender.v4.0.dll
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tool", "Tool", "{452812AE-9B15-47E7-8F05-6F3A559E16FA}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Doc", "Doc", "{1F3E81CC-6777-4BD3-B05A-60BD3485749F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
