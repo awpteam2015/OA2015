@@ -7,6 +7,6 @@ using System.Threading.Tasks;
 namespace Project.Infrastructure.FrameworkCore.Domain
 {
     class Class1
-    {
+    {  
     }
 }
