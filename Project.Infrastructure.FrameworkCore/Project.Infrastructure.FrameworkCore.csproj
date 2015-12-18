@@ -99,6 +99,7 @@
     <Compile Include="DataNhibernate\SessionStorage\SessionStorageFactory.cs" />
     <Compile Include="DataNhibernate\SessionStorage\ThreadSessionStorageContainer.cs" />
     <Compile Include="DataNhibernate\TransactionHelper.cs" />
+    <Compile Include="Domain\Class1.cs" />
     <Compile Include="Domain\Entities\Auditing\Abstract\AuditedEntity.cs" />
     <Compile Include="Domain\Entities\Auditing\Abstract\FullAuditedEntity.cs" />
     <Compile Include="Domain\Entities\Auditing\Abstract\ModificationAuditedEntity.cs" />
