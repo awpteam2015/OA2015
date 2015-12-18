@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Text.RegularExpressions;
 
-namespace SyncSoft.ROM.Infrastructure.DataNhibernate.Helpers
+namespace Project.Infrastructure.FrameworkCore.DataNhibernate.Helpers
 {
     public static class NhExpansion
     {
