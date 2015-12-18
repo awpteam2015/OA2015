@@ -88,6 +88,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataNhibernate\EntityMappings\FullMap.cs" />
+    <Compile Include="DataNhibernate\EntityMappings\ViewBaseMap.cs" />
     <Compile Include="DataNhibernate\Helpers\CustomDialect.cs" />
     <Compile Include="DataNhibernate\Helpers\HqlGeneratorForMethodExtend.cs" />
     <Compile Include="DataNhibernate\Helpers\NhExpansion.cs" />
@@ -134,14 +136,13 @@
     <Compile Include="Domain\Repositories\RepositoryBase.cs" />
     <Compile Include="Domain\Repositories\RepositoryBaseOracle.cs" />
     <Compile Include="Domain\Repositories\RepositoryBaseSql.cs" />
+    <Compile Include="Domain\Services\IService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Domain\Services\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
