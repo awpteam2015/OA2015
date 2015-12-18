@@ -1,35 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.OracleClient;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using NHibernate;
 using NHibernate.Linq;
 using Project.Infrastructure.FrameworkCore.DataNhibernate;
 using Project.Infrastructure.FrameworkCore.Domain.Entities.Component;
-using SyncSoft.ROM.Domain.Repository;
+using Project.Infrastructure.FrameworkCore.Domain.Repositories.Interface;
 using SyncSoft.ROM.Infrastructure.DataNhibernate;
 
-namespace Project.Infrastructure.FrameworkCore.FrameworkCore.Repository
+namespace Project.Infrastructure.FrameworkCore.Domain.Repositories
 {
     /// <summary>
     /// 数据持久基类
     /// </summary>
-    public class RepositoryBase<TEntity, TKey> : IRepositoryBaseOracle<TEntity, TKey>
+    public class RepositoryBase<TEntity, TKey> : ReadOnlyRepositoryBase<TEntity, TKey>, IRepositoryBase<TEntity, TKey>
         where TEntity : class
     {
-
-
-        public TEntity GetById(TKey id)
-        {
-
-            ISession session = SessionFactoryManager.GetCurrentSession();
-            return session.Get<TEntity>(id);
-        }
-
-
         public TEntity Load(TKey id)
         {
             ISession session = SessionFactoryManager.GetCurrentSession();
@@ -42,17 +27,10 @@ namespace Project.Infrastructure.FrameworkCore.FrameworkCore.Repository
             return session.Merge(entity);
         }
 
-        public IQueryable<TEntity> Query()
-        {
-            ISession session = SessionFactoryManager.GetCurrentSession();
-
-            return session.Query<TEntity>();
-        }
 
         public TKey Save(TEntity entity)
         {
             ISession session = SessionFactoryManager.GetCurrentSession();
-
             using (var tx = NhTransactionHelper.BeginTransaction())
             {
                 try
@@ -68,7 +46,6 @@ namespace Project.Infrastructure.FrameworkCore.FrameworkCore.Repository
                 }
             }
         }
-
 
 
         public TKey Save2(TEntity entity, ISession session)
@@ -112,8 +89,6 @@ namespace Project.Infrastructure.FrameworkCore.FrameworkCore.Repository
             //        throw;
             //    }
             //}
-
-
             ISession session = SessionFactoryManager.GetCurrentSession();
             if (entity is ISoftDelete)
             {
@@ -145,26 +120,7 @@ namespace Project.Infrastructure.FrameworkCore.FrameworkCore.Repository
             }
         }
 
-        /// <summary>
-        /// 清除对象一级缓存(Session.Flush()不会同步到数据库)
-        /// </summary>
-        /// <param name="entity"></param>
-        public void Evict(TEntity entity)
-        {
-            SessionFactoryManager.GetCurrentSession().Evict(entity);
-        }
 
-        /// <summary>
-        /// 清除对象一级缓存(Session.Flush()不会同步到数据库)
-        /// </summary>
-        /// <param name="list"></param>
-        public void Evict(IEnumerable<TEntity> list)
-        {
-            foreach (var p in list)
-            {
-                SessionFactoryManager.GetCurrentSession().Evict(p);
-            }
-        }
 
     }
 }

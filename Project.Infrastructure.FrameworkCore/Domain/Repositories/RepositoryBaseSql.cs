@@ -1,14 +1,8 @@
-﻿using System.Collections.Generic;
-using System.Data;
+﻿using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
-using NHibernate;
-using NHibernate.Linq;
 using Project.Infrastructure.FrameworkCore.FrameworkCore.Repository.Interface;
-using SyncSoft.ROM.Domain.Repository;
-using SyncSoft.ROM.Infrastructure.DataNhibernate;
 
-namespace Project.Infrastructure.FrameworkCore.FrameworkCore.Repository
+namespace Project.Infrastructure.FrameworkCore.Domain.Repositories
 {
     /// <summary>
     /// 数据持久基类

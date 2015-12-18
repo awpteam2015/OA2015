@@ -126,9 +126,11 @@
     <Compile Include="DataNhibernate\EntityMappings\BaseMap.cs" />
     <Compile Include="Domain\Entities\Entity.cs" />
     <Compile Include="DataNhibernate\EntityMappings\NhMappingExtensions.cs" />
+    <Compile Include="Domain\Repositories\Interface\IReadOnlyRepositoryBase.cs" />
     <Compile Include="Domain\Repositories\Interface\IRepositoryBase.cs" />
     <Compile Include="Domain\Repositories\Interface\IRepositoryBaseExtendOracle.cs" />
     <Compile Include="Domain\Repositories\Interface\IRepositoryBaseExtendSql.cs" />
+    <Compile Include="Domain\Repositories\ReadOnlyRepositoryBase.cs" />
     <Compile Include="Domain\Repositories\RepositoryBase.cs" />
     <Compile Include="Domain\Repositories\RepositoryBaseOracle.cs" />
     <Compile Include="Domain\Repositories\RepositoryBaseSql.cs" />

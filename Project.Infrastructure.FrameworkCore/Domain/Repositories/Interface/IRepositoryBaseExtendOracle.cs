@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
+﻿using System.Data;
 using System.Data.OracleClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Project.Infrastructure.FrameworkCore.FrameworkCore.Repository.Interface
+namespace Project.Infrastructure.FrameworkCore.Domain.Repositories.Interface
 {
     public interface IRepositoryBaseExtendOracle
     {
