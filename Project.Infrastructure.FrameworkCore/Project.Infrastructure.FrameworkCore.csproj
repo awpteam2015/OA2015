@@ -100,10 +100,19 @@
     <Compile Include="DataNhibernate\SessionStorage\ThreadSessionStorageContainer.cs" />
     <Compile Include="DataNhibernate\TransactionHelper.cs" />
     <Compile Include="Domain\Class1.cs" />
-    <Compile Include="Domain\Entities\Auditing\Abstract\AuditedEntity.cs" />
-    <Compile Include="Domain\Entities\Auditing\Abstract\FullAuditedEntity.cs" />
+    <Compile Include="Domain\Entities\Auditing\Abstract\AuditedEntity.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Domain\Entities\Auditing\Abstract\CreationAuditedEntity.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Domain\Entities\Auditing\Abstract\FullAuditedEntity.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Domain\Entities\Auditing\Abstract\ModificationAuditedEntity.cs" />
-    <Compile Include="Domain\Entities\Auditing\Abstract\CreationAuditedEntity.cs" />
+    <Compile Include="Domain\Entities\Auditing\Interface\IFullAudited.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Domain\Entities\Component\IHasCreationTime.cs" />
     <Compile Include="Domain\Entities\Component\IMustHaveSiteCode.cs" />
     <Compile Include="Domain\Entities\FullAuditedEntity.cs" />
@@ -111,7 +120,6 @@
     <Compile Include="Domain\Entities\Auditing\Interface\IAudited.cs" />
     <Compile Include="Domain\Entities\Auditing\Interface\ICreationAudited.cs" />
     <Compile Include="Domain\Entities\Auditing\Interface\IDeletionAudited.cs" />
-    <Compile Include="Domain\Entities\Auditing\Interface\IFullAudited.cs" />
     <Compile Include="Domain\Entities\Auditing\Interface\IModificationAudited.cs" />
     <Compile Include="Domain\Entities\Component\ISoftDelete.cs" />
     <Compile Include="Domain\Entities\ModificationAuditedEntity.cs" />
