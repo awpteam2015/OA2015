@@ -16,7 +16,7 @@ namespace Project.WebApplication.Controllers
     public class AccountController : Controller
     {
 
-        [PermissionAuthorize]
+        //[PermissionAuthorize]
         // GET: Account
         public ActionResult Index()
         {
@@ -72,6 +72,12 @@ namespace Project.WebApplication.Controllers
             };
 
         }
+
+        public ActionResult Default()
+        {
+            return View();
+        }
+
 
     }
 

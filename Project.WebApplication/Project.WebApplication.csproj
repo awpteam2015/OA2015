@@ -99,6 +99,8 @@
     <Content Include="Areas\ContentManager\Script\JavaScript1.js" />
     <Content Include="Config\hibernate.cfg.xml" />
     <Content Include="Global.asax" />
+    <Content Include="Resources\Css\Site.css" />
+    <Content Include="Scripts\Account\Index.js" />
     <Content Include="Scripts\Account\Login.js" />
     <Content Include="Scripts\jquery-easyui\changelog.txt" />
     <Content Include="Scripts\jquery-easyui\easyloader.js" />
@@ -498,6 +500,7 @@
     <Content Include="Areas\PermissionManager\Views\web.config" />
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Account\Index.cshtml" />
+    <Content Include="Views\Account\Default.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -517,7 +520,6 @@
     <Folder Include="Areas\SystemSetManager\Models\" />
     <Folder Include="Areas\SystemSetManager\Views\Shared\" />
     <Folder Include="Models\" />
-    <Folder Include="Resources\Css\" />
     <Folder Include="Views\Default\" />
   </ItemGroup>
   <ItemGroup>
