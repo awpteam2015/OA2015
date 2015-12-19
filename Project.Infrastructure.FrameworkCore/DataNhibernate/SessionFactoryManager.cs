@@ -97,6 +97,7 @@ namespace Project.Infrastructure.FrameworkCore.DataNhibernate
             if (currentSession != null)
             {
                 currentSession.Clear();
+                _sessionStorageContainer.Remove();
             }
         }
 

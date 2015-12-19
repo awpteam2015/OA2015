@@ -8,6 +8,8 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Project.Infrastructure.FrameworkCore.DataNhibernate;
+using Project.Service.PermissionManager;
 
 namespace WindowsFormsApplicationTest
 {
@@ -20,15 +22,16 @@ namespace WindowsFormsApplicationTest
 
         private void button1_Click(object sender, EventArgs e)
         {
-        var t=    Thread.CurrentThread.ManagedThreadId.ToString(); 
+            var t = UserService.GetInstance().GetModel(1);
            // Thread.CurrentThread.Name = "1111";
-            textBox1.Text += Thread.CurrentThread.Name + "-----------"+t;
+            textBox1.Text += Thread.CurrentThread.Name + "-----------"+t.UserName;
+            SessionFactoryManager.Clear();
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            var t = Thread.CurrentThread.ManagedThreadId.ToString();
-            textBox1.Text += Thread.CurrentThread.Name + "-----------" + t; ;
+            var t = UserService.GetInstance().GetModel(1);
+            textBox1.Text += Thread.CurrentThread.Name + "-----------" + t.UserName;
         }
     }
 }
