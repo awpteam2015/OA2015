@@ -4,9 +4,7 @@ namespace Project.Infrastructure.FrameworkCore.Domain.Entities.Auditing.Interfac
 {
     public interface IDeletionAudited
     {
-
         string DeleterUserCode { get; set; }
-
 
         DateTime? DeletionTime { get; set; }
     }

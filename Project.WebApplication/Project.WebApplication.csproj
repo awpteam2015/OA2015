@@ -483,10 +483,12 @@
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Areas\ContentManager\ContentManagerAreaRegistration.cs" />
+    <Compile Include="Areas\PermissionManager\Controllers\PermissionController.cs" />
     <Compile Include="Areas\PermissionManager\PermissionManagerAreaRegistration.cs" />
     <Compile Include="Areas\SystemSetManager\SystemSetManagerAreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\DefaultController.cs" />
+    <Compile Include="Controllers\PermissionManager\PermissionController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -513,14 +515,15 @@
     <Folder Include="Areas\ContentManager\Controllers\" />
     <Folder Include="Areas\ContentManager\Models\" />
     <Folder Include="Areas\ContentManager\Views\Shared\" />
-    <Folder Include="Areas\PermissionManager\Controllers\" />
     <Folder Include="Areas\PermissionManager\Models\" />
+    <Folder Include="Areas\PermissionManager\Views\Permission\" />
     <Folder Include="Areas\PermissionManager\Views\Shared\" />
     <Folder Include="Areas\SystemSetManager\Controllers\" />
     <Folder Include="Areas\SystemSetManager\Models\" />
     <Folder Include="Areas\SystemSetManager\Views\Shared\" />
     <Folder Include="Models\" />
     <Folder Include="Views\Default\" />
+    <Folder Include="Views\Permission\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Project.Infrastructure.FrameworkCore\Project.Infrastructure.FrameworkCore.csproj">
