@@ -37,7 +37,9 @@ namespace Project.Infrastructure.FrameworkCore.DataNhibernate.SessionStorage
         {
             if (Thread.CurrentThread.Name==null)
             {
-                return Guid.NewGuid().ToString();
+                var guid= Guid.NewGuid().ToString();
+                Thread.CurrentThread.Name = guid;
+                return guid;
             }
 
             return Thread.CurrentThread.Name;

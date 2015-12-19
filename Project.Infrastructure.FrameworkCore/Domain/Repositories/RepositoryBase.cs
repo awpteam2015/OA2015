@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using NHibernate;
 using NHibernate.Linq;
@@ -65,30 +66,16 @@ namespace Project.Infrastructure.FrameworkCore.Domain.Repositories
                     session.Update(entity);
                     tx.Commit();
                 }
-                catch
+                catch(Exception e)
                 {
                     tx.Rollback();
-                    throw;
+                    throw; 
                 }
             }
         }
 
         public void Delete(TEntity entity)
         {
-            //ISession session = SessionFactoryManager.GetCurrentSession();
-            //using (var tx = NhTransactionHelper.BeginTransaction())
-            //{
-            //    try
-            //    {
-            //        session.Delete(entity);
-            //        tx.Commit();
-            //    }
-            //    catch
-            //    {
-            //        tx.Rollback();
-            //        throw;
-            //    }
-            //}
             ISession session = SessionFactoryManager.GetCurrentSession();
             if (entity is ISoftDelete)
             {
@@ -99,7 +86,6 @@ namespace Project.Infrastructure.FrameworkCore.Domain.Repositories
             {
                 session.Delete(entity);
             }
-
         }
 
         public void SaveOrUpdate(TEntity entity)

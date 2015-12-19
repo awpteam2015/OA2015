@@ -117,6 +117,7 @@
     </Compile>
     <Compile Include="Domain\Entities\Component\IHasCreationTime.cs" />
     <Compile Include="Domain\Entities\Component\IMustHaveSiteCode.cs" />
+    <Compile Include="Domain\Entities\AuditedEntity.cs" />
     <Compile Include="Domain\Entities\FullAuditedEntity.cs" />
     <Compile Include="Domain\Entities\CreationAuditedEntity.cs" />
     <Compile Include="Domain\Entities\Auditing\Interface\IAudited.cs" />

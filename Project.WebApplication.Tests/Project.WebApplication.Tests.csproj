@@ -60,9 +60,17 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Project.Infrastructure.FrameworkCore\Project.Infrastructure.FrameworkCore.csproj">
+      <Project>{1C2392AD-A0F8-4378-9C54-3DCD1FB5D1DB}</Project>
+      <Name>Project.Infrastructure.FrameworkCore</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Project.Map\Project.Map.csproj">
       <Project>{21e524e2-cafe-4cbb-8141-e21dba15fc1f}</Project>
       <Name>Project.Map</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Project.Model\Project.Model.csproj">
+      <Project>{3D26782A-3308-430B-B58F-5F8ABA1A50B3}</Project>
+      <Name>Project.Model</Name>
     </ProjectReference>
     <ProjectReference Include="..\Project.Service\Project.Service.csproj">
       <Project>{CC818705-0142-46D9-A858-1575069C0ABE}</Project>

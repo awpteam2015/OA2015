@@ -10,8 +10,8 @@ namespace Project.Infrastructure.FrameworkCore.Domain.Entities.Auditing.Abstract
      [Serializable]
     public abstract class CreationAuditedEntity<TPrimaryKey> : Entity<TPrimaryKey>, ICreationAudited
     {
-        public string CreatorUserCode { get; set; }
-        public DateTime? CreationTime { get; set; }
+         public virtual string CreatorUserCode { get; set; }
+         public virtual DateTime? CreationTime { get; set; }
     }
 
    

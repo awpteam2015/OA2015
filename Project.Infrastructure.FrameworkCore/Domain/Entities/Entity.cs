@@ -66,10 +66,12 @@ namespace Project.Infrastructure.FrameworkCore.Domain.Entities
 
     }
 
-    [Serializable]
-    public abstract class EntitySoftDelete : Entity, ISoftDelete
-    {
-        public virtual bool IsDeleted { get; set; }
-    }
+    //[Serializable]
+    //public abstract class EntitySoftDelete<T> : Entity<T>, ISoftDelete
+    //{
+    //    public virtual bool IsDeleted { get; set; }
+    //}
 
+
+   
 }
