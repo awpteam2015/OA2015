@@ -53,7 +53,8 @@
                 }*@
             <div title="我的收藏" data-options="iconCls:'icon-asterisk_yellow'">
                 <ul class='menulist'>
-                    <li><a target='mainFrame' href='javascript:void(0)' lang='/Account/Default'>流程发起</a></li>
+                    <li><a target='mainFrame' href='javascript:void(0)' lang='/PermissionManager/UserInfo/List'>流程发起</a></li>
+
                 </ul>
             </div>
             <div title="流程审批" data-options="iconCls:'icon-workflow'">
@@ -125,24 +126,24 @@
     </div>
 
     @*<div id="updatePwdWin" class="easyui-dialog" title="修改密码" style="width:300px;height:200px; padding:10px 10px; background-color:#fff;"
-         data-options="iconCls:'icon-save',modal:true,closed:true,buttons:[{
-				text:'确认修改',iconCls:'icon-ok',handler: $.Index.updatePwdHandler
-			},{
-				text:'关闭',iconCls:'icon-cancel',handler: $.Index.closeUpdatePwdWin
-			}]">
-        <form id="upPwdForm" method="post">
-            <table>
-                <tr>
-                    <td>新密码：</td>
-                    <td><input id="pw1" type="password" name="newPwd" style="width:150px;" /></td>
-                </tr>
-                <tr>
-                    <td>确认新密码：</td>
-                    <td><input id="pw2" type="password" name="newPwdConfirm" style="width:150px;" /></td>
-                </tr>
-            </table>
-        </form>
-    </div>*@
+             data-options="iconCls:'icon-save',modal:true,closed:true,buttons:[{
+                    text:'确认修改',iconCls:'icon-ok',handler: $.Index.updatePwdHandler
+                },{
+                    text:'关闭',iconCls:'icon-cancel',handler: $.Index.closeUpdatePwdWin
+                }]">
+            <form id="upPwdForm" method="post">
+                <table>
+                    <tr>
+                        <td>新密码：</td>
+                        <td><input id="pw1" type="password" name="newPwd" style="width:150px;" /></td>
+                    </tr>
+                    <tr>
+                        <td>确认新密码：</td>
+                        <td><input id="pw2" type="password" name="newPwdConfirm" style="width:150px;" /></td>
+                    </tr>
+                </table>
+            </form>
+        </div>*@
 
 </body>
 </html>

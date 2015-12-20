@@ -3,24 +3,24 @@ using Project.Infrastructure.FrameworkCore.Domain.Entities.Component;
 
 namespace Project.Infrastructure.FrameworkCore.Domain.Entities
 {
-    public interface  IEntity<TId>
+    public interface  IEntity<TPrimaryKey>
     {
-          TId PkId { get;  set; }
+          TPrimaryKey PkId { get;  set; }
           int Version { get; set; }
     }
 
     [Serializable]
-    public abstract class Entity<TId> : IEntity<TId>
+    public abstract class Entity<TPrimaryKey> : IEntity<TPrimaryKey>
     {   
         public override bool Equals(object obj)
         {
-            return Equals(obj as Entity<TId>);
+            return Equals(obj as Entity<TPrimaryKey>);
         }
 
-        private static bool IsTransient(Entity<TId> obj)
+        private static bool IsTransient(Entity<TPrimaryKey> obj)
         {
             return obj != null &&
-                   Equals(obj.PkId, default(TId));
+                   Equals(obj.PkId, default(TPrimaryKey));
         }
 
         private Type GetUnproxiedType()
@@ -28,7 +28,7 @@ namespace Project.Infrastructure.FrameworkCore.Domain.Entities
             return GetType();
         }
 
-        public virtual bool Equals(Entity<TId> other)
+        public virtual bool Equals(Entity<TPrimaryKey> other)
         {
             if (other == null)
                 return false;
@@ -51,12 +51,12 @@ namespace Project.Infrastructure.FrameworkCore.Domain.Entities
 
         public override int GetHashCode()
         {
-            if (Equals(PkId, default(TId)))
+            if (Equals(PkId, default(TPrimaryKey)))
                 return base.GetHashCode();
             return PkId.GetHashCode();
         }
 
-        public virtual TId PkId { get; set; }
+        public virtual TPrimaryKey PkId { get; set; }
         public virtual int Version { get; set; }
     }
 

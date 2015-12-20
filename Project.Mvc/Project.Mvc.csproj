@@ -75,6 +75,7 @@
     <Compile Include="Authorization\PermissionAuthorizeAttribute.cs" />
     <Compile Include="Class1.cs" />
     <Compile Include="Controllers\Results\AbpJsonResult.cs" />
+    <Compile Include="Models\AjaxRequest.cs" />
     <Compile Include="Models\AjaxResponse.cs" />
     <Compile Include="Models\ErrorInfo.cs" />
     <Compile Include="Models\LoginUserInfo.cs" />
@@ -83,6 +84,10 @@
     <Compile Include="Views\LoginVM.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Project.Infrastructure.FrameworkCore\Project.Infrastructure.FrameworkCore.csproj">
+      <Project>{1C2392AD-A0F8-4378-9C54-3DCD1FB5D1DB}</Project>
+      <Name>Project.Infrastructure.FrameworkCore</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Project.Model\Project.Model.csproj">
       <Project>{3D26782A-3308-430B-B58F-5F8ABA1A50B3}</Project>
       <Name>Project.Model</Name>

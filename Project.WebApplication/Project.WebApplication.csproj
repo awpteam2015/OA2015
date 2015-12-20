@@ -97,11 +97,14 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\ContentManager\Script\JavaScript1.js" />
+    <Content Include="Areas\PermissionManager\Scripts\UserInfo\Hd.js" />
+    <Content Include="Areas\PermissionManager\Scripts\UserInfo\List.js" />
     <Content Include="Config\hibernate.cfg.xml" />
     <Content Include="Global.asax" />
     <Content Include="Resources\Css\Site.css" />
     <Content Include="Scripts\Account\Index.js" />
     <Content Include="Scripts\Account\Login.js" />
+    <Content Include="Scripts\pro\base64.js" />
     <Content Include="Scripts\jquery-easyui\changelog.txt" />
     <Content Include="Scripts\jquery-easyui\easyloader.js" />
     <Content Include="Scripts\jquery-easyui\jquery.easyui.min.js" />
@@ -476,6 +479,9 @@
     <Content Include="Scripts\jquery-easyui\themes\metro\validatebox.css" />
     <Content Include="Scripts\jquery-easyui\themes\metro\window.css" />
     <Content Include="Scripts\jquery-easyui\themes\mobile.css" />
+    <Content Include="Scripts\jqueryExtend\Json.js" />
+    <Content Include="Scripts\pro\bindKit.js" />
+    <Content Include="Scripts\pro\submitKit.js" />
     <Content Include="Scripts\pro\jquery-message.js" />
     <Content Include="Scripts\pro\abp.jquery.ajax.js" />
     <Content Include="Web.config" />
@@ -484,6 +490,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Areas\ContentManager\ContentManagerAreaRegistration.cs" />
     <Compile Include="Areas\PermissionManager\Controllers\PermissionController.cs" />
+    <Compile Include="Areas\PermissionManager\Controllers\UserInfoController.cs" />
     <Compile Include="Areas\PermissionManager\PermissionManagerAreaRegistration.cs" />
     <Compile Include="Areas\SystemSetManager\SystemSetManagerAreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
@@ -503,6 +510,10 @@
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Account\Index.cshtml" />
     <Content Include="Views\Account\Default.cshtml" />
+    <Content Include="Views\Permission\UserInfoHd.cshtml" />
+    <Content Include="Views\Shared\_LayoutHandler.cshtml" />
+    <Content Include="Areas\PermissionManager\Views\UserInfo\Hd.cshtml" />
+    <Content Include="Areas\PermissionManager\Views\UserInfo\List.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -522,13 +533,17 @@
     <Folder Include="Areas\SystemSetManager\Models\" />
     <Folder Include="Areas\SystemSetManager\Views\Shared\" />
     <Folder Include="Models\" />
+    <Folder Include="Scripts\Config\" />
     <Folder Include="Views\Default\" />
-    <Folder Include="Views\Permission\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Project.Infrastructure.FrameworkCore\Project.Infrastructure.FrameworkCore.csproj">
       <Project>{1C2392AD-A0F8-4378-9C54-3DCD1FB5D1DB}</Project>
       <Name>Project.Infrastructure.FrameworkCore</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Project.Model\Project.Model.csproj">
+      <Project>{3D26782A-3308-430B-B58F-5F8ABA1A50B3}</Project>
+      <Name>Project.Model</Name>
     </ProjectReference>
     <ProjectReference Include="..\Project.Mvc\Project.Mvc.csproj">
       <Project>{28697EFA-5FC7-4454-AE92-6DF284882EF8}</Project>

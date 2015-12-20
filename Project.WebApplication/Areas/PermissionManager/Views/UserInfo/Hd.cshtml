@@ -1,0 +1,42 @@
+﻿@{
+    ViewBag.Title = "Hd";
+    Layout = "~/Views/Shared/_LayoutHandler.cshtml";
+}
+
+@section JavaScript{
+    <script src="~/Areas/PermissionManager/Scripts/UserInfo/Hd.js"></script>
+}
+
+<input id="BindEntity" type="text" value="@ViewBag.BindEntity" />
+<input id="Command" type="hidden" />
+<div class="mtable_div">
+    <table class="mtable">
+        <tr>
+            <td>UserCode:</td>
+            <td>
+                <input type="text" name="UserCode" />
+            </td>
+        </tr>
+        <tr>
+            <td>Password:</td>
+            <td>
+                <input type="text" name="Password" />
+            </td>
+        </tr>
+        <tr>
+            <td>UserName:</td>
+            <td>
+                <input type="text" name="UserName" />
+            </td>
+        </tr>
+    </table>
+</div>
+<div style="padding: 10px 10px 0 10px; text-align: center;">
+    <a id="btnAdd" class="easyui-linkbutton" iconcls="icon-add" href="javascript:void(0)">新增</a>
+    <a id="btnEdit" class="easyui-linkbutton" iconcls="icon-ok" href="javascript:void(0)">编辑</a>
+    <a id="btnClose" class="easyui-linkbutton" iconcls="icon-cancel" href="javascript:void(0)">关闭</a>
+</div>
+
+
+
+
