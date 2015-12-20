@@ -40,7 +40,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="PermissionManager\PermissionFunctionEntity.cs" />
-    <Compile Include="PermissionManager\UserInfoEntity.cs" />
+    <Compile Include="PermissionManager\UserInfoEntity.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
