@@ -16,7 +16,7 @@ var pro = pro || {};
                     $("[name=" + filedname + "]").val(BindEntity[filedname]);
                 }
                 //行项目信息用json绑定控件
-                alert(JSON.stringify(BindEntity.List));
+                //alert(JSON.stringify(BindEntity.List));
             }
         },
         submit: function() {
