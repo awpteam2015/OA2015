@@ -54,8 +54,10 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.OracleClient" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.Helpers.dll</HintPath>
@@ -139,6 +141,47 @@
     <Compile Include="Domain\Repositories\RepositoryBaseSql.cs" />
     <Compile Include="Domain\Services\IService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ToolKit\CacheHelper.cs" />
+    <Compile Include="ToolKit\ConfigHelper.cs" />
+    <Compile Include="ToolKit\ConvertHelper.cs" />
+    <Compile Include="ToolKit\CookieHelper.cs" />
+    <Compile Include="ToolKit\DataSetHelper.cs" />
+    <Compile Include="ToolKit\DateTimeHelper.cs" />
+    <Compile Include="ToolKit\Encrypt.cs" />
+    <Compile Include="ToolKit\EntityHelper.cs" />
+    <Compile Include="ToolKit\EnumHelper.cs" />
+    <Compile Include="ToolKit\ExtensionMethods..cs" />
+    <Compile Include="ToolKit\Extensions\DataTableExtensions.cs" />
+    <Compile Include="ToolKit\Extensions\DictionaryExtessions.cs" />
+    <Compile Include="ToolKit\FileHandler\FileHelper.cs" />
+    <Compile Include="ToolKit\FileHandler\FileUpload.cs" />
+    <Compile Include="ToolKit\ImageHandler\ImageHelper.cs" />
+    <Compile Include="ToolKit\ImageHandler\ImageUtil.cs" />
+    <Compile Include="ToolKit\ImageHandler\VerificationImage.cs" />
+    <Compile Include="ToolKit\IPHelper.cs" />
+    <Compile Include="ToolKit\JsonHandler\JsonHelper.cs" />
+    <Compile Include="ToolKit\LinqExpansion\DynamicQuery.cs" />
+    <Compile Include="ToolKit\LinqExpansion\Expansion.cs" />
+    <Compile Include="ToolKit\LinqExpansion\KeyEqualityComparer.cs" />
+    <Compile Include="ToolKit\MathHandler.cs" />
+    <Compile Include="ToolKit\MessageBox.cs" />
+    <Compile Include="ToolKit\NetWorkHandler\AppDomainUtil.cs" />
+    <Compile Include="ToolKit\NetWorkHandler\DomainsUtil.cs" />
+    <Compile Include="ToolKit\PageHtmlHelper.cs" />
+    <Compile Include="ToolKit\RequestHelper.cs" />
+    <Compile Include="ToolKit\SendMail.cs" />
+    <Compile Include="ToolKit\StringHandler\HtmlHelper.cs" />
+    <Compile Include="ToolKit\StringHandler\SqlStrHelper.cs" />
+    <Compile Include="ToolKit\StringHandler\StringArrayHelper.cs" />
+    <Compile Include="ToolKit\StringHandler\StringExtensions.cs" />
+    <Compile Include="ToolKit\StringHandler\StringHelper.cs" />
+    <Compile Include="ToolKit\StringHandler\TypeParse.cs" />
+    <Compile Include="ToolKit\UrlHandler\UrlBuilder.cs" />
+    <Compile Include="ToolKit\UrlHandler\UrlHelper.cs" />
+    <Compile Include="ToolKit\ValidateHandler\Regexdefine.cs" />
+    <Compile Include="ToolKit\ValidateHandler\ValidateHelper.cs" />
+    <Compile Include="ToolKit\ValidateHandler\ValidateRegExp.cs" />
+    <Compile Include="ToolKit\XmlHelper.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
