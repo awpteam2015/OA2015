@@ -5,7 +5,7 @@ var pro = pro || {};
     pro.UserInfo.ListPage = pro.UserInfo.ListPage || {};
     pro.UserInfo.ListPage = {
         initPage: function () {
-
+            var gridObj =
             $('#datagrid').datagrid({
                 url: '/PermissionManager/UserInfo/GetList',
                 fitColumns: false,
@@ -37,8 +37,54 @@ var pro = pro || {};
                     alert("请选中要编辑的行");
                     return;
                 }
-                $.tabExtend.config.url = "/PermissionManager/UserInfo/Hd?PkId=" + $.datagridExtend.getObject("getSelected").PkId;
+                $.tabExtend.config.url = "/PermissionManager/UserInfo/Hd?PkId=" + $.datagridExtend.getFunObject("getSelected").PkId;
                 $.tabExtend.add();
+            });
+
+
+            $("#btnSearch").click(function () {
+                $.datagridExtend.getObject().search();
+            });
+
+            $("#btnDel").click(function () {
+                if (!$.datagridExtend.isSelected()) {
+                    return;
+                }
+
+                $.messager.confirm("确认操作", "是否确认删除", function (bl) {
+                    if (!bl) return;
+                    //var result = $.ajax({
+                    //    url: "/PermissionManager/UserInfo/Delete?PkId" + $.datagridExtend.getFunObject("getSelected").PkId,
+                    //    type: "POST",
+                    //    async: false,
+                    //    cache: false
+                    //}).responseText;
+
+                    //$("#btnRefresh").click();
+
+                    abp.ajax({
+                        url: "/PermissionManager/UserInfo/Delete?PkId=" + $.datagridExtend.getFunObject("getSelected").PkId
+                    }).done(
+                    function (dataresult, data) {
+                        alert(JSON.stringify(dataresult));
+                        alert(JSON.stringify(data));
+                        alert("新增成功！");
+                        $("#btnRefresh").click();
+                    }
+                    ).fail(
+                    function (errordetails, errormessage) {
+                        alert(JSON.stringify(errordetails));
+                        alert(JSON.stringify(errormessage));
+                        alert("新增失败！");
+                    }
+                    );
+
+
+                });
+            });
+
+            $("#btnRefresh").click(function () {
+                $.datagridExtend.getObject().refresh();
             });
 
 

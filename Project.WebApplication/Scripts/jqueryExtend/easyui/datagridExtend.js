@@ -6,26 +6,29 @@ $.datagridExtend = $.datagridExtend || {};
             grdidId: "#datagrid",
             url: ""
         },
-        getObject: function (obj) {
+        getObject: function () {
+            return $(this.config.grdidId);
+        },
+        getFunObject: function (obj) {
             return $(this.config.grdidId).datagrid(obj);
         },
         isSelected: function () {
 
-            if (this.getObject("getSelected")) return true;
+            if (this.getFunObject("getSelected")) return true;
             return false;
         },
         closeTab: function (tabId) {
 
         },
         selectRowLast: function () {
-            $(this.config.grdidId).datagetObject("selectRow", this.getRowsCount() - 1);
+            $(this.config.grdidId).datagetFunObject("selectRow", this.getRowsCount() - 1);
         },
         getSelectedIndex: function () {
-            var selectedIndex = $(this.config.grdidId).datagetObject("getRowIndex", $(this.config.grdidId).datagetObject("getSelected"));
+            var selectedIndex = $(this.config.grdidId).datagetFunObject("getRowIndex", $(this.config.grdidId).datagetFunObject("getSelected"));
             return selectedIndex;
         },
         getRowsCount: function () {
-            return $(this.config.grdidId).datagetObject("getRows").length;
+            return $(this.config.grdidId).datagetFunObject("getRows").length;
         },
         searchForm: function () {
             ///<summary>获取json格式搜索参数</summary>
@@ -46,8 +49,8 @@ $.datagridExtend = $.datagridExtend || {};
         reload: function (formSearch) {
             ///<summary>刷新列表，不带搜索参数，当前页数重置1</summary>
             if (!formSearch) formSearch = {};
-            this.getObject("options").queryParams = formSearch;
-            this.getObject("load");
+            this.getFunObject("options").queryParams = formSearch;
+            this.getFunObject("load");
         },
         refresh: function () {
             ///<summary>重置搜索表单；刷新列表，不带搜索参数，当前页数重置1</summary>

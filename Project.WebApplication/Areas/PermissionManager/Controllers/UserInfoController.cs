@@ -32,25 +32,11 @@ namespace Project.WebApplication.Areas.PermissionManager.Controllers
             return View();
         }
 
-        //public AbpJsonResult Add()
-        //{
-
-
-        //    return new AbpJsonResult(new AjaxResponse<UserInfoEntity>(), new NHibernateContractResolver());
-        //}
-
-        //public AbpJsonResult Update()
-        //{
-
-        //    return new AbpJsonResult(new AjaxResponse<UserInfoEntity>(), new NHibernateContractResolver());
-        //}
-
-
+ 
         public ActionResult List()
         {
             return View();
         }
-
 
         public AbpJsonResult GetList()
         {
@@ -89,6 +75,17 @@ namespace Project.WebApplication.Areas.PermissionManager.Controllers
             {
                 success = updateResult,
                 result = postData.RequestEntity
+            };
+            return new AbpJsonResult(result, new NHibernateContractResolver(new string[] { "result" }));
+        }
+
+        [HttpPost]
+        public AbpJsonResult Delete(int pkid)
+        {
+            var deleteResult = UserInfoService.GetInstance().Delete(pkid);
+            var result = new AjaxResponse<UserInfoEntity>()
+            {
+                success = deleteResult
             };
             return new AbpJsonResult(result, new NHibernateContractResolver(new string[] { "result" }));
         }

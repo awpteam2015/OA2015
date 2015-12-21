@@ -55,10 +55,11 @@ namespace Project.Service.PermissionManager
             }
         }
 
-        public bool Delete(UserInfoEntity entity)
+        public bool Delete(int pkId)
         {
             try
             {
+                var entity = _userInfoRepository.GetById(pkId);
                 _userInfoRepository.Delete(entity);
                 return true;
             }
