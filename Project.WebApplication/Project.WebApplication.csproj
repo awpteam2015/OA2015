@@ -514,6 +514,7 @@
     <Content Include="Views\Shared\_LayoutHandler.cshtml" />
     <Content Include="Areas\PermissionManager\Views\UserInfo\Hd.cshtml" />
     <Content Include="Areas\PermissionManager\Views\UserInfo\List.cshtml" />
+    <Content Include="Views\Shared\_LayoutList.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
