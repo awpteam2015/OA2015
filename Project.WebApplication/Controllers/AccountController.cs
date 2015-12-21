@@ -38,7 +38,7 @@ namespace Project.WebApplication.Controllers
 
             return new AbpJsonResult
             {
-                Data = new AjaxResponse<object>() { Success = true, Result = "{'name':'1111'}", }
+                Data = new AjaxResponse<object>() { success = true, result = "{'name':'1111'}", }
             };
         }
 
@@ -68,7 +68,7 @@ namespace Project.WebApplication.Controllers
 
             return new AbpJsonResult
             {
-                Data = new AjaxResponse<object>() { Success = true, Result = "{'name':'1111'}", }
+                Data = new AjaxResponse<object>() { success = true, result = "{'name':'1111'}", }
             };
 
         }

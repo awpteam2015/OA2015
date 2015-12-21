@@ -20,7 +20,7 @@ namespace Project.WebApplication.Tests
         public void TestMethod1()
         {
             var t = AppDomain.CurrentDomain.BaseDirectory;
-              UserService.GetInstance().Test();
+              UserInfoService.GetInstance().Test();
         }
 
 
@@ -31,28 +31,28 @@ namespace Project.WebApplication.Tests
             t.UserCode = "1111";
             t.UserName = "2222";
             t.Password = "1111";
-            UserService.GetInstance().Add(t);
+            UserInfoService.GetInstance().Add(t);
         }
 
 
         [TestMethod]
         public void Update()
         {
-            var t = UserService.GetInstance().GetModel(1);
+            var t = UserInfoService.GetInstance().GetModel(1);
             t.UserName = DateTime.Now.ToString();
-            UserService.GetInstance().Update(t);
+            UserInfoService.GetInstance().Update(t);
 
 
-            var t222 = UserService.GetInstance().GetModel(1);
+            var t222 = UserInfoService.GetInstance().GetModel(1);
         }
 
 
         [TestMethod]
         public void Delete()
         {
-            var t = UserService.GetInstance().GetModel(3);
+            var t = UserInfoService.GetInstance().GetModel(3);
          
-            UserService.GetInstance().Delete(t);
+            UserInfoService.GetInstance().Delete(t);
 
         }
 

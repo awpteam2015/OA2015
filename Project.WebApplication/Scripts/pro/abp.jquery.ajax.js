@@ -30,7 +30,7 @@
         defaultOpts: {
             dataType: 'json',
             type: 'POST',
-            contentType: 'application/json'
+           contentType: 'application/json'
         },
 
         defaultError: {

@@ -7,6 +7,9 @@ namespace Project.Mvc.Controllers.Results
 {
     public class AbpJsonResult : JsonResult
     {
+
+        private IContractResolver ContractResolver { get;set;}
+
         /// <summary>
         /// Constructor.
         /// </summary>
@@ -22,6 +25,13 @@ namespace Project.Mvc.Controllers.Results
         public AbpJsonResult(object data)
             : this()
         {
+            Data = data;
+        }
+
+        public AbpJsonResult(object data, IContractResolver contractResolver)
+            : this()
+        {
+            ContractResolver = contractResolver;
             Data = data;
         }
 
@@ -48,11 +58,10 @@ namespace Project.Mvc.Controllers.Results
 
             if (Data != null)
             {
-                //TODO: Make this static for performance reason?
-                //TODO: Make this shared with ASP.NET WebAPI settings?
+   
                 var jsonSerializerSettings = new JsonSerializerSettings
                 {
-                    ContractResolver = new CamelCasePropertyNamesContractResolver()
+                    ContractResolver =ContractResolver?? new CamelCasePropertyNamesContractResolver()
                 };
 
                 response.Write(JsonConvert.SerializeObject(Data, Formatting.Indented, jsonSerializerSettings));

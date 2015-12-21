@@ -4,7 +4,7 @@
 }
 
 @section JavaScript{
-    <script src="~/Areas/PermissionManager/Scripts/UserInfo/Hd.js"></script>
+    <script src="/Areas/PermissionManager/Scripts/UserInfo/Hd.js"></script>
 }
 
 <input id="BindEntity" type="text" value="@ViewBag.BindEntity" />
@@ -32,7 +32,7 @@
     </table>
 </div>
 <div style="padding: 10px 10px 0 10px; text-align: center;">
-    @if (int.Parse(Request["PkId"]) == 0)
+    @if (Request["PkId"]==null||int.Parse(Request["PkId"]) == 0)
     {
         <a id="btnAdd" class="easyui-linkbutton" iconcls="icon-add" href="javascript:void(0)">新增</a>
     }

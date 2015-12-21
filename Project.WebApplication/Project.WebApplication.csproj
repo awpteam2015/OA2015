@@ -104,6 +104,7 @@
     <Content Include="Resources\Css\Site.css" />
     <Content Include="Scripts\Account\Index.js" />
     <Content Include="Scripts\Account\Login.js" />
+    <Content Include="Scripts\jqueryExtend\easyui\tabExtend.js" />
     <Content Include="Scripts\pro\base64.js" />
     <Content Include="Scripts\jquery-easyui\changelog.txt" />
     <Content Include="Scripts\jquery-easyui\easyloader.js" />
@@ -481,6 +482,7 @@
     <Content Include="Scripts\jquery-easyui\themes\mobile.css" />
     <Content Include="Scripts\jqueryExtend\Json.js" />
     <Content Include="Scripts\pro\bindKit.js" />
+    <Content Include="Scripts\pro\commonKit.js" />
     <Content Include="Scripts\pro\submitKit.js" />
     <Content Include="Scripts\pro\jquery-message.js" />
     <Content Include="Scripts\pro\abp.jquery.ajax.js" />
@@ -542,6 +544,10 @@
       <Project>{1C2392AD-A0F8-4378-9C54-3DCD1FB5D1DB}</Project>
       <Name>Project.Infrastructure.FrameworkCore</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Project.Map\Project.Map.csproj">
+      <Project>{21e524e2-cafe-4cbb-8141-e21dba15fc1f}</Project>
+      <Name>Project.Map</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Project.Model\Project.Model.csproj">
       <Project>{3D26782A-3308-430B-B58F-5F8ABA1A50B3}</Project>
       <Name>Project.Model</Name>
@@ -549,6 +555,10 @@
     <ProjectReference Include="..\Project.Mvc\Project.Mvc.csproj">
       <Project>{28697EFA-5FC7-4454-AE92-6DF284882EF8}</Project>
       <Name>Project.Mvc</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Project.Service\Project.Service.csproj">
+      <Project>{CC818705-0142-46D9-A858-1575069C0ABE}</Project>
+      <Name>Project.Service</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

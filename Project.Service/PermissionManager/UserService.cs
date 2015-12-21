@@ -9,18 +9,18 @@ using Project.Repository.PermissionManager;
 
 namespace Project.Service.PermissionManager
 {
-    public class UserService
+    public class UserInfoService
     {
         #region
-        private static readonly UserService Instance = new UserService();
+        private static readonly UserInfoService Instance = new UserInfoService();
         private readonly UserInfoRepository _userInfoRepository;
 
-        private UserService()
+        private UserInfoService()
         {
             _userInfoRepository = new UserInfoRepository();
         }
 
-        public static UserService GetInstance()
+        public static UserInfoService GetInstance()
         {
             return Instance;
         }
@@ -71,16 +71,16 @@ namespace Project.Service.PermissionManager
         /// <summary>
         /// 搜索
         /// </summary>
-        /// <param name="temp"></param>
+        /// <param name="where"></param>
         /// <param name="skipResults"></param>
         /// <param name="maxResults"></param>
         /// <returns></returns>
-        public System.Tuple<IList<UserInfoEntity>, int> Search(UserInfoEntity temp, int skipResults, int maxResults)
+        public System.Tuple<IList<UserInfoEntity>, int> Search(UserInfoEntity where, int skipResults, int maxResults)
         {
             var expr = PredicateBuilder.True<UserInfoEntity>();
             #region
-            if (!string.IsNullOrWhiteSpace(temp.UserCode))
-                expr = expr.And(p => p.UserCode == temp.UserCode);
+            if (!string.IsNullOrWhiteSpace(where.UserCode))
+                expr = expr.And(p => p.UserCode == where.UserCode);
             #endregion
 
             var list = _userInfoRepository.Query().Where(expr).OrderBy(p => p.PkId).Skip(skipResults).Take(skipResults + maxResults).ToList();

@@ -6,36 +6,42 @@ var pro = pro || {};
     pro.UserInfo.HdPage = {
         initPage: function () {
             $("#btnAdd").click(function () {
-                pro.UserInfo.HdPage.submit();
+                pro.UserInfo.HdPage.submit("Add");
+            });
+
+            $("#btnEdit").click(function () {
+                pro.UserInfo.HdPage.submit("Edit");
             });
 
             if ($("#BindEntity").val()) {
                 var bindField = pro.bindKit.getHeadJson();
-                var BindEntity = JSON.parse($("#BindEntity").val());
+                var bindEntity = JSON.parse($("#BindEntity").val());
                 for (var filedname in bindField) {
-                    $("[name=" + filedname + "]").val(BindEntity[filedname]);
+                    $("[name=" + filedname + "]").val(bindEntity[filedname]);
                 }
                 //行项目信息用json绑定控件
                 //alert(JSON.stringify(BindEntity.List));
             }
         },
-        submit: function() {
+        submit: function (command) {
             var postData = {};
-            var head = pro.submitKit.getHeadJson();
-            postData.Entity = head;
-            postData.Command = "add";
+            postData.RequestEntity = pro.submitKit.getHeadJson();
 
-            var msg = $.ajax({
-                type: "POST",
-                url: "/PermissionManager/UserInfo/Hd",
-                data: postData,
-                cache: false,
-                async: false
-            }).responseText;
-            //  var obj = jQuery.pars
+            if (pro.commonKit.getUrlParam("PkId") != "") {
+                postData.RequestEntity.PkId = pro.commonKit.getUrlParam("PkId");
+            }
+            abp.ajax({
+                url: "/PermissionManager/UserInfo/" + command,
+                data: JSON.stringify(postData)
+            }).done(
+                function (data, data2) {
+                    alert(JSON.stringify(data));
+                    alert(JSON.stringify(data2));
+                }
+            );
         },
         addTab: function (subtitle, url) {
-        
+
         }
     };
 })();

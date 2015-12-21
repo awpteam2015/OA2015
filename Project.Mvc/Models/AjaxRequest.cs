@@ -9,11 +9,11 @@ namespace Project.Mvc.Models
     {
         public AjaxRequest()
         {
-            Entity = new TRequestEntity();
+            RequestEntity = new TRequestEntity();
         }
         public string Command { get; set; }
 
-        public TRequestEntity Entity { get; set; }
+        public TRequestEntity RequestEntity { get; set; }
     }
 
 
@@ -22,10 +22,10 @@ namespace Project.Mvc.Models
     {
         public AjaxRequest()
         {
-            Entity = new TRequestEntity();
+            RequestEntity = new TRequestEntity();
         }
         public string Command { get; set; }
 
-        public TRequestEntity Entity { get; set; }
+        public TRequestEntity RequestEntity { get; set; }
     }
 }
