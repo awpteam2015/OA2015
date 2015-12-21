@@ -104,6 +104,7 @@
     <Content Include="Resources\Css\Site.css" />
     <Content Include="Scripts\Account\Index.js" />
     <Content Include="Scripts\Account\Login.js" />
+    <Content Include="Scripts\jqueryExtend\easyui\datagridExtend.js" />
     <Content Include="Scripts\jqueryExtend\easyui\tabExtend.js" />
     <Content Include="Scripts\pro\base64.js" />
     <Content Include="Scripts\jquery-easyui\changelog.txt" />
@@ -505,7 +506,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\web.config" />
-    <Content Include="packages.config" />
+    <Content Include="packages.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Areas\SystemSetManager\Views\web.config" />
     <Content Include="Areas\ContentManager\Views\web.config" />
     <Content Include="Areas\PermissionManager\Views\web.config" />

@@ -32,9 +32,17 @@ var pro = pro || {};
 
             });
 
+            $("#btnEdit").click(function () {
+                if (!$.datagridExtend.isSelected()) {
+                    alert("请选中要编辑的行");
+                    return;
+                }
+                $.tabExtend.config.url = "/PermissionManager/UserInfo/Hd?PkId=" + $.datagridExtend.getObject("getSelected").PkId;
+                $.tabExtend.add();
+            });
+
 
         }
-      
     };
 })();
 
