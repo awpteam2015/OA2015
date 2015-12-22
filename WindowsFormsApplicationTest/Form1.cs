@@ -23,8 +23,11 @@ namespace WindowsFormsApplicationTest
         private void button1_Click(object sender, EventArgs e)
         {
             var t = UserInfoService.GetInstance().GetModel(1);
+
+            var t2 = UserInfoService.GetInstance().GetModel(1);
            // Thread.CurrentThread.Name = "1111";
             textBox1.Text += Thread.CurrentThread.Name + "-----------"+t.UserName;
+
             SessionFactoryManager.Clear();
         }
 

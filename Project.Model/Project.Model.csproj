@@ -39,7 +39,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="PermissionManager\DepartmentModel.cs" />
+    <Compile Include="PermissionManager\DepartmentEntity.cs" />
     <Compile Include="PermissionManager\PermissionFunctionEntity.cs" />
     <Compile Include="PermissionManager\UserInfoEntity.cs">
       <SubType>Code</SubType>

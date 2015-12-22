@@ -6,7 +6,6 @@ using NHibernate.Linq;
 using Project.Infrastructure.FrameworkCore.DataNhibernate;
 using Project.Infrastructure.FrameworkCore.Domain.Entities.Component;
 using Project.Infrastructure.FrameworkCore.Domain.Repositories.Interface;
-using SyncSoft.ROM.Infrastructure.DataNhibernate;
 
 namespace Project.Infrastructure.FrameworkCore.Domain.Repositories
 {

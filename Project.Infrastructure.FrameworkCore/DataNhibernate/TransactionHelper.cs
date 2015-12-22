@@ -1,54 +1,9 @@
 ﻿using System;
 using System.Data;
 using NHibernate;
-using Project.Infrastructure.FrameworkCore.DataNhibernate;
 
-namespace SyncSoft.ROM.Infrastructure.DataNhibernate
+namespace Project.Infrastructure.FrameworkCore.DataNhibernate
 {
-    ///// <summary>
-    ///// 嵌套事物
-    ///// </summary>
-    //public static class NestedTransactions
-    //{
-    //    /// <summary>
-    //    /// 嵌套事物
-    //    /// </summary>
-    //    /// <param name="level"></param>
-    //    /// <param name="transactional"></param>
-    //    public static void Transaction(IsolationLevel level, Action transactional)
-    //    {
-    //        var sessionFactory = ServerConfig.KernelOracle.Get<ISessionFactory>();
-    //        //如果已经在一个事物中，就不用在开启一个事物
-    //        if (sessionFactory.GetCurrentSession().Transaction.IsActive)
-    //        {
-    //            transactional();
-    //        }
-    //        else
-    //        {
-    //            using (var tx = sessionFactory.GetCurrentSession().BeginTransaction(level))
-    //            {
-    //                try
-    //                {
-    //                    transactional();
-    //                    tx.Commit();
-    //                }
-    //                catch
-    //                {
-    //                    tx.Rollback();
-    //                    throw;
-    //                }
-    //            }
-    //        }
-    //    }
-    //    /// <summary>
-    //    /// 嵌套事物
-    //    /// </summary>
-    //    /// <param name="transactional">业务逻辑</param>
-    //    public static void Transaction(Action transactional)
-    //    {
-    //        Transaction(IsolationLevel.ReadCommitted, transactional);
-    //    }
-    //}
 
     /// <summary>
     /// 嵌套事物
