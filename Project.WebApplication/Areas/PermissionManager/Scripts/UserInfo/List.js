@@ -52,13 +52,6 @@ var pro = pro || {};
                 }
                 $.messager.confirm("确认操作", "是否确认删除", function (bl) {
                     if (!bl) return;
-                    //var result = $.ajax({
-                    //    url: "/PermissionManager/UserInfo/Delete?PkId" + $.datagridExtend.getFunObject("getSelected").PkId,
-                    //    type: "POST",
-                    //    async: false,
-                    //    cache: false
-                    //}).responseText;
-                    //$("#btnRefresh").click();
                     abp.ajax({
                         url: "/PermissionManager/UserInfo/Delete?PkId=" + $.datagridExtend.getFunObject("getSelected").PkId
                     }).done(

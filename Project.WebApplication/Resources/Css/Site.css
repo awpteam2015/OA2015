@@ -201,3 +201,7 @@ textarea
     vertical-align: inherit;
     background-color:  #E0ECFF;
 }
+
+.error {
+    color: red;
+}

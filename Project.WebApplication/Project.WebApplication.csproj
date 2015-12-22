@@ -107,8 +107,8 @@
     <Content Include="Scripts\jqueryPlugins\jquery_tip\tip-yellow\tip-yellow.css" />
     <Content Include="Scripts\jqueryPlugins\jquery_tip\tip-yellow\tip-yellow.png" />
     <Content Include="Scripts\jqueryPlugins\jquery_tip\tip-yellow\tip-yellow_arrows.png" />
-    <Content Include="Views\Script\Account\Index.js" />
-    <Content Include="Views\Script\Account\Login.js" />
+    <Content Include="Scripts\Account\Index.js" />
+    <Content Include="Scripts\Account\Login.js" />
     <Content Include="Scripts\Config\globalConfig.js" />
     <Content Include="Scripts\jqueryPlugins\jquery_tip\jquery.poshytip.js" />
     <Content Include="Scripts\jqueryPluginsExtend\jquery-easyui\alertExtend.js" />
