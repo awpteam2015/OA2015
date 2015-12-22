@@ -2,6 +2,7 @@
 using System.Web.Mvc;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
+using Project.Infrastructure.FrameworkCore.ToolKit.JsonHandler;
 
 namespace Project.Mvc.Controllers.Results
 {
@@ -59,12 +60,14 @@ namespace Project.Mvc.Controllers.Results
             if (Data != null)
             {
    
-                var jsonSerializerSettings = new JsonSerializerSettings
-                {
-                    ContractResolver =ContractResolver?? new CamelCasePropertyNamesContractResolver()
-                };
+                //var jsonSerializerSettings = new JsonSerializerSettings
+                //{
+                //    ContractResolver =ContractResolver?? new CamelCasePropertyNamesContractResolver()
+                //};
 
-                response.Write(JsonConvert.SerializeObject(Data, Formatting.Indented, jsonSerializerSettings));
+                //response.Write(JsonConvert.SerializeObject(Data, Formatting.Indented, jsonSerializerSettings));
+
+                response.Write(JsonHelper.JsonSerializer(Data, ContractResolver));
             }
         }
     }

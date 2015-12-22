@@ -31,28 +31,51 @@ var pro = pro || {};
                 postData.RequestEntity.PkId = pro.commonKit.getUrlParam("PkId");
             }
 
-            abp.ajax({
-                url: "/PermissionManager/UserInfo/" + command,
-                data: JSON.stringify(postData)
-            }).done(
-                function (dataresult, data) {
-                    alert(JSON.stringify(dataresult));
-                    alert(JSON.stringify(data));
-                    alert("新增成功！");
-                }
-            ).fail(
-             function (errordetails, errormessage) {
-                 alert(JSON.stringify(errordetails));
-                 alert(JSON.stringify(errormessage));
-                 alert("新增失败！");
-             }
-            );
+            this.submitExtend.addRule();
+            if (!$("#form1").valid()) {
+                return false;
+            }
 
+            //abp.ajax({
+            //    url: "/PermissionManager/UserInfo/" + command,
+            //    data: JSON.stringify(postData)
+            //}).done(
+            //    function (dataresult, data) {
+            //        $.alertExtend.info();
+            //    }
+            //).fail(
+            // function (errordetails, errormessage) {
+            //     $.alertExtend.error();
+            // }
+            //);
 
         },
+        submitExtend: {
+            addRule: function () {
+                $("#form1").validate({
+                    rules: {
+                        UserCode: {
+                            required: true
+                        }
+                    },
+                    messages: {
+                        UserCode: { required: "站点代码必填!" }
+                    },
+                    errorPlacement: function (error, element) {
+
+                    },
+                    debug: false
+                });
+            },
+            logicValidate: function () {
+
+            }
+        },
+
         addTab: function (subtitle, url) {
 
         }
+
     };
 })();
 

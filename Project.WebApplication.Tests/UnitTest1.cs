@@ -52,7 +52,7 @@ namespace Project.WebApplication.Tests
         {
             var t = UserInfoService.GetInstance().GetModel(3);
          
-            UserInfoService.GetInstance().Delete(t);
+           // UserInfoService.GetInstance().Delete(t);
 
         }
 

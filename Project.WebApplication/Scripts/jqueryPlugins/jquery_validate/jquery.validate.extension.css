@@ -1,0 +1,16 @@
+﻿label.error
+{
+    background: url(images/error.png) no-repeat 0px 0px;
+    color: Red;
+    padding-left: 20px;
+}
+input.error
+{
+    /*border: dashed 1px red;*/
+    background-color: #FACD9C;
+}
+select.error
+{
+    /*border: dashed 1px red;*/
+    background-color: #FACD9C;
+}

@@ -50,7 +50,6 @@ var pro = pro || {};
                 if (!$.datagridExtend.isSelected()) {
                     return;
                 }
-
                 $.messager.confirm("确认操作", "是否确认删除", function (bl) {
                     if (!bl) return;
                     //var result = $.ajax({
@@ -59,35 +58,24 @@ var pro = pro || {};
                     //    async: false,
                     //    cache: false
                     //}).responseText;
-
                     //$("#btnRefresh").click();
-
                     abp.ajax({
                         url: "/PermissionManager/UserInfo/Delete?PkId=" + $.datagridExtend.getFunObject("getSelected").PkId
                     }).done(
                     function (dataresult, data) {
-                        alert(JSON.stringify(dataresult));
-                        alert(JSON.stringify(data));
-                        alert("新增成功！");
-                        $("#btnRefresh").click();
+                        $.alertExtend.info();
                     }
                     ).fail(
                     function (errordetails, errormessage) {
-                        alert(JSON.stringify(errordetails));
-                        alert(JSON.stringify(errormessage));
-                        alert("新增失败！");
+                        $.alertExtend.error();
                     }
                     );
-
-
                 });
             });
 
             $("#btnRefresh").click(function () {
                 $.datagridExtend.getObject().refresh();
             });
-
-
         }
     };
 })();

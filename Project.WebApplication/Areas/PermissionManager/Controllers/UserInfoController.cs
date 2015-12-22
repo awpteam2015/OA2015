@@ -22,11 +22,13 @@ namespace Project.WebApplication.Areas.PermissionManager.Controllers
         //    return View();
         //}
 
-        public ActionResult Hd(int PkId = 0)
+        public ActionResult Hd(int pkId = 0)
         {
-            if (PkId > 0)
+            if (pkId > 0)
             {
-                ViewBag.BindEntity = "{\"UserCode\":\"1111\",\"List\":[{\"List\":\"111\"},{\"List\":\"222\"}]}";
+                var entity = UserInfoService.GetInstance().GetModel(pkId);
+
+                ViewBag.BindEntity = JsonHelper.JsonSerializer(entity);
             }
 
             return View();
