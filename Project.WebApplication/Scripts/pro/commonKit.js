@@ -29,7 +29,8 @@
                     alignTo: 'target',
                     alignX: 'inner-left',
                     offsetX: 0,
-                    offsetY: 5
+                    offsetY: 5,
+                    showTimeout: 100
                 });
             }
         }
