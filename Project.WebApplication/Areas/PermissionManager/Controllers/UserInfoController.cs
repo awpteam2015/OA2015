@@ -16,21 +16,14 @@ namespace Project.WebApplication.Areas.PermissionManager.Controllers
 {
     public class UserInfoController : Controller
     {
-        // GET: PermissionManager/UserInfo
-        //public ActionResult Hd()
-        //{
-        //    return View();
-        //}
 
         public ActionResult Hd(int pkId = 0)
         {
             if (pkId > 0)
             {
                 var entity = UserInfoService.GetInstance().GetModel(pkId);
-
                 ViewBag.BindEntity = JsonHelper.JsonSerializer(entity);
             }
-
             return View();
         }
 

@@ -32,7 +32,7 @@ var pro = pro || {};
             }
 
             this.submitExtend.addRule();
-            if (!$("#form1").valid()) {
+            if (!$("#form1").valid() && pro.submitExtend.logicValidate()) {
                 $.alertExtend.error();
                 return false;
             }
@@ -55,21 +55,23 @@ var pro = pro || {};
             addRule: function () {
                 $("#form1").validate({
                     rules: {
-                        UserCode: {
-                            required: true
-                        }
+                        UserCode: { required: true },
+                        Password: { required: true },
+                        UserName: { required: true }
                     },
                     messages: {
-                        UserCode: { required: "站点代码必填!" }
+                        UserCode: { required: "站点代码必填!" },
+                        Password: { required: "密码必填!" },
+                        UserName: { required: "用户名必填!" }
                     },
                     errorPlacement: function (error, element) {
-                      pro.commonKit.errorPlacementHd(error, element);
+                        pro.commonKit.errorPlacementHd(error, element);
                     },
                     debug: false
                 });
             },
             logicValidate: function () {
-
+                return true;
             }
         },
 
