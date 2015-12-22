@@ -33,21 +33,22 @@ var pro = pro || {};
 
             this.submitExtend.addRule();
             if (!$("#form1").valid()) {
+                $.alertExtend.error();
                 return false;
             }
 
-            //abp.ajax({
-            //    url: "/PermissionManager/UserInfo/" + command,
-            //    data: JSON.stringify(postData)
-            //}).done(
-            //    function (dataresult, data) {
-            //        $.alertExtend.info();
-            //    }
-            //).fail(
-            // function (errordetails, errormessage) {
-            //     $.alertExtend.error();
-            // }
-            //);
+            abp.ajax({
+                url: "/PermissionManager/UserInfo/" + command,
+                data: JSON.stringify(postData)
+            }).done(
+                function (dataresult, data) {
+                    $.alertExtend.info();
+                }
+            ).fail(
+             function (errordetails, errormessage) {
+                 $.alertExtend.error();
+             }
+            );
 
         },
         submitExtend: {
@@ -62,7 +63,7 @@ var pro = pro || {};
                         UserCode: { required: "站点代码必填!" }
                     },
                     errorPlacement: function (error, element) {
-
+                      pro.commonKit.errorPlacementHd(error, element);
                     },
                     debug: false
                 });

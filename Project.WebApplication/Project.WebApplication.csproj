@@ -102,6 +102,11 @@
     <Content Include="Config\hibernate.cfg.xml" />
     <Content Include="Global.asax" />
     <Content Include="Resources\Css\Site.css" />
+    <Content Include="Scripts\jqueryPlugins\jquery_tip\tip-yellowsimple\tip-yellowsimple.css" />
+    <Content Include="Scripts\jqueryPlugins\jquery_tip\tip-yellowsimple\tip-yellowsimple_arrows.gif" />
+    <Content Include="Scripts\jqueryPlugins\jquery_tip\tip-yellow\tip-yellow.css" />
+    <Content Include="Scripts\jqueryPlugins\jquery_tip\tip-yellow\tip-yellow.png" />
+    <Content Include="Scripts\jqueryPlugins\jquery_tip\tip-yellow\tip-yellow_arrows.png" />
     <Content Include="Views\Script\Account\Index.js" />
     <Content Include="Views\Script\Account\Login.js" />
     <Content Include="Scripts\Config\globalConfig.js" />
@@ -497,11 +502,6 @@
     <Content Include="Scripts\pro\submitKit.js" />
     <Content Include="Scripts\pro\jquery-message.js" />
     <Content Include="Scripts\pro\abp.jquery.ajax.js" />
-    <Content Include="Scripts\jqueryPlugins\jquery_tip\tip-yellowsimple\tip-yellowsimple.css" />
-    <Content Include="Scripts\jqueryPlugins\jquery_tip\tip-yellowsimple\tip-yellowsimple_arrows.gif" />
-    <Content Include="Scripts\jqueryPlugins\jquery_tip\tip-yellow\tip-yellow.css" />
-    <Content Include="Scripts\jqueryPlugins\jquery_tip\tip-yellow\tip-yellow.png" />
-    <Content Include="Scripts\jqueryPlugins\jquery_tip\tip-yellow\tip-yellow_arrows.png" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>

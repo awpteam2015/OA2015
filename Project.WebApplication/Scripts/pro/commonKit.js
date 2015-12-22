@@ -19,6 +19,19 @@
                 }
             }
             return paramValue;
+        },
+        errorPlacementHd: function (error, element) {
+            if (element.get(0).type.indexOf("select") == -1) {
+                element.attr('title', error.html());
+                element.poshytip({
+                    className: 'tip-yellowsimple',
+                    showOn: 'focus',
+                    alignTo: 'target',
+                    alignX: 'inner-left',
+                    offsetX: 0,
+                    offsetY: 5
+                });
+            }
         }
     };
 })();
