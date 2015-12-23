@@ -585,7 +585,6 @@
     <Content Include="Areas\PermissionManager\Views\UserInfo\Hd.cshtml" />
     <Content Include="Areas\PermissionManager\Views\UserInfo\List.cshtml" />
     <Content Include="Views\Shared\_LayoutList.cshtml" />
-    <Content Include="Areas\PermissionManager\Views\_ViewStart.cshtml" />
     <Content Include="Areas\PermissionManager\Views\Department\Hd.cshtml" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
