@@ -97,11 +97,22 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\ContentManager\Script\JavaScript1.js" />
+    <Content Include="Areas\PermissionManager\Scripts\Department\Hd.js" />
+    <Content Include="Areas\PermissionManager\Scripts\Department\List.js" />
     <Content Include="Areas\PermissionManager\Scripts\UserInfo\Hd.js" />
     <Content Include="Areas\PermissionManager\Scripts\UserInfo\List.js" />
     <Content Include="Config\hibernate.cfg.xml" />
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Site.css" />
     <Content Include="Global.asax" />
     <Content Include="Resources\Css\Site.css" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Areas\PermissionManager\Views\Department\List.cshtml" />
+    <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\jquery-1.10.2.js" />
+    <Content Include="Scripts\jquery-1.10.2.min.js" />
     <Content Include="Scripts\jqueryPlugins\jquery_tip\tip-yellowsimple\tip-yellowsimple.css" />
     <Content Include="Scripts\jqueryPlugins\jquery_tip\tip-yellowsimple\tip-yellowsimple_arrows.gif" />
     <Content Include="Scripts\jqueryPlugins\jquery_tip\tip-yellow\tip-yellow.css" />
@@ -121,6 +132,7 @@
     <Content Include="Scripts\jqueryPlugins\jquery_validate\jquery.validate.min.js" />
     <Content Include="Scripts\jqueryPlugins\jquery_validate\jquery.validate.pack.js" />
     <Content Include="Scripts\jqueryPlugins\jquery_validate\jquery.validate.vaidationgroup.js" />
+    <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\pro\base64.js" />
     <Content Include="Scripts\jqueryPlugins\jquery-easyui\changelog.txt" />
     <Content Include="Scripts\jqueryPlugins\jquery-easyui\easyloader.js" />
@@ -536,6 +548,14 @@
     <Content Include="Areas\PermissionManager\Views\UserInfo\Hd.cshtml" />
     <Content Include="Areas\PermissionManager\Views\UserInfo\List.cshtml" />
     <Content Include="Views\Shared\_LayoutList.cshtml" />
+    <Content Include="Areas\PermissionManager\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\PermissionManager\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\PermissionManager\Views\Department\Hd.cshtml" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Scripts\jquery-1.10.2.min.map" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -549,9 +569,7 @@
     <Folder Include="Areas\ContentManager\Models\" />
     <Folder Include="Areas\ContentManager\Views\Shared\" />
     <Folder Include="Areas\PermissionManager\Models\" />
-    <Folder Include="Areas\PermissionManager\Views\Department\" />
     <Folder Include="Areas\PermissionManager\Views\Permission\" />
-    <Folder Include="Areas\PermissionManager\Views\Shared\" />
     <Folder Include="Areas\SystemSetManager\Controllers\" />
     <Folder Include="Areas\SystemSetManager\Models\" />
     <Folder Include="Areas\SystemSetManager\Views\Shared\" />
