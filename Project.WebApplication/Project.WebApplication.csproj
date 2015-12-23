@@ -507,6 +507,7 @@
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Areas\ContentManager\ContentManagerAreaRegistration.cs" />
+    <Compile Include="Areas\PermissionManager\Controllers\DepartmentController.cs" />
     <Compile Include="Areas\PermissionManager\Controllers\PermissionController.cs" />
     <Compile Include="Areas\PermissionManager\Controllers\UserInfoController.cs" />
     <Compile Include="Areas\PermissionManager\PermissionManagerAreaRegistration.cs" />
@@ -548,6 +549,7 @@
     <Folder Include="Areas\ContentManager\Models\" />
     <Folder Include="Areas\ContentManager\Views\Shared\" />
     <Folder Include="Areas\PermissionManager\Models\" />
+    <Folder Include="Areas\PermissionManager\Views\Department\" />
     <Folder Include="Areas\PermissionManager\Views\Permission\" />
     <Folder Include="Areas\PermissionManager\Views\Shared\" />
     <Folder Include="Areas\SystemSetManager\Controllers\" />

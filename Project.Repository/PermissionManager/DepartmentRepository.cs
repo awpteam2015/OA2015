@@ -9,7 +9,7 @@
 using Project.Infrastructure.FrameworkCore.Domain.Repositories;
 using Project.Model.PermissionManager;
 
-namespace SyncSoft.ECPChina.Data.PermissionManager.Repository
+namespace Project.Repository.PermissionManager
 {
     /// <summary>
     /// 持久层
