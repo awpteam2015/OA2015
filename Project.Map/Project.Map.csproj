@@ -52,7 +52,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="PermissionManager\DepartmentMap.cs" />
+    <Compile Include="PermissionManager\FunctionDetailMap.cs" />
+    <Compile Include="PermissionManager\FunctionMap.cs" />
+    <Compile Include="PermissionManager\ModuleMap.cs" />
+    <Compile Include="PermissionManager\RoleFunctionDetailMap.cs" />
+    <Compile Include="PermissionManager\RoleMap.cs" />
+    <Compile Include="PermissionManager\UserDepartmentMap.cs" />
+    <Compile Include="PermissionManager\UserFunctionDetailMap.cs" />
     <Compile Include="PermissionManager\UserInfoMap.cs" />
+    <Compile Include="PermissionManager\UserRoleMap.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

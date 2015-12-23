@@ -40,7 +40,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="PermissionManager\DepartmentRepository.cs" />
+    <Compile Include="PermissionManager\FunctionDetailRepository.cs" />
+    <Compile Include="PermissionManager\FunctionRepository.cs" />
+    <Compile Include="PermissionManager\ModuleRepository.cs" />
+    <Compile Include="PermissionManager\RoleFunctionDetailRepository.cs" />
+    <Compile Include="PermissionManager\RoleRepository.cs" />
+    <Compile Include="PermissionManager\UserDepartmentRepository.cs" />
+    <Compile Include="PermissionManager\UserFunctionDetailRepository.cs" />
     <Compile Include="PermissionManager\UserInfoRepository.cs" />
+    <Compile Include="PermissionManager\UserRoleRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

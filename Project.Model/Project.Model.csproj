@@ -40,10 +40,18 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="PermissionManager\DepartmentEntity.cs" />
+    <Compile Include="PermissionManager\FunctionDetailModel.cs" />
+    <Compile Include="PermissionManager\FunctionModel.cs" />
+    <Compile Include="PermissionManager\ModuleModel.cs" />
     <Compile Include="PermissionManager\PermissionFunctionEntity.cs" />
+    <Compile Include="PermissionManager\RoleFunctionDetailModel.cs" />
+    <Compile Include="PermissionManager\RoleModel.cs" />
+    <Compile Include="PermissionManager\UserDepartmentModel.cs" />
+    <Compile Include="PermissionManager\UserFunctionDetailModel.cs" />
     <Compile Include="PermissionManager\UserInfoEntity.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="PermissionManager\UserRoleModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

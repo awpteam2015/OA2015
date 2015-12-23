@@ -1,0 +1,129 @@
+﻿
+
+  
+
+
+@{
+    ViewBag.Title = "Hd";
+    Layout = "~/Views/Shared/_LayoutHandler.cshtml";
+}
+
+@section JavaScript{
+    <script src="/Areas/PermissionManager/Scripts/Function/Hd.js"></script>
+}
+
+<input id="BindEntity" type="text" value="@ViewBag.BindEntity" />
+<input id="Command" type="hidden" />
+<div class="mtable_div">
+    <form id="form1">
+        <table class="mtable">
+            
+              <tr>
+            <td >
+                <span style="color: Red">*</span>
+            </td>
+            <td >
+                <input id="PkId" name="PkId"  type="text"  />
+            </td>
+        </tr>
+            
+              <tr>
+            <td >
+                模块名称<span style="color: Red">*</span>
+            </td>
+            <td >
+                <input id="FunctionnName" name="FunctionnName"  type="text"  />
+            </td>
+        </tr>
+            
+              <tr>
+            <td >
+                模块ID<span style="color: Red">*</span>
+            </td>
+            <td >
+                <input id="ModuleId" name="ModuleId"  type="text"  />
+            </td>
+        </tr>
+            
+              <tr>
+            <td >
+                模块路径<span style="color: Red">*</span>
+            </td>
+            <td >
+                <input id="FunctionUrl" name="FunctionUrl"  type="text"  />
+            </td>
+        </tr>
+            
+              <tr>
+            <td >
+                <span style="color: Red">*</span>
+            </td>
+            <td >
+                <input id="Area" name="Area"  type="text"  />
+            </td>
+        </tr>
+            
+              <tr>
+            <td >
+                <span style="color: Red">*</span>
+            </td>
+            <td >
+                <input id="Controller" name="Controller"  type="text"  />
+            </td>
+        </tr>
+            
+              <tr>
+            <td >
+                <span style="color: Red">*</span>
+            </td>
+            <td >
+                <input id="Action" name="Action"  type="text"  />
+            </td>
+        </tr>
+            
+              <tr>
+            <td >
+                是否在菜单上显示1是 0不是<span style="color: Red">*</span>
+            </td>
+            <td >
+                <input id="IsDisplayOnMenu" name="IsDisplayOnMenu"  type="text"  />
+            </td>
+        </tr>
+            
+              <tr>
+            <td >
+                顺序<span style="color: Red">*</span>
+            </td>
+            <td >
+                <input id="RankId" name="RankId"  type="text"  />
+            </td>
+        </tr>
+            
+              <tr>
+            <td >
+                备注<span style="color: Red">*</span>
+            </td>
+            <td >
+                <input id="Remark" name="Remark"  type="text"  />
+            </td>
+        </tr>
+          
+        </table>
+    </form>
+</div>
+<div style="padding: 10px 10px 0 10px; text-align: center;">
+    @if (Request["PkId"]==null||int.Parse(Request["PkId"]) == 0)
+    {
+        <a id="btnAdd" class="easyui-linkbutton" iconcls="icon-add" href="javascript:void(0)">新增</a>
+    }
+    else
+    {
+        <a id="btnEdit" class="easyui-linkbutton" iconcls="icon-ok" href="javascript:void(0)">编辑</a>
+    }
+    <a id="btnClose" class="easyui-linkbutton" iconcls="icon-cancel" href="javascript:void(0)">关闭</a>
+</div>
+
+
+
+
+

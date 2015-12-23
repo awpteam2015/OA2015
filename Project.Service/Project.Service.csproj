@@ -41,7 +41,15 @@
   <ItemGroup>
     <Compile Include="Class1.cs" />
     <Compile Include="PermissionManager\DepartmentService.cs" />
+    <Compile Include="PermissionManager\FunctionDetailService.cs" />
+    <Compile Include="PermissionManager\FunctionService.cs" />
+    <Compile Include="PermissionManager\ModuleService.cs" />
     <Compile Include="PermissionManager\PermissionService.cs" />
+    <Compile Include="PermissionManager\RoleFunctionDetailService.cs" />
+    <Compile Include="PermissionManager\RoleService.cs" />
+    <Compile Include="PermissionManager\UserDepartmentService.cs" />
+    <Compile Include="PermissionManager\UserFunctionDetailService.cs" />
+    <Compile Include="PermissionManager\UserRoleService.cs" />
     <Compile Include="PermissionManager\UserService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
