@@ -48,7 +48,7 @@ namespace Project.Service.PermissionManager
         /// 删除
         /// </summary>
         /// <param name="entity"></param>
-        public bool DeleteBypkId(System.Int32 pkId)
+        public bool DeleteByPkId(System.Int32 pkId)
         {
             try
             {

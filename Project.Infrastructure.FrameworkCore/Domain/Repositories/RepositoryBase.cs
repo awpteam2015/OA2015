@@ -65,10 +65,10 @@ namespace Project.Infrastructure.FrameworkCore.Domain.Repositories
                     session.Update(entity);
                     tx.Commit();
                 }
-                catch(Exception e)
+                catch (Exception e)
                 {
                     tx.Rollback();
-                    throw; 
+                    throw;
                 }
             }
         }
@@ -76,14 +76,27 @@ namespace Project.Infrastructure.FrameworkCore.Domain.Repositories
         public void Delete(TEntity entity)
         {
             ISession session = SessionFactoryManager.GetCurrentSession();
-            if (entity is ISoftDelete)
+            using (var tx = NhTransactionHelper.BeginTransaction())
             {
-                (entity as ISoftDelete).IsDeleted = true;
-                Update(entity);
-            }
-            else
-            {
-                session.Delete(entity);
+                try
+                {
+                    if (entity is ISoftDelete)
+                    {
+                        (entity as ISoftDelete).IsDeleted = true;
+                        Update(entity);
+                    }
+                    else
+                    {
+                        session.Delete(entity);
+                    }
+
+                    tx.Commit();
+                }
+                catch (Exception e)
+                {
+                    tx.Rollback();
+                    throw;
+                }
             }
         }
 

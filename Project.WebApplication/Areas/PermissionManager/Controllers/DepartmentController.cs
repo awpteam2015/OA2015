@@ -83,7 +83,7 @@ namespace Project.WebApplication.Areas.PermissionManager.Controllers
         [HttpPost]
         public AbpJsonResult Delete(int pkid)
         {
-            var deleteResult = DepartmentService.GetInstance().DeleteBypkId(pkid);
+            var deleteResult = DepartmentService.GetInstance().DeleteByPkId(pkid);
             var result = new AjaxResponse<DepartmentEntity>()
             {
                 success = deleteResult

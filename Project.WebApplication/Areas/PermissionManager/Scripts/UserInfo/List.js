@@ -57,6 +57,7 @@ var pro = pro || {};
                     }).done(
                     function (dataresult, data) {
                         $.alertExtend.info();
+                        $.datagridExtend.getObject().search();
                     }
                     ).fail(
                     function (errordetails, errormessage) {
