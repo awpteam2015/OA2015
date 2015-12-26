@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 using Project.Infrastructure.FrameworkCore.DataNhibernate.Helpers;
+using Project.Infrastructure.FrameworkCore.ToolKit;
 using Project.Infrastructure.FrameworkCore.ToolKit.JsonHandler;
 using Project.Infrastructure.FrameworkCore.ToolKit.LinqExpansion;
 using Project.Model.PermissionManager;
@@ -39,18 +40,15 @@ namespace Project.WebApplication.Areas.PermissionManager.Controllers
             var pIndex = this.Request["page"].ConvertTo<int>();
             var pSize = this.Request["rows"].ConvertTo<int>();
             var where = new DepartmentEntity();
-            //where.PkId = RequestHelper.GetFormString("PkId");
-            //where.DepartmentCode = RequestHelper.GetFormString("DepartmentCode");
-            //where.DepartmentName = RequestHelper.GetFormString("DepartmentName");
-            //where.ParentdepartmentCode = RequestHelper.GetFormString("ParentdepartmentCode");
-            //where.Remark = RequestHelper.GetFormString("Remark");
-            var searchList = DepartmentService.GetInstance().Search(where, (pIndex - 1) * pSize, pSize);
+            where.DepartmentCode = RequestHelper.GetFormString("DepartmentCode");
+            where.DepartmentName = RequestHelper.GetFormString("DepartmentName");
+            //where.ParentDepartmentCode = RequestHelper.GetFormString("ParentDepartmentCode");
+            where.Remark = RequestHelper.GetFormString("Remark");
 
-            var dataGridEntity = new DataGridResponse()
-            {
-                total = searchList.Item2,
-                rows = searchList.Item1
-            };
+
+            var searchList = DepartmentService.GetInstance().GetList(where);
+            var dataGridEntity = new DataGridTreeResponse<DepartmentEntity>(searchList.Count, searchList);
+
             return new AbpJsonResult(dataGridEntity, new NHibernateContractResolver());
         }
 

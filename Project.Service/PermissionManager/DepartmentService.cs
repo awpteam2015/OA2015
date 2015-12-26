@@ -125,8 +125,8 @@ namespace Project.Service.PermissionManager
             //  expr = expr.And(p => p.DepartmentCode == entity.DepartmentCode);
             // if (!string.IsNullOrEmpty(entity.DepartmentName))
             //  expr = expr.And(p => p.DepartmentName == entity.DepartmentName);
-            // if (!string.IsNullOrEmpty(entity.ParentdepartmentCode))
-            //  expr = expr.And(p => p.ParentdepartmentCode == entity.ParentdepartmentCode);
+            // if (!string.IsNullOrEmpty(entity.ParentDepartmentCode))
+            //  expr = expr.And(p => p.ParentDepartmentCode == entity.ParentDepartmentCode);
             // if (!string.IsNullOrEmpty(entity.Remark))
             //  expr = expr.And(p => p.Remark == entity.Remark);
             #endregion
@@ -144,16 +144,14 @@ namespace Project.Service.PermissionManager
         {
             var expr = PredicateBuilder.True<DepartmentEntity>();
             #region
-            // if (!string.IsNullOrEmpty(entity.PkId))
-            //  expr = expr.And(p => p.PkId == entity.PkId);
-            // if (!string.IsNullOrEmpty(entity.DepartmentCode))
-            //  expr = expr.And(p => p.DepartmentCode == entity.DepartmentCode);
-            // if (!string.IsNullOrEmpty(entity.DepartmentName))
-            //  expr = expr.And(p => p.DepartmentName == entity.DepartmentName);
-            // if (!string.IsNullOrEmpty(entity.ParentdepartmentCode))
-            //  expr = expr.And(p => p.ParentdepartmentCode == entity.ParentdepartmentCode);
-            // if (!string.IsNullOrEmpty(entity.Remark))
-            //  expr = expr.And(p => p.Remark == entity.Remark);
+            if (!string.IsNullOrEmpty(entity.DepartmentCode))
+                expr = expr.And(p => p.DepartmentCode == entity.DepartmentCode);
+            if (!string.IsNullOrEmpty(entity.DepartmentName))
+                expr = expr.And(p => p.DepartmentName == entity.DepartmentName);
+            if (!string.IsNullOrEmpty(entity.ParentDepartmentCode))
+                expr = expr.And(p => p.ParentDepartmentCode == entity.ParentDepartmentCode);
+            if (!string.IsNullOrEmpty(entity.Remark))
+                expr = expr.And(p => p.Remark.Contains(entity.Remark));
             #endregion
             var list = _departmentRepository.Query().Where(expr).OrderBy(p => p.PkId).ToList();
             return list;

@@ -2,8 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Hosting;
 using System.Web.Mvc;
+using System.Web.Routing;
 using System.Web.Security;
+using System.Web.UI;
 using Newtonsoft.Json;
 using Project.Mvc.Authorization;
 using Project.Mvc.Controllers.Results;
@@ -19,7 +22,11 @@ namespace Project.WebApplication.Controllers
        // [PermissionAuthorize]
         // GET: Account
         public ActionResult Index()
-        {
+        {  // ISAPIRuntime
+         //  PageHandlerFactory
+         //   ApplicationManager
+        //        applicat
+       //UrlRoutingModule
             return View();
         }
 

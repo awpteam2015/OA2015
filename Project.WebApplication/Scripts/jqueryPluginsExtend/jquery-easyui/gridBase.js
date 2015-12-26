@@ -1,34 +1,45 @@
 ﻿
-$.datagridExtend = $.datagridExtend || {};
+var pro = pro || {};
+
 (function () {
-    $.datagridExtend = {
-        config: {
-            grdidId: "#datagrid",
-            url: ""
-        },
-        getObject: function () {
-            return $(this.config.grdidId);
-        },
-        getFunObject: function (obj) {
-            return $(this.config.grdidId).datagrid(obj);
+    pro.GridBase = pro.GridBase || {};
+
+    pro.GridBase = function (id, isTree) {
+        if (!id) {
+            id = "#datagrid";
+        }
+        if (!isTree) {
+            isTree = false;
+        }
+        this.grdidId = id;
+        this.isTree = isTree;
+    };
+
+    pro.GridBase.prototype = {
+        grid: function (obj) {
+            if (this.isTree) {
+                return $(this.grdidId).treegrid(obj);
+            } else {
+                return $(this.grdidId).datagrid(obj);
+            }
         },
         isSelected: function () {
-
-            if (this.getFunObject("getSelected")) return true;
+            if (this.grid("getSelected")) return true;
             return false;
         },
-        closeTab: function (tabId) {
-
-        },
         selectRowLast: function () {
-            $(this.config.grdidId).datagetFunObject("selectRow", this.getRowsCount() - 1);
+            $(this.grdidId).datagrid("selectRow", this.getRowsCount() - 1);
         },
         getSelectedIndex: function () {
-            var selectedIndex = $(this.config.grdidId).datagetFunObject("getRowIndex", $(this.config.grdidId).datagetFunObject("getSelected"));
+            var selectedIndex = $(this.grdidId).datagrid("getRowIndex", $(this.grdidId).datagrid("getSelected"));
             return selectedIndex;
         },
+        getSelectedRow: function () {
+            var getSelected = $(this.grdidId).datagrid("getSelected");
+            return getSelected;
+        },
         getRowsCount: function () {
-            return $(this.config.grdidId).datagetFunObject("getRows").length;
+            return $(this.grdidId).datagrid("getRows").length;
         },
         searchForm: function () {
             ///<summary>获取json格式搜索参数</summary>
@@ -46,11 +57,15 @@ $.datagridExtend = $.datagridExtend || {};
             var jsonSearch = $.parseJSON(strJson);
             return jsonSearch;
         },
+        resetFormSearch: function () {
+            ///<summary>重置搜索表单</summary>
+            // $('#form1')[0].reset();
+        },
         reload: function (formSearch) {
             ///<summary>刷新列表，不带搜索参数，当前页数重置1</summary>
             if (!formSearch) formSearch = {};
-            this.getFunObject("options").queryParams = formSearch;
-            this.getFunObject("load");
+            this.grid("options").queryParams = formSearch;
+            this.grid("load");
         },
         refresh: function () {
             ///<summary>重置搜索表单；刷新列表，不带搜索参数，当前页数重置1</summary>
@@ -63,6 +78,7 @@ $.datagridExtend = $.datagridExtend || {};
             this.reload(formSearch);
         }
     };
+
 })();
 
 

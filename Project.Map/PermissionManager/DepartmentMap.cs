@@ -19,7 +19,7 @@ namespace Project.Map.PermissionManager
 
             Map(p => p.DepartmentCode);
             Map(p => p.DepartmentName);
-            Map(p => p.ParentdepartmentCode);
+            Map(p => p.ParentDepartmentCode);
             Map(p => p.Remark);
         }
     }

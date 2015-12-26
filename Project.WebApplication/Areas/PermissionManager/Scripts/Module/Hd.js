@@ -42,6 +42,7 @@
             }).done(
                 function (dataresult, data) {
                     $.alertExtend.info();
+                    parent.$("#btnSearch").trigger("click");
                 }
             ).fail(
              function (errordetails, errormessage) {

@@ -4,7 +4,7 @@
 }
 
 @section JavaScript{
-    <script src="/Areas/PermissionManager/Scripts/Department/Hd.js"></script>
+    <script src="/Areas/PermissionManager/Scripts/Department/Hd.js?id=1"></script>
 }
 
 <input id="BindEntity" type="text" value="@ViewBag.BindEntity" />
@@ -15,10 +15,10 @@
 
             <tr>
                 <td>
-                    <span style="color: Red">*</span>
+                    上级部门<span style="color: Red">*</span>
                 </td>
                 <td>
-                    <input id="PkId" name="PkId" type="text" />
+                    <input id="ParentDepartmentCode" name="ParentDepartmentCode" type="text" />
                 </td>
             </tr>
 
@@ -27,7 +27,7 @@
                     部门编码<span style="color: Red">*</span>
                 </td>
                 <td>
-                    <input id="DepartmentCode" name="DepartmentCode" type="text" />
+                    <input id="DepartmentCode" name="DepartmentCode" type="text"/>
                 </td>
             </tr>
 
@@ -36,16 +36,7 @@
                     部门名称<span style="color: Red">*</span>
                 </td>
                 <td>
-                    <input id="DepartmentName" name="DepartmentName" type="text" />
-                </td>
-            </tr>
-
-            <tr>
-                <td>
-                    公司代码<span style="color: Red">*</span>
-                </td>
-                <td>
-                    <input id="ParentdepartmentCode" name="ParentdepartmentCode" type="text" />
+                    <input id="DepartmentName" name="DepartmentName" type="text"/>
                 </td>
             </tr>
 
@@ -54,7 +45,7 @@
                     备注<span style="color: Red">*</span>
                 </td>
                 <td>
-                    <input id="Remark" name="Remark" type="text" />
+                    <input id="Remark" name="Remark" type="text"/>
                 </td>
             </tr>
 

@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{3D26782A-3308-430B-B58F-5F8ABA1A50B3}</ProjectGuid>
+    <ProjectGuid>{7E5CD828-D4FF-445E-9F1D-068102151681}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Project.Model</RootNamespace>
-    <AssemblyName>Project.Model</AssemblyName>
+    <RootNamespace>Project.Config</RootNamespace>
+    <AssemblyName>Project.Config</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -39,30 +39,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Enum\Class1.cs" />
-    <Compile Include="ExtendUi\ITree.cs" />
-    <Compile Include="PermissionManager\DepartmentEntity.cs" />
-    <Compile Include="PermissionManager\FunctionDetailModel.cs" />
-    <Compile Include="PermissionManager\FunctionModel.cs" />
-    <Compile Include="PermissionManager\ModuleModel.cs" />
-    <Compile Include="PermissionManager\PermissionFunctionEntity.cs" />
-    <Compile Include="PermissionManager\RoleFunctionDetailModel.cs" />
-    <Compile Include="PermissionManager\RoleModel.cs" />
-    <Compile Include="PermissionManager\UserDepartmentModel.cs" />
-    <Compile Include="PermissionManager\UserFunctionDetailModel.cs" />
-    <Compile Include="PermissionManager\UserInfoEntity.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="PermissionManager\UserRoleModel.cs" />
+    <Compile Include="Class1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Project.Infrastructure.FrameworkCore\Project.Infrastructure.FrameworkCore.csproj">
-      <Project>{1C2392AD-A0F8-4378-9C54-3DCD1FB5D1DB}</Project>
-      <Name>Project.Infrastructure.FrameworkCore</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

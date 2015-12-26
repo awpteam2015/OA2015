@@ -41,6 +41,7 @@
                 data: JSON.stringify(postData)
             }).done(
                 function (dataresult, data) {
+                    parent.$("#btnSearch").trigger("click");
                     $.alertExtend.info();
                 }
             ).fail(
@@ -48,7 +49,6 @@
                  $.alertExtend.error();
              }
             );
-
         },
         submitExtend: {
             addRule: function () {
@@ -57,14 +57,14 @@
                         PkId: { required: true },
                         DepartmentCode: { required: true },
                         DepartmentName: { required: true },
-                        ParentdepartmentCode: { required: true },
+                        ParentDepartmentCode: { required: true },
                         Remark: { required: true }
                     },
                     messages: {
                         PkId: "必填!",
                         DepartmentCode: "部门编码必填!",
                         DepartmentName: "部门名称必填!",
-                        ParentdepartmentCode: "公司代码必填!",
+                        ParentDepartmentCode: "公司代码必填!",
                         Remark: "备注必填!"
                     },
                     errorPlacement: function (error, element) {

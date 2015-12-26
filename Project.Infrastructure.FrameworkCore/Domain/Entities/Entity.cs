@@ -1,5 +1,5 @@
 ﻿using System;
-using Project.Infrastructure.FrameworkCore.Domain.Entities.Component;
+
 
 namespace Project.Infrastructure.FrameworkCore.Domain.Entities
 {
@@ -65,6 +65,13 @@ namespace Project.Infrastructure.FrameworkCore.Domain.Entities
     {
 
     }
+
+    //[Serializable]
+    //public  class EntityWithTreeUi : ITree
+    //{
+    //    public string _parentId { get; set; }
+    //}
+
 
     //[Serializable]
     //public abstract class EntitySoftDelete<T> : Entity<T>, ISoftDelete
