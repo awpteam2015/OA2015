@@ -45,7 +45,7 @@ namespace Project.Infrastructure.FrameworkCore.DataNhibernate
                 var mapAssembly = Assembly.Load("Project.Map");
                 SessionFactory = Fluently.Configure(config)
                  .Mappings(m => m.FluentMappings.AddFromAssembly(mapAssembly)
-                    // .ExportTo(@"E:\XmlMappings")
+                     .ExportTo(@"E:\XmlMappings2")
                  ).BuildSessionFactory();
             }
             catch (Exception e)
@@ -105,7 +105,6 @@ namespace Project.Infrastructure.FrameworkCore.DataNhibernate
         {
             SessionStorageFactory.Dispose();
         }
-
 
     }
 }

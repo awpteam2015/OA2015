@@ -11,6 +11,10 @@
             $("#btnEdit").click(function () {
                 pro.Module.HdPage.submit("Edit");
             });
+            
+             $("#btnClose").click(function () {
+                parent.pro.Module.ListPage.closeTab("");
+            });
 
             if ($("#BindEntity").val()) {
                 var bindField = pro.bindKit.getHeadJson();
@@ -41,8 +45,11 @@
                 data: JSON.stringify(postData)
             }).done(
                 function (dataresult, data) {
-                    $.alertExtend.info();
-                    parent.$("#btnSearch").trigger("click");
+                   function afterSuccess() {
+                        parent.$("#btnSearch").trigger("click");
+                        parent.pro.Function.ListPage.closeTab();
+                    }
+                    parent.$.alertExtend.info("", afterSuccess());
                 }
             ).fail(
              function (errordetails, errormessage) {

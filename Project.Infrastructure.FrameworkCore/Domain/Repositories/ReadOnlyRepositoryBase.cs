@@ -13,6 +13,12 @@ namespace Project.Infrastructure.FrameworkCore.Domain.Repositories
     public class ReadOnlyRepositoryBase<TEntity, TKey> : IReadOnlyRepositoryBase<TEntity, TKey>
         where TEntity : class
     {
+        public TEntity Load(TKey id)
+        {
+            ISession session = SessionFactoryManager.GetCurrentSession();
+            return session.Load<TEntity>(id);
+        }
+
         public IQueryable<TEntity> Query()
         {
             ISession session = SessionFactoryManager.GetCurrentSession();
@@ -25,17 +31,5 @@ namespace Project.Infrastructure.FrameworkCore.Domain.Repositories
             return session.Get<TEntity>(id);
         }
 
-        public void Evict(TEntity entity)
-        {
-            SessionFactoryManager.GetCurrentSession().Evict(entity);
-        }
-
-        public void Evict(IEnumerable<TEntity> list)
-        {
-            foreach (var p in list)
-            {
-                SessionFactoryManager.GetCurrentSession().Evict(p);
-            }
-        }
     }
 }

@@ -543,6 +543,7 @@
     <Content Include="Scripts\jqueryPlugins\jquery_json\Json.js" />
     <Content Include="Scripts\pro\bindKit.js" />
     <Content Include="Scripts\pro\commonKit.js" />
+    <Content Include="Scripts\pro\controlKit.js" />
     <Content Include="Scripts\pro\submitKit.js" />
     <Content Include="Scripts\pro\jquery-message.js" />
     <Content Include="Scripts\pro\abp.jquery.ajax.js" />

@@ -9,6 +9,9 @@ namespace Project.WebApplication.Controllers
 {
     public class BaseController : Controller
     {
+
+        
+
         // GET: Base
         protected override void OnResultExecuting(ResultExecutingContext filterContext)
         {

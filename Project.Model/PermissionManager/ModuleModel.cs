@@ -7,6 +7,8 @@
  *       描述：     权限模块
  * *************************************************************************/
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using Project.Infrastructure.FrameworkCore.Domain.Entities;
 using Project.Infrastructure.FrameworkCore.Domain.Entities.Component;
 
@@ -39,7 +41,9 @@ namespace Project.Model.PermissionManager
         
 
         #region 新增属性
-        
+
+        public virtual ISet<FunctionEntity> FunctionEntityList { get; set; }
+
         #endregion
     }
 }

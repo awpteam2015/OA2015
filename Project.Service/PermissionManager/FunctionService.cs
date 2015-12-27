@@ -1,39 +1,44 @@
 ﻿
- /***************************************************************************
- *       功能：     PMFunction业务处理层
- *       作者：     李伟伟
- *       日期：     2015/12/23
- *       描述：     模块功能
- * *************************************************************************/
+/***************************************************************************
+*       功能：     PMFunction业务处理层
+*       作者：     李伟伟
+*       日期：     2015/12/23
+*       描述：     模块功能
+* *************************************************************************/
 using System.Linq;
 using System.Collections.Generic;
+using Project.Infrastructure.FrameworkCore.DataNhibernate;
 using Project.Infrastructure.FrameworkCore.DataNhibernate.Helpers;
 using Project.Model.PermissionManager;
 using Project.Repository.PermissionManager;
+using Project.Infrastructure.FrameworkCore.ToolKit.LinqExpansion;
+
 
 namespace Project.Service.PermissionManager
 {
     public class FunctionService
     {
-       
-       #region 构造函数
-        private readonly FunctionRepository  _functionRepository;
-            private static readonly FunctionService Instance = new FunctionService();
+
+        #region 构造函数
+        private readonly FunctionRepository _functionRepository;
+        private readonly FunctionDetailRepository _functionDetailRepository;
+        private static readonly FunctionService Instance = new FunctionService();
 
         public FunctionService()
         {
-           this._functionRepository =new FunctionRepository();
+            this._functionRepository = new FunctionRepository();
+            this._functionDetailRepository = new FunctionDetailRepository();
         }
-        
-         public static  FunctionService GetInstance()
+
+        public static FunctionService GetInstance()
         {
             return Instance;
         }
         #endregion
 
 
-        #region 基础方法 
-         /// <summary>
+        #region 基础方法
+        /// <summary>
         /// 新增
         /// </summary>
         /// <param name="entity"></param>
@@ -42,24 +47,24 @@ namespace Project.Service.PermissionManager
         {
             return _functionRepository.Save(entity);
         }
-        
-        
-         /// <summary>
+
+
+        /// <summary>
         /// 删除
         /// </summary>
         /// <param name="pkId"></param>
         public bool DeleteByPkId(System.Int32 pkId)
         {
-         try
+            try
             {
-            var entity= _functionRepository.GetById(pkId);
-            _functionRepository.Delete(entity);
-             return true;
-        }
-        catch
-        {
-         return false;
-        }
+                var entity = _functionRepository.GetById(pkId);
+                _functionRepository.Delete(entity);
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
         }
 
         /// <summary>
@@ -68,15 +73,15 @@ namespace Project.Service.PermissionManager
         /// <param name="entity"></param>
         public bool Delete(FunctionEntity entity)
         {
-         try
+            try
             {
-            _functionRepository.Delete(entity);
-             return true;
-        }
-        catch
-        {
-         return false;
-        }
+                _functionRepository.Delete(entity);
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
         }
 
         /// <summary>
@@ -85,15 +90,32 @@ namespace Project.Service.PermissionManager
         /// <param name="entity"></param>
         public bool Update(FunctionEntity entity)
         {
-          try
+            using (var tx = NhTransactionHelper.BeginTransaction())
             {
-            _functionRepository.Update(entity);
-         return true;
-        }
-        catch
-        {
-         return false;
-        }
+                try
+                {
+
+                    _functionRepository.Update(entity);
+                   // _functionDetailRepository.Merge(entity.FunctionDetailList.Where(p=>p.PkId>0).ToList());
+                    //newList.ForEach(p =>
+                    //{
+                    //    p.CreationTime = p.LastModificationTime;
+                    //    p.CreatorUserCode = p.LastModifierUserCode;
+                    //    _functionDetailRepository.Save(p);
+                    //});
+                    //updateList.ForEach(p => { _functionDetailRepository.Update(p); });
+                   // deleteList.ForEach(p => { _functionDetailRepository.Delete(p); });
+
+                  
+                    tx.Commit();
+                    return true;
+                }
+                catch
+                {
+                    tx.Rollback();
+                    throw;
+                }
+            }
         }
 
 
@@ -117,29 +139,29 @@ namespace Project.Service.PermissionManager
         /// <returns>获取当前页【模块功能】和总【模块功能】数</returns>
         public System.Tuple<IList<FunctionEntity>, int> Search(FunctionEntity entity, int skipResults, int maxResults)
         {
-                var expr = PredicateBuilder.True<FunctionEntity>();
-                  #region
-              // if (!string.IsNullOrEmpty(entity.PkId))
-              //  expr = expr.And(p => p.PkId == entity.PkId);
-              // if (!string.IsNullOrEmpty(entity.FunctionnName))
-              //  expr = expr.And(p => p.FunctionnName == entity.FunctionnName);
-              // if (!string.IsNullOrEmpty(entity.ModuleId))
-              //  expr = expr.And(p => p.ModuleId == entity.ModuleId);
-              // if (!string.IsNullOrEmpty(entity.FunctionUrl))
-              //  expr = expr.And(p => p.FunctionUrl == entity.FunctionUrl);
-              // if (!string.IsNullOrEmpty(entity.Area))
-              //  expr = expr.And(p => p.Area == entity.Area);
-              // if (!string.IsNullOrEmpty(entity.Controller))
-              //  expr = expr.And(p => p.Controller == entity.Controller);
-              // if (!string.IsNullOrEmpty(entity.Action))
-              //  expr = expr.And(p => p.Action == entity.Action);
-              // if (!string.IsNullOrEmpty(entity.IsDisplayOnMenu))
-              //  expr = expr.And(p => p.IsDisplayOnMenu == entity.IsDisplayOnMenu);
-              // if (!string.IsNullOrEmpty(entity.RankId))
-              //  expr = expr.And(p => p.RankId == entity.RankId);
-              // if (!string.IsNullOrEmpty(entity.Remark))
-              //  expr = expr.And(p => p.Remark == entity.Remark);
- #endregion
+            var expr = PredicateBuilder.True<FunctionEntity>();
+            #region
+            // if (!string.IsNullOrEmpty(entity.PkId))
+            //  expr = expr.And(p => p.PkId == entity.PkId);
+            // if (!string.IsNullOrEmpty(entity.FunctionnName))
+            //  expr = expr.And(p => p.FunctionnName == entity.FunctionnName);
+            // if (!string.IsNullOrEmpty(entity.ModuleId))
+            //  expr = expr.And(p => p.ModuleId == entity.ModuleId);
+            // if (!string.IsNullOrEmpty(entity.FunctionUrl))
+            //  expr = expr.And(p => p.FunctionUrl == entity.FunctionUrl);
+            // if (!string.IsNullOrEmpty(entity.Area))
+            //  expr = expr.And(p => p.Area == entity.Area);
+            // if (!string.IsNullOrEmpty(entity.Controller))
+            //  expr = expr.And(p => p.Controller == entity.Controller);
+            // if (!string.IsNullOrEmpty(entity.Action))
+            //  expr = expr.And(p => p.Action == entity.Action);
+            // if (!string.IsNullOrEmpty(entity.IsDisplayOnMenu))
+            //  expr = expr.And(p => p.IsDisplayOnMenu == entity.IsDisplayOnMenu);
+            // if (!string.IsNullOrEmpty(entity.RankId))
+            //  expr = expr.And(p => p.RankId == entity.RankId);
+            // if (!string.IsNullOrEmpty(entity.Remark))
+            //  expr = expr.And(p => p.Remark == entity.Remark);
+            #endregion
             var list = _functionRepository.Query().Where(expr).OrderBy(p => p.PkId).Skip(skipResults).Take(maxResults).ToList();
             var count = _functionRepository.Query().Where(expr).Count();
             return new System.Tuple<IList<FunctionEntity>, int>(list, count);
@@ -152,29 +174,29 @@ namespace Project.Service.PermissionManager
         /// <returns>返回列表</returns>
         public IList<FunctionEntity> GetList(FunctionEntity entity)
         {
-               var expr = PredicateBuilder.True<FunctionEntity>();
-             #region
-              // if (!string.IsNullOrEmpty(entity.PkId))
-              //  expr = expr.And(p => p.PkId == entity.PkId);
-              // if (!string.IsNullOrEmpty(entity.FunctionnName))
-              //  expr = expr.And(p => p.FunctionnName == entity.FunctionnName);
-              // if (!string.IsNullOrEmpty(entity.ModuleId))
-              //  expr = expr.And(p => p.ModuleId == entity.ModuleId);
-              // if (!string.IsNullOrEmpty(entity.FunctionUrl))
-              //  expr = expr.And(p => p.FunctionUrl == entity.FunctionUrl);
-              // if (!string.IsNullOrEmpty(entity.Area))
-              //  expr = expr.And(p => p.Area == entity.Area);
-              // if (!string.IsNullOrEmpty(entity.Controller))
-              //  expr = expr.And(p => p.Controller == entity.Controller);
-              // if (!string.IsNullOrEmpty(entity.Action))
-              //  expr = expr.And(p => p.Action == entity.Action);
-              // if (!string.IsNullOrEmpty(entity.IsDisplayOnMenu))
-              //  expr = expr.And(p => p.IsDisplayOnMenu == entity.IsDisplayOnMenu);
-              // if (!string.IsNullOrEmpty(entity.RankId))
-              //  expr = expr.And(p => p.RankId == entity.RankId);
-              // if (!string.IsNullOrEmpty(entity.Remark))
-              //  expr = expr.And(p => p.Remark == entity.Remark);
- #endregion
+            var expr = PredicateBuilder.True<FunctionEntity>();
+            #region
+            // if (!string.IsNullOrEmpty(entity.PkId))
+            //  expr = expr.And(p => p.PkId == entity.PkId);
+            // if (!string.IsNullOrEmpty(entity.FunctionnName))
+            //  expr = expr.And(p => p.FunctionnName == entity.FunctionnName);
+            // if (!string.IsNullOrEmpty(entity.ModuleId))
+            //  expr = expr.And(p => p.ModuleId == entity.ModuleId);
+            // if (!string.IsNullOrEmpty(entity.FunctionUrl))
+            //  expr = expr.And(p => p.FunctionUrl == entity.FunctionUrl);
+            // if (!string.IsNullOrEmpty(entity.Area))
+            //  expr = expr.And(p => p.Area == entity.Area);
+            // if (!string.IsNullOrEmpty(entity.Controller))
+            //  expr = expr.And(p => p.Controller == entity.Controller);
+            // if (!string.IsNullOrEmpty(entity.Action))
+            //  expr = expr.And(p => p.Action == entity.Action);
+            // if (!string.IsNullOrEmpty(entity.IsDisplayOnMenu))
+            //  expr = expr.And(p => p.IsDisplayOnMenu == entity.IsDisplayOnMenu);
+            // if (!string.IsNullOrEmpty(entity.RankId))
+            //  expr = expr.And(p => p.RankId == entity.RankId);
+            // if (!string.IsNullOrEmpty(entity.Remark))
+            //  expr = expr.And(p => p.Remark == entity.Remark);
+            #endregion
             var list = _functionRepository.Query().Where(expr).OrderBy(p => p.PkId).ToList();
             return list;
         }
@@ -182,11 +204,11 @@ namespace Project.Service.PermissionManager
 
 
         #region 新增方法
-        
+
         #endregion
     }
 }
 
-    
- 
+
+
 

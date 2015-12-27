@@ -13,6 +13,8 @@ var pro = pro || {};
         }
         this.grdidId = id;
         this.isTree = isTree;
+        this.RowIndex = 0;
+        this.PkId = -1;
     };
 
     pro.GridBase.prototype = {
@@ -76,6 +78,37 @@ var pro = pro || {};
             ///<summary>搜索</summary>
             var formSearch = this.searchForm();
             this.reload(formSearch);
+        },
+        insertRow: function (rowJson) {
+            var obj = this;
+            var row = $(this.grdidId).datagrid('getSelected');
+            if (row) {
+                obj.RowIndex = $(this.grdidId).datagrid('getRowIndex', row);
+            }
+
+            $(this.grdidId).datagrid('insertRow', {
+                index: obj.RowIndex,
+                row: rowJson
+            });
+          
+            obj.PkId--;
+           // alert(obj.RowIndex);
+            $(this.grdidId).datagrid('selectRow', obj.RowIndex);
+
+        },
+        delRow: function () {
+            if ($(this.grdidId).datagrid("getRows") == "") {
+                return false;
+            }
+            var selectrow = $(this.grdidId).datagrid("getSelected");
+            var nowIndex = $(this.grdidId).datagrid("getRowIndex", selectrow);
+            $(this.grdidId).datagrid('deleteRow', nowIndex);
+            if (nowIndex > 0) {
+                $(this.grdidId).datagrid('selectRow', nowIndex - 1);
+            } else {
+                $(this.grdidId).datagrid('selectRow', 0);
+            }
+            return true;
         }
     };
 

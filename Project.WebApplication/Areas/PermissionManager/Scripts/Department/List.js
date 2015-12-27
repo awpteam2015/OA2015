@@ -5,6 +5,8 @@ var pro = pro || {};
     pro.Department.ListPage = pro.Department.ListPage || {};
     pro.Department.ListPage = {
         initPage: function () {
+            var tabObj = new pro.TabBase();
+ 
             var gridObj = new pro.GridBase("#datagrid", true);
 
             gridObj.grid({
@@ -25,8 +27,7 @@ var pro = pro || {};
                );
 
             $("#btnAdd").click(function () {
-                $.tabExtend.config.url = "/PermissionManager/Department/Hd";
-                $.tabExtend.add();
+                tabObj.add("/PermissionManager/Department/Hd","新增");
 
             });
 
@@ -35,8 +36,8 @@ var pro = pro || {};
                     $.alertExtend.info("请选中要编辑的行");
                     return;
                 }
-                $.tabExtend.config.url = "/PermissionManager/Department/Hd?PkId=" + gridObj.getSelectedRow().PkId;
-                $.tabExtend.add();
+                var PkId = gridObj.getSelectedRow().PkId;
+                tabObj.add("/PermissionManager/Department/Hd?PkId=" + PkId, "编辑" + PkId);
             });
 
 

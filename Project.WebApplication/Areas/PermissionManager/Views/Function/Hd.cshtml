@@ -1,9 +1,4 @@
-﻿
-
-  
-
-
-@{
+﻿@{
     ViewBag.Title = "Hd";
     Layout = "~/Views/Shared/_LayoutHandler.cshtml";
 }
@@ -17,102 +12,114 @@
 <div class="mtable_div">
     <form id="form1">
         <table class="mtable">
-            
-              <tr>
-            <td >
-                <span style="color: Red">*</span>
-            </td>
-            <td >
-                <input id="PkId" name="PkId"  type="text"  />
-            </td>
-        </tr>
-            
-              <tr>
-            <td >
-                模块名称<span style="color: Red">*</span>
-            </td>
-            <td >
-                <input id="FunctionnName" name="FunctionnName"  type="text"  />
-            </td>
-        </tr>
-            
-              <tr>
-            <td >
-                模块ID<span style="color: Red">*</span>
-            </td>
-            <td >
-                <input id="ModuleId" name="ModuleId"  type="text"  />
-            </td>
-        </tr>
-            
-              <tr>
-            <td >
-                模块路径<span style="color: Red">*</span>
-            </td>
-            <td >
-                <input id="FunctionUrl" name="FunctionUrl"  type="text"  />
-            </td>
-        </tr>
-            
-              <tr>
-            <td >
-                <span style="color: Red">*</span>
-            </td>
-            <td >
-                <input id="Area" name="Area"  type="text"  />
-            </td>
-        </tr>
-            
-              <tr>
-            <td >
-                <span style="color: Red">*</span>
-            </td>
-            <td >
-                <input id="Controller" name="Controller"  type="text"  />
-            </td>
-        </tr>
-            
-              <tr>
-            <td >
-                <span style="color: Red">*</span>
-            </td>
-            <td >
-                <input id="Action" name="Action"  type="text"  />
-            </td>
-        </tr>
-            
-              <tr>
-            <td >
-                是否在菜单上显示1是 0不是<span style="color: Red">*</span>
-            </td>
-            <td >
-                <input id="IsDisplayOnMenu" name="IsDisplayOnMenu"  type="text"  />
-            </td>
-        </tr>
-            
-              <tr>
-            <td >
-                顺序<span style="color: Red">*</span>
-            </td>
-            <td >
-                <input id="RankId" name="RankId"  type="text"  />
-            </td>
-        </tr>
-            
-              <tr>
-            <td >
-                备注<span style="color: Red">*</span>
-            </td>
-            <td >
-                <input id="Remark" name="Remark"  type="text"  />
-            </td>
-        </tr>
-          
+
+            <tr>
+                <td style="width: 200px">
+                    模块名称<span style="color: Red">*</span>
+                </td>
+                <td>
+                    <input id="FunctionnName" name="FunctionnName" type="text" />
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    模块ID<span style="color: Red">*</span>
+                </td>
+                <td>
+                    <input id="ModuleId" name="ModuleId" type="text" />
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    模块路径<span style="color: Red">*</span>
+                </td>
+                <td>
+                    <input id="FunctionUrl" name="FunctionUrl" type="text" />
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    Area<span style="color: Red">*</span>
+                </td>
+                <td>
+                    <input id="Area" name="Area" type="text" />
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    Controller<span style="color: Red">*</span>
+                </td>
+                <td>
+                    <input id="Controller" name="Controller" type="text" />
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    Action<span style="color: Red">*</span>
+                </td>
+                <td>
+                    <input id="Action" name="Action" type="text" />
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    是否在菜单上显示<span style="color: Red">*</span>
+                </td>
+                <td>
+                    <select id="IsDisplayOnMenu" name="IsDisplayOnMenu">
+                        <option value="1">是</option>
+                        <option value="0">否</option>
+                    </select>
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    顺序
+                </td>
+                <td>
+                    <input id="RankId" name="RankId" type="text" />
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    备注
+                </td>
+                <td>
+                    <input id="Remark" name="Remark" type="text" />
+                </td>
+            </tr>
+
         </table>
+
+        <div title="模块功能" style="padding:1px;height: 500px" >
+            <table id="datagrid" style="height:auto;" iconcls=".icon-save" singleselect="true" idfield="id" toolbar="#tb" fit="true"></table>
+            <div id="tb" style="padding: 5px; height: auto">
+                <div style="margin-bottom: 5px">
+                    <a id="btnAdd_ToolBar" href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:true">添加</a>
+
+                    <a id="btnDel_ToolBar" href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-remove',plain:true">删除</a>
+
+
+                 <input type="button" onclick="$('#datagrid').datagrid('selectRow', 0)" />
+                </div>
+
+                <div id="divSearch">
+
+                </div>
+            </div>
+        </div>
     </form>
 </div>
 <div style="padding: 10px 10px 0 10px; text-align: center;">
-    @if (Request["PkId"]==null||int.Parse(Request["PkId"]) == 0)
+    @if (Request["PkId"] == null || int.Parse(Request["PkId"]) == 0)
     {
         <a id="btnAdd" class="easyui-linkbutton" iconcls="icon-add" href="javascript:void(0)">新增</a>
     }
@@ -122,8 +129,6 @@
     }
     <a id="btnClose" class="easyui-linkbutton" iconcls="icon-cancel" href="javascript:void(0)">关闭</a>
 </div>
-
-
 
 
 

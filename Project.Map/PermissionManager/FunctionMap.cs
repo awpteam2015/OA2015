@@ -25,7 +25,13 @@ namespace  Project.Map.PermissionManager
             Map(p => p.Action);    
             Map(p => p.IsDisplayOnMenu);    
             Map(p => p.RankId);    
-            Map(p => p.Remark);    
+            Map(p => p.Remark);
+
+            HasMany(p => p.FunctionDetailList)
+          .AsSet()
+          .LazyLoad()
+          .Cascade.All().Inverse()
+          .KeyColumn("FunctionId");
         }
     }
 }

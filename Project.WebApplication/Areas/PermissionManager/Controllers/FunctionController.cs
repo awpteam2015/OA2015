@@ -28,7 +28,7 @@ namespace Project.WebApplication.Areas.PermissionManager.Controllers
             return View();
         }
 
- 
+
         public ActionResult List()
         {
             return View();
@@ -39,16 +39,16 @@ namespace Project.WebApplication.Areas.PermissionManager.Controllers
             var pIndex = this.Request["page"].ConvertTo<int>();
             var pSize = this.Request["rows"].ConvertTo<int>();
             var where = new FunctionEntity();
-			//where.PkId = RequestHelper.GetFormString("PkId");
-			//where.FunctionnName = RequestHelper.GetFormString("FunctionnName");
-			//where.ModuleId = RequestHelper.GetFormString("ModuleId");
-			//where.FunctionUrl = RequestHelper.GetFormString("FunctionUrl");
-			//where.Area = RequestHelper.GetFormString("Area");
-			//where.Controller = RequestHelper.GetFormString("Controller");
-			//where.Action = RequestHelper.GetFormString("Action");
-			//where.IsDisplayOnMenu = RequestHelper.GetFormString("IsDisplayOnMenu");
-			//where.RankId = RequestHelper.GetFormString("RankId");
-			//where.Remark = RequestHelper.GetFormString("Remark");
+            //where.PkId = RequestHelper.GetFormString("PkId");
+            //where.FunctionnName = RequestHelper.GetFormString("FunctionnName");
+            //where.ModuleId = RequestHelper.GetFormString("ModuleId");
+            //where.FunctionUrl = RequestHelper.GetFormString("FunctionUrl");
+            //where.Area = RequestHelper.GetFormString("Area");
+            //where.Controller = RequestHelper.GetFormString("Controller");
+            //where.Action = RequestHelper.GetFormString("Action");
+            //where.IsDisplayOnMenu = RequestHelper.GetFormString("IsDisplayOnMenu");
+            //where.RankId = RequestHelper.GetFormString("RankId");
+            //where.Remark = RequestHelper.GetFormString("Remark");
             var searchList = FunctionService.GetInstance().Search(where, (pIndex - 1) * pSize, pSize);
 
             var dataGridEntity = new DataGridResponse()
@@ -58,6 +58,34 @@ namespace Project.WebApplication.Areas.PermissionManager.Controllers
             };
             return new AbpJsonResult(dataGridEntity, new NHibernateContractResolver());
         }
+
+
+        public AbpJsonResult GetFunctionDetailList()
+        {
+            var pIndex = this.Request["page"].ConvertTo<int>();
+            var pSize = this.Request["rows"].ConvertTo<int>();
+            var where = new FunctionDetailEntity();
+            //where.PkId = RequestHelper.GetFormString("PkId");
+            //where.FunctionDetailName = RequestHelper.GetFormString("FunctionDetailName");
+            //where.FunctionDetailCode = RequestHelper.GetFormString("FunctionDetailCode");
+            //where.FunctionId = RequestHelper.GetFormString("FunctionId");
+            //where.Area = RequestHelper.GetFormString("Area");
+            //where.Controller = RequestHelper.GetFormString("Controller");
+            //where.Action = RequestHelper.GetFormString("Action");
+            //where.CreatorUserCode = RequestHelper.GetFormString("CreatorUserCode");
+            //where.CreationTime = RequestHelper.GetFormString("CreationTime");
+            //where.LastModifierUserCode = RequestHelper.GetFormString("LastModifierUserCode");
+            //where.LastModificationTime = RequestHelper.GetFormString("LastModificationTime");
+            var searchList = FunctionDetailService.GetInstance().Search(where, (pIndex - 1) * pSize, pSize);
+
+            var dataGridEntity = new DataGridResponse()
+            {
+                total = searchList.Item2,
+                rows = searchList.Item1
+            };
+            return new AbpJsonResult(dataGridEntity, new NHibernateContractResolver());
+        }
+
 
 
         [HttpPost]
@@ -74,8 +102,47 @@ namespace Project.WebApplication.Areas.PermissionManager.Controllers
 
 
         [HttpPost]
-        public AbpJsonResult Edit( AjaxRequest<FunctionEntity> postData)
+        public AbpJsonResult Edit(AjaxRequest<FunctionEntity> postData)
         {
+            var newEntiy = postData.RequestEntity;
+            var oldEntity = FunctionService.GetInstance().GetModelByPk(postData.RequestEntity.PkId);
+            oldEntity.FunctionUrl = postData.RequestEntity.FunctionUrl;
+
+
+
+            var date = DateTime.Now;
+            postData.RequestEntity.FunctionDetailList.ToList().ForEach(p =>
+            {
+                if (p.PkId < 0)
+                {
+                    p.CreationTime = date;
+                    p.CreatorUserCode = "";
+                }
+                else
+                {
+                    var oldRowEntity = oldEntity.FunctionDetailList.SingleOrDefault(x => x.PkId == p.PkId);
+                    p.CreationTime = oldRowEntity.CreationTime;
+                    p.CreatorUserCode = oldRowEntity.CreatorUserCode;
+                }
+                p.FunctionId = postData.RequestEntity.PkId;
+                p.LastModificationTime = date;
+                p.LastModifierUserCode = "";
+            });
+
+            var deleteList = oldEntity.FunctionDetailList.Where(
+                    p => postData.RequestEntity.FunctionDetailList.All(x => x.PkId != p.PkId)).ToList();
+
+            for (int i = 0; i < deleteList.Count(); i++)
+            {
+                oldEntity.FunctionDetailList.Remove(deleteList[i]);
+            }
+
+           
+            //deleteList.ForEach(p =>
+            //        {
+                        
+            //        });
+
             var updateResult = FunctionService.GetInstance().Update(postData.RequestEntity);
             var result = new AjaxResponse<FunctionEntity>()
             {

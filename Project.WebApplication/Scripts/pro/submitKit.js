@@ -1,13 +1,13 @@
 ﻿var pro = pro || {};
-(function() {
+(function () {
     pro.submitKit = pro.submitKit || {};
     pro.submitKit = {
         config: {
-            columnPkidName: "",
+            columnPkidName: "PkId",
             columns: new Array(),
             excludeAreaIds: ""
         },
-        getHeadJson: function() {
+        getHeadJson: function () {
             var inputObj = $("input[type=text]");
             var selectObj = $("select");
             if (this.excludeAreaIds) {
@@ -24,14 +24,14 @@
 
             var json = "";
             inputObj.each(
-                function() {
+                function () {
                     if ($(this).attr("name") != undefined) {
                         json += '"' + $(this).attr("name") + '":"' + $(this).val().trim() + '",';
                     }
                 });
 
             selectObj.each(
-                function() {
+                function () {
                     if ($(this).attr("name") != undefined) {
                         json += '"' + $(this).attr("name") + '":"' + $(this).val().trim() + '",';
                     }
@@ -47,18 +47,22 @@
             );
             return jQuery.parseJSON("{" + json.substring(0, json.length - 1) + "}");
         },
-        getRowJson: function() {
+        getRowJson: function () {
             var columns = this.config.columns;
+            var PkId = this.config.columnPkidName;
             var json = "";
-            $("[name=" + this.config.columnPkidName + "]").each(
-                function() {
-                    var rowJson = "";
+            $("[name=" + PkId + "]").each(
+                function () {
+                    var rowJson = '"' + PkId + '":"' + $(this).val() + '",';
                     for (var i = 0, max = columns.length; i < max; i++) {
+
                         rowJson += '"' + columns[i] + '":"' + $("[name=" + columns[i] + "_" + $(this).val() + "]").val() + '",';
                     }
+
                     json += "{" + rowJson.substring(0, rowJson.length - 1) + "},";
                 }
             );
+            alert(json);
             return jQuery.parseJSON("[" + json.substring(0, json.length - 1) + "]");
         }
     };

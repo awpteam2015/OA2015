@@ -15,18 +15,6 @@ namespace Project.Infrastructure.FrameworkCore.Domain.Repositories
     public class RepositoryBase<TEntity, TKey> : ReadOnlyRepositoryBase<TEntity, TKey>, IRepositoryBase<TEntity, TKey>
         where TEntity : class
     {
-        public TEntity Load(TKey id)
-        {
-            ISession session = SessionFactoryManager.GetCurrentSession();
-            return session.Load<TEntity>(id);
-        }
-
-        public TEntity Merge(TEntity entity)
-        {
-            ISession session = SessionFactoryManager.GetCurrentSession();
-            return session.Merge(entity);
-        }
-
 
         public TKey Save(TEntity entity)
         {
@@ -118,7 +106,68 @@ namespace Project.Infrastructure.FrameworkCore.Domain.Repositories
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="entity"></param>
+        public virtual void Merge(TEntity entity)
+        {
+            ISession session = SessionFactoryManager.GetCurrentSession();
+            using (var tx = NhTransactionHelper.BeginTransaction())
+            {
+                try
+                {
+                    session.Merge(entity);
+                    tx.Commit();
+                }
+                catch
+                {
+                    tx.Rollback();
+                    throw;
+                }
+            }
+        }
 
+        public virtual void Merge(IEnumerable<TEntity> list)
+        {
+            ISession session = SessionFactoryManager.GetCurrentSession();
+            using (var tx = NhTransactionHelper.BeginTransaction())
+            {
+                try
+                {
+                    foreach (var p in list)
+                    {
+                        session.Merge(p);
+                    }
+                    tx.Commit();
+                }
+                catch
+                {
+                    tx.Rollback();
+                    throw;
+                }
+            }
+        }
 
+        /// <summary>
+        /// 清除对象一级缓存(Session.Flush()不会同步到数据库)
+        /// </summary>
+        /// <param name="entity"></param>
+        public void Evict(TEntity entity)
+        {
+            SessionFactoryManager.GetCurrentSession().Evict(entity);
+        }
+
+        /// <summary>
+        /// 清除对象一级缓存(Session.Flush()不会同步到数据库)
+        /// </summary>
+        /// <param name="list"></param>
+        public void Evict(IEnumerable<TEntity> list)
+        {
+            foreach (var p in list)
+            {
+                SessionFactoryManager.GetCurrentSession().Evict(p);
+            }
+        }     
     }
 }

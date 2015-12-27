@@ -46,7 +46,7 @@ namespace Project.Model.PermissionManager
         /// <summary>
         /// 创建时间
         /// </summary>
-        public virtual System.DateTime? CreationTime{get; set;}
+        public virtual System.DateTime CreationTime{get; set;}
         /// <summary>
         /// 修改人
         /// </summary>

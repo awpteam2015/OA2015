@@ -8,7 +8,7 @@ $.alertExtend = $.alertExtend || {};
             ///</summary>
             ///<param name="msg" type="String">提示信息</param>
             ///<param name="fn" type="function">关闭之后回调函数</param>
-            if (msg==undefined) {
+            if (msg == undefined || msg==="") {
                 msg = "操作失败！";
             }
             if (fn) $.messager.alert("错误提示", msg, "error", fn);
@@ -29,11 +29,14 @@ $.alertExtend = $.alertExtend || {};
             ///</summary>
             ///<param name="msg" type="String">提示信息</param>
             ///<param name="fn" type="function">关闭之后回调函数</param>
-            if (msg == undefined) {
+            if (msg == undefined || msg === "") {
                 msg = "操作成功！";
             }
             if (fn) $.messager.alert("信息提示", msg, "info", fn);
             else $.messager.alert("信息提示", msg, "info");
+        },
+        infoOp: function(msg, fn) {
+            this.info("请选择需要操作的行项目！",fn);
         },
         warning: function (msg, fn) {
             ///<summary>

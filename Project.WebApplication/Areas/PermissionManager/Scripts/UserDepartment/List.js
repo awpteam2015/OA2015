@@ -4,8 +4,16 @@ var pro = pro || {};
     pro.UserDepartment = pro.UserDepartment || {};
     pro.UserDepartment.ListPage = pro.UserDepartment.ListPage || {};
     pro.UserDepartment.ListPage = {
+      init: function () {
+            return {
+                tabObj: new pro.TabBase(),
+                gridObj: new pro.GridBase("#datagrid", false)
+            };
+        },
         initPage: function () {
-           var gridObj = new pro.GridBase("#datagrid", false);
+            var initObj = this.init();
+            var tabObj = initObj.tabObj;
+            var gridObj = initObj.gridObj;
             gridObj.grid({
                 url: '/PermissionManager/UserDepartment/GetList',
                 fitColumns: false,
@@ -24,18 +32,16 @@ var pro = pro || {};
                );
 
             $("#btnAdd").click(function () {
-                $.tabExtend.config.url = "/PermissionManager/UserDepartment/Hd";
-                $.tabExtend.add();
-
+               tabObj.add("/PermissionManager/UserDepartment/Hd","新增");
             });
 
             $("#btnEdit").click(function () {
                 if (!gridObj.isSelected()) {
-                    alert("请选中要编辑的行");
+                    $.alertExtend.infoOp();
                     return;
                 }
-                $.tabExtend.config.url = "/PermissionManager/UserDepartment/Hd?PkId=" + gridObj.getSelectedRow().PkId;
-                $.tabExtend.add();
+                var PkId = gridObj.getSelectedRow().PkId;
+                tabObj.add("/PermissionManager/UserDepartment/Hd?PkId=" + PkId, "编辑" + PkId);
             });
 
 
@@ -45,6 +51,7 @@ var pro = pro || {};
 
             $("#btnDel").click(function () {
                 if (!gridObj.isSelected()) {
+                $.alertExtend.infoOp();
                     return;
                 }
                 $.messager.confirm("确认操作", "是否确认删除", function (bl) {
@@ -54,7 +61,7 @@ var pro = pro || {};
                     }).done(
                     function (dataresult, data) {
                         $.alertExtend.info();
-                        gridObj.getObject().search();
+                        gridObj.search();
                     }
                     ).fail(
                     function (errordetails, errormessage) {
@@ -67,6 +74,9 @@ var pro = pro || {};
             $("#btnRefresh").click(function () {
                 gridObj.refresh();
             });
+        },
+         closeTab: function () {
+            this.init().tabObj.closeTab();
         }
     };
 })();
