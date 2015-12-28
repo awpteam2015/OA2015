@@ -5,6 +5,8 @@
 *       日期：     2015/12/23
 *       描述：     模块功能
 * *************************************************************************/
+
+using System;
 using System.Linq;
 using System.Collections.Generic;
 using Project.Infrastructure.FrameworkCore.DataNhibernate;
@@ -90,23 +92,36 @@ namespace Project.Service.PermissionManager
         /// <param name="entity"></param>
         public bool Update(FunctionEntity entity)
         {
+            var oldEntity = FunctionService.GetInstance().GetModelByPk(entity.PkId);
+
+            var date = DateTime.Now;
+            entity.FunctionDetailList.ToList().ForEach(p =>
+            {
+                if (p.PkId < 0)
+                {
+                    p.CreationTime = date;
+                    p.CreatorUserCode = "";
+                }
+                else
+                {
+                    var oldRowEntity = oldEntity.FunctionDetailList.SingleOrDefault(x => x.PkId == p.PkId);
+                    p.CreationTime = oldRowEntity.CreationTime;
+                    p.CreatorUserCode = oldRowEntity.CreatorUserCode;
+                }
+                p.FunctionId = entity.PkId;
+                p.LastModificationTime = date;
+                p.LastModifierUserCode = "";
+            });
+
+            var deleteList = oldEntity.FunctionDetailList.Where(
+                    p => entity.FunctionDetailList.All(x => x.PkId != p.PkId)).ToList();
+
             using (var tx = NhTransactionHelper.BeginTransaction())
             {
                 try
                 {
-
-                    _functionRepository.Update(entity);
-                   // _functionDetailRepository.Merge(entity.FunctionDetailList.Where(p=>p.PkId>0).ToList());
-                    //newList.ForEach(p =>
-                    //{
-                    //    p.CreationTime = p.LastModificationTime;
-                    //    p.CreatorUserCode = p.LastModifierUserCode;
-                    //    _functionDetailRepository.Save(p);
-                    //});
-                    //updateList.ForEach(p => { _functionDetailRepository.Update(p); });
-                   // deleteList.ForEach(p => { _functionDetailRepository.Delete(p); });
-
-                  
+                    _functionRepository.Merge(entity);
+                    deleteList.ForEach(p => { _functionDetailRepository.Delete(p); });
                     tx.Commit();
                     return true;
                 }

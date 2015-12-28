@@ -104,45 +104,6 @@ namespace Project.WebApplication.Areas.PermissionManager.Controllers
         [HttpPost]
         public AbpJsonResult Edit(AjaxRequest<FunctionEntity> postData)
         {
-            var newEntiy = postData.RequestEntity;
-            var oldEntity = FunctionService.GetInstance().GetModelByPk(postData.RequestEntity.PkId);
-            oldEntity.FunctionUrl = postData.RequestEntity.FunctionUrl;
-
-
-
-            var date = DateTime.Now;
-            postData.RequestEntity.FunctionDetailList.ToList().ForEach(p =>
-            {
-                if (p.PkId < 0)
-                {
-                    p.CreationTime = date;
-                    p.CreatorUserCode = "";
-                }
-                else
-                {
-                    var oldRowEntity = oldEntity.FunctionDetailList.SingleOrDefault(x => x.PkId == p.PkId);
-                    p.CreationTime = oldRowEntity.CreationTime;
-                    p.CreatorUserCode = oldRowEntity.CreatorUserCode;
-                }
-                p.FunctionId = postData.RequestEntity.PkId;
-                p.LastModificationTime = date;
-                p.LastModifierUserCode = "";
-            });
-
-            var deleteList = oldEntity.FunctionDetailList.Where(
-                    p => postData.RequestEntity.FunctionDetailList.All(x => x.PkId != p.PkId)).ToList();
-
-            for (int i = 0; i < deleteList.Count(); i++)
-            {
-                oldEntity.FunctionDetailList.Remove(deleteList[i]);
-            }
-
-           
-            //deleteList.ForEach(p =>
-            //        {
-                        
-            //        });
-
             var updateResult = FunctionService.GetInstance().Update(postData.RequestEntity);
             var result = new AjaxResponse<FunctionEntity>()
             {
