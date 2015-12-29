@@ -19,14 +19,15 @@
                 nowrap: false,
                 rownumbers: true, //行号
                 singleSelect: true,
+                idField: "PkId",
                 columns: [[
                     { field: 'PkId', title: '', width: 100, formatter: function (value, row, index) {
                         return pro.controlKit.getInputHtml("PkId", value);
                     }
-         },
+                    },
                     {
                         field: 'FunctionDetailName', title: '功能名称', width: 100, formatter: function (value, row, index) {
-                            return pro.controlKit.getInputHtml("FunctionDetailName_" + row.PkId, value);
+                            return pro.controlKit.getInputHtml("FunctionDetailName_" + row.PkId, value +"----"+ index);
                         }
                     },
                     {
@@ -50,7 +51,7 @@
                         }
                     }
                 ]],
-                pagination: true,
+                pagination: false,
                 pageSize: 20, //每页显示的记录条数，默认为10     
                 pageList: [20, 30, 40] //可以设置每页记录条数的列表    
             }
@@ -61,6 +62,11 @@
                     PkId: gridObj.PkId,
                     FunctionDetailCode: ""
                 });
+
+                console.log(JSON.stringify($("#datagrid").datagrid('getRows')));
+                console.log(gridObj.PkId + 1);
+               
+                $("#datagrid").datagrid('selectRecord', gridObj.PkId+1);
             });
 
 
@@ -115,7 +121,7 @@
                 function (dataresult, data) {
                     function afterSuccess() {
                         parent.$("#btnSearch").trigger("click");
-                       // parent.pro.Function.ListPage.closeTab();
+                        parent.pro.Function.ListPage.closeTab();
                     }
                     parent.$.alertExtend.info("", afterSuccess());
                 }

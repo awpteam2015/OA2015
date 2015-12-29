@@ -1,15 +1,11 @@
 ﻿
-
-  
-
-
 @{
     ViewBag.Title = "Hd";
     Layout = "~/Views/Shared/_LayoutHandler.cshtml";
 }
 
 @section JavaScript{
-    <script src="/Areas/PermissionManager/Scripts/FunctionDetail/Hd.js"></script>
+    <script src="/Areas/PermissionManager/Scripts/FunctionDetail/Hd.js?JsParamter=@SiteConfig.GetConfig().JsParamter"></script>
 }
 
 <input id="BindEntity" type="text" value="@ViewBag.BindEntity" />

@@ -92,8 +92,9 @@ var pro = pro || {};
             });
           
             obj.PkId--;
-           // alert(obj.RowIndex);
-            $(this.grdidId).datagrid('selectRow', obj.RowIndex);
+            //alert(this.grdidId);
+            //alert(this.grdidId);
+            //$(this.grdidId).datagrid('selectRow', obj.RowIndex);
 
         },
         delRow: function () {

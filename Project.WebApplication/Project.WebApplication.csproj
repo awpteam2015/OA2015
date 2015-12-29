@@ -141,6 +141,7 @@
     <Content Include="Areas\PermissionManager\Views\UserFunctionDetail\List.cshtml" />
     <Content Include="Areas\PermissionManager\Views\UserRole\Hd.cshtml" />
     <Content Include="Areas\PermissionManager\Views\UserRole\List.cshtml" />
+    <Content Include="Config\appSettings.config" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -609,6 +610,10 @@
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Project.Config\Project.Config.csproj">
+      <Project>{7E5CD828-D4FF-445E-9F1D-068102151681}</Project>
+      <Name>Project.Config</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Project.Infrastructure.FrameworkCore\Project.Infrastructure.FrameworkCore.csproj">
       <Project>{1C2392AD-A0F8-4378-9C54-3DCD1FB5D1DB}</Project>
       <Name>Project.Infrastructure.FrameworkCore</Name>
