@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 using Project.Infrastructure.FrameworkCore.DataNhibernate.Helpers;
+using Project.Infrastructure.FrameworkCore.ToolKit;
 using Project.Infrastructure.FrameworkCore.ToolKit.JsonHandler;
 using Project.Infrastructure.FrameworkCore.ToolKit.LinqExpansion;
 using Project.Model.PermissionManager;
@@ -59,8 +60,58 @@ namespace Project.WebApplication.Areas.PermissionManager.Controllers
             return new AbpJsonResult(dataGridEntity, new NHibernateContractResolver());
         }
 
+        public AbpJsonResult GetListAll()
+        {
+
+            var where = new FunctionEntity();
+            //where.PkId = RequestHelper.GetFormString("PkId");
+            //where.FunctionnName = RequestHelper.GetFormString("FunctionnName");
+            where.ModuleId = RequestHelper.GetInt("ModuleId");
+            //where.FunctionUrl = RequestHelper.GetFormString("FunctionUrl");
+            //where.Area = RequestHelper.GetFormString("Area");
+            //where.Controller = RequestHelper.GetFormString("Controller");
+            //where.Action = RequestHelper.GetFormString("Action");
+            //where.IsDisplayOnMenu = RequestHelper.GetFormString("IsDisplayOnMenu");
+            //where.RankId = RequestHelper.GetFormString("RankId");
+            //where.Remark = RequestHelper.GetFormString("Remark");
+            var searchList = FunctionService.GetInstance().GetList(where);
+
+            var dataGridEntity = new DataGridResponse()
+            {
+                total = searchList.Count,
+                rows = searchList
+            };
+            return new AbpJsonResult(dataGridEntity, new NHibernateContractResolver(new[] { "FunctionDetailList" }));
+        }
+
 
         public AbpJsonResult GetFunctionDetailList()
+        {
+            var pIndex = this.Request["page"].ConvertTo<int>();
+            var pSize = this.Request["rows"].ConvertTo<int>();
+            var where = new FunctionDetailEntity();
+            //where.PkId = RequestHelper.GetFormString("PkId");
+            //where.FunctionDetailName = RequestHelper.GetFormString("FunctionDetailName");
+            //where.FunctionDetailCode = RequestHelper.GetFormString("FunctionDetailCode");
+            //where.FunctionId = RequestHelper.GetFormString("FunctionId");
+            //where.Area = RequestHelper.GetFormString("Area");
+            //where.Controller = RequestHelper.GetFormString("Controller");
+            //where.Action = RequestHelper.GetFormString("Action");
+            //where.CreatorUserCode = RequestHelper.GetFormString("CreatorUserCode");
+            //where.CreationTime = RequestHelper.GetFormString("CreationTime");
+            //where.LastModifierUserCode = RequestHelper.GetFormString("LastModifierUserCode");
+            //where.LastModificationTime = RequestHelper.GetFormString("LastModificationTime");
+            var searchList = FunctionDetailService.GetInstance().Search(where, (pIndex - 1) * pSize, pSize);
+
+            var dataGridEntity = new DataGridResponse()
+            {
+                total = searchList.Item2,
+                rows = searchList.Item1
+            };
+            return new AbpJsonResult(dataGridEntity, new NHibernateContractResolver());
+        }
+
+        public AbpJsonResult GetRoleFunctionDetailList()
         {
             var pIndex = this.Request["page"].ConvertTo<int>();
             var pSize = this.Request["rows"].ConvertTo<int>();

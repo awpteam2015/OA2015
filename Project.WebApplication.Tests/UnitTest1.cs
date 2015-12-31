@@ -15,11 +15,24 @@ namespace Project.WebApplication.Tests
         {
         }
 
+        public class  a
+        {
+            public decimal? ad { get; set; }
+        }
 
         [TestMethod]
         public void TestMethod1()
         {
-            var t = AppDomain.CurrentDomain.BaseDirectory;
+            var axxx=new a();
+
+            if (axxx .ad== null)
+            {
+
+            }
+
+
+            var t = DateTime.UtcNow;
+           // var t = AppDomain.CurrentDomain.BaseDirectory;
               UserInfoService.GetInstance().Test();
         }
 

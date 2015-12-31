@@ -1,9 +1,4 @@
-﻿
-
-  
-
-
-@{
+﻿@{
     ViewBag.Title = "Hd";
     Layout = "~/Views/Shared/_LayoutHandler.cshtml";
 }
@@ -17,39 +12,30 @@
 <div class="mtable_div">
     <form id="form1">
         <table class="mtable">
-            
-              <tr>
-            <td  >
-                角色ID<span style="color: Red">*</span>:
-            </td>
-            <td >
-                <input id="PkId" name="PkId"  type="text"  />
-            </td>
-        </tr>
-            
-              <tr>
-            <td  >
-                角色名称<span style="color: Red">*</span>:
-            </td>
-            <td >
-                <input id="RoleName" name="RoleName"  type="text"  />
-            </td>
-        </tr>
-            
-              <tr>
-            <td  >
-                备注<span style="color: Red">*</span>:
-            </td>
-            <td >
-                <input id="Remark" name="Remark"  type="text"  />
-            </td>
-        </tr>
-          
+
+            <tr>
+                <td>
+                    角色名称<span style="color: Red">*</span>:
+                </td>
+                <td>
+                    <input id="RoleName" name="RoleName" type="text" />
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    备注<span style="color: Red">*</span>:
+                </td>
+                <td>
+                    <input id="Remark" name="Remark" type="text" />
+                </td>
+            </tr>
+
         </table>
     </form>
 </div>
 <div style="padding: 10px 10px 0 10px; text-align: center;">
-    @if (Request["PkId"]==null||int.Parse(Request["PkId"]) == 0)
+    @if (Request["PkId"] == null || int.Parse(Request["PkId"]) == 0)
     {
         <a id="btnAdd" class="easyui-linkbutton" iconcls="icon-add" href="javascript:void(0)">新增</a>
     }
@@ -59,8 +45,6 @@
     }
     <a id="btnClose" class="easyui-linkbutton" iconcls="icon-cancel" href="javascript:void(0)">关闭</a>
 </div>
-
-
 
 
 

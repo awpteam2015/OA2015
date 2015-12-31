@@ -107,6 +107,7 @@
     <Content Include="Areas\PermissionManager\Scripts\RoleFunctionDetail\Hd.js" />
     <Content Include="Areas\PermissionManager\Scripts\RoleFunctionDetail\List.js" />
     <Content Include="Areas\PermissionManager\Scripts\Role\Hd.js" />
+    <Content Include="Areas\PermissionManager\Scripts\Role\RoleFunctionDetailList.js" />
     <Content Include="Areas\PermissionManager\Scripts\Role\List.js" />
     <Content Include="Areas\PermissionManager\Scripts\UserDepartment\Hd.js" />
     <Content Include="Areas\PermissionManager\Scripts\UserDepartment\List.js" />
@@ -116,6 +117,9 @@
     <Content Include="Areas\PermissionManager\Scripts\UserInfo\List.js" />
     <Content Include="Areas\PermissionManager\Scripts\UserRole\Hd.js" />
     <Content Include="Areas\PermissionManager\Scripts\UserRole\List.js" />
+    <Content Include="Areas\PermissionManager\Views\Role\RoleFunctionDetailList.cshtml">
+      <SubType>Code</SubType>
+    </Content>
     <Content Include="Config\hibernate.cfg.xml" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
@@ -146,6 +150,7 @@
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <Content Include="Scripts\jqueryPluginsExtend\jquery-easyui\tabBase.js" />
+    <Content Include="Scripts\jqueryPlugins\jquery-easyui\extend\datagrid-detailview.js" />
     <Content Include="Scripts\jqueryPlugins\jquery_tip\tip-yellowsimple\tip-yellowsimple.css" />
     <Content Include="Scripts\jqueryPlugins\jquery_tip\tip-yellowsimple\tip-yellowsimple_arrows.gif" />
     <Content Include="Scripts\jqueryPlugins\jquery_tip\tip-yellow\tip-yellow.css" />
@@ -545,6 +550,7 @@
     <Content Include="Scripts\pro\bindKit.js" />
     <Content Include="Scripts\pro\commonKit.js" />
     <Content Include="Scripts\pro\controlKit.js" />
+    <Content Include="Scripts\pro\debugKit.js" />
     <Content Include="Scripts\pro\submitKit.js" />
     <Content Include="Scripts\pro\jquery-message.js" />
     <Content Include="Scripts\pro\abp.jquery.ajax.js" />
@@ -593,6 +599,8 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
+    <Content Include="Views\Shared\_Head.cshtml" />
+    <Content Include="Views\Shared\_LayoutList2.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -603,7 +611,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\PermissionManager\Models\" />
-    <Folder Include="Areas\PermissionManager\Views\Permission\" />
     <Folder Include="Areas\SystemSetManager\Controllers\" />
     <Folder Include="Areas\SystemSetManager\Models\" />
     <Folder Include="Areas\SystemSetManager\Views\Shared\" />

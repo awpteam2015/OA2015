@@ -4,76 +4,157 @@ using System.Linq;
 using System.Text;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Mvc.Filters;
 
 namespace Project.WebApplication.Controllers
 {
     public class BaseController : Controller
     {
 
-        
+        /// <summary>
+        /// 在调用操作方法前调用。
+        /// </summary>
+        /// <param name="filterContext">有关当前请求和操作的信息。</param>
+        protected override void OnActionExecuting(ActionExecutingContext filterContext)
+        {
+            ViewBag.ShowInfo += "OnActionExecuting<br/>";
+            base.OnActionExecuting(filterContext);
+        }
 
-        // GET: Base
+        /// <summary>
+        /// 在调用操作方法后调用。
+        /// </summary>
+        /// <param name="filterContext">有关当前请求和操作的信息。</param>
+        protected override void OnActionExecuted(ActionExecutedContext filterContext)
+        {
+            ViewBag.ShowInfo += "OnActionExecuted<br/>";
+            base.OnActionExecuted(filterContext);
+        }
+
+        /// <summary>
+        /// 在进行授权时调用。
+        /// </summary>
+        /// <param name="filterContext">有关当前请求和操作的信息。</param>
+        protected override void OnAuthentication(AuthenticationContext filterContext)
+        {
+            //身份验证
+            ViewBag.ShowInfo += "OnAuthentication<br/>";
+            base.OnAuthentication(filterContext);
+        }
+
+        /// <summary>
+        /// 在进行授权质询时调用。
+        /// </summary>
+        /// <param name="filterContext">有关当前请求和操作的信息。</param>
+        protected override void OnAuthenticationChallenge(AuthenticationChallengeContext filterContext)
+        {
+            ViewBag.ShowInfo += "OnAuthenticationChallenge<br/>";
+            base.OnAuthenticationChallenge(filterContext);
+        }
+
+        /// <summary>
+        /// 在进行授权时调用。
+        /// </summary>
+        /// <param name="filterContext">有关当前请求和操作的信息。</param>
+        protected override void OnAuthorization(AuthorizationContext filterContext)
+        {
+            //授权
+            ViewBag.ShowInfo += "OnAuthorization<br/>";
+            base.OnAuthorization(filterContext);
+        }
+
+        /// <summary>
+        /// 当操作中发生未经处理的异常时调用。
+        /// </summary>
+        /// <param name="filterContext">有关当前请求和操作的信息。</param>
+        protected override void OnException(ExceptionContext filterContext)
+        {
+            ViewBag.ShowInfo += "OnException<br/>";
+            base.OnException(filterContext);
+        }
+
+        /// <summary>
+        /// 在执行由操作方法返回的操作结果后调用。
+        /// </summary>
+        /// <param name="filterContext">有关当前请求和操作结果的信息。</param>
+        protected override void OnResultExecuted(ResultExecutedContext filterContext)
+        {
+            ViewBag.ShowInfo += "OnResultExecuted<br/>";
+            base.OnResultExecuted(filterContext);
+        }
+
+        /// <summary>
+        /// 在执行由操作方法返回的操作结果前调用。
+        /// </summary>
+        /// <param name="filterContext">有关当前请求和操作结果的信息。</param>
         protected override void OnResultExecuting(ResultExecutingContext filterContext)
         {
-            if (HttpContext.User.Identity.IsAuthenticated)
-            {
-                var javascriptBuilder = new StringBuilder();
-                //notPagePopedoms.ForEach(p => javascriptBuilder.AppendFormat("$('#{0}').next().remove('.datagrid-btn-separator');$('#{0}').remove();", p.RightTagId));
-                ViewBag.PermissionScript = javascriptBuilder.ToString();
-            }
-
+            ViewBag.ShowInfo += "OnResultExecuting<br/>";
             base.OnResultExecuting(filterContext);
         }
 
-        protected override void OnException(ExceptionContext filterContext)
-        {
-            //if (filterContext == null) return;
+        // GET: Base
+        //protected override void OnResultExecuting(ResultExecutingContext filterContext)
+        //{
+        //    if (HttpContext.User.Identity.IsAuthenticated)
+        //    {
+        //        var javascriptBuilder = new StringBuilder();
+        //        //notPagePopedoms.ForEach(p => javascriptBuilder.AppendFormat("$('#{0}').next().remove('.datagrid-btn-separator');$('#{0}').remove();", p.RightTagId));
+        //        ViewBag.ShowInfo = javascriptBuilder.ToString();
+        //    }
 
-            //var exception = filterContext.Exception ?? new Exception("不存在进一步错误信息");
+        //    base.OnResultExecuting(filterContext);
+        //}
 
-            //string message;
-            ////如果没有记录日常，就记录日志
-            //if (exception is EipException)
-            //{
-            //    message = exception.Message;
-            //}
-            //else
-            //{
-            //    //记录日志
-            //    message = new ExceptionLogRecordsService().Records(exception);
-            //    exception = new EipException(message, exception);
-            //}
+        //protected override void OnException(ExceptionContext filterContext)
+        //{
+        //    //if (filterContext == null) return;
 
-            //if (!filterContext.HttpContext.IsCustomErrorEnabled)
-            //{
-            //    base.OnException(filterContext);
-            //    return;
-            //}
+        //    //var exception = filterContext.Exception ?? new Exception("不存在进一步错误信息");
 
-            //filterContext.ExceptionHandled = true;
+        //    //string message;
+        //    ////如果没有记录日常，就记录日志
+        //    //if (exception is EipException)
+        //    //{
+        //    //    message = exception.Message;
+        //    //}
+        //    //else
+        //    //{
+        //    //    //记录日志
+        //    //    message = new ExceptionLogRecordsService().Records(exception);
+        //    //    exception = new EipException(message, exception);
+        //    //}
 
-            //if (Request.IsAjaxRequest())
-            //{
-            //    filterContext.Result = Content(message);
-            //}
-            //else
-            //{
-            //    var controllerName = (string)filterContext.RouteData.Values["controller"];
-            //    var actionName = (string)filterContext.RouteData.Values["action"];
-            //    var model = new HandleErrorInfo(exception, controllerName, actionName);
-            //    filterContext.Result = new ViewResult
-            //    {
-            //        ViewName = "InternalServer",
-            //        MasterName = "",
-            //        ViewData = new ViewDataDictionary<HandleErrorInfo>(model),
-            //        TempData = filterContext.Controller.TempData
-            //    };
-            //}
+        //    //if (!filterContext.HttpContext.IsCustomErrorEnabled)
+        //    //{
+        //    //    base.OnException(filterContext);
+        //    //    return;
+        //    //}
 
-            //filterContext.HttpContext.Response.Clear();
-            //filterContext.HttpContext.Response.Clear();
-            //filterContext.HttpContext.Response.StatusCode = 500;
-            //filterContext.HttpContext.Response.TrySkipIisCustomErrors = true;
-        }
+        //    //filterContext.ExceptionHandled = true;
+
+        //    //if (Request.IsAjaxRequest())
+        //    //{
+        //    //    filterContext.Result = Content(message);
+        //    //}
+        //    //else
+        //    //{
+        //    //    var controllerName = (string)filterContext.RouteData.Values["controller"];
+        //    //    var actionName = (string)filterContext.RouteData.Values["action"];
+        //    //    var model = new HandleErrorInfo(exception, controllerName, actionName);
+        //    //    filterContext.Result = new ViewResult
+        //    //    {
+        //    //        ViewName = "InternalServer",
+        //    //        MasterName = "",
+        //    //        ViewData = new ViewDataDictionary<HandleErrorInfo>(model),
+        //    //        TempData = filterContext.Controller.TempData
+        //    //    };
+        //    //}
+
+        //    //filterContext.HttpContext.Response.Clear();
+        //    //filterContext.HttpContext.Response.Clear();
+        //    //filterContext.HttpContext.Response.StatusCode = 500;
+        //    //filterContext.HttpContext.Response.TrySkipIisCustomErrors = true;
+        //}
     }
 }

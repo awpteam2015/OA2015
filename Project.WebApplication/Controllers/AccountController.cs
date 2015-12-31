@@ -18,7 +18,7 @@ using Project.Service.PermissionManager;
 
 namespace Project.WebApplication.Controllers
 {
-    public class AccountController : Controller
+    public class AccountController : BaseController
     {
 
         // [PermissionAuthorize]
@@ -29,6 +29,7 @@ namespace Project.WebApplication.Controllers
             //   ApplicationManager
             //        applicat
             //UrlRoutingModule
+         //   MvcHandler
 
 
             ViewBag.ModuleList = ModuleService.GetInstance().GetList(null);

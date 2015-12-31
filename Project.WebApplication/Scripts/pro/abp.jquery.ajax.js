@@ -32,7 +32,7 @@
             type: 'POST',
            contentType: 'application/json'
         },
-
+        contentTypeForm: "application/x-www-form-urlencoded",
         defaultError: {
             message: 'Ajax request did not succeed!',
             details: 'Error detail not sent by server.'

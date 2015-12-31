@@ -195,8 +195,8 @@ namespace Project.Service.PermissionManager
             //  expr = expr.And(p => p.PkId == entity.PkId);
             // if (!string.IsNullOrEmpty(entity.FunctionnName))
             //  expr = expr.And(p => p.FunctionnName == entity.FunctionnName);
-            // if (!string.IsNullOrEmpty(entity.ModuleId))
-            //  expr = expr.And(p => p.ModuleId == entity.ModuleId);
+            if (entity.ModuleId > 0)
+                expr = expr.And(p => p.ModuleId == entity.ModuleId);
             // if (!string.IsNullOrEmpty(entity.FunctionUrl))
             //  expr = expr.And(p => p.FunctionUrl == entity.FunctionUrl);
             // if (!string.IsNullOrEmpty(entity.Area))
@@ -213,6 +213,43 @@ namespace Project.Service.PermissionManager
             //  expr = expr.And(p => p.Remark == entity.Remark);
             #endregion
             var list = _functionRepository.Query().Where(expr).OrderBy(p => p.PkId).ToList();
+            return list;
+        }
+
+
+        /// <summary>
+        /// 功能详情
+        /// </summary>
+        /// <param name="entity"></param>
+        /// <returns></returns>
+        public IList<FunctionDetailEntity> GetFunctionDetailList(FunctionDetailEntity entity)
+        {
+            var expr = PredicateBuilder.True<FunctionDetailEntity>();
+            #region
+            // if (!string.IsNullOrEmpty(entity.PkId))
+            //  expr = expr.And(p => p.PkId == entity.PkId);
+            // if (!string.IsNullOrEmpty(entity.FunctionDetailName))
+            //  expr = expr.And(p => p.FunctionDetailName == entity.FunctionDetailName);
+            // if (!string.IsNullOrEmpty(entity.FunctionDetailCode))
+            //  expr = expr.And(p => p.FunctionDetailCode == entity.FunctionDetailCode);
+            if (entity.FunctionId>0)
+                expr = expr.And(p => p.FunctionId == entity.FunctionId);
+            // if (!string.IsNullOrEmpty(entity.Area))
+            //  expr = expr.And(p => p.Area == entity.Area);
+            // if (!string.IsNullOrEmpty(entity.Controller))
+            //  expr = expr.And(p => p.Controller == entity.Controller);
+            // if (!string.IsNullOrEmpty(entity.Action))
+            //  expr = expr.And(p => p.Action == entity.Action);
+            // if (!string.IsNullOrEmpty(entity.CreatorUserCode))
+            //  expr = expr.And(p => p.CreatorUserCode == entity.CreatorUserCode);
+            // if (!string.IsNullOrEmpty(entity.CreationTime))
+            //  expr = expr.And(p => p.CreationTime == entity.CreationTime);
+            // if (!string.IsNullOrEmpty(entity.LastModifierUserCode))
+            //  expr = expr.And(p => p.LastModifierUserCode == entity.LastModifierUserCode);
+            // if (!string.IsNullOrEmpty(entity.LastModificationTime))
+            //  expr = expr.And(p => p.LastModificationTime == entity.LastModificationTime);
+            #endregion
+            var list = _functionDetailRepository.Query().Where(expr).OrderBy(p => p.PkId).ToList();
             return list;
         }
         #endregion

@@ -47,7 +47,7 @@
                 function (dataresult, data) {
                    function afterSuccess() {
                         parent.$("#btnSearch").trigger("click");
-                        parent.pro.Function.ListPage.closeTab();
+                        parent.pro.UserRole.ListPage.closeTab();
                     }
                     parent.$.alertExtend.info("", afterSuccess());
                 }

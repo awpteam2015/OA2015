@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 using Project.Infrastructure.FrameworkCore.DataNhibernate.Helpers;
+using Project.Infrastructure.FrameworkCore.ToolKit;
 using Project.Infrastructure.FrameworkCore.ToolKit.JsonHandler;
 using Project.Infrastructure.FrameworkCore.ToolKit.LinqExpansion;
 using Project.Model.PermissionManager;
@@ -52,6 +53,30 @@ namespace Project.WebApplication.Areas.PermissionManager.Controllers
             return new AbpJsonResult(dataGridEntity, new NHibernateContractResolver());
         }
 
+        public ActionResult RoleFunctionDetailList()
+        {
+            return View();
+        }
+
+        public AbpJsonResult GetRoleFunctionDetailList()
+        {
+            var pIndex = this.Request["page"].ConvertTo<int>();
+            var pSize = this.Request["rows"].ConvertTo<int>();
+            var where = new FunctionEntity();
+            //where.PkId = RequestHelper.GetFormString("PkId");
+            //where.RoleName = RequestHelper.GetFormString("RoleName");
+            //where.Remark = RequestHelper.GetFormString("Remark");
+            var searchList = FunctionService.GetInstance().GetList(where);
+
+            var dataGridEntity = new DataGridResponse()
+            {
+                total = searchList.Count,
+                rows = searchList
+            };
+            return new AbpJsonResult(dataGridEntity, new NHibernateContractResolver());
+        }
+
+
 
         [HttpPost]
         public AbpJsonResult Add(AjaxRequest<RoleEntity> postData)
@@ -87,6 +112,24 @@ namespace Project.WebApplication.Areas.PermissionManager.Controllers
                 success = deleteResult
             };
             return new AbpJsonResult(result, new NHibernateContractResolver(new string[] { "result" }));
+        }
+
+
+        [HttpPost]
+        public AbpJsonResult SetRowFunction()
+        {
+            var t = this.Request["RolePkId"];
+            var rolePkId = RequestHelper.GetInt("RolePkId");
+            var functionPkId = RequestHelper.GetInt("FunctionPkId");
+            var functionDetailPkId = RequestHelper.GetInt("FunctionDetailPkId");
+            var isCheck = RequestHelper.GetInt("IsCheck")==1;
+            var addResult = RoleService.GetInstance().SetRowFunction(rolePkId, functionPkId, functionDetailPkId,isCheck);
+            var result = new AjaxResponse<RoleEntity>()
+            {
+                success = addResult
+               // result = postData.RequestEntity
+            };
+            return new AbpJsonResult(result, null);
         }
     }
 }

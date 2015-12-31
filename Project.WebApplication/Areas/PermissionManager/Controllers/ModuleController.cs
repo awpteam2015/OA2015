@@ -55,6 +55,26 @@ namespace Project.WebApplication.Areas.PermissionManager.Controllers
             return new AbpJsonResult(dataGridEntity, new NHibernateContractResolver());
         }
 
+        public AbpJsonResult GetListAll()
+        {
+        
+            var where = new ModuleEntity();
+            //where.PkId = RequestHelper.GetFormString("PkId");
+            //where.ModuleName = RequestHelper.GetFormString("ModuleName");
+            //where.ParentId = RequestHelper.GetFormString("ParentId");
+            //where.ModuleLevel = RequestHelper.GetFormString("ModuleLevel");
+            //where.RankId = RequestHelper.GetFormString("RankId");
+            //where.Remark = RequestHelper.GetFormString("Remark");
+            var searchList = ModuleService.GetInstance().GetList(where);
+
+            var dataGridEntity = new DataGridResponse()
+            {
+                total = searchList.Count(),
+                rows = searchList
+            };
+            return new AbpJsonResult(dataGridEntity, new NHibernateContractResolver());
+        }
+
 
         [HttpPost]
         public AbpJsonResult Add(AjaxRequest<ModuleEntity> postData)

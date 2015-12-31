@@ -1,0 +1,68 @@
+﻿<title>@ViewBag.Title</title>
+<link href="/Scripts/jqueryPlugins/jquery-easyui/themes/default/easyui.css" rel="stylesheet" />
+<link href="/Resources/Css/Site.css" rel="stylesheet" />
+<link href="/Scripts/jqueryPlugins/jquery-easyui/themes/icon.css" rel="stylesheet" />
+<script src="/Scripts/jqueryPlugins/jquery-easyui/jquery.min.js"></script>
+<script src="/Scripts/jqueryPlugins/jquery-easyui/jquery.easyui.min.js"></script>
+<script src="/Scripts/jqueryPlugins/jquery-easyui/locale/easyui-lang-zh_CN.js"></script>
+<script src="/Scripts/pro/submitKit.js"></script>
+<script src="/Scripts/pro/bindKit.js"></script>
+<script src="/Scripts/pro/commonKit.js"></script>
+<script src="~/Scripts/pro/abp.jquery.ajax.js"></script>
+<script src="/Scripts/jqueryPlugins/jquery_json/Json.js"></script>
+<script src="/Scripts/pro/base64.js"></script>
+<script src="/Scripts/jqueryPluginsExtend/jquery-easyui/tabExtend.js"></script>
+<script src="~/Scripts/jqueryPluginsExtend/jquery-easyui/tabBase.js"></script>
+<script src="~/Scripts/jqueryPluginsExtend/jquery-easyui/gridBase.js"></script>
+<script src="~/Scripts/jqueryPluginsExtend/jquery-easyui/alertExtend.js"></script>
+
+<script src="~/Scripts/jqueryPlugins/jquery_validate/jquery.validate.js"></script>
+<script src="~/Scripts/jqueryPlugins/jquery_validate/jquery.validate.extension.js"></script>
+<link href="~/Scripts/jqueryPlugins/jquery_validate/jquery.validate.extension.css" rel="stylesheet" />
+
+<link href="~/Scripts/jqueryPlugins/jquery_tip/tip-yellowsimple/tip-yellowsimple.css" rel="stylesheet" />
+<script src="~/Scripts/jqueryPlugins/jquery_tip/jquery.poshytip.js"></script>
+<script src="~/Scripts/pro/debugKit.js"></script>
+<script src="~/Scripts/jqueryPlugins/jquery-easyui/extend/datagrid-detailview.js"></script>
+<script type="text/javascript" language="javascript">
+        $(function() {
+            var str = "@ViewBag.PermissionScript";
+            eval(str.replace(/&#39;/g, "'"));
+        });
+
+        $.extend($.messager, {
+            ajaxTitle: function (msg) {
+                if (msg == "close") {
+                    $("#ajaxbodymsg,#ajaxtitlemsg").remove();
+                } else {
+                    $(".datagrid-mask,.datagrid-mask-msg").remove();
+                    $("<div class=\"datagrid-mask\" id=\"ajaxbodymsg\" style=\"z-index: 9000\"></div>").css({
+                        display: "block",
+                        width: "100%",
+                        height: $(window).height()
+                    }).appendTo("body");
+
+                    $("<div class=\"datagrid-mask-msg\" id=\"ajaxtitlemsg\" style=\"z-index: 9001\"></div>").html(msg).appendTo("body").css({
+                        display: "block",
+                        left: ($(document.body).outerWidth(true) - 190) / 2,
+                        top: ($(window).height() - 45) / 2
+                    });
+                }
+            }
+        });
+
+        $(function () {
+            $("body").bind("ajaxSend", function () {
+                $.messager.ajaxTitle("正在处理，请稍候。。。");
+            }).bind("ajaxComplete", function () {
+                $.messager.ajaxTitle("close");
+            }).bind("ajaxError", function (event, request, settings, thrownError) {
+                $.messager.alert("错误提示-请复制错误代码，发给技术支持", request.responseText, "error");
+            });
+        });
+</script>
+<style type="text/css">
+    .tabOverflow {
+        overflow: hidden;
+    }
+</style>

@@ -8,27 +8,51 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>Login</title>
-    <script src="~/Scripts/jquery-easyui/jquery.min.js"></script>
+
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
     <script src="~/Scripts/Account/Login.js"></script>
     <script src="~/Scripts/pro/abp.jquery.ajax.js"></script>
 </head>
 <body>
     <div>
+        @ViewBag.PermissionScript
         <table>
             <tr>
                 <td>用户名：</td>
-                <td><input type="text" id="UserName" /></td>
+                <td><input type="text" id="UserName"/></td>
             </tr>
             <tr>
                 <td>密码：</td>
-                <td><input type="text" id="Password" /></td>
+                <td><input type="text" id="Password"/></td>
             </tr>
             <tr>
                 <td></td>
                 <td><input type="button" value="登录" id="btn_Login2"/></td>
             </tr>
         </table>
+
+        <input id="" type="button" value="add" onclick="onEvent()"/>
+        <div><div>
+    <div id="sss"></div>
+</div>
+</div>
     </div>
 
+    <script type="text/javascript">
+        function onEvent() {
+
+            $("#sss").html('<input type="button" name="button1"/>');
+        }
+
+        $(function () {
+
+            $(document).on("click", "input[name=button1]", function () {
+                alert(1);
+            });
+        });
+    </script>
+
 </body>
+
+
 </html>
