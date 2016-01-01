@@ -39,14 +39,16 @@
         },
 
         logError: function (error) {
-            abp.log.error(error);
+            //abp.log.error(error);
         },
 
         showError: function (error) {
             if (error.details) {
-                return abp.message.error(error.details, error.message);
+                return $.alertExtend.error(error.details + error.message);
+                // abp.message.error(error.details, error.message);
             } else {
-                return abp.message.error(error.message);
+                return $.alertExtend.error("操作失败！" + error.message);
+               // return abp.message.error(error.message);
             }
         },
 

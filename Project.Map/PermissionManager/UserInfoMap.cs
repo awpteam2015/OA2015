@@ -6,9 +6,10 @@ namespace Project.Map.PermissionManager
 {
     public class UserInfoMap : BaseMap<UserInfoEntity, int>
     {
-        public UserInfoMap(): base("PM_UserInfo")
+        public UserInfoMap()
+            : base("PM_UserInfo")
         {
-            this.MapPkidDefault<UserInfoEntity,int>();
+            this.MapPkidDefault<UserInfoEntity, int>();
 
             Map(p => p.UserCode);
             Map(p => p.Password);
@@ -16,6 +17,22 @@ namespace Project.Map.PermissionManager
             Map(p => p.Email);
             Map(p => p.Mobile);
             Map(p => p.IsDeleted);
+
+            HasMany(p => p.UserDepartmentList)
+    .AsSet()
+    .LazyLoad()
+    .Cascade.All().Inverse()
+    .PropertyRef("UserCode")
+    .KeyColumn("UserCode");
+
+            HasMany(p => p.UserRoleList)
+  .AsSet()
+  .LazyLoad()
+  .Cascade.All().Inverse()
+  .PropertyRef("UserCode")
+  .KeyColumn("UserCode");
+
+
         }
     }
 }

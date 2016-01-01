@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 using Project.Infrastructure.FrameworkCore.DataNhibernate.Helpers;
+using Project.Infrastructure.FrameworkCore.ToolKit;
 using Project.Infrastructure.FrameworkCore.ToolKit.JsonHandler;
 using Project.Infrastructure.FrameworkCore.ToolKit.LinqExpansion;
 using Project.Model.PermissionManager;
@@ -66,6 +67,11 @@ namespace Project.WebApplication.Areas.PermissionManager.Controllers
             //where.RankId = RequestHelper.GetFormString("RankId");
             //where.Remark = RequestHelper.GetFormString("Remark");
             var searchList = ModuleService.GetInstance().GetList(where);
+            searchList.ForEach(p =>
+            {
+                p.Att_RoleId = RequestHelper.GetInt("RoleId");
+                p.Att_UserInfoCode = RequestHelper.GetString("UserInfoCode");
+            });
 
             var dataGridEntity = new DataGridResponse()
             {

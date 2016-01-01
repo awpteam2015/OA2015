@@ -21,7 +21,14 @@ namespace  Project.Map.PermissionManager
             Map(p => p.ParentId);    
             Map(p => p.ModuleLevel);    
             Map(p => p.RankId);    
-            Map(p => p.Remark);    
+            Map(p => p.Remark);
+
+
+            HasMany(p => p.FunctionEntityList)
+      .AsSet()
+      .LazyLoad()
+      .Cascade.All().Inverse()
+      .KeyColumn("ModuleId");
         }
     }
 }

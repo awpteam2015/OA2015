@@ -4,21 +4,33 @@ var pro = pro || {};
     pro.UserInfo = pro.UserInfo || {};
     pro.UserInfo.ListPage = pro.UserInfo.ListPage || {};
     pro.UserInfo.ListPage = {
+      init: function () {
+            return {
+                tabObj: new pro.TabBase(),
+                gridObj: new pro.GridBase("#datagrid", false)
+            };
+        },
         initPage: function () {
-            var gridObj =
-            $('#datagrid').datagrid({
+            var initObj = this.init();
+            var tabObj = initObj.tabObj;
+            var gridObj = initObj.gridObj;
+            gridObj.grid({
                 url: '/PermissionManager/UserInfo/GetList',
                 fitColumns: false,
                 nowrap: false,
                 rownumbers: true, //行号
                 singleSelect: true,
                 columns: [[
-                    { field: 'UserCode', title: 'UserCode', width: 100 },
-                    { field: 'UserName', title: 'UserName', width: 100 },
-                    { field: 'Email', title: 'Email', width: 100 },
-                    { field: 'Mobile', title: 'Mobile', width: 100 },
-                    { field: 'Tel', title: 'Tel', width: 100 },
-                    { field: 'Mobile', title: 'Mobile', width: 100 }
+         { field: 'UserCode', title: '员工号', width: 100 },
+         { field: 'UserName', title: '用户名', width: 100 },
+         { field: 'Email', title: '电子邮件', width: 100 },
+         { field: 'Mobile', title: '手机号', width: 100 },
+         { field: 'Tel', title: '家庭电话', width: 100 },
+         { field: 'IsActive', title: '是否有效', width: 100 },
+         { field: 'CreatorUserCode', title: '创建人', width: 100 },
+         { field: 'CreationTime', title: '创建时间', width: 100 },
+         { field: 'LastModifierUserCode', title: '修改人', width: 100 },
+         { field: 'LastModificationTime', title: '修改时间', width: 100 },
                 ]],
                 pagination: true,
                 pageSize: 20, //每页显示的记录条数，默认为10     
@@ -27,18 +39,16 @@ var pro = pro || {};
                );
 
             $("#btnAdd").click(function () {
-                $.tabExtend.config.url = "/PermissionManager/UserInfo/Hd";
-                $.tabExtend.add();
-
+               tabObj.add("/PermissionManager/UserInfo/Hd","新增");
             });
 
             $("#btnEdit").click(function () {
                 if (!gridObj.isSelected()) {
-                    alert("请选中要编辑的行");
+                    $.alertExtend.infoOp();
                     return;
                 }
-                $.tabExtend.config.url = "/PermissionManager/UserInfo/Hd?PkId=" + gridObj.getSelectedRow().PkId;
-                $.tabExtend.add();
+                var PkId = gridObj.getSelectedRow().PkId;
+                tabObj.add("/PermissionManager/UserInfo/Hd?PkId=" + PkId, "编辑" + PkId);
             });
 
 
@@ -48,6 +58,7 @@ var pro = pro || {};
 
             $("#btnDel").click(function () {
                 if (!gridObj.isSelected()) {
+                $.alertExtend.infoOp();
                     return;
                 }
                 $.messager.confirm("确认操作", "是否确认删除", function (bl) {
@@ -70,6 +81,9 @@ var pro = pro || {};
             $("#btnRefresh").click(function () {
                 gridObj.refresh();
             });
+        },
+         closeTab: function () {
+            this.init().tabObj.closeTab();
         }
     };
 })();
@@ -79,3 +93,5 @@ var pro = pro || {};
 $(function () {
     pro.UserInfo.ListPage.initPage();
 });
+
+

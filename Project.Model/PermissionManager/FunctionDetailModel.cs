@@ -59,7 +59,7 @@ namespace Project.Model.PermissionManager
         
 
         #region 新增属性
-        
+        public virtual bool Attr_IsCheck { get; set; }
         #endregion
     }
 }

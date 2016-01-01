@@ -8,17 +8,17 @@ namespace Project.Mvc.Models
         /// <summary>
         /// Error code.
         /// </summary>
-        public int Code { get; set; }
+        public int code { get; set; }
 
         /// <summary>
         /// Error message.
         /// </summary>
-        public string Message { get; set; }
+        public string message { get; set; }
 
         /// <summary>
         /// Error details.
         /// </summary>
-        public string Details { get; set; }
+        public string details { get; set; }
 
         /// <summary>
         /// Validation errors if exists.
@@ -39,7 +39,7 @@ namespace Project.Mvc.Models
         /// <param name="message">Error message</param>
         public ErrorInfo(string message)
         {
-            Message = message;
+           this.message = message;
         }
 
         /// <summary>
@@ -48,7 +48,7 @@ namespace Project.Mvc.Models
         /// <param name="code">Error code</param>
         public ErrorInfo(int code)
         {
-            Code = code;
+            this.code = code;
         }
 
         /// <summary>
@@ -59,7 +59,7 @@ namespace Project.Mvc.Models
         public ErrorInfo(int code, string message)
             : this(message)
         {
-            Code = code;
+            this.code = code;
         }
 
         /// <summary>
@@ -70,7 +70,7 @@ namespace Project.Mvc.Models
         public ErrorInfo(string message, string details)
             : this(message)
         {
-            Details = details;
+            this.details = details;
         }
 
         /// <summary>
@@ -82,7 +82,7 @@ namespace Project.Mvc.Models
         public ErrorInfo(int code, string message, string details)
             : this(message, details)
         {
-            Code = code;
+            this.code = code;
         }
     }
 }

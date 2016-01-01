@@ -1,5 +1,6 @@
 ﻿
 using System;
+using System.Collections.Generic;
 using Project.Infrastructure.FrameworkCore.Domain.Entities;
 using Project.Infrastructure.FrameworkCore.Domain.Entities.Component;
 
@@ -55,5 +56,11 @@ namespace Project.Model.PermissionManager
 
 
         public virtual bool IsDeleted { get; set; }
+
+        public virtual ISet<UserDepartmentEntity> UserDepartmentList { get; set; }
+
+        public virtual ISet<UserRoleEntity> UserRoleList { get; set; }
+
+
     }
 }

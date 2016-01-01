@@ -126,8 +126,8 @@ namespace Project.WebApplication.Areas.PermissionManager.Controllers
             var addResult = RoleService.GetInstance().SetRowFunction(rolePkId, functionPkId, functionDetailPkId,isCheck);
             var result = new AjaxResponse<RoleEntity>()
             {
-                success = addResult
-               // result = postData.RequestEntity
+                success = addResult,
+                result = null
             };
             return new AbpJsonResult(result, null);
         }

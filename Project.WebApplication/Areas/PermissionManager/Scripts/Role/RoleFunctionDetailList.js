@@ -25,7 +25,11 @@ var pro = pro || {};
          { field: 'RoleName', title: '角色名称', width: 100 },
          { field: 'Remark', title: '备注', width: 100 }
                 ]],
-                pagination: true,
+                onClickRow: function (index, row) {
+
+                    initObj.gridObj2.reload({ RoleId: row.PkId });
+                },
+                pagination: false,
                 pageSize: 20, //每页显示的记录条数，默认为10     
                 pageList: [20, 30, 40] //可以设置每页记录条数的列表    
             }
@@ -46,8 +50,14 @@ var pro = pro || {};
                     return '<div style="padding:2px"><table   id="ddv-' + index + '"></table></div>';
                 },
                 onExpandRow: function (index, row) {
+                    var RoleId = row.Att_RoleId;
+                    if (RoleId <= 0) {
+                        $.alertExtend.info("请先选择角色！");
+                        return false;
+                    }
+
                     $('#ddv-' + index).datagrid({
-                        url: '/PermissionManager/Function/GetListAll?ModuleId=' + row.PkId,
+                        url: '/PermissionManager/Function/GetListAll?RoleId=' + RoleId + '&ModuleId=' + row.PkId,
                         fitColumns: false,
                         singleSelect: true,
                         height: 'auto',
@@ -66,7 +76,9 @@ var pro = pro || {};
 
                                 var html = '<div style="width:600;" >';
                                 $.each(value, function (index, row) {
-                                    html += '<div style="float:left"><input name="FunctionDetail_' + row.PkId + '" type="checkbox"/>' + row.FunctionDetailName + '</div>';
+                                    var checkHtml = (row.Attr_IsCheck == true ? 'checked="checked"' : "");
+                                    html += '<div style="float:left"><input name="FunctionDetail_' + row.FunctionId + '" type="checkbox" value="' + row.PkId + '" ' + checkHtml + '/>' + row.FunctionDetailName + '</div>';
+
                                 });
                                 html += '</div>';
 
@@ -82,16 +94,25 @@ var pro = pro || {};
                             $("input[name=FunctionPkId]").click(function () {
 
                                 var postData = {};
-                                postData.RolePkId = pro.commonKit.getUrlParam("RolePkId");
+                                postData.RolePkId = RoleId;
                                 postData.FunctionPkId = $(this).val();
                                 postData.FunctionDetailPkId = 0;
                                 postData.IsCheck = $(this).is(':checked') ? 1 : 0;
 
                                 abp.ajax({
-                                    contentType:  abp.ajax.contentTypeForm,
+                                    contentType: abp.ajax.contentTypeForm,
                                     url: "/PermissionManager/Role/SetRowFunction",
                                     data: postData
-                                });
+                                }).done(
+                                function (dataresult, data) {
+                                    $("input[name=FunctionDetail_" + postData.FunctionPkId + "]").attr("checked", postData.IsCheck == 1);
+                                }
+                                ).fail(
+                                function (errordetails, errormessage) {
+                                    // $.alertExtend.error(errormessage);
+                                }
+                                );
+                                ;
 
                                 //var result = $.ajax({
                                 //    url: "/PermissionManager/Role/SetRowFunction",
@@ -100,18 +121,17 @@ var pro = pro || {};
                                 //    async: false,
                                 //    cache: false
                                 //}).responseText;
-
                             });
 
                             $("input[name^=FunctionDetail_]").click(function () {
                                 var postData = {};
-                                postData.RolePkId = pro.commonKit.getUrlParam("RolePkId");
+                                postData.RolePkId = RoleId;
                                 postData.FunctionPkId = 0;
                                 postData.FunctionDetailPkId = $(this).val();
                                 postData.IsCheck = $(this).is(':checked') ? 1 : 0;
 
                                 abp.ajax({
-                                    contentType: 'application/x-www-form-urlencoded',
+                                    contentType: abp.ajax.contentTypeForm,
                                     url: "/PermissionManager/Role/SetRowFunction",
                                     data: postData
                                 });
@@ -128,7 +148,7 @@ var pro = pro || {};
                         }
                     });
                 },
-                pagination: true,
+                pagination: false,
                 pageSize: 20, //每页显示的记录条数，默认为10     
                 pageList: [20, 30, 40] //可以设置每页记录条数的列表    
             }

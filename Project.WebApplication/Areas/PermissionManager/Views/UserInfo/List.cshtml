@@ -1,167 +1,57 @@
-﻿
-
-  
-
-
-
-@{
+﻿@{
     ViewBag.Title = "List";
     Layout = "~/Views/Shared/_LayoutList.cshtml";
 }
 
 @section JavaScript{
-    <script src="/Areas/PermissionManager/Scripts/UserInfo/List.js" type="text/javascript"></script>
+    <script src="/Areas/PermissionManager/Scripts/UserInfo/List.js?JsParamter=@SiteConfig.GetConfig().JsParamter" type="text/javascript"></script>
 }
 
 <div title="用户信息表" style="padding:1px;">
-    <table id="datagrid" style="height:auto;" iconcls=".icon-save" singleselect="true"  toolbar="#tb" fit="true"></table>
+    <table id="datagrid" style="height:auto;" iconcls=".icon-save" singleselect="true" toolbar="#tb" fit="true"></table>
     <div id="tb" style="padding:5px;height:auto">
-        <div  style="margin-bottom: 5px">
-            <a id="btnAdd" href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:true" >添加</a>
-  
-            <a id="btnDel" href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-remove',plain:true" >删除</a>
-           
-            <a id="btnEdit" href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-edit',plain:true" >编辑</a>
-          
-            <a id="btnRefresh" href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-reload',plain:true" >刷新</a>
-           
+        <div style="margin-bottom: 5px">
+            <a id="btnAdd" href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:true">添加</a>
+
+            <a id="btnDel" href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-remove',plain:true">删除</a>
+
+            <a id="btnEdit" href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-edit',plain:true">编辑</a>
+
+            <a id="btnRefresh" href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-reload',plain:true">刷新</a>
+
         </div>
-      
+
         <div id="divSearch">
             <form>
-            
-             <table class="mtable">
-            
-              <tr>
-            <td >
-                
-            </td>
-            <td >
-                <input id="PkId" name="PkId"  type="text"  />
-            </td>
-        </tr>
-            
-              <tr>
-            <td >
-                员工号
-            </td>
-            <td >
-                <input id="UserCode" name="UserCode"  type="text"  />
-            </td>
-        </tr>
-            
-              <tr>
-            <td >
-                密码
-            </td>
-            <td >
-                <input id="Password" name="Password"  type="text"  />
-            </td>
-        </tr>
-            
-              <tr>
-            <td >
-                用户名
-            </td>
-            <td >
-                <input id="UserName" name="UserName"  type="text"  />
-            </td>
-        </tr>
-            
-              <tr>
-            <td >
-                电子邮件
-            </td>
-            <td >
-                <input id="Email" name="Email"  type="text"  />
-            </td>
-        </tr>
-            
-              <tr>
-            <td >
-                手机号
-            </td>
-            <td >
-                <input id="Mobile" name="Mobile"  type="text"  />
-            </td>
-        </tr>
-            
-              <tr>
-            <td >
-                家庭电话
-            </td>
-            <td >
-                <input id="Tel" name="Tel"  type="text"  />
-            </td>
-        </tr>
-            
-              <tr>
-            <td >
-                是否有效
-            </td>
-            <td >
-                <input id="IsActive" name="IsActive"  type="text"  />
-            </td>
-        </tr>
-            
-              <tr>
-            <td >
-                创建人
-            </td>
-            <td >
-                <input id="CreatorUserCode" name="CreatorUserCode"  type="text"  />
-            </td>
-        </tr>
-            
-              <tr>
-            <td >
-                创建时间
-            </td>
-            <td >
-                <input id="CreationTime" name="CreationTime"  type="text"  />
-            </td>
-        </tr>
-            
-              <tr>
-            <td >
-                修改人
-            </td>
-            <td >
-                <input id="LastModifierUserCode" name="LastModifierUserCode"  type="text"  />
-            </td>
-        </tr>
-            
-              <tr>
-            <td >
-                修改时间
-            </td>
-            <td >
-                <input id="LastModificationTime" name="LastModificationTime"  type="text"  />
-            </td>
-        </tr>
-            
-              <tr>
-            <td >
-                备注
-            </td>
-            <td >
-                <input id="Remark" name="Remark"  type="text"  />
-            </td>
-        </tr>
-            
-              <tr>
-            <td >
-                是否删除
-            </td>
-            <td >
-                <input id="IsDeleted" name="IsDeleted"  type="text"  />
-            </td>
-        </tr>
-          <tr>
-        <td colspan="2">   <a href="#" class="easyui-linkbutton" iconcls="icon-search" id="btnSearch">搜索</a>
-        </td>
-        </tr>
-        </table>
+
+                <table class="mtable">
+
+                    <tr>
+                        <td>
+                            员工号
+                        </td>
+                        <td>
+                            <input id="UserCode" name="UserCode" type="text" />
+                        </td>
+                    
+                        <td>
+                            用户名
+                        </td>
+                        <td>
+                            <input id="UserName" name="UserName" type="text" />
+                        </td>
+                   
+                        <td>
+                            手机号
+                        </td>
+                        <td>
+                            <input id="Mobile" name="Mobile" type="text" />
+                        </td><td >
+    <a href="#" class="easyui-linkbutton" iconcls="icon-search" id="btnSearch">搜索</a>
+</td>
+                    </tr>
+                   
+                </table>
             </form>
         </div>
     </div>

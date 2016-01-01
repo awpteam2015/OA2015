@@ -209,7 +209,7 @@ namespace Project.Service.PermissionManager
                     if (isCheck)
                     {
                       
-                        var newRoleFunctionDetailList = functionDetailList.Where(p => oldRoleFunctionDetailList.All(x => p.FunctionId != x.PkId));
+                        var newRoleFunctionDetailList = functionDetailList.Where(p => oldRoleFunctionDetailList.All(x => p.PkId != x.FunctionDetailId));
 
                         newRoleFunctionDetailList.ForEach(p =>
                                {

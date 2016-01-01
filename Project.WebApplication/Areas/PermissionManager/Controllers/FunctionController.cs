@@ -74,7 +74,16 @@ namespace Project.WebApplication.Areas.PermissionManager.Controllers
             //where.IsDisplayOnMenu = RequestHelper.GetFormString("IsDisplayOnMenu");
             //where.RankId = RequestHelper.GetFormString("RankId");
             //where.Remark = RequestHelper.GetFormString("Remark");
+        var checkList=    RoleService.GetInstance().GetRoleFunctionDetailList(new RoleFunctionDetailEntity() { RoleId = RequestHelper.GetInt("RoleId") }).ToList();
             var searchList = FunctionService.GetInstance().GetList(where);
+
+            searchList.ForEach(p =>
+            {
+                p.FunctionDetailList.ForEach(x =>
+                {
+                    x.Attr_IsCheck=checkList.Any(y=>y.FunctionDetailId==x.PkId) ;
+                });
+            });
 
             var dataGridEntity = new DataGridResponse()
             {

@@ -19,15 +19,30 @@ namespace Project.WebApplication.Areas.PermissionManager.Controllers
 
         public ActionResult Hd(int pkId = 0)
         {
+            var roleList = RoleService.GetInstance().GetList(new RoleEntity());
+            var departmentList = DepartmentService.GetInstance().GetList(new DepartmentEntity());
             if (pkId > 0)
             {
                 var entity = UserInfoService.GetInstance().GetModel(pkId);
+
                 ViewBag.BindEntity = JsonHelper.JsonSerializer(entity);
+
+             
+
             }
+
+            ViewBag.RoleList = JsonHelper.JsonSerializer(new DataGridResponse()
+            {
+                total = roleList.Count,
+                rows = roleList
+            }, new NHibernateContractResolver());
+
+            ViewBag.DepartmentList = JsonHelper.JsonSerializer(new DataGridTreeResponse<DepartmentEntity>(departmentList.Count, departmentList), new NHibernateContractResolver());
+
             return View();
         }
 
- 
+
         public ActionResult List()
         {
             return View();
@@ -63,7 +78,7 @@ namespace Project.WebApplication.Areas.PermissionManager.Controllers
 
 
         [HttpPost]
-        public AbpJsonResult Edit( AjaxRequest<UserInfoEntity> postData)
+        public AbpJsonResult Edit(AjaxRequest<UserInfoEntity> postData)
         {
             var updateResult = UserInfoService.GetInstance().Update(postData.RequestEntity);
             var result = new AjaxResponse<UserInfoEntity>()

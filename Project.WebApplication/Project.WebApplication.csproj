@@ -552,7 +552,6 @@
     <Content Include="Scripts\pro\controlKit.js" />
     <Content Include="Scripts\pro\debugKit.js" />
     <Content Include="Scripts\pro\submitKit.js" />
-    <Content Include="Scripts\pro\jquery-message.js" />
     <Content Include="Scripts\pro\abp.jquery.ajax.js" />
     <Content Include="Web.config" />
   </ItemGroup>

@@ -18,11 +18,11 @@ var pro = pro || {};
     };
 
     pro.GridBase.prototype = {
-        grid: function (obj) {
+        grid: function (obj,data) {
             if (this.isTree) {
-                return $(this.grdidId).treegrid(obj);
+                return data == undefined ? $(this.grdidId).treegrid(obj) : $(this.grdidId).treegrid(obj,data);
             } else {
-                return $(this.grdidId).datagrid(obj);
+                return data == undefined ? $(this.grdidId).datagrid(obj) : $(this.grdidId).datagrid(obj,data);
             }
         },
         isSelected: function () {

@@ -1,154 +1,109 @@
-﻿
-
-  
-
-
-@{
+﻿@{
     ViewBag.Title = "Hd";
     Layout = "~/Views/Shared/_LayoutHandler.cshtml";
 }
 
 @section JavaScript{
-    <script src="/Areas/PermissionManager/Scripts/UserInfo/Hd.js"></script>
+    <script src="/Areas/PermissionManager/Scripts/UserInfo/Hd.js?JsParamter=@SiteConfig.GetConfig().JsParamter"></script>
 }
 
-<input id="BindEntity" type="text" value="@ViewBag.BindEntity" />
+<textarea id="BindEntity">@ViewBag.BindEntity</textarea>
+<textarea id="RoleList">@ViewBag.RoleList</textarea>
+<textarea id="DepartmentList">@ViewBag.DepartmentList</textarea>
+
 <input id="Command" type="hidden" />
 <div class="mtable_div">
     <form id="form1">
         <table class="mtable">
-            
-              <tr>
-            <td  >
-                <span style="color: Red">*</span>:
-            </td>
-            <td >
-                <input id="PkId" name="PkId"  type="text"  />
-            </td>
-        </tr>
-            
-              <tr>
-            <td  >
-                员工号<span style="color: Red">*</span>:
-            </td>
-            <td >
-                <input id="UserCode" name="UserCode"  type="text"  />
-            </td>
-        </tr>
-            
-              <tr>
-            <td  >
-                密码<span style="color: Red">*</span>:
-            </td>
-            <td >
-                <input id="Password" name="Password"  type="text"  />
-            </td>
-        </tr>
-            
-              <tr>
-            <td  >
-                用户名<span style="color: Red">*</span>:
-            </td>
-            <td >
-                <input id="UserName" name="UserName"  type="text"  />
-            </td>
-        </tr>
-            
-              <tr>
-            <td  >
-                电子邮件<span style="color: Red">*</span>:
-            </td>
-            <td >
-                <input id="Email" name="Email"  type="text"  />
-            </td>
-        </tr>
-            
-              <tr>
-            <td  >
-                手机号<span style="color: Red">*</span>:
-            </td>
-            <td >
-                <input id="Mobile" name="Mobile"  type="text"  />
-            </td>
-        </tr>
-            
-              <tr>
-            <td  >
-                家庭电话<span style="color: Red">*</span>:
-            </td>
-            <td >
-                <input id="Tel" name="Tel"  type="text"  />
-            </td>
-        </tr>
-            
-              <tr>
-            <td  >
-                是否有效<span style="color: Red">*</span>:
-            </td>
-            <td >
-                <input id="IsActive" name="IsActive"  type="text"  />
-            </td>
-        </tr>
-            
-              <tr>
-            <td  >
-                创建人<span style="color: Red">*</span>:
-            </td>
-            <td >
-                <input id="CreatorUserCode" name="CreatorUserCode"  type="text"  />
-            </td>
-        </tr>
-            
-              <tr>
-            <td  >
-                创建时间<span style="color: Red">*</span>:
-            </td>
-            <td >
-                <input id="CreationTime" name="CreationTime"  type="text"  />
-            </td>
-        </tr>
-            
-              <tr>
-            <td  >
-                修改人<span style="color: Red">*</span>:
-            </td>
-            <td >
-                <input id="LastModifierUserCode" name="LastModifierUserCode"  type="text"  />
-            </td>
-        </tr>
-            
-              <tr>
-            <td  >
-                修改时间<span style="color: Red">*</span>:
-            </td>
-            <td >
-                <input id="LastModificationTime" name="LastModificationTime"  type="text"  />
-            </td>
-        </tr>
-            
-              <tr>
-            <td  >
-                备注<span style="color: Red">*</span>:
-            </td>
-            <td >
-                <input id="Remark" name="Remark"  type="text"  />
-            </td>
-        </tr>
-            
-              <tr>
-            <td  >
-                是否删除<span style="color: Red">*</span>:
-            </td>
-            <td >
-                <input id="IsDeleted" name="IsDeleted"  type="text"  />
-            </td>
-        </tr>
-          
+
+            <tr>
+                <td>
+                    员工号<span style="color: Red">*</span>:
+                </td>
+                <td>
+                    <input id="UserCode" name="UserCode" type="text"/>
+                </td>
+
+
+                <td>
+                    用户名<span style="color: Red">*</span>:
+                </td>
+                <td>
+                    <input id="UserName" name="UserName" type="text"/>
+                </td>
+
+                <td>
+                    密码<span style="color: Red">*</span>:
+                </td>
+                <td>
+                    <input id="Password" name="Password" type="password"/>
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    电子邮件<span style="color: Red">*</span>:
+                </td>
+                <td>
+                    <input id="Email" name="Email" type="text"/>
+                </td>
+
+                <td>
+                    手机号<span style="color: Red">*</span>:
+                </td>
+                <td>
+                    <input id="Mobile" name="Mobile" type="text"/>
+                </td>
+
+                <td>
+                    家庭电话<span style="color: Red">*</span>:
+                </td>
+                <td>
+                    <input id="Tel" name="Tel" type="text"/>
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    是否有效<span style="color: Red">*</span>:
+                </td>
+                <td>
+                    <input id="IsActive" name="IsActive" type="text"/>
+                </td>
+
+                <td>
+                    备注<span style="color: Red">*</span>:
+                </td>
+                <td colspan="3">
+                    <input id="Remark" name="Remark" type="text"/>
+                </td>
+            </tr>
+     
+            <tr>
+                <td>
+                    所属部门：
+                </td>
+                <td colspan="5" style="height: 300px" >
+
+                    <table id="datagrid" style="height:auto;" fit="true"></table>
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    所属角色：
+                </td>
+                <td colspan="5" style="height: 300px">
+                    <table id="datagrid2" style="height:auto;" fit="true"></table>
+
+                </td>
+            </tr>
+
         </table>
     </form>
 </div>
 <div style="padding: 10px 10px 0 10px; text-align: center;">
-    @if (Request["PkId"]==null||int.Parse(Request["PkId"]) == 0)
+    @if (Request["PkId"] == null || int.Parse(Request["PkId"]) == 0)
     {
         <a id="btnAdd" class="easyui-linkbutton" iconcls="icon-add" href="javascript:void(0)">新增</a>
     }
@@ -158,8 +113,6 @@
     }
     <a id="btnClose" class="easyui-linkbutton" iconcls="icon-cancel" href="javascript:void(0)">关闭</a>
 </div>
-
-
 
 
 
