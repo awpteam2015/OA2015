@@ -40,9 +40,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="SiteConfig.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="SiteConfigEntiy.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SiteConfig.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
