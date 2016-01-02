@@ -4,6 +4,24 @@
     pro.Department.HdPage = pro.Department.HdPage || {};
     pro.Department.HdPage = {
         initPage: function () {
+
+            $('#ParentDepartmentCode').combotree({
+                editable: false,
+                valueField: 'DepartmentCode',
+                textField: 'DepartmentName',
+                url: '/PermissionManager/Department/GetList_Combotree',
+                onLoadSuccess: function () {
+                  
+                }
+            });
+
+            //$('#ModuleId').combobox({
+            //    valueField: 'PkId',
+            //    textField: 'ModuleName',
+            //    url: '/PermissionManager/Module/GetListAll_ForCombobox'
+            //});
+
+
             $("#btnAdd").click(function () {
                 pro.Department.HdPage.submit("Add");
             });
@@ -46,7 +64,7 @@
                 }
             ).fail(
              function (errordetails, errormessage) {
-                 $.alertExtend.error();
+                // $.alertExtend.error();
              }
             );
         },
@@ -54,11 +72,11 @@
             addRule: function () {
                 $("#form1").validate({
                     rules: {
-                        PkId: { required: true },
+                        //PkId: { required: true },
                         DepartmentCode: { required: true },
                         DepartmentName: { required: true },
-                        ParentDepartmentCode: { required: true },
-                        Remark: { required: true }
+                        ParentDepartmentCode: { required: true }
+                        //Remark: { required: true }
                     },
                     messages: {
                         PkId: "必填!",

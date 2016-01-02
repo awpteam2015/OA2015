@@ -5,6 +5,8 @@
 *       日期：     2015/12/23
 *       描述：     部门基础信息表
 * *************************************************************************/
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Project.Infrastructure.FrameworkCore.DataNhibernate.Helpers;
@@ -160,6 +162,16 @@ namespace Project.Service.PermissionManager
 
 
         #region 新增方法
+
+        public IList<DepartmentEntity> GetTreeList(DepartmentEntity entity)
+        {
+            //Func<> a=
+
+            var listAll = this.GetList(entity);
+
+
+            return listAll;
+        }
 
         #endregion
     }

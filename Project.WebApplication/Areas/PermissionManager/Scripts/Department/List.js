@@ -10,7 +10,7 @@ var pro = pro || {};
             var gridObj = new pro.GridBase("#datagrid", true);
 
             gridObj.grid({
-                url: '/PermissionManager/Department/GetList',
+                url: '/PermissionManager/Department/GetList_Combotree',
                 idField: "DepartmentCode",
                 treeField: "DepartmentCode",
                 fitColumns: false,

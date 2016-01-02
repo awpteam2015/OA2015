@@ -42,7 +42,7 @@ namespace Project.Mvc.Models
         public IList<T> rows { get; set; }
 
 
-        public DataGridTreeResponse(int total,IList<T> rows)
+        public DataGridTreeResponse(int total, IList<T> rows)
         {
             if (total == 1)
             {

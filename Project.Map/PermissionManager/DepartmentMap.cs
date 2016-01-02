@@ -21,6 +21,13 @@ namespace Project.Map.PermissionManager
             Map(p => p.DepartmentName);
             Map(p => p.ParentDepartmentCode);
             Map(p => p.Remark);
+
+       //     HasMany(p => p.children)
+       //.AsSet()
+       //.LazyLoad()
+       //.Cascade.All().Inverse()
+       //.PropertyRef("DepartmentCode")
+       //.KeyColumn("ParentDepartmentCode");
         }
     }
 }

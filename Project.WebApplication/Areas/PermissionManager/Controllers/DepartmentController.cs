@@ -37,19 +37,21 @@ namespace Project.WebApplication.Areas.PermissionManager.Controllers
 
         public AbpJsonResult GetList()
         {
-            var pIndex = this.Request["page"].ConvertTo<int>();
-            var pSize = this.Request["rows"].ConvertTo<int>();
             var where = new DepartmentEntity();
             where.DepartmentCode = RequestHelper.GetFormString("DepartmentCode");
             where.DepartmentName = RequestHelper.GetFormString("DepartmentName");
-            //where.ParentDepartmentCode = RequestHelper.GetFormString("ParentDepartmentCode");
-            where.Remark = RequestHelper.GetFormString("Remark");
-
-
             var searchList = DepartmentService.GetInstance().GetList(where);
             var dataGridEntity = new DataGridTreeResponse<DepartmentEntity>(searchList.Count, searchList);
-
             return new AbpJsonResult(dataGridEntity, new NHibernateContractResolver());
+        }
+
+        public AbpJsonResult GetList_Combotree()
+        {
+            var where = new DepartmentEntity();
+            where.ParentDepartmentCode = "0";
+            var searchList = DepartmentService.GetInstance().GetList(where);
+
+            return new AbpJsonResult(searchList, new NHibernateContractResolver(new[] { "children" }));
         }
 
 
