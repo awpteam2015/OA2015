@@ -8,14 +8,15 @@
             excludeAreaIds: ""
         },
         getHeadJson: function() {
-            var inputObj = $("input[type=text]");
+            var inputObj = $("input");
             var selectObj = $("select");
-            if (this.excludeAreaIds) {
-                var excludeAreaId = excludeAreaIds.split(',');
+    
+            if (this.config.excludeAreaIds) {
+                var excludeAreaId = this.config.excludeAreaIds.split(',');
                 var inputnotexpr = "";
                 var selectnotexpr = "";
                 for (var i = 0, max = excludeAreaId.length; i < max; i++) {
-                    inputnotexpr += "#" + excludeAreaId[i] + " input[type='text'],";
+                    inputnotexpr += "#" + excludeAreaId[i] + " input,";
                     selectnotexpr += "#" + excludeAreaId[i] + " select,";
                 }
                 inputObj = inputObj.not($(inputnotexpr.substring(0, inputnotexpr.length - 1)));

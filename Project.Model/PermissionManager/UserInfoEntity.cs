@@ -9,8 +9,14 @@ namespace Project.Model.PermissionManager
      [Serializable]
     public class UserInfoEntity : AuditedEntity, ISoftDelete
     {
-          
-        #region 属性
+         public UserInfoEntity()
+         {
+             UserDepartmentList=new HashSet<UserDepartmentEntity>();
+             UserRoleList=new HashSet<UserRoleEntity>();
+         }
+
+         #region 属性
+
         /// <summary>
         /// 数据库类型：System.String   大小:36 
         /// 描述:员工号
@@ -62,5 +68,6 @@ namespace Project.Model.PermissionManager
         public virtual ISet<UserRoleEntity> UserRoleList { get; set; }
 
 
+      
     }
 }

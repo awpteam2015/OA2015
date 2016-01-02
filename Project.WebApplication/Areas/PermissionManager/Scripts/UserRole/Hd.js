@@ -35,7 +35,7 @@
             }
 
             this.submitExtend.addRule();
-            if (!$("#form1").valid() && pro.submitExtend.logicValidate()) {
+            if (!$("#form1").valid() && this.submitExtend.logicValidate()) {
                 $.alertExtend.error();
                 return false;
             }

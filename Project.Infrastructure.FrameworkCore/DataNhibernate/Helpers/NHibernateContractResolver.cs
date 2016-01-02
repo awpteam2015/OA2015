@@ -18,6 +18,16 @@ namespace Project.Infrastructure.FrameworkCore.DataNhibernate.Helpers
         {
             this._exceptMemberName = exceptMemberName;
         }
+
+        protected override JsonContract CreateContract(Type objectType)
+        {
+            if (typeof(NHibernate.Proxy.INHibernateProxy).IsAssignableFrom(objectType))
+                return base.CreateContract(objectType.BaseType);
+
+            return base.CreateContract(objectType);
+        }
+
+
         protected override List<MemberInfo> GetSerializableMembers(Type objectType)
         {
             var members = new List<PropertyInfo>(objectType.GetProperties());

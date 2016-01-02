@@ -35,7 +35,7 @@
             }
 
             this.submitExtend.addRule();
-            if (!$("#form1").valid() && pro.submitExtend.logicValidate()) {
+            if (!$("#form1").valid() && this.submitExtend.logicValidate()) {
                 $.alertExtend.error();
                 return false;
             }
@@ -62,14 +62,14 @@
             addRule: function () {
                 $("#form1").validate({
                     rules: {
-          PkId: { required: true  },
-          RoleName: { required: true  },
-          Remark: { required: true  },
+          //PkId: { required: true  },
+          RoleName: { required: true  }
+          //Remark: { required: true  },
                     },
                     messages: {
-          PkId:  "角色ID必填!",
+          //PkId:  "角色ID必填!",
           RoleName:  "角色名称必填!",
-          Remark:  "备注必填!",
+          Remark:  "备注必填!"
                     },
                     errorPlacement: function (error, element) {
                         pro.commonKit.errorPlacementHd(error, element);

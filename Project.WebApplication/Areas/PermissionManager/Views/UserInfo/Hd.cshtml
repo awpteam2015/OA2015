@@ -2,103 +2,98 @@
     ViewBag.Title = "Hd";
     Layout = "~/Views/Shared/_LayoutHandler.cshtml";
 }
-
 @section JavaScript{
     <script src="/Areas/PermissionManager/Scripts/UserInfo/Hd.js?JsParamter=@SiteConfig.GetConfig().JsParamter"></script>
 }
 
-<textarea id="BindEntity">@ViewBag.BindEntity</textarea>
-<textarea id="RoleList">@ViewBag.RoleList</textarea>
-<textarea id="DepartmentList">@ViewBag.DepartmentList</textarea>
-
-<input id="Command" type="hidden" />
+<div style="display:none ">
+    <textarea id="BindEntity">@ViewBag.BindEntity</textarea>
+    <textarea id="RoleList">@ViewBag.RoleList</textarea>
+    <textarea id="DepartmentList">@ViewBag.DepartmentList</textarea>
+    <input id="Command" type="hidden" />
+</div>
 <div class="mtable_div">
     <form id="form1">
         <table class="mtable">
-
             <tr>
                 <td>
                     员工号<span style="color: Red">*</span>:
                 </td>
                 <td>
-                    <input id="UserCode" name="UserCode" type="text"/>
+                    <input id="UserCode" name="UserCode" type="text" />
                 </td>
-
 
                 <td>
                     用户名<span style="color: Red">*</span>:
                 </td>
                 <td>
-                    <input id="UserName" name="UserName" type="text"/>
-                </td>
-
-                <td>
-                    密码<span style="color: Red">*</span>:
+                    <input id="UserName" name="UserName" type="text" />
                 </td>
                 <td>
-                    <input id="Password" name="Password" type="password"/>
-                </td>
-            </tr>
-
-            <tr>
-                <td>
-                    电子邮件<span style="color: Red">*</span>:
+                    密码:
                 </td>
                 <td>
-                    <input id="Email" name="Email" type="text"/>
-                </td>
-
-                <td>
-                    手机号<span style="color: Red">*</span>:
-                </td>
-                <td>
-                    <input id="Mobile" name="Mobile" type="text"/>
-                </td>
-
-                <td>
-                    家庭电话<span style="color: Red">*</span>:
-                </td>
-                <td>
-                    <input id="Tel" name="Tel" type="text"/>
+                    <input id="Password" name="Password" type="password" />
                 </td>
             </tr>
-
             <tr>
                 <td>
-                    是否有效<span style="color: Red">*</span>:
+                    电子邮件:
                 </td>
                 <td>
-                    <input id="IsActive" name="IsActive" type="text"/>
+                    <input id="Email" name="Email" type="text" />
                 </td>
-
                 <td>
-                    备注<span style="color: Red">*</span>:
+                    手机号:
+                </td>
+                <td>
+                    <input id="Mobile" name="Mobile" type="text" />
+                </td>
+                <td>
+                    家庭电话:
+                </td>
+                <td>
+                    <input id="Tel" name="Tel" type="text" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    是否有效:
+                </td>
+                <td>
+                    <select id="IsActive" name="IsActive">
+                        <option value="1">是</option>
+                        <option value="0">否</option>
+                    </select>
+                </td>
+                <td>
+                    备注:
                 </td>
                 <td colspan="3">
-                    <input id="Remark" name="Remark" type="text"/>
+                    <input id="Remark" name="Remark" type="text" />
                 </td>
             </tr>
-     
+
             <tr>
                 <td>
                     所属部门：
                 </td>
-                <td colspan="5" style="height: 300px" >
-
-                    <table id="datagrid" style="height:auto;" fit="true"></table>
+                <td colspan="5">
+                    <div id="div_datagrid" style="height: 300px;width: 800px">
+                        <table id="datagrid" style="height:auto;" fit="true"></table>
+                    </div>
                 </td>
             </tr>
-
             <tr>
                 <td>
                     所属角色：
                 </td>
-                <td colspan="5" style="height: 300px">
-                    <table id="datagrid2" style="height:auto;" fit="true"></table>
-
+                <td colspan="5">
+                    <div id="div_datagrid2" style="height: 300px;width: 600px">
+                        <table id="datagrid2" style="height: auto; " fit="true"></table>
+                    </div>
                 </td>
             </tr>
-
         </table>
     </form>
 </div>
@@ -113,6 +108,3 @@
     }
     <a id="btnClose" class="easyui-linkbutton" iconcls="icon-cancel" href="javascript:void(0)">关闭</a>
 </div>
-
-
-

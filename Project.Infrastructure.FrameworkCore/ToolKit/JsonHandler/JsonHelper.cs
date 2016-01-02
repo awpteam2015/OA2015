@@ -22,15 +22,26 @@ namespace Project.Infrastructure.FrameworkCore.ToolKit.JsonHandler
         /// <returns></returns>
         public static string JsonSerializer(object jsonEntiy, IContractResolver contractResolver = null, string dateFormat = "yyyy-MM-dd")
         {
-            var t = JsonConvert.SerializeObject(jsonEntiy, Formatting.Indented, new JsonSerializerSettings
+            try
             {
-                ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
-                Converters = new JsonConverter[] { new IsoDateTimeConverter { DateTimeFormat = dateFormat },
+                var t = JsonConvert.SerializeObject(jsonEntiy, Formatting.Indented, new JsonSerializerSettings
+                {
+                    ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
+                    Converters = new JsonConverter[] { new IsoDateTimeConverter { DateTimeFormat = dateFormat },
                     new StringEnumConverter() { } },
-                NullValueHandling = NullValueHandling.Ignore,
-                ContractResolver = contractResolver
-            });
-            return t;
+                    NullValueHandling = NullValueHandling.Ignore,
+                    ContractResolver = contractResolver
+                });
+                return t;
+
+            }
+            catch (Exception e)
+            {
+                
+                throw;
+            }
+          
+           
         }
 
 

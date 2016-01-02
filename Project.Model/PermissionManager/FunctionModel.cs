@@ -66,6 +66,7 @@ namespace Project.Model.PermissionManager
         /// </summary>
         public virtual ISet<FunctionDetailEntity> FunctionDetailList { get; set; }
 
+        public virtual ModuleEntity ModuleEntity { get; set; }
         #endregion
     }
 }

@@ -162,8 +162,8 @@ namespace Project.Service.PermissionManager
               //  expr = expr.And(p => p.FunctionDetailName == entity.FunctionDetailName);
               // if (!string.IsNullOrEmpty(entity.FunctionDetailCode))
               //  expr = expr.And(p => p.FunctionDetailCode == entity.FunctionDetailCode);
-              // if (!string.IsNullOrEmpty(entity.FunctionId))
-              //  expr = expr.And(p => p.FunctionId == entity.FunctionId);
+               if (entity.FunctionId>0)
+                   expr = expr.And(p => p.FunctionId == entity.FunctionId);
               // if (!string.IsNullOrEmpty(entity.Area))
               //  expr = expr.And(p => p.Area == entity.Area);
               // if (!string.IsNullOrEmpty(entity.Controller))

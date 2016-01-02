@@ -132,8 +132,8 @@ namespace Project.Service.PermissionManager
             #region
             // if (!string.IsNullOrEmpty(entity.PkId))
             //  expr = expr.And(p => p.PkId == entity.PkId);
-            // if (!string.IsNullOrEmpty(entity.RoleName))
-            //  expr = expr.And(p => p.RoleName == entity.RoleName);
+            if (!string.IsNullOrEmpty(entity.RoleName))
+                expr = expr.And(p => p.RoleName.Contains(entity.RoleName));
             // if (!string.IsNullOrEmpty(entity.Remark))
             //  expr = expr.And(p => p.Remark == entity.Remark);
             #endregion

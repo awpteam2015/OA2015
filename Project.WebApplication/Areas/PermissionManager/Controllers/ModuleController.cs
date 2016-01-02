@@ -41,7 +41,7 @@ namespace Project.WebApplication.Areas.PermissionManager.Controllers
             var pSize = this.Request["rows"].ConvertTo<int>();
             var where = new ModuleEntity();
 			//where.PkId = RequestHelper.GetFormString("PkId");
-			//where.ModuleName = RequestHelper.GetFormString("ModuleName");
+			where.ModuleName = RequestHelper.GetFormString("ModuleName");
 			//where.ParentId = RequestHelper.GetFormString("ParentId");
 			//where.ModuleLevel = RequestHelper.GetFormString("ModuleLevel");
 			//where.RankId = RequestHelper.GetFormString("RankId");
@@ -58,7 +58,6 @@ namespace Project.WebApplication.Areas.PermissionManager.Controllers
 
         public AbpJsonResult GetListAll()
         {
-        
             var where = new ModuleEntity();
             //where.PkId = RequestHelper.GetFormString("PkId");
             //where.ModuleName = RequestHelper.GetFormString("ModuleName");
@@ -79,6 +78,19 @@ namespace Project.WebApplication.Areas.PermissionManager.Controllers
                 rows = searchList
             };
             return new AbpJsonResult(dataGridEntity, new NHibernateContractResolver());
+        }
+
+        public AbpJsonResult GetListAll_ForCombobox()
+        {
+            var where = new ModuleEntity();
+            //where.PkId = RequestHelper.GetFormString("PkId");
+            //where.ModuleName = RequestHelper.GetFormString("ModuleName");
+            //where.ParentId = RequestHelper.GetFormString("ParentId");
+            //where.ModuleLevel = RequestHelper.GetFormString("ModuleLevel");
+            //where.RankId = RequestHelper.GetFormString("RankId");
+            //where.Remark = RequestHelper.GetFormString("Remark");
+            var searchList = ModuleService.GetInstance().GetList(where);
+            return new AbpJsonResult(searchList, new NHibernateContractResolver());
         }
 
 

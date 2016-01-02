@@ -92,7 +92,8 @@
   <ItemGroup>
     <Compile Include="DataNhibernate\EntityMappings\FullMap.cs" />
     <Compile Include="DataNhibernate\EntityMappings\ViewBaseMap.cs" />
-    <Compile Include="DataNhibernate\Helpers\CustomDialect.cs" />
+    <Compile Include="DataNhibernate\Helpers\CustomDialectSql.cs" />
+    <Compile Include="DataNhibernate\Helpers\CustomDialectOracle.cs" />
     <Compile Include="DataNhibernate\Helpers\HqlGeneratorForMethodExtend.cs" />
     <Compile Include="DataNhibernate\Helpers\NhExpansion.cs" />
     <Compile Include="DataNhibernate\Helpers\NHibernateContractResolver.cs" />

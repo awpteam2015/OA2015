@@ -4,7 +4,7 @@ var pro = pro || {};
     pro.Function = pro.Function || {};
     pro.Function.ListPage = pro.Function.ListPage || {};
     pro.Function.ListPage = {
-      init: function () {
+        init: function () {
             return {
                 tabObj: new pro.TabBase(),
                 gridObj: new pro.GridBase("#datagrid", false)
@@ -20,11 +20,16 @@ var pro = pro || {};
                 nowrap: false,
                 rownumbers: true, //行号
                 singleSelect: true,
-                columns: [[
-         { field: 'PkId', title: '', width: 100 },
+                frozenColumns: [[
+                     { field: 'PkId', title: '', width: 50 },
          { field: 'FunctionnName', title: '模块名称', width: 100 },
-         { field: 'ModuleId', title: '模块ID', width: 100 },
-         { field: 'FunctionUrl', title: '模块路径', width: 100 },
+         { field: 'ModuleId', title: '模块ID', width: 100,formatter: function(value,row) {
+             return row.ModuleEntity.ModuleName;
+         } }
+                ]],
+                columns: [[
+
+         { field: 'FunctionUrl', title: '模块路径', width: 400 },
          { field: 'Area', title: '', width: 100 },
          { field: 'Controller', title: '', width: 100 },
          { field: 'Action', title: '', width: 100 },
@@ -39,7 +44,7 @@ var pro = pro || {};
                );
 
             $("#btnAdd").click(function () {
-               tabObj.add("/PermissionManager/Function/Hd","新增");
+                tabObj.add("/PermissionManager/Function/Hd?ModuleId="+$('#ModuleId').combobox("getValue"), "新增");
             });
 
             $("#btnEdit").click(function () {
@@ -58,7 +63,7 @@ var pro = pro || {};
 
             $("#btnDel").click(function () {
                 if (!gridObj.isSelected()) {
-                $.alertExtend.infoOp();
+                    $.alertExtend.infoOp();
                     return;
                 }
                 $.messager.confirm("确认操作", "是否确认删除", function (bl) {
@@ -81,8 +86,17 @@ var pro = pro || {};
             $("#btnRefresh").click(function () {
                 gridObj.refresh();
             });
+
+
+
+            $('#ModuleId').combobox({
+                valueField: 'PkId',
+                textField: 'ModuleName',
+                url: '/PermissionManager/Module/GetListAll_ForCombobox'
+            });
+
         },
-         closeTab: function () {
+        closeTab: function () {
             this.init().tabObj.closeTab();
         }
     };

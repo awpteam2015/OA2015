@@ -22,8 +22,8 @@ var pro = pro || {};
                 singleSelect: true,
                 columns: [[
          { field: 'PkId', title: '角色ID', width: 100 },
-         { field: 'RoleName', title: '角色名称', width: 100 },
-         { field: 'Remark', title: '备注', width: 100 },
+         { field: 'RoleName', title: '角色名称', width: 200 },
+         { field: 'Remark', title: '备注', width: 300 }
                 ]],
                 pagination: true,
                 pageSize: 20, //每页显示的记录条数，默认为10     
@@ -65,7 +65,7 @@ var pro = pro || {};
                     }
                     ).fail(
                     function (errordetails, errormessage) {
-                        $.alertExtend.error();
+                        //$.alertExtend.error();
                     }
                     );
                 });

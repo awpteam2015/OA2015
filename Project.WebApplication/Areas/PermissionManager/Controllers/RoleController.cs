@@ -41,7 +41,7 @@ namespace Project.WebApplication.Areas.PermissionManager.Controllers
             var pSize = this.Request["rows"].ConvertTo<int>();
             var where = new RoleEntity();
 			//where.PkId = RequestHelper.GetFormString("PkId");
-			//where.RoleName = RequestHelper.GetFormString("RoleName");
+			where.RoleName = RequestHelper.GetFormString("RoleName");
 			//where.Remark = RequestHelper.GetFormString("Remark");
             var searchList = RoleService.GetInstance().Search(where, (pIndex - 1) * pSize, pSize);
 

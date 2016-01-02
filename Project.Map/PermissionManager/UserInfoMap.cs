@@ -4,19 +4,20 @@ using Project.Model.PermissionManager;
 
 namespace Project.Map.PermissionManager
 {
-    public class UserInfoMap : BaseMap<UserInfoEntity, int>
+    public class UserInfoMap : FullMap<UserInfoEntity, int>
     {
         public UserInfoMap()
             : base("PM_UserInfo")
         {
-            this.MapPkidDefault<UserInfoEntity, int>();
+            //this.MapPkidDefault<UserInfoEntity, int>();
 
             Map(p => p.UserCode);
             Map(p => p.Password);
             Map(p => p.UserName);
             Map(p => p.Email);
             Map(p => p.Mobile);
-            Map(p => p.IsDeleted);
+            Map(p => p.IsActive);
+
 
             HasMany(p => p.UserDepartmentList)
     .AsSet()

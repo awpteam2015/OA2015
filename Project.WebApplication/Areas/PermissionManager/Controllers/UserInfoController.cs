@@ -25,10 +25,19 @@ namespace Project.WebApplication.Areas.PermissionManager.Controllers
             {
                 var entity = UserInfoService.GetInstance().GetModel(pkId);
 
-                ViewBag.BindEntity = JsonHelper.JsonSerializer(entity);
+                ViewBag.BindEntity = JsonHelper.JsonSerializer(entity, new NHibernateContractResolver());
 
-             
+                roleList.Where(p => entity.UserRoleList.Any(x => x.RoleId == p.PkId)).ForEach(p =>
+                {
+                    p.Attr_UserRolePkId = entity.UserRoleList.SingleOrDefault(x => x.RoleId == p.PkId).PkId;
+                    p.Attr_IsCheck = true;
+                });
 
+                departmentList.Where(p => entity.UserDepartmentList.Any(x => x.DepartmentCode == p.DepartmentCode)).ForEach(p =>
+                {
+                    p.Attr_UserDepartmentPkId = entity.UserDepartmentList.SingleOrDefault(x => x.DepartmentCode == p.DepartmentCode).PkId;
+                    p.Attr_IsCheck = true;
+                });
             }
 
             ViewBag.RoleList = JsonHelper.JsonSerializer(new DataGridResponse()
@@ -53,6 +62,11 @@ namespace Project.WebApplication.Areas.PermissionManager.Controllers
             var pIndex = this.Request["page"].ConvertTo<int>();
             var pSize = this.Request["rows"].ConvertTo<int>();
             var where = new UserInfoEntity();
+            where.UserCode = RequestHelper.GetString("UserCode");
+            where.UserName = RequestHelper.GetString("UserName");
+            where.Mobile = RequestHelper.GetString("Mobile");
+            where.IsActive = RequestHelper.GetInt("IsActive");
+
             var searchList = UserInfoService.GetInstance().Search(where, (pIndex - 1) * pSize, pSize);
 
             var dataGridEntity = new DataGridResponse()
@@ -67,11 +81,17 @@ namespace Project.WebApplication.Areas.PermissionManager.Controllers
         [HttpPost]
         public AbpJsonResult Add(AjaxRequest<UserInfoEntity> postData)
         {
+            postData.RequestEntity.UserDepartmentList.ForEach(p => p.UserCode = postData.RequestEntity.UserCode);
+            postData.RequestEntity.UserRoleList.ForEach(p => p.UserCode = postData.RequestEntity.UserCode);
+            postData.RequestEntity.CreationTime = DateTime.Now;
+            postData.RequestEntity.CreatorUserCode = "";
+
             var addResult = UserInfoService.GetInstance().Add(postData.RequestEntity);
             var result = new AjaxResponse<UserInfoEntity>()
                {
-                   success = true,
-                   result = postData.RequestEntity
+                   success = addResult.Item1,
+                   result = postData.RequestEntity,
+                   error = addResult.Item1 ? null : new ErrorInfo(addResult.Item2) 
                };
             return new AbpJsonResult(result, new NHibernateContractResolver());
         }
@@ -80,11 +100,17 @@ namespace Project.WebApplication.Areas.PermissionManager.Controllers
         [HttpPost]
         public AbpJsonResult Edit(AjaxRequest<UserInfoEntity> postData)
         {
+            postData.RequestEntity.UserDepartmentList.ForEach(p => p.UserCode = postData.RequestEntity.UserCode);
+            postData.RequestEntity.UserRoleList.ForEach(p => p.UserCode = postData.RequestEntity.UserCode);
+            postData.RequestEntity.LastModificationTime = DateTime.Now;
+            postData.RequestEntity.LastModifierUserCode = "";
+
             var updateResult = UserInfoService.GetInstance().Update(postData.RequestEntity);
             var result = new AjaxResponse<UserInfoEntity>()
             {
-                success = updateResult,
-                result = postData.RequestEntity
+                success = updateResult.Item1,
+                result = postData.RequestEntity,
+                error = updateResult.Item1 ? null : new ErrorInfo(updateResult.Item2) 
             };
             return new AbpJsonResult(result, new NHibernateContractResolver(new string[] { "result" }));
         }

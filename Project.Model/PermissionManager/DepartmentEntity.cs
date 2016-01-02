@@ -46,6 +46,9 @@ namespace Project.Model.PermissionManager
             get { return (ParentDepartmentCode == "0" || parentId == TreeInvalidCodeEnum.Invalid.ToString()) ? null : ParentDepartmentCode; }
             set { this.parentId = value; }
         }
+
+        public virtual bool Attr_IsCheck { get; set; }
+        public virtual int Attr_UserDepartmentPkId { get; set; }
         #endregion
 
        // public virtual string _parentId { get; set; }

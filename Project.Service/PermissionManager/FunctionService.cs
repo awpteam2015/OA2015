@@ -158,10 +158,10 @@ namespace Project.Service.PermissionManager
             #region
             // if (!string.IsNullOrEmpty(entity.PkId))
             //  expr = expr.And(p => p.PkId == entity.PkId);
-            // if (!string.IsNullOrEmpty(entity.FunctionnName))
-            //  expr = expr.And(p => p.FunctionnName == entity.FunctionnName);
-            // if (!string.IsNullOrEmpty(entity.ModuleId))
-            //  expr = expr.And(p => p.ModuleId == entity.ModuleId);
+            if (!string.IsNullOrEmpty(entity.FunctionnName))
+                expr = expr.And(p => p.FunctionnName.Contains(entity.FunctionnName));
+            if (entity.ModuleId>0)
+                expr = expr.And(p => p.ModuleId == entity.ModuleId);
             // if (!string.IsNullOrEmpty(entity.FunctionUrl))
             //  expr = expr.And(p => p.FunctionUrl == entity.FunctionUrl);
             // if (!string.IsNullOrEmpty(entity.Area))

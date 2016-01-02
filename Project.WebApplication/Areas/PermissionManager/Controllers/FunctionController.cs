@@ -24,7 +24,10 @@ namespace Project.WebApplication.Areas.PermissionManager.Controllers
             if (pkId > 0)
             {
                 var entity = FunctionService.GetInstance().GetModelByPk(pkId);
+
+
                 ViewBag.BindEntity = JsonHelper.JsonSerializer(entity);
+
             }
             return View();
         }
@@ -42,7 +45,7 @@ namespace Project.WebApplication.Areas.PermissionManager.Controllers
             var where = new FunctionEntity();
             //where.PkId = RequestHelper.GetFormString("PkId");
             //where.FunctionnName = RequestHelper.GetFormString("FunctionnName");
-            //where.ModuleId = RequestHelper.GetFormString("ModuleId");
+            where.ModuleId = RequestHelper.GetInt("ModuleId");
             //where.FunctionUrl = RequestHelper.GetFormString("FunctionUrl");
             //where.Area = RequestHelper.GetFormString("Area");
             //where.Controller = RequestHelper.GetFormString("Controller");
@@ -57,7 +60,7 @@ namespace Project.WebApplication.Areas.PermissionManager.Controllers
                 total = searchList.Item2,
                 rows = searchList.Item1
             };
-            return new AbpJsonResult(dataGridEntity, new NHibernateContractResolver());
+            return new AbpJsonResult(dataGridEntity, new NHibernateContractResolver(new[] { "ModuleEntity" }));
         }
 
         public AbpJsonResult GetListAll()
@@ -96,13 +99,13 @@ namespace Project.WebApplication.Areas.PermissionManager.Controllers
 
         public AbpJsonResult GetFunctionDetailList()
         {
-            var pIndex = this.Request["page"].ConvertTo<int>();
-            var pSize = this.Request["rows"].ConvertTo<int>();
+            //var pIndex = this.Request["page"].ConvertTo<int>();
+            //var pSize = this.Request["rows"].ConvertTo<int>();
             var where = new FunctionDetailEntity();
             //where.PkId = RequestHelper.GetFormString("PkId");
             //where.FunctionDetailName = RequestHelper.GetFormString("FunctionDetailName");
             //where.FunctionDetailCode = RequestHelper.GetFormString("FunctionDetailCode");
-            //where.FunctionId = RequestHelper.GetFormString("FunctionId");
+            where.FunctionId = RequestHelper.GetInt("FunctionId");
             //where.Area = RequestHelper.GetFormString("Area");
             //where.Controller = RequestHelper.GetFormString("Controller");
             //where.Action = RequestHelper.GetFormString("Action");
@@ -110,12 +113,12 @@ namespace Project.WebApplication.Areas.PermissionManager.Controllers
             //where.CreationTime = RequestHelper.GetFormString("CreationTime");
             //where.LastModifierUserCode = RequestHelper.GetFormString("LastModifierUserCode");
             //where.LastModificationTime = RequestHelper.GetFormString("LastModificationTime");
-            var searchList = FunctionDetailService.GetInstance().Search(where, (pIndex - 1) * pSize, pSize);
+            var searchList = FunctionDetailService.GetInstance().GetList(where);
 
             var dataGridEntity = new DataGridResponse()
             {
-                total = searchList.Item2,
-                rows = searchList.Item1
+                total = searchList.Count,
+                rows = searchList
             };
             return new AbpJsonResult(dataGridEntity, new NHibernateContractResolver());
         }

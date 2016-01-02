@@ -35,7 +35,7 @@
             }
 
             this.submitExtend.addRule();
-            if (!$("#form1").valid() && pro.submitExtend.logicValidate()) {
+            if (!$("#form1").valid() && this.submitExtend.logicValidate()) {
                 $.alertExtend.error();
                 return false;
             }
@@ -62,12 +62,12 @@
             addRule: function () {
                 $("#form1").validate({
                     rules: {
-          PkId: { required: true  },
-          ModuleName: { required: true  },
-          ParentId: { required: true  },
-          ModuleLevel: { required: true  },
-          RankId: { required: true  },
-          Remark: { required: true  },
+        //  PkId: { required: true  },
+          ModuleName: { required: true  }
+          //ParentId: { required: true  },
+          //ModuleLevel: { required: true  },
+          //RankId: { required: true  },
+          //Remark: { required: true  },
                     },
                     messages: {
           PkId:  "ID必填!",

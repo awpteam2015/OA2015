@@ -14,7 +14,7 @@
             var tabObj = initObj.tabObj;
             var gridObj = initObj.gridObj;
             gridObj.grid({
-                url: '/PermissionManager/Function/GetFunctionDetailList',
+                url: '/PermissionManager/Function/GetFunctionDetailList?FunctionId=' + pro.commonKit.getUrlParam("PkId"),
                 fitColumns: false,
                 nowrap: false,
                 rownumbers: true, //行号
@@ -27,7 +27,7 @@
                     },
                     {
                         field: 'FunctionDetailName', title: '功能名称', width: 100, formatter: function (value, row, index) {
-                            return pro.controlKit.getInputHtml("FunctionDetailName_" + row.PkId, value +"----"+ index);
+                            return pro.controlKit.getInputHtml("FunctionDetailName_" + row.PkId, value );
                         }
                     },
                     {
@@ -36,18 +36,18 @@
                         }
                     },
                     {
-                        field: 'Area', title: 'Area', width: 100, formatter: function (value, row, index) {
-                            return pro.controlKit.getInputHtml("Area_" + row.PkId, value);
+                        field: 'Area', title: 'Area', width: 200, formatter: function (value, row, index) {
+                            return pro.controlKit.getInputHtml("Area_" + row.PkId, value, 200);
                         }
                     },
                     {
-                        field: 'Controller', title: 'Controller', width: 100, formatter: function (value, row, index) {
-                            return pro.controlKit.getInputHtml("Controller_" + row.PkId, value);
+                        field: 'Controller', title: 'Controller', width: 200, formatter: function (value, row, index) {
+                            return pro.controlKit.getInputHtml("Controller_" + row.PkId, value,200);
                         }
                     },
                     {
-                        field: 'Action', title: 'Action', width: 100, formatter: function (value, row, index) {
-                            return pro.controlKit.getInputHtml("Action_" + row.PkId, value);
+                        field: 'Action', title: 'Action', width: 200, formatter: function (value, row, index) {
+                            return pro.controlKit.getInputHtml("Action_" + row.PkId, value, 200);
                         }
                     }
                 ]],
@@ -63,8 +63,8 @@
                     FunctionDetailCode: ""
                 });
 
-                console.log(JSON.stringify($("#datagrid").datagrid('getRows')));
-                console.log(gridObj.PkId + 1);
+                //console.log(JSON.stringify($("#datagrid").datagrid('getRows')));
+                //console.log(gridObj.PkId + 1);
                
                 $("#datagrid").datagrid('selectRecord', gridObj.PkId+1);
             });
@@ -87,19 +87,37 @@
                 parent.pro.Function.ListPage.closeTab("");
             });
 
+            $('#ModuleId').combobox({
+                 valueField:'PkId',
+                 textField: 'ModuleName',
+                 url: '/PermissionManager/Module/GetListAll_ForCombobox'
+            });
+
+
             if ($("#BindEntity").val()) {
                 var bindField = pro.bindKit.getHeadJson();
                 var bindEntity = JSON.parse($("#BindEntity").val());
                 for (var filedname in bindField) {
                     $("[name=" + filedname + "]").val(bindEntity[filedname]);
                 }
+
+                $('#ModuleId').combobox('setValue', bindEntity.ModuleId);
+
                 //行项目信息用json绑定控件
                 //alert(JSON.stringify(BindEntity.List));
             }
+
+            var moduleId = pro.commonKit.getUrlParam("ModuleId");
+            if (moduleId > 0) {
+                $('#ModuleId').combobox('setValue', moduleId);
+            }
+
         },
         submit: function (command) {
             var postData = {};
             postData.RequestEntity = pro.submitKit.getHeadJson();
+           // postData.RequestEntity.ModuleId = $('#ModuleId').combobox('getValue');
+
             pro.submitKit.config.columnPkidName = "PkId";
             pro.submitKit.config.columns = ["FunctionDetailName", "FunctionDetailCode", "Area", "Controller", "Action"];
             postData.RequestEntity.FunctionDetailList = pro.submitKit.getRowJson();
@@ -109,7 +127,7 @@
             }
 
             this.submitExtend.addRule();
-            if (!$("#form1").valid() && pro.submitExtend.logicValidate()) {
+            if (!$("#form1").valid() && this.submitExtend.logicValidate()) {
                 $.alertExtend.error();
                 return false;
             }
@@ -140,7 +158,7 @@
                         FunctionnName: { required: true },
                         ModuleId: { required: true },
                         FunctionUrl: { required: true },
-                        Area: { required: true },
+                        //Area: { required: true },
                         Controller: { required: true },
                         Action: { required: true },
                         IsDisplayOnMenu: { required: true }

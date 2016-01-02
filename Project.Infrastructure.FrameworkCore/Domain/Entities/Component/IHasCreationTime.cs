@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace Project.Infrastructure.FrameworkCore.Domain.Entities.Component
 {
+    /// <summary>
+    ///例子
+    /// </summary>
    public interface IHasCreationTime
     {
         DateTime CreationTime { get; set; }

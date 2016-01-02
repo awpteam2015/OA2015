@@ -3,19 +3,20 @@
     pro.submitKit = pro.submitKit || {};
     pro.submitKit = {
         config: {
+            iscolumnPkidChecked: false,
             columnPkidName: "PkId",
             columns: new Array(),
             excludeAreaIds: ""
         },
         getHeadJson: function () {
-            var inputObj = $("input[type=text]");
+            var inputObj = $("input");
             var selectObj = $("select");
             if (this.excludeAreaIds) {
                 var excludeAreaId = excludeAreaIds.split(',');
                 var inputnotexpr = "";
                 var selectnotexpr = "";
                 for (var i = 0, max = excludeAreaId.length; i < max; i++) {
-                    inputnotexpr += "#" + excludeAreaId[i] + " input[type='text'],";
+                    inputnotexpr += "#" + excludeAreaId[i] + " input,";
                     selectnotexpr += "#" + excludeAreaId[i] + " select,";
                 }
                 inputObj = inputObj.not($(inputnotexpr.substring(0, inputnotexpr.length - 1)));
@@ -50,8 +51,10 @@
         getRowJson: function () {
             var columns = this.config.columns;
             var PkId = this.config.columnPkidName;
+
             var json = "";
-            $("[name=" + PkId + "]").each(
+            var obj = this.config.iscolumnPkidChecked ? $("[name=" + PkId + "]:checked") : $("[name=" + PkId + "]");
+            obj.each(
                 function () {
                     var rowJson = '"' + PkId + '":"' + $(this).val() + '",';
                     for (var i = 0, max = columns.length; i < max; i++) {

@@ -21,11 +21,17 @@
                 columns: [[
                 {
                     field: 'DepartmentCode', title: '部门编码', width: 300, formatter: function (value, row) {
-                        return '<input  name="DepartmentCode" type="checkbox" value="' + row.DepartmentCode + '"/>' + row.DepartmentCode;
+                        var checkHtml = row.Attr_IsCheck ? 'checked="checked"' : "";
+                        return '<input  name="DepartmentCode" type="checkbox" value="' + row.DepartmentCode + '" ' + checkHtml + '/>' + row.DepartmentCode;
                     }
                 },
                 { field: 'DepartmentName', title: '部门名称', width: 100 },
-                { field: 'ParentDepartmentCode', title: '上级部门编码', width: 100 }
+                { field: 'ParentDepartmentCode', title: '上级部门编码', width: 100 },
+                  {
+                      field: 'Attr_UserDepartmentPkId', title: 'Attr_UserDepartmentPkId', width: 200, formatter: function (value, row) {
+                          return '<input   name="Attr_UserDepartmentPkId_' + row.DepartmentCode + '"  type="text" value="' + row.Attr_UserDepartmentPkId + '"  />';
+                      }
+                  }
                 ]]
             }
              );
@@ -34,17 +40,25 @@
             initObj.gridObj2.grid({
                 nowrap: false,
                 rownumbers: true, //行号
-                singleSelect: true,
+                fitColumns: false,
+                singleSelect: false,
                 columns: [
                     [
          {
              field: 'PkId', title: '角色ID', width: 100, formatter: function (value, row) {
+                 var checkHtml = row.Attr_IsCheck ? 'checked="checked"' : "";
 
-                 return '<input name="RoleId"  value="' + value + '"   type="checkbox"/>';
+                 return '<input name="RoleId"  value="' + value + '"   type="checkbox"  value="' + row.DepartmentCode + '" ' + checkHtml + '/>' + value;
              }
          },
          { field: 'RoleName', title: '角色名称', width: 100 },
-         { field: 'Remark', title: '备注', width: 100 }
+         { field: 'Remark', title: '备注', width: 100 },
+         { field: 'ParentDepartmentCode', title: '上级部门编码', width: 100 },
+                  {
+                      field: 'Attr_UserRolePkId', title: 'Attr_UserRolePkId', width: 100, formatter: function (value, row) {
+                          return '<input  name="Attr_UserRolePkId_' + row.DepartmentCode + '" type="text" value="' + value + '" />';
+                      }
+                  }
                     ]
                 ],
                 pagination: false,
@@ -71,9 +85,11 @@
             });
 
             if ($("#BindEntity").val()) {
+                pro.bindKit.config.excludeAreaIds = "div_datagrid,div_datagrid2";
                 var bindField = pro.bindKit.getHeadJson();
                 var bindEntity = JSON.parse($("#BindEntity").val());
                 for (var filedname in bindField) {
+                    console.log(filedname);
                     $("[name=" + filedname + "]").val(bindEntity[filedname]);
                 }
                 //行项目信息用json绑定控件
@@ -85,17 +101,32 @@
         submit: function (command) {
             var postData = {};
             postData.RequestEntity = pro.submitKit.getHeadJson();
+            postData.RequestEntity.Password = $("#Password").val();
 
             if (pro.commonKit.getUrlParam("PkId") != "") {
                 postData.RequestEntity.PkId = pro.commonKit.getUrlParam("PkId");
             }
 
-            pro.submitKit.config.columnPkidName = "omC2i4vb";
-            pro.submitKit.config.columns = ["FunctionDetailName", "FunctionDetailCode", "Area", "Controller", "Action"];
-            postData.RequestEntity.FunctionDetailList = pro.submitKit.getRowJson(); 
+            pro.submitKit.config.columnPkidName = "DepartmentCode";
+            pro.submitKit.config.columns = ["Attr_UserDepartmentPkId"];
+            pro.submitKit.config.iscolumnPkidChecked = true;
+            postData.RequestEntity.UserDepartmentList = pro.submitKit.getRowJson();
+            $.each(postData.RequestEntity.UserDepartmentList, function (index, row) {
+                row.PkId = row.Attr_UserDepartmentPkId;
+            }
+            );
+
+            pro.submitKit.config.columnPkidName = "RoleId";
+            pro.submitKit.config.columns = ["Attr_UserRolePkId"];
+            pro.submitKit.config.iscolumnPkidChecked = true;
+            postData.RequestEntity.UserRoleList = pro.submitKit.getRowJson();
+            $.each(postData.RequestEntity.UserRoleList, function (index, row) {
+                row.PkId = row.Attr_UserRolePkId;
+            }
+          );
 
             this.submitExtend.addRule();
-            if (!$("#form1").valid() && pro.submitExtend.logicValidate()) {
+            if (!$("#form1").valid() && this.submitExtend.logicValidate()) {
                 $.alertExtend.error();
                 return false;
             }
@@ -113,7 +144,7 @@
                 }
             ).fail(
              function (errordetails, errormessage) {
-                 $.alertExtend.error();
+                 // $.alertExtend.error();
              }
             );
 
@@ -124,7 +155,7 @@
                     rules: {
                         // PkId: { required: true  },
                         UserCode: { required: true },
-                        Password: { required: true },
+                        //Password: { required: true },
                         UserName: { required: true }
                         //Email: { required: true  },
                         //Mobile: { required: true  },

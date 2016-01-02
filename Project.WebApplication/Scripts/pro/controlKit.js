@@ -13,11 +13,16 @@
             return html;
         },
         //获取Input的格式
-        getInputHtml: function (name, value) {
+        getInputHtml: function (name, value,width) {
             if (value == undefined) {
                 value = "";
             }
-            var html = '<input name="' + name + '" value="' + value + '"  type="text" />';
+
+            if (width == undefined) {
+                width = "100";
+            }
+
+            var html = '<input name="' + name + '" value="' + value + '"  type="text" style="width:' + width + 'px" />';
             return html;
         },
         //获取Input的格式

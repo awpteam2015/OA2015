@@ -98,8 +98,6 @@
   <ItemGroup>
     <Content Include="Areas\PermissionManager\Scripts\Department\Hd.js" />
     <Content Include="Areas\PermissionManager\Scripts\Department\List.js" />
-    <Content Include="Areas\PermissionManager\Scripts\FunctionDetail\Hd.js" />
-    <Content Include="Areas\PermissionManager\Scripts\FunctionDetail\List.js" />
     <Content Include="Areas\PermissionManager\Scripts\Function\Hd.js" />
     <Content Include="Areas\PermissionManager\Scripts\Function\List.js" />
     <Content Include="Areas\PermissionManager\Scripts\Module\Hd.js" />
@@ -109,8 +107,6 @@
     <Content Include="Areas\PermissionManager\Scripts\Role\Hd.js" />
     <Content Include="Areas\PermissionManager\Scripts\Role\RoleFunctionDetailList.js" />
     <Content Include="Areas\PermissionManager\Scripts\Role\List.js" />
-    <Content Include="Areas\PermissionManager\Scripts\UserDepartment\Hd.js" />
-    <Content Include="Areas\PermissionManager\Scripts\UserDepartment\List.js" />
     <Content Include="Areas\PermissionManager\Scripts\UserFunctionDetail\Hd.js" />
     <Content Include="Areas\PermissionManager\Scripts\UserFunctionDetail\List.js" />
     <Content Include="Areas\PermissionManager\Scripts\UserInfo\Hd.js" />
@@ -129,8 +125,6 @@
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Areas\PermissionManager\Views\Department\List.cshtml" />
-    <Content Include="Areas\PermissionManager\Views\FunctionDetail\Hd.cshtml" />
-    <Content Include="Areas\PermissionManager\Views\FunctionDetail\List.cshtml" />
     <Content Include="Areas\PermissionManager\Views\Function\Hd.cshtml" />
     <Content Include="Areas\PermissionManager\Views\Function\List.cshtml" />
     <Content Include="Areas\PermissionManager\Views\Module\Hd.cshtml" />

@@ -23,10 +23,10 @@ var pro = pro || {};
                 columns: [[
          { field: 'PkId', title: 'ID', width: 100 },
          { field: 'ModuleName', title: '模块名称', width: 100 },
-         { field: 'ParentId', title: '父级 预留', width: 100 },
-         { field: 'ModuleLevel', title: '层级', width: 100 },
+         //{ field: 'ParentId', title: '父级 预留', width: 100 },
+         //{ field: 'ModuleLevel', title: '层级', width: 100 },
          { field: 'RankId', title: '排序', width: 100 },
-         { field: 'Remark', title: '备注', width: 100 },
+         { field: 'Remark', title: '备注', width: 100 }
                 ]],
                 pagination: true,
                 pageSize: 20, //每页显示的记录条数，默认为10     

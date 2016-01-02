@@ -121,8 +121,8 @@ namespace Project.Service.PermissionManager
                   #region
               // if (!string.IsNullOrEmpty(entity.PkId))
               //  expr = expr.And(p => p.PkId == entity.PkId);
-              // if (!string.IsNullOrEmpty(entity.ModuleName))
-              //  expr = expr.And(p => p.ModuleName == entity.ModuleName);
+                if (!string.IsNullOrEmpty(entity.ModuleName))
+                    expr = expr.And(p => p.ModuleName == entity.ModuleName);
               // if (!string.IsNullOrEmpty(entity.ParentId))
               //  expr = expr.And(p => p.ParentId == entity.ParentId);
               // if (!string.IsNullOrEmpty(entity.ModuleLevel))
@@ -132,7 +132,7 @@ namespace Project.Service.PermissionManager
               // if (!string.IsNullOrEmpty(entity.Remark))
               //  expr = expr.And(p => p.Remark == entity.Remark);
  #endregion
-            var list = _moduleRepository.Query().Where(expr).OrderBy(p => p.PkId).Skip(skipResults).Take(maxResults).ToList();
+            var list = _moduleRepository.Query().Where(expr).OrderBy(p => p.RankId).ThenBy(p=>p.PkId).Skip(skipResults).Take(maxResults).ToList();
             var count = _moduleRepository.Query().Where(expr).Count();
             return new System.Tuple<IList<ModuleEntity>, int>(list, count);
         }

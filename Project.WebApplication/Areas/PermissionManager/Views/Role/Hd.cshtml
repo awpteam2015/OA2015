@@ -2,35 +2,33 @@
     ViewBag.Title = "Hd";
     Layout = "~/Views/Shared/_LayoutHandler.cshtml";
 }
-
 @section JavaScript{
     <script src="/Areas/PermissionManager/Scripts/Role/Hd.js"></script>
 }
+<div style="display: none">
+    <input id="BindEntity" type="text" value="@ViewBag.BindEntity" />
+    <input id="Command" type="hidden" />
+</div>
 
-<input id="BindEntity" type="text" value="@ViewBag.BindEntity" />
-<input id="Command" type="hidden" />
 <div class="mtable_div">
     <form id="form1">
         <table class="mtable">
-
             <tr>
-                <td>
+                <td style="width: 100px">
                     角色名称<span style="color: Red">*</span>:
                 </td>
-                <td>
+                <td >
                     <input id="RoleName" name="RoleName" type="text" />
                 </td>
             </tr>
-
             <tr>
                 <td>
-                    备注<span style="color: Red">*</span>:
+                    备注:
                 </td>
                 <td>
                     <input id="Remark" name="Remark" type="text" />
                 </td>
             </tr>
-
         </table>
     </form>
 </div>
@@ -45,6 +43,3 @@
     }
     <a id="btnClose" class="easyui-linkbutton" iconcls="icon-cancel" href="javascript:void(0)">关闭</a>
 </div>
-
-
-

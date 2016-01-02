@@ -5,6 +5,7 @@ using System.Web;
 using FluentNHibernate.Cfg;
 using NHibernate;
 using NHibernate.Cfg;
+using Project.Infrastructure.FrameworkCore.DataNhibernate.Helpers;
 using Project.Infrastructure.FrameworkCore.DataNhibernate.SessionStorage;
 
 namespace Project.Infrastructure.FrameworkCore.DataNhibernate
@@ -37,7 +38,7 @@ namespace Project.Infrastructure.FrameworkCore.DataNhibernate
             var config = new Configuration().Configure(path);
             //config.Properties[Environment.CollectionTypeFactoryClass]
             //       = typeof(Net4CollectionTypeFactory).AssemblyQualifiedName;
-            // config.LinqToHqlGeneratorsRegistry<HqlGeneratorForMethodExtend>();
+             config.LinqToHqlGeneratorsRegistry<HqlGeneratorForMethodExtend>();
             // config.SetInterceptor();
             var t = Fluently.Configure(config);
             try

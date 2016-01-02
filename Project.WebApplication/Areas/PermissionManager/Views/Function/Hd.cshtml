@@ -2,71 +2,71 @@
     ViewBag.Title = "Hd";
     Layout = "~/Views/Shared/_LayoutHandler.cshtml";
 }
-
 @section JavaScript{
     <script src="/Areas/PermissionManager/Scripts/Function/Hd.js?JsParamter=@SiteConfig.GetConfig().JsParamter"></script>
 }
-
-<input id="BindEntity" type="text" value="@ViewBag.BindEntity" />
+<textarea id="BindEntity">@ViewBag.BindEntity</textarea>
+<textarea id="ModuleList">@ViewBag.ModuleList</textarea>
 <input id="Command" type="hidden" />
 <div class="mtable_div">
     <form id="form1">
         <table class="mtable">
-
+            <tr>
+                <td style="width: 200px">
+                    所属模块：<span style="color: Red">*</span>
+                </td>
+                <td>
+                    <input id="ModuleId" name="ModuleId" type="text" style="width: 400px" />
+                </td>
+            </tr>
             <tr>
                 <td style="width: 200px">
                     模块名称<span style="color: Red">*</span>
                 </td>
                 <td>
-                    <input id="FunctionnName" name="FunctionnName" type="text" />
+                    <input id="FunctionnName" name="FunctionnName" type="text" style="width: 400px" />
                 </td>
             </tr>
-
-            <tr>
-                <td>
-                    模块ID<span style="color: Red">*</span>
-                </td>
-                <td>
-                    <input id="ModuleId" name="ModuleId" type="text" />
-                </td>
-            </tr>
-
+            @*<tr>
+                    <td>
+                        模块ID<span style="color: Red">*</span>
+                    </td>
+                    <td>
+                        <input id="ModuleId" name="ModuleId" type="text" />
+                    </td>
+                </tr>*@
             <tr>
                 <td>
                     模块路径<span style="color: Red">*</span>
                 </td>
                 <td>
-                    <input id="FunctionUrl" name="FunctionUrl" type="text" />
+                    <input id="FunctionUrl" name="FunctionUrl" type="text" style="width: 400px" />
                 </td>
             </tr>
-
             <tr>
                 <td>
-                    Area<span style="color: Red">*</span>
+                    Area:
                 </td>
                 <td>
-                    <input id="Area" name="Area" type="text" />
+                    <input id="Area" name="Area" type="text" style="width: 200px" />
                 </td>
             </tr>
-
             <tr>
                 <td>
                     Controller<span style="color: Red">*</span>
                 </td>
                 <td>
-                    <input id="Controller" name="Controller" type="text" />
+                    <input id="Controller" name="Controller" type="text" style="width: 200px" />
                 </td>
             </tr>
-
             <tr>
                 <td>
                     Action<span style="color: Red">*</span>
                 </td>
                 <td>
-                    <input id="Action" name="Action" type="text" />
+                    <input id="Action" name="Action" type="text" style="width: 200px" />
                 </td>
             </tr>
-
             <tr>
                 <td>
                     是否在菜单上显示<span style="color: Red">*</span>
@@ -78,7 +78,6 @@
                     </select>
                 </td>
             </tr>
-
             <tr>
                 <td>
                     顺序
@@ -87,32 +86,23 @@
                     <input id="RankId" name="RankId" type="text" />
                 </td>
             </tr>
-
             <tr>
                 <td>
                     备注
                 </td>
                 <td>
-                    <input id="Remark" name="Remark" type="text" />
+                    <input id="Remark" name="Remark" type="text" style="width: 400px" />
                 </td>
             </tr>
-
         </table>
-
-        <div title="模块功能" style="padding:1px;height: 500px" >
-            <table id="datagrid" style="height:auto;" iconcls=".icon-save" singleselect="true"  toolbar="#tb" fit="true"></table>
+        <div title="模块功能" style="padding:1px;height: 500px">
+            <table id="datagrid" toolbar="#tb" fit="true"></table>
             <div id="tb" style="padding: 5px; height: auto">
                 <div style="margin-bottom: 5px">
                     <a id="btnAdd_ToolBar" href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:true">添加</a>
-
                     <a id="btnDel_ToolBar" href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-remove',plain:true">删除</a>
-
-
-                 <input type="button" onclick="$('#datagrid').datagrid('selectRow', 0)" />
                 </div>
-
                 <div id="divSearch">
-
                 </div>
             </div>
         </div>
@@ -129,6 +119,3 @@
     }
     <a id="btnClose" class="easyui-linkbutton" iconcls="icon-cancel" href="javascript:void(0)">关闭</a>
 </div>
-
-
-
