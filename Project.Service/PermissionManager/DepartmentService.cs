@@ -165,13 +165,22 @@ namespace Project.Service.PermissionManager
 
         public IList<DepartmentEntity> GetTreeList(DepartmentEntity entity)
         {
-            //Func<> a=
+            //Func<IList<DepartmentEntity>, IList<DepartmentEntity>> funReturnName2 = s =>
+            //{
+                
+            //    return 0;
+            //};
+
+           
 
             var listAll = this.GetList(entity);
 
+            // funReturnName2()
 
             return listAll;
         }
+
+
 
         #endregion
     }
