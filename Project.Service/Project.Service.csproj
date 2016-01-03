@@ -56,8 +56,10 @@
     <Compile Include="PermissionManager\RoleService.cs" />
     <Compile Include="PermissionManager\UserDepartmentService.cs" />
     <Compile Include="PermissionManager\UserFunctionDetailService.cs" />
+    <Compile Include="PermissionManager\UserInfoService.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="PermissionManager\UserRoleService.cs" />
-    <Compile Include="PermissionManager\UserInfoService.cs" />
     <Compile Include="PermissionManager\Validate\UserInfoValidate.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
