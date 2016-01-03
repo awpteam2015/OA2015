@@ -6,20 +6,12 @@
         initPage: function () {
 
             $('#ParentDepartmentCode').combotree({
+                required:true,
                 editable: false,
                 valueField: 'DepartmentCode',
                 textField: 'DepartmentName',
-                url: '/PermissionManager/Department/GetList_Combotree',
-                onLoadSuccess: function () {
-                  
-                }
+                url: '/PermissionManager/Department/GetList_Combotree'
             });
-
-            //$('#ModuleId').combobox({
-            //    valueField: 'PkId',
-            //    textField: 'ModuleName',
-            //    url: '/PermissionManager/Module/GetListAll_ForCombobox'
-            //});
 
 
             $("#btnAdd").click(function () {
@@ -59,8 +51,11 @@
                 data: JSON.stringify(postData)
             }).done(
                 function (dataresult, data) {
-                    parent.$("#btnSearch").trigger("click");
-                    $.alertExtend.info();
+                    function afterSuccess() {
+                        parent.$("#btnSearch").trigger("click");
+                        parent.pro.Department.ListPage.closeTab();
+                    }
+                    parent.$.alertExtend.info("", afterSuccess());
                 }
             ).fail(
              function (errordetails, errormessage) {

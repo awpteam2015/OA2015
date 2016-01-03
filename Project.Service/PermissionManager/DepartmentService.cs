@@ -10,6 +10,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Project.Infrastructure.FrameworkCore.DataNhibernate.Helpers;
+using Project.Infrastructure.FrameworkCore.ToolKit.LinqExpansion;
 using Project.Model.PermissionManager;
 using Project.Repository.PermissionManager;
 
@@ -165,19 +166,35 @@ namespace Project.Service.PermissionManager
 
         public IList<DepartmentEntity> GetTreeList(DepartmentEntity entity)
         {
-            //Func<IList<DepartmentEntity>, IList<DepartmentEntity>> funReturnName2 = s =>
-            //{
-                
-            //    return 0;
-            //};
-
-           
-
             var listAll = this.GetList(entity);
-
-            // funReturnName2()
-
+            listAll = GetChildList(listAll, null);
             return listAll;
+        }
+
+        private IList<DepartmentEntity> GetChildList(IList<DepartmentEntity> allList, DepartmentEntity parentDepartmentEntity)
+        {
+            var list = new List<DepartmentEntity>();
+            if (parentDepartmentEntity == null)
+            {
+                list.AddRange(allList.Where(p => p.ParentDepartmentCode == "0"));
+                list.ForEach(p =>
+                {
+                     GetChildList(allList, p);
+                });
+            }
+            else
+            {
+                var childList = allList.Where(p => p.ParentDepartmentCode == parentDepartmentEntity.DepartmentCode).ToList();
+                if (childList.Any())
+                {
+                    parentDepartmentEntity.children = childList;
+                    childList.ForEach(p =>
+                    {
+                        GetChildList(allList, p);
+                    });
+                }
+            }
+            return list;
         }
 
 

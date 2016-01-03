@@ -1,0 +1,47 @@
+﻿@{
+    ViewBag.Title = "List";
+    Layout = "~/Views/Shared/_LayoutList2.cshtml";
+}
+
+@section JavaScript{
+    <script src="/Areas/PermissionManager/Scripts/UserInfo/UserFunctionDetailList.js?JsParamter=@SiteConfig.GetConfig()" type="text/javascript"></script>
+}
+
+
+    <div region="west" split="true" title="角色" style="width:520px;" border="false">
+        <table id="datagrid" style="height:auto;" iconcls=".icon-save" singleselect="true" toolbar="#tb" fit="true"></table>
+        <div id="tb" style="padding:5px;height:auto">
+            <div id="divSearch" style="margin-bottom:5px;">
+                <table class="mtable">
+                    <tr>
+                        <td>
+                            员工号:
+                        </td>
+                        <td>
+                            <input id="UserCode" name="UserCode" type="text" />
+                        </td>
+
+                        <td>
+                            用户名:
+                        </td>
+                        <td>
+                            <input id="UserName" name="UserName" type="text" />
+                            <a href="#" class="easyui-linkbutton" iconcls="icon-search" id="btnSearchRole" plain="true">搜索</a>
+                            <a href="#" class="easyui-linkbutton" iconcls="icon-reload" id="btnReload" plain="true">刷新</a>
+                        </td>
+                    </tr>
+                </table>
+              
+            </div>
+        </div>
+    </div>
+    <div region="center" title="模块权限" id="center" border="false">
+        <table id="datagrid2" style="height:auto;" iconcls=".icon-save" singleselect="true"  fit="true"></table>
+
+    </div>
+
+
+
+
+
+

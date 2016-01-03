@@ -4,11 +4,16 @@ var pro = pro || {};
     pro.Department = pro.Department || {};
     pro.Department.ListPage = pro.Department.ListPage || {};
     pro.Department.ListPage = {
+        init: function () {
+            return {
+                tabObj: new pro.TabBase(),
+                gridObj: new pro.GridBase("#datagrid", true)
+            };
+        },
         initPage: function () {
-            var tabObj = new pro.TabBase();
- 
-            var gridObj = new pro.GridBase("#datagrid", true);
-
+            var initObj = this.init();
+            var tabObj = initObj.tabObj;
+            var gridObj = initObj.gridObj;
             gridObj.grid({
                 url: '/PermissionManager/Department/GetList_Combotree',
                 idField: "DepartmentCode",
@@ -69,6 +74,9 @@ var pro = pro || {};
             $("#btnRefresh").click(function () {
                 gridObj.refresh();
             });
+        },
+        closeTab: function () {
+            this.init().tabObj.closeTab();
         }
     };
 })();

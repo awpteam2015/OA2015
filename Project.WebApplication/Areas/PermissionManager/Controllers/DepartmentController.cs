@@ -48,8 +48,7 @@ namespace Project.WebApplication.Areas.PermissionManager.Controllers
         public AbpJsonResult GetList_Combotree()
         {
             var where = new DepartmentEntity();
-            where.ParentDepartmentCode = "0";
-            var searchList = DepartmentService.GetInstance().GetList(where);
+            var searchList = DepartmentService.GetInstance().GetTreeList(where);
 
             return new AbpJsonResult(searchList, new NHibernateContractResolver(new[] { "children" }));
         }

@@ -53,7 +53,6 @@
     <Compile Include="PermissionManager\FunctionService.cs" />
     <Compile Include="PermissionManager\ModuleService.cs" />
     <Compile Include="PermissionManager\PermissionService.cs" />
-    <Compile Include="PermissionManager\RoleFunctionDetailService.cs" />
     <Compile Include="PermissionManager\RoleService.cs" />
     <Compile Include="PermissionManager\UserDepartmentService.cs" />
     <Compile Include="PermissionManager\UserFunctionDetailService.cs" />

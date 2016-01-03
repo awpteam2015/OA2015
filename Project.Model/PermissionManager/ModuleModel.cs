@@ -53,7 +53,7 @@ namespace Project.Model.PermissionManager
         /// <summary>
         ///用户编码id 辅助属性数据库不存在
         /// </summary>
-        public virtual string Att_UserInfoCode { get; set; }
+        public virtual string Att_UserCode { get; set; }
         #endregion
     }
 }

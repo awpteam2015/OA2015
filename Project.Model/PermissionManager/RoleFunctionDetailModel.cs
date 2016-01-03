@@ -18,15 +18,15 @@ namespace Project.Model.PermissionManager
         /// <summary>
         /// 
         /// </summary>
-        public virtual System.Int32? RoleId{get; set;}
+        public virtual System.Int32 RoleId{get; set;}
         /// <summary>
         /// 
         /// </summary>
-        public virtual System.Int32? FunctionId{get; set;}
+        public virtual System.Int32 FunctionId{get; set;}
         /// <summary>
         /// 
         /// </summary>
-        public virtual System.Int32? FunctionDetailId{get; set;}
+        public virtual System.Int32 FunctionDetailId{get; set;}
 		#endregion
         
 

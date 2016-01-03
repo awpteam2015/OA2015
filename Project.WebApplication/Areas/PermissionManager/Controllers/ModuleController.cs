@@ -69,7 +69,7 @@ namespace Project.WebApplication.Areas.PermissionManager.Controllers
             searchList.ForEach(p =>
             {
                 p.Att_RoleId = RequestHelper.GetInt("RoleId");
-                p.Att_UserInfoCode = RequestHelper.GetString("UserInfoCode");
+                p.Att_UserCode = RequestHelper.GetString("UserCode");
             });
 
             var dataGridEntity = new DataGridResponse()

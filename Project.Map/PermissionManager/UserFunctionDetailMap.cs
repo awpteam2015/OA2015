@@ -19,7 +19,8 @@ namespace  Project.Map.PermissionManager
  
             Map(p => p.UserCode);    
             Map(p => p.FunctionId);    
-            Map(p => p.FunctionDetailId);    
+            Map(p => p.FunctionDetailId);
+            Map(p => p.State);    
         }
     }
 }

@@ -65,28 +65,26 @@ namespace Project.WebApplication.Areas.PermissionManager.Controllers
 
         public AbpJsonResult GetListAll()
         {
+            var checkList = new List<int>();
+            var userCode = RequestHelper.GetString("UserCode");
+             var roleId = RequestHelper.GetInt("RoleId");
+            if (!string.IsNullOrWhiteSpace(userCode))
+            {
+                checkList = UserInfoService.GetInstance().GetFunctionDetailList_Checked(userCode);
+            }
+
+            if (roleId>0)
+            {
+                checkList = RoleService.GetInstance().GetFunctionDetailList_Checked(roleId);
+            }
 
             var where = new FunctionEntity();
-            //where.PkId = RequestHelper.GetFormString("PkId");
-            //where.FunctionnName = RequestHelper.GetFormString("FunctionnName");
             where.ModuleId = RequestHelper.GetInt("ModuleId");
-            //where.FunctionUrl = RequestHelper.GetFormString("FunctionUrl");
-            //where.Area = RequestHelper.GetFormString("Area");
-            //where.Controller = RequestHelper.GetFormString("Controller");
-            //where.Action = RequestHelper.GetFormString("Action");
-            //where.IsDisplayOnMenu = RequestHelper.GetFormString("IsDisplayOnMenu");
-            //where.RankId = RequestHelper.GetFormString("RankId");
-            //where.Remark = RequestHelper.GetFormString("Remark");
-        var checkList=    RoleService.GetInstance().GetRoleFunctionDetailList(new RoleFunctionDetailEntity() { RoleId = RequestHelper.GetInt("RoleId") }).ToList();
             var searchList = FunctionService.GetInstance().GetList(where);
-
-            searchList.ForEach(p =>
+            searchList.ForEach(p => p.FunctionDetailList.ForEach(x =>
             {
-                p.FunctionDetailList.ForEach(x =>
-                {
-                    x.Attr_IsCheck=checkList.Any(y=>y.FunctionDetailId==x.PkId) ;
-                });
-            });
+                x.Attr_IsCheck=checkList.Any(y=>y==x.PkId) ;
+            }));
 
             var dataGridEntity = new DataGridResponse()
             {
@@ -95,6 +93,55 @@ namespace Project.WebApplication.Areas.PermissionManager.Controllers
             };
             return new AbpJsonResult(dataGridEntity, new NHibernateContractResolver(new[] { "FunctionDetailList" }));
         }
+
+
+        //public AbpJsonResult GetListAll()
+        //{
+        //    var userCode = RequestHelper.GetString("UserCode");
+        //    if (!string.IsNullOrWhiteSpace(userCode))
+        //    {
+        //        var userInfo = UserInfoService.GetInstance().GetUserInfo(userCode);
+        //        userInfo.UserRoleList.ForEach(p =>
+        //        {
+
+
+        //        });
+        //    }
+
+        //    var checkList = RoleService.GetInstance().GetRoleFunctionDetailList(new RoleFunctionDetailEntity() { RoleId = RequestHelper.GetInt("RoleId") }).ToList();
+
+
+
+
+
+        //    var where = new FunctionEntity();
+        //    //where.PkId = RequestHelper.GetFormString("PkId");
+        //    //where.FunctionnName = RequestHelper.GetFormString("FunctionnName");
+        //    where.ModuleId = RequestHelper.GetInt("ModuleId");
+        //    //where.FunctionUrl = RequestHelper.GetFormString("FunctionUrl");
+        //    //where.Area = RequestHelper.GetFormString("Area");
+        //    //where.Controller = RequestHelper.GetFormString("Controller");
+        //    //where.Action = RequestHelper.GetFormString("Action");
+        //    //where.IsDisplayOnMenu = RequestHelper.GetFormString("IsDisplayOnMenu");
+        //    //where.RankId = RequestHelper.GetFormString("RankId");
+        //    //where.Remark = RequestHelper.GetFormString("Remark");
+        //    var searchList = FunctionService.GetInstance().GetList(where);
+
+        //    searchList.ForEach(p =>
+        //    {
+        //        p.FunctionDetailList.ForEach(x =>
+        //        {
+        //            x.Attr_IsCheck = checkList.Any(y => y.FunctionDetailId == x.PkId);
+        //        });
+        //    });
+
+        //    var dataGridEntity = new DataGridResponse()
+        //    {
+        //        total = searchList.Count,
+        //        rows = searchList
+        //    };
+        //    return new AbpJsonResult(dataGridEntity, new NHibernateContractResolver(new[] { "FunctionDetailList" }));
+        //}
 
 
         public AbpJsonResult GetFunctionDetailList()

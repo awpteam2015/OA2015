@@ -22,7 +22,7 @@ namespace Project.Model.PermissionManager
         /// <summary>
         /// 角色ID
         /// </summary>
-        public virtual System.Int32? RoleId{get; set;}
+        public virtual System.Int32 RoleId{get; set;}
 		#endregion
         
 

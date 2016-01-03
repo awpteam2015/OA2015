@@ -181,6 +181,17 @@ namespace Project.Service.PermissionManager
             var list = _roleFunctionDetailRepository.Query().Where(expr).OrderBy(p => p.PkId).ToList();
             return list;
         }
+
+        /// <summary>
+        /// 角色所对用的权限详情
+        /// </summary>
+        /// <param name="roleId"></param>
+        /// <returns></returns>
+        public List<int> GetFunctionDetailList_Checked(int roleId)
+        {
+            return _roleFunctionDetailRepository.Query().Where(p => p.RoleId == roleId).Select(p => p.FunctionDetailId).ToList();
+        }
+
         #endregion
 
 
@@ -205,10 +216,10 @@ namespace Project.Service.PermissionManager
                     }
 
 
-                     var oldRoleFunctionDetailList = GetRoleFunctionDetailList(new RoleFunctionDetailEntity() { RoleId = roleId });
+                    var oldRoleFunctionDetailList = GetRoleFunctionDetailList(new RoleFunctionDetailEntity() { RoleId = roleId });
                     if (isCheck)
                     {
-                      
+
                         var newRoleFunctionDetailList = functionDetailList.Where(p => oldRoleFunctionDetailList.All(x => p.PkId != x.FunctionDetailId));
 
                         newRoleFunctionDetailList.ForEach(p =>
@@ -226,7 +237,7 @@ namespace Project.Service.PermissionManager
                     {
                         functionDetailList.ForEach(p =>
                         {
-                            _roleFunctionDetailRepository.Delete(oldRoleFunctionDetailList.Single(x=>x.FunctionDetailId==p.PkId));
+                            _roleFunctionDetailRepository.Delete(oldRoleFunctionDetailList.Single(x => x.FunctionDetailId == p.PkId));
                         });
                     }
                     tx.Commit();

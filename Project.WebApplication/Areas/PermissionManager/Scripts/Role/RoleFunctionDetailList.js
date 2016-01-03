@@ -29,7 +29,7 @@ var pro = pro || {};
 
                     initObj.gridObj2.reload({ RoleId: row.PkId });
                 },
-                pagination: false,
+                pagination: true,
                 pageSize: 20, //每页显示的记录条数，默认为10     
                 pageList: [20, 30, 40] //可以设置每页记录条数的列表    
             }

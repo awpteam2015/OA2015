@@ -78,6 +78,31 @@ namespace Project.WebApplication.Areas.PermissionManager.Controllers
         }
 
 
+        public ActionResult UserFunctionDetailList()
+        {
+            return View();
+        }
+
+        public AbpJsonResult GetUserFunctionDetailList()
+        {
+            var pIndex = this.Request["page"].ConvertTo<int>();
+            var pSize = this.Request["rows"].ConvertTo<int>();
+            var where = new UserFunctionDetailEntity();
+            //where.PkId = RequestHelper.GetFormString("PkId");
+            //where.UserCode = RequestHelper.GetFormString("UserCode");
+            //where.FunctionId = RequestHelper.GetFormString("FunctionId");
+            //where.FunctionDetailId = RequestHelper.GetFormString("FunctionDetailId");
+            var searchList = UserFunctionDetailService.GetInstance().Search(where, (pIndex - 1) * pSize, pSize);
+
+            var dataGridEntity = new DataGridResponse()
+            {
+                total = searchList.Item2,
+                rows = searchList.Item1
+            };
+            return new AbpJsonResult(dataGridEntity, new NHibernateContractResolver());
+        }
+
+
         [HttpPost]
         public AbpJsonResult Add(AjaxRequest<UserInfoEntity> postData)
         {
@@ -124,6 +149,22 @@ namespace Project.WebApplication.Areas.PermissionManager.Controllers
                 success = deleteResult
             };
             return new AbpJsonResult(result, new NHibernateContractResolver(new string[] { "result" }));
+        }
+
+        [HttpPost]
+        public AbpJsonResult SetRowFunction()
+        {
+            var userCode = RequestHelper.GetString("UserCode");
+            var functionPkId = RequestHelper.GetInt("FunctionPkId");
+            var functionDetailPkId = RequestHelper.GetInt("FunctionDetailPkId");
+            var isCheck = RequestHelper.GetInt("IsCheck") == 1;
+            var addResult = UserInfoService.GetInstance().SetRowFunction(userCode, functionPkId, functionDetailPkId, isCheck);
+            var result = new AjaxResponse<UserInfoEntity>()
+            {
+                success = addResult,
+                result = null
+            };
+            return new AbpJsonResult(result, null);
         }
     }
 }

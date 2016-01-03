@@ -34,6 +34,14 @@ namespace Project.Map.PermissionManager
   .KeyColumn("UserCode");
 
 
+            HasMany(p => p.UserFunctionDetailList)
+.AsSet()
+.LazyLoad()
+.Cascade.All().Inverse()
+.PropertyRef("UserCode")
+.KeyColumn("UserCode");
+
+
         }
     }
 }

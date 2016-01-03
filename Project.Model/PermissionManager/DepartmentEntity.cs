@@ -39,12 +39,12 @@ namespace Project.Model.PermissionManager
 
 
         #region 新增属性
-        public virtual ISet<DepartmentEntity> children { get; set; }
+        public virtual IList<DepartmentEntity> children { get; set; }
         /// <summary>
         /// 部门编码
         /// </summary>
-        public virtual int id {
-            get { return PkId; }
+        public virtual string id {
+            get { return DepartmentCode; }
         }
         /// <summary>
         /// 部门名称

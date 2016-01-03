@@ -13,6 +13,7 @@ namespace Project.Model.PermissionManager
          {
              UserDepartmentList=new HashSet<UserDepartmentEntity>();
              UserRoleList=new HashSet<UserRoleEntity>();
+             UserFunctionDetailList=new HashSet<UserFunctionDetailEntity>();
          }
 
          #region 属性
@@ -68,6 +69,10 @@ namespace Project.Model.PermissionManager
         public virtual ISet<UserRoleEntity> UserRoleList { get; set; }
 
 
+         /// <summary>
+         /// 在角色基础上的增删详细模块功能
+         /// </summary>
+        public virtual ISet<UserFunctionDetailEntity> UserFunctionDetailList { get; set; }
       
     }
 }
