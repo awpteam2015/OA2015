@@ -300,13 +300,31 @@ namespace Project.Service.PermissionManager
                         var addList = functionDetailList.Where(p => checkList.All(x => x != p.PkId)).ToList();
                         addList.ForEach(p =>
                         {
-                            DeleteUserFunctionDetail(userCode, p.PkId, p.FunctionId);
-                            var temp = new UserFunctionDetailEntity();
-                            temp.FunctionDetailId = p.PkId;
-                            temp.FunctionId = p.FunctionId;
-                            temp.State = 1;
-                            temp.UserCode = userCode;
-                            _userFunctionDetailRepository.Save(temp);
+                            //DeleteUserFunctionDetail(userCode, p.PkId, p.FunctionId);
+
+                            var entiy =
+                                GetUserFunctionDetailList(new UserFunctionDetailEntity()
+                                {
+                                    UserCode = userCode,
+                                    FunctionDetailId = p.PkId,
+                                    FunctionId = p.FunctionId
+                                }).FirstOrDefault();
+                            if (entiy == null)
+                            {
+                                var temp = new UserFunctionDetailEntity();
+                                temp.FunctionDetailId = p.PkId;
+                                temp.FunctionId = p.FunctionId;
+                                temp.State = 1;
+                                temp.UserCode = userCode;
+                                _userFunctionDetailRepository.Save(temp);
+                            }
+                            else
+                            {
+                                entiy.State = 1;
+                                _userFunctionDetailRepository.Update(entiy);
+                            }
+
+
                         });
                     }
                     else
@@ -325,14 +343,27 @@ namespace Project.Service.PermissionManager
                         var addList = functionDetailList.Where(p => userFunctionDetailList.All(x => x.FunctionDetailId != p.PkId)).ToList();
                         addList.ForEach(p =>
                         {
-                            DeleteUserFunctionDetail(userCode, p.PkId, p.FunctionId);
-
-                            var temp = new UserFunctionDetailEntity();
-                            temp.FunctionDetailId = p.PkId;
-                            temp.FunctionId = p.FunctionId;
-                            temp.State = -1;
-                            temp.UserCode = userCode;
-                            _userFunctionDetailRepository.Save(temp);
+                            var entiy =
+                               GetUserFunctionDetailList(new UserFunctionDetailEntity()
+                               {
+                                   UserCode = userCode,
+                                   FunctionDetailId = p.PkId,
+                                   FunctionId = p.FunctionId
+                               }).FirstOrDefault();
+                            if (entiy == null)
+                            {
+                                var temp = new UserFunctionDetailEntity();
+                                temp.FunctionDetailId = p.PkId;
+                                temp.FunctionId = p.FunctionId;
+                                temp.State = 1;
+                                temp.UserCode = userCode;
+                                _userFunctionDetailRepository.Save(temp);
+                            }
+                            else
+                            {
+                                entiy.State = 1;
+                                _userFunctionDetailRepository.Update(entiy);
+                            }
                         });
 
                     }
