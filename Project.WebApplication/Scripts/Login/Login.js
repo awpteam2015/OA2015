@@ -3,7 +3,7 @@
     pro.LoginPage = pro.LoginPage || {};
     pro.LoginPage = {
         initPage: function () {
-            $("#btn_Login2").click(function () {
+            $("#btn_Login").click(function () {
                 pro.LoginPage.Login();
             });
         },
