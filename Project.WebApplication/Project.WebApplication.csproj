@@ -119,6 +119,7 @@
     <Content Include="Content\Site.css" />
     <Content Include="Global.asax" />
     <Content Include="HtmlPage1.html" />
+    <Content Include="HtmlPage12.html" />
     <Content Include="Resources\Css\Site.css" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
