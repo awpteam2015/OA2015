@@ -357,6 +357,9 @@ namespace Project.Service.PermissionManager
                         functionDetailList.Add(_functionDetailRepository.GetById(functionDetailPkId));
                     }
 
+
+
+
                     if (isCheck == true)
                     {
                         var addList = functionDetailList.Where(p => checkList.All(x => x != p.PkId)).ToList();
