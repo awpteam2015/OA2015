@@ -51,6 +51,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="HRManager\AttendanceMap.cs" />
     <Compile Include="PermissionManager\DepartmentMap.cs" />
     <Compile Include="PermissionManager\FunctionDetailMap.cs" />
     <Compile Include="PermissionManager\FunctionMap.cs" />

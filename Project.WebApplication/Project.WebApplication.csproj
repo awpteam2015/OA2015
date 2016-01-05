@@ -96,6 +96,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Areas\HRManager\Scripts\Attendance\Hd.js" />
+    <Content Include="Areas\HRManager\Scripts\Attendance\List.js" />
     <Content Include="Areas\PermissionManager\Scripts\Department\Hd.js" />
     <Content Include="Areas\PermissionManager\Scripts\Department\List.js" />
     <Content Include="Areas\PermissionManager\Scripts\Function\Hd.js" />
@@ -132,6 +134,9 @@
     <Content Include="Areas\PermissionManager\Views\UserFunctionDetail\List.cshtml" />
     <Content Include="Config\appSettings.config" />
     <Content Include="Areas\PermissionManager\Views\UserInfo\UserFunctionDetailList.cshtml" />
+    <Content Include="Areas\HRManager\Views\Attendance\Hd.cshtml" />
+    <Content Include="Areas\HRManager\Views\Attendance\List.cshtml" />
+    <Content Include="Areas\HRManager\Views\web.config" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\Control\DepartmentControl.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
@@ -544,6 +549,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Areas\HRManager\Controllers\AttendanceController.cs" />
+    <Compile Include="Areas\HRManager\HRManagerAreaRegistration.cs" />
     <Compile Include="Areas\PermissionManager\Controllers\DepartmentController.cs" />
     <Compile Include="Areas\PermissionManager\Controllers\FunctionController.cs" />
     <Compile Include="Areas\PermissionManager\Controllers\ModuleController.cs" />

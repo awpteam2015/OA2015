@@ -49,6 +49,7 @@
     <Compile Include="PermissionManager\UserFunctionDetailRepository.cs" />
     <Compile Include="PermissionManager\UserInfoRepository.cs" />
     <Compile Include="PermissionManager\UserRoleRepository.cs" />
+    <Compile Include="Project.Repository\HRManager\AttendanceRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -60,6 +61,9 @@
       <Project>{3D26782A-3308-430B-B58F-5F8ABA1A50B3}</Project>
       <Name>Project.Model</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="HRManager\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
