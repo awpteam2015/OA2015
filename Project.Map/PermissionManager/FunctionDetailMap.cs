@@ -18,8 +18,9 @@ namespace  Project.Map.PermissionManager
             this.MapPkidDefault<FunctionDetailEntity,int>();
  
             Map(p => p.FunctionDetailName);    
-            Map(p => p.FunctionDetailCode);    
-            Map(p => p.FunctionId);    
+            Map(p => p.FunctionDetailCode);
+            Map(p => p.FunctionId);
+            Map(p => p.ModuleId);   
             Map(p => p.Area);    
             Map(p => p.Controller);    
             Map(p => p.Action);    

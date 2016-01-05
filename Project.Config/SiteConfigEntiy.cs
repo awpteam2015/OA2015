@@ -12,6 +12,8 @@ namespace Project.Config
         public string JsParamter {
             get { return ConfigurationManager.AppSettings["JsParamter"]; }
         }
+
+
     }
 
 

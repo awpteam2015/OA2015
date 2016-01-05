@@ -48,15 +48,14 @@
              field: 'PkId', title: '角色ID', width: 100, formatter: function (value, row) {
                  var checkHtml = row.Attr_IsCheck ? 'checked="checked"' : "";
 
-                 return '<input name="RoleId"  value="' + value + '"   type="checkbox"  value="' + row.DepartmentCode + '" ' + checkHtml + '/>' + value;
+                 return '<input name="RoleId"  value="' + value + '"   type="checkbox"  value="' + row.PkId + '" ' + checkHtml + '/>' + value;
              }
          },
          { field: 'RoleName', title: '角色名称', width: 100 },
          { field: 'Remark', title: '备注', width: 100 },
-         { field: 'ParentDepartmentCode', title: '上级部门编码', width: 100 },
                   {
                       field: 'Attr_UserRolePkId', title: 'Attr_UserRolePkId', width: 100, formatter: function (value, row) {
-                          return '<input  name="Attr_UserRolePkId_' + row.DepartmentCode + '" type="text" value="' + value + '" />';
+                          return '<input  name="Attr_UserRolePkId_' + row.PkId + '" type="text" value="' + value + '" />';
                       }
                   }
                     ]
@@ -155,7 +154,7 @@
                     rules: {
                         // PkId: { required: true  },
                         UserCode: { required: true },
-                        //Password: { required: true },
+                        Password: { required: true },
                         UserName: { required: true }
                         //Email: { required: true  },
                         //Mobile: { required: true  },

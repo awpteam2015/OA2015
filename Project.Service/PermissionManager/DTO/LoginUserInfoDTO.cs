@@ -1,19 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
-namespace Project.Mvc.Models
+namespace Project.Service.PermissionManager.DTO
 {
     /// <summary>
     /// 登录用户信息及权限信息
     /// </summary>
-    public class LoginUserInfo
+    public class LoginUserInfoDTO
     {
-        public LoginUserInfo()
+        public LoginUserInfoDTO()
         {
-            PermissionCodeList = new List<string>();
+            PermissionCodeList = new List<int>();
         }
 
         public string UserCode { get; set; }
@@ -24,6 +20,6 @@ namespace Project.Mvc.Models
         /// <summary>
         /// 授予的权限代号
         /// </summary>
-        public List<string> PermissionCodeList { get; set; }
+        public IList<int>  PermissionCodeList { get; set; }
     }
 }

@@ -47,6 +47,11 @@ namespace Project.Service.PermissionManager
         /// <returns></returns>
         public System.Int32 Add(FunctionEntity entity)
         {
+            PermissionService.GetInstance().ClearAllPermissionFunction();
+            entity.FunctionDetailList.ToList().ForEach(p =>
+            {
+                p.ModuleId = entity.ModuleId;
+            });
             return _functionRepository.Save(entity);
         }
 
@@ -59,6 +64,7 @@ namespace Project.Service.PermissionManager
         {
             try
             {
+                PermissionService.GetInstance().ClearAllPermissionFunction();
                 var entity = _functionRepository.GetById(pkId);
                 _functionRepository.Delete(entity);
                 return true;
@@ -69,22 +75,6 @@ namespace Project.Service.PermissionManager
             }
         }
 
-        /// <summary>
-        /// 删除
-        /// </summary>
-        /// <param name="entity"></param>
-        public bool Delete(FunctionEntity entity)
-        {
-            try
-            {
-                _functionRepository.Delete(entity);
-                return true;
-            }
-            catch
-            {
-                return false;
-            }
-        }
 
         /// <summary>
         /// 更新
@@ -92,8 +82,9 @@ namespace Project.Service.PermissionManager
         /// <param name="entity"></param>
         public bool Update(FunctionEntity entity)
         {
-            var oldEntity = FunctionService.GetInstance().GetModelByPk(entity.PkId);
+            PermissionService.GetInstance().ClearAllPermissionFunction();
 
+            var oldEntity = FunctionService.GetInstance().GetModelByPk(entity.PkId);
             var date = DateTime.Now;
             entity.FunctionDetailList.ToList().ForEach(p =>
             {
@@ -109,6 +100,7 @@ namespace Project.Service.PermissionManager
                     p.CreatorUserCode = oldRowEntity.CreatorUserCode;
                 }
                 p.FunctionId = entity.PkId;
+                p.ModuleId = entity.ModuleId;
                 p.LastModificationTime = date;
                 p.LastModifierUserCode = "";
             });
@@ -160,7 +152,7 @@ namespace Project.Service.PermissionManager
             //  expr = expr.And(p => p.PkId == entity.PkId);
             if (!string.IsNullOrEmpty(entity.FunctionnName))
                 expr = expr.And(p => p.FunctionnName.Contains(entity.FunctionnName));
-            if (entity.ModuleId>0)
+            if (entity.ModuleId > 0)
                 expr = expr.And(p => p.ModuleId == entity.ModuleId);
             // if (!string.IsNullOrEmpty(entity.FunctionUrl))
             //  expr = expr.And(p => p.FunctionUrl == entity.FunctionUrl);
@@ -232,7 +224,7 @@ namespace Project.Service.PermissionManager
             //  expr = expr.And(p => p.FunctionDetailName == entity.FunctionDetailName);
             // if (!string.IsNullOrEmpty(entity.FunctionDetailCode))
             //  expr = expr.And(p => p.FunctionDetailCode == entity.FunctionDetailCode);
-            if (entity.FunctionId>0)
+            if (entity.FunctionId > 0)
                 expr = expr.And(p => p.FunctionId == entity.FunctionId);
             // if (!string.IsNullOrEmpty(entity.Area))
             //  expr = expr.And(p => p.Area == entity.Area);

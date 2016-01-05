@@ -30,9 +30,9 @@ var pro = pro || {};
                 columns: [[
 
          { field: 'FunctionUrl', title: '模块路径', width: 400 },
-         { field: 'Area', title: '', width: 100 },
-         { field: 'Controller', title: '', width: 100 },
-         { field: 'Action', title: '', width: 100 },
+         //{ field: 'Area', title: '', width: 100 },
+         //{ field: 'Controller', title: '', width: 100 },
+         //{ field: 'Action', title: '', width: 100 },
          { field: 'IsDisplayOnMenu', title: '是否在菜单上显示1是 0不是', width: 100 },
          { field: 'RankId', title: '顺序', width: 100 },
          { field: 'Remark', title: '备注', width: 100 },

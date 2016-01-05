@@ -8,12 +8,14 @@ using System.Web.Routing;
 using System.Web.Security;
 using System.Web.UI;
 using Newtonsoft.Json;
+using Project.Infrastructure.FrameworkCore.ToolKit;
 using Project.Model.PermissionManager;
 using Project.Mvc.Authorization;
 using Project.Mvc.Controllers.Results;
 using Project.Mvc.Models;
 using Project.Mvc.Views;
 using Project.Service.PermissionManager;
+using Project.Service.PermissionManager.DTO;
 
 
 namespace Project.WebApplication.Controllers
@@ -21,7 +23,7 @@ namespace Project.WebApplication.Controllers
     public class AccountController : BaseController
     {
 
-        // [PermissionAuthorize]
+         //[PermissionAuthorize]
         // GET: Account
         public ActionResult Index()
         {  // ISAPIRuntime
@@ -29,19 +31,18 @@ namespace Project.WebApplication.Controllers
             //   ApplicationManager
             //        applicat
             //UrlRoutingModule
-         //   MvcHandler
+            //   MvcHandler
 
 
-            ViewBag.ModuleList = ModuleService.GetInstance().GetList(null);
+
+            ViewBag.ModuleList = UserInfoService.GetInstance().GetMenuDTOList(LoginUserInfo.UserCode,LoginUserInfo.PermissionCodeList);
+
+
+
             return View();
         }
 
 
-        [HttpGet]
-        public ActionResult Login()
-        {
-            return View();
-        }
 
         public JsonResult GetData()
         {
@@ -55,36 +56,8 @@ namespace Project.WebApplication.Controllers
             };
         }
 
-        [HttpPost]
-        public JsonResult UserLogin(string userCode, string password)
-        {
-            var loginUserInfo = new LoginUserInfo();
-            loginUserInfo.PermissionCodeList = new List<string>() { "111", "222" };
-            loginUserInfo.UserCode = "UserCode";
-            loginUserInfo.UserName = "UserName";
+       
 
-            var ticket = new FormsAuthenticationTicket(
-            1 /*version*/,
-            Guid.NewGuid().ToString(),
-            DateTime.Now,
-             DateTime.Now.AddMinutes(20),
-            true,//持久性
-           JsonConvert.SerializeObject(loginUserInfo),
-            FormsAuthentication.FormsCookiePath);
-            var encryptedTicket = FormsAuthentication.Encrypt(ticket);
-
-
-            var cookie = new HttpCookie(FormsAuthentication.FormsCookieName, encryptedTicket);
-            cookie.Expires = DateTime.Now.AddMinutes(20);
-            cookie.HttpOnly = true;
-            Response.Cookies.Add(cookie);
-
-            return new AbpJsonResult
-            {
-                Data = new AjaxResponse<object>() { success = true, result = "{'name':'1111'}", }
-            };
-
-        }
 
         public ActionResult Default()
         {

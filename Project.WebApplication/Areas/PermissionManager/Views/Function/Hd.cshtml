@@ -6,7 +6,6 @@
     <script src="/Areas/PermissionManager/Scripts/Function/Hd.js?JsParamter=@SiteConfig.GetConfig().JsParamter"></script>
 }
 <textarea id="BindEntity">@ViewBag.BindEntity</textarea>
-<textarea id="ModuleList">@ViewBag.ModuleList</textarea>
 <input id="Command" type="hidden" />
 <div class="mtable_div">
     <form id="form1">
@@ -43,7 +42,7 @@
                     <input id="FunctionUrl" name="FunctionUrl" type="text" style="width: 400px" />
                 </td>
             </tr>
-            <tr>
+            @*<tr>
                 <td>
                     Area:
                 </td>
@@ -66,7 +65,7 @@
                 <td>
                     <input id="Action" name="Action" type="text" style="width: 200px" />
                 </td>
-            </tr>
+            </tr>*@
             <tr>
                 <td>
                     是否在菜单上显示<span style="color: Red">*</span>

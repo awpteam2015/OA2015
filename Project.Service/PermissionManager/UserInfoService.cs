@@ -1,15 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using NHibernate.Criterion;
+using AutoMapper;
+using NHibernate.Mapping;
 using NHibernate.Util;
 using Project.Infrastructure.FrameworkCore.DataNhibernate;
 using Project.Infrastructure.FrameworkCore.DataNhibernate.Helpers;
-using Project.Infrastructure.FrameworkCore.ToolKit.LinqExpansion;
+using Project.Infrastructure.FrameworkCore.ToolKit;
 using Project.Model.PermissionManager;
 using Project.Repository.PermissionManager;
+using Project.Service.PermissionManager.DTO;
 using Project.Service.PermissionManager.Validate;
 
 namespace Project.Service.PermissionManager
@@ -43,6 +43,74 @@ namespace Project.Service.PermissionManager
             var t = _userInfoRepository.GetById(1);
         }
         #endregion
+
+
+        public Tuple<bool, string, LoginUserInfoDTO> Login(string userCode, string password)
+        {
+            var userInfoEntity = this.GetList(new UserInfoEntity() { UserCode = userCode, Password = Encrypt.MD5Encrypt(password) }).FirstOrDefault();
+            if (userInfoEntity != null)
+            {
+                userInfoEntity.UserFunctionDetailList_Checked = this.GetFunctionDetailList_Checked(userCode);
+
+                var loginUserInfo = Mapper.Map<UserInfoEntity, LoginUserInfoDTO>(userInfoEntity);
+                return new Tuple<bool, string, LoginUserInfoDTO>(true, "", loginUserInfo);
+            }
+            else
+            {
+                return new Tuple<bool, string, LoginUserInfoDTO>(false, "用户名或者密码错误！", null);
+            }
+        }
+
+
+        /// <summary>
+        /// 获取用户对应的菜单信息
+        /// </summary>
+        /// <param name="userCode"></param>
+        /// <returns></returns>
+        public IList<MenuDTO> GetMenuDTOList(string userCode, IList<int> permissionCodeList)
+        {
+            var allPermissionFunction = PermissionService.GetInstance().GetAllPermissionFunction();
+
+            var userPermissionFunction = PermissionService.GetInstance().GetAllPermissionFunction();
+            if (!PermissionService.GetInstance().IsAdmin(userCode))
+            {
+                userPermissionFunction = userPermissionFunction.Where(p => permissionCodeList.Contains(p.PkId)).ToList();
+            }
+            var module = userPermissionFunction.Select(p => p.ModuleId).Distinct().ToList();
+            var function = userPermissionFunction.Select(p => p.FunctionId).Distinct().ToList();
+            var menuDtoList = new List<MenuDTO>();
+            var moduleList = ModuleService.GetInstance().GetList(new ModuleEntity());
+            moduleList.Where(p => module.Contains(p.PkId)).ForEach(p =>
+            {
+                var temp = new MenuDTO()
+                {
+                    Url = "",
+                    Name = p.ModuleName
+                };
+
+                var list = p.FunctionEntityList.Where(x => function.Contains(x.PkId)).ToList();
+
+                list.ForEach(
+                    x =>
+                    {
+                        if (x.IsDisplayOnMenu == 1)
+                        {
+                            temp.MenuDTOList.Add(new MenuDTO()
+                            {
+                                Url = x.FunctionUrl,
+                                Name = x.FunctionnName
+                            });
+                        }
+                    }
+                    );
+                if (temp.MenuDTOList.Any())
+                {
+                    menuDtoList.Add(temp);
+                }
+            });
+            return menuDtoList;
+        }
+
 
 
         public UserInfoEntity GetModel(int pkId)
@@ -85,16 +153,10 @@ namespace Project.Service.PermissionManager
             var oldEntity = _userInfoRepository.GetById(entity.PkId);
             entity.CreationTime = oldEntity.CreationTime;
             entity.CreatorUserCode = oldEntity.CreatorUserCode;
-            if (string.IsNullOrEmpty(entity.Password))
+            if (entity.Password != oldEntity.Password)
             {
-                entity.CreatorUserCode = oldEntity.Password;
+                entity.Password = Encrypt.MD5Encrypt(entity.Password);//加密
             }
-            //var deleteList = (from oldList in oldEntity.UserDepartmentList.ToList()
-            //                  join newList in entity.UserDepartmentList
-            //                  on oldList.DepartmentCode equals newList.DepartmentCode into joinlist
-            //                  from ur in joinlist.DefaultIfEmpty()
-            //                  where ur == null
-            //                  select oldList).ToList();
 
             var deleteList = oldEntity.UserDepartmentList.Where(
              p => entity.UserDepartmentList.All(x => x.DepartmentCode != p.DepartmentCode)).ToList();
@@ -194,8 +256,8 @@ namespace Project.Service.PermissionManager
             //  expr = expr.And(p => p.PkId == entity.PkId);
             if (!string.IsNullOrEmpty(entity.UserCode))
                 expr = expr.And(p => p.UserCode == entity.UserCode);
-            // if (!string.IsNullOrEmpty(entity.Password))
-            //  expr = expr.And(p => p.Password == entity.Password);
+            if (!string.IsNullOrEmpty(entity.Password))
+                expr = expr.And(p => p.Password == entity.Password);
             // if (!string.IsNullOrEmpty(entity.UserName))
             //  expr = expr.And(p => p.UserName == entity.UserName);
             // if (!string.IsNullOrEmpty(entity.Email))
@@ -378,16 +440,10 @@ namespace Project.Service.PermissionManager
             }
         }
 
-        private void DeleteUserFunctionDetail(string userCode, int functionDetailId, int functionId)
-        {
-            var list = GetUserFunctionDetailList(new UserFunctionDetailEntity() { UserCode = userCode, FunctionDetailId = functionDetailId, FunctionId = functionId }).ToList();
 
-            list.ForEach(p =>
-            {
-                _userFunctionDetailRepository.Delete(p);
 
-            });
-        }
+
+
 
     }
 

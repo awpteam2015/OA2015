@@ -45,7 +45,6 @@
     <Compile Include="PermissionManager\FunctionDetailModel.cs" />
     <Compile Include="PermissionManager\FunctionModel.cs" />
     <Compile Include="PermissionManager\ModuleModel.cs" />
-    <Compile Include="PermissionManager\PermissionFunctionEntity.cs" />
     <Compile Include="PermissionManager\RoleFunctionDetailModel.cs" />
     <Compile Include="PermissionManager\RoleModel.cs" />
     <Compile Include="PermissionManager\UserDepartmentModel.cs" />

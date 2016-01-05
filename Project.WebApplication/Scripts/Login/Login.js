@@ -8,12 +8,10 @@
             });
         },
         Login: function () {
-            var postData = {};
-            postData.userCode = "";
-            postData.password = "";
+            var postData = pro.submitKit.getHeadJson();
             abp.ajax({
-                url: "/Account/UserLogin",
-                data: '{"userCode":"","password":""}'
+                url: "/Login/UserLogin",
+                data: JSON.stringify(postData)
             }).done(
                 function (data, data2) {
                     window.location.href = "/Account/Index";

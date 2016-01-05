@@ -26,7 +26,7 @@ namespace Project.WebApplication.Areas.PermissionManager.Controllers
                 var entity = FunctionService.GetInstance().GetModelByPk(pkId);
 
 
-                ViewBag.BindEntity = JsonHelper.JsonSerializer(entity);
+                ViewBag.BindEntity = JsonHelper.JsonSerializer(entity, new NHibernateContractResolver());
 
             }
             return View();
@@ -67,13 +67,13 @@ namespace Project.WebApplication.Areas.PermissionManager.Controllers
         {
             var checkList = new List<int>();
             var userCode = RequestHelper.GetString("UserCode");
-             var roleId = RequestHelper.GetInt("RoleId");
+            var roleId = RequestHelper.GetInt("RoleId");
             if (!string.IsNullOrWhiteSpace(userCode))
             {
                 checkList = UserInfoService.GetInstance().GetFunctionDetailList_Checked(userCode);
             }
 
-            if (roleId>0)
+            if (roleId > 0)
             {
                 checkList = RoleService.GetInstance().GetFunctionDetailList_Checked(roleId);
             }
@@ -83,7 +83,7 @@ namespace Project.WebApplication.Areas.PermissionManager.Controllers
             var searchList = FunctionService.GetInstance().GetList(where);
             searchList.ForEach(p => p.FunctionDetailList.ForEach(x =>
             {
-                x.Attr_IsCheck=checkList.Any(y=>y==x.PkId) ;
+                x.Attr_IsCheck = checkList.Any(y => y == x.PkId);
             }));
 
             var dataGridEntity = new DataGridResponse()
@@ -146,21 +146,11 @@ namespace Project.WebApplication.Areas.PermissionManager.Controllers
 
         public AbpJsonResult GetFunctionDetailList()
         {
-            //var pIndex = this.Request["page"].ConvertTo<int>();
-            //var pSize = this.Request["rows"].ConvertTo<int>();
+
             var where = new FunctionDetailEntity();
-            //where.PkId = RequestHelper.GetFormString("PkId");
-            //where.FunctionDetailName = RequestHelper.GetFormString("FunctionDetailName");
-            //where.FunctionDetailCode = RequestHelper.GetFormString("FunctionDetailCode");
             where.FunctionId = RequestHelper.GetInt("FunctionId");
-            //where.Area = RequestHelper.GetFormString("Area");
-            //where.Controller = RequestHelper.GetFormString("Controller");
-            //where.Action = RequestHelper.GetFormString("Action");
-            //where.CreatorUserCode = RequestHelper.GetFormString("CreatorUserCode");
-            //where.CreationTime = RequestHelper.GetFormString("CreationTime");
-            //where.LastModifierUserCode = RequestHelper.GetFormString("LastModifierUserCode");
-            //where.LastModificationTime = RequestHelper.GetFormString("LastModificationTime");
-            var searchList = FunctionDetailService.GetInstance().GetList(where);
+
+            var searchList = where.FunctionId == 0 ? new List<FunctionDetailEntity>() : FunctionDetailService.GetInstance().GetList(where);
 
             var dataGridEntity = new DataGridResponse()
             {
@@ -201,7 +191,18 @@ namespace Project.WebApplication.Areas.PermissionManager.Controllers
         [HttpPost]
         public AbpJsonResult Add(AjaxRequest<FunctionEntity> postData)
         {
+            if (!postData.RequestEntity.FunctionDetailList.Any())
+            {
+                postData.RequestEntity.FunctionDetailList.Add(new FunctionDetailEntity()
+                {
+                    FunctionDetailCode = "",
+                    FunctionDetailName = "浏览"
+                });
+            }
             var addResult = FunctionService.GetInstance().Add(postData.RequestEntity);
+            
+
+
             var result = new AjaxResponse<FunctionEntity>()
                {
                    success = true,

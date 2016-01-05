@@ -6,17 +6,17 @@ using Project.Infrastructure.FrameworkCore.Domain.Entities.Component;
 
 namespace Project.Model.PermissionManager
 {
-     [Serializable]
+    [Serializable]
     public class UserInfoEntity : AuditedEntity, ISoftDelete
     {
-         public UserInfoEntity()
-         {
-             UserDepartmentList=new HashSet<UserDepartmentEntity>();
-             UserRoleList=new HashSet<UserRoleEntity>();
-             UserFunctionDetailList=new HashSet<UserFunctionDetailEntity>();
-         }
+        public UserInfoEntity()
+        {
+            UserDepartmentList = new HashSet<UserDepartmentEntity>();
+            UserRoleList = new HashSet<UserRoleEntity>();
+            UserFunctionDetailList = new HashSet<UserFunctionDetailEntity>();
+        }
 
-         #region 属性
+        #region 属性
 
         /// <summary>
         /// 数据库类型：System.String   大小:36 
@@ -69,10 +69,15 @@ namespace Project.Model.PermissionManager
         public virtual ISet<UserRoleEntity> UserRoleList { get; set; }
 
 
-         /// <summary>
-         /// 在角色基础上的增删详细模块功能
-         /// </summary>
+        /// <summary>
+        /// 在角色基础上的增删详细模块功能
+        /// </summary>
         public virtual ISet<UserFunctionDetailEntity> UserFunctionDetailList { get; set; }
-      
+
+        /// <summary>
+        /// 有效权限
+        /// </summary>
+        public virtual IList<int> UserFunctionDetailList_Checked { get; set; }
+
     }
 }

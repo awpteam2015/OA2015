@@ -27,6 +27,8 @@ namespace Project.Model.PermissionManager
         /// 模块ID
         /// </summary>
         public virtual System.Int32 FunctionId{get; set;}
+
+        public virtual System.Int32 ModuleId { get; set; }
         /// <summary>
         /// 
         /// </summary>

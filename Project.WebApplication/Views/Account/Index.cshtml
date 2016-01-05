@@ -1,4 +1,6 @@
-﻿@using Project.Model.PermissionManager
+﻿@using System.Web.UI.WebControls
+@using Project.Model.PermissionManager
+@using Project.Service.PermissionManager.DTO
 @{
     Layout = null;
 }
@@ -7,20 +9,8 @@
 
 <html>
 <head>
-    <meta name="viewport" content="width=device-width" />
-    <link href="~/Scripts/jqueryPlugins/jquery-easyui/themes/default/easyui.css" rel="stylesheet" />
-    <link href="~/Resources/Css/Site.css" rel="stylesheet" />
-    <link href="~/Scripts/jqueryPlugins/jquery-easyui/themes/icon.css" rel="stylesheet" />
-    <script src="~/Scripts/jqueryPlugins/jquery-easyui/jquery.min.js"></script>
-    <script src="~/Scripts/jqueryPlugins/jquery-easyui/jquery.easyui.min.js"></script>
-    <script src="~/Scripts/jqueryPlugins/jquery-easyui/locale/easyui-lang-zh_CN.js"></script>
+    @Html.Partial("_Head")
     <script src="~/Scripts/Account/Index.js"></script>
-    <title>Index</title>
-    <style type="text/css">
-        .tabOverflow {
-            overflow: hidden;
-        }
-    </style>
 </head>
 <body class="easyui-layout">
     <div data-options="region:'north',split:true" style="overflow: hidden; height: 35px; background: #E0ECFF repeat-x center 50%;color: #fff;">
@@ -32,7 +22,7 @@
             </div>
             <div style="float: right; width: 58%; padding-right:5px;">
                 <div class="datagrid-btn-separator" style="height: 15px; margin: 7px 2px 0; float: right;"></div>
-                <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-lock_go',plain:true" style="float: right;" onclick="$.Index.LogOff()">注销</a>
+                <a href="javascript:void(0)" id="btnLogoff" class="easyui-linkbutton" data-options="iconCls:'icon-lock_go',plain:true" style="float: right;">注销</a>
                 <div class="datagrid-btn-separator" style="height: 15px; margin: 7px 2px 0; float: right;"></div>
             </div>
             <div style="clear: both;">
@@ -41,24 +31,14 @@
     </div>
     <div data-options="region:'west',split:true,title:'导航菜单',icon:'icon-redo'" style="width: 200px;">
         <div id="menu" class="easyui-accordion" data-options="border:false,fit:true">
-            @*@foreach (Module p in ViewBag.Module)
-                {
-                    <div title="@p.ModuleName" data-options="iconCls:'icon-asterisk_yellow'">
-                        <ul class='menulist'>
-                            @foreach (var a in p.ModuleFunctions)
-                            {
-                                <li><a target='mainFrame' href='javascript:void(0)' lang='@a.FunctionUrl'>@a.FunctionName</a></li>
-                            }
-                        </ul>
-                    </div>
-                }*@
-            @foreach (ModuleEntity p in ViewBag.ModuleList)
+
+            @foreach (MenuDTO p in ViewBag.ModuleList)
             {
-                <div title="@p.ModuleName" data-options="iconCls:'icon-asterisk_yellow'">
+                <div title="@p.Name" data-options="iconCls:'icon-asterisk_yellow'">
                     <ul class='menulist'>
-                        @foreach (var function in p.FunctionEntityList)
+                        @foreach (var child in p.MenuDTOList)
                         {
-                            <li><a target='mainFrame' href='javascript:void(0)' lang='@function.FunctionUrl'>@function.FunctionnName</a></li>
+                            <li><a target='mainFrame' href='javascript:void(0)' lang='@child.Url' >@child.Name</a></li>
                         }
                     </ul>
                 </div>

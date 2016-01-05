@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
 using Project.Infrastructure.FrameworkCore.DataNhibernate.Helpers;
 using Project.Infrastructure.FrameworkCore.ToolKit;
 using Project.Infrastructure.FrameworkCore.ToolKit.JsonHandler;
@@ -11,10 +12,11 @@ using Project.Model.PermissionManager;
 using Project.Mvc.Controllers.Results;
 using Project.Mvc.Models;
 using Project.Service.PermissionManager;
+using Project.WebApplication.Controllers;
 
 namespace Project.WebApplication.Areas.PermissionManager.Controllers
 {
-    public class UserInfoController : Controller
+    public class UserInfoController : BaseController
     {
 
         public ActionResult Hd(int pkId = 0)
@@ -110,6 +112,7 @@ namespace Project.WebApplication.Areas.PermissionManager.Controllers
             postData.RequestEntity.UserRoleList.ForEach(p => p.UserCode = postData.RequestEntity.UserCode);
             postData.RequestEntity.CreationTime = DateTime.Now;
             postData.RequestEntity.CreatorUserCode = "";
+            postData.RequestEntity.Password = Encrypt.MD5Encrypt(postData.RequestEntity.Password);
 
             var addResult = UserInfoService.GetInstance().Add(postData.RequestEntity);
             var result = new AjaxResponse<UserInfoEntity>()
@@ -129,7 +132,6 @@ namespace Project.WebApplication.Areas.PermissionManager.Controllers
             postData.RequestEntity.UserRoleList.ForEach(p => p.UserCode = postData.RequestEntity.UserCode);
             postData.RequestEntity.LastModificationTime = DateTime.Now;
             postData.RequestEntity.LastModifierUserCode = "";
-
             var updateResult = UserInfoService.GetInstance().Update(postData.RequestEntity);
             var result = new AjaxResponse<UserInfoEntity>()
             {

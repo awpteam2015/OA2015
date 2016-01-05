@@ -28,7 +28,7 @@ namespace Project.Model.PermissionManager
         /// <summary>
         /// 模块ID
         /// </summary>
-        public virtual System.Int32? ModuleId { get; set; }
+        public virtual System.Int32 ModuleId { get; set; }
         /// <summary>
         /// 模块路径
         /// </summary>
@@ -36,19 +36,19 @@ namespace Project.Model.PermissionManager
         /// <summary>
         /// 
         /// </summary>
-        public virtual System.String Area { get; set; }
-        /// <summary>
-        /// 
-        /// </summary>
-        public virtual System.String Controller { get; set; }
-        /// <summary>
-        /// 
-        /// </summary>
-        public virtual System.String Action { get; set; }
+        //public virtual System.String Area { get; set; }
+        ///// <summary>
+        ///// 
+        ///// </summary>
+        //public virtual System.String Controller { get; set; }
+        ///// <summary>
+        ///// 
+        ///// </summary>
+        //public virtual System.String Action { get; set; }
         /// <summary>
         /// 是否在菜单上显示1是 0不是
         /// </summary>
-        public virtual System.Int32? IsDisplayOnMenu { get; set; }
+        public virtual System.Int32 IsDisplayOnMenu { get; set; }
         /// <summary>
         /// 顺序
         /// </summary>

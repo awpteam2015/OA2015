@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using System.Threading;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -34,6 +35,15 @@ namespace Project.WebApplication.Tests
             var t = DateTime.UtcNow;
            // var t = AppDomain.CurrentDomain.BaseDirectory;
               UserInfoService.GetInstance().Test();
+        }
+
+
+        [TestMethod]
+        public void TestMethod4()
+        {
+           List<int> t=new List<int>(){1,2,3};
+            var x = t.Contains(3);
+
         }
 
 

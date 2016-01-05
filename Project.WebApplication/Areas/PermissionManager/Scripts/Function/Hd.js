@@ -159,8 +159,8 @@
                         ModuleId: { required: true },
                         FunctionUrl: { required: true },
                         //Area: { required: true },
-                        Controller: { required: true },
-                        Action: { required: true },
+                        //Controller: { required: true },
+                        //Action: { required: true },
                         IsDisplayOnMenu: { required: true }
                     },
                     messages: {

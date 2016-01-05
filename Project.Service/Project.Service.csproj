@@ -30,6 +30,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AutoMapper, Version=4.1.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.4.1.1\lib\net45\AutoMapper.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Iesi.Collections, Version=4.0.0.0, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
       <HintPath>..\packages\Iesi.Collections.4.0.0.4000\lib\net40\Iesi.Collections.dll</HintPath>
       <Private>True</Private>
@@ -47,8 +51,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
+    <Compile Include="BootstrapperService.cs" />
     <Compile Include="PermissionManager\DepartmentService.cs" />
+    <Compile Include="PermissionManager\DTO\LoginUserInfoDTO.cs" />
+    <Compile Include="PermissionManager\DTO\MenuDTO.cs" />
+    <Compile Include="PermissionManager\DTO\PermissionFunctionDetailDTO.cs" />
     <Compile Include="PermissionManager\FunctionDetailService.cs" />
     <Compile Include="PermissionManager\FunctionService.cs" />
     <Compile Include="PermissionManager\ModuleService.cs" />
@@ -80,6 +87,7 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

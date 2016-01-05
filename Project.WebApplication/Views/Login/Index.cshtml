@@ -10,8 +10,11 @@
     <title>Login</title>
 
     <script src="~/Scripts/jquery-1.10.2.min.js"></script>
-    <script src="~/Scripts/Account/Login.js"></script>
+    <script src="/Scripts/jqueryPlugins/jquery-easyui/jquery.easyui.min.js"></script>
+    <script src="~/Scripts/Login/Login.js"></script>
     <script src="~/Scripts/pro/abp.jquery.ajax.js"></script>
+    <script src="~/Scripts/pro/submitKit.js"></script>
+    <script src="~/Scripts/jqueryPluginsExtend/jquery-easyui/alertExtend.js"></script>
 </head>
 <body>
     <div>
@@ -19,11 +22,11 @@
         <table>
             <tr>
                 <td>用户名：</td>
-                <td><input type="text" id="UserName"/></td>
+                <td><input type="text" name="UserCode"/></td>
             </tr>
             <tr>
                 <td>密码：</td>
-                <td><input type="text" id="Password"/></td>
+                <td><input type="password" name="Password" /></td>
             </tr>
             <tr>
                 <td></td>

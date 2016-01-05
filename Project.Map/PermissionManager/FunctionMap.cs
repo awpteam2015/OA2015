@@ -21,9 +21,9 @@ namespace Project.Map.PermissionManager
             Map(p => p.FunctionnName);
             Map(p => p.ModuleId);
             Map(p => p.FunctionUrl);
-            Map(p => p.Area);
-            Map(p => p.Controller);
-            Map(p => p.Action);
+            //Map(p => p.Area);
+            //Map(p => p.Controller);
+            //Map(p => p.Action);
             Map(p => p.IsDisplayOnMenu);
             Map(p => p.RankId);
             Map(p => p.Remark);

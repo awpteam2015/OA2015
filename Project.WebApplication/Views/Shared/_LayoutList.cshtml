@@ -4,6 +4,12 @@
 <head>
     @Html.Partial("_Head")
     @RenderSection("JavaScript", false)
+    <script type="text/javascript">
+        $(function () {
+            var str = "@ViewBag.PermissionScript";
+            eval(str.replace(/&#39;/g, "'"));
+        });
+    </script>
 </head>
 <body class="easyui-layout" style="overflow: hidden" scroll="no" border="false">
     <div data-options="region:'center',border:false">

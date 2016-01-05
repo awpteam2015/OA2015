@@ -11,6 +11,19 @@ var pro = pro || {};
                 var url = $(this).find("a").attr("lang");
                 pro.IndexPage.addTab(tabTitle, url);
             });
+
+            $("#btnLogoff").click(
+                function() {
+                    abp.ajax({
+                        url: "/Login/UserLogoff"
+                    }).done(
+              function (data, data2) {
+                  window.location.href = "/Login/Index";
+              }
+          );
+                }
+            );
+
         },
         addTab: function (subtitle, url) {
             if (!$('#tabsDefault').tabs('exists', subtitle)) {

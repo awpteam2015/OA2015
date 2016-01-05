@@ -1,8 +1,11 @@
 ﻿<title>@ViewBag.Title</title>
-<link href="/Resources/Css/Site.css" rel="stylesheet" />
+
 <link href="/Scripts/jqueryPlugins/jquery-easyui/themes/default/easyui.css" rel="stylesheet" />
 
-<link href="/Scripts/jqueryPlugins/jquery-easyui/themes/icon.css" rel="stylesheet" />
+<link href="/Scripts/jqueryPlugins/jquery-easyui/themes/icon.css" rel="stylesheet"/>
+
+<link href="/Resources/Css/Site.css" rel="stylesheet" />
+
 <script src="/Scripts/jqueryPlugins/jquery-easyui/jquery.min.js"></script>
 <script src="/Scripts/jqueryPlugins/jquery-easyui/jquery.easyui.min.js"></script>
 <script src="/Scripts/jqueryPlugins/jquery-easyui/locale/easyui-lang-zh_CN.js"></script>
@@ -54,9 +57,10 @@
         });
 
         $(function () {
-            $("body").bind("ajaxSend", function () {
+            $(document).bind("ajaxSend", function () {
                 $.messager.ajaxTitle("正在处理，请稍候。。。");
-            }).bind("ajaxComplete", function () {
+            }).bind("ajaxComplete", function (event,request) {
+              
                 $.messager.ajaxTitle("close");
             }).bind("ajaxError", function (event, request, settings, thrownError) {
                 $.messager.alert("错误提示-请复制错误代码，发给技术支持", request.responseText, "error");

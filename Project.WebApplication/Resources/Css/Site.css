@@ -20,7 +20,34 @@ div, ul, li, dl, dt, dd, table, td, textarea {
 }
 
 
-a {
+
+
+.menulist {
+    display: block;
+    margin: 0;
+    padding: 0;
+    border: none;
+    overflow: hidden;
+}
+
+    .menulist li {
+        display: block;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        line-height: 18px;
+        padding: 4px 0;
+        background-color: #fff;
+        border-bottom: 1px dotted #CCCCCC;
+        padding-left: 12px;
+    }
+
+        .menulist li:hover {
+            background-color: #D0E5F5;
+            cursor: pointer;
+        }
+
+        a {
     text-decoration: none;
     outline: none;
     blr: expression(this.onFocus=this.blur());
@@ -49,31 +76,6 @@ a {
         color: #40588A;
         text-decoration: none;
     }
-
-.menulist {
-    display: block;
-    margin: 0;
-    padding: 0;
-    border: none;
-    overflow: hidden;
-}
-
-    .menulist li {
-        display: block;
-        margin: 0;
-        padding: 0;
-        overflow: hidden;
-        line-height: 18px;
-        padding: 4px 0;
-        background-color: #fff;
-        border-bottom: 1px dotted #CCCCCC;
-        padding-left: 12px;
-    }
-
-        .menulist li:hover {
-            background-color: #D0E5F5;
-            cursor: pointer;
-        }
 
 
 body {
