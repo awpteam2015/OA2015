@@ -554,7 +554,6 @@
     <Compile Include="Areas\PermissionManager\Controllers\DepartmentController.cs" />
     <Compile Include="Areas\PermissionManager\Controllers\FunctionController.cs" />
     <Compile Include="Areas\PermissionManager\Controllers\ModuleController.cs" />
-    <Compile Include="Areas\PermissionManager\Controllers\PermissionController.cs" />
     <Compile Include="Areas\PermissionManager\Controllers\RoleController.cs" />
     <Compile Include="Areas\PermissionManager\Controllers\UserInfoController.cs" />
     <Compile Include="Areas\PermissionManager\PermissionManagerAreaRegistration.cs" />
