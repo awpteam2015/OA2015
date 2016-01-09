@@ -47,7 +47,7 @@ namespace Project.Model.HRManager
         /// <summary>
         /// 生日
         /// </summary>
-        public virtual System.Object Birthday{get; set;}
+        public virtual System.DateTime? Birthday{get; set;}
         /// <summary>
         /// 技术职称
         /// </summary>

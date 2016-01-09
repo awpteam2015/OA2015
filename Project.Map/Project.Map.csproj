@@ -52,7 +52,17 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="HRManager\AttendanceMap.cs" />
+    <Compile Include="HRManager\ContractMap.cs" />
+    <Compile Include="HRManager\EmployeeChildrenMap.cs" />
     <Compile Include="HRManager\EmployeeInfoMap.cs" />
+    <Compile Include="HRManager\EmployeeRotateMap.cs" />
+    <Compile Include="HRManager\GoAbroadMap.cs" />
+    <Compile Include="HRManager\GroupEmployeeHisMap.cs" />
+    <Compile Include="HRManager\GroupEmployeeMap.cs" />
+    <Compile Include="HRManager\GroupMap.cs" />
+    <Compile Include="HRManager\LearningExperiencesMap.cs" />
+    <Compile Include="HRManager\SanctionMap.cs" />
+    <Compile Include="HRManager\WorkExperienceMap.cs" />
     <Compile Include="PermissionManager\DepartmentMap.cs" />
     <Compile Include="PermissionManager\FunctionDetailMap.cs" />
     <Compile Include="PermissionManager\FunctionMap.cs" />

@@ -191,16 +191,20 @@ namespace Project.WebApplication.Areas.PermissionManager.Controllers
         [HttpPost]
         public AbpJsonResult Add(AjaxRequest<FunctionEntity> postData)
         {
-            if (!postData.RequestEntity.FunctionDetailList.Any())
-            {
-                postData.RequestEntity.FunctionDetailList.Add(new FunctionDetailEntity()
-                {
-                    FunctionDetailCode = "",
-                    FunctionDetailName = "浏览"
-                });
-            }
+
+            //if (!postData.RequestEntity.FunctionDetailList.Any())
+            //{
+            //    postData.RequestEntity.FunctionDetailList.Add(new FunctionDetailEntity()
+            //    {
+            //        CreationTime = DateTime.Now,
+            //        CreatorUserCode = LoginUserInfo.UserCode,
+            //        FunctionDetailCode = "",
+            //        FunctionDetailName = "浏览"
+            //    });
+            //}
+
             var addResult = FunctionService.GetInstance().Add(postData.RequestEntity);
-            
+
 
 
             var result = new AjaxResponse<FunctionEntity>()

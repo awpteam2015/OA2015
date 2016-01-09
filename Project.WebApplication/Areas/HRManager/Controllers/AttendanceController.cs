@@ -15,7 +15,7 @@ using Project.WebApplication.Controllers;
 
 namespace Project.WebApplication.Areas.HRManager.Controllers
 {
-    public class AttendanceController : Controller
+    public class AttendanceController : BaseController
     {
 
         public ActionResult Hd(int pkId = 0)

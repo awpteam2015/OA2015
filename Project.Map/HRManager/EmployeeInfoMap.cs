@@ -11,7 +11,7 @@ using Project.Infrastructure.FrameworkCore.DataNhibernate.EntityMappings;
 using Project.Model.HRManager;
 using Project.Model.PermissionManager;
 
-namespace Project.Map.HRManager
+namespace  Project.Map.HRManager
 {
     public class EmployeeInfoMap : BaseMap<EmployeeInfoEntity,int>
     {

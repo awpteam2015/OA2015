@@ -1,0 +1,175 @@
+﻿
+
+  
+
+
+@{
+    ViewBag.Title = "Hd";
+    Layout = "~/Views/Shared/_LayoutHandler.cshtml";
+}
+
+@section JavaScript{
+    <script src="/Areas/HRManager/Scripts/LearningExperiences/Hd.js?JsParamter=@SiteConfig.GetConfig().JsParamter"></script>
+}
+<div style="display: none">
+<input id="BindEntity" type="text" value="@ViewBag.BindEntity" />
+<input id="Command" type="hidden" />
+</div>
+<div class="mtable_div">
+    <form id="form1">
+        <table class="mtable">
+            
+              <tr>
+            <td  >
+                <span style="color: Red">*</span>:
+            </td>
+            <td >
+                <input id="PkId" name="PkId"  type="text"  />
+            </td>
+        </tr>
+            
+              <tr>
+            <td  >
+                <span style="color: Red">*</span>:
+            </td>
+            <td >
+                <input id="EmployeeCode" name="EmployeeCode"  type="text"  />
+            </td>
+        </tr>
+            
+              <tr>
+            <td  >
+                <span style="color: Red">*</span>:
+            </td>
+            <td >
+                <input id="DepartmentCode" name="DepartmentCode"  type="text"  />
+            </td>
+        </tr>
+            
+              <tr>
+            <td  >
+                数据字典维护<span style="color: Red">*</span>:
+            </td>
+            <td >
+                <input id="ProfessionCode" name="ProfessionCode"  type="text"  />
+            </td>
+        </tr>
+            
+              <tr>
+            <td  >
+                <span style="color: Red">*</span>:
+            </td>
+            <td >
+                <input id="School" name="School"  type="text"  />
+            </td>
+        </tr>
+            
+              <tr>
+            <td  >
+                手动输入<span style="color: Red">*</span>:
+            </td>
+            <td >
+                <input id="Degree" name="Degree"  type="text"  />
+            </td>
+        </tr>
+            
+              <tr>
+            <td  >
+                手动输入<span style="color: Red">*</span>:
+            </td>
+            <td >
+                <input id="Education" name="Education"  type="text"  />
+            </td>
+        </tr>
+            
+              <tr>
+            <td  >
+                <span style="color: Red">*</span>:
+            </td>
+            <td >
+                <input id="VerifyPersone" name="VerifyPersone"  type="text"  />
+            </td>
+        </tr>
+            
+              <tr>
+            <td  >
+                <span style="color: Red">*</span>:
+            </td>
+            <td >
+                <input id="Reward" name="Reward"  type="text"  />
+            </td>
+        </tr>
+            
+              <tr>
+            <td  >
+                <span style="color: Red">*</span>:
+            </td>
+            <td >
+                <input id="Certificate" name="Certificate"  type="text"  />
+            </td>
+        </tr>
+            
+              <tr>
+            <td  >
+                <span style="color: Red">*</span>:
+            </td>
+            <td >
+                <input id="Remark" name="Remark"  type="text"  />
+            </td>
+        </tr>
+            
+              <tr>
+            <td  >
+                <span style="color: Red">*</span>:
+            </td>
+            <td >
+                <input id="CreatorUserCode" name="CreatorUserCode"  type="text"  />
+            </td>
+        </tr>
+            
+              <tr>
+            <td  >
+                <span style="color: Red">*</span>:
+            </td>
+            <td >
+                <input id="CreatorUserName" name="CreatorUserName"  type="text"  />
+            </td>
+        </tr>
+            
+              <tr>
+            <td  >
+                <span style="color: Red">*</span>:
+            </td>
+            <td >
+                <input id="CreateTime" name="CreateTime"  type="text"  />
+            </td>
+        </tr>
+            
+              <tr>
+            <td  >
+                <span style="color: Red">*</span>:
+            </td>
+            <td >
+                <input id="LastModificationTime" name="LastModificationTime"  type="text"  />
+            </td>
+        </tr>
+          
+        </table>
+    </form>
+</div>
+<div style="padding: 10px 10px 0 10px; text-align: center;">
+    @if (Request["PkId"]==null||int.Parse(Request["PkId"]) == 0)
+    {
+        <a id="btnAdd" class="easyui-linkbutton" iconcls="icon-add" href="javascript:void(0)">新增</a>
+    }
+    else
+    {
+        <a id="btnEdit" class="easyui-linkbutton" iconcls="icon-ok" href="javascript:void(0)">编辑</a>
+    }
+    <a id="btnClose" class="easyui-linkbutton" iconcls="icon-cancel" href="javascript:void(0)">关闭</a>
+</div>
+
+
+
+
+

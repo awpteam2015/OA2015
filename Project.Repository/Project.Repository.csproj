@@ -39,7 +39,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="HRManager\AttendanceRepository.cs" />
+    <Compile Include="HRManager\ContractRepository.cs" />
+    <Compile Include="HRManager\EmployeeChildrenRepository.cs" />
     <Compile Include="HRManager\EmployeeInfoRepository.cs" />
+    <Compile Include="HRManager\EmployeeRotateRepository.cs" />
+    <Compile Include="HRManager\GoAbroadRepository.cs" />
+    <Compile Include="HRManager\GroupEmployeeHisRepository.cs" />
+    <Compile Include="HRManager\GroupEmployeeRepository.cs" />
+    <Compile Include="HRManager\GroupRepository.cs" />
+    <Compile Include="HRManager\LearningExperiencesRepository.cs" />
+    <Compile Include="HRManager\SanctionRepository.cs" />
+    <Compile Include="HRManager\WorkExperienceRepository.cs" />
     <Compile Include="PermissionManager\DepartmentRepository.cs" />
     <Compile Include="PermissionManager\FunctionDetailRepository.cs" />
     <Compile Include="PermissionManager\FunctionRepository.cs" />
@@ -50,7 +61,6 @@
     <Compile Include="PermissionManager\UserFunctionDetailRepository.cs" />
     <Compile Include="PermissionManager\UserInfoRepository.cs" />
     <Compile Include="PermissionManager\UserRoleRepository.cs" />
-    <Compile Include="Project.Repository\HRManager\AttendanceRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

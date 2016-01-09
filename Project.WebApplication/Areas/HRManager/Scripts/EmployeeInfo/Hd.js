@@ -11,8 +11,8 @@
             $("#btnEdit").click(function () {
                 pro.EmployeeInfo.HdPage.submit("Edit");
             });
-            
-             $("#btnClose").click(function () {
+
+            $("#btnClose").click(function () {
                 parent.pro.EmployeeInfo.ListPage.closeTab("");
             });
 
@@ -41,11 +41,11 @@
             }
 
             abp.ajax({
-                url: "/PermissionManager/EmployeeInfo/" + command,
+                url: "/HRManager/EmployeeInfo/" + command,
                 data: JSON.stringify(postData)
             }).done(
                 function (dataresult, data) {
-                   function afterSuccess() {
+                    function afterSuccess() {
                         parent.$("#btnSearch").trigger("click");
                         parent.pro.EmployeeInfo.ListPage.closeTab();
                     }
@@ -53,7 +53,7 @@
                 }
             ).fail(
              function (errordetails, errormessage) {
-               //  $.alertExtend.error();
+                 //  $.alertExtend.error();
              }
             );
 
@@ -62,54 +62,54 @@
             addRule: function () {
                 $("#form1").validate({
                     rules: {
-          PkId: { required: true  },
-          EmployeeCode: { required: true  },
-          EmployeeName: { required: true  },
-          DepartmentCode: { required: true  },
-          JobName: { required: true  },
-          PayCode: { required: true  },
-          Sex: { required: true  },
-          CertNo: { required: true  },
-          Birthday: { required: true  },
-          TechnicalTitle: { required: true  },
-          Duties: { required: true  },
-          WorkState: { required: true  },
-          EmployeeType: { required: true  },
-          HomeAddress: { required: true  },
-          MobileNO: { required: true  },
-          ImageUrl: { required: true  },
-          Sort: { required: true  },
-          State: { required: true  },
-          Remark: { required: true  },
-          CreatorUserCode: { required: true  },
-          CreatorUserName: { required: true  },
-          CreateTime: { required: true  },
-          LastModificationTime: { required: true  },
+
+                        EmployeeCode: { required: true },
+                        EmployeeName: { required: true },
+                        //DepartmentCode: { required: true  },
+                        //JobName: { required: true  },
+                        //PayCode: { required: true  },
+                        //Sex: { required: true  },
+                        //CertNo: { required: true  },
+                        //Birthday: { required: true  },
+                        //TechnicalTitle: { required: true  },
+                        //Duties: { required: true  },
+                        //WorkState: { required: true  },
+                        //EmployeeType: { required: true  },
+                        //HomeAddress: { required: true  },
+                        //MobileNO: { required: true  },
+                        //ImageUrl: { required: true  },
+                        //Sort: { required: true  },
+                        //State: { required: true  },
+                        //Remark: { required: true  },
+                        //CreatorUserCode: { required: true  },
+                        //CreatorUserName: { required: true  },
+                        //CreateTime: { required: true  },
+                        //LastModificationTime: { required: true  },
                     },
                     messages: {
-          PkId:  "必填!",
-          EmployeeCode:  "员工编号必填!",
-          EmployeeName:  "员工名称必填!",
-          DepartmentCode:  "所属部门必填!",
-          JobName:  "工号必填!",
-          PayCode:  "中文简拼必填!",
-          Sex:  "姓别必填!",
-          CertNo:  "身份证必填!",
-          Birthday:  "生日必填!",
-          TechnicalTitle:  "技术职称必填!",
-          Duties:  "单位职务必填!",
-          WorkState:  "在职状态必填!",
-          EmployeeType:  "员工类型必填!",
-          HomeAddress:  "家庭地址必填!",
-          MobileNO:  "手机号必填!",
-          ImageUrl:  "图片地址必填!",
-          Sort:  "排序必填!",
-          State:  "状态必填!",
-          Remark:  "备注必填!",
-          CreatorUserCode:  "操作员必填!",
-          CreatorUserName:  "操作员名称必填!",
-          CreateTime:  "创建时间必填!",
-          LastModificationTime:  "修改时间必填!",
+                        PkId: "必填!",
+                        EmployeeCode: "员工编号必填!",
+                        EmployeeName: "员工名称必填!",
+                        DepartmentCode: "所属部门必填!",
+                        JobName: "工号必填!",
+                        PayCode: "中文简拼必填!",
+                        Sex: "姓别必填!",
+                        CertNo: "身份证必填!",
+                        Birthday: "生日必填!",
+                        TechnicalTitle: "技术职称必填!",
+                        Duties: "单位职务必填!",
+                        WorkState: "在职状态必填!",
+                        EmployeeType: "员工类型必填!",
+                        HomeAddress: "家庭地址必填!",
+                        MobileNO: "手机号必填!",
+                        ImageUrl: "图片地址必填!",
+                        Sort: "排序必填!",
+                        State: "状态必填!",
+                        Remark: "备注必填!",
+                        CreatorUserCode: "操作员必填!",
+                        CreatorUserName: "操作员名称必填!",
+                        CreateTime: "创建时间必填!",
+                        LastModificationTime: "修改时间必填!",
                     },
                     errorPlacement: function (error, element) {
                         pro.commonKit.errorPlacementHd(error, element);
