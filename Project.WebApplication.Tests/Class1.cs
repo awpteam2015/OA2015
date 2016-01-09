@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -17,14 +18,18 @@ namespace Project.WebApplication.Tests
         [TestMethod]
         public void TestMethod1()
         {
-           List<string> list1=new List<string>(){"111","222"};
+            List<string> list1 = new List<string>() { "111", "222" };
 
-               List<string> list2=new List<string>();
+            List<string> list2 = new List<string>();
+
+
 
             var tt = (from a in list1
-                from b in list2
-                where a == b
-                select a).ToList();
+                      from b in list2
+                      where a == b
+                      select a).ToList();
+
+
 
         }
 
@@ -35,10 +40,40 @@ namespace Project.WebApplication.Tests
 
             List<string> list2 = new List<string>() { "111", "3333" };
 
-            var tt = (from a in list1
-                      from b in list2
-                      where a == b
-                      select a).ToList();
+            List<string> tt = (from a in list1
+                               from b in list2
+                               where a == b
+                               select a).ToList();
+
+            var ttttt = list1.SelectMany(left => list2, (t, s) => new { t, s }).Where(p => p.t == p.s).ToList();
+
+
+            List<string> newList = new List<string>();
+            foreach (var a in list1)
+            {
+                foreach (var b in list2)
+                {
+                    if (a == b)
+                    {
+                        newList.Add(a);
+                    }
+                }
+            }
+
+
+            List<string> tt2 = list1.Where(p => list2.Any(x => x == p)).ToList();
+
+            List<string> newList2 = new List<string>();
+            foreach (var a in list1)
+            {
+                foreach (var b in list2)
+                {
+                    if (a == b)
+                    {
+                        newList2.Add(a);
+                    }
+                }
+            }
 
         }
 
@@ -48,14 +83,28 @@ namespace Project.WebApplication.Tests
         {
             List<string> list1 = new List<string>() { "111", "222" };
 
-            List<string> list2 = new List<string>();
+            List<A> list2 = new List<A>()
+            {
+                new A() { code = "111", name = "222" }, 
+                new A() { code = "111", name = "333" }
+            };
 
             var tt = (from a in list1
-                join b in list2 on a equals b into joinlist
-                    //  from ur in joinlist.DefaultIfEmpty()
+                      join b in list2 on a equals b.code into joinlist
+                      from ur in joinlist.DefaultIfEmpty()
+                      where ur != null && ur.name == "222"
+                      select new { a, ur }).ToList();
 
-                      select a).ToList();
 
+
+            var tt2 = list1.Where(p => list2.Any(x => x.code == p));
+        }
+
+
+        public class A
+        {
+            public string code { get; set; }
+            public string name { get; set; }
         }
 
     }
