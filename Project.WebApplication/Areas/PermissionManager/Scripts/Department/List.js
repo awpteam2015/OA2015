@@ -15,7 +15,7 @@ var pro = pro || {};
             var tabObj = initObj.tabObj;
             var gridObj = initObj.gridObj;
             gridObj.grid({
-                url: '/PermissionManager/Department/GetList_Combotree',
+                url: '/PermissionManager/Department/GetList',
                 idField: "DepartmentCode",
                 treeField: "DepartmentCode",
                 fitColumns: false,
@@ -24,9 +24,9 @@ var pro = pro || {};
                 singleSelect: true,
                 columns: [[
          { field: 'DepartmentCode', title: '部门编码', width: 300 },
-         { field: 'DepartmentName', title: '部门名称', width: 100 },
+         { field: 'DepartmentName', title: '部门名称', width: 200 },
          { field: 'ParentDepartmentCode', title: '上级部门编码', width: 100 },
-         { field: 'Remark', title: '备注', width: 100 }
+         { field: 'Remark', title: '备注', width:200 }
                 ]]
             }
                );

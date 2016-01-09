@@ -28,7 +28,7 @@
                 { field: 'DepartmentName', title: '部门名称', width: 100 },
                 { field: 'ParentDepartmentCode', title: '上级部门编码', width: 100 },
                   {
-                      field: 'Attr_UserDepartmentPkId', title: 'Attr_UserDepartmentPkId', width: 200, formatter: function (value, row) {
+                      field: 'Attr_UserDepartmentPkId',hidden:true, title: 'Attr_UserDepartmentPkId', width: 200, formatter: function (value, row) {
                           return '<input   name="Attr_UserDepartmentPkId_' + row.DepartmentCode + '"  type="text" value="' + row.Attr_UserDepartmentPkId + '"  />';
                       }
                   }
@@ -54,7 +54,7 @@
          { field: 'RoleName', title: '角色名称', width: 100 },
          { field: 'Remark', title: '备注', width: 100 },
                   {
-                      field: 'Attr_UserRolePkId', title: 'Attr_UserRolePkId', width: 100, formatter: function (value, row) {
+                      field: 'Attr_UserRolePkId', hidden: true, title: 'Attr_UserRolePkId', width: 100, formatter: function (value, row) {
                           return '<input  name="Attr_UserRolePkId_' + row.PkId + '" type="text" value="' + value + '" />';
                       }
                   }
