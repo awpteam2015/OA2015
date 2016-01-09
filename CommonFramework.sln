@@ -32,6 +32,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WindowsFormsApplicationTest
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Project.Config", "Project.Config\Project.Config.csproj", "{7E5CD828-D4FF-445E-9F1D-068102151681}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DB", "DB", "{BAFEF88F-042B-429A-81ED-2E49ECCCF8FF}"
+	ProjectSection(SolutionItems) = preProject
+		DB\海盐卫生局.PDM = DB\海盐卫生局.PDM
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -81,5 +86,8 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{BAFEF88F-042B-429A-81ED-2E49ECCCF8FF} = {1F3E81CC-6777-4BD3-B05A-60BD3485749F}
 	EndGlobalSection
 EndGlobal
