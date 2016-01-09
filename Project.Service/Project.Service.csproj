@@ -69,6 +69,7 @@
     <Compile Include="PermissionManager\UserRoleService.cs" />
     <Compile Include="PermissionManager\Validate\UserInfoValidate.cs" />
     <Compile Include="Project.Service\HRManager\AttendanceService.cs" />
+    <Compile Include="Project.Service\HRManager\EmployeeInfoService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

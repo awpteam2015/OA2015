@@ -42,6 +42,7 @@
     <Compile Include="Enum\Class1.cs" />
     <Compile Include="ExtendUi\ITree.cs" />
     <Compile Include="HRManager\AttendanceEntity.cs" />
+    <Compile Include="HRManager\EmployeeInfoEntity.cs" />
     <Compile Include="PermissionManager\DepartmentEntity.cs" />
     <Compile Include="PermissionManager\FunctionDetailModel.cs" />
     <Compile Include="PermissionManager\FunctionModel.cs" />

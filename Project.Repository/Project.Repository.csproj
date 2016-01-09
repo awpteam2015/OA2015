@@ -39,6 +39,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="HRManager\EmployeeInfoRepository.cs" />
     <Compile Include="PermissionManager\DepartmentRepository.cs" />
     <Compile Include="PermissionManager\FunctionDetailRepository.cs" />
     <Compile Include="PermissionManager\FunctionRepository.cs" />
@@ -62,9 +63,7 @@
       <Name>Project.Model</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="HRManager\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
