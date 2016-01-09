@@ -7,10 +7,10 @@ using System.Web.Mvc;
 using Project.Infrastructure.FrameworkCore.DataNhibernate.Helpers;
 using Project.Infrastructure.FrameworkCore.ToolKit.JsonHandler;
 using Project.Infrastructure.FrameworkCore.ToolKit.LinqExpansion;
-using Project.Model.HrManager;
+using Project.Model.HRManager;
 using Project.Mvc.Controllers.Results;
 using Project.Mvc.Models;
-using Project.Service.HrManager;
+using Project.Service.HRManager;
 using Project.WebApplication.Controllers;
 
 namespace Project.WebApplication.Areas.HRManager.Controllers
