@@ -13,6 +13,7 @@ using Project.Infrastructure.FrameworkCore.DataNhibernate.Helpers;
 using Project.Infrastructure.FrameworkCore.ToolKit.LinqExpansion;
 using Project.Model.PermissionManager;
 using Project.Repository.PermissionManager;
+using Project.Service.PermissionManager.Validate;
 
 namespace Project.Service.PermissionManager
 {
@@ -41,9 +42,22 @@ namespace Project.Service.PermissionManager
         /// </summary>
         /// <param name="entity"></param>
         /// <returns></returns>
-        public System.Int32 Add(DepartmentEntity entity)
+        public Tuple<bool, string> Add(DepartmentEntity entity)
         {
-            return _departmentRepository.Save(entity);
+            var validateResult = DepartmentValidate.GetInstance().IsHasSameDepartmentCode(entity.DepartmentCode);
+            if (!validateResult.Item1)
+            {
+                return validateResult;
+            }
+            var addResult =_departmentRepository.Save(entity);
+            if (addResult > 0)
+            {
+                return new Tuple<bool, string>(true, "");
+            }
+            else
+            {
+                return new Tuple<bool, string>(false, "");
+            }
         }
 
 
@@ -86,16 +100,22 @@ namespace Project.Service.PermissionManager
         /// 更新
         /// </summary>
         /// <param name="entity"></param>
-        public bool Update(DepartmentEntity entity)
+        public Tuple<bool, string> Update(DepartmentEntity entity)
         {
+            var validateResult = DepartmentValidate.GetInstance().IsHasSameDepartmentCode(entity.DepartmentCode, entity.PkId);
+            if (!validateResult.Item1)
+            {
+                return validateResult;
+            }
+
             try
             {
-                _departmentRepository.Update(entity);
-                return true;
+                _departmentRepository.Merge(entity);
+                return new Tuple<bool, string>(true,"");
             }
             catch
             {
-                return false;
+                throw;
             }
         }
 
@@ -164,37 +184,42 @@ namespace Project.Service.PermissionManager
 
         #region 新增方法
 
-        public IList<DepartmentEntity> GetTreeList(DepartmentEntity entity)
+        public IList<DepartmentEntity> GetTreeList(DepartmentEntity entity, bool isShowTop = false)
         {
             var listAll = this.GetList(entity);
-            listAll = GetChildList(listAll, null);
-            return listAll;
-        }
 
-        private IList<DepartmentEntity> GetChildList(IList<DepartmentEntity> allList, DepartmentEntity parentDepartmentEntity)
-        {
             var list = new List<DepartmentEntity>();
-            if (parentDepartmentEntity == null)
+            if (isShowTop)
             {
-                list.AddRange(allList.Where(p => p.ParentDepartmentCode == "0"));
-                list.ForEach(p =>
-                {
-                     GetChildList(allList, p);
-                });
+                list.Add(new DepartmentEntity() { DepartmentCode = "0", DepartmentName = "顶级节点" });
             }
             else
             {
-                var childList = allList.Where(p => p.ParentDepartmentCode == parentDepartmentEntity.DepartmentCode).ToList();
-                if (childList.Any())
-                {
-                    parentDepartmentEntity.children = childList;
-                    childList.ForEach(p =>
-                    {
-                        GetChildList(allList, p);
-                    });
-                }
+                list.AddRange(listAll.Where(p => p.ParentDepartmentCode == "0"));
             }
+
+            list.ForEach(p =>
+            {
+                GetChildList(listAll, p);
+            }
+            );
+
             return list;
+        }
+
+        private void GetChildList(IList<DepartmentEntity> allList, DepartmentEntity parentDepartmentEntity)
+        {
+
+            var childList = allList.Where(p => p.ParentDepartmentCode == parentDepartmentEntity.DepartmentCode).ToList();
+            if (childList.Any())
+            {
+                parentDepartmentEntity.children = childList;
+                childList.ForEach(p =>
+                {
+                    GetChildList(allList, p);
+                });
+            }
+
         }
 
 

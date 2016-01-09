@@ -85,24 +85,24 @@ namespace Project.WebApplication.Areas.PermissionManager.Controllers
             return View();
         }
 
-        public AbpJsonResult GetUserFunctionDetailList()
-        {
-            var pIndex = this.Request["page"].ConvertTo<int>();
-            var pSize = this.Request["rows"].ConvertTo<int>();
-            var where = new UserFunctionDetailEntity();
-            //where.PkId = RequestHelper.GetFormString("PkId");
-            //where.UserCode = RequestHelper.GetFormString("UserCode");
-            //where.FunctionId = RequestHelper.GetFormString("FunctionId");
-            //where.FunctionDetailId = RequestHelper.GetFormString("FunctionDetailId");
-            var searchList = UserFunctionDetailService.GetInstance().Search(where, (pIndex - 1) * pSize, pSize);
+        //public AbpJsonResult GetUserFunctionDetailList()
+        //{
+        //    var pIndex = this.Request["page"].ConvertTo<int>();
+        //    var pSize = this.Request["rows"].ConvertTo<int>();
+        //    var where = new UserFunctionDetailEntity();
+        //    //where.PkId = RequestHelper.GetFormString("PkId");
+        //    //where.UserCode = RequestHelper.GetFormString("UserCode");
+        //    //where.FunctionId = RequestHelper.GetFormString("FunctionId");
+        //    //where.FunctionDetailId = RequestHelper.GetFormString("FunctionDetailId");
+        //    var searchList = UserFunctionDetailService.GetInstance().Search(where, (pIndex - 1) * pSize, pSize);
 
-            var dataGridEntity = new DataGridResponse()
-            {
-                total = searchList.Item2,
-                rows = searchList.Item1
-            };
-            return new AbpJsonResult(dataGridEntity, new NHibernateContractResolver());
-        }
+        //    var dataGridEntity = new DataGridResponse()
+        //    {
+        //        total = searchList.Item2,
+        //        rows = searchList.Item1
+        //    };
+        //    return new AbpJsonResult(dataGridEntity, new NHibernateContractResolver());
+        //}
 
 
         [HttpPost]

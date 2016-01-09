@@ -48,7 +48,9 @@ namespace Project.WebApplication.Areas.PermissionManager.Controllers
         public AbpJsonResult GetList_Combotree()
         {
             var where = new DepartmentEntity();
-            var searchList = DepartmentService.GetInstance().GetTreeList(where);
+            where.DepartmentCode = RequestHelper.GetFormString("DepartmentCode");
+            where.DepartmentName = RequestHelper.GetFormString("DepartmentName");
+            var searchList = DepartmentService.GetInstance().GetTreeList(where,true);
 
             return new AbpJsonResult(searchList, new NHibernateContractResolver(new[] { "children" }));
         }
@@ -60,8 +62,9 @@ namespace Project.WebApplication.Areas.PermissionManager.Controllers
             var addResult = DepartmentService.GetInstance().Add(postData.RequestEntity);
             var result = new AjaxResponse<DepartmentEntity>()
             {
-                success = true,
-                result = postData.RequestEntity
+                success = addResult.Item1,
+                result = postData.RequestEntity,
+                error = addResult.Item1 ? null : new ErrorInfo(addResult.Item2) 
             };
             return new AbpJsonResult(result, new NHibernateContractResolver());
         }
@@ -73,8 +76,9 @@ namespace Project.WebApplication.Areas.PermissionManager.Controllers
             var updateResult = DepartmentService.GetInstance().Update(postData.RequestEntity);
             var result = new AjaxResponse<DepartmentEntity>()
             {
-                success = updateResult,
-                result = postData.RequestEntity
+                success = updateResult.Item1,
+                result = postData.RequestEntity,
+                error = updateResult.Item1 ? null : new ErrorInfo(updateResult.Item2) 
             };
             return new AbpJsonResult(result, new NHibernateContractResolver(new string[] { "result" }));
         }

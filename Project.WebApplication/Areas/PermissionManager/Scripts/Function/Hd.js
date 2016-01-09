@@ -20,42 +20,61 @@
                 rownumbers: true, //行号
                 singleSelect: true,
                 idField: "PkId",
-                columns: [[
-                    { field: 'PkId', title: '', width: 100, formatter: function (value, row, index) {
-                        return pro.controlKit.getInputHtml("PkId", value);
-                    }
-                    },
-                    {
-                        field: 'FunctionDetailName', title: '功能名称', width: 100, formatter: function (value, row, index) {
-                            return pro.controlKit.getInputHtml("FunctionDetailName_" + row.PkId, value );
+                columns: [
+                    [
+                        {
+                            field: 'PkId', title: '', hidden: true, width: 100,
+                            formatter: function (value, row, index) {
+                                return pro.controlKit.getInputHtml("PkId", value);
+                            }
+                        },
+                        {
+                            field: 'FunctionDetailName',
+                            title: '功能名称',
+                            width: 100,
+                            formatter: function (value, row, index) {
+                                return pro.controlKit.getInputHtml("FunctionDetailName_" + row.PkId, value);
+                            }
+                        },
+                        {
+                            field: 'FunctionDetailCode',
+                            title: '按钮Id',
+                            width: 100,
+                            formatter: function (value, row, index) {
+                                return pro.controlKit.getInputHtml("FunctionDetailCode_" + row.PkId, value);
+                            }
+                        },
+                        {
+                            field: 'Area',
+                            title: 'Area',
+                            width: 200,
+                            formatter: function (value, row, index) {
+                                return pro.controlKit.getInputHtml("Area_" + row.PkId, value, 200);
+                            }
+                        },
+                        {
+                            field: 'Controller',
+                            title: 'Controller',
+                            width: 200,
+                            formatter: function (value, row, index) {
+                                return pro.controlKit.getInputHtml("Controller_" + row.PkId, value, 200);
+                            }
+                        },
+                        {
+                            field: 'Action',
+                            title: 'Action',
+                            width: 200,
+                            formatter: function (value, row, index) {
+                                return pro.controlKit.getInputHtml("Action_" + row.PkId, value, 200);
+                            }
                         }
-                    },
-                    {
-                        field: 'FunctionDetailCode', title: '按钮Id', width: 100, formatter: function (value, row, index) {
-                            return pro.controlKit.getInputHtml("FunctionDetailCode_" + row.PkId, value);
-                        }
-                    },
-                    {
-                        field: 'Area', title: 'Area', width: 200, formatter: function (value, row, index) {
-                            return pro.controlKit.getInputHtml("Area_" + row.PkId, value, 200);
-                        }
-                    },
-                    {
-                        field: 'Controller', title: 'Controller', width: 200, formatter: function (value, row, index) {
-                            return pro.controlKit.getInputHtml("Controller_" + row.PkId, value,200);
-                        }
-                    },
-                    {
-                        field: 'Action', title: 'Action', width: 200, formatter: function (value, row, index) {
-                            return pro.controlKit.getInputHtml("Action_" + row.PkId, value, 200);
-                        }
-                    }
-                ]],
+                    ]
+                ],
                 pagination: false,
                 pageSize: 20, //每页显示的记录条数，默认为10     
                 pageList: [20, 30, 40] //可以设置每页记录条数的列表    
             }
-               );
+            );
 
             $("#btnAdd_ToolBar").click(function () {
                 gridObj.insertRow({
@@ -65,8 +84,8 @@
 
                 //console.log(JSON.stringify($("#datagrid").datagrid('getRows')));
                 //console.log(gridObj.PkId + 1);
-               
-                $("#datagrid").datagrid('selectRecord', gridObj.PkId+1);
+
+                $("#datagrid").datagrid('selectRecord', gridObj.PkId + 1);
             });
 
 
@@ -88,9 +107,11 @@
             });
 
             $('#ModuleId').combobox({
-                 valueField:'PkId',
-                 textField: 'ModuleName',
-                 url: '/PermissionManager/Module/GetListAll_ForCombobox'
+                required: true,
+                editable: false,
+                valueField: 'PkId',
+                textField: 'ModuleName',
+                url: '/PermissionManager/Module/GetListAll_ForCombobox'
             });
 
 
@@ -116,7 +137,7 @@
         submit: function (command) {
             var postData = {};
             postData.RequestEntity = pro.submitKit.getHeadJson();
-           // postData.RequestEntity.ModuleId = $('#ModuleId').combobox('getValue');
+            // postData.RequestEntity.ModuleId = $('#ModuleId').combobox('getValue');
 
             pro.submitKit.config.columnPkidName = "PkId";
             pro.submitKit.config.columns = ["FunctionDetailName", "FunctionDetailCode", "Area", "Controller", "Action"];
@@ -141,12 +162,13 @@
                         parent.$("#btnSearch").trigger("click");
                         parent.pro.Function.ListPage.closeTab();
                     }
+
                     parent.$.alertExtend.info("", afterSuccess());
                 }
             ).fail(
-             function (errordetails, errormessage) {
-                 $.alertExtend.error();
-             }
+                function (errordetails, errormessage) {
+                    $.alertExtend.error();
+                }
             );
 
         },
@@ -180,6 +202,18 @@
                     },
                     debug: false
                 });
+
+                $("input[name=PkId]").each(function () {
+                    var i = $(this).val();
+                    $("input[name=FunctionDetailName_" + i + "]").rules("add", { required: true, messages: { required: "必填!" } });
+                    $("input[name=FunctionDetailCode_" + i + "]").rules("add", { required: true, messages: { required: "必填!" } });
+                    $("input[name=Area_" + i + "]").rules("add", { required: true, messages: { required: "必填!" } });
+                    $("input[name=Controller_" + i + "]").rules("add", { required: true, messages: { required: "必填!" } });
+                    $("input[name=Action_" + i + "]").rules("add", { required: true, messages: { required: "必填!" } });
+                }
+
+                );
+
             },
             logicValidate: function () {
                 return true;

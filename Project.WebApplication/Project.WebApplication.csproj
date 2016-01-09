@@ -130,8 +130,6 @@
     <Content Include="Areas\PermissionManager\Views\Module\List.cshtml" />
     <Content Include="Areas\PermissionManager\Views\Role\Hd.cshtml" />
     <Content Include="Areas\PermissionManager\Views\Role\List.cshtml" />
-    <Content Include="Areas\PermissionManager\Views\UserDepartment\Hd.cshtml" />
-    <Content Include="Areas\PermissionManager\Views\UserDepartment\List.cshtml" />
     <Content Include="Areas\PermissionManager\Views\UserFunctionDetail\Hd.cshtml" />
     <Content Include="Areas\PermissionManager\Views\UserFunctionDetail\List.cshtml" />
     <Content Include="Config\appSettings.config" />
@@ -558,7 +556,6 @@
     <Compile Include="Areas\PermissionManager\Controllers\ModuleController.cs" />
     <Compile Include="Areas\PermissionManager\Controllers\PermissionController.cs" />
     <Compile Include="Areas\PermissionManager\Controllers\RoleController.cs" />
-    <Compile Include="Areas\PermissionManager\Controllers\UserDepartmentController.cs" />
     <Compile Include="Areas\PermissionManager\Controllers\UserInfoController.cs" />
     <Compile Include="Areas\PermissionManager\PermissionManagerAreaRegistration.cs" />
     <Compile Include="Areas\SystemSetManager\SystemSetManagerAreaRegistration.cs" />

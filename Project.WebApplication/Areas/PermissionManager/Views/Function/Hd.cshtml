@@ -5,8 +5,13 @@
 @section JavaScript{
     <script src="/Areas/PermissionManager/Scripts/Function/Hd.js?JsParamter=@SiteConfig.GetConfig().JsParamter"></script>
 }
-<textarea id="BindEntity">@ViewBag.BindEntity</textarea>
-<input id="Command" type="hidden" />
+
+<div style="display: none">
+    <textarea id="BindEntity">@ViewBag.BindEntity</textarea>
+    <input id="Command" type="hidden" />
+</div>
+
+
 <div class="mtable_div">
     <form id="form1">
         <table class="mtable">
