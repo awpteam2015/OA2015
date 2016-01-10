@@ -122,16 +122,26 @@
     <Content Include="Areas\HRManager\Scripts\WorkExperience\List.js" />
     <Content Include="Areas\PermissionManager\Scripts\Department\Hd.js" />
     <Content Include="Areas\PermissionManager\Scripts\Department\List.js" />
+    <Content Include="Areas\PermissionManager\Scripts\FunctionDetail\Hd.js" />
+    <Content Include="Areas\PermissionManager\Scripts\FunctionDetail\List.js" />
     <Content Include="Areas\PermissionManager\Scripts\Function\Hd.js" />
     <Content Include="Areas\PermissionManager\Scripts\Function\List.js" />
     <Content Include="Areas\PermissionManager\Scripts\Module\Hd.js" />
     <Content Include="Areas\PermissionManager\Scripts\Module\List.js" />
+    <Content Include="Areas\PermissionManager\Scripts\RoleFunctionDetail\Hd.js" />
+    <Content Include="Areas\PermissionManager\Scripts\RoleFunctionDetail\List.js" />
     <Content Include="Areas\PermissionManager\Scripts\Role\Hd.js" />
     <Content Include="Areas\PermissionManager\Scripts\Role\RoleFunctionDetailList.js" />
     <Content Include="Areas\PermissionManager\Scripts\Role\List.js" />
+    <Content Include="Areas\PermissionManager\Scripts\UserDepartment\Hd.js" />
+    <Content Include="Areas\PermissionManager\Scripts\UserDepartment\List.js" />
+    <Content Include="Areas\PermissionManager\Scripts\UserFunctionDetail\Hd.js" />
+    <Content Include="Areas\PermissionManager\Scripts\UserFunctionDetail\List.js" />
     <Content Include="Areas\PermissionManager\Scripts\UserInfo\Hd.js" />
     <Content Include="Areas\PermissionManager\Scripts\UserInfo\List.js" />
     <Content Include="Areas\PermissionManager\Scripts\UserInfo\UserFunctionDetailList.js" />
+    <Content Include="Areas\PermissionManager\Scripts\UserRole\Hd.js" />
+    <Content Include="Areas\PermissionManager\Scripts\UserRole\List.js" />
     <Content Include="Areas\PermissionManager\Views\Role\RoleFunctionDetailList.cshtml">
       <SubType>Code</SubType>
     </Content>
@@ -179,6 +189,14 @@
     <Content Include="Areas\HRManager\Views\LearningExperiences\List.cshtml" />
     <Content Include="Areas\HRManager\Views\Sanction\Hd.cshtml" />
     <Content Include="Areas\HRManager\Views\Sanction\List.cshtml" />
+    <Content Include="Areas\PermissionManager\Views\FunctionDetail\Hd.cshtml" />
+    <Content Include="Areas\PermissionManager\Views\FunctionDetail\List.cshtml" />
+    <Content Include="Areas\PermissionManager\Views\RoleFunctionDetail\Hd.cshtml" />
+    <Content Include="Areas\PermissionManager\Views\RoleFunctionDetail\List.cshtml" />
+    <Content Include="Areas\PermissionManager\Views\UserDepartment\Hd.cshtml" />
+    <Content Include="Areas\PermissionManager\Views\UserDepartment\List.cshtml" />
+    <Content Include="Areas\PermissionManager\Views\UserRole\Hd.cshtml" />
+    <Content Include="Areas\PermissionManager\Views\UserRole\List.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\Control\DepartmentControl.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
@@ -606,9 +624,15 @@
     <Compile Include="Areas\HRManager\HRManagerAreaRegistration.cs" />
     <Compile Include="Areas\PermissionManager\Controllers\DepartmentController.cs" />
     <Compile Include="Areas\PermissionManager\Controllers\FunctionController.cs" />
+    <Compile Include="Areas\PermissionManager\Controllers\FunctionDetailController.cs" />
     <Compile Include="Areas\PermissionManager\Controllers\ModuleController.cs" />
+    <Compile Include="Areas\PermissionManager\Controllers\PermissionController.cs" />
     <Compile Include="Areas\PermissionManager\Controllers\RoleController.cs" />
+    <Compile Include="Areas\PermissionManager\Controllers\RoleFunctionDetailController.cs" />
+    <Compile Include="Areas\PermissionManager\Controllers\UserDepartmentController.cs" />
+    <Compile Include="Areas\PermissionManager\Controllers\UserFunctionDetailController.cs" />
     <Compile Include="Areas\PermissionManager\Controllers\UserInfoController.cs" />
+    <Compile Include="Areas\PermissionManager\Controllers\UserRoleController.cs" />
     <Compile Include="Areas\PermissionManager\PermissionManagerAreaRegistration.cs" />
     <Compile Include="Areas\SystemSetManager\SystemSetManagerAreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
@@ -653,6 +677,8 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\PermissionManager\Models\" />
+    <Folder Include="Areas\PermissionManager\Views\Permission\" />
+    <Folder Include="Areas\PermissionManager\Views\Shared\" />
     <Folder Include="Areas\SystemSetManager\Controllers\" />
     <Folder Include="Areas\SystemSetManager\Models\" />
     <Folder Include="Areas\SystemSetManager\Views\Shared\" />
