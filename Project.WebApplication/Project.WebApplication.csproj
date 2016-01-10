@@ -209,6 +209,7 @@
     <Content Include="Scripts\jqueryPlugins\jquery_tip\tip-yellow\tip-yellow.png" />
     <Content Include="Scripts\jqueryPlugins\jquery_tip\tip-yellow\tip-yellow_arrows.png" />
     <Content Include="Scripts\Account\Index.js" />
+    <Content Include="Scripts\jqueryPlugins\jquery_validate\card.js" />
     <Content Include="Scripts\Login\Login.js" />
     <Content Include="Scripts\Config\globalConfig.js" />
     <Content Include="Scripts\jqueryPlugins\jquery_tip\jquery.poshytip.js" />

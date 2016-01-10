@@ -16,6 +16,15 @@
                 parent.pro.EmployeeInfo.ListPage.closeTab("");
             });
 
+            $('#ModuleId').combobox({
+                required: true,
+                editable: false,
+                valueField: 'PkId',
+                textField: 'ModuleName',
+                url: '/PermissionManager/Module/GetListAll_ForCombobox'
+            });          
+           
+
             if ($("#BindEntity").val()) {
                 var bindField = pro.bindKit.getHeadJson();
                 var bindEntity = JSON.parse($("#BindEntity").val());
@@ -24,6 +33,11 @@
                 }
                 //行项目信息用json绑定控件
                 //alert(JSON.stringify(BindEntity.List));
+            }
+
+            var moduleId = pro.commonKit.getUrlParam("ModuleId");
+            if (moduleId > 0) {
+                $('#ModuleId').combobox('setValue', moduleId);
             }
         },
         submit: function (command) {
@@ -69,14 +83,15 @@
                         //JobName: { required: true  },
                         //PayCode: { required: true  },
                         //Sex: { required: true  },
-                        //CertNo: { required: true  },
+                        CertNo: {  isIdCardNo: '输入正确身份证号' },
+                       
                         //Birthday: { required: true  },
                         //TechnicalTitle: { required: true  },
                         //Duties: { required: true  },
                         //WorkState: { required: true  },
                         //EmployeeType: { required: true  },
                         //HomeAddress: { required: true  },
-                        //MobileNO: { required: true  },
+                        //MobileNO: {  },
                         //ImageUrl: { required: true  },
                         //Sort: { required: true  },
                         //State: { required: true  },
