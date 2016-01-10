@@ -66,10 +66,14 @@
     <Compile Include="PermissionManager\DTO\MenuDTO.cs" />
     <Compile Include="PermissionManager\DTO\LoginUserInfoDTO.cs" />
     <Compile Include="PermissionManager\DTO\PermissionFunctionDetailDTO.cs" />
+    <Compile Include="PermissionManager\FunctionDetailService.cs" />
     <Compile Include="PermissionManager\FunctionService.cs" />
     <Compile Include="PermissionManager\ModuleService.cs" />
     <Compile Include="PermissionManager\PermissionService.cs" />
+    <Compile Include="PermissionManager\RoleFunctionDetailService.cs" />
     <Compile Include="PermissionManager\RoleService.cs" />
+    <Compile Include="PermissionManager\UserDepartmentService.cs" />
+    <Compile Include="PermissionManager\UserFunctionDetailService.cs" />
     <Compile Include="PermissionManager\UserInfoService.cs">
       <SubType>Code</SubType>
     </Compile>
