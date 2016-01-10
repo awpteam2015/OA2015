@@ -53,6 +53,7 @@
   <ItemGroup>
     <Compile Include="BootstrapperService.cs" />
     <Compile Include="HRManager\ContractService.cs" />
+    <Compile Include="HRManager\DictionaryService.cs" />
     <Compile Include="HRManager\EmployeeChildrenService.cs" />
     <Compile Include="HRManager\EmployeeRotateService.cs" />
     <Compile Include="HRManager\GoAbroadService.cs" />

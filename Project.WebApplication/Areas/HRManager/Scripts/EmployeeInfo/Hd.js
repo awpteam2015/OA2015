@@ -16,12 +16,12 @@
                 parent.pro.EmployeeInfo.ListPage.closeTab("");
             });
 
-            $('#ModuleId').combobox({
+            $('#TechnicalTitle').combobox({
                 required: true,
                 editable: false,
-                valueField: 'PkId',
-                textField: 'ModuleName',
-                url: '/PermissionManager/Module/GetListAll_ForCombobox'
+                valueField: 'KeyValue',
+                textField: 'KeyName',
+                url: '/HRManager/Dictionary/GetListByCode?ParentKeyCode=JSZC'
             });          
            
 

@@ -100,6 +100,8 @@
     <Content Include="Areas\HRManager\Scripts\Attendance\List.js" />
     <Content Include="Areas\HRManager\Scripts\Contract\Hd.js" />
     <Content Include="Areas\HRManager\Scripts\Contract\List.js" />
+    <Content Include="Areas\HRManager\Scripts\Dictionary\Hd.js" />
+    <Content Include="Areas\HRManager\Scripts\Dictionary\List.js" />
     <Content Include="Areas\HRManager\Scripts\EmployeeChildren\Hd.js" />
     <Content Include="Areas\HRManager\Scripts\EmployeeChildren\List.js" />
     <Content Include="Areas\HRManager\Scripts\EmployeeInfo\Hd.js" />
@@ -197,6 +199,8 @@
     <Content Include="Areas\PermissionManager\Views\UserDepartment\List.cshtml" />
     <Content Include="Areas\PermissionManager\Views\UserRole\Hd.cshtml" />
     <Content Include="Areas\PermissionManager\Views\UserRole\List.cshtml" />
+    <Content Include="Areas\HRManager\Views\Dictionary\Hd.cshtml" />
+    <Content Include="Areas\HRManager\Views\Dictionary\List.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\Control\DepartmentControl.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
@@ -612,6 +616,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Areas\HRManager\Controllers\AttendanceController.cs" />
     <Compile Include="Areas\HRManager\Controllers\ContractController.cs" />
+    <Compile Include="Areas\HRManager\Controllers\DictionaryController.cs" />
     <Compile Include="Areas\HRManager\Controllers\EmployeeChildrenController.cs" />
     <Compile Include="Areas\HRManager\Controllers\EmployeeInfoController.cs" />
     <Compile Include="Areas\HRManager\Controllers\EmployeeRotateController.cs" />

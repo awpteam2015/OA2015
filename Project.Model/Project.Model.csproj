@@ -43,6 +43,7 @@
     <Compile Include="ExtendUi\ITree.cs" />
     <Compile Include="HRManager\AttendanceEntity.cs" />
     <Compile Include="HRManager\ContractEntity.cs" />
+    <Compile Include="HRManager\DictionaryEntity.cs" />
     <Compile Include="HRManager\EmployeeChildrenEntity.cs" />
     <Compile Include="HRManager\EmployeeInfoEntity.cs" />
     <Compile Include="HRManager\EmployeeRotateEntity.cs" />
