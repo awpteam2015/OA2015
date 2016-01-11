@@ -62,6 +62,7 @@
     <Compile Include="HRManager\GroupService.cs" />
     <Compile Include="HRManager\LearningExperiencesService.cs" />
     <Compile Include="HRManager\SanctionService.cs" />
+    <Compile Include="HRManager\Validate\EmployeeInfoValidate.cs" />
     <Compile Include="HRManager\WorkExperienceService.cs" />
     <Compile Include="PermissionManager\DepartmentService.cs" />
     <Compile Include="PermissionManager\DTO\MenuDTO.cs" />

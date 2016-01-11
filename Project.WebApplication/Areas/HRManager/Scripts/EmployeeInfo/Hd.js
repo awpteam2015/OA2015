@@ -16,17 +16,54 @@
                 parent.pro.EmployeeInfo.ListPage.closeTab("");
             });
 
+            $('#DepartmentCode').combotree({
+                required: true,
+                editable: false,
+                valueField: 'DepartmentCode',
+                textField: 'DepartmentName',
+                url: '/PermissionManager/Department/GetList_Combotree'
+            });
+
             $('#TechnicalTitle').combobox({
                 required: true,
                 editable: false,
                 valueField: 'KeyValue',
                 textField: 'KeyName',
                 url: '/HRManager/Dictionary/GetListByCode?ParentKeyCode=JSZC'
-            });          
-           
+            });
+            $('#Duties').combobox({
+                required: true,
+                editable: false,
+                valueField: 'KeyValue',
+                textField: 'KeyName',
+                url: '/HRManager/Dictionary/GetListByCode?ParentKeyCode=DWZW'
+            });
+            $('#WorkState').combobox({
+                required: true,
+                editable: false,
+                valueField: 'KeyValue',
+                textField: 'KeyName',
+                url: '/HRManager/Dictionary/GetListByCode?ParentKeyCode=ZZZT'
+            });
+
+            $('#EmployeeType').combobox({
+                required: true,
+                editable: false,
+                valueField: 'KeyValue',
+                textField: 'KeyName',
+                url: '/HRManager/Dictionary/GetListByCode?ParentKeyCode=YGLY'
+            });
+            $('#State').combobox({
+                required: true,
+                editable: false,
+                valueField: 'KeyValue',
+                textField: 'KeyName',
+                url: '/HRManager/Dictionary/GetListByCode?ParentKeyCode=ZT'
+            });
 
             if ($("#BindEntity").val()) {
                 var bindField = pro.bindKit.getHeadJson();
+
                 var bindEntity = JSON.parse($("#BindEntity").val());
                 for (var filedname in bindField) {
                     $("[name=" + filedname + "]").val(bindEntity[filedname]);
@@ -35,15 +72,15 @@
                 //alert(JSON.stringify(BindEntity.List));
             }
 
-            var moduleId = pro.commonKit.getUrlParam("ModuleId");
-            if (moduleId > 0) {
-                $('#ModuleId').combobox('setValue', moduleId);
-            }
+         
         },
         submit: function (command) {
             var postData = {};
             postData.RequestEntity = pro.submitKit.getHeadJson();
-
+            postData.RequestEntity.TechnicalTitleName = $('#TechnicalTitle').combobox('getText');
+            postData.RequestEntity.DutiesName = $('#Duties').combobox('getText');
+            postData.RequestEntity.WorkStateName = $('#WorkState').combobox('getText');
+            postData.RequestEntity.EmployeeTypeName = $('#EmployeeType').combobox('getText');
             if (pro.commonKit.getUrlParam("PkId") != "") {
                 postData.RequestEntity.PkId = pro.commonKit.getUrlParam("PkId");
             }

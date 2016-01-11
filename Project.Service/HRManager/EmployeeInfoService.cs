@@ -8,10 +8,12 @@
 * *************************************************************************/
 using System;
 using System.Linq;
+using NHibernate.Linq;
 using System.Collections.Generic;
 using Project.Infrastructure.FrameworkCore.DataNhibernate.Helpers;
 using Project.Model.HRManager;
 using Project.Repository.HRManager;
+using Project.Service.HRManager.Validate;
 
 namespace Project.Service.HRManager
 {
@@ -40,9 +42,22 @@ namespace Project.Service.HRManager
         /// </summary>
         /// <param name="entity"></param>
         /// <returns></returns>
-        public System.Int32 Add(EmployeeInfoEntity entity)
+        public Tuple<bool, string> Add(EmployeeInfoEntity entity)
         {
-            return _employeeInfoRepository.Save(entity);
+            var validateResult = EmployeeInfoValidate.GetInstance().IsHasSameEmployeeCode(entity.EmployeeCode);
+            if (!validateResult.Item1)
+            {
+                return validateResult;
+            }
+            var addResult = _employeeInfoRepository.Save(entity);
+            if (addResult > 0)
+            {
+                return new Tuple<bool, string>(true, "");
+            }
+            else
+            {
+                return new Tuple<bool, string>(false, "");
+            }
         }
 
 
@@ -85,16 +100,21 @@ namespace Project.Service.HRManager
         /// 更新
         /// </summary>
         /// <param name="entity"></param>
-        public bool Update(EmployeeInfoEntity entity)
+        public Tuple<bool, string> Update(EmployeeInfoEntity entity)
         {
             try
             {
+                var validateResult = EmployeeInfoValidate.GetInstance().IsHasSameEmployeeCode(entity.EmployeeCode, entity.PkId);
+                if (!validateResult.Item1)
+                {
+                    return validateResult;
+                }
                 _employeeInfoRepository.Update(entity);
-                return true;
+                return new Tuple<bool, string>(true, "");
             }
             catch
             {
-                return false;
+                return new Tuple<bool, string>(false, "");
             }
         }
 
@@ -123,8 +143,11 @@ namespace Project.Service.HRManager
         {
             var expr = PredicateBuilder.True<EmployeeInfoEntity>();
             #region
-            // if (!string.IsNullOrEmpty(where.PkId))
-            //  expr = expr.And(p => p.PkId == where.PkId);
+            //if (where.SexEntity == null)
+            //{
+            //    expr = expr.And(p => p.SexEntity.ParentKeyCode == "ZZTZ");
+
+            //}
             // if (!string.IsNullOrEmpty(where.EmployeeCode))
             //  expr = expr.And(p => p.EmployeeCode == where.EmployeeCode);
             // if (!string.IsNullOrEmpty(where.EmployeeName))
@@ -186,8 +209,8 @@ namespace Project.Service.HRManager
             #region
             // if (!string.IsNullOrEmpty(where.PkId))
             //  expr = expr.And(p => p.PkId == where.PkId);
-            // if (!string.IsNullOrEmpty(where.EmployeeCode))
-            //  expr = expr.And(p => p.EmployeeCode == where.EmployeeCode);
+            if (!string.IsNullOrEmpty(where.EmployeeCode))
+                expr = expr.And(p => p.EmployeeCode == where.EmployeeCode);
             // if (!string.IsNullOrEmpty(where.EmployeeName))
             //  expr = expr.And(p => p.EmployeeName == where.EmployeeName);
             // if (!string.IsNullOrEmpty(where.DepartmentCode))
