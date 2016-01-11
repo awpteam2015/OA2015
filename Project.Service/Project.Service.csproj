@@ -52,20 +52,38 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BootstrapperService.cs" />
+    <Compile Include="HRManager\ContractService.cs" />
+    <Compile Include="HRManager\DictionaryService.cs" />
+    <Compile Include="HRManager\EmployeeChildrenService.cs" />
+    <Compile Include="HRManager\EmployeeRotateService.cs" />
+    <Compile Include="HRManager\GoAbroadService.cs" />
+    <Compile Include="HRManager\GroupEmployeeHisService.cs" />
+    <Compile Include="HRManager\GroupEmployeeService.cs" />
+    <Compile Include="HRManager\GroupService.cs" />
+    <Compile Include="HRManager\LearningExperiencesService.cs" />
+    <Compile Include="HRManager\SanctionService.cs" />
+    <Compile Include="HRManager\Validate\EmployeeInfoValidate.cs" />
+    <Compile Include="HRManager\WorkExperienceService.cs" />
     <Compile Include="PermissionManager\DepartmentService.cs" />
+    <Compile Include="PermissionManager\DTO\MenuDTO.cs" />
     <Compile Include="PermissionManager\DTO\LoginUserInfoDTO.cs" />
     <Compile Include="PermissionManager\DTO\PermissionFunctionDetailDTO.cs" />
+    <Compile Include="PermissionManager\FunctionDetailService.cs" />
     <Compile Include="PermissionManager\FunctionService.cs" />
     <Compile Include="PermissionManager\ModuleService.cs" />
     <Compile Include="PermissionManager\PermissionService.cs" />
+    <Compile Include="PermissionManager\RoleFunctionDetailService.cs" />
     <Compile Include="PermissionManager\RoleService.cs" />
+    <Compile Include="PermissionManager\UserDepartmentService.cs" />
+    <Compile Include="PermissionManager\UserFunctionDetailService.cs" />
     <Compile Include="PermissionManager\UserInfoService.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="PermissionManager\UserRoleService.cs" />
     <Compile Include="PermissionManager\Validate\DepartmentValidate.cs" />
     <Compile Include="PermissionManager\Validate\UserInfoValidate.cs" />
-    <Compile Include="Project.Service\HRManager\AttendanceService.cs" />
+    <Compile Include="HRManager\AttendanceService.cs" />
+    <Compile Include="HRManager\EmployeeInfoService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -85,7 +103,9 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Project.Service\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

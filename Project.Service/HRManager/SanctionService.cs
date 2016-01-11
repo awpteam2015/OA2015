@@ -1,9 +1,9 @@
 ﻿
  /***************************************************************************
- *       功能：     HRAttendance业务处理层
- *       作者：     李伟伟
- *       日期：     2016/1/5
- *       描述：     
+ *       功能：     HRSanction业务处理层
+ *       作者：     ROY
+ *       日期：     2016-01-09
+ *       描述：     职工奖罚及部门等奖罚
  * *************************************************************************/
 using System.Linq;
 using System.Collections.Generic;
@@ -13,19 +13,19 @@ using Project.Repository.HRManager;
 
 namespace Project.Service.HRManager
 {
-    public class AttendanceService
+    public class SanctionService
     {
        
        #region 构造函数
-        private readonly AttendanceRepository  _attendanceRepository;
-            private static readonly AttendanceService Instance = new AttendanceService();
+        private readonly SanctionRepository  _sanctionRepository;
+            private static readonly SanctionService Instance = new SanctionService();
 
-        public AttendanceService()
+        public SanctionService()
         {
-           this._attendanceRepository =new AttendanceRepository();
+           this._sanctionRepository =new SanctionRepository();
         }
         
-         public static  AttendanceService GetInstance()
+         public static  SanctionService GetInstance()
         {
             return Instance;
         }
@@ -38,9 +38,9 @@ namespace Project.Service.HRManager
         /// </summary>
         /// <param name="entity"></param>
         /// <returns></returns>
-        public System.Int32 Add(AttendanceEntity entity)
+        public System.Int32 Add(SanctionEntity entity)
         {
-            return _attendanceRepository.Save(entity);
+            return _sanctionRepository.Save(entity);
         }
         
         
@@ -52,8 +52,8 @@ namespace Project.Service.HRManager
         {
          try
             {
-            var entity= _attendanceRepository.GetById(pkId);
-            _attendanceRepository.Delete(entity);
+            var entity= _sanctionRepository.GetById(pkId);
+            _sanctionRepository.Delete(entity);
              return true;
         }
         catch
@@ -66,11 +66,11 @@ namespace Project.Service.HRManager
         /// 删除
         /// </summary>
         /// <param name="entity"></param>
-        public bool Delete(AttendanceEntity entity)
+        public bool Delete(SanctionEntity entity)
         {
          try
             {
-            _attendanceRepository.Delete(entity);
+            _sanctionRepository.Delete(entity);
              return true;
         }
         catch
@@ -83,11 +83,11 @@ namespace Project.Service.HRManager
         /// 更新
         /// </summary>
         /// <param name="entity"></param>
-        public bool Update(AttendanceEntity entity)
+        public bool Update(SanctionEntity entity)
         {
           try
             {
-            _attendanceRepository.Update(entity);
+            _sanctionRepository.Update(entity);
          return true;
         }
         catch
@@ -102,9 +102,9 @@ namespace Project.Service.HRManager
         /// </summary>
         /// <param name="pkId">主键</param>
         /// <returns></returns>
-        public AttendanceEntity GetModelByPk(System.Int32 pkId)
+        public SanctionEntity GetModelByPk(System.Int32 pkId)
         {
-            return _attendanceRepository.GetById(pkId);
+            return _sanctionRepository.GetById(pkId);
         }
 
 
@@ -114,21 +114,23 @@ namespace Project.Service.HRManager
         /// <param name="entity">条件实体</param>
         /// <param name="skipResults">开始</param>
         /// <param name="maxResults">结束</param>
-        /// <returns>获取当前页【】和总【】数</returns>
-        public System.Tuple<IList<AttendanceEntity>, int> Search(AttendanceEntity where, int skipResults, int maxResults)
+        /// <returns>获取当前页【职工奖罚及部门等奖罚】和总【职工奖罚及部门等奖罚】数</returns>
+        public System.Tuple<IList<SanctionEntity>, int> Search(SanctionEntity where, int skipResults, int maxResults)
         {
-                var expr = PredicateBuilder.True<AttendanceEntity>();
+                var expr = PredicateBuilder.True<SanctionEntity>();
                   #region
               // if (!string.IsNullOrEmpty(where.PkId))
               //  expr = expr.And(p => p.PkId == where.PkId);
-              // if (!string.IsNullOrEmpty(where.EmployeeCode))
-              //  expr = expr.And(p => p.EmployeeCode == where.EmployeeCode);
-              // if (!string.IsNullOrEmpty(where.DepartmentCode))
-              //  expr = expr.And(p => p.DepartmentCode == where.DepartmentCode);
-              // if (!string.IsNullOrEmpty(where.State))
-              //  expr = expr.And(p => p.State == where.State);
-              // if (!string.IsNullOrEmpty(where.Date))
-              //  expr = expr.And(p => p.Date == where.Date);
+              // if (!string.IsNullOrEmpty(where.SanctionType))
+              //  expr = expr.And(p => p.SanctionType == where.SanctionType);
+              // if (!string.IsNullOrEmpty(where.SanctionObj))
+              //  expr = expr.And(p => p.SanctionObj == where.SanctionObj);
+              // if (!string.IsNullOrEmpty(where.SanctionTitle))
+              //  expr = expr.And(p => p.SanctionTitle == where.SanctionTitle);
+              // if (!string.IsNullOrEmpty(where.SanctionMoney))
+              //  expr = expr.And(p => p.SanctionMoney == where.SanctionMoney);
+              // if (!string.IsNullOrEmpty(where.SanctionDate))
+              //  expr = expr.And(p => p.SanctionDate == where.SanctionDate);
               // if (!string.IsNullOrEmpty(where.Remark))
               //  expr = expr.And(p => p.Remark == where.Remark);
               // if (!string.IsNullOrEmpty(where.CreatorUserCode))
@@ -138,9 +140,9 @@ namespace Project.Service.HRManager
               // if (!string.IsNullOrEmpty(where.CreateTime))
               //  expr = expr.And(p => p.CreateTime == where.CreateTime);
  #endregion
-            var list = _attendanceRepository.Query().Where(expr).OrderBy(p => p.PkId).Skip(skipResults).Take(maxResults).ToList();
-            var count = _attendanceRepository.Query().Where(expr).Count();
-            return new System.Tuple<IList<AttendanceEntity>, int>(list, count);
+            var list = _sanctionRepository.Query().Where(expr).OrderBy(p => p.PkId).Skip(skipResults).Take(maxResults).ToList();
+            var count = _sanctionRepository.Query().Where(expr).Count();
+            return new System.Tuple<IList<SanctionEntity>, int>(list, count);
         }
 
         /// <summary>
@@ -148,20 +150,22 @@ namespace Project.Service.HRManager
         /// </summary>
         /// <param name="entity">条件实体</param>
         /// <returns>返回列表</returns>
-        public IList<AttendanceEntity> GetList(AttendanceEntity where)
+        public IList<SanctionEntity> GetList(SanctionEntity where)
         {
-               var expr = PredicateBuilder.True<AttendanceEntity>();
+               var expr = PredicateBuilder.True<SanctionEntity>();
              #region
               // if (!string.IsNullOrEmpty(where.PkId))
               //  expr = expr.And(p => p.PkId == where.PkId);
-              // if (!string.IsNullOrEmpty(where.EmployeeCode))
-              //  expr = expr.And(p => p.EmployeeCode == where.EmployeeCode);
-              // if (!string.IsNullOrEmpty(where.DepartmentCode))
-              //  expr = expr.And(p => p.DepartmentCode == where.DepartmentCode);
-              // if (!string.IsNullOrEmpty(where.State))
-              //  expr = expr.And(p => p.State == where.State);
-              // if (!string.IsNullOrEmpty(where.Date))
-              //  expr = expr.And(p => p.Date == where.Date);
+              // if (!string.IsNullOrEmpty(where.SanctionType))
+              //  expr = expr.And(p => p.SanctionType == where.SanctionType);
+              // if (!string.IsNullOrEmpty(where.SanctionObj))
+              //  expr = expr.And(p => p.SanctionObj == where.SanctionObj);
+              // if (!string.IsNullOrEmpty(where.SanctionTitle))
+              //  expr = expr.And(p => p.SanctionTitle == where.SanctionTitle);
+              // if (!string.IsNullOrEmpty(where.SanctionMoney))
+              //  expr = expr.And(p => p.SanctionMoney == where.SanctionMoney);
+              // if (!string.IsNullOrEmpty(where.SanctionDate))
+              //  expr = expr.And(p => p.SanctionDate == where.SanctionDate);
               // if (!string.IsNullOrEmpty(where.Remark))
               //  expr = expr.And(p => p.Remark == where.Remark);
               // if (!string.IsNullOrEmpty(where.CreatorUserCode))
@@ -171,7 +175,7 @@ namespace Project.Service.HRManager
               // if (!string.IsNullOrEmpty(where.CreateTime))
               //  expr = expr.And(p => p.CreateTime == where.CreateTime);
  #endregion
-            var list = _attendanceRepository.Query().Where(expr).OrderBy(p => p.PkId).ToList();
+            var list = _sanctionRepository.Query().Where(expr).OrderBy(p => p.PkId).ToList();
             return list;
         }
         #endregion

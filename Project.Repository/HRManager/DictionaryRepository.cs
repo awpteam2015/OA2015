@@ -1,8 +1,8 @@
 ﻿
  /***************************************************************************
- *       功能：     HRAttendance持久层
- *       作者：     李伟伟
- *       日期：     2016/1/5
+ *       功能：     SMDictionary持久层
+ *       作者：     ROY
+ *       日期：     2016-01-10
  *       描述：     
  * *************************************************************************/
 
@@ -14,7 +14,7 @@ namespace Project.Repository.HRManager
     /// <summary>
     /// 持久层
     /// </summary>
-    public class  AttendanceRepository : RepositoryBaseSql< AttendanceEntity, int>
+    public class  DictionaryRepository : RepositoryBaseSql< DictionaryEntity, int>
     {
 
     }

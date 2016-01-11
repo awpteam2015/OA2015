@@ -22,6 +22,7 @@
 <script src="~/Scripts/jqueryPluginsExtend/jquery-easyui/alertExtend.js"></script>
 
 <script src="~/Scripts/jqueryPlugins/jquery_validate/jquery.validate.js"></script>
+<script src="~/Scripts/jqueryPlugins/jquery_validate/card.js"></script>
 <script src="~/Scripts/jqueryPlugins/jquery_validate/jquery.validate.extension.js"></script>
 <link href="~/Scripts/jqueryPlugins/jquery_validate/jquery.validate.extension.css" rel="stylesheet" />
 
@@ -35,37 +36,37 @@
             eval(str.replace(/&#39;/g, "'"));
         });
 
-        $.extend($.messager, {
-            ajaxTitle: function (msg) {
-                if (msg == "close") {
-                    $("#ajaxbodymsg,#ajaxtitlemsg").remove();
-                } else {
-                    $(".datagrid-mask,.datagrid-mask-msg").remove();
-                    $("<div class=\"datagrid-mask\" id=\"ajaxbodymsg\" style=\"z-index: 9000\"></div>").css({
-                        display: "block",
-                        width: "100%",
-                        height: $(window).height()
-                    }).appendTo("body");
+        //$.extend($.messager, {
+        //    ajaxTitle: function (msg) {
+        //        if (msg == "close") {
+        //            $("#ajaxbodymsg,#ajaxtitlemsg").remove();
+        //        } else {
+        //            $(".datagrid-mask,.datagrid-mask-msg").remove();
+        //            $("<div class=\"datagrid-mask\" id=\"ajaxbodymsg\" style=\"z-index: 9000\"></div>").css({
+        //                display: "block",
+        //                width: "100%",
+        //                height: $(window).height()
+        //            }).appendTo("body");
 
-                    $("<div class=\"datagrid-mask-msg\" id=\"ajaxtitlemsg\" style=\"z-index: 9001\"></div>").html(msg).appendTo("body").css({
-                        display: "block",
-                        left: ($(document.body).outerWidth(true) - 190) / 2,
-                        top: ($(window).height() - 45) / 2
-                    });
-                }
-            }
-        });
+        //            $("<div class=\"datagrid-mask-msg\" id=\"ajaxtitlemsg\" style=\"z-index: 9001\"></div>").html(msg).appendTo("body").css({
+        //                display: "block",
+        //                left: ($(document.body).outerWidth(true) - 190) / 2,
+        //                top: ($(window).height() - 45) / 2
+        //            });
+        //        }
+        //    }
+        //});
 
-        $(function () {
-            $(document).bind("ajaxSend", function () {
-                $.messager.ajaxTitle("正在处理，请稍候。。。");
-            }).bind("ajaxComplete", function (event,request) {
+        //$(function () {
+        //    $(document).bind("ajaxSend", function () {
+        //        $.messager.ajaxTitle("正在处理，请稍候。。。");
+        //    }).bind("ajaxComplete", function (event,request) {
               
-                $.messager.ajaxTitle("close");
-            }).bind("ajaxError", function (event, request, settings, thrownError) {
-                $.messager.alert("错误提示-请复制错误代码，发给技术支持", request.responseText, "error");
-            });
-        });
+        //        $.messager.ajaxTitle("close");
+        //    }).bind("ajaxError", function (event, request, settings, thrownError) {
+        //        $.messager.alert("错误提示-请复制错误代码，发给技术支持", request.responseText, "error");
+        //    });
+        //});
 </script>
 <style type="text/css">
     .tabOverflow {
