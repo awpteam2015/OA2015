@@ -26,6 +26,11 @@ namespace Project.WebApplication.Areas.HRManager.Controllers
                 var entity = EmployeeInfoService.GetInstance().GetModelByPk(pkId);
                 ViewBag.BindEntity = JsonHelper.JsonSerializer(entity);
             }
+            else
+            {
+
+                ViewBag.BindEntity = JsonHelper.JsonSerializer(new EmployeeInfoEntity() { EmployeeCode=""});
+            }
             return View();
         }
 
