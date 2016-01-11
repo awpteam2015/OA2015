@@ -261,7 +261,11 @@ namespace Project.Service.HRManager
 
 
         #region 新增方法
-
+        public string GetMaxEmployeeCode()
+        {
+            string retStr=_employeeInfoRepository.GetMaxEmployeeCode();            
+            return retStr;
+        }
         #endregion
     }
 }

@@ -28,8 +28,8 @@ namespace Project.WebApplication.Areas.HRManager.Controllers
             }
             else
             {
-
-                ViewBag.BindEntity = JsonHelper.JsonSerializer(new EmployeeInfoEntity() { EmployeeCode=""});
+                var maxCode = EmployeeInfoService.GetInstance().GetMaxEmployeeCode();
+                ViewBag.BindEntity = JsonHelper.JsonSerializer(new EmployeeInfoEntity() { EmployeeCode = maxCode });
             }
             return View();
         }
