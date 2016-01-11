@@ -29,6 +29,27 @@ namespace Project.Repository.PermissionManager
             return list.UniqueResult().ToString();
         }
 
+
+
+        /// <summary>
+        /// 锁定订单
+        /// </summary>
+        /// <param name="Orderchildno"></param>
+        /// <param name="Saplockreason"></param>
+        //public void LockOrder(string Orderchildno, string Saplockreason)
+        //{
+        //    string sql = "update " + DataBaseConfig.GetQZ() + "OM_ORDERCHILD set ";
+        //    sql += "Issaplock=:Issaplock,";
+        //    sql += "Saplockreason=:Saplockreason";
+        //    sql += " where Orderchildno=:Orderchildno";
+        //    OracleParameter[] cmdParms = new OracleParameter[] { 
+        //            new OracleParameter(":Issaplock", "1"),
+        //            new OracleParameter(":Saplockreason",Saplockreason),
+        //            new OracleParameter(":Orderchildno", Orderchildno)
+        //    };
+        //    this.ExecuteNoQuery(sql, cmdParms);
+        //}
+
     }
 }
 
