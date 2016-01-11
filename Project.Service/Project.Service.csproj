@@ -54,7 +54,6 @@
     <Compile Include="BootstrapperService.cs" />
     <Compile Include="PermissionManager\DepartmentService.cs" />
     <Compile Include="PermissionManager\DTO\LoginUserInfoDTO.cs" />
-    <Compile Include="PermissionManager\DTO\MenuDTO.cs" />
     <Compile Include="PermissionManager\DTO\PermissionFunctionDetailDTO.cs" />
     <Compile Include="PermissionManager\FunctionService.cs" />
     <Compile Include="PermissionManager\ModuleService.cs" />
