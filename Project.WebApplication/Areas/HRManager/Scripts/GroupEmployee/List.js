@@ -3,12 +3,15 @@ var pro = pro || {};
 (function () {
     pro.GroupEmployee = pro.GroupEmployee || {};
     pro.GroupEmployee.ListPage = pro.GroupEmployee.ListPage || {};
-    pro.GroupEmployee.ListPage = {
+    pro.GroupEmployee.ListPage = {      
         init: function () {
             return {
                 tabObj: new pro.TabBase(),
                 gridObj: new pro.GridBase("#datagrid", false),
-                gridObjdetail: new pro.GridBase("#datagriddetail", false)
+                gridObjdetail: new pro.GridBase("#datagriddetail", false),
+                VarsObj: {
+                    selectedGrioupCode: ''
+                },
             };
         },
         initPage: function () {
@@ -16,6 +19,7 @@ var pro = pro || {};
             var tabObj = initObj.tabObj;
             var gridObj = initObj.gridObj;
             var gridObjdetail = initObj.gridObjdetail;
+            var varsObj = initObj.VarsObj;
             initObj.gridObj.grid({
                 url: '/HRManager/Group/GetList',
                 fitColumns: false,
@@ -28,7 +32,7 @@ var pro = pro || {};
          { field: 'Remark', title: '备注', width: 100 }
                 ]],
                 onClickRow: function (index, row) {
-
+                    VarsObj.selectedGrioupCode = row.GroupCode;
                     gridObjdetail.reload({ GroupCode: row.GroupCode });
                 },
                 pagination: true,
@@ -58,17 +62,8 @@ var pro = pro || {};
                 tabObj.add("/HRManager/GroupEmployee/Hd", "新增");
             });
 
-            $("#btnEdit").click(function () {
-                if (!gridObj.isSelected()) {
-                    $.alertExtend.infoOp();
-                    return;
-                }
-                var PkId = gridObj.getSelectedRow().PkId;
-                tabObj.add("/HRManager/GroupEmployee/Hd?PkId=" + PkId, "编辑" + PkId);
-            });
-
             $("#btnDel").click(function () {
-                if (!gridObj.isSelected()) {
+                if (!gridObjdetail.isSelected()) {
                     $.alertExtend.infoOp();
                     return;
                 }
@@ -79,7 +74,7 @@ var pro = pro || {};
                     }).done(
                     function (dataresult, data) {
                         $.alertExtend.info();
-                        gridObj.search();
+                        gridObjdetail.search();
                     }
                     ).fail(
                     function (errordetails, errormessage) {

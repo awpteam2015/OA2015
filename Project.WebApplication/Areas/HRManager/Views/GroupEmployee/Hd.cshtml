@@ -1,9 +1,4 @@
-﻿
-
-  
-
-
-@{
+﻿@{
     ViewBag.Title = "Hd";
     Layout = "~/Views/Shared/_LayoutHandler.cshtml";
 }
@@ -12,72 +7,62 @@
     <script src="/Areas/HRManager/Scripts/GroupEmployee/Hd.js?JsParamter=@SiteConfig.GetConfig().JsParamter"></script>
 }
 <div style="display: none">
-<input id="BindEntity" type="text" value="@ViewBag.BindEntity" />
-<input id="Command" type="hidden" />
+    <input id="BindEntity" type="text" value="@ViewBag.BindEntity" />
+    <input id="Command" type="hidden" />
 </div>
 <div class="mtable_div">
     <form id="form1">
         <table class="mtable">
-            
-              <tr>
-            <td  >
-                PkId<span style="color: Red">*</span>:
-            </td>
-            <td >
-                <input id="PkId" name="PkId"  type="text"  />
-            </td>
-        </tr>
-            
-              <tr>
-            <td  >
-                组编号<span style="color: Red">*</span>:
-            </td>
-            <td >
-                <input id="GroupCode" name="GroupCode"  type="text"  />
-            </td>
-        </tr>
-            
-              <tr>
-            <td  >
-                员工编号<span style="color: Red">*</span>:
-            </td>
-            <td >
-                <input id="EmployeeCode" name="EmployeeCode"  type="text"  />
-            </td>
-        </tr>
-            
-              <tr>
-            <td  >
-                操作员<span style="color: Red">*</span>:
-            </td>
-            <td >
-                <input id="CreatorUserCode" name="CreatorUserCode"  type="text"  />
-            </td>
-        </tr>
-            
-              <tr>
-            <td  >
-                操作员<span style="color: Red">*</span>:
-            </td>
-            <td >
-                <input id="CreatorUserName" name="CreatorUserName"  type="text"  />
-            </td>
-        </tr>
-            
-              <tr>
-            <td  >
-                创建时间<span style="color: Red">*</span>:
-            </td>
-            <td >
-                <input id="CreateTime" name="CreateTime"  type="text"  />
-            </td>
-        </tr>
-          
+            <tr>
+                <td>
+                    组编号<span style="color: Red">*</span>:
+                </td>
+                <td>
+                    <input id="GroupCode" name="GroupCode" type="text" />
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    员工编号<span style="color: Red">*</span>:
+                </td>
+                <td>
+                    <input id="EmployeeCode" name="EmployeeCode" type="text" />
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    操作员<span style="color: Red">*</span>:
+                </td>
+                <td>
+                    <input id="CreatorUserCode" name="CreatorUserCode" type="text" />
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    操作员<span style="color: Red">*</span>:
+                </td>
+                <td>
+                    <input id="CreatorUserName" name="CreatorUserName" type="text" />
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    创建时间<span style="color: Red">*</span>:
+                </td>
+                <td>
+                    <input id="CreateTime" name="CreateTime" type="text" />
+                </td>
+            </tr>
+
         </table>
     </form>
 </div>
 <div style="padding: 10px 10px 0 10px; text-align: center;">
-    @if (Request["PkId"]==null||int.Parse(Request["PkId"]) == 0)
+    @if (Request["PkId"] == null || int.Parse(Request["PkId"]) == 0)
     {
         <a id="btnAdd" class="easyui-linkbutton" iconcls="icon-add" href="javascript:void(0)">新增</a>
     }
@@ -87,8 +72,6 @@
     }
     <a id="btnClose" class="easyui-linkbutton" iconcls="icon-cancel" href="javascript:void(0)">关闭</a>
 </div>
-
-
 
 
 
