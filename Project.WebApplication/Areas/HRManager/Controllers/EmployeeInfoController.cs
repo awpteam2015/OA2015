@@ -28,7 +28,7 @@ namespace Project.WebApplication.Areas.HRManager.Controllers
             }
             else
             {
-                var maxCode = EmployeeInfoService.GetInstance().GetMaxEmployeeCode();
+                var maxCode = ((TypeParse.StrToInt(EmployeeInfoService.GetInstance().GetMaxEmployeeCode(), 0) + 1) + "").PadLeft(8, '0');
                 ViewBag.BindEntity = JsonHelper.JsonSerializer(new EmployeeInfoEntity() { EmployeeCode = maxCode });
             }
             return View();

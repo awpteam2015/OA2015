@@ -1,9 +1,4 @@
-﻿
-
-  
-
-
-@{
+﻿@{
     ViewBag.Title = "Hd";
     Layout = "~/Views/Shared/_LayoutHandler.cshtml";
 }
@@ -12,108 +7,48 @@
     <script src="/Areas/HRManager/Scripts/Group/Hd.js?JsParamter=@SiteConfig.GetConfig().JsParamter"></script>
 }
 <div style="display: none">
-<input id="BindEntity" type="text" value="@ViewBag.BindEntity" />
-<input id="Command" type="hidden" />
+    <input id="BindEntity" type="text" value="@ViewBag.BindEntity" />
+    <input id="Command" type="hidden" />
 </div>
 <div class="mtable_div">
     <form id="form1">
         <table class="mtable">
-            
-              <tr>
-            <td  >
-                <span style="color: Red">*</span>:
-            </td>
-            <td >
-                <input id="PkId" name="PkId"  type="text"  />
-            </td>
-        </tr>
-            
-              <tr>
-            <td  >
-                <span style="color: Red">*</span>:
-            </td>
-            <td >
-                <input id="GroupCode" name="GroupCode"  type="text"  />
-            </td>
-        </tr>
-            
-              <tr>
-            <td  >
-                <span style="color: Red">*</span>:
-            </td>
-            <td >
-                <input id="GroupName" name="GroupName"  type="text"  />
-            </td>
-        </tr>
-            
-              <tr>
-            <td  >
-                <span style="color: Red">*</span>:
-            </td>
-            <td >
-                <input id="Sort" name="Sort"  type="text"  />
-            </td>
-        </tr>
-            
-              <tr>
-            <td  >
-                <span style="color: Red">*</span>:
-            </td>
-            <td >
-                <input id="Remark" name="Remark"  type="text"  />
-            </td>
-        </tr>
-            
-              <tr>
-            <td  >
-                <span style="color: Red">*</span>:
-            </td>
-            <td >
-                <input id="CreatorUserCode" name="CreatorUserCode"  type="text"  />
-            </td>
-        </tr>
-            
-              <tr>
-            <td  >
-                <span style="color: Red">*</span>:
-            </td>
-            <td >
-                <input id="CreatorUserName" name="CreatorUserName"  type="text"  />
-            </td>
-        </tr>
-            
-              <tr>
-            <td  >
-                <span style="color: Red">*</span>:
-            </td>
-            <td >
-                <input id="CreateTime" name="CreateTime"  type="text"  />
-            </td>
-        </tr>
-            
-              <tr>
-            <td  >
-                <span style="color: Red">*</span>:
-            </td>
-            <td >
-                <input id="LastModificationTime" name="LastModificationTime"  type="text"  />
-            </td>
-        </tr>
-            
-              <tr>
-            <td  >
-                1:删除 0:未删除,默认0<span style="color: Red">*</span>:
-            </td>
-            <td >
-                <input id="IsDeleted" name="IsDeleted"  type="text"  />
-            </td>
-        </tr>
-          
+            <tr>
+                <td>
+                    组别编号<span style="color: Red">*</span>:
+                </td>
+                <td>
+                    <input id="GroupCode" name="GroupCode" type="text" />
+                </td>
+
+                <td>
+                    组别名称<span style="color: Red">*</span>:
+                </td>
+                <td>
+                    <input id="GroupName" name="GroupName" type="text" />
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    排序号<span style="color: Red">*</span>:
+                </td>
+                <td>
+                    <input id="Sort" name="Sort" type="text" />
+                </td>
+
+                <td>
+                    备注<span style="color: Red">*</span>:
+                </td>
+                <td>
+                    <input id="Remark" name="Remark" type="text" style="width:300px;"/>
+                </td>
+            </tr>
         </table>
     </form>
 </div>
 <div style="padding: 10px 10px 0 10px; text-align: center;">
-    @if (Request["PkId"]==null||int.Parse(Request["PkId"]) == 0)
+    @if (Request["PkId"] == null || int.Parse(Request["PkId"]) == 0)
     {
         <a id="btnAdd" class="easyui-linkbutton" iconcls="icon-add" href="javascript:void(0)">新增</a>
     }
@@ -123,8 +58,6 @@
     }
     <a id="btnClose" class="easyui-linkbutton" iconcls="icon-cancel" href="javascript:void(0)">关闭</a>
 </div>
-
-
 
 
 
