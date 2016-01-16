@@ -1,10 +1,10 @@
 ﻿
- /***************************************************************************
- *       功能：     HRGroupEmployee业务处理层
- *       作者：     ROY
- *       日期：     2016-01-09
- *       描述：     组成员情况
- * *************************************************************************/
+/***************************************************************************
+*       功能：     HRGroupEmployee业务处理层
+*       作者：     ROY
+*       日期：     2016-01-09
+*       描述：     组成员情况
+* *************************************************************************/
 using System.Linq;
 using System.Collections.Generic;
 using Project.Infrastructure.FrameworkCore.DataNhibernate.Helpers;
@@ -15,25 +15,25 @@ namespace Project.Service.HRManager
 {
     public class GroupEmployeeService
     {
-       
-       #region 构造函数
-        private readonly GroupEmployeeRepository  _groupEmployeeRepository;
-            private static readonly GroupEmployeeService Instance = new GroupEmployeeService();
+
+        #region 构造函数
+        private readonly GroupEmployeeRepository _groupEmployeeRepository;
+        private static readonly GroupEmployeeService Instance = new GroupEmployeeService();
 
         public GroupEmployeeService()
         {
-           this._groupEmployeeRepository =new GroupEmployeeRepository();
+            this._groupEmployeeRepository = new GroupEmployeeRepository();
         }
-        
-         public static  GroupEmployeeService GetInstance()
+
+        public static GroupEmployeeService GetInstance()
         {
             return Instance;
         }
         #endregion
 
 
-        #region 基础方法 
-         /// <summary>
+        #region 基础方法
+        /// <summary>
         /// 新增
         /// </summary>
         /// <param name="entity"></param>
@@ -42,24 +42,24 @@ namespace Project.Service.HRManager
         {
             return _groupEmployeeRepository.Save(entity);
         }
-        
-        
-         /// <summary>
+
+
+        /// <summary>
         /// 删除
         /// </summary>
         /// <param name="pkId"></param>
         public bool DeleteByPkId(System.Int32 pkId)
         {
-         try
+            try
             {
-            var entity= _groupEmployeeRepository.GetById(pkId);
-            _groupEmployeeRepository.Delete(entity);
-             return true;
-        }
-        catch
-        {
-         return false;
-        }
+                var entity = _groupEmployeeRepository.GetById(pkId);
+                _groupEmployeeRepository.Delete(entity);
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
         }
 
         /// <summary>
@@ -68,15 +68,15 @@ namespace Project.Service.HRManager
         /// <param name="entity"></param>
         public bool Delete(GroupEmployeeEntity entity)
         {
-         try
+            try
             {
-            _groupEmployeeRepository.Delete(entity);
-             return true;
-        }
-        catch
-        {
-         return false;
-        }
+                _groupEmployeeRepository.Delete(entity);
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
         }
 
         /// <summary>
@@ -85,15 +85,15 @@ namespace Project.Service.HRManager
         /// <param name="entity"></param>
         public bool Update(GroupEmployeeEntity entity)
         {
-          try
+            try
             {
-            _groupEmployeeRepository.Update(entity);
-         return true;
-        }
-        catch
-        {
-         return false;
-        }
+                _groupEmployeeRepository.Update(entity);
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
         }
 
 
@@ -117,21 +117,21 @@ namespace Project.Service.HRManager
         /// <returns>获取当前页【组成员情况】和总【组成员情况】数</returns>
         public System.Tuple<IList<GroupEmployeeEntity>, int> Search(GroupEmployeeEntity where, int skipResults, int maxResults)
         {
-                var expr = PredicateBuilder.True<GroupEmployeeEntity>();
-                  #region
-              // if (!string.IsNullOrEmpty(where.PkId))
-              //  expr = expr.And(p => p.PkId == where.PkId);
-              // if (!string.IsNullOrEmpty(where.GroupCode))
-              //  expr = expr.And(p => p.GroupCode == where.GroupCode);
-              // if (!string.IsNullOrEmpty(where.EmployeeCode))
-              //  expr = expr.And(p => p.EmployeeCode == where.EmployeeCode);
-              // if (!string.IsNullOrEmpty(where.CreatorUserCode))
-              //  expr = expr.And(p => p.CreatorUserCode == where.CreatorUserCode);
-              // if (!string.IsNullOrEmpty(where.CreatorUserName))
-              //  expr = expr.And(p => p.CreatorUserName == where.CreatorUserName);
-              // if (!string.IsNullOrEmpty(where.CreateTime))
-              //  expr = expr.And(p => p.CreateTime == where.CreateTime);
- #endregion
+            var expr = PredicateBuilder.True<GroupEmployeeEntity>();
+            #region
+            // if (!string.IsNullOrEmpty(where.PkId))
+            //  expr = expr.And(p => p.PkId == where.PkId);
+            if (!string.IsNullOrEmpty(where.GroupCode))
+                expr = expr.And(p => p.GroupCode == where.GroupCode);
+            // if (!string.IsNullOrEmpty(where.EmployeeCode))
+            //  expr = expr.And(p => p.EmployeeCode == where.EmployeeCode);
+            // if (!string.IsNullOrEmpty(where.CreatorUserCode))
+            //  expr = expr.And(p => p.CreatorUserCode == where.CreatorUserCode);
+            // if (!string.IsNullOrEmpty(where.CreatorUserName))
+            //  expr = expr.And(p => p.CreatorUserName == where.CreatorUserName);
+            // if (!string.IsNullOrEmpty(where.CreateTime))
+            //  expr = expr.And(p => p.CreateTime == where.CreateTime);
+            #endregion
             var list = _groupEmployeeRepository.Query().Where(expr).OrderBy(p => p.PkId).Skip(skipResults).Take(maxResults).ToList();
             var count = _groupEmployeeRepository.Query().Where(expr).Count();
             return new System.Tuple<IList<GroupEmployeeEntity>, int>(list, count);
@@ -144,21 +144,21 @@ namespace Project.Service.HRManager
         /// <returns>返回列表</returns>
         public IList<GroupEmployeeEntity> GetList(GroupEmployeeEntity where)
         {
-               var expr = PredicateBuilder.True<GroupEmployeeEntity>();
-             #region
-              // if (!string.IsNullOrEmpty(where.PkId))
-              //  expr = expr.And(p => p.PkId == where.PkId);
-              // if (!string.IsNullOrEmpty(where.GroupCode))
-              //  expr = expr.And(p => p.GroupCode == where.GroupCode);
-              // if (!string.IsNullOrEmpty(where.EmployeeCode))
-              //  expr = expr.And(p => p.EmployeeCode == where.EmployeeCode);
-              // if (!string.IsNullOrEmpty(where.CreatorUserCode))
-              //  expr = expr.And(p => p.CreatorUserCode == where.CreatorUserCode);
-              // if (!string.IsNullOrEmpty(where.CreatorUserName))
-              //  expr = expr.And(p => p.CreatorUserName == where.CreatorUserName);
-              // if (!string.IsNullOrEmpty(where.CreateTime))
-              //  expr = expr.And(p => p.CreateTime == where.CreateTime);
- #endregion
+            var expr = PredicateBuilder.True<GroupEmployeeEntity>();
+            #region
+            // if (!string.IsNullOrEmpty(where.PkId))
+            //  expr = expr.And(p => p.PkId == where.PkId);
+            if (!string.IsNullOrEmpty(where.GroupCode))
+                expr = expr.And(p => p.GroupCode == where.GroupCode);
+            // if (!string.IsNullOrEmpty(where.EmployeeCode))
+            //  expr = expr.And(p => p.EmployeeCode == where.EmployeeCode);
+            // if (!string.IsNullOrEmpty(where.CreatorUserCode))
+            //  expr = expr.And(p => p.CreatorUserCode == where.CreatorUserCode);
+            // if (!string.IsNullOrEmpty(where.CreatorUserName))
+            //  expr = expr.And(p => p.CreatorUserName == where.CreatorUserName);
+            // if (!string.IsNullOrEmpty(where.CreateTime))
+            //  expr = expr.And(p => p.CreateTime == where.CreateTime);
+            #endregion
             var list = _groupEmployeeRepository.Query().Where(expr).OrderBy(p => p.PkId).ToList();
             return list;
         }
@@ -166,11 +166,11 @@ namespace Project.Service.HRManager
 
 
         #region 新增方法
-        
+
         #endregion
     }
 }
 
-    
- 
+
+
 

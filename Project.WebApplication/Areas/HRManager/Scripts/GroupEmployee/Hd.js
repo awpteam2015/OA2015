@@ -70,12 +70,12 @@
           CreateTime: { required: true  },
                     },
                     messages: {
-          PkId:  "必填!",
-          GroupCode:  "必填!",
-          EmployeeCode:  "必填!",
-          CreatorUserCode:  "必填!",
-          CreatorUserName:  "必填!",
-          CreateTime:  "必填!",
+          PkId:  "PkId必填!",
+          GroupCode:  "组编号必填!",
+          EmployeeCode:  "员工编号必填!",
+          CreatorUserCode:  "操作员必填!",
+          CreatorUserName:  "操作员必填!",
+          CreateTime:  "创建时间必填!",
                     },
                     errorPlacement: function (error, element) {
                         pro.commonKit.errorPlacementHd(error, element);

@@ -12,6 +12,7 @@ using Project.Mvc.Controllers.Results;
 using Project.Mvc.Models;
 using Project.Service.HRManager;
 using Project.WebApplication.Controllers;
+using Project.Infrastructure.FrameworkCore.ToolKit;
 
 namespace Project.WebApplication.Areas.HRManager.Controllers
 {
@@ -43,8 +44,8 @@ namespace Project.WebApplication.Areas.HRManager.Controllers
             var pSize = this.Request["rows"].ConvertTo<int>();
             var where = new GroupEntity();
             //where.PkId = RequestHelper.GetFormString("PkId");
-            //where.GroupCode = RequestHelper.GetFormString("GroupCode");
-            //where.GroupName = RequestHelper.GetFormString("GroupName");
+            where.GroupCode = RequestHelper.GetFormString("GroupCode");
+            where.GroupName = RequestHelper.GetFormString("GroupName");
             //where.Sort = RequestHelper.GetFormString("Sort");
             //where.Remark = RequestHelper.GetFormString("Remark");
             //where.CreatorUserCode = RequestHelper.GetFormString("CreatorUserCode");
@@ -87,8 +88,9 @@ namespace Project.WebApplication.Areas.HRManager.Controllers
             var updateResult = GroupService.GetInstance().Update(postData.RequestEntity);
             var result = new AjaxResponse<GroupEntity>()
             {
-                success = updateResult,
-                result = postData.RequestEntity
+                success = updateResult.Item1,
+                result = postData.RequestEntity,
+                error = updateResult.Item1 ? null : new ErrorInfo(updateResult.Item2)
             };
             return new AbpJsonResult(result, new NHibernateContractResolver(new string[] { "result" }));
         }

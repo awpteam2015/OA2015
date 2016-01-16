@@ -142,10 +142,10 @@ namespace Project.Service.HRManager
             #region
             // if (!string.IsNullOrEmpty(where.PkId))
             //  expr = expr.And(p => p.PkId == where.PkId);
-            // if (!string.IsNullOrEmpty(where.GroupCode))
-            //  expr = expr.And(p => p.GroupCode == where.GroupCode);
-            // if (!string.IsNullOrEmpty(where.GroupName))
-            //  expr = expr.And(p => p.GroupName == where.GroupName);
+            if (!string.IsNullOrEmpty(where.GroupCode))
+                expr = expr.And(p => p.GroupCode == where.GroupCode);
+            if (!string.IsNullOrEmpty(where.GroupName))
+                expr = expr.And(p => p.GroupName == where.GroupName);
             // if (!string.IsNullOrEmpty(where.Sort))
             //  expr = expr.And(p => p.Sort == where.Sort);
             // if (!string.IsNullOrEmpty(where.Remark))
@@ -177,8 +177,8 @@ namespace Project.Service.HRManager
             #region
             // if (!string.IsNullOrEmpty(where.PkId))
             //  expr = expr.And(p => p.PkId == where.PkId);
-            // if (!string.IsNullOrEmpty(where.GroupCode))
-            //  expr = expr.And(p => p.GroupCode == where.GroupCode);
+            if (!string.IsNullOrEmpty(where.GroupCode))
+                expr = expr.And(p => p.GroupCode == where.GroupCode);
             // if (!string.IsNullOrEmpty(where.GroupName))
             //  expr = expr.And(p => p.GroupName == where.GroupName);
             // if (!string.IsNullOrEmpty(where.Sort))
