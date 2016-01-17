@@ -32,7 +32,7 @@ var pro = pro || {};
          { field: 'Remark', title: '备注', width: 100 }
                 ]],
                 onClickRow: function (index, row) {
-                    VarsObj.selectedGrioupCode = row.GroupCode;
+                    varsObj.selectedGrioupCode = row.GroupCode;
                     gridObjdetail.reload({ GroupCode: row.GroupCode });
                 },
                 pagination: true,

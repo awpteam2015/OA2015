@@ -93,7 +93,8 @@ var pro = pro || {};
                     return;
                 }
                 var PkId = gridObj.getSelectedRow().PkId;
-                tabObj.add("/HRManager/EmployeeInfo/Hd?PkId=" + PkId, "编辑" + PkId);
+                var EmployeeCode = gridObj.getSelectedRow().EmployeeCode;
+                tabObj.add("/HRManager/EmployeeInfo/Hd?PkId=" + PkId + "&EmployeeCode=" + EmployeeCode, "编辑" + PkId);
             });
 
 

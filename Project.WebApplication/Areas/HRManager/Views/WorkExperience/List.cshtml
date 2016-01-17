@@ -10,10 +10,10 @@
 }
 
 @section JavaScript{
-    <script src="/Areas/HRManager/Scripts/LearningExperiences/List.js?JsParamter=@SiteConfig.GetConfig().JsParamter" type="text/javascript"></script>
+    <script src="/Areas/HRManager/Scripts/WorkExperience/List.js?JsParamter=@SiteConfig.GetConfig().JsParamter" type="text/javascript"></script>
 }
 
-<div title="员工学习经历" style="padding:1px;">
+<div title="员工工作经历记录" style="padding:1px;">
     <table id="datagrid" style="height:auto;" iconcls=".icon-save" singleselect="true"  toolbar="#tb" fit="true"></table>
     <div id="tb" style="padding:5px;height:auto">
         <div  style="margin-bottom: 5px">
@@ -52,7 +52,7 @@
             
               <tr>
             <td >
-                部门编号:
+                所属部门:
             </td>
             <td >
                 <input id="DepartmentCode" name="DepartmentCode"  type="text"  />
@@ -61,64 +61,55 @@
             
               <tr>
             <td >
-                专业:
+                工作单位:
             </td>
             <td >
-                <input id="ProfessionCode" name="ProfessionCode"  type="text"  />
-            </td>
-        </tr>
-            
-              <tr>
-            <td >
-                学校:
-            </td>
-            <td >
-                <input id="School" name="School"  type="text"  />
+                <input id="WorkCompany" name="WorkCompany"  type="text"  />
             </td>
         </tr>
             
               <tr>
             <td >
-                获取学位:
+                职务:
             </td>
             <td >
-                <input id="Degree" name="Degree"  type="text"  />
-            </td>
-        </tr>
-            
-              <tr>
-            <td >
-                获取学历:
-            </td>
-            <td >
-                <input id="Education" name="Education"  type="text"  />
+                <input id="Duties" name="Duties"  type="text"  />
             </td>
         </tr>
             
               <tr>
             <td >
-                证明人:
+                开始日期:
             </td>
             <td >
-                <input id="VerifyPersone" name="VerifyPersone"  type="text"  />
-            </td>
-        </tr>
-            
-              <tr>
-            <td >
-                获奖说明:
-            </td>
-            <td >
-                <input id="Reward" name="Reward"  type="text"  />
+                <input id="BeginDate" name="BeginDate"  type="text"  />
             </td>
         </tr>
             
               <tr>
             <td >
-                获奖证书:
+                结束日期:
             </td>
             <td >
-                <input id="Certificate" name="Certificate"  type="text"  />
+                <input id="EndDate" name="EndDate"  type="text"  />
+            </td>
+        </tr>
+            
+              <tr>
+            <td >
+                工作内容:
+            </td>
+            <td >
+                <input id="WorkContent" name="WorkContent"  type="text"  />
+            </td>
+        </tr>
+            
+              <tr>
+            <td >
+                离职原因:
+            </td>
+            <td >
+                <input id="LeaveReason" name="LeaveReason"  type="text"  />
             </td>
         </tr>
             
@@ -133,7 +124,7 @@
             
               <tr>
             <td >
-                操作人员:
+                操作人:
             </td>
             <td >
                 <input id="CreatorUserCode" name="CreatorUserCode"  type="text"  />
@@ -142,7 +133,7 @@
             
               <tr>
             <td >
-                操作人员名称:
+                操作人名称:
             </td>
             <td >
                 <input id="CreatorUserName" name="CreatorUserName"  type="text"  />

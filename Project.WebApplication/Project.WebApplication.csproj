@@ -201,6 +201,8 @@
     <Content Include="Areas\PermissionManager\Views\UserRole\List.cshtml" />
     <Content Include="Areas\HRManager\Views\Dictionary\Hd.cshtml" />
     <Content Include="Areas\HRManager\Views\Dictionary\List.cshtml" />
+    <Content Include="Areas\HRManager\Views\WorkExperience\Hd.cshtml" />
+    <Content Include="Areas\HRManager\Views\WorkExperience\List.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\Control\DepartmentControl.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
@@ -642,7 +644,6 @@
     <Compile Include="Areas\PermissionManager\PermissionManagerAreaRegistration.cs" />
     <Compile Include="Areas\SystemSetManager\SystemSetManagerAreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\BaseController - 复制.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\DefaultController.cs" />
     <Compile Include="Controllers\LoginController.cs" />

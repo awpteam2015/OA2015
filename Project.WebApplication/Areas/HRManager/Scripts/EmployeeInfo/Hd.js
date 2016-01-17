@@ -3,7 +3,17 @@
     pro.EmployeeInfo = pro.EmployeeInfo || {};
     pro.EmployeeInfo.HdPage = pro.EmployeeInfo.HdPage || {};
     pro.EmployeeInfo.HdPage = {
+        init: function () {
+            return {
+                tabObj: new pro.TabBase(),
+                gridObjWork: new pro.GridBase("#datagridwork", false),
+                gridObjStudy: new pro.GridBase("#datagridstudy", false)
+            };
+        },
         initPage: function () {
+            var initObj = this.init();
+            var gridObjWork = initObj.gridObjWork;
+            var gridObjStudy = initObj.gridObjStudy;
             $("#btnAdd").click(function () {
                 pro.EmployeeInfo.HdPage.submit("Add");
             });
@@ -61,6 +71,96 @@
                 url: '/HRManager/Dictionary/GetListByCode?ParentKeyCode=ZT'
             });
 
+            gridObjWork.grid({
+                url: '/HRManager/WorkExperience/GetList?EmployeeCode=' + pro.commonKit.getUrlParam("EmployeeCode"),
+                fitColumns: false,
+                nowrap: false,
+                rownumbers: true, //行号
+                singleSelect: true,
+                idField: "PkId",
+                columns: [
+                    [
+                        {
+                            field: 'PkId', title: '', hidden: true, width: 100,
+                            formatter: function (value, row, index) {
+                                return pro.controlKit.getInputHtml("PkId", value);
+                            }
+                        },
+                        {
+                            field: 'FunctionDetailName',
+                            title: '功能名称',
+                            width: 100,
+                            formatter: function (value, row, index) {
+                                return pro.controlKit.getInputHtml("FunctionDetailName_" + row.PkId, value);
+                            }
+                        },
+                        {
+                            field: 'FunctionDetailCode',
+                            title: '按钮Id',
+                            width: 100,
+                            formatter: function (value, row, index) {
+                                return pro.controlKit.getInputHtml("FunctionDetailCode_" + row.PkId, value);
+                            }
+                        },
+                        {
+                            field: 'Area',
+                            title: 'Area',
+                            width: 200,
+                            formatter: function (value, row, index) {
+                                return pro.controlKit.getInputHtml("Area_" + row.PkId, value, 200);
+                            }
+                        },
+                        {
+                            field: 'Controller',
+                            title: 'Controller',
+                            width: 200,
+                            formatter: function (value, row, index) {
+                                return pro.controlKit.getInputHtml("Controller_" + row.PkId, value, 200);
+                            }
+                        },
+                        {
+                            field: 'Action',
+                            title: 'Action',
+                            width: 200,
+                            formatter: function (value, row, index) {
+                                return pro.controlKit.getInputHtml("Action_" + row.PkId, value, 200);
+                            }
+                        }
+                    ]
+                ],
+                pagination: false,
+                pageSize: 20, //每页显示的记录条数，默认为10     
+                pageList: [20, 30, 40] //可以设置每页记录条数的列表    
+            }
+            );
+
+            $("#btnAddWork_ToolBar").click(function () {
+                gridObjWork.insertRow({
+                    PkId: gridObj.PkId,
+                    FunctionDetailCode: ""
+                });
+
+                //console.log(JSON.stringify($("#datagrid").datagrid('getRows')));
+                //console.log(gridObj.PkId + 1);
+
+                $("#datagridwork").datagrid('selectRecord', gridObj.PkId + 1);
+            });
+            $("#btnAddStudy_ToolBar").click(function () {
+                gridObjStudy.insertRow({
+                    PkId: gridObj.PkId,
+                    FunctionDetailCode: ""
+                });
+
+                $("#datagridstudy").datagrid('selectRecord', gridObj.PkId + 1);
+            });
+
+
+            $("#btnDel_ToolBar").click(function () {
+                gridObj.delRow();
+            });
+
+
+
             if ($("#BindEntity").val()) {
                 var bindField = pro.bindKit.getHeadJson();
 
@@ -72,7 +172,6 @@
                 //alert(JSON.stringify(BindEntity.List));
             }
 
-         
         },
         submit: function (command) {
             var postData = {};
@@ -120,8 +219,8 @@
                         //JobName: { required: true  },
                         //PayCode: { required: true  },
                         //Sex: { required: true  },
-                        CertNo: {  isIdCardNo: '输入正确身份证号' },
-                       
+                        CertNo: { isIdCardNo: '输入正确身份证号' },
+
                         //Birthday: { required: true  },
                         //TechnicalTitle: { required: true  },
                         //Duties: { required: true  },
