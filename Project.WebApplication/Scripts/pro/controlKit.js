@@ -13,7 +13,7 @@
             return html;
         },
         //获取Input的格式
-        getInputHtml: function (name, value,width) {
+        getInputHtml: function (name, value, width) {
             if (value == undefined) {
                 value = "";
             }
@@ -26,11 +26,27 @@
             return html;
         },
         //获取Input的格式
+        getTextAreaHtml: function (name, value, width, height) {
+            if (value == undefined) {
+                value = "";
+            }
+
+            if (width == undefined) {
+                width = "100";
+            }
+            if (height == undefined) {
+                height = "120";
+            }
+
+            var html = '<textarea name="' + name + '"  type="text" style="width:' + width + 'px;height:' + height + 'px">' + value + '</textarea>';
+            return html;
+        },
+        //获取Input的格式
         getInputDateHtml: function (name, value) {
             if (value == undefined) {
                 value = "";
             }
-            var html = '<input class="Wdate"   name="' + name + '" value="' + value + '"  onclick="WdatePicker({skin:\'ext\'});"  type="text"/>';
+            var html = '<input class="Wdate"   name="' + name + '" value="' + value + '"  onclick="WdatePicker();"  type="text"/>';
             return html;
         },
         //获取Span的格式

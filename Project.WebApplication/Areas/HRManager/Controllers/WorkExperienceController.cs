@@ -12,6 +12,7 @@ using Project.Mvc.Controllers.Results;
 using Project.Mvc.Models;
 using Project.Service.HRManager;
 using Project.WebApplication.Controllers;
+using Project.Infrastructure.FrameworkCore.ToolKit;
 
 namespace Project.WebApplication.Areas.HRManager.Controllers
 {
@@ -28,7 +29,7 @@ namespace Project.WebApplication.Areas.HRManager.Controllers
             return View();
         }
 
- 
+
         public ActionResult List()
         {
             return View();
@@ -39,20 +40,20 @@ namespace Project.WebApplication.Areas.HRManager.Controllers
             var pIndex = this.Request["page"].ConvertTo<int>();
             var pSize = this.Request["rows"].ConvertTo<int>();
             var where = new WorkExperienceEntity();
-			//where.PkId = RequestHelper.GetFormString("PkId");
-			//where.EmployeeCode = RequestHelper.GetFormString("EmployeeCode");
-			//where.DepartmentCode = RequestHelper.GetFormString("DepartmentCode");
-			//where.WorkCompany = RequestHelper.GetFormString("WorkCompany");
-			//where.Duties = RequestHelper.GetFormString("Duties");
-			//where.BeginDate = RequestHelper.GetFormString("BeginDate");
-			//where.EndDate = RequestHelper.GetFormString("EndDate");
-			//where.WorkContent = RequestHelper.GetFormString("WorkContent");
-			//where.LeaveReason = RequestHelper.GetFormString("LeaveReason");
-			//where.Remark = RequestHelper.GetFormString("Remark");
-			//where.CreatorUserCode = RequestHelper.GetFormString("CreatorUserCode");
-			//where.CreatorUserName = RequestHelper.GetFormString("CreatorUserName");
-			//where.CreateTime = RequestHelper.GetFormString("CreateTime");
-			//where.LastModificationTime = RequestHelper.GetFormString("LastModificationTime");
+            //where.PkId = RequestHelper.GetFormString("PkId");
+            where.EmployeeCode = RequestHelper.GetFormString("EmployeeCode");
+            //where.DepartmentCode = RequestHelper.GetFormString("DepartmentCode");
+            //where.WorkCompany = RequestHelper.GetFormString("WorkCompany");
+            //where.Duties = RequestHelper.GetFormString("Duties");
+            //where.BeginDate = RequestHelper.GetFormString("BeginDate");
+            //where.EndDate = RequestHelper.GetFormString("EndDate");
+            //where.WorkContent = RequestHelper.GetFormString("WorkContent");
+            //where.LeaveReason = RequestHelper.GetFormString("LeaveReason");
+            //where.Remark = RequestHelper.GetFormString("Remark");
+            //where.CreatorUserCode = RequestHelper.GetFormString("CreatorUserCode");
+            //where.CreatorUserName = RequestHelper.GetFormString("CreatorUserName");
+            //where.CreateTime = RequestHelper.GetFormString("CreateTime");
+            //where.LastModificationTime = RequestHelper.GetFormString("LastModificationTime");
             var searchList = WorkExperienceService.GetInstance().Search(where, (pIndex - 1) * pSize, pSize);
 
             var dataGridEntity = new DataGridResponse()
@@ -63,6 +64,20 @@ namespace Project.WebApplication.Areas.HRManager.Controllers
             return new AbpJsonResult(dataGridEntity, new NHibernateContractResolver());
         }
 
+        public AbpJsonResult GetAllList()
+        {
+            var where = new WorkExperienceEntity();
+            where.EmployeeCode = RequestHelper.GetFormString("EmployeeCode");
+            //where.DepartmentCode = RequestHelper.GetFormString("DepartmentCode");
+            var searchList = WorkExperienceService.GetInstance().GetList(where);
+
+            var dataGridEntity = new DataGridResponse()
+            {
+                total = searchList.Count,
+                rows = searchList
+            };
+            return new AbpJsonResult(dataGridEntity, new NHibernateContractResolver());
+        }
 
         [HttpPost]
         public AbpJsonResult Add(AjaxRequest<WorkExperienceEntity> postData)
@@ -78,7 +93,7 @@ namespace Project.WebApplication.Areas.HRManager.Controllers
 
 
         [HttpPost]
-        public AbpJsonResult Edit( AjaxRequest<WorkExperienceEntity> postData)
+        public AbpJsonResult Edit(AjaxRequest<WorkExperienceEntity> postData)
         {
             var updateResult = WorkExperienceService.GetInstance().Update(postData.RequestEntity);
             var result = new AjaxResponse<WorkExperienceEntity>()

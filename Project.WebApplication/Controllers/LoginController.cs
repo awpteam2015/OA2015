@@ -37,7 +37,7 @@ namespace Project.WebApplication.Controllers
             1 /*version*/,
             Guid.NewGuid().ToString(),
             DateTime.Now,
-            DateTime.Now.AddMinutes(20),
+            DateTime.Now.AddMinutes(200),
             true,//持久性
             JsonConvert.SerializeObject(userInfo.Item3),
             FormsAuthentication.FormsCookiePath);

@@ -72,7 +72,7 @@
             });
 
             gridObjWork.grid({
-                url: '/HRManager/WorkExperience/GetList?EmployeeCode=' + pro.commonKit.getUrlParam("EmployeeCode"),
+                url: '/HRManager/WorkExperience/GetAllList?EmployeeCode=' + pro.commonKit.getUrlParam("EmployeeCode"),
                 fitColumns: false,
                 nowrap: false,
                 rownumbers: true, //行号
@@ -87,43 +87,43 @@
                             }
                         },
                         {
-                            field: 'FunctionDetailName',
-                            title: '功能名称',
+                            field: 'WorkCompany',
+                            title: '工作单位',
                             width: 100,
                             formatter: function (value, row, index) {
-                                return pro.controlKit.getInputHtml("FunctionDetailName_" + row.PkId, value);
+                                return pro.controlKit.getInputHtml("WorkCompany" + row.PkId, value);
                             }
                         },
                         {
-                            field: 'FunctionDetailCode',
-                            title: '按钮Id',
+                            field: 'Duties',
+                            title: '职务',
                             width: 100,
                             formatter: function (value, row, index) {
-                                return pro.controlKit.getInputHtml("FunctionDetailCode_" + row.PkId, value);
+                                return pro.controlKit.getInputHtml("Duties" + row.PkId, value);
                             }
                         },
                         {
-                            field: 'Area',
-                            title: 'Area',
-                            width: 200,
+                            field: 'BeginDate',
+                            title: '开始日期',
+                            width: 150,
                             formatter: function (value, row, index) {
-                                return pro.controlKit.getInputHtml("Area_" + row.PkId, value, 200);
+                                return pro.controlKit.getInputDateHtml("BeginDate_" + row.PkId, value, 145);
                             }
                         },
                         {
-                            field: 'Controller',
-                            title: 'Controller',
-                            width: 200,
+                            field: 'EndDate',
+                            title: '结束日期',
+                            width: 150,
                             formatter: function (value, row, index) {
-                                return pro.controlKit.getInputHtml("Controller_" + row.PkId, value, 200);
+                                return pro.controlKit.getInputDateHtml("EndDate_" + row.PkId, value, 145);
                             }
                         },
                         {
-                            field: 'Action',
-                            title: 'Action',
+                            field: 'WorkContent',
+                            title: '工作内容',
                             width: 200,
                             formatter: function (value, row, index) {
-                                return pro.controlKit.getInputHtml("Action_" + row.PkId, value, 200);
+                                return pro.controlKit.getTextAreaHtml("WorkContent_" + row.PkId, value, 180,150);
                             }
                         }
                     ]
@@ -136,22 +136,22 @@
 
             $("#btnAddWork_ToolBar").click(function () {
                 gridObjWork.insertRow({
-                    PkId: gridObj.PkId,
-                    FunctionDetailCode: ""
+                    PkId: gridObjWork.PkId,
+                    WorkCompany: ""
                 });
 
                 //console.log(JSON.stringify($("#datagrid").datagrid('getRows')));
                 //console.log(gridObj.PkId + 1);
 
-                $("#datagridwork").datagrid('selectRecord', gridObj.PkId + 1);
+                $("#datagridwork").datagrid('selectRecord', gridObjWork.PkId + 1);
             });
             $("#btnAddStudy_ToolBar").click(function () {
                 gridObjStudy.insertRow({
-                    PkId: gridObj.PkId,
-                    FunctionDetailCode: ""
+                    PkId: gridObjStudy.PkId,
+                    WorkCompany: ""
                 });
 
-                $("#datagridstudy").datagrid('selectRecord', gridObj.PkId + 1);
+                $("#datagridstudy").datagrid('selectRecord', gridObjStudy.PkId + 1);
             });
 
 
