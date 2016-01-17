@@ -6,6 +6,7 @@
             iscolumnPkidChecked: false,
             columnPkidName: "PkId",
             columns: new Array(),
+            columnNamePreStr: '',//字段名前缀
             excludeAreaIds: ""
         },
         getHeadJson: function () {
@@ -51,15 +52,21 @@
         getRowJson: function () {
             var columns = this.config.columns;
             var PkId = this.config.columnPkidName;
+            var PreStr = this.config.columnNamePreStr;
 
             var json = "";
             var obj = this.config.iscolumnPkidChecked ? $("[name=" + PkId + "]:checked") : $("[name=" + PkId + "]");
+
             obj.each(
                 function () {
-                    var rowJson = '"' + PkId + '":"' + $(this).val() + '",';
+                    var rowJson = "";
+                    if ($(this).val() > 0) {
+                        rowJson = '"' + PkId.replace(PreStr, '') + '":"' + $(this).val() + '",';
+                    }
+
                     for (var i = 0, max = columns.length; i < max; i++) {
 
-                        rowJson += '"' + columns[i] + '":"' + $("[name=" + columns[i] + "_" + $(this).val() + "]").val() + '",';
+                        rowJson += '"' + columns[i] + '":"' + $("[name=" + PreStr + columns[i] + "_" + $(this).val() + "]").val() + '",';
                     }
 
                     json += "{" + rowJson.substring(0, rowJson.length - 1) + "},";

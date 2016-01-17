@@ -13,6 +13,7 @@ using Project.Mvc.Models;
 using Project.Service.HRManager;
 using Project.WebApplication.Controllers;
 using Project.Infrastructure.FrameworkCore.ToolKit;
+using Project.Infrastructure.FrameworkCore.ToolKit.StringHandler;
 
 namespace Project.WebApplication.Areas.HRManager.Controllers
 {
@@ -41,7 +42,7 @@ namespace Project.WebApplication.Areas.HRManager.Controllers
             var pSize = this.Request["rows"].ConvertTo<int>();
             var where = new WorkExperienceEntity();
             //where.PkId = RequestHelper.GetFormString("PkId");
-            where.EmployeeCode = RequestHelper.GetFormString("EmployeeCode");
+            where.EmployeeID = RequestHelper.GetFormInt("EmployeeCode", 0);
             //where.DepartmentCode = RequestHelper.GetFormString("DepartmentCode");
             //where.WorkCompany = RequestHelper.GetFormString("WorkCompany");
             //where.Duties = RequestHelper.GetFormString("Duties");
@@ -67,7 +68,7 @@ namespace Project.WebApplication.Areas.HRManager.Controllers
         public AbpJsonResult GetAllList()
         {
             var where = new WorkExperienceEntity();
-            where.EmployeeCode = RequestHelper.GetFormString("EmployeeCode");
+            where.EmployeeID = TypeParse.StrToInt(RequestHelper.QueryString["EmployeeID"],0);
             //where.DepartmentCode = RequestHelper.GetFormString("DepartmentCode");
             var searchList = WorkExperienceService.GetInstance().GetList(where);
 

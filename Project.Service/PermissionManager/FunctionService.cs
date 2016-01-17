@@ -51,8 +51,29 @@ namespace Project.Service.PermissionManager
             entity.FunctionDetailList.ToList().ForEach(p =>
             {
                 p.ModuleId = entity.ModuleId;
+                p.CreationTime = DateTime.Now;
             });
-            return _functionRepository.Save(entity);
+
+            using (var tx = NhTransactionHelper.BeginTransaction())
+            {
+                try
+                {
+
+                    var pkId= _functionRepository.Save(entity);
+                    entity.FunctionDetailList.ToList().ForEach(p =>
+                    {
+                        p.FunctionId = pkId;
+                    });
+                    tx.Commit();
+                    return pkId;
+                }
+                catch (Exception e)
+                {
+                    tx.Rollback();
+                    throw;
+                }
+            }
+
         }
 
 
@@ -88,7 +109,7 @@ namespace Project.Service.PermissionManager
             var date = DateTime.Now;
             entity.FunctionDetailList.ToList().ForEach(p =>
             {
-                if (p.PkId < 0)
+                if (p.PkId <= 0)
                 {
                     p.CreationTime = date;
                     p.CreatorUserCode = "";

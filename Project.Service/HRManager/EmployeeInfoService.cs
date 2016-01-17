@@ -14,6 +14,7 @@ using Project.Infrastructure.FrameworkCore.DataNhibernate.Helpers;
 using Project.Model.HRManager;
 using Project.Repository.HRManager;
 using Project.Service.HRManager.Validate;
+using Project.Infrastructure.FrameworkCore.DataNhibernate;
 
 namespace Project.Service.HRManager
 {
@@ -22,11 +23,16 @@ namespace Project.Service.HRManager
 
         #region 构造函数
         private readonly EmployeeInfoRepository _employeeInfoRepository;
+        private readonly WorkExperienceRepository _workExperienceRepository;
+        private readonly LearningExperiencesRepository _learnExperienceRepository;
         private static readonly EmployeeInfoService Instance = new EmployeeInfoService();
 
         public EmployeeInfoService()
         {
             this._employeeInfoRepository = new EmployeeInfoRepository();
+
+            this._workExperienceRepository = new WorkExperienceRepository();
+            this._learnExperienceRepository = new LearningExperiencesRepository();
         }
 
         public static EmployeeInfoService GetInstance()
@@ -49,15 +55,41 @@ namespace Project.Service.HRManager
             {
                 return validateResult;
             }
-            var addResult = _employeeInfoRepository.Save(entity);
-            if (addResult > 0)
+
+            using (var tx = NhTransactionHelper.BeginTransaction())
             {
-                return new Tuple<bool, string>(true, "");
+                try
+                {
+                    var pkId = _employeeInfoRepository.Save(entity);
+                    entity.WorkList.ToList().ForEach(p =>
+                    {
+                        p.EmployeeID = pkId;
+                    });
+                    entity.LearningList.ToList().ForEach(p =>
+                    {
+                        p.EmployeeID = pkId;
+                    });
+                    tx.Commit();
+                    return new Tuple<bool, string>(true, ""); ;
+                }
+                catch (Exception e)
+                {
+                    tx.Rollback();
+                    throw;
+                }
             }
-            else
-            {
-                return new Tuple<bool, string>(false, "");
-            }
+            //var addResult = _employeeInfoRepository.Save(entity);
+
+
+
+            //if (addResult > 0)
+            //{
+
+            //}
+            //else
+            //{
+            //    return new Tuple<bool, string>(false, "");
+            //}
         }
 
 
@@ -102,20 +134,40 @@ namespace Project.Service.HRManager
         /// <param name="entity"></param>
         public Tuple<bool, string> Update(EmployeeInfoEntity entity)
         {
-            try
+
+            var validateResult = EmployeeInfoValidate.GetInstance().IsHasSameEmployeeCode(entity.EmployeeCode, entity.PkId);
+            if (!validateResult.Item1)
             {
-                var validateResult = EmployeeInfoValidate.GetInstance().IsHasSameEmployeeCode(entity.EmployeeCode, entity.PkId);
-                if (!validateResult.Item1)
+                return validateResult;
+            }
+            var oldEntity = EmployeeInfoService.GetInstance().GetModelByPk(entity.PkId);
+            var date = DateTime.Now;
+            entity.WorkList.ToList().ForEach(item => item.EmployeeID = entity.PkId);
+            entity.LearningList.ToList().ForEach(item => item.EmployeeID = entity.PkId);
+            var deleteList = oldEntity.WorkList.Where(
+                    p => entity.WorkList.All(x => x.PkId != p.PkId)).ToList();
+            var deleteLearningList = oldEntity.LearningList.Where(
+                              p => entity.LearningList.All(x => x.PkId != p.PkId)).ToList();
+            using (var tx = NhTransactionHelper.BeginTransaction())
+            {
+                try
                 {
-                    return validateResult;
+                    _employeeInfoRepository.Merge(entity);
+                    deleteList.ForEach(p => { _workExperienceRepository.Delete(p); });
+                    deleteLearningList.ForEach(p => { _learnExperienceRepository.Delete(p); });
+                    tx.Commit();
+                    return new Tuple<bool, string>(true, "");
                 }
-                _employeeInfoRepository.Update(entity);
-                return new Tuple<bool, string>(true, "");
+                catch
+                {
+                    tx.Rollback();
+                    throw;
+                }
             }
-            catch
-            {
-                return new Tuple<bool, string>(false, "");
-            }
+
+
+
+
         }
 
 
@@ -263,7 +315,7 @@ namespace Project.Service.HRManager
         #region 新增方法
         public string GetMaxEmployeeCode()
         {
-            string retStr=_employeeInfoRepository.GetMaxEmployeeCode();            
+            string retStr = _employeeInfoRepository.GetMaxEmployeeCode();
             return retStr;
         }
         #endregion

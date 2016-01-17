@@ -10,11 +10,18 @@
 using System;
 using Project.Infrastructure.FrameworkCore.Domain.Entities;
 using Project.Infrastructure.FrameworkCore.Domain.Entities.Component;
+using System.Collections.Generic;
 
 namespace Project.Model.HRManager
 {
     public class EmployeeInfoEntity : Entity
     {
+        public EmployeeInfoEntity()
+        {
+
+            this.WorkList = new HashSet<WorkExperienceEntity>();
+            this.LearningList = new HashSet<LearningExperiencesEntity>();
+        }
         #region 属性
         /// <summary>
         /// 员工编号
@@ -84,14 +91,7 @@ namespace Project.Model.HRManager
         /// 手机号
         /// </summary>
         public virtual System.String MobileNO { get; set; }
-        /// <summary>
-        /// 工作经历
-        /// </summary>
-        public virtual System.String WorkExperience { get; set; }
-        /// <summary>
-        /// 学习经历
-        /// </summary>
-        public virtual System.String LearnExperience { get; set; }
+
         /// <summary>
         /// 图片地址
         /// </summary>
@@ -133,6 +133,16 @@ namespace Project.Model.HRManager
 
 
         #region 新增属性
+
+        /// <summary>
+        /// 工作经历
+        /// </summary>
+        public virtual ISet<WorkExperienceEntity> WorkList { get; set; }
+
+        /// <summary>
+        /// 学习经历
+        /// </summary>
+        public virtual ISet<LearningExperiencesEntity> LearningList { get; set; }
 
         #endregion
     }

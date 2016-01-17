@@ -82,9 +82,9 @@ namespace Project.WebApplication.Areas.HRManager.Controllers
         [HttpPost]
         public AbpJsonResult Add(AjaxRequest<EmployeeInfoEntity> postData)
         {
-            var where = new EmployeeInfoEntity();
-            where.EmployeeCode = postData.RequestEntity.EmployeeCode;
-            EmployeeInfoService.GetInstance().GetList(where);
+            //var where = new EmployeeInfoEntity();
+            //where.EmployeeCode = postData.RequestEntity.EmployeeCode;
+            //EmployeeInfoService.GetInstance().GetList(where);
             postData.RequestEntity.CreatorUserCode = LoginUserInfo.UserCode;
             postData.RequestEntity.CreateTime = DateTime.Now;
             postData.RequestEntity.PayCode = postData.RequestEntity.EmployeeName.GetStringSpellCode();
