@@ -1,9 +1,4 @@
-﻿
-
-  
-
-
-@{
+﻿@{
     ViewBag.Title = "Hd";
     Layout = "~/Views/Shared/_LayoutHandler.cshtml";
 }
@@ -12,108 +7,84 @@
     <script src="/Areas/HRManager/Scripts/Sanction/Hd.js?JsParamter=@SiteConfig.GetConfig().JsParamter"></script>
 }
 <div style="display: none">
-<input id="BindEntity" type="text" value="@ViewBag.BindEntity" />
-<input id="Command" type="hidden" />
+    <input id="BindEntity" type="text" value="@ViewBag.BindEntity" />
+    <input id="Command" type="hidden" />
 </div>
 <div class="mtable_div">
     <form id="form1">
         <table class="mtable">
-            
-              <tr>
-            <td  >
-                <span style="color: Red">*</span>:
-            </td>
-            <td >
-                <input id="PkId" name="PkId"  type="text"  />
-            </td>
-        </tr>
-            
-              <tr>
-            <td  >
-                0:罚 1:奖<span style="color: Red">*</span>:
-            </td>
-            <td >
-                <input id="SanctionType" name="SanctionType"  type="text"  />
-            </td>
-        </tr>
-            
-              <tr>
-            <td  >
-                0:个人 1:部门（科室）<span style="color: Red">*</span>:
-            </td>
-            <td >
-                <input id="SanctionObj" name="SanctionObj"  type="text"  />
-            </td>
-        </tr>
-            
-              <tr>
-            <td  >
-                <span style="color: Red">*</span>:
-            </td>
-            <td >
-                <input id="SanctionTitle" name="SanctionTitle"  type="text"  />
-            </td>
-        </tr>
-            
-              <tr>
-            <td  >
-                <span style="color: Red">*</span>:
-            </td>
-            <td >
-                <input id="SanctionMoney" name="SanctionMoney"  type="text"  />
-            </td>
-        </tr>
-            
-              <tr>
-            <td  >
-                <span style="color: Red">*</span>:
-            </td>
-            <td >
-                <input id="SanctionDate" name="SanctionDate"  type="text"  />
-            </td>
-        </tr>
-            
-              <tr>
-            <td  >
-                <span style="color: Red">*</span>:
-            </td>
-            <td >
-                <input id="Remark" name="Remark"  type="text"  />
-            </td>
-        </tr>
-            
-              <tr>
-            <td  >
-                <span style="color: Red">*</span>:
-            </td>
-            <td >
-                <input id="CreatorUserCode" name="CreatorUserCode"  type="text"  />
-            </td>
-        </tr>
-            
-              <tr>
-            <td  >
-                <span style="color: Red">*</span>:
-            </td>
-            <td >
-                <input id="CreatorUserName" name="CreatorUserName"  type="text"  />
-            </td>
-        </tr>
-            
-              <tr>
-            <td  >
-                <span style="color: Red">*</span>:
-            </td>
-            <td >
-                <input id="CreateTime" name="CreateTime"  type="text"  />
-            </td>
-        </tr>
-          
+            <tr>
+                <td>
+                    奖罚类型<span style="color: Red">*</span>:
+                </td>
+                <td>
+                    <select id="SanctionType" name="SanctionType" class="easyui-combobox">
+                        <option value="0">奖励</option>
+                        <option value="1">惩罚</option>
+                    </select>
+                </td>
+
+                <td>
+                    奖罚对象类型<span style="color: Red">*</span>:
+                </td>
+                <td>
+                    <select id="SanctionObjType" name="SanctionObjType" class="easyui-combobox">
+                        <option value="0">个人</option>
+                        <option value="1">机构（科室）</option>
+                    </select>
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    奖罚对象<span style="color: Red">*</span>:
+                </td>
+                <td colspan="3">
+                    <input id="DepartmentCode" name="DepartmentCode" type="text" style="width: 200px" />
+                    <input id="SanctionObj" name="SanctionObj" type="text" class="easyui-combobox" />
+                </td>
+            </tr>
+
+
+            <tr>
+                <td>
+                    奖罚金额<span style="color: Red">*</span>:
+                </td>
+                <td>
+                    <input id="SanctionMoney" name="SanctionMoney" type="text" />
+                </td>
+
+                <td>
+                    奖罚日期<span style="color: Red">*</span>:
+                </td>
+                <td>
+                    <input id="SanctionDate" name="SanctionDate" type="text" class="Wdate" onclick="WdatePicker();" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    奖罚名目<span style="color: Red">*</span>:
+                </td>
+                <td colspan="3">
+                    <input id="SanctionTitle" name="SanctionTitle" type="text" style="width:400px;height:150px;" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    备注<span style="color: Red">*</span>:
+                </td>
+                <td colspan="3">
+                    <input id="Remark" name="Remark" type="text" style="width:400px;height:150px;" />
+                </td>
+            </tr>
+
+
+
         </table>
     </form>
 </div>
 <div style="padding: 10px 10px 0 10px; text-align: center;">
-    @if (Request["PkId"]==null||int.Parse(Request["PkId"]) == 0)
+    @if (Request["PkId"] == null || int.Parse(Request["PkId"]) == 0)
     {
         <a id="btnAdd" class="easyui-linkbutton" iconcls="icon-add" href="javascript:void(0)">新增</a>
     }
@@ -123,8 +94,6 @@
     }
     <a id="btnClose" class="easyui-linkbutton" iconcls="icon-cancel" href="javascript:void(0)">关闭</a>
 </div>
-
-
 
 
 

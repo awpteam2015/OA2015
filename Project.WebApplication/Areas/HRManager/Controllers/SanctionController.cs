@@ -12,6 +12,7 @@ using Project.Mvc.Controllers.Results;
 using Project.Mvc.Models;
 using Project.Service.HRManager;
 using Project.WebApplication.Controllers;
+using Project.Infrastructure.FrameworkCore.ToolKit;
 
 namespace Project.WebApplication.Areas.HRManager.Controllers
 {
@@ -28,7 +29,7 @@ namespace Project.WebApplication.Areas.HRManager.Controllers
             return View();
         }
 
- 
+
         public ActionResult List()
         {
             return View();
@@ -39,16 +40,20 @@ namespace Project.WebApplication.Areas.HRManager.Controllers
             var pIndex = this.Request["page"].ConvertTo<int>();
             var pSize = this.Request["rows"].ConvertTo<int>();
             var where = new SanctionEntity();
-			//where.PkId = RequestHelper.GetFormString("PkId");
-			//where.SanctionType = RequestHelper.GetFormString("SanctionType");
-			//where.SanctionObj = RequestHelper.GetFormString("SanctionObj");
-			//where.SanctionTitle = RequestHelper.GetFormString("SanctionTitle");
-			//where.SanctionMoney = RequestHelper.GetFormString("SanctionMoney");
-			//where.SanctionDate = RequestHelper.GetFormString("SanctionDate");
-			//where.Remark = RequestHelper.GetFormString("Remark");
-			//where.CreatorUserCode = RequestHelper.GetFormString("CreatorUserCode");
-			//where.CreatorUserName = RequestHelper.GetFormString("CreatorUserName");
-			//where.CreateTime = RequestHelper.GetFormString("CreateTime");
+            //where.PkId = RequestHelper.GetFormString("PkId");
+            where.SanctionType = RequestHelper.GetFormInt("SanctionType",-1);
+            where.DepartmentCode = RequestHelper.GetFormString("DepartmentCode");            
+            //where.SanctionObjType = RequestHelper.GetFormInt("SanctionObjType", 0);
+            //where.SanctionObj = RequestHelper.GetFormString("SanctionObj");
+            //where.SanctionTitle = RequestHelper.GetFormString("SanctionTitle");
+            //where.SanctionMoney = RequestHelper.GetFormString("SanctionMoney");
+            where.SanctionDate = RequestHelper.GetFormDateTime("SanctionDate");
+            where.SanctionDateEnd = RequestHelper.GetFormDateTime("SanctionDateEnd");
+            //where.Remark = RequestHelper.GetFormString("Remark");
+            //where.CreatorUserCode = RequestHelper.GetFormString("CreatorUserCode");
+            //where.CreatorUserName = RequestHelper.GetFormString("CreatorUserName");
+            //where.CreateTime = RequestHelper.GetFormString("CreateTime");
+            //where.LastModificationTime = RequestHelper.GetFormString("LastModificationTime");
             var searchList = SanctionService.GetInstance().Search(where, (pIndex - 1) * pSize, pSize);
 
             var dataGridEntity = new DataGridResponse()
@@ -63,6 +68,9 @@ namespace Project.WebApplication.Areas.HRManager.Controllers
         [HttpPost]
         public AbpJsonResult Add(AjaxRequest<SanctionEntity> postData)
         {
+            postData.RequestEntity.CreatorUserCode = LoginUserInfo.UserCode;
+            postData.RequestEntity.CreatorUserName = LoginUserInfo.UserName;
+            postData.RequestEntity.CreateTime = DateTime.Now;
             var addResult = SanctionService.GetInstance().Add(postData.RequestEntity);
             var result = new AjaxResponse<SanctionEntity>()
                {
@@ -74,7 +82,7 @@ namespace Project.WebApplication.Areas.HRManager.Controllers
 
 
         [HttpPost]
-        public AbpJsonResult Edit( AjaxRequest<SanctionEntity> postData)
+        public AbpJsonResult Edit(AjaxRequest<SanctionEntity> postData)
         {
             var updateResult = SanctionService.GetInstance().Update(postData.RequestEntity);
             var result = new AjaxResponse<SanctionEntity>()

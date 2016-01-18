@@ -265,8 +265,8 @@ namespace Project.Service.HRManager
                 expr = expr.And(p => p.EmployeeCode == where.EmployeeCode);
             // if (!string.IsNullOrEmpty(where.EmployeeName))
             //  expr = expr.And(p => p.EmployeeName == where.EmployeeName);
-            // if (!string.IsNullOrEmpty(where.DepartmentCode))
-            //  expr = expr.And(p => p.DepartmentCode == where.DepartmentCode);
+            if (!string.IsNullOrEmpty(where.DepartmentCode))
+                expr = expr.And(p => p.DepartmentCode == where.DepartmentCode);
             // if (!string.IsNullOrEmpty(where.JobName))
             //  expr = expr.And(p => p.JobName == where.JobName);
             // if (!string.IsNullOrEmpty(where.PayCode))

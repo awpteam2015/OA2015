@@ -1,10 +1,10 @@
 ﻿
- /***************************************************************************
- *       功能：     HRSanction业务处理层
- *       作者：     ROY
- *       日期：     2016-01-09
- *       描述：     职工奖罚及部门等奖罚
- * *************************************************************************/
+/***************************************************************************
+*       功能：     HRSanction业务处理层
+*       作者：     Roy
+*       日期：     2016-01-18
+*       描述：     职工奖罚及部门等奖罚
+* *************************************************************************/
 using System.Linq;
 using System.Collections.Generic;
 using Project.Infrastructure.FrameworkCore.DataNhibernate.Helpers;
@@ -15,25 +15,25 @@ namespace Project.Service.HRManager
 {
     public class SanctionService
     {
-       
-       #region 构造函数
-        private readonly SanctionRepository  _sanctionRepository;
-            private static readonly SanctionService Instance = new SanctionService();
+
+        #region 构造函数
+        private readonly SanctionRepository _sanctionRepository;
+        private static readonly SanctionService Instance = new SanctionService();
 
         public SanctionService()
         {
-           this._sanctionRepository =new SanctionRepository();
+            this._sanctionRepository = new SanctionRepository();
         }
-        
-         public static  SanctionService GetInstance()
+
+        public static SanctionService GetInstance()
         {
             return Instance;
         }
         #endregion
 
 
-        #region 基础方法 
-         /// <summary>
+        #region 基础方法
+        /// <summary>
         /// 新增
         /// </summary>
         /// <param name="entity"></param>
@@ -42,24 +42,24 @@ namespace Project.Service.HRManager
         {
             return _sanctionRepository.Save(entity);
         }
-        
-        
-         /// <summary>
+
+
+        /// <summary>
         /// 删除
         /// </summary>
         /// <param name="pkId"></param>
         public bool DeleteByPkId(System.Int32 pkId)
         {
-         try
+            try
             {
-            var entity= _sanctionRepository.GetById(pkId);
-            _sanctionRepository.Delete(entity);
-             return true;
-        }
-        catch
-        {
-         return false;
-        }
+                var entity = _sanctionRepository.GetById(pkId);
+                _sanctionRepository.Delete(entity);
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
         }
 
         /// <summary>
@@ -68,15 +68,15 @@ namespace Project.Service.HRManager
         /// <param name="entity"></param>
         public bool Delete(SanctionEntity entity)
         {
-         try
+            try
             {
-            _sanctionRepository.Delete(entity);
-             return true;
-        }
-        catch
-        {
-         return false;
-        }
+                _sanctionRepository.Delete(entity);
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
         }
 
         /// <summary>
@@ -85,15 +85,15 @@ namespace Project.Service.HRManager
         /// <param name="entity"></param>
         public bool Update(SanctionEntity entity)
         {
-          try
+            try
             {
-            _sanctionRepository.Update(entity);
-         return true;
-        }
-        catch
-        {
-         return false;
-        }
+                _sanctionRepository.Update(entity);
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
         }
 
 
@@ -117,29 +117,38 @@ namespace Project.Service.HRManager
         /// <returns>获取当前页【职工奖罚及部门等奖罚】和总【职工奖罚及部门等奖罚】数</returns>
         public System.Tuple<IList<SanctionEntity>, int> Search(SanctionEntity where, int skipResults, int maxResults)
         {
-                var expr = PredicateBuilder.True<SanctionEntity>();
-                  #region
-              // if (!string.IsNullOrEmpty(where.PkId))
-              //  expr = expr.And(p => p.PkId == where.PkId);
-              // if (!string.IsNullOrEmpty(where.SanctionType))
-              //  expr = expr.And(p => p.SanctionType == where.SanctionType);
-              // if (!string.IsNullOrEmpty(where.SanctionObj))
-              //  expr = expr.And(p => p.SanctionObj == where.SanctionObj);
-              // if (!string.IsNullOrEmpty(where.SanctionTitle))
-              //  expr = expr.And(p => p.SanctionTitle == where.SanctionTitle);
-              // if (!string.IsNullOrEmpty(where.SanctionMoney))
-              //  expr = expr.And(p => p.SanctionMoney == where.SanctionMoney);
-              // if (!string.IsNullOrEmpty(where.SanctionDate))
-              //  expr = expr.And(p => p.SanctionDate == where.SanctionDate);
-              // if (!string.IsNullOrEmpty(where.Remark))
-              //  expr = expr.And(p => p.Remark == where.Remark);
-              // if (!string.IsNullOrEmpty(where.CreatorUserCode))
-              //  expr = expr.And(p => p.CreatorUserCode == where.CreatorUserCode);
-              // if (!string.IsNullOrEmpty(where.CreatorUserName))
-              //  expr = expr.And(p => p.CreatorUserName == where.CreatorUserName);
-              // if (!string.IsNullOrEmpty(where.CreateTime))
-              //  expr = expr.And(p => p.CreateTime == where.CreateTime);
- #endregion
+            var expr = PredicateBuilder.True<SanctionEntity>();
+            #region
+            // if (!string.IsNullOrEmpty(where.PkId))
+            //  expr = expr.And(p => p.PkId == where.PkId);
+            if (where.SanctionType >= 0)
+                expr = expr.And(p => p.SanctionType == where.SanctionType);
+            if (where.SanctionObjType > 0)
+                expr = expr.And(p => p.SanctionObjType == where.SanctionObjType);
+
+            if (!string.IsNullOrEmpty(where.DepartmentCode))
+                expr = expr.And(p => p.DepartmentCode == where.DepartmentCode);
+            //if (!string.IsNullOrEmpty(where.SanctionObj))
+            //  expr = expr.And(p => p.SanctionObj == where.SanctionObj);
+            // if (!string.IsNullOrEmpty(where.SanctionTitle))
+            //  expr = expr.And(p => p.SanctionTitle == where.SanctionTitle);
+            // if (!string.IsNullOrEmpty(where.SanctionMoney))
+            //  expr = expr.And(p => p.SanctionMoney == where.SanctionMoney);
+            if (where.SanctionDate.HasValue && where.SanctionDate.Value.Year > 1)
+                expr = expr.And(p => p.SanctionDate >= where.SanctionDate);
+            if (where.SanctionDateEnd.HasValue && where.SanctionDateEnd.Value.Year > 1)
+                expr = expr.And(p => p.SanctionDate <= where.SanctionDateEnd.Value.AddDays(1));
+            // if (!string.IsNullOrEmpty(where.Remark))
+            //  expr = expr.And(p => p.Remark == where.Remark);
+            // if (!string.IsNullOrEmpty(where.CreatorUserCode))
+            //  expr = expr.And(p => p.CreatorUserCode == where.CreatorUserCode);
+            // if (!string.IsNullOrEmpty(where.CreatorUserName))
+            //  expr = expr.And(p => p.CreatorUserName == where.CreatorUserName);
+            // if (!string.IsNullOrEmpty(where.CreateTime))
+            //  expr = expr.And(p => p.CreateTime == where.CreateTime);
+            // if (!string.IsNullOrEmpty(where.LastModificationTime))
+            //  expr = expr.And(p => p.LastModificationTime == where.LastModificationTime);
+            #endregion
             var list = _sanctionRepository.Query().Where(expr).OrderBy(p => p.PkId).Skip(skipResults).Take(maxResults).ToList();
             var count = _sanctionRepository.Query().Where(expr).Count();
             return new System.Tuple<IList<SanctionEntity>, int>(list, count);
@@ -152,29 +161,33 @@ namespace Project.Service.HRManager
         /// <returns>返回列表</returns>
         public IList<SanctionEntity> GetList(SanctionEntity where)
         {
-               var expr = PredicateBuilder.True<SanctionEntity>();
-             #region
-              // if (!string.IsNullOrEmpty(where.PkId))
-              //  expr = expr.And(p => p.PkId == where.PkId);
-              // if (!string.IsNullOrEmpty(where.SanctionType))
-              //  expr = expr.And(p => p.SanctionType == where.SanctionType);
-              // if (!string.IsNullOrEmpty(where.SanctionObj))
-              //  expr = expr.And(p => p.SanctionObj == where.SanctionObj);
-              // if (!string.IsNullOrEmpty(where.SanctionTitle))
-              //  expr = expr.And(p => p.SanctionTitle == where.SanctionTitle);
-              // if (!string.IsNullOrEmpty(where.SanctionMoney))
-              //  expr = expr.And(p => p.SanctionMoney == where.SanctionMoney);
-              // if (!string.IsNullOrEmpty(where.SanctionDate))
-              //  expr = expr.And(p => p.SanctionDate == where.SanctionDate);
-              // if (!string.IsNullOrEmpty(where.Remark))
-              //  expr = expr.And(p => p.Remark == where.Remark);
-              // if (!string.IsNullOrEmpty(where.CreatorUserCode))
-              //  expr = expr.And(p => p.CreatorUserCode == where.CreatorUserCode);
-              // if (!string.IsNullOrEmpty(where.CreatorUserName))
-              //  expr = expr.And(p => p.CreatorUserName == where.CreatorUserName);
-              // if (!string.IsNullOrEmpty(where.CreateTime))
-              //  expr = expr.And(p => p.CreateTime == where.CreateTime);
- #endregion
+            var expr = PredicateBuilder.True<SanctionEntity>();
+            #region
+            // if (!string.IsNullOrEmpty(where.PkId))
+            //  expr = expr.And(p => p.PkId == where.PkId);
+            // if (!string.IsNullOrEmpty(where.SanctionType))
+            //  expr = expr.And(p => p.SanctionType == where.SanctionType);
+            // if (!string.IsNullOrEmpty(where.SanctionObjType))
+            //  expr = expr.And(p => p.SanctionObjType == where.SanctionObjType);
+            // if (!string.IsNullOrEmpty(where.SanctionObj))
+            //  expr = expr.And(p => p.SanctionObj == where.SanctionObj);
+            // if (!string.IsNullOrEmpty(where.SanctionTitle))
+            //  expr = expr.And(p => p.SanctionTitle == where.SanctionTitle);
+            // if (!string.IsNullOrEmpty(where.SanctionMoney))
+            //  expr = expr.And(p => p.SanctionMoney == where.SanctionMoney);
+            // if (!string.IsNullOrEmpty(where.SanctionDate))
+            //  expr = expr.And(p => p.SanctionDate == where.SanctionDate);
+            // if (!string.IsNullOrEmpty(where.Remark))
+            //  expr = expr.And(p => p.Remark == where.Remark);
+            // if (!string.IsNullOrEmpty(where.CreatorUserCode))
+            //  expr = expr.And(p => p.CreatorUserCode == where.CreatorUserCode);
+            // if (!string.IsNullOrEmpty(where.CreatorUserName))
+            //  expr = expr.And(p => p.CreatorUserName == where.CreatorUserName);
+            // if (!string.IsNullOrEmpty(where.CreateTime))
+            //  expr = expr.And(p => p.CreateTime == where.CreateTime);
+            // if (!string.IsNullOrEmpty(where.LastModificationTime))
+            //  expr = expr.And(p => p.LastModificationTime == where.LastModificationTime);
+            #endregion
             var list = _sanctionRepository.Query().Where(expr).OrderBy(p => p.PkId).ToList();
             return list;
         }
@@ -182,11 +195,11 @@ namespace Project.Service.HRManager
 
 
         #region 新增方法
-        
+
         #endregion
     }
 }
 
-    
- 
+
+
 

@@ -13,6 +13,7 @@ using Project.Mvc.Controllers.Results;
 using Project.Mvc.Models;
 using Project.Service.HRManager;
 using Project.WebApplication.Controllers;
+using Project.Infrastructure.FrameworkCore.ToolKit;
 
 namespace Project.WebApplication.Areas.HRManager.Controllers
 {
@@ -76,6 +77,18 @@ namespace Project.WebApplication.Areas.HRManager.Controllers
                 rows = searchList.Item1
             };
             return new AbpJsonResult(dataGridEntity, new NHibernateContractResolver());
+        }
+
+        public AbpJsonResult GetAllList()
+        {
+            var where = new EmployeeInfoEntity();
+            where.DepartmentCode = RequestHelper.QueryString["DepartmentCode"];
+
+            //where.DepartmentCode = RequestHelper.GetFormString("DepartmentCode");
+            var searchList = EmployeeInfoService.GetInstance().GetList(where);
+
+
+            return new AbpJsonResult(searchList, new NHibernateContractResolver());
         }
 
 
