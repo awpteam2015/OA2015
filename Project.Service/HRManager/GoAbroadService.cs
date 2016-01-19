@@ -1,10 +1,10 @@
 ﻿
- /***************************************************************************
- *       功能：     HRGoAbroad业务处理层
- *       作者：     ROY
- *       日期：     2016-01-09
- *       描述：     记录人员出国情况
- * *************************************************************************/
+/***************************************************************************
+*       功能：     HRGoAbroad业务处理层
+*       作者：     Roy
+*       日期：     2016-01-19
+*       描述：     记录人员出国情况
+* *************************************************************************/
 using System.Linq;
 using System.Collections.Generic;
 using Project.Infrastructure.FrameworkCore.DataNhibernate.Helpers;
@@ -15,25 +15,25 @@ namespace Project.Service.HRManager
 {
     public class GoAbroadService
     {
-       
-       #region 构造函数
-        private readonly GoAbroadRepository  _goAbroadRepository;
-            private static readonly GoAbroadService Instance = new GoAbroadService();
+
+        #region 构造函数
+        private readonly GoAbroadRepository _goAbroadRepository;
+        private static readonly GoAbroadService Instance = new GoAbroadService();
 
         public GoAbroadService()
         {
-           this._goAbroadRepository =new GoAbroadRepository();
+            this._goAbroadRepository = new GoAbroadRepository();
         }
-        
-         public static  GoAbroadService GetInstance()
+
+        public static GoAbroadService GetInstance()
         {
             return Instance;
         }
         #endregion
 
 
-        #region 基础方法 
-         /// <summary>
+        #region 基础方法
+        /// <summary>
         /// 新增
         /// </summary>
         /// <param name="entity"></param>
@@ -42,24 +42,24 @@ namespace Project.Service.HRManager
         {
             return _goAbroadRepository.Save(entity);
         }
-        
-        
-         /// <summary>
+
+
+        /// <summary>
         /// 删除
         /// </summary>
         /// <param name="pkId"></param>
         public bool DeleteByPkId(System.Int32 pkId)
         {
-         try
+            try
             {
-            var entity= _goAbroadRepository.GetById(pkId);
-            _goAbroadRepository.Delete(entity);
-             return true;
-        }
-        catch
-        {
-         return false;
-        }
+                var entity = _goAbroadRepository.GetById(pkId);
+                _goAbroadRepository.Delete(entity);
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
         }
 
         /// <summary>
@@ -68,15 +68,15 @@ namespace Project.Service.HRManager
         /// <param name="entity"></param>
         public bool Delete(GoAbroadEntity entity)
         {
-         try
+            try
             {
-            _goAbroadRepository.Delete(entity);
-             return true;
-        }
-        catch
-        {
-         return false;
-        }
+                _goAbroadRepository.Delete(entity);
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
         }
 
         /// <summary>
@@ -85,15 +85,15 @@ namespace Project.Service.HRManager
         /// <param name="entity"></param>
         public bool Update(GoAbroadEntity entity)
         {
-          try
+            try
             {
-            _goAbroadRepository.Update(entity);
-         return true;
-        }
-        catch
-        {
-         return false;
-        }
+                _goAbroadRepository.Update(entity);
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
         }
 
 
@@ -117,33 +117,37 @@ namespace Project.Service.HRManager
         /// <returns>获取当前页【记录人员出国情况】和总【记录人员出国情况】数</returns>
         public System.Tuple<IList<GoAbroadEntity>, int> Search(GoAbroadEntity where, int skipResults, int maxResults)
         {
-                var expr = PredicateBuilder.True<GoAbroadEntity>();
-                  #region
-              // if (!string.IsNullOrEmpty(where.PkId))
-              //  expr = expr.And(p => p.PkId == where.PkId);
-              // if (!string.IsNullOrEmpty(where.EmployeeCode))
-              //  expr = expr.And(p => p.EmployeeCode == where.EmployeeCode);
-              // if (!string.IsNullOrEmpty(where.DepartmentCode))
-              //  expr = expr.And(p => p.DepartmentCode == where.DepartmentCode);
-              // if (!string.IsNullOrEmpty(where.Country))
-              //  expr = expr.And(p => p.Country == where.Country);
-              // if (!string.IsNullOrEmpty(where.BeginDate))
-              //  expr = expr.And(p => p.BeginDate == where.BeginDate);
-              // if (!string.IsNullOrEmpty(where.EndDate))
-              //  expr = expr.And(p => p.EndDate == where.EndDate);
-              // if (!string.IsNullOrEmpty(where.DaySum))
-              //  expr = expr.And(p => p.DaySum == where.DaySum);
-              // if (!string.IsNullOrEmpty(where.Remark))
-              //  expr = expr.And(p => p.Remark == where.Remark);
-              // if (!string.IsNullOrEmpty(where.CreatorUserCode))
-              //  expr = expr.And(p => p.CreatorUserCode == where.CreatorUserCode);
-              // if (!string.IsNullOrEmpty(where.CreatorUserName))
-              //  expr = expr.And(p => p.CreatorUserName == where.CreatorUserName);
-              // if (!string.IsNullOrEmpty(where.CreateTime))
-              //  expr = expr.And(p => p.CreateTime == where.CreateTime);
-              // if (!string.IsNullOrEmpty(where.LastModificationTime))
-              //  expr = expr.And(p => p.LastModificationTime == where.LastModificationTime);
- #endregion
+            var expr = PredicateBuilder.True<GoAbroadEntity>();
+            #region
+            // if (!string.IsNullOrEmpty(where.PkId))
+            //  expr = expr.And(p => p.PkId == where.PkId);
+            // if (!string.IsNullOrEmpty(where.EmployeeCode))
+            //  expr = expr.And(p => p.EmployeeCode == where.EmployeeCode);
+            if (!string.IsNullOrEmpty(where.DepartmentCode) && where.DepartmentCode != "0")
+                expr = expr.And(p => p.DepartmentCode == where.DepartmentCode);
+            // if (!string.IsNullOrEmpty(where.Country))
+            //  expr = expr.And(p => p.Country == where.Country);
+            // if (!string.IsNullOrEmpty(where.BeginDate))
+            //  expr = expr.And(p => p.BeginDate == where.BeginDate);
+            // if (!string.IsNullOrEmpty(where.EndDate))
+            //  expr = expr.And(p => p.EndDate == where.EndDate);
+            // if (!string.IsNullOrEmpty(where.DaySum))
+            //  expr = expr.And(p => p.DaySum == where.DaySum);
+            // if (!string.IsNullOrEmpty(where.Reason))
+            //  expr = expr.And(p => p.Reason == where.Reason);
+            // if (!string.IsNullOrEmpty(where.Remark))
+            //  expr = expr.And(p => p.Remark == where.Remark);
+            // if (!string.IsNullOrEmpty(where.CreatorUserCode))
+            //  expr = expr.And(p => p.CreatorUserCode == where.CreatorUserCode);
+            // if (!string.IsNullOrEmpty(where.CreatorUserName))
+            //  expr = expr.And(p => p.CreatorUserName == where.CreatorUserName);
+            if (where.CreateTime.HasValue && where.CreateTime.Value.Year > 1)
+                expr = expr.And(p => p.CreateTime >= where.CreateTime);
+            if (where.CreateTimeEnd.HasValue && where.CreateTimeEnd.Value.Year > 1)
+                expr = expr.And(p => p.CreateTime < where.CreateTimeEnd);
+            // if (!string.IsNullOrEmpty(where.LastModificationTime))
+            //  expr = expr.And(p => p.LastModificationTime == where.LastModificationTime);
+            #endregion
             var list = _goAbroadRepository.Query().Where(expr).OrderBy(p => p.PkId).Skip(skipResults).Take(maxResults).ToList();
             var count = _goAbroadRepository.Query().Where(expr).Count();
             return new System.Tuple<IList<GoAbroadEntity>, int>(list, count);
@@ -156,33 +160,35 @@ namespace Project.Service.HRManager
         /// <returns>返回列表</returns>
         public IList<GoAbroadEntity> GetList(GoAbroadEntity where)
         {
-               var expr = PredicateBuilder.True<GoAbroadEntity>();
-             #region
-              // if (!string.IsNullOrEmpty(where.PkId))
-              //  expr = expr.And(p => p.PkId == where.PkId);
-              // if (!string.IsNullOrEmpty(where.EmployeeCode))
-              //  expr = expr.And(p => p.EmployeeCode == where.EmployeeCode);
-              // if (!string.IsNullOrEmpty(where.DepartmentCode))
-              //  expr = expr.And(p => p.DepartmentCode == where.DepartmentCode);
-              // if (!string.IsNullOrEmpty(where.Country))
-              //  expr = expr.And(p => p.Country == where.Country);
-              // if (!string.IsNullOrEmpty(where.BeginDate))
-              //  expr = expr.And(p => p.BeginDate == where.BeginDate);
-              // if (!string.IsNullOrEmpty(where.EndDate))
-              //  expr = expr.And(p => p.EndDate == where.EndDate);
-              // if (!string.IsNullOrEmpty(where.DaySum))
-              //  expr = expr.And(p => p.DaySum == where.DaySum);
-              // if (!string.IsNullOrEmpty(where.Remark))
-              //  expr = expr.And(p => p.Remark == where.Remark);
-              // if (!string.IsNullOrEmpty(where.CreatorUserCode))
-              //  expr = expr.And(p => p.CreatorUserCode == where.CreatorUserCode);
-              // if (!string.IsNullOrEmpty(where.CreatorUserName))
-              //  expr = expr.And(p => p.CreatorUserName == where.CreatorUserName);
-              // if (!string.IsNullOrEmpty(where.CreateTime))
-              //  expr = expr.And(p => p.CreateTime == where.CreateTime);
-              // if (!string.IsNullOrEmpty(where.LastModificationTime))
-              //  expr = expr.And(p => p.LastModificationTime == where.LastModificationTime);
- #endregion
+            var expr = PredicateBuilder.True<GoAbroadEntity>();
+            #region
+            // if (!string.IsNullOrEmpty(where.PkId))
+            //  expr = expr.And(p => p.PkId == where.PkId);
+            // if (!string.IsNullOrEmpty(where.EmployeeCode))
+            //  expr = expr.And(p => p.EmployeeCode == where.EmployeeCode);
+            // if (!string.IsNullOrEmpty(where.DepartmentCode))
+            //  expr = expr.And(p => p.DepartmentCode == where.DepartmentCode);
+            // if (!string.IsNullOrEmpty(where.Country))
+            //  expr = expr.And(p => p.Country == where.Country);
+            // if (!string.IsNullOrEmpty(where.BeginDate))
+            //  expr = expr.And(p => p.BeginDate == where.BeginDate);
+            // if (!string.IsNullOrEmpty(where.EndDate))
+            //  expr = expr.And(p => p.EndDate == where.EndDate);
+            // if (!string.IsNullOrEmpty(where.DaySum))
+            //  expr = expr.And(p => p.DaySum == where.DaySum);
+            // if (!string.IsNullOrEmpty(where.Reason))
+            //  expr = expr.And(p => p.Reason == where.Reason);
+            // if (!string.IsNullOrEmpty(where.Remark))
+            //  expr = expr.And(p => p.Remark == where.Remark);
+            // if (!string.IsNullOrEmpty(where.CreatorUserCode))
+            //  expr = expr.And(p => p.CreatorUserCode == where.CreatorUserCode);
+            // if (!string.IsNullOrEmpty(where.CreatorUserName))
+            //  expr = expr.And(p => p.CreatorUserName == where.CreatorUserName);
+            // if (!string.IsNullOrEmpty(where.CreateTime))
+            //  expr = expr.And(p => p.CreateTime == where.CreateTime);
+            // if (!string.IsNullOrEmpty(where.LastModificationTime))
+            //  expr = expr.And(p => p.LastModificationTime == where.LastModificationTime);
+            #endregion
             var list = _goAbroadRepository.Query().Where(expr).OrderBy(p => p.PkId).ToList();
             return list;
         }
@@ -190,11 +196,11 @@ namespace Project.Service.HRManager
 
 
         #region 新增方法
-        
+
         #endregion
     }
 }
 
-    
- 
+
+
 

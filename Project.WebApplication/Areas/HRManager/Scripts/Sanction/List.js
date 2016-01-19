@@ -70,7 +70,10 @@ var pro = pro || {};
                 editable: false,
                 valueField: 'DepartmentCode',
                 textField: 'DepartmentName',
-                url: '/PermissionManager/Department/GetList_Combotree'
+                url: '/PermissionManager/Department/GetList_Combotree',
+                onLoadSuccess: function (node, data) {
+                    $("#DepartmentCode").combotree('setValue', "0");
+                }
             })
 
             $("#btnAdd").click(function () {

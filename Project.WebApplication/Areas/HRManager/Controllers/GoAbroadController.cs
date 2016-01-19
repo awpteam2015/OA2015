@@ -12,6 +12,7 @@ using Project.Mvc.Controllers.Results;
 using Project.Mvc.Models;
 using Project.Service.HRManager;
 using Project.WebApplication.Controllers;
+using Project.Infrastructure.FrameworkCore.ToolKit;
 
 namespace Project.WebApplication.Areas.HRManager.Controllers
 {
@@ -28,7 +29,7 @@ namespace Project.WebApplication.Areas.HRManager.Controllers
             return View();
         }
 
- 
+
         public ActionResult List()
         {
             return View();
@@ -39,18 +40,20 @@ namespace Project.WebApplication.Areas.HRManager.Controllers
             var pIndex = this.Request["page"].ConvertTo<int>();
             var pSize = this.Request["rows"].ConvertTo<int>();
             var where = new GoAbroadEntity();
-			//where.PkId = RequestHelper.GetFormString("PkId");
-			//where.EmployeeCode = RequestHelper.GetFormString("EmployeeCode");
-			//where.DepartmentCode = RequestHelper.GetFormString("DepartmentCode");
-			//where.Country = RequestHelper.GetFormString("Country");
-			//where.BeginDate = RequestHelper.GetFormString("BeginDate");
-			//where.EndDate = RequestHelper.GetFormString("EndDate");
-			//where.DaySum = RequestHelper.GetFormString("DaySum");
-			//where.Remark = RequestHelper.GetFormString("Remark");
-			//where.CreatorUserCode = RequestHelper.GetFormString("CreatorUserCode");
-			//where.CreatorUserName = RequestHelper.GetFormString("CreatorUserName");
-			//where.CreateTime = RequestHelper.GetFormString("CreateTime");
-			//where.LastModificationTime = RequestHelper.GetFormString("LastModificationTime");
+            //where.PkId = RequestHelper.GetFormString("PkId");
+            //where.EmployeeCode = RequestHelper.GetFormString("EmployeeCode");
+            where.DepartmentCode = RequestHelper.GetFormString("DepartmentCode");
+            //where.Country = RequestHelper.GetFormString("Country");
+            //where.BeginDate = RequestHelper.GetFormString("BeginDate");
+            //where.EndDate = RequestHelper.GetFormString("EndDate");
+            //where.DaySum = RequestHelper.GetFormString("DaySum");
+            //where.Reason = RequestHelper.GetFormString("Reason");
+            //where.Remark = RequestHelper.GetFormString("Remark");
+            //where.CreatorUserCode = RequestHelper.GetFormString("CreatorUserCode");
+            //where.CreatorUserName = RequestHelper.GetFormString("CreatorUserName");
+            where.CreateTime = RequestHelper.GetFormDateTime("CreateTime");
+            where.CreateTimeEnd = RequestHelper.GetFormDateTime("CreateTimeEnd");
+            //where.LastModificationTime = RequestHelper.GetFormString("LastModificationTime");
             var searchList = GoAbroadService.GetInstance().Search(where, (pIndex - 1) * pSize, pSize);
 
             var dataGridEntity = new DataGridResponse()
@@ -65,6 +68,11 @@ namespace Project.WebApplication.Areas.HRManager.Controllers
         [HttpPost]
         public AbpJsonResult Add(AjaxRequest<GoAbroadEntity> postData)
         {
+            postData.RequestEntity.CreateTime = DateTime.Now;
+            postData.RequestEntity.CreatorUserCode = LoginUserInfo.UserCode;
+            postData.RequestEntity.CreatorUserName = LoginUserInfo.UserName;
+            postData.RequestEntity.Reason = Base64Helper.DecodeBase64(postData.RequestEntity.Reason);
+            postData.RequestEntity.Remark = Base64Helper.DecodeBase64(postData.RequestEntity.Remark);
             var addResult = GoAbroadService.GetInstance().Add(postData.RequestEntity);
             var result = new AjaxResponse<GoAbroadEntity>()
                {
@@ -76,8 +84,11 @@ namespace Project.WebApplication.Areas.HRManager.Controllers
 
 
         [HttpPost]
-        public AbpJsonResult Edit( AjaxRequest<GoAbroadEntity> postData)
+        public AbpJsonResult Edit(AjaxRequest<GoAbroadEntity> postData)
         {
+            postData.RequestEntity.LastModificationTime = DateTime.Now;
+            postData.RequestEntity.Reason = Base64Helper.DecodeBase64(postData.RequestEntity.Reason);
+            postData.RequestEntity.Remark = Base64Helper.DecodeBase64(postData.RequestEntity.Remark);
             var updateResult = GoAbroadService.GetInstance().Update(postData.RequestEntity);
             var result = new AjaxResponse<GoAbroadEntity>()
             {
