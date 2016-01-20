@@ -147,6 +147,8 @@
     <Content Include="Areas\PermissionManager\Views\Role\RoleFunctionDetailList.cshtml">
       <SubType>Code</SubType>
     </Content>
+    <Content Include="Areas\SystemSetManager\Scripts\HolidayDetail\Hd.js" />
+    <Content Include="Areas\SystemSetManager\Scripts\HolidayDetail\List.js" />
     <Content Include="Config\hibernate.cfg.xml" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
@@ -203,6 +205,8 @@
     <Content Include="Areas\HRManager\Views\Dictionary\List.cshtml" />
     <Content Include="Areas\HRManager\Views\WorkExperience\Hd.cshtml" />
     <Content Include="Areas\HRManager\Views\WorkExperience\List.cshtml" />
+    <Content Include="Areas\SystemSetManager\Views\HolidayDetail\Hd.cshtml" />
+    <Content Include="Areas\SystemSetManager\Views\HolidayDetail\List.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\Control\DepartmentControl.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
@@ -667,6 +671,7 @@
     <Compile Include="Areas\PermissionManager\Controllers\UserInfoController.cs" />
     <Compile Include="Areas\PermissionManager\Controllers\UserRoleController.cs" />
     <Compile Include="Areas\PermissionManager\PermissionManagerAreaRegistration.cs" />
+    <Compile Include="Areas\SystemSetManager\Controllers\HolidayDetailController.cs" />
     <Compile Include="Areas\SystemSetManager\SystemSetManagerAreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
@@ -711,7 +716,6 @@
     <Folder Include="Areas\PermissionManager\Models\" />
     <Folder Include="Areas\PermissionManager\Views\Permission\" />
     <Folder Include="Areas\PermissionManager\Views\Shared\" />
-    <Folder Include="Areas\SystemSetManager\Controllers\" />
     <Folder Include="Areas\SystemSetManager\Models\" />
     <Folder Include="Areas\SystemSetManager\Views\Shared\" />
     <Folder Include="Models\" />
