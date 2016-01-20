@@ -1,9 +1,4 @@
-﻿
-
-  
-
-
-@{
+﻿@{
     ViewBag.Title = "Hd";
     Layout = "~/Views/Shared/_LayoutHandler.cshtml";
 }
@@ -12,90 +7,55 @@
     <script src="/Areas/SystemSetManager/Scripts/HolidayDetail/Hd.js?JsParamter=@SiteConfig.GetConfig().JsParamter"></script>
 }
 <div style="display: none">
-<input id="BindEntity" type="text" value="@ViewBag.BindEntity" />
-<input id="Command" type="hidden" />
+    <input id="BindEntity" type="text" value="@ViewBag.BindEntity" />
+    <input id="Command" type="hidden" />
 </div>
 <div class="mtable_div">
     <form id="form1">
         <table class="mtable">
-            
-              <tr>
-            <td  >
-                PkId<span style="color: Red">*</span>:
-            </td>
-            <td >
-                <input id="PkId" name="PkId"  type="text"  />
-            </td>
-        </tr>
-            
-              <tr>
-            <td  >
-                <span style="color: Red">*</span>:
-            </td>
-            <td >
-                <input id="HolidayName" name="HolidayName"  type="text"  />
-            </td>
-        </tr>
-            
-              <tr>
-            <td  >
-                日期<span style="color: Red">*</span>:
-            </td>
-            <td >
-                <input id="HolidayDate" name="HolidayDate"  type="text"  />
-            </td>
-        </tr>
-            
-              <tr>
-            <td  >
-                备注<span style="color: Red">*</span>:
-            </td>
-            <td >
-                <input id="Remark" name="Remark"  type="text"  />
-            </td>
-        </tr>
-            
-              <tr>
-            <td  >
-                操作人<span style="color: Red">*</span>:
-            </td>
-            <td >
-                <input id="CreatorUserCode" name="CreatorUserCode"  type="text"  />
-            </td>
-        </tr>
-            
-              <tr>
-            <td  >
-                操作人姓名<span style="color: Red">*</span>:
-            </td>
-            <td >
-                <input id="CreatorUserName" name="CreatorUserName"  type="text"  />
-            </td>
-        </tr>
-            
-              <tr>
-            <td  >
-                创建时间<span style="color: Red">*</span>:
-            </td>
-            <td >
-                <input id="CreateTime" name="CreateTime"  type="text"  />
-            </td>
-        </tr>
-            
-              <tr>
-            <td  >
-                修改时间<span style="color: Red">*</span>:
-            </td>
-            <td >
-                <input id="LastModificationTime" name="LastModificationTime"  type="text"  />
-            </td>
-        </tr>
-          
+            <tr>
+                <td>
+                    节假日名称<span style="color: Red">*</span>:
+                </td>
+                <td>
+                    <input id="HolidayName" name="HolidayName" type="text" />
+                </td>
+                <td>
+                    日期<span style="color: Red">*</span>:
+                </td>
+                <td>
+                    <input id="HolidayDate" name="HolidayDate" type="text" class="Wdate" onclick="WdatePicker();" />
+                </td>
+                <td>
+                    至<span style="color: Red">*</span>:
+                </td>
+                <td>
+                    <input id="HolidayDateEnd" name="HolidayDateEnd" type="text" class="Wdate" onclick="WdatePicker();" />
+                </td>
+                <td>
+                    类型<span style="color: Red">*</span>:
+                </td>
+                <td>
+                    <select id="HolidayDateType" name="HolidayDateType" class="easyui-combobox">
+                        <option value="0">公休日</option>
+                        <option value="1">节假日</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    备注<span style="color: Red">*</span>:
+                </td>
+                <td colspan="7">
+                    <input id="Remark" name="Remark" type="text" style="width:400px;"/>
+                </td>
+            </tr>
+
         </table>
     </form>
 </div>
 <div style="padding: 10px 10px 0 10px; text-align: center;">
-    @if (Request["PkId"]==null||int.Parse(Request["PkId"]) == 0)
+    @if (Request["PkId"] == null || int.Parse(Request["PkId"]) == 0)
     {
         <a id="btnAdd" class="easyui-linkbutton" iconcls="icon-add" href="javascript:void(0)">新增</a>
     }
@@ -105,8 +65,6 @@
     }
     <a id="btnClose" class="easyui-linkbutton" iconcls="icon-cancel" href="javascript:void(0)">关闭</a>
 </div>
-
-
 
 
 

@@ -18,8 +18,9 @@ namespace  Project.Map.SystemSetManager
         {
             this.MapPkidDefault<HolidayDetailEntity,int>();
  
-            Map(p => p.HolidayName);    
-            Map(p => p.HolidayDate);    
+            Map(p => p.HolidayName);
+            Map(p => p.HolidayDate);
+            Map(p => p.HolidayDateType);   
             Map(p => p.Remark);    
             Map(p => p.CreatorUserCode);    
             Map(p => p.CreatorUserName);    

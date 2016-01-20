@@ -64,6 +64,10 @@ namespace Project.Infrastructure.FrameworkCore.Domain.Entities
     public abstract class Entity : Entity<int>
     {
 
+        public virtual object Clone()
+        {
+            return this.MemberwiseClone();
+        }
     }
 
     //[Serializable]
@@ -78,7 +82,6 @@ namespace Project.Infrastructure.FrameworkCore.Domain.Entities
     //{
     //    public virtual bool IsDeleted { get; set; }
     //}
-
 
    
 }

@@ -37,13 +37,13 @@ namespace Project.WebApplication.Controllers
             1 /*version*/,
             Guid.NewGuid().ToString(),
             DateTime.Now,
-            DateTime.Now.AddMinutes(200),
+            DateTime.Now.AddMinutes(30),
             true,//持久性
             JsonConvert.SerializeObject(userInfo.Item3),
             FormsAuthentication.FormsCookiePath);
             var encryptedTicket = FormsAuthentication.Encrypt(ticket);
             var cookie = new HttpCookie(FormsAuthentication.FormsCookieName, encryptedTicket);
-            cookie.Expires = DateTime.Now.AddMinutes(20);
+            cookie.Expires = DateTime.Now.AddMinutes(30);
             cookie.HttpOnly = true;
             Response.Cookies.Add(cookie);
             return new AbpJsonResult
