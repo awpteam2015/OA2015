@@ -4,6 +4,15 @@
     pro.Dictionary.HdPage = pro.Dictionary.HdPage || {};
     pro.Dictionary.HdPage = {
         initPage: function () {
+
+            $('#ParentKeyCode').combotree({
+                required: true,
+                editable: false,
+                valueField: 'KeyCode',
+                textField: 'KeyName',
+                url: '/HRManager/Dictionary/GetList_Combotree'
+            });
+
             $("#btnAdd").click(function () {
                 pro.Dictionary.HdPage.submit("Add");
             });

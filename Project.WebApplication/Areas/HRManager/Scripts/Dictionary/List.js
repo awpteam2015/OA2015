@@ -4,10 +4,10 @@ var pro = pro || {};
     pro.Dictionary = pro.Dictionary || {};
     pro.Dictionary.ListPage = pro.Dictionary.ListPage || {};
     pro.Dictionary.ListPage = {
-      init: function () {
+        init: function () {
             return {
                 tabObj: new pro.TabBase(),
-                gridObj: new pro.GridBase("#datagrid", false)
+                gridObj: new pro.GridBase("#datagrid", true)
             };
         },
         initPage: function () {
@@ -16,16 +16,18 @@ var pro = pro || {};
             var gridObj = initObj.gridObj;
             gridObj.grid({
                 url: '/HRManager/Dictionary/GetList',
+                idField: "KeyCode",
+                treeField: "KeyCode",
                 fitColumns: false,
                 nowrap: false,
                 rownumbers: true, //行号
                 singleSelect: true,
                 columns: [[
-         { field: 'PkId', title: '', width: 100 },
-         { field: 'KeyCode', title: '', width: 100 },
-         { field: 'ParentKeyCode', title: '', width: 100 },
-         { field: 'KeyName', title: '', width: 100 },
-         { field: 'KeyValue', title: '', width: 100 },
+         { field: 'PkId', title: '', hidden: true, width: 100 },
+         { field: 'KeyCode', title: '字典Code', width: 100 },
+         { field: 'ParentKeyCode', title: '父级Code', width: 100 },
+         { field: 'KeyName', title: '名称', width: 180 },
+         { field: 'KeyValue', title: '值', width: 100 },
                 ]],
                 pagination: true,
                 pageSize: 20, //每页显示的记录条数，默认为10     
@@ -34,7 +36,7 @@ var pro = pro || {};
                );
 
             $("#btnAdd").click(function () {
-               tabObj.add("/HRManager/Dictionary/Hd","新增");
+                tabObj.add("/HRManager/Dictionary/Hd", "新增");
             });
 
             $("#btnEdit").click(function () {
@@ -53,7 +55,7 @@ var pro = pro || {};
 
             $("#btnDel").click(function () {
                 if (!gridObj.isSelected()) {
-                $.alertExtend.infoOp();
+                    $.alertExtend.infoOp();
                     return;
                 }
                 $.messager.confirm("确认操作", "是否确认删除", function (bl) {
@@ -77,7 +79,7 @@ var pro = pro || {};
                 gridObj.refresh();
             });
         },
-         closeTab: function () {
+        closeTab: function () {
             this.init().tabObj.closeTab();
         }
     };

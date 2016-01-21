@@ -163,6 +163,43 @@ namespace Project.Service.HRManager
 
         #region 新增方法
 
+        public IList<DictionaryEntity> GetTreeList(DictionaryEntity entity, bool isShowTop = false)
+        {
+            var listAll = this.GetList(entity);
+
+            var list = new List<DictionaryEntity>();
+            if (isShowTop)
+            {
+                list.Add(new DictionaryEntity() { KeyCode = "0", KeyName = "顶级节点" });
+            }
+            else
+            {
+                list.AddRange(listAll.Where(p => p.ParentKeyCode == "0"));
+            }
+
+            list.ForEach(p =>
+            {
+                GetChildList(listAll, p);
+            }
+            );
+
+            return list;
+        }
+        private void GetChildList(IList<DictionaryEntity> allList, DictionaryEntity parentDictionaryEntity)
+        {
+
+            var childList = allList.Where(p => p.ParentKeyCode == parentDictionaryEntity.KeyCode).ToList();
+            if (childList.Any())
+            {
+                parentDictionaryEntity.children = childList;
+                childList.ForEach(p =>
+                {
+                    GetChildList(allList, p);
+                });
+            }
+
+        }
+
         #endregion
     }
 }

@@ -45,16 +45,28 @@ namespace Project.WebApplication.Areas.HRManager.Controllers
             //where.ParentKeyCode = RequestHelper.GetFormString("ParentKeyCode");
             //where.KeyName = RequestHelper.GetFormString("KeyName");
             //where.KeyValue = RequestHelper.GetFormString("KeyValue");
-            var searchList = DictionaryService.GetInstance().Search(where, (pIndex - 1) * pSize, pSize);
+            //var searchList = DictionaryService.GetInstance().Search(where, (pIndex - 1) * pSize, pSize);
 
-            var dataGridEntity = new DataGridResponse()
-            {
-                total = searchList.Item2,
-                rows = searchList.Item1
-            };
+            //var dataGridEntity = new DataGridResponse()
+            //{
+            //    total = searchList.Item2,
+            //    rows = searchList.Item1
+            //};
+            //return new AbpJsonResult(dataGridEntity, new NHibernateContractResolver());
+            var searchList = DictionaryService.GetInstance().GetList(where);
+            var dataGridEntity = new DataGridTreeResponse<DictionaryEntity>(searchList.Count, searchList);
             return new AbpJsonResult(dataGridEntity, new NHibernateContractResolver());
         }
 
+        public AbpJsonResult GetList_Combotree()
+        {
+            var where = new DictionaryEntity();
+            where.KeyCode = RequestHelper.GetFormString("KeyCode");
+            where.KeyName = RequestHelper.GetFormString("KeyName");
+            var searchList = DictionaryService.GetInstance().GetTreeList(where, true);
+
+            return new AbpJsonResult(searchList, new NHibernateContractResolver(new[] { "children" }));
+        }
 
         public AbpJsonResult GetListByCode()
         {         
