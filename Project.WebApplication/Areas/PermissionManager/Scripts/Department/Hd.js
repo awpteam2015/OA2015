@@ -28,8 +28,7 @@
                 for (var filedname in bindField) {
                     $("[name=" + filedname + "]").val(bindEntity[filedname]);
                 }
-                debugger;
-                $('#DepartmentType').combobox('setValue', bindEntity["DepartmentType"]);
+                //$('#DepartmentType').combobox('setValue', bindEntity["DepartmentType"]);
                 //行项目信息用json绑定控件
                 //alert(JSON.stringify(BindEntity.List));
             }
