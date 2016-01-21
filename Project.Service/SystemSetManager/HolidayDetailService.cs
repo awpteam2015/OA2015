@@ -171,7 +171,7 @@ namespace Project.Service.SystemSetManager
             if (where.HolidayDate.HasValue && where.HolidayDate.Value.Year > 1)
                 expr = expr.And(p => p.HolidayDate >= where.HolidayDate);
             if (where.HolidayDateEnd.HasValue && where.HolidayDateEnd.Value.Year > 1)
-                expr = expr.And(p => p.HolidayDateEnd < where.HolidayDate);
+                expr = expr.And(p => p.HolidayDate < where.HolidayDateEnd);
             // if (!string.IsNullOrEmpty(where.Remark))
             //  expr = expr.And(p => p.Remark == where.Remark);
             // if (!string.IsNullOrEmpty(where.CreatorUserCode))

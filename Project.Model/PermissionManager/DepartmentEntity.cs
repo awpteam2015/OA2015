@@ -5,6 +5,8 @@
 *       作者：     李伟伟
 *       日期：     2015/12/22
 *       描述：     部门基础信息表
+*--------------------------------------修改记录-----------------------------
+*1. Roy 加入类型机构或是科室
 * *************************************************************************/
 using System;
 using System.Collections.Generic;
@@ -30,6 +32,9 @@ namespace Project.Model.PermissionManager
         /// 公司代码
         /// </summary>
         public virtual System.String ParentDepartmentCode { get; set; }
+
+
+        public virtual System.Int32 DepartmentType { get; set; }
         /// <summary>
         /// 备注
         /// </summary>
@@ -43,13 +48,15 @@ namespace Project.Model.PermissionManager
         /// <summary>
         /// 部门编码
         /// </summary>
-        public virtual string id {
+        public virtual string id
+        {
             get { return DepartmentCode; }
         }
         /// <summary>
         /// 部门名称
         /// </summary>
-        public virtual System.String text {
+        public virtual System.String text
+        {
             get { return DepartmentName; }
         }
 

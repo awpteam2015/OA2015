@@ -6,7 +6,7 @@
         initPage: function () {
 
             $('#ParentDepartmentCode').combotree({
-                required:true,
+                required: true,
                 editable: false,
                 valueField: 'DepartmentCode',
                 textField: 'DepartmentName',
@@ -28,6 +28,8 @@
                 for (var filedname in bindField) {
                     $("[name=" + filedname + "]").val(bindEntity[filedname]);
                 }
+                debugger;
+                $('#DepartmentType').combobox('setValue', bindEntity["DepartmentType"]);
                 //行项目信息用json绑定控件
                 //alert(JSON.stringify(BindEntity.List));
             }
@@ -59,7 +61,7 @@
                 }
             ).fail(
              function (errordetails, errormessage) {
-                // $.alertExtend.error();
+                 // $.alertExtend.error();
              }
             );
         },

@@ -2,44 +2,50 @@
     ViewBag.Title = "Hd";
     Layout = "~/Views/Shared/_LayoutHandler.cshtml";
 }
-
 @section JavaScript{
     <script src="/Areas/PermissionManager/Scripts/Department/Hd.js?JsParamter=@SiteConfig.GetConfig().JsParamter"></script>
 }
-
 <input id="BindEntity" type="hidden" value="@ViewBag.BindEntity" />
 <input id="Command" type="hidden" />
 <div class="mtable_div">
     <form id="form1">
         <table class="mtable">
-
             <tr>
                 <td style="width: 100px">
                     上级部门<span style="color: Red">*</span>
                 </td>
-                <td >
-                    <input id="ParentDepartmentCode" name="ParentDepartmentCode" type="text"  style="width: 400px"/>
+                <td>
+                    <input id="ParentDepartmentCode" name="ParentDepartmentCode" type="text" style="width: 400px" />
                 </td>
             </tr>
-
             <tr>
                 <td>
                     部门编码<span style="color: Red">*</span>
                 </td>
                 <td>
-                    <input id="DepartmentCode" name="DepartmentCode" type="text"/>
+                    <input id="DepartmentCode" name="DepartmentCode" type="text" />
                 </td>
             </tr>
-
             <tr>
                 <td>
                     部门名称<span style="color: Red">*</span>
                 </td>
                 <td>
-                    <input id="DepartmentName" name="DepartmentName" type="text"/>
+                    <input id="DepartmentName" name="DepartmentName" type="text" />
                 </td>
             </tr>
-
+            <tr>
+                <td>
+                    类型<span style="color: Red">*</span>
+                </td>
+                <td>
+                    <select id="DepartmentType" name="DepartmentType" class="easyui-combobox">
+                        <option value="0">机构</option>
+                        <option value="1">科室</option>
+                    </select>
+                   
+                </td>
+            </tr>
             <tr>
                 <td>
                     备注
@@ -48,7 +54,6 @@
                     <input id="Remark" name="Remark" type="text" style="width: 400px" />
                 </td>
             </tr>
-
         </table>
     </form>
 </div>
@@ -63,6 +68,3 @@
     }
     <a id="btnClose" class="easyui-linkbutton" iconcls="icon-cancel" href="javascript:void(0)">关闭</a>
 </div>
-
-
-
