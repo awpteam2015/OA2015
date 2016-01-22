@@ -201,11 +201,11 @@ namespace Project.WebApplication.Controllers
 
         protected override void OnException(ExceptionContext filterContext)
         {
-            if (filterContext == null) return;
-
+            if (filterContext.ExceptionHandled)
+            {
+                return;
+            }
             var exception = filterContext.Exception ?? new Exception("不存在进一步错误信息");
-            LoggerHelper.Error(LogType.ErrorLogger, exception.Message);
-
 
             if (Request.IsAjaxRequest())
             {
@@ -221,14 +221,43 @@ namespace Project.WebApplication.Controllers
                 var model = new HandleErrorInfo(exception, controllerName, actionName);
                 filterContext.Result = new ViewResult
                 {
-                    ViewName = "InternalServer",
-                    MasterName = "",
+                    ViewName = "~/Views/Shared/InternalServer.cshtml",
                     ViewData = new ViewDataDictionary<HandleErrorInfo>(model),
-                    TempData = filterContext.Controller.TempData
                 };
             }
-            base.OnException(filterContext);
-           // return;
+
+            filterContext.ExceptionHandled = true;
+
+            //if (filterContext == null) return;
+
+            //var exception = filterContext.Exception ?? new Exception("不存在进一步错误信息");
+            //LoggerHelper.Error(LogType.ErrorLogger, exception.Message);
+
+
+            //if (Request.IsAjaxRequest())
+            //{
+            //    filterContext.Result = new AbpJsonResult
+            //    {
+            //        Data = new AjaxResponse<object>() { success = false, error = new ErrorInfo(exception.ToString()) }
+            //    };
+            //}
+            //else
+            //{
+            //    var controllerName = (string)filterContext.RouteData.Values["controller"];
+            //    var actionName = (string)filterContext.RouteData.Values["action"];
+            //    var model = new HandleErrorInfo(exception, controllerName, actionName);
+            //    filterContext.Result = new ViewResult
+            //    {
+            //        ViewName = "InternalServer",
+            //        MasterName = "",
+            //        ViewData = new ViewDataDictionary<HandleErrorInfo>(model),
+            //        TempData = filterContext.Controller.TempData
+            //    };
+            //}
+            //filterContext.HttpContext.Response.Clear();
+            //filterContext.HttpContext.Response.StatusCode = 500;
+            //filterContext.HttpContext.Response.TrySkipIisCustomErrors = true;
+            // return;
             //string message;
             ////如果没有记录日常，就记录日志
             //if (exception is EipException)
@@ -269,7 +298,7 @@ namespace Project.WebApplication.Controllers
             //}
 
             //filterContext.HttpContext.Response.Clear();
-           // filterContext.HttpContext.Response.Clear();
+            // filterContext.HttpContext.Response.Clear();
             //filterContext.HttpContext.Response.StatusCode = 500;
             //filterContext.HttpContext.Response.TrySkipIisCustomErrors = true;
         }

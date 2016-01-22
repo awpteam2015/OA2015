@@ -32,13 +32,13 @@ namespace Project.WebApplication.Areas.PermissionManager.Controllers
 
         public ActionResult List()
         {
-           
+            //int.Parse("ssss");
             return View();
         }
 
         public AbpJsonResult GetList()
         {
-            int.Parse("ssss");
+            //int.Parse("ssss");
             var where = new DepartmentEntity();
             where.DepartmentCode = RequestHelper.GetFormString("DepartmentCode");
             where.DepartmentName = RequestHelper.GetFormString("DepartmentName");
