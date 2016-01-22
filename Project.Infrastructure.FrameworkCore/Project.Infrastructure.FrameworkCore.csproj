@@ -196,6 +196,9 @@
     <Compile Include="WebMvc\Model\ErrorInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Logging\Config\log4net.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup />
