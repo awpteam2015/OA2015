@@ -62,6 +62,9 @@ namespace Project.WebApplication.Areas.HRManager.Controllers
         [HttpPost]
         public AbpJsonResult Add(AjaxRequest<EmployeeYearMainEntity> postData)
         {
+            postData.RequestEntity.CreateTime = DateTime.Now;
+            postData.RequestEntity.CreatorUserCode = LoginUserInfo.UserCode;
+            postData.RequestEntity.CreatorUserName = LoginUserInfo.UserName;
             var addResult = EmployeeYearMainService.GetInstance().Add(postData.RequestEntity);
             var result = new AjaxResponse<EmployeeYearMainEntity>()
                {
@@ -75,7 +78,8 @@ namespace Project.WebApplication.Areas.HRManager.Controllers
         [HttpPost]
         public AbpJsonResult Edit( AjaxRequest<EmployeeYearMainEntity> postData)
         {
-            var updateResult = EmployeeYearMainService.GetInstance().Update(postData.RequestEntity);
+            postData.RequestEntity.LastModificationTime = DateTime.Now;
+               var updateResult = EmployeeYearMainService.GetInstance().Update(postData.RequestEntity);
             var result = new AjaxResponse<EmployeeYearMainEntity>()
             {
                 success = updateResult,

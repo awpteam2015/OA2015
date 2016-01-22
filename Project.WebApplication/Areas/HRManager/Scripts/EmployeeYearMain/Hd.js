@@ -11,8 +11,8 @@
             $("#btnEdit").click(function () {
                 pro.EmployeeYearMain.HdPage.submit("Edit");
             });
-            
-             $("#btnClose").click(function () {
+
+            $("#btnClose").click(function () {
                 parent.pro.EmployeeYearMain.ListPage.closeTab("");
             });
 
@@ -45,7 +45,7 @@
                 data: JSON.stringify(postData)
             }).done(
                 function (dataresult, data) {
-                   function afterSuccess() {
+                    function afterSuccess() {
                         parent.$("#btnSearch").trigger("click");
                         parent.pro.EmployeeYearMain.ListPage.closeTab();
                     }
@@ -53,7 +53,7 @@
                 }
             ).fail(
              function (errordetails, errormessage) {
-               //  $.alertExtend.error();
+                 //  $.alertExtend.error();
              }
             );
 
@@ -62,26 +62,26 @@
             addRule: function () {
                 $("#form1").validate({
                     rules: {
-          PkId: { required: true  },
-          DepartmentCode: { required: true  },
-          EmployeeCode: { required: true  },
-          LeftCount: { required: true  },
-          Remark: { required: true  },
-          CreatorUserCode: { required: true  },
-          CreatorUserName: { required: true  },
-          CreateTime: { required: true  },
-          LastModificationTime: { required: true  },
+                        PkId: { required: true },
+                        DepartmentCode: { required: true },
+                        EmployeeCode: { required: true },
+                        LeftCount: { required: true },
+                        //Remark: { required: true  },
+                        //CreatorUserCode: { required: true  },
+                        //CreatorUserName: { required: true  },
+                        // CreateTime: { required: true  },
+                        // LastModificationTime: { required: true  },
                     },
                     messages: {
-          PkId:  "必填!",
-          DepartmentCode:  "部门编号必填!",
-          EmployeeCode:  "员工编号必填!",
-          LeftCount:  "_decimal 年休余数必填!",
-          Remark:  "必填!",
-          CreatorUserCode:  "必填!",
-          CreatorUserName:  "必填!",
-          CreateTime:  "必填!",
-          LastModificationTime:  "必填!",
+                        PkId: "必填!",
+                        DepartmentCode: "部门编号必填!",
+                        EmployeeCode: "员工编号必填!",
+                        LeftCount: "_decimal 年休余数必填!",
+                        Remark: "必填!",
+                        CreatorUserCode: "必填!",
+                        CreatorUserName: "必填!",
+                        CreateTime: "必填!",
+                        LastModificationTime: "必填!",
                     },
                     errorPlacement: function (error, element) {
                         pro.commonKit.errorPlacementHd(error, element);
