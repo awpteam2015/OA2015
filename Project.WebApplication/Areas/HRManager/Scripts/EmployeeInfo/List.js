@@ -83,6 +83,29 @@ var pro = pro || {};
             }
                );
 
+            $('#WorkState').combobox({
+                required: true,
+                editable: false,
+                valueField: 'KeyValue',
+                textField: 'KeyName',
+                url: '/HRManager/Dictionary/GetListByCode?ParentKeyCode=ZZZT'
+            });
+
+            $('#EmployeeType').combobox({
+                required: true,
+                editable: false,
+                valueField: 'KeyValue',
+                textField: 'KeyName',
+                url: '/HRManager/Dictionary/GetListByCode?ParentKeyCode=YGLY'
+            });
+            $('#DepartmentCode').combotree({
+                required: true,
+                editable: false,
+                valueField: 'DepartmentCode',
+                textField: 'DepartmentName',
+                url: '/PermissionManager/Department/GetList_Combotree'
+            });
+
             $("#btnAdd").click(function () {
                 tabObj.add("/HRManager/EmployeeInfo/Hd", "新增");
             });

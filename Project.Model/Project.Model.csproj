@@ -54,6 +54,7 @@
     <Compile Include="HRManager\LearningExperiencesEntity.cs" />
     <Compile Include="HRManager\SanctionEntity.cs" />
     <Compile Include="HRManager\WorkExperienceEntity.cs" />
+    <Compile Include="HRManager\YearHholidayDefinitionEntity.cs" />
     <Compile Include="PermissionManager\DepartmentEntity.cs" />
     <Compile Include="PermissionManager\FunctionDetailModel.cs" />
     <Compile Include="PermissionManager\FunctionModel.cs" />

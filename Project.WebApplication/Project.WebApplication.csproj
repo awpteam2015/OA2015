@@ -19,6 +19,7 @@
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -122,6 +123,8 @@
     <Content Include="Areas\HRManager\Scripts\Sanction\List.js" />
     <Content Include="Areas\HRManager\Scripts\WorkExperience\Hd.js" />
     <Content Include="Areas\HRManager\Scripts\WorkExperience\List.js" />
+    <Content Include="Areas\HRManager\Scripts\YearHholidayDefinition\Hd.js" />
+    <Content Include="Areas\HRManager\Scripts\YearHholidayDefinition\List.js" />
     <Content Include="Areas\PermissionManager\Scripts\Department\Hd.js" />
     <Content Include="Areas\PermissionManager\Scripts\Department\List.js" />
     <Content Include="Areas\PermissionManager\Scripts\FunctionDetail\Hd.js" />
@@ -207,6 +210,8 @@
     <Content Include="Areas\HRManager\Views\WorkExperience\List.cshtml" />
     <Content Include="Areas\SystemSetManager\Views\HolidayDetail\Hd.cshtml" />
     <Content Include="Areas\SystemSetManager\Views\HolidayDetail\List.cshtml" />
+    <Content Include="Areas\HRManager\Views\YearHholidayDefinition\Hd.cshtml" />
+    <Content Include="Areas\HRManager\Views\YearHholidayDefinition\List.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\Control\DepartmentControl.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
@@ -658,6 +663,7 @@
     <Compile Include="Areas\HRManager\Controllers\LearningExperiencesController.cs" />
     <Compile Include="Areas\HRManager\Controllers\SanctionController.cs" />
     <Compile Include="Areas\HRManager\Controllers\WorkExperienceController.cs" />
+    <Compile Include="Areas\HRManager\Controllers\YearHholidayDefinitionController.cs" />
     <Compile Include="Areas\HRManager\HRManagerAreaRegistration.cs" />
     <Compile Include="Areas\PermissionManager\Controllers\DepartmentController.cs" />
     <Compile Include="Areas\PermissionManager\Controllers\FunctionController.cs" />

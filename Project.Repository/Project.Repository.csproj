@@ -60,6 +60,7 @@
     <Compile Include="HRManager\LearningExperiencesRepository.cs" />
     <Compile Include="HRManager\SanctionRepository.cs" />
     <Compile Include="HRManager\WorkExperienceRepository.cs" />
+    <Compile Include="HRManager\YearHholidayDefinitionRepository.cs" />
     <Compile Include="PermissionManager\DepartmentRepository.cs" />
     <Compile Include="PermissionManager\FunctionDetailRepository.cs" />
     <Compile Include="PermissionManager\FunctionRepository.cs" />

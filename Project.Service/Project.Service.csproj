@@ -87,6 +87,7 @@
     <Compile Include="HRManager\EmployeeInfoService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SystemSetManager\HolidayDetailService.cs" />
+    <Compile Include="HRManager\YearHholidayDefinitionService.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Project.Infrastructure.FrameworkCore\Project.Infrastructure.FrameworkCore.csproj">
