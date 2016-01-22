@@ -10,6 +10,8 @@ using System.Collections.Generic;
 using Project.Infrastructure.FrameworkCore.DataNhibernate.Helpers;
 using Project.Model.HRManager;
 using Project.Repository.HRManager;
+using Project.Service.HRManager.Validate;
+using System;
 
 namespace Project.Service.HRManager
 {
@@ -17,12 +19,12 @@ namespace Project.Service.HRManager
     {
 
         #region 构造函数
-        private readonly YearHholidayDefinitionRepository _yearHholidayDefinitionRepository;
+        private readonly YearHolidayDefinitionRepository _yearHholidayDefinitionRepository;
         private static readonly YearHholidayDefinitionService Instance = new YearHholidayDefinitionService();
 
         public YearHholidayDefinitionService()
         {
-            this._yearHholidayDefinitionRepository = new YearHholidayDefinitionRepository();
+            this._yearHholidayDefinitionRepository = new YearHolidayDefinitionRepository();
         }
 
         public static YearHholidayDefinitionService GetInstance()
@@ -38,9 +40,23 @@ namespace Project.Service.HRManager
         /// </summary>
         /// <param name="entity"></param>
         /// <returns></returns>
-        public System.Int32 Add(YearHholidayDefinitionEntity entity)
+        public Tuple<bool, string> Add(YearHolidayDefinitionEntity entity)
         {
-            return _yearHholidayDefinitionRepository.Save(entity);
+            //判断年份是否已经存在
+            var validateResult = YearHolidayDefinitionValidate.GetInstance().IsHasSameYearsNum(entity.YearsNum.Value);
+            if (!validateResult.Item1)
+            {
+                return validateResult;
+            }
+            var addResult = _yearHholidayDefinitionRepository.Save(entity);
+            if (addResult > 0)
+            {
+                return new Tuple<bool, string>(true, "");
+            }
+            else
+            {
+                return new Tuple<bool, string>(false, "");
+            }
         }
 
 
@@ -66,7 +82,7 @@ namespace Project.Service.HRManager
         /// 删除
         /// </summary>
         /// <param name="entity"></param>
-        public bool Delete(YearHholidayDefinitionEntity entity)
+        public bool Delete(YearHolidayDefinitionEntity entity)
         {
             try
             {
@@ -83,16 +99,22 @@ namespace Project.Service.HRManager
         /// 更新
         /// </summary>
         /// <param name="entity"></param>
-        public bool Update(YearHholidayDefinitionEntity entity)
+        public Tuple<bool, string> Update(YearHolidayDefinitionEntity entity)
         {
             try
             {
+                //判断年份是否已经存在
+                var validateResult = YearHolidayDefinitionValidate.GetInstance().IsHasSameYearsNum(entity.YearsNum.Value);
+                if (!validateResult.Item1)
+                {
+                    return validateResult;
+                }
                 _yearHholidayDefinitionRepository.Update(entity);
-                return true;
+                return new Tuple<bool, string>(true, "");
             }
             catch
             {
-                return false;
+                return new Tuple<bool, string>(false, "");
             }
         }
 
@@ -102,7 +124,7 @@ namespace Project.Service.HRManager
         /// </summary>
         /// <param name="pkId">主键</param>
         /// <returns></returns>
-        public YearHholidayDefinitionEntity GetModelByPk(System.Int32 pkId)
+        public YearHolidayDefinitionEntity GetModelByPk(System.Int32 pkId)
         {
             return _yearHholidayDefinitionRepository.GetById(pkId);
         }
@@ -115,9 +137,9 @@ namespace Project.Service.HRManager
         /// <param name="skipResults">开始</param>
         /// <param name="maxResults">结束</param>
         /// <returns>获取当前页【年休存休月定义】和总【年休存休月定义】数</returns>
-        public System.Tuple<IList<YearHholidayDefinitionEntity>, int> Search(YearHholidayDefinitionEntity where, int skipResults, int maxResults)
+        public System.Tuple<IList<YearHolidayDefinitionEntity>, int> Search(YearHolidayDefinitionEntity where, int skipResults, int maxResults)
         {
-            var expr = PredicateBuilder.True<YearHholidayDefinitionEntity>();
+            var expr = PredicateBuilder.True<YearHolidayDefinitionEntity>();
             #region
             // if (!string.IsNullOrEmpty(where.PkId))
             //  expr = expr.And(p => p.PkId == where.PkId);
@@ -138,7 +160,7 @@ namespace Project.Service.HRManager
             #endregion
             var list = _yearHholidayDefinitionRepository.Query().Where(expr).OrderBy(p => p.PkId).Skip(skipResults).Take(maxResults).ToList();
             var count = _yearHholidayDefinitionRepository.Query().Where(expr).Count();
-            return new System.Tuple<IList<YearHholidayDefinitionEntity>, int>(list, count);
+            return new System.Tuple<IList<YearHolidayDefinitionEntity>, int>(list, count);
         }
 
         /// <summary>
@@ -146,9 +168,9 @@ namespace Project.Service.HRManager
         /// </summary>
         /// <param name="entity">条件实体</param>
         /// <returns>返回列表</returns>
-        public IList<YearHholidayDefinitionEntity> GetList(YearHholidayDefinitionEntity where)
+        public IList<YearHolidayDefinitionEntity> GetList(YearHolidayDefinitionEntity where)
         {
-            var expr = PredicateBuilder.True<YearHholidayDefinitionEntity>();
+            var expr = PredicateBuilder.True<YearHolidayDefinitionEntity>();
             #region
             // if (!string.IsNullOrEmpty(where.PkId))
             //  expr = expr.And(p => p.PkId == where.PkId);

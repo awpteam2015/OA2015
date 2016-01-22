@@ -12,7 +12,7 @@ using Project.Infrastructure.FrameworkCore.Domain.Entities.Component;
 
 namespace Project.Model.HRManager
 {
-    public class YearHholidayDefinitionEntity: Entity
+    public class YearHolidayDefinitionEntity: Entity
     { 
         #region 属性
         /// <summary>

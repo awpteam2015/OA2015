@@ -15,7 +15,7 @@ var pro = pro || {};
             var tabObj = initObj.tabObj;
             var gridObj = initObj.gridObj;
             gridObj.grid({
-                url: '/HRManager/YearHholidayDefinition/GetList',
+                url: '/HRManager/YearHolidayDefinition/GetList',
                 fitColumns: false,
                 nowrap: false,
                 rownumbers: true, //行号
@@ -35,7 +35,7 @@ var pro = pro || {};
                );
 
             $("#btnAdd").click(function () {
-                tabObj.add("/HRManager/YearHholidayDefinition/Hd", "新增");
+                tabObj.add("/HRManager/YearHolidayDefinition/Hd", "新增");
             });
 
             $("#btnEdit").click(function () {
@@ -44,7 +44,7 @@ var pro = pro || {};
                     return;
                 }
                 var PkId = gridObj.getSelectedRow().PkId;
-                tabObj.add("/HRManager/YearHholidayDefinition/Hd?PkId=" + PkId, "编辑" + PkId);
+                tabObj.add("/HRManager/YearHolidayDefinition/Hd?PkId=" + PkId, "编辑" + PkId);
             });
 
 
@@ -60,7 +60,7 @@ var pro = pro || {};
                 $.messager.confirm("确认操作", "是否确认删除", function (bl) {
                     if (!bl) return;
                     abp.ajax({
-                        url: "/HRManager/YearHholidayDefinition/Delete?PkId=" + gridObj.getSelectedRow().PkId
+                        url: "/HRManager/YearHolidayDefinition/Delete?PkId=" + gridObj.getSelectedRow().PkId
                     }).done(
                     function (dataresult, data) {
                         $.alertExtend.info();

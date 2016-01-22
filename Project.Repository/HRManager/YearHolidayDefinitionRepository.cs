@@ -14,7 +14,7 @@ namespace Project.Repository.HRManager
     /// <summary>
     /// 持久层
     /// </summary>
-    public class  YearHholidayDefinitionRepository : RepositoryBaseSql< YearHholidayDefinitionEntity, int>
+    public class  YearHolidayDefinitionRepository : RepositoryBaseSql< YearHolidayDefinitionEntity, int>
     {
 
     }

@@ -12,11 +12,11 @@ using Project.Model.PermissionManager;
 
 namespace  Project.Map.HRManager
 {
-    public class YearHholidayDefinitionMap : BaseMap<YearHholidayDefinitionEntity,int>
+    public class YearHolidayDefinitionMap : BaseMap<YearHolidayDefinitionEntity,int>
     {
-        public YearHholidayDefinitionMap():base("HR_YearHholidayDefinition")
+        public YearHolidayDefinitionMap():base("HR_YearHolidayDefinition")
         {
-            this.MapPkidDefault<YearHholidayDefinitionEntity,int>();
+            this.MapPkidDefault<YearHolidayDefinitionEntity,int>();
  
             Map(p => p.YearsNum);    
             Map(p => p.BeginMonth);    

@@ -13,10 +13,11 @@ using Project.Mvc.Models;
 using Project.Service.HRManager;
 using Project.WebApplication.Controllers;
 using Project.Infrastructure.FrameworkCore.ToolKit;
+using Project.Service.HRManager.Validate;
 
 namespace Project.WebApplication.Areas.HRManager.Controllers
 {
-    public class YearHholidayDefinitionController : BaseController
+    public class YearHolidayDefinitionController : BaseController
     {
 
         public ActionResult Hd(int pkId = 0)
@@ -39,7 +40,7 @@ namespace Project.WebApplication.Areas.HRManager.Controllers
         {
             var pIndex = this.Request["page"].ConvertTo<int>();
             var pSize = this.Request["rows"].ConvertTo<int>();
-            var where = new YearHholidayDefinitionEntity();
+            var where = new YearHolidayDefinitionEntity();
             //where.PkId = RequestHelper.GetFormString("PkId");
             where.YearsNum = RequestHelper.GetFormInt("YearsNum", -1);
             //where.BeginMonth = RequestHelper.GetFormString("BeginMonth");
@@ -60,45 +61,49 @@ namespace Project.WebApplication.Areas.HRManager.Controllers
 
 
         [HttpPost]
-        public AbpJsonResult Add(AjaxRequest<YearHholidayDefinitionEntity> postData)
+        public ActionResult Add(AjaxRequest<YearHolidayDefinitionEntity> postData)
         {
             postData.RequestEntity.CreatorUserCode = LoginUserInfo.UserCode;
             postData.RequestEntity.CreatorUserName = LoginUserInfo.UserName;
             postData.RequestEntity.CreateTime = DateTime.Now;
             var addResult = YearHholidayDefinitionService.GetInstance().Add(postData.RequestEntity);
-            var result = new AjaxResponse<YearHholidayDefinitionEntity>()
+            var result = new AjaxResponse<YearHolidayDefinitionEntity>()
             {
-                success = true,
-                result = postData.RequestEntity
+                success = addResult.Item1,
+                result = postData.RequestEntity,
+                error = new ErrorInfo() { message = addResult.Item2 }
             };
+      
             return new AbpJsonResult(result, new NHibernateContractResolver());
         }
 
 
-        [HttpPost]
-        public AbpJsonResult Edit(AjaxRequest<YearHholidayDefinitionEntity> postData)
-        {
-            postData.RequestEntity.LastModificationTime = DateTime.Now;
-            var updateResult = YearHholidayDefinitionService.GetInstance().Update(postData.RequestEntity);
-            var result = new AjaxResponse<YearHholidayDefinitionEntity>()
-            {
-                success = updateResult,
-                result = postData.RequestEntity
-            };
-            return new AbpJsonResult(result, new NHibernateContractResolver(new string[] { "result" }));
-        }
+    [HttpPost]
+    public AbpJsonResult Edit(AjaxRequest<YearHolidayDefinitionEntity> postData)
+    {
 
-        [HttpPost]
-        public AbpJsonResult Delete(int pkid)
+        postData.RequestEntity.LastModificationTime = DateTime.Now;
+        var updateResult = YearHholidayDefinitionService.GetInstance().Update(postData.RequestEntity);
+        var result = new AjaxResponse<YearHolidayDefinitionEntity>()
         {
-            var deleteResult = YearHholidayDefinitionService.GetInstance().DeleteByPkId(pkid);
-            var result = new AjaxResponse<YearHholidayDefinitionEntity>()
-            {
-                success = deleteResult
-            };
-            return new AbpJsonResult(result, new NHibernateContractResolver(new string[] { "result" }));
-        }
+            success = updateResult.Item1,
+            result = postData.RequestEntity,
+            error = updateResult.Item1 ? null : new ErrorInfo(updateResult.Item2)
+        };
+        return new AbpJsonResult(result, new NHibernateContractResolver(new string[] { "result" }));
     }
+
+    [HttpPost]
+    public AbpJsonResult Delete(int pkid)
+    {
+        var deleteResult = YearHholidayDefinitionService.GetInstance().DeleteByPkId(pkid);
+        var result = new AjaxResponse<YearHolidayDefinitionEntity>()
+        {
+            success = deleteResult
+        };
+        return new AbpJsonResult(result, new NHibernateContractResolver(new string[] { "result" }));
+    }
+}
 }
 
 
