@@ -212,6 +212,10 @@
     <Content Include="Areas\SystemSetManager\Views\HolidayDetail\List.cshtml" />
     <Content Include="Areas\HRManager\Views\YearHolidayDefinition\Hd.cshtml" />
     <Content Include="Areas\HRManager\Views\YearHolidayDefinition\List.cshtml" />
+    <Content Include="Areas\HRManager\Views\EmployeeYearDetail\Hd.cshtml" />
+    <Content Include="Areas\HRManager\Views\EmployeeYearDetail\List.cshtml" />
+    <Content Include="Areas\HRManager\Views\EmployeeYearMain\Hd.cshtml" />
+    <Content Include="Areas\HRManager\Views\EmployeeYearMain\List.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\Control\DepartmentControl.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
@@ -724,8 +728,6 @@
     <Folder Include="App_Data\" />
     <Folder Include="Areas\HRManager\Scripts\EmployeeYearDetail\" />
     <Folder Include="Areas\HRManager\Scripts\EmployeeYearMain\" />
-    <Folder Include="Areas\HRManager\Views\EmployeeYearDetail\" />
-    <Folder Include="Areas\HRManager\Views\EmployeeYearMain\" />
     <Folder Include="Areas\PermissionManager\Models\" />
     <Folder Include="Areas\PermissionManager\Views\Permission\" />
     <Folder Include="Areas\PermissionManager\Views\Shared\" />
