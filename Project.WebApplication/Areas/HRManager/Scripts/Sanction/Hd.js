@@ -23,6 +23,13 @@
                         $("#SanctionObj+.combo").show();
                 }
             })
+            $('#SanctionObjLevel').combobox({
+                required: true,
+                editable: false,
+                valueField: 'KeyValue',
+                textField: 'KeyName',
+                url: '/HRManager/Dictionary/GetListByCode?ParentKeyCode=JCDJ'
+            });
             $('#DepartmentCode').combotree({
                 required: true,
                 editable: false,
@@ -54,6 +61,8 @@
         submit: function (command) {
             var postData = {};
             postData.RequestEntity = pro.submitKit.getHeadJson();
+
+            postData.RequestEntity.SanctionObjLevelName = $('#SanctionObjLevel').combobox('getText');
             if (postData.RequestEntity.SanctionObjType == '1') {
                 postData.RequestEntity.SanctionObj = postData.RequestEntity.DepartmentCode;
                 postData.RequestEntity.SanctionObjName = $('#DepartmentCode').combobox('getText');

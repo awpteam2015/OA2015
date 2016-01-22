@@ -36,6 +36,7 @@ var pro = pro || {};
                  return ret;
              }
          },
+          { field: 'SanctionObjLevelName', title: '等级', width: 100 },
          {
              field: 'SanctionObjType', title: '奖罚对象类型', width: 100, formatter: function (value, row, index) {
                  var ret = "";

@@ -23,7 +23,14 @@ namespace Project.Model.HRManager
         /// 奖罚对象类型
         /// </summary>
         public virtual System.Int32? SanctionObjType { get; set; }
-
+        /// <summary>
+        /// 奖励等级
+        /// </summary>
+        public virtual System.Int32? SanctionObjLevel { get; set; }
+        /// <summary>
+        /// 等级名称
+        /// </summary>
+        public virtual System.String SanctionObjLevelName { get; set; }
         /// <summary>
         /// 部门编号
         /// </summary>

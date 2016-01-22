@@ -21,6 +21,8 @@ namespace Project.Map.HRManager
 
             Map(p => p.SanctionType);
             Map(p => p.SanctionObjType);
+            Map(p => p.SanctionObjLevel);
+            Map(p => p.SanctionObjLevelName);
             Map(p => p.DepartmentCode);
             Map(p => p.SanctionObjName);
             Map(p => p.SanctionObj);
