@@ -212,6 +212,8 @@
     <Content Include="Areas\SystemSetManager\Views\HolidayDetail\List.cshtml" />
     <Content Include="Areas\HRManager\Views\YearHholidayDefinition\Hd.cshtml" />
     <Content Include="Areas\HRManager\Views\YearHholidayDefinition\List.cshtml" />
+    <Content Include="Areas\HRManager\Views\YearHolidayDefinition\Hd.cshtml" />
+    <Content Include="Areas\HRManager\Views\YearHolidayDefinition\List.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\Control\DepartmentControl.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
@@ -656,6 +658,8 @@
     <Compile Include="Areas\HRManager\Controllers\EmployeeChildrenController.cs" />
     <Compile Include="Areas\HRManager\Controllers\EmployeeInfoController.cs" />
     <Compile Include="Areas\HRManager\Controllers\EmployeeRotateController.cs" />
+    <Compile Include="Areas\HRManager\Controllers\EmployeeYearDetailController.cs" />
+    <Compile Include="Areas\HRManager\Controllers\EmployeeYearMainController.cs" />
     <Compile Include="Areas\HRManager\Controllers\GoAbroadController.cs" />
     <Compile Include="Areas\HRManager\Controllers\GroupController.cs" />
     <Compile Include="Areas\HRManager\Controllers\GroupEmployeeController.cs" />
@@ -719,6 +723,10 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Areas\HRManager\Scripts\EmployeeYearDetail\" />
+    <Folder Include="Areas\HRManager\Scripts\EmployeeYearMain\" />
+    <Folder Include="Areas\HRManager\Views\EmployeeYearDetail\" />
+    <Folder Include="Areas\HRManager\Views\EmployeeYearMain\" />
     <Folder Include="Areas\PermissionManager\Models\" />
     <Folder Include="Areas\PermissionManager\Views\Permission\" />
     <Folder Include="Areas\PermissionManager\Views\Shared\" />

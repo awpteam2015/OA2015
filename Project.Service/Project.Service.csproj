@@ -56,6 +56,8 @@
     <Compile Include="HRManager\DictionaryService.cs" />
     <Compile Include="HRManager\EmployeeChildrenService.cs" />
     <Compile Include="HRManager\EmployeeRotateService.cs" />
+    <Compile Include="HRManager\EmployeeYearDetailService.cs" />
+    <Compile Include="HRManager\EmployeeYearMainService.cs" />
     <Compile Include="HRManager\GoAbroadService.cs" />
     <Compile Include="HRManager\GroupEmployeeHisService.cs" />
     <Compile Include="HRManager\GroupEmployeeService.cs" />
