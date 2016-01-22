@@ -12,7 +12,7 @@ namespace Project.Infrastructure.FrameworkCore.Logging
     {
         InfoLogger = 0,
         ErrorLogger = 1,
-        ExceptionLogger = 2,
+        //ExceptionLogger = 2,
         SuccessLogger = 3,
     }
 
@@ -34,12 +34,12 @@ namespace Project.Infrastructure.FrameworkCore.Logging
         {
             if (HttpContext.Current != null)
             {
-                var path = HttpContext.Current.Server.MapPath("~/bin/Config/log4net.config");
+                var path = HttpContext.Current.Server.MapPath("~/Config/log4net.config");
                 var s = XmlConfigurator.Configure(new FileInfo(path));
             }
             else
             {
-                var path = AppDomain.CurrentDomain.BaseDirectory + @"bin\Config\log4net.config";
+                var path = AppDomain.CurrentDomain.BaseDirectory + @"Config\log4net.config";
                 XmlConfigurator.Configure(new FileInfo(path));
             }
         }

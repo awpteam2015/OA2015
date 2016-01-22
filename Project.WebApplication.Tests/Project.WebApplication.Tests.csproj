@@ -90,7 +90,6 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Config\log4net.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup />
