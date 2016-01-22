@@ -24,6 +24,10 @@ namespace Project.Model.HRManager
         /// </summary>
         public virtual System.String EmployeeCode{get; set;}
         /// <summary>
+        /// 员工姓名
+        /// </summary>
+        public virtual System.String EmployeeName { get; set; }
+        /// <summary>
         /// 
         /// </summary>
         public virtual System.DateTime? BeginDate{get; set;}
