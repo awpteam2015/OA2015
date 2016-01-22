@@ -1,9 +1,9 @@
 ﻿
  /***************************************************************************
- *       功能：     HRYearHholidayDefinition持久层
+ *       功能：     HREmployeeYearMain持久层
  *       作者：     Roy
  *       日期：     2016-01-22
- *       描述：     年休存休月定义
+ *       描述：     员工年休管理
  * *************************************************************************/
 
 using Project.Infrastructure.FrameworkCore.Domain.Repositories;
@@ -14,7 +14,7 @@ namespace Project.Repository.HRManager
     /// <summary>
     /// 持久层
     /// </summary>
-    public class  YearHholidayDefinitionRepository : RepositoryBaseSql< YearHholidayDefinitionEntity, int>
+    public class  EmployeeYearMainRepository : RepositoryBaseSql< EmployeeYearMainEntity, int>
     {
 
     }

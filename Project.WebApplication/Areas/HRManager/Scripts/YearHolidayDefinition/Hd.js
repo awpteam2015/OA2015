@@ -22,6 +22,8 @@
                 for (var filedname in bindField) {
                     $("[name=" + filedname + "]").val(bindEntity[filedname]);
                 }
+                $('#BeginMonth').numberbox('setValue', bindEntity['BeginMonth']);
+                $('#EndMonth').numberbox('setValue', bindEntity['EndMonth']);
                 //行项目信息用json绑定控件
                 //alert(JSON.stringify(BindEntity.List));
             }
@@ -41,7 +43,7 @@
             }
 
             abp.ajax({
-                url: "/HRManager/YearHholidayDefinition/" + command,
+                url: "/HRManager/YearHolidayDefinition/" + command,
                 data: JSON.stringify(postData)
             }).done(
                 function (dataresult, data) {

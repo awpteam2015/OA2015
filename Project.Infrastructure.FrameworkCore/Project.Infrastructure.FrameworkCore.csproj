@@ -191,6 +191,9 @@
     <Compile Include="ToolKit\ValidateHandler\ValidateHelper.cs" />
     <Compile Include="ToolKit\ValidateHandler\ValidateRegExp.cs" />
     <Compile Include="ToolKit\XmlHelper.cs" />
+    <Compile Include="WebMvc\Controllers\Results\AbpJsonResult.cs" />
+    <Compile Include="WebMvc\Model\AjaxResponse.cs" />
+    <Compile Include="WebMvc\Model\ErrorInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Logging\Config\log4net.config">
