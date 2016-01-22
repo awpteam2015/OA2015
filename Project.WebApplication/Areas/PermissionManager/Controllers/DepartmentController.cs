@@ -32,6 +32,7 @@ namespace Project.WebApplication.Areas.PermissionManager.Controllers
 
         public ActionResult List()
         {
+            int.Parse("ssss");
             return View();
         }
 

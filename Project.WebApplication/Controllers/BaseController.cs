@@ -8,6 +8,7 @@ using System.Web.Mvc.Filters;
 using System.Web.Security;
 using Newtonsoft.Json;
 using Project.Infrastructure.FrameworkCore.DataNhibernate.Helpers;
+using Project.Infrastructure.FrameworkCore.Logging;
 using Project.Infrastructure.FrameworkCore.ToolKit.LinqExpansion;
 using Project.Model.PermissionManager;
 using Project.Mvc.Controllers.Results;
@@ -200,9 +201,32 @@ namespace Project.WebApplication.Controllers
 
         protected override void OnException(ExceptionContext filterContext)
         {
-            //if (filterContext == null) return;
+            if (filterContext == null) return;
 
-            //var exception = filterContext.Exception ?? new Exception("不存在进一步错误信息");
+            var exception = filterContext.Exception ?? new Exception("不存在进一步错误信息");
+            LoggerHelper.Error(LogType.ErrorLogger, exception.Message);
+
+
+            if (Request.IsAjaxRequest())
+            {
+                filterContext.Result = new AbpJsonResult
+                {
+                    Data = new AjaxResponse<object>() { success = false, error = new ErrorInfo(exception.ToString()) }
+                };
+            }
+            else
+            {
+                var controllerName = (string)filterContext.RouteData.Values["controller"];
+                var actionName = (string)filterContext.RouteData.Values["action"];
+                var model = new HandleErrorInfo(exception, controllerName, actionName);
+                filterContext.Result = new ViewResult
+                {
+                    ViewName = "InternalServer",
+                    MasterName = "",
+                    ViewData = new ViewDataDictionary<HandleErrorInfo>(model),
+                    TempData = filterContext.Controller.TempData
+                };
+            }
 
             //string message;
             ////如果没有记录日常，就记录日志
@@ -243,10 +267,10 @@ namespace Project.WebApplication.Controllers
             //    };
             //}
 
-            //filterContext.HttpContext.Response.Clear();
-            //filterContext.HttpContext.Response.Clear();
-            //filterContext.HttpContext.Response.StatusCode = 500;
-            //filterContext.HttpContext.Response.TrySkipIisCustomErrors = true;
+            filterContext.HttpContext.Response.Clear();
+            filterContext.HttpContext.Response.Clear();
+            filterContext.HttpContext.Response.StatusCode = 500;
+            filterContext.HttpContext.Response.TrySkipIisCustomErrors = true;
         }
     }
 }

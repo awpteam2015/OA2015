@@ -14,7 +14,17 @@ namespace Project.WebApplication.Tests
           [TestMethod]
           public void TestMethod1()
           {
-              LoggerHelper.Error(LogType.InfoLogger,"111");
+              try
+              {
+                  LoggerHelper.Error(LogType.InfoLogger, "111");
+
+              }
+              catch (Exception e)
+              {
+                  
+                  throw;
+              }
+             
           }
     }
 }

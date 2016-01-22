@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
 using Newtonsoft.Json;
+using Project.Infrastructure.FrameworkCore.Logging;
 using Project.Infrastructure.FrameworkCore.ToolKit;
 using Project.Mvc.Controllers.Results;
 using Project.Mvc.Models;
@@ -17,6 +18,7 @@ namespace Project.WebApplication.Controllers
         // GET: Login
         public ActionResult Index()
         {
+           
             return View();
         }
 
