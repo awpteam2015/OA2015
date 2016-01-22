@@ -21,19 +21,10 @@
             
               <tr>
             <td  >
-                <span style="color: Red">*</span>:
-            </td>
-            <td >
-                <input id="PkId" name="PkId"  type="text"  />
-            </td>
-        </tr>
-            
-              <tr>
-            <td  >
                 年份<span style="color: Red">*</span>:
             </td>
             <td >
-                <input id="YearsNum" name="YearsNum"  type="text"  />
+                <input id="YearsNum" name="YearsNum"  type="text"  class="Wdate" onclick="WdatePicker({ dateFmt: 'yyyy' });" />
             </td>
         </tr>
             
@@ -42,7 +33,7 @@
                 开始月<span style="color: Red">*</span>:
             </td>
             <td >
-                <input id="BeginMonth" name="BeginMonth"  type="text"  />
+                <input id="BeginMonth" name="BeginMonth"  type="text" class="easyui-numberbox" data-options="min:1,max:12"/>
             </td>
         </tr>
             
@@ -51,44 +42,9 @@
                 结束月<span style="color: Red">*</span>:
             </td>
             <td >
-                <input id="EndMonth" name="EndMonth"  type="text"  />
+                <input id="EndMonth" name="EndMonth"  type="text" class="easyui-numberbox" data-options="min:1,max:12"/>
             </td>
-        </tr>
-            
-              <tr>
-            <td  >
-                操作人<span style="color: Red">*</span>:
-            </td>
-            <td >
-                <input id="CreatorUserCode" name="CreatorUserCode"  type="text"  />
-            </td>
-        </tr>
-            
-              <tr>
-            <td  >
-                操作人姓名<span style="color: Red">*</span>:
-            </td>
-            <td >
-                <input id="CreatorUserName" name="CreatorUserName"  type="text"  />
-            </td>
-        </tr>
-            
-              <tr>
-            <td  >
-                创建时间<span style="color: Red">*</span>:
-            </td>
-            <td >
-                <input id="CreateTime" name="CreateTime"  type="text"  />
-            </td>
-        </tr>
-            
-              <tr>
-            <td  >
-                修改时间<span style="color: Red">*</span>:
-            </td>
-            <td >
-                <input id="LastModificationTime" name="LastModificationTime"  type="text"  />
-            </td>
+       
         </tr>
           
         </table>

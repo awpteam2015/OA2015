@@ -4,7 +4,7 @@ var pro = pro || {};
     pro.YearHholidayDefinition = pro.YearHholidayDefinition || {};
     pro.YearHholidayDefinition.ListPage = pro.YearHholidayDefinition.ListPage || {};
     pro.YearHholidayDefinition.ListPage = {
-      init: function () {
+        init: function () {
             return {
                 tabObj: new pro.TabBase(),
                 gridObj: new pro.GridBase("#datagrid", false)
@@ -21,12 +21,10 @@ var pro = pro || {};
                 rownumbers: true, //行号
                 singleSelect: true,
                 columns: [[
-         { field: 'PkId', title: '', width: 100 },
          { field: 'YearsNum', title: '年份', width: 100 },
          { field: 'BeginMonth', title: '开始月', width: 100 },
          { field: 'EndMonth', title: '结束月', width: 100 },
-         { field: 'CreatorUserCode', title: '操作人', width: 100 },
-         { field: 'CreatorUserName', title: '操作人姓名', width: 100 },
+         { field: 'CreatorUserName', title: '操作人', width: 100 },
          { field: 'CreateTime', title: '创建时间', width: 100 },
          { field: 'LastModificationTime', title: '修改时间', width: 100 },
                 ]],
@@ -37,7 +35,7 @@ var pro = pro || {};
                );
 
             $("#btnAdd").click(function () {
-               tabObj.add("/HRManager/YearHholidayDefinition/Hd","新增");
+                tabObj.add("/HRManager/YearHholidayDefinition/Hd", "新增");
             });
 
             $("#btnEdit").click(function () {
@@ -56,7 +54,7 @@ var pro = pro || {};
 
             $("#btnDel").click(function () {
                 if (!gridObj.isSelected()) {
-                $.alertExtend.infoOp();
+                    $.alertExtend.infoOp();
                     return;
                 }
                 $.messager.confirm("确认操作", "是否确认删除", function (bl) {
@@ -80,7 +78,7 @@ var pro = pro || {};
                 gridObj.refresh();
             });
         },
-         closeTab: function () {
+        closeTab: function () {
             this.init().tabObj.closeTab();
         }
     };
