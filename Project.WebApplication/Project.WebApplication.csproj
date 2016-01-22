@@ -210,8 +210,8 @@
     <Content Include="Areas\HRManager\Views\WorkExperience\List.cshtml" />
     <Content Include="Areas\SystemSetManager\Views\HolidayDetail\Hd.cshtml" />
     <Content Include="Areas\SystemSetManager\Views\HolidayDetail\List.cshtml" />
-    <Content Include="Areas\HRManager\Views\YearHolidayDefinition\Hd.cshtml" />
-    <Content Include="Areas\HRManager\Views\YearHolidayDefinition\List.cshtml" />
+    <Content Include="Areas\HRManager\Views\YearHholidayDefinition\Hd.cshtml" />
+    <Content Include="Areas\HRManager\Views\YearHholidayDefinition\List.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\Control\DepartmentControl.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
