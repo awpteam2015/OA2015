@@ -1,0 +1,11 @@
+﻿@model HandleErrorInfo
+
+
+<div class="list-header clearfix" style=" margin-left:15px; margin-top:25px;">
+    <span>Error</span>
+</div>
+<div class="list-sfs-holder" style=" margin-left:15px;">
+    <p>服务器内部错误</p>
+    <p style=" margin-left:25px; font-weight:bold;">@Html.Raw(Model.Exception.Message)</p>
+    <p style="color:Red;">请把错误代码复制下来，发给技术支持，谢谢！</p>
+</div>
