@@ -87,7 +87,8 @@ namespace Project.WebApplication.Areas.HRManager.Controllers
             var result = new AjaxResponse<AttendanceEntity>()
             {
                 success = updateResult,
-                result = postData.RequestEntity
+                result = postData.RequestEntity,
+                error = updateResult.Item1 ? null : new ErrorInfo(updateResult.Item2) 
             };
             return new AbpJsonResult(result, new NHibernateContractResolver(new string[] { "result" }));
         }
