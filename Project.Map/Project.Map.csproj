@@ -52,6 +52,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="HRManager\AttendanceMap.cs" />
+    <Compile Include="HRManager\AttendanceUploadRecordMap.cs" />
     <Compile Include="HRManager\ContractMap.cs" />
     <Compile Include="HRManager\DictionaryMap.cs" />
     <Compile Include="HRManager\EmployeeChildrenMap.cs" />

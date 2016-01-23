@@ -42,6 +42,7 @@
     <Compile Include="Enum\Class1.cs" />
     <Compile Include="ExtendUi\ITree.cs" />
     <Compile Include="HRManager\AttendanceEntity.cs" />
+    <Compile Include="HRManager\AttendanceUploadRecordEntity.cs" />
     <Compile Include="HRManager\ContractEntity.cs" />
     <Compile Include="HRManager\DictionaryEntity.cs" />
     <Compile Include="HRManager\EmployeeChildrenEntity.cs" />

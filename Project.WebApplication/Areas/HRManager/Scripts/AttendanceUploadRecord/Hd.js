@@ -1,19 +1,19 @@
 ﻿var pro = pro || {};
 (function () {
-    pro.Contract = pro.Contract || {};
-    pro.Contract.HdPage = pro.Contract.HdPage || {};
-    pro.Contract.HdPage = {
+    pro.AttendanceUploadRecord = pro.AttendanceUploadRecord || {};
+    pro.AttendanceUploadRecord.HdPage = pro.AttendanceUploadRecord.HdPage || {};
+    pro.AttendanceUploadRecord.HdPage = {
         initPage: function () {
             $("#btnAdd").click(function () {
-                pro.Contract.HdPage.submit("Add");
+                pro.AttendanceUploadRecord.HdPage.submit("Add");
             });
 
             $("#btnEdit").click(function () {
-                pro.Contract.HdPage.submit("Edit");
+                pro.AttendanceUploadRecord.HdPage.submit("Edit");
             });
             
              $("#btnClose").click(function () {
-                parent.pro.Contract.ListPage.closeTab("");
+                parent.pro.AttendanceUploadRecord.ListPage.closeTab("");
             });
 
             if ($("#BindEntity").val()) {
@@ -41,13 +41,13 @@
             }
 
             abp.ajax({
-                url: "/PermissionManager/Contract/" + command,
+                url: "/PermissionManager/AttendanceUploadRecord/" + command,
                 data: JSON.stringify(postData)
             }).done(
                 function (dataresult, data) {
                    function afterSuccess() {
                         parent.$("#btnSearch").trigger("click");
-                        parent.pro.Contract.ListPage.closeTab();
+                        parent.pro.AttendanceUploadRecord.ListPage.closeTab();
                     }
                     parent.$.alertExtend.info("", afterSuccess());
                 }
@@ -63,33 +63,25 @@
                 $("#form1").validate({
                     rules: {
           PkId: { required: true  },
-          EmployeeCode: { required: true  },
           DepartmentCode: { required: true  },
-          BeginDate: { required: true  },
-          EndDate: { required: true  },
+          Date: { required: true  },
           Remark: { required: true  },
           CreatorUserCode: { required: true  },
           CreatorUserName: { required: true  },
           CreateTime: { required: true  },
-          LastModificationTime: { required: true  },
+          FileUrl: { required: true  },
           IsDelete: { required: true  },
-          State: { required: true  },
-          IsActive: { required: true  },
                     },
                     messages: {
           PkId:  "必填!",
-          EmployeeCode:  "必填!",
           DepartmentCode:  "必填!",
-          BeginDate:  "必填!",
-          EndDate:  "必填!",
+          Date:  "必填!",
           Remark:  "必填!",
           CreatorUserCode:  "必填!",
           CreatorUserName:  "必填!",
           CreateTime:  "必填!",
-          LastModificationTime:  "必填!",
+          FileUrl:  "必填!",
           IsDelete:  "必填!",
-          State:  "1 最初签订 2续订 3 变更 4 终止 必填!",
-          IsActive:  "是否有效必填!",
                     },
                     errorPlacement: function (error, element) {
                         pro.commonKit.errorPlacementHd(error, element);
@@ -112,7 +104,7 @@
 
 
 $(function () {
-    pro.Contract.HdPage.initPage();
+    pro.AttendanceUploadRecord.HdPage.initPage();
 });
 
 

@@ -1,9 +1,9 @@
 ﻿
 var pro = pro || {};
 (function () {
-    pro.Attendance = pro.Attendance || {};
-    pro.Attendance.ListPage = pro.Attendance.ListPage || {};
-    pro.Attendance.ListPage = {
+    pro.AttendanceUploadRecord = pro.AttendanceUploadRecord || {};
+    pro.AttendanceUploadRecord.ListPage = pro.AttendanceUploadRecord.ListPage || {};
+    pro.AttendanceUploadRecord.ListPage = {
       init: function () {
             return {
                 tabObj: new pro.TabBase(),
@@ -15,23 +15,20 @@ var pro = pro || {};
             var tabObj = initObj.tabObj;
             var gridObj = initObj.gridObj;
             gridObj.grid({
-                url: '/HRManager/Attendance/GetList',
+                url: '/HRManager/AttendanceUploadRecord/GetList',
                 fitColumns: false,
                 nowrap: false,
                 rownumbers: true, //行号
                 singleSelect: true,
                 columns: [[
          { field: 'PkId', title: '', width: 100 },
-         { field: 'AttendanceUploadRecordId', title: '通过那次上传 0代表自己补的', width: 100 },
-         { field: 'EmployeeCode', title: '', width: 100 },
          { field: 'DepartmentCode', title: '', width: 100 },
-         { field: 'DepartmentName', title: '', width: 100 },
-         { field: 'State', title: '-1代表缺勤 1代表正常', width: 100 },
-         { field: 'Date', title: '考勤日期', width: 100 },
+         { field: 'Date', title: '', width: 100 },
          { field: 'Remark', title: '', width: 100 },
          { field: 'CreatorUserCode', title: '', width: 100 },
          { field: 'CreatorUserName', title: '', width: 100 },
          { field: 'CreateTime', title: '', width: 100 },
+         { field: 'FileUrl', title: '', width: 100 },
          { field: 'IsDelete', title: '', width: 100 },
                 ]],
                 pagination: true,
@@ -41,7 +38,7 @@ var pro = pro || {};
                );
 
             $("#btnAdd").click(function () {
-               tabObj.add("/HRManager/Attendance/Hd","新增");
+               tabObj.add("/HRManager/AttendanceUploadRecord/Hd","新增");
             });
 
             $("#btnEdit").click(function () {
@@ -50,7 +47,7 @@ var pro = pro || {};
                     return;
                 }
                 var PkId = gridObj.getSelectedRow().PkId;
-                tabObj.add("/HRManager/Attendance/Hd?PkId=" + PkId, "编辑" + PkId);
+                tabObj.add("/HRManager/AttendanceUploadRecord/Hd?PkId=" + PkId, "编辑" + PkId);
             });
 
 
@@ -66,7 +63,7 @@ var pro = pro || {};
                 $.messager.confirm("确认操作", "是否确认删除", function (bl) {
                     if (!bl) return;
                     abp.ajax({
-                        url: "/HRManager/Attendance/Delete?PkId=" + gridObj.getSelectedRow().PkId
+                        url: "/HRManager/AttendanceUploadRecord/Delete?PkId=" + gridObj.getSelectedRow().PkId
                     }).done(
                     function (dataresult, data) {
                         $.alertExtend.info();
@@ -93,7 +90,7 @@ var pro = pro || {};
 
 
 $(function () {
-    pro.Attendance.ListPage.initPage();
+    pro.AttendanceUploadRecord.ListPage.initPage();
 });
 
 

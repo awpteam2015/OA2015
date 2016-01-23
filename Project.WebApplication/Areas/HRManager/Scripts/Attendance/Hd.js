@@ -41,7 +41,7 @@
             }
 
             abp.ajax({
-                url: "/HRManager/Attendance/" + command,
+                url: "/PermissionManager/Attendance/" + command,
                 data: JSON.stringify(postData)
             }).done(
                 function (dataresult, data) {
@@ -63,25 +63,31 @@
                 $("#form1").validate({
                     rules: {
           PkId: { required: true  },
+          AttendanceUploadRecordId: { required: true  },
           EmployeeCode: { required: true  },
           DepartmentCode: { required: true  },
+          DepartmentName: { required: true  },
           State: { required: true  },
           Date: { required: true  },
           Remark: { required: true  },
           CreatorUserCode: { required: true  },
           CreatorUserName: { required: true  },
           CreateTime: { required: true  },
+          IsDelete: { required: true  },
                     },
                     messages: {
           PkId:  "必填!",
+          AttendanceUploadRecordId:  "通过那次上传 0代表自己补的必填!",
           EmployeeCode:  "必填!",
           DepartmentCode:  "必填!",
-          State:  "必填!",
-          Date:  "必填!",
+          DepartmentName:  "必填!",
+          State:  "-1代表缺勤 1代表正常必填!",
+          Date:  "考勤日期必填!",
           Remark:  "必填!",
           CreatorUserCode:  "必填!",
           CreatorUserName:  "必填!",
           CreateTime:  "必填!",
+          IsDelete:  "必填!",
                     },
                     errorPlacement: function (error, element) {
                         pro.commonKit.errorPlacementHd(error, element);

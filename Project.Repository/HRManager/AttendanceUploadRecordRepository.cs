@@ -1,9 +1,9 @@
 ﻿
  /***************************************************************************
- *       功能：     HRContract持久层
+ *       功能：     HRAttendanceUploadRecord持久层
  *       作者：     李伟伟
  *       日期：     2016/1/23
- *       描述：     用于记录合同（合同内工资类型等都过滤暂时不考虑）
+ *       描述：     人事考勤上传记录
  * *************************************************************************/
 
 using Project.Infrastructure.FrameworkCore.Domain.Repositories;
@@ -14,7 +14,7 @@ namespace Project.Repository.HRManager
     /// <summary>
     /// 持久层
     /// </summary>
-    public class  ContractRepository : RepositoryBaseSql< ContractEntity, int>
+    public class  AttendanceUploadRecordRepository : RepositoryBaseSql< AttendanceUploadRecordEntity, int>
     {
 
     }

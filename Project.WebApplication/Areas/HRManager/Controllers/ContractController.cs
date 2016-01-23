@@ -49,6 +49,9 @@ namespace Project.WebApplication.Areas.HRManager.Controllers
 			//where.CreatorUserName = RequestHelper.GetFormString("CreatorUserName");
 			//where.CreateTime = RequestHelper.GetFormString("CreateTime");
 			//where.LastModificationTime = RequestHelper.GetFormString("LastModificationTime");
+			//where.IsDelete = RequestHelper.GetFormString("IsDelete");
+			//where.State = RequestHelper.GetFormString("State");
+			//where.IsActive = RequestHelper.GetFormString("IsActive");
             var searchList = ContractService.GetInstance().Search(where, (pIndex - 1) * pSize, pSize);
 
             var dataGridEntity = new DataGridResponse()

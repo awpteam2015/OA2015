@@ -1,9 +1,9 @@
 ﻿
  /***************************************************************************
- *       功能：     HRContract业务处理层
+ *       功能：     HRAttendanceUploadRecord业务处理层
  *       作者：     李伟伟
  *       日期：     2016/1/23
- *       描述：     用于记录合同（合同内工资类型等都过滤暂时不考虑）
+ *       描述：     人事考勤上传记录
  * *************************************************************************/
 using System.Linq;
 using System.Collections.Generic;
@@ -13,19 +13,19 @@ using Project.Repository.HRManager;
 
 namespace Project.Service.HRManager
 {
-    public class ContractService
+    public class AttendanceUploadRecordService
     {
        
        #region 构造函数
-        private readonly ContractRepository  _contractRepository;
-            private static readonly ContractService Instance = new ContractService();
+        private readonly AttendanceUploadRecordRepository  _attendanceUploadRecordRepository;
+            private static readonly AttendanceUploadRecordService Instance = new AttendanceUploadRecordService();
 
-        public ContractService()
+        public AttendanceUploadRecordService()
         {
-           this._contractRepository =new ContractRepository();
+           this._attendanceUploadRecordRepository =new AttendanceUploadRecordRepository();
         }
         
-         public static  ContractService GetInstance()
+         public static  AttendanceUploadRecordService GetInstance()
         {
             return Instance;
         }
@@ -38,9 +38,9 @@ namespace Project.Service.HRManager
         /// </summary>
         /// <param name="entity"></param>
         /// <returns></returns>
-        public System.Int32 Add(ContractEntity entity)
+        public System.Int32 Add(AttendanceUploadRecordEntity entity)
         {
-            return _contractRepository.Save(entity);
+            return _attendanceUploadRecordRepository.Save(entity);
         }
         
         
@@ -52,8 +52,8 @@ namespace Project.Service.HRManager
         {
          try
             {
-            var entity= _contractRepository.GetById(pkId);
-            _contractRepository.Delete(entity);
+            var entity= _attendanceUploadRecordRepository.GetById(pkId);
+            _attendanceUploadRecordRepository.Delete(entity);
              return true;
         }
         catch
@@ -66,11 +66,11 @@ namespace Project.Service.HRManager
         /// 删除
         /// </summary>
         /// <param name="entity"></param>
-        public bool Delete(ContractEntity entity)
+        public bool Delete(AttendanceUploadRecordEntity entity)
         {
          try
             {
-            _contractRepository.Delete(entity);
+            _attendanceUploadRecordRepository.Delete(entity);
              return true;
         }
         catch
@@ -83,11 +83,11 @@ namespace Project.Service.HRManager
         /// 更新
         /// </summary>
         /// <param name="entity"></param>
-        public bool Update(ContractEntity entity)
+        public bool Update(AttendanceUploadRecordEntity entity)
         {
           try
             {
-            _contractRepository.Update(entity);
+            _attendanceUploadRecordRepository.Update(entity);
          return true;
         }
         catch
@@ -102,9 +102,9 @@ namespace Project.Service.HRManager
         /// </summary>
         /// <param name="pkId">主键</param>
         /// <returns></returns>
-        public ContractEntity GetModelByPk(System.Int32 pkId)
+        public AttendanceUploadRecordEntity GetModelByPk(System.Int32 pkId)
         {
-            return _contractRepository.GetById(pkId);
+            return _attendanceUploadRecordRepository.GetById(pkId);
         }
 
 
@@ -114,21 +114,17 @@ namespace Project.Service.HRManager
         /// <param name="entity">条件实体</param>
         /// <param name="skipResults">开始</param>
         /// <param name="maxResults">结束</param>
-        /// <returns>获取当前页【用于记录合同（合同内工资类型等都过滤暂时不考虑）】和总【用于记录合同（合同内工资类型等都过滤暂时不考虑）】数</returns>
-        public System.Tuple<IList<ContractEntity>, int> Search(ContractEntity where, int skipResults, int maxResults)
+        /// <returns>获取当前页【人事考勤上传记录】和总【人事考勤上传记录】数</returns>
+        public System.Tuple<IList<AttendanceUploadRecordEntity>, int> Search(AttendanceUploadRecordEntity where, int skipResults, int maxResults)
         {
-                var expr = PredicateBuilder.True<ContractEntity>();
+                var expr = PredicateBuilder.True<AttendanceUploadRecordEntity>();
                   #region
               // if (!string.IsNullOrEmpty(where.PkId))
               //  expr = expr.And(p => p.PkId == where.PkId);
-              // if (!string.IsNullOrEmpty(where.EmployeeCode))
-              //  expr = expr.And(p => p.EmployeeCode == where.EmployeeCode);
               // if (!string.IsNullOrEmpty(where.DepartmentCode))
               //  expr = expr.And(p => p.DepartmentCode == where.DepartmentCode);
-              // if (!string.IsNullOrEmpty(where.BeginDate))
-              //  expr = expr.And(p => p.BeginDate == where.BeginDate);
-              // if (!string.IsNullOrEmpty(where.EndDate))
-              //  expr = expr.And(p => p.EndDate == where.EndDate);
+              // if (!string.IsNullOrEmpty(where.Date))
+              //  expr = expr.And(p => p.Date == where.Date);
               // if (!string.IsNullOrEmpty(where.Remark))
               //  expr = expr.And(p => p.Remark == where.Remark);
               // if (!string.IsNullOrEmpty(where.CreatorUserCode))
@@ -137,18 +133,14 @@ namespace Project.Service.HRManager
               //  expr = expr.And(p => p.CreatorUserName == where.CreatorUserName);
               // if (!string.IsNullOrEmpty(where.CreateTime))
               //  expr = expr.And(p => p.CreateTime == where.CreateTime);
-              // if (!string.IsNullOrEmpty(where.LastModificationTime))
-              //  expr = expr.And(p => p.LastModificationTime == where.LastModificationTime);
+              // if (!string.IsNullOrEmpty(where.FileUrl))
+              //  expr = expr.And(p => p.FileUrl == where.FileUrl);
               // if (!string.IsNullOrEmpty(where.IsDelete))
               //  expr = expr.And(p => p.IsDelete == where.IsDelete);
-              // if (!string.IsNullOrEmpty(where.State))
-              //  expr = expr.And(p => p.State == where.State);
-              // if (!string.IsNullOrEmpty(where.IsActive))
-              //  expr = expr.And(p => p.IsActive == where.IsActive);
  #endregion
-            var list = _contractRepository.Query().Where(expr).OrderBy(p => p.PkId).Skip(skipResults).Take(maxResults).ToList();
-            var count = _contractRepository.Query().Where(expr).Count();
-            return new System.Tuple<IList<ContractEntity>, int>(list, count);
+            var list = _attendanceUploadRecordRepository.Query().Where(expr).OrderBy(p => p.PkId).Skip(skipResults).Take(maxResults).ToList();
+            var count = _attendanceUploadRecordRepository.Query().Where(expr).Count();
+            return new System.Tuple<IList<AttendanceUploadRecordEntity>, int>(list, count);
         }
 
         /// <summary>
@@ -156,20 +148,16 @@ namespace Project.Service.HRManager
         /// </summary>
         /// <param name="entity">条件实体</param>
         /// <returns>返回列表</returns>
-        public IList<ContractEntity> GetList(ContractEntity where)
+        public IList<AttendanceUploadRecordEntity> GetList(AttendanceUploadRecordEntity where)
         {
-               var expr = PredicateBuilder.True<ContractEntity>();
+               var expr = PredicateBuilder.True<AttendanceUploadRecordEntity>();
              #region
               // if (!string.IsNullOrEmpty(where.PkId))
               //  expr = expr.And(p => p.PkId == where.PkId);
-              // if (!string.IsNullOrEmpty(where.EmployeeCode))
-              //  expr = expr.And(p => p.EmployeeCode == where.EmployeeCode);
               // if (!string.IsNullOrEmpty(where.DepartmentCode))
               //  expr = expr.And(p => p.DepartmentCode == where.DepartmentCode);
-              // if (!string.IsNullOrEmpty(where.BeginDate))
-              //  expr = expr.And(p => p.BeginDate == where.BeginDate);
-              // if (!string.IsNullOrEmpty(where.EndDate))
-              //  expr = expr.And(p => p.EndDate == where.EndDate);
+              // if (!string.IsNullOrEmpty(where.Date))
+              //  expr = expr.And(p => p.Date == where.Date);
               // if (!string.IsNullOrEmpty(where.Remark))
               //  expr = expr.And(p => p.Remark == where.Remark);
               // if (!string.IsNullOrEmpty(where.CreatorUserCode))
@@ -178,16 +166,12 @@ namespace Project.Service.HRManager
               //  expr = expr.And(p => p.CreatorUserName == where.CreatorUserName);
               // if (!string.IsNullOrEmpty(where.CreateTime))
               //  expr = expr.And(p => p.CreateTime == where.CreateTime);
-              // if (!string.IsNullOrEmpty(where.LastModificationTime))
-              //  expr = expr.And(p => p.LastModificationTime == where.LastModificationTime);
+              // if (!string.IsNullOrEmpty(where.FileUrl))
+              //  expr = expr.And(p => p.FileUrl == where.FileUrl);
               // if (!string.IsNullOrEmpty(where.IsDelete))
               //  expr = expr.And(p => p.IsDelete == where.IsDelete);
-              // if (!string.IsNullOrEmpty(where.State))
-              //  expr = expr.And(p => p.State == where.State);
-              // if (!string.IsNullOrEmpty(where.IsActive))
-              //  expr = expr.And(p => p.IsActive == where.IsActive);
  #endregion
-            var list = _contractRepository.Query().Where(expr).OrderBy(p => p.PkId).ToList();
+            var list = _attendanceUploadRecordRepository.Query().Where(expr).OrderBy(p => p.PkId).ToList();
             return list;
         }
         #endregion

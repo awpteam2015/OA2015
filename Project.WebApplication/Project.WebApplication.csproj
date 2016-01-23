@@ -97,6 +97,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Areas\HRManager\Scripts\AttendanceUploadRecord\Hd.js" />
+    <Content Include="Areas\HRManager\Scripts\AttendanceUploadRecord\List.js" />
     <Content Include="Areas\HRManager\Scripts\Attendance\Hd.js" />
     <Content Include="Areas\HRManager\Scripts\Attendance\List.js" />
     <Content Include="Areas\HRManager\Scripts\Contract\Hd.js" />
@@ -216,6 +218,8 @@
     <Content Include="Areas\HRManager\Views\EmployeeYearDetail\List.cshtml" />
     <Content Include="Areas\HRManager\Views\EmployeeYearMain\Hd.cshtml" />
     <Content Include="Areas\HRManager\Views\EmployeeYearMain\List.cshtml" />
+    <Content Include="Areas\HRManager\Views\AttendanceUploadRecord\Hd.cshtml" />
+    <Content Include="Areas\HRManager\Views\AttendanceUploadRecord\List.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\Control\DepartmentControl.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
@@ -655,6 +659,7 @@
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Areas\HRManager\Controllers\AttendanceController.cs" />
+    <Compile Include="Areas\HRManager\Controllers\AttendanceUploadRecordController.cs" />
     <Compile Include="Areas\HRManager\Controllers\ContractController.cs" />
     <Compile Include="Areas\HRManager\Controllers\DictionaryController.cs" />
     <Compile Include="Areas\HRManager\Controllers\EmployeeChildrenController.cs" />

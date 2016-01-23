@@ -1,8 +1,8 @@
 ﻿
  /***************************************************************************
  *       功能：     HRAttendance业务处理层
- *       作者：     ROY
- *       日期：     2016-01-09
+ *       作者：     李伟伟
+ *       日期：     2016/1/23
  *       描述：     人事考勤记录
  * *************************************************************************/
 using System.Linq;
@@ -121,10 +121,14 @@ namespace Project.Service.HRManager
                   #region
               // if (!string.IsNullOrEmpty(where.PkId))
               //  expr = expr.And(p => p.PkId == where.PkId);
+              // if (!string.IsNullOrEmpty(where.AttendanceUploadRecordId))
+              //  expr = expr.And(p => p.AttendanceUploadRecordId == where.AttendanceUploadRecordId);
               // if (!string.IsNullOrEmpty(where.EmployeeCode))
               //  expr = expr.And(p => p.EmployeeCode == where.EmployeeCode);
               // if (!string.IsNullOrEmpty(where.DepartmentCode))
               //  expr = expr.And(p => p.DepartmentCode == where.DepartmentCode);
+              // if (!string.IsNullOrEmpty(where.DepartmentName))
+              //  expr = expr.And(p => p.DepartmentName == where.DepartmentName);
               // if (!string.IsNullOrEmpty(where.State))
               //  expr = expr.And(p => p.State == where.State);
               // if (!string.IsNullOrEmpty(where.Date))
@@ -137,6 +141,8 @@ namespace Project.Service.HRManager
               //  expr = expr.And(p => p.CreatorUserName == where.CreatorUserName);
               // if (!string.IsNullOrEmpty(where.CreateTime))
               //  expr = expr.And(p => p.CreateTime == where.CreateTime);
+              // if (!string.IsNullOrEmpty(where.IsDelete))
+              //  expr = expr.And(p => p.IsDelete == where.IsDelete);
  #endregion
             var list = _attendanceRepository.Query().Where(expr).OrderBy(p => p.PkId).Skip(skipResults).Take(maxResults).ToList();
             var count = _attendanceRepository.Query().Where(expr).Count();
@@ -154,10 +160,14 @@ namespace Project.Service.HRManager
              #region
               // if (!string.IsNullOrEmpty(where.PkId))
               //  expr = expr.And(p => p.PkId == where.PkId);
+              // if (!string.IsNullOrEmpty(where.AttendanceUploadRecordId))
+              //  expr = expr.And(p => p.AttendanceUploadRecordId == where.AttendanceUploadRecordId);
               // if (!string.IsNullOrEmpty(where.EmployeeCode))
               //  expr = expr.And(p => p.EmployeeCode == where.EmployeeCode);
               // if (!string.IsNullOrEmpty(where.DepartmentCode))
               //  expr = expr.And(p => p.DepartmentCode == where.DepartmentCode);
+              // if (!string.IsNullOrEmpty(where.DepartmentName))
+              //  expr = expr.And(p => p.DepartmentName == where.DepartmentName);
               // if (!string.IsNullOrEmpty(where.State))
               //  expr = expr.And(p => p.State == where.State);
               // if (!string.IsNullOrEmpty(where.Date))
@@ -170,6 +180,8 @@ namespace Project.Service.HRManager
               //  expr = expr.And(p => p.CreatorUserName == where.CreatorUserName);
               // if (!string.IsNullOrEmpty(where.CreateTime))
               //  expr = expr.And(p => p.CreateTime == where.CreateTime);
+              // if (!string.IsNullOrEmpty(where.IsDelete))
+              //  expr = expr.And(p => p.IsDelete == where.IsDelete);
  #endregion
             var list = _attendanceRepository.Query().Where(expr).OrderBy(p => p.PkId).ToList();
             return list;

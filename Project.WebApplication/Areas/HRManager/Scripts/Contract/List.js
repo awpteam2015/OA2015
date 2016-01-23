@@ -31,6 +31,9 @@ var pro = pro || {};
          { field: 'CreatorUserName', title: '', width: 100 },
          { field: 'CreateTime', title: '', width: 100 },
          { field: 'LastModificationTime', title: '', width: 100 },
+         { field: 'IsDelete', title: '', width: 100 },
+         { field: 'State', title: '1 最初签订 2续订 3 变更 4 终止 ', width: 100 },
+         { field: 'IsActive', title: '是否有效', width: 100 },
                 ]],
                 pagination: true,
                 pageSize: 20, //每页显示的记录条数，默认为10     

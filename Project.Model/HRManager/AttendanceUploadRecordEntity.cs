@@ -1,10 +1,10 @@
 ﻿
 
  /***************************************************************************
- *       功能：     HRContract实体类
+ *       功能：     HRAttendanceUploadRecord实体类
  *       作者：     李伟伟
  *       日期：     2016/1/23
- *       描述：     用于记录合同（合同内工资类型等都过滤暂时不考虑）
+ *       描述：     人事考勤上传记录
  * *************************************************************************/
 using System;
 using Project.Infrastructure.FrameworkCore.Domain.Entities;
@@ -12,13 +12,9 @@ using Project.Infrastructure.FrameworkCore.Domain.Entities.Component;
 
 namespace Project.Model.HRManager
 {
-    public class ContractEntity: Entity
+    public class AttendanceUploadRecordEntity: Entity
     { 
         #region 属性
-        /// <summary>
-        /// 
-        /// </summary>
-        public virtual System.String EmployeeCode{get; set;}
         /// <summary>
         /// 
         /// </summary>
@@ -26,11 +22,7 @@ namespace Project.Model.HRManager
         /// <summary>
         /// 
         /// </summary>
-        public virtual System.DateTime? BeginDate{get; set;}
-        /// <summary>
-        /// 
-        /// </summary>
-        public virtual System.DateTime? EndDate{get; set;}
+        public virtual System.DateTime? Date{get; set;}
         /// <summary>
         /// 
         /// </summary>
@@ -50,19 +42,11 @@ namespace Project.Model.HRManager
         /// <summary>
         /// 
         /// </summary>
-        public virtual System.DateTime? LastModificationTime{get; set;}
+        public virtual System.String FileUrl{get; set;}
         /// <summary>
         /// 
         /// </summary>
         public virtual System.Int32? IsDelete{get; set;}
-        /// <summary>
-        /// 1 最初签订 2续订 3 变更 4 终止 
-        /// </summary>
-        public virtual System.Int32? State{get; set;}
-        /// <summary>
-        /// 是否有效
-        /// </summary>
-        public virtual System.Int32? IsActive{get; set;}
 		#endregion
         
 

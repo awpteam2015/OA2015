@@ -9,7 +9,7 @@
 }
 
 @section JavaScript{
-    <script src="/Areas/HRManager/Scripts/Attendance/Hd.js?JsParamter=@SiteConfig.GetConfig().JsParamter"></script>
+    <script src="/Areas/HRManager/Scripts/AttendanceUploadRecord/Hd.js?JsParamter=@SiteConfig.GetConfig().JsParamter"></script>
 }
 <div style="display: none">
 <input id="BindEntity" type="text" value="@ViewBag.BindEntity" />
@@ -30,24 +30,6 @@
             
               <tr>
             <td  >
-                通过那次上传 0代表自己补的<span style="color: Red">*</span>:
-            </td>
-            <td >
-                <input id="AttendanceUploadRecordId" name="AttendanceUploadRecordId"  type="text"  />
-            </td>
-        </tr>
-            
-              <tr>
-            <td  >
-                <span style="color: Red">*</span>:
-            </td>
-            <td >
-                <input id="EmployeeCode" name="EmployeeCode"  type="text"  />
-            </td>
-        </tr>
-            
-              <tr>
-            <td  >
                 <span style="color: Red">*</span>:
             </td>
             <td >
@@ -58,24 +40,6 @@
               <tr>
             <td  >
                 <span style="color: Red">*</span>:
-            </td>
-            <td >
-                <input id="DepartmentName" name="DepartmentName"  type="text"  />
-            </td>
-        </tr>
-            
-              <tr>
-            <td  >
-                -1代表缺勤 1代表正常<span style="color: Red">*</span>:
-            </td>
-            <td >
-                <input id="State" name="State"  type="text"  />
-            </td>
-        </tr>
-            
-              <tr>
-            <td  >
-                考勤日期<span style="color: Red">*</span>:
             </td>
             <td >
                 <input id="Date" name="Date"  type="text"  />
@@ -115,6 +79,15 @@
             </td>
             <td >
                 <input id="CreateTime" name="CreateTime"  type="text"  />
+            </td>
+        </tr>
+            
+              <tr>
+            <td  >
+                <span style="color: Red">*</span>:
+            </td>
+            <td >
+                <input id="FileUrl" name="FileUrl"  type="text"  />
             </td>
         </tr>
             
