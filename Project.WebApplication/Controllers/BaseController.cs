@@ -227,7 +227,8 @@ namespace Project.WebApplication.Controllers
                     TempData = filterContext.Controller.TempData
                 };
             }
-
+            base.OnException(filterContext);
+           // return;
             //string message;
             ////如果没有记录日常，就记录日志
             //if (exception is EipException)
@@ -267,10 +268,10 @@ namespace Project.WebApplication.Controllers
             //    };
             //}
 
-            filterContext.HttpContext.Response.Clear();
-            filterContext.HttpContext.Response.Clear();
-            filterContext.HttpContext.Response.StatusCode = 500;
-            filterContext.HttpContext.Response.TrySkipIisCustomErrors = true;
+            //filterContext.HttpContext.Response.Clear();
+           // filterContext.HttpContext.Response.Clear();
+            //filterContext.HttpContext.Response.StatusCode = 500;
+            //filterContext.HttpContext.Response.TrySkipIisCustomErrors = true;
         }
     }
 }
