@@ -15,6 +15,23 @@
             $("#btnClose").click(function () {
                 parent.pro.EmployeeYearMain.ListPage.closeTab("");
             });
+            $('#DepartmentCode').combotree({
+                required: true,
+                editable: false,
+                valueField: 'DepartmentCode',
+                textField: 'DepartmentName',
+                url: '/PermissionManager/Department/GetList_Combotree'
+            }).combotree({
+                onSelect: function (node) {
+                    $('#EmployeeCode').combobox({
+                        required: true,
+                        editable: false,
+                        valueField: 'EmployeeCode',
+                        textField: 'EmployeeName',
+                        url: '/HRManager/EmployeeInfo/GetAllList?DepartmentCode=' + node.DepartmentCode
+                    });
+                }
+            });
 
             if ($("#BindEntity").val()) {
                 var bindField = pro.bindKit.getHeadJson();
