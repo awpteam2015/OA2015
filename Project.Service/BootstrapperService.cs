@@ -21,7 +21,8 @@ namespace Project.Service
         private static void InitAutoMapper()
         {
             Mapper.CreateMap<ContractEntity, ContractEntity>().IgnoreAllNull();
-      
+            Mapper.CreateMap<AttendanceEntity, AttendanceEntity>().IgnoreAllNull();
+            Mapper.CreateMap<AttendanceUploadRecordEntity, AttendanceUploadRecordEntity>().IgnoreAllNull();
 
 
             Mapper.CreateMap<FunctionDetailEntity, PermissionFunctionDetailDTO>();

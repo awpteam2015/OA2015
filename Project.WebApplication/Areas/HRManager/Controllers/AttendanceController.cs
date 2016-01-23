@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
+using AutoMapper;
 using Project.Infrastructure.FrameworkCore.DataNhibernate.Helpers;
 using Project.Infrastructure.FrameworkCore.ToolKit;
 using Project.Infrastructure.FrameworkCore.ToolKit.JsonHandler;
@@ -29,7 +30,7 @@ namespace Project.WebApplication.Areas.HRManager.Controllers
             return View();
         }
 
- 
+
         public ActionResult List()
         {
             return View();
@@ -40,18 +41,18 @@ namespace Project.WebApplication.Areas.HRManager.Controllers
             var pIndex = this.Request["page"].ConvertTo<int>();
             var pSize = this.Request["rows"].ConvertTo<int>();
             var where = new AttendanceEntity();
-			//where.PkId = RequestHelper.GetFormString("PkId");
-			//where.AttendanceUploadRecordId = RequestHelper.GetFormString("AttendanceUploadRecordId");
-			//where.EmployeeCode = RequestHelper.GetFormString("EmployeeCode");
-			//where.DepartmentCode = RequestHelper.GetFormString("DepartmentCode");
-			//where.DepartmentName = RequestHelper.GetFormString("DepartmentName");
-			//where.State = RequestHelper.GetFormString("State");
-			//where.Date = RequestHelper.GetFormString("Date");
-			//where.Remark = RequestHelper.GetFormString("Remark");
-			//where.CreatorUserCode = RequestHelper.GetFormString("CreatorUserCode");
-			//where.CreatorUserName = RequestHelper.GetFormString("CreatorUserName");
-			//where.CreateTime = RequestHelper.GetFormString("CreateTime");
-			//where.IsDelete = RequestHelper.GetFormString("IsDelete");
+            //where.PkId = RequestHelper.GetFormString("PkId");
+            //where.AttendanceUploadRecordId = RequestHelper.GetFormString("AttendanceUploadRecordId");
+            //where.EmployeeCode = RequestHelper.GetFormString("EmployeeCode");
+            //where.DepartmentCode = RequestHelper.GetFormString("DepartmentCode");
+            //where.DepartmentName = RequestHelper.GetFormString("DepartmentName");
+            //where.State = RequestHelper.GetFormString("State");
+            //where.Date = RequestHelper.GetFormString("Date");
+            //where.Remark = RequestHelper.GetFormString("Remark");
+            //where.CreatorUserCode = RequestHelper.GetFormString("CreatorUserCode");
+            //where.CreatorUserName = RequestHelper.GetFormString("CreatorUserName");
+            //where.CreateTime = RequestHelper.GetFormString("CreateTime");
+            //where.IsDelete = RequestHelper.GetFormString("IsDelete");
             var searchList = AttendanceService.GetInstance().Search(where, (pIndex - 1) * pSize, pSize);
 
             var dataGridEntity = new DataGridResponse()
@@ -77,9 +78,12 @@ namespace Project.WebApplication.Areas.HRManager.Controllers
 
 
         [HttpPost]
-        public AbpJsonResult Edit( AjaxRequest<AttendanceEntity> postData)
+        public AbpJsonResult Edit(AjaxRequest<AttendanceEntity> postData)
         {
-            var updateResult = AttendanceService.GetInstance().Update(postData.RequestEntity);
+            var newInfo = postData.RequestEntity;
+            var orgInfo = AttendanceService.GetInstance().GetModelByPk(postData.RequestEntity.PkId);
+            var mergInfo = Mapper.Map(newInfo, orgInfo);
+            var updateResult = AttendanceService.GetInstance().Update(mergInfo);
             var result = new AjaxResponse<AttendanceEntity>()
             {
                 success = updateResult,
