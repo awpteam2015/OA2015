@@ -6,7 +6,9 @@
  *       描述：     用于记录合同（合同内工资类型等都过滤暂时不考虑）
  * *************************************************************************/
 
+using NHibernate.Type;
 using Project.Infrastructure.FrameworkCore.DataNhibernate.EntityMappings;
+using Project.Model.Enum.HRManager;
 using Project.Model.HRManager;
 using Project.Model.PermissionManager;
 
@@ -27,9 +29,9 @@ namespace  Project.Map.HRManager
             Map(p => p.CreatorUserName);    
             Map(p => p.CreateTime);    
             Map(p => p.LastModificationTime);    
-            Map(p => p.IsDelete);    
-            Map(p => p.State);    
-            Map(p => p.IsActive);    
+            Map(p => p.IsDelete);
+            Map(p => p.State).CustomType<EnumStringType<ContractStateEnum>>();
+            Map(p => p.IsActive).CustomType<EnumStringType<ContractIsActiveEnum>>();    
         }
     }
 }

@@ -40,6 +40,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Enum\Class1.cs" />
+    <Compile Include="Enum\HRManager\ContractIsActiveEnum.cs" />
+    <Compile Include="Enum\HRManager\ContractStateEnum.cs" />
     <Compile Include="ExtendUi\ITree.cs" />
     <Compile Include="HRManager\AttendanceEntity.cs" />
     <Compile Include="HRManager\AttendanceUploadRecordEntity.cs" />
@@ -79,7 +81,9 @@
       <Name>Project.Infrastructure.FrameworkCore</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Enum\PermissionManager\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

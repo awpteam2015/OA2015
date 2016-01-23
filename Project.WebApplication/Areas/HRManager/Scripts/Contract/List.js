@@ -4,7 +4,7 @@ var pro = pro || {};
     pro.Contract = pro.Contract || {};
     pro.Contract.ListPage = pro.Contract.ListPage || {};
     pro.Contract.ListPage = {
-      init: function () {
+        init: function () {
             return {
                 tabObj: new pro.TabBase(),
                 gridObj: new pro.GridBase("#datagrid", false)
@@ -21,19 +21,17 @@ var pro = pro || {};
                 rownumbers: true, //行号
                 singleSelect: true,
                 columns: [[
-         { field: 'PkId', title: '', width: 100 },
-         { field: 'EmployeeCode', title: '', width: 100 },
-         { field: 'DepartmentCode', title: '', width: 100 },
-         { field: 'BeginDate', title: '', width: 100 },
-         { field: 'EndDate', title: '', width: 100 },
-         { field: 'Remark', title: '', width: 100 },
-         { field: 'CreatorUserCode', title: '', width: 100 },
-         { field: 'CreatorUserName', title: '', width: 100 },
-         { field: 'CreateTime', title: '', width: 100 },
-         { field: 'LastModificationTime', title: '', width: 100 },
-         { field: 'IsDelete', title: '', width: 100 },
-         { field: 'State', title: '1 最初签订 2续订 3 变更 4 终止 ', width: 100 },
-         { field: 'IsActive', title: '是否有效', width: 100 },
+         { field: 'PkId', title: '', hidden: true, width: 100 },
+         { field: 'EmployeeCode', title: '员工号', width: 100 },
+         { field: 'DepartmentCode', title: '部门编码', width: 100 },
+         { field: 'BeginDate', title: '开始时间', width: 100 },
+         { field: 'EndDate', title: '结束时间', width: 100 },
+         { field: 'CreatorUserCode', title: '创建人', width: 100 },
+         { field: 'CreatorUserName', title: '创建人', width: 100 },
+         { field: 'CreateTime', title: '创建时间', width: 100 },
+         { field: 'LastModificationTime', title: '修改时间', width: 100 },
+         { field: 'State', title: '状态', width: 100 },
+         { field: 'IsActive', title: '是否有效', width: 100 }
                 ]],
                 pagination: true,
                 pageSize: 20, //每页显示的记录条数，默认为10     
@@ -41,8 +39,12 @@ var pro = pro || {};
             }
                );
 
+            pro.DepartmentControl.init({ controlId: "DepartmentCode" });
+
+
+
             $("#btnAdd").click(function () {
-               tabObj.add("/HRManager/Contract/Hd","新增");
+                tabObj.add("/HRManager/Contract/Hd", "新增");
             });
 
             $("#btnEdit").click(function () {
@@ -61,7 +63,7 @@ var pro = pro || {};
 
             $("#btnDel").click(function () {
                 if (!gridObj.isSelected()) {
-                $.alertExtend.infoOp();
+                    $.alertExtend.infoOp();
                     return;
                 }
                 $.messager.confirm("确认操作", "是否确认删除", function (bl) {
@@ -85,7 +87,7 @@ var pro = pro || {};
                 gridObj.refresh();
             });
         },
-         closeTab: function () {
+        closeTab: function () {
             this.init().tabObj.closeTab();
         }
     };
