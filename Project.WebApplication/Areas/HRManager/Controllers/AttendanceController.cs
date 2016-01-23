@@ -86,7 +86,7 @@ namespace Project.WebApplication.Areas.HRManager.Controllers
             var updateResult = AttendanceService.GetInstance().Update(mergInfo);
             var result = new AjaxResponse<AttendanceEntity>()
             {
-                success = updateResult,
+                success = updateResult.Item1,
                 result = postData.RequestEntity,
                 error = updateResult.Item1 ? null : new ErrorInfo(updateResult.Item2) 
             };
