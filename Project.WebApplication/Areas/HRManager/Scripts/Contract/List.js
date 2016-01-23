@@ -34,7 +34,7 @@ var pro = pro || {};
          { field: 'SecondParty', title: '已方', width: 100 },
          { field: 'IdentityCardNo', title: '身份证', width: 100 },
          { field: 'CreatorUserCode', title: '创建人', width: 100 },
-         { field: 'CreateTime', title: '创建时间', width: 100 },
+         { field: 'CreationTime', title: '创建时间', width: 100 },
          { field: 'LastModifierUserCode', title: '修改人', width: 100 },
          { field: 'LastModificationTime', title: '最后修改时间', width: 100 }
                 ]],
