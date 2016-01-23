@@ -4,6 +4,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
+using AutoMapper;
+using NHibernate.Mapping.ByCode.Impl;
 using Project.Infrastructure.FrameworkCore.DataNhibernate.Helpers;
 using Project.Infrastructure.FrameworkCore.ToolKit;
 using Project.Infrastructure.FrameworkCore.ToolKit.JsonHandler;
@@ -100,7 +102,11 @@ namespace Project.WebApplication.Areas.HRManager.Controllers
         public AbpJsonResult Edit(AjaxRequest<ContractEntity> postData)
         {
             postData.RequestEntity.ContractContent = Base64Helper.DecodeBase64(postData.RequestEntity.ContractContent);
-            var updateResult = ContractService.GetInstance().Update(postData.RequestEntity);
+            var newInfo = postData.RequestEntity;
+            var orgInfo = ContractService.GetInstance().GetModelByPk(postData.RequestEntity.PkId);
+            var mergInfo = Mapper.Map(newInfo, orgInfo);
+
+            var updateResult = ContractService.GetInstance().Update(mergInfo);
             var result = new AjaxResponse<ContractEntity>()
             {
                 success = updateResult,

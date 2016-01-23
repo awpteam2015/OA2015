@@ -27,7 +27,9 @@ var pro = pro || {};
          { field: 'State', title: '状态', width: 100 },
          { field: 'Date', title: '考勤日期', width: 100 },
          { field: 'CreatorUserCode', title: '创建人', width: 100 },
-         { field: 'CreationTime', title: '创建时间', width: 100 }
+         { field: 'CreationTime', title: '创建时间', width: 100 },
+         { field: 'LastModifierUserCode', title: '修改人', width: 100 },
+         { field: 'LastModificationTime', title: '最后修改时间', width: 100 }
                 ]],
                 pagination: true,
                 pageSize: 20, //每页显示的记录条数，默认为10     
