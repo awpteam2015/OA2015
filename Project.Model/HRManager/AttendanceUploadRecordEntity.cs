@@ -12,7 +12,7 @@ using Project.Infrastructure.FrameworkCore.Domain.Entities.Component;
 
 namespace Project.Model.HRManager
 {
-    public class AttendanceUploadRecordEntity: Entity
+    public class AttendanceUploadRecordEntity : Entity, IHasRemark
     { 
         #region 属性
         /// <summary>
@@ -31,14 +31,11 @@ namespace Project.Model.HRManager
         /// 
         /// </summary>
         public virtual System.String CreatorUserCode{get; set;}
+
         /// <summary>
         /// 
         /// </summary>
-        public virtual System.String CreatorUserName{get; set;}
-        /// <summary>
-        /// 
-        /// </summary>
-        public virtual System.DateTime? CreateTime{get; set;}
+        public virtual System.DateTime? CreationTime { get; set; }
         /// <summary>
         /// 
         /// </summary>

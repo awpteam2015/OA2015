@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 using Project.Infrastructure.FrameworkCore.DataNhibernate.Helpers;
+using Project.Infrastructure.FrameworkCore.ToolKit;
 using Project.Infrastructure.FrameworkCore.ToolKit.JsonHandler;
 using Project.Infrastructure.FrameworkCore.ToolKit.LinqExpansion;
 using Project.Model.HRManager;
@@ -25,10 +26,20 @@ namespace Project.WebApplication.Areas.HRManager.Controllers
                 var entity = ContractService.GetInstance().GetModelByPk(pkId);
                 ViewBag.BindEntity = JsonHelper.JsonSerializer(entity);
             }
+
+            if (RequestHelper.GetInt("ParentId") > 0)
+            {
+                var entity = ContractService.GetInstance().GetModelByPk(RequestHelper.GetInt("ParentId"));
+                entity.BeginDate = null;
+                entity.EndDate = null;
+                entity.ContractContent = null;
+                entity.ContractNo = null;
+                ViewBag.BindEntity = JsonHelper.JsonSerializer(entity);
+            }
             return View();
         }
 
- 
+
         public ActionResult List()
         {
             return View();
@@ -39,19 +50,25 @@ namespace Project.WebApplication.Areas.HRManager.Controllers
             var pIndex = this.Request["page"].ConvertTo<int>();
             var pSize = this.Request["rows"].ConvertTo<int>();
             var where = new ContractEntity();
-			//where.PkId = RequestHelper.GetFormString("PkId");
-			//where.EmployeeCode = RequestHelper.GetFormString("EmployeeCode");
-			//where.DepartmentCode = RequestHelper.GetFormString("DepartmentCode");
-			//where.BeginDate = RequestHelper.GetFormString("BeginDate");
-			//where.EndDate = RequestHelper.GetFormString("EndDate");
-			//where.Remark = RequestHelper.GetFormString("Remark");
-			//where.CreatorUserCode = RequestHelper.GetFormString("CreatorUserCode");
-			//where.CreatorUserName = RequestHelper.GetFormString("CreatorUserName");
-			//where.CreateTime = RequestHelper.GetFormString("CreateTime");
-			//where.LastModificationTime = RequestHelper.GetFormString("LastModificationTime");
-			//where.IsDelete = RequestHelper.GetFormString("IsDelete");
-			//where.State = RequestHelper.GetFormString("State");
-			//where.IsActive = RequestHelper.GetFormString("IsActive");
+            //where.PkId = RequestHelper.GetFormString("PkId");
+            //where.EmployeeCode = RequestHelper.GetFormString("EmployeeCode");
+            //where.DepartmentCode = RequestHelper.GetFormString("DepartmentCode");
+            //where.DepartmentName = RequestHelper.GetFormString("DepartmentName");
+            //where.BeginDate = RequestHelper.GetFormString("BeginDate");
+            //where.EndDate = RequestHelper.GetFormString("EndDate");
+            //where.Remark = RequestHelper.GetFormString("Remark");
+            //where.CreatorUserCode = RequestHelper.GetFormString("CreatorUserCode");
+            //where.CreateTime = RequestHelper.GetFormString("CreateTime");
+            //where.LastModifierUserCode = RequestHelper.GetFormString("LastModifierUserCode");
+            //where.LastModificationTime = RequestHelper.GetFormString("LastModificationTime");
+            //where.IsDelete = RequestHelper.GetFormString("IsDelete");
+            //where.State = RequestHelper.GetFormString("State");
+            //where.IsActive = RequestHelper.GetFormString("IsActive");
+            //where.ContractNo = RequestHelper.GetFormString("ContractNo");
+            //where.FirstParty = RequestHelper.GetFormString("FirstParty");
+            //where.SecondParty = RequestHelper.GetFormString("SecondParty");
+            //where.ContractContent = RequestHelper.GetFormString("ContractContent");
+            //where.IdentityCardNo = RequestHelper.GetFormString("IdentityCardNo");
             var searchList = ContractService.GetInstance().Search(where, (pIndex - 1) * pSize, pSize);
 
             var dataGridEntity = new DataGridResponse()
@@ -59,13 +76,15 @@ namespace Project.WebApplication.Areas.HRManager.Controllers
                 total = searchList.Item2,
                 rows = searchList.Item1
             };
-            return new AbpJsonResult(dataGridEntity, new NHibernateContractResolver());
+            return new AbpJsonResult(dataGridEntity, new NHibernateContractResolver(new string[] { "Remark", "ContractContent" }));
         }
 
 
         [HttpPost]
         public AbpJsonResult Add(AjaxRequest<ContractEntity> postData)
         {
+            postData.RequestEntity.ContractContent = Base64Helper.DecodeBase64(postData.RequestEntity.ContractContent);
+            postData.RequestEntity.IsActive = 1;
             var addResult = ContractService.GetInstance().Add(postData.RequestEntity);
             var result = new AjaxResponse<ContractEntity>()
                {
@@ -76,9 +95,11 @@ namespace Project.WebApplication.Areas.HRManager.Controllers
         }
 
 
+
         [HttpPost]
-        public AbpJsonResult Edit( AjaxRequest<ContractEntity> postData)
+        public AbpJsonResult Edit(AjaxRequest<ContractEntity> postData)
         {
+            postData.RequestEntity.ContractContent = Base64Helper.DecodeBase64(postData.RequestEntity.ContractContent);
             var updateResult = ContractService.GetInstance().Update(postData.RequestEntity);
             var result = new AjaxResponse<ContractEntity>()
             {

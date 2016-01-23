@@ -4,7 +4,7 @@ var pro = pro || {};
     pro.Attendance = pro.Attendance || {};
     pro.Attendance.ListPage = pro.Attendance.ListPage || {};
     pro.Attendance.ListPage = {
-      init: function () {
+        init: function () {
             return {
                 tabObj: new pro.TabBase(),
                 gridObj: new pro.GridBase("#datagrid", false)
@@ -21,18 +21,13 @@ var pro = pro || {};
                 rownumbers: true, //行号
                 singleSelect: true,
                 columns: [[
-         { field: 'PkId', title: '', width: 100 },
-         { field: 'AttendanceUploadRecordId', title: '通过那次上传 0代表自己补的', width: 100 },
-         { field: 'EmployeeCode', title: '', width: 100 },
-         { field: 'DepartmentCode', title: '', width: 100 },
-         { field: 'DepartmentName', title: '', width: 100 },
-         { field: 'State', title: '-1代表缺勤 1代表正常', width: 100 },
+         { field: 'PkId', title: '序号', width: 100 },
+         { field: 'EmployeeCode', title: '工号', width: 100 },
+         { field: 'DepartmentName', title: '部门', width: 100 },
+         { field: 'State', title: '状态', width: 100 },
          { field: 'Date', title: '考勤日期', width: 100 },
-         { field: 'Remark', title: '', width: 100 },
-         { field: 'CreatorUserCode', title: '', width: 100 },
-         { field: 'CreatorUserName', title: '', width: 100 },
-         { field: 'CreateTime', title: '', width: 100 },
-         { field: 'IsDelete', title: '', width: 100 },
+         { field: 'CreatorUserCode', title: '创建人', width: 100 },
+         { field: 'CreateTime', title: '创建时间', width: 100 }
                 ]],
                 pagination: true,
                 pageSize: 20, //每页显示的记录条数，默认为10     
@@ -40,8 +35,10 @@ var pro = pro || {};
             }
                );
 
+            pro.DepartmentControl.init();
+
             $("#btnAdd").click(function () {
-               tabObj.add("/HRManager/Attendance/Hd","新增");
+                tabObj.add("/HRManager/Attendance/Hd", "新增");
             });
 
             $("#btnEdit").click(function () {
@@ -60,7 +57,7 @@ var pro = pro || {};
 
             $("#btnDel").click(function () {
                 if (!gridObj.isSelected()) {
-                $.alertExtend.infoOp();
+                    $.alertExtend.infoOp();
                     return;
                 }
                 $.messager.confirm("确认操作", "是否确认删除", function (bl) {
@@ -84,7 +81,7 @@ var pro = pro || {};
                 gridObj.refresh();
             });
         },
-         closeTab: function () {
+        closeTab: function () {
             this.init().tabObj.closeTab();
         }
     };

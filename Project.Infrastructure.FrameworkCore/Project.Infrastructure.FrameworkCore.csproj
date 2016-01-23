@@ -123,6 +123,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Domain\Entities\Component\IHasCreationTime.cs" />
+    <Compile Include="Domain\Entities\Component\IHasRemark.cs" />
     <Compile Include="Domain\Entities\Component\IMustHaveSiteCode.cs" />
     <Compile Include="Domain\Entities\AuditedEntity.cs" />
     <Compile Include="Domain\Entities\FullAuditedEntity.cs" />
@@ -132,6 +133,7 @@
     <Compile Include="Domain\Entities\Auditing\Interface\IDeletionAudited.cs" />
     <Compile Include="Domain\Entities\Auditing\Interface\IModificationAudited.cs" />
     <Compile Include="Domain\Entities\Component\ISoftDelete.cs" />
+    <Compile Include="Domain\Entities\HttpContextUserInfo.cs" />
     <Compile Include="Domain\Entities\ModificationAuditedEntity.cs" />
     <Compile Include="DataNhibernate\EntityMappings\BaseMap.cs" />
     <Compile Include="Domain\Entities\Entity.cs" />

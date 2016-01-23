@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 using Project.Infrastructure.FrameworkCore.DataNhibernate.Helpers;
+using Project.Infrastructure.FrameworkCore.ToolKit;
 using Project.Infrastructure.FrameworkCore.ToolKit.JsonHandler;
 using Project.Infrastructure.FrameworkCore.ToolKit.LinqExpansion;
 using Project.Model.HRManager;

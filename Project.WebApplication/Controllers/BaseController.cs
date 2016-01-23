@@ -8,6 +8,7 @@ using System.Web.Mvc.Filters;
 using System.Web.Security;
 using Newtonsoft.Json;
 using Project.Infrastructure.FrameworkCore.DataNhibernate.Helpers;
+using Project.Infrastructure.FrameworkCore.Domain.Entities;
 using Project.Infrastructure.FrameworkCore.Logging;
 using Project.Infrastructure.FrameworkCore.ToolKit.LinqExpansion;
 using Project.Model.PermissionManager;
@@ -50,6 +51,13 @@ namespace Project.WebApplication.Controllers
 
             var userData = ((FormsIdentity)User.Identity).Ticket.UserData;
             LoginUserInfo = JsonConvert.DeserializeObject<LoginUserInfoDTO>(userData);
+
+            HttpContext.Items.Add("UserInfo", new HttpContextUserInfo()
+            {
+                UserCode = LoginUserInfo.UserCode,
+                UserName = LoginUserInfo.UserName
+            });
+
             if (PermissionService.GetInstance().IsAdmin(LoginUserInfo.UserCode))
             {
                 base.OnActionExecuting(filterContext);

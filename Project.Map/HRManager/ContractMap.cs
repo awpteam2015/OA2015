@@ -22,16 +22,23 @@ namespace  Project.Map.HRManager
  
             Map(p => p.EmployeeCode);    
             Map(p => p.DepartmentCode);    
+            Map(p => p.DepartmentName);    
             Map(p => p.BeginDate);    
             Map(p => p.EndDate);    
             Map(p => p.Remark);    
             Map(p => p.CreatorUserCode);    
-            Map(p => p.CreatorUserName);    
-            Map(p => p.CreateTime);    
+            Map(p => p.CreationTime);    
+            Map(p => p.LastModifierUserCode);    
             Map(p => p.LastModificationTime);    
-            Map(p => p.IsDelete);
-            Map(p => p.State).CustomType<EnumStringType<ContractStateEnum>>();
-            Map(p => p.IsActive).CustomType<EnumStringType<ContractIsActiveEnum>>();    
+            Map(p => p.IsDelete);    
+            Map(p => p.State);
+            Map(p => p.IsActive);      
+            Map(p => p.ContractNo);    
+            Map(p => p.FirstParty);    
+            Map(p => p.SecondParty);    
+            Map(p => p.ContractContent);    
+            Map(p => p.IdentityCardNo);
+            Map(p => p.ParentId);    
         }
     }
 }

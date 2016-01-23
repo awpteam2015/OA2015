@@ -5,7 +5,6 @@
         init: function (paramter) {
             var defaultParamter = {
                 controlId: "DepartmentCode",
-                required: true,
                 editable: false,
                 valueField: 'DepartmentCode',
                 textField: 'DepartmentName',

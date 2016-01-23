@@ -137,6 +137,29 @@ namespace Project.WebApplication.Areas.HRManager.Controllers
             };
             return new AbpJsonResult(result, new NHibernateContractResolver(new string[] { "result" }));
         }
+
+
+        public AbpJsonResult GetEmployeeInfo(string employeeCode)
+        {
+
+            var list = EmployeeInfoService.GetInstance().GetList(new EmployeeInfoEntity() { EmployeeCode = employeeCode });
+
+            if (list.Any())
+            {
+                var result = new AjaxResponse<EmployeeInfoEntity>()
+                {
+                    success =true,
+                    result = list.FirstOrDefault()
+                };
+                return new AbpJsonResult(result, new NHibernateContractResolver(new string[] { "result" }));
+            }
+            else
+            {
+                return new AbpJsonResult(new AjaxResponse<string>(){success = false,error = new ErrorInfo(){message = "请输入正确的员工号！"}});
+            }
+
+           
+        }
     }
 }
 

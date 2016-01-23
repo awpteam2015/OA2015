@@ -41,7 +41,7 @@
             }
 
             abp.ajax({
-                url: "/PermissionManager/AttendanceUploadRecord/" + command,
+                url: "/HRManager/AttendanceUploadRecord/" + command,
                 data: JSON.stringify(postData)
             }).done(
                 function (dataresult, data) {

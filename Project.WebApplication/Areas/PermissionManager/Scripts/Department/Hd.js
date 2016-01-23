@@ -5,7 +5,7 @@
     pro.Department.HdPage = {
         initPage: function () {
 
-            pro.DepartmentControl.init({ controlId: "ParentDepartmentCode" });
+            pro.DepartmentControl.init({ controlId: "ParentDepartmentCode" ,required:true});
 
             $("#btnAdd").click(function () {
                 pro.Department.HdPage.submit("Add");

@@ -35,8 +35,11 @@ $.alertExtend = $.alertExtend || {};
             if (fn) $.messager.alert("信息提示", msg, "info", fn);
             else $.messager.alert("信息提示", msg, "info");
         },
-        infoOp: function(msg, fn) {
-            this.info("请选择需要操作的行项目！",fn);
+        infoOp: function (msg, fn) {
+            if (msg == undefined || msg === "") {
+                msg = "请选择需要操作的行项目！";
+            }
+            this.info(msg, fn);
         },
         warning: function (msg, fn) {
             ///<summary>

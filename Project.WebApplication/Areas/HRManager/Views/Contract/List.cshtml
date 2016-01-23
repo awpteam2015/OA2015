@@ -11,7 +11,13 @@
     <table id="datagrid" style="height:auto;" iconcls=".icon-save" singleselect="true" toolbar="#tb" fit="true"></table>
     <div id="tb" style="padding:5px;height:auto">
         <div style="margin-bottom: 5px">
-            <a id="btnAdd" href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:true">添加</a>
+            <a id="btnAdd" href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:true">添加新合同</a>
+
+            <a id="btnAdd2" href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:true">续订合同</a>
+
+            <a id="btnAdd3" href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:true">变更合同</a>
+
+            <a id="btnAdd4" href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:true">终止合同</a>
 
             <a id="btnDel" href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-remove',plain:true">删除</a>
 
@@ -26,30 +32,28 @@
 
                 <table class="mtable">
 
-
-
                     <tr>
                         <td>
-                            工号 :
+                            工号:
                         </td>
                         <td>
                             <input id="EmployeeCode" name="EmployeeCode" type="text" />
                         </td>
 
                         <td>
-                            部门编码:
+                            部门编号:
                         </td>
                         <td>
                             <input id="DepartmentCode" name="DepartmentCode" type="text" style="width: 300px" />
                         </td>
 
                         <td>
-                            开始时间 :
+                            开始时间:
                         </td>
                         <td>
                             <input id="BeginDate" name="BeginDate" type="text" onclick="WdatePicker();" />
                         </td>
-
+                  
                         <td>
                             结束时间:
                         </td>
@@ -58,6 +62,39 @@
                         </td>
                     </tr>
 
+
+
+
+
+                    <tr>
+                        <td>
+                            合同编号:
+                        </td>
+                        <td>
+                            <input id="ContractNo" name="ContractNo" type="text"/>
+                        </td>
+                        <td>
+                            身份证:
+                        </td>
+                        <td>
+                            <input id="IdentityCardNo" name="IdentityCardNo" type="text" style="width: 300px" />
+                        </td>
+                        <td>
+                            甲方:
+                        </td>
+                        <td>
+                            <input id="FirstParty" name="FirstParty" type="text"/>
+                        </td>
+
+                        <td>
+                            已方:
+                        </td>
+                        <td>
+                            <input id="SecondParty" name="SecondParty" type="text"/>
+                        </td>
+
+                       
+                    </tr>
 
                     <tr>
                         <td>
@@ -85,6 +122,7 @@
                             </select>
                         </td>
 
+                  
                         <td colspan="2">
                             <a href="#" class="easyui-linkbutton" iconcls="icon-search" id="btnSearch">搜索</a>
                         </td>
