@@ -245,6 +245,12 @@
     <Content Include="Scripts\jqueryPlugins\jquery_tip\tip-yellow\tip-yellow_arrows.png" />
     <Content Include="Scripts\Account\Index.js" />
     <Content Include="Scripts\jqueryPlugins\jquery_validate\card.js" />
+    <Content Include="Scripts\jqueryPlugins\jquery_uploadify\jquery.uploadify.js" />
+    <Content Include="Scripts\jqueryPlugins\jquery_uploadify\jquery.uploadify.min.js" />
+    <Content Include="Scripts\jqueryPlugins\jquery_uploadify\uploadify-cancel.png" />
+    <Content Include="Scripts\jqueryPlugins\jquery_uploadify\uploadify.css" />
+    <Content Include="Scripts\jqueryPlugins\jquery_uploadify\uploadify.swf" />
+    <Content Include="Scripts\jqueryPlugins\jquery_uploadify\uploadify_jxp.css" />
     <Content Include="Scripts\Login\Login.js" />
     <Content Include="Scripts\Config\globalConfig.js" />
     <Content Include="Scripts\jqueryPlugins\jquery_tip\jquery.poshytip.js" />
@@ -701,6 +707,7 @@
     <Compile Include="Areas\PermissionManager\Controllers\UserRoleController.cs" />
     <Compile Include="Areas\PermissionManager\PermissionManagerAreaRegistration.cs" />
     <Compile Include="Areas\SystemSetManager\Controllers\HolidayDetailController.cs" />
+    <Compile Include="Areas\SystemSetManager\Controllers\UploadController.cs" />
     <Compile Include="Areas\SystemSetManager\SystemSetManagerAreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
@@ -748,7 +755,9 @@
     <Folder Include="Areas\PermissionManager\Views\Shared\" />
     <Folder Include="Areas\SystemSetManager\Models\" />
     <Folder Include="Areas\SystemSetManager\Views\Shared\" />
+    <Folder Include="Areas\SystemSetManager\Views\Upload\" />
     <Folder Include="Models\" />
+    <Folder Include="UploadFile\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Project.Config\Project.Config.csproj">
