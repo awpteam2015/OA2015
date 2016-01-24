@@ -7,6 +7,8 @@
  *       描述：     人事考勤上传记录
  * *************************************************************************/
 using System;
+using System.Collections.Generic;
+using System.Configuration;
 using Project.Infrastructure.FrameworkCore.Domain.Entities;
 using Project.Infrastructure.FrameworkCore.Domain.Entities.Auditing.Interface;
 using Project.Infrastructure.FrameworkCore.Domain.Entities.Component;
@@ -14,7 +16,13 @@ using Project.Infrastructure.FrameworkCore.Domain.Entities.Component;
 namespace Project.Model.HRManager
 {
     public class AttendanceUploadRecordEntity : Entity, IHasRemark,ICreationAudited
-    { 
+    {
+        public AttendanceUploadRecordEntity()
+        {
+            AttendanceList=new HashSet<AttendanceEntity>();
+        }
+
+
         #region 属性
         /// <summary>
         /// 
@@ -52,8 +60,22 @@ namespace Project.Model.HRManager
         
 
         #region 新增属性
-        
+        public virtual string Att_Date {
+            get
+            {
+                if (Date!=null)
+                {
+                    return Date.GetValueOrDefault().ToString("yyyy-MM");
+                }
+                else
+                {
+                    return"";
+                }
+            }
+        }
         #endregion
+
+        public virtual ISet<AttendanceEntity> AttendanceList { get; set; }
     }
 }
 
