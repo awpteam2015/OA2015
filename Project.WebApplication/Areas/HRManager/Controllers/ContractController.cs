@@ -92,33 +92,22 @@ namespace Project.WebApplication.Areas.HRManager.Controllers
         }
 
 
-
         [HttpPost]
-        public AbpJsonResult Edit(AjaxRequest<ContractEntity> postData)
+        public AbpJsonResult<string> Edit(AjaxRequest<ContractEntity> postData)
         {
             postData.RequestEntity.ContractContent = Base64Helper.DecodeBase64(postData.RequestEntity.ContractContent);
             var newInfo = postData.RequestEntity;
             var orgInfo = ContractService.GetInstance().GetModelByPk(postData.RequestEntity.PkId);
             var mergInfo = Mapper.Map(newInfo, orgInfo);
-
             var updateResult = ContractService.GetInstance().Update(mergInfo);
-            var result = new AjaxResponse<ContractEntity>()
-            {
-                success = updateResult,
-                result = postData.RequestEntity
-            };
-            return new AbpJsonResult(result, new NHibernateContractResolver(new string[] { "result" }));
+            return new AbpJsonResult<string>(updateResult);
         }
 
         [HttpPost]
-        public AbpJsonResult Delete(int pkid)
+        public AbpJsonResult<string> Delete(int pkid)
         {
             var deleteResult = ContractService.GetInstance().DeleteByPkId(pkid);
-            var result = new AjaxResponse<ContractEntity>()
-            {
-                success = deleteResult
-            };
-            return new AbpJsonResult(result, new NHibernateContractResolver(new string[] { "result" }));
+            return new AbpJsonResult<string>(deleteResult);
         }
     }
 }

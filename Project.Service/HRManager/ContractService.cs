@@ -70,17 +70,17 @@ namespace Project.Service.HRManager
         /// 删除
         /// </summary>
         /// <param name="pkId"></param>
-        public bool DeleteByPkId(System.Int32 pkId)
+        public Tuple<bool, string> DeleteByPkId(System.Int32 pkId)
         {
             try
             {
                 var entity = _contractRepository.GetById(pkId);
                 _contractRepository.Delete(entity);
-                return true;
+                return new Tuple<bool, string>(true,"");
             }
             catch
             {
-                return false;
+                throw;
             }
         }
 
@@ -88,16 +88,16 @@ namespace Project.Service.HRManager
         /// 删除
         /// </summary>
         /// <param name="entity"></param>
-        public bool Delete(ContractEntity entity)
+        public Tuple<bool, string> Delete(ContractEntity entity)
         {
             try
             {
                 _contractRepository.Delete(entity);
-                return true;
+                return new Tuple<bool, string>(true,"");
             }
             catch
             {
-                return false;
+                throw;
             }
         }
 
@@ -105,16 +105,16 @@ namespace Project.Service.HRManager
         /// 更新
         /// </summary>
         /// <param name="entity"></param>
-        public bool Update(ContractEntity entity)
+        public Tuple<bool, string> Update(ContractEntity entity)
         {
             try
             {
                 _contractRepository.Update(entity);
-                return true;
+                return new Tuple<bool, string>(true, "");
             }
             catch
             {
-                return false;
+                throw;
             }
         }
 
