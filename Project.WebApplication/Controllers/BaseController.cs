@@ -11,9 +11,9 @@ using Project.Infrastructure.FrameworkCore.DataNhibernate.Helpers;
 using Project.Infrastructure.FrameworkCore.Domain.Entities;
 using Project.Infrastructure.FrameworkCore.Logging;
 using Project.Infrastructure.FrameworkCore.ToolKit.LinqExpansion;
+using Project.Infrastructure.FrameworkCore.WebMvc.Controllers.Results;
+using Project.Infrastructure.FrameworkCore.WebMvc.Models;
 using Project.Model.PermissionManager;
-using Project.Mvc.Controllers.Results;
-using Project.Mvc.Models;
 using Project.Service.PermissionManager;
 using Project.Service.PermissionManager.DTO;
 

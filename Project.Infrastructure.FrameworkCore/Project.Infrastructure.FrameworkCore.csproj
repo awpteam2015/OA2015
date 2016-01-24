@@ -198,9 +198,24 @@
     <Compile Include="ToolKit\ValidateHandler\ValidateHelper.cs" />
     <Compile Include="ToolKit\ValidateHandler\ValidateRegExp.cs" />
     <Compile Include="ToolKit\XmlHelper.cs" />
-    <Compile Include="WebMvc\Controllers\Results\AbpJsonResult.cs" />
-    <Compile Include="WebMvc\Model\AjaxResponse.cs" />
-    <Compile Include="WebMvc\Model\ErrorInfo.cs" />
+    <Compile Include="WebMvc\Authorization\PermissionAuthorizeAttribute.cs" />
+    <Compile Include="WebMvc\Controllers\Results\AbpJsonResult.cs">
+      <SubType>
+      </SubType>
+    </Compile>
+    <Compile Include="WebMvc\Models\AjaxRequest.cs" />
+    <Compile Include="WebMvc\Models\AjaxResponse.cs">
+      <SubType>
+      </SubType>
+    </Compile>
+    <Compile Include="WebMvc\Models\DataGridResponse.cs" />
+    <Compile Include="WebMvc\Models\ErrorInfo.cs">
+      <SubType>
+      </SubType>
+    </Compile>
+    <Compile Include="WebMvc\Models\ExtendUi\TreeInvalidCodeEnum.cs" />
+    <Compile Include="WebMvc\Models\ExtendUi\ITree.cs" />
+    <Compile Include="WebMvc\Models\PermissionFunctionInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Logging\Config\log4net.config">

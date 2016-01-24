@@ -9,8 +9,8 @@
 using System;
 using Project.Infrastructure.FrameworkCore.Domain.Entities;
 using Project.Infrastructure.FrameworkCore.Domain.Entities.Component;
-using Project.Model.ExtendUi;
 using System.Collections.Generic;
+using Project.Infrastructure.FrameworkCore.WebMvc.Models.ExtendUi;
 using Project.Model.Enum;
 
 namespace Project.Model.HRManager

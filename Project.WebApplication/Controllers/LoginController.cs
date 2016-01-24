@@ -7,8 +7,8 @@ using System.Web.Security;
 using Newtonsoft.Json;
 using Project.Infrastructure.FrameworkCore.Logging;
 using Project.Infrastructure.FrameworkCore.ToolKit;
-using Project.Mvc.Controllers.Results;
-using Project.Mvc.Models;
+using Project.Infrastructure.FrameworkCore.WebMvc.Controllers.Results;
+using Project.Infrastructure.FrameworkCore.WebMvc.Models;
 using Project.Service.PermissionManager;
 
 namespace Project.WebApplication.Controllers

@@ -39,10 +39,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Enum\Class1.cs" />
     <Compile Include="Enum\HRManager\ContractIsActiveEnum.cs" />
     <Compile Include="Enum\HRManager\ContractStateEnum.cs" />
-    <Compile Include="ExtendUi\ITree.cs" />
     <Compile Include="HRManager\AttendanceEntity.cs" />
     <Compile Include="HRManager\AttendanceUploadRecordEntity.cs" />
     <Compile Include="HRManager\ContractEntity.cs" />

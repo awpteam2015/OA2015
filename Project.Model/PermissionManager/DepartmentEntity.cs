@@ -12,8 +12,8 @@ using System;
 using System.Collections.Generic;
 using Project.Infrastructure.FrameworkCore.Domain.Entities;
 using Project.Infrastructure.FrameworkCore.Domain.Entities.Component;
+using Project.Infrastructure.FrameworkCore.WebMvc.Models.ExtendUi;
 using Project.Model.Enum;
-using Project.Model.ExtendUi;
 
 namespace Project.Model.PermissionManager
 {

@@ -761,10 +761,6 @@
       <Project>{3D26782A-3308-430B-B58F-5F8ABA1A50B3}</Project>
       <Name>Project.Model</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Project.Mvc\Project.Mvc.csproj">
-      <Project>{28697EFA-5FC7-4454-AE92-6DF284882EF8}</Project>
-      <Name>Project.Mvc</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Project.Service\Project.Service.csproj">
       <Project>{CC818705-0142-46D9-A858-1575069C0ABE}</Project>
       <Name>Project.Service</Name>
