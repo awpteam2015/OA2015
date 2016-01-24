@@ -115,6 +115,10 @@
     <Content Include="Areas\HRManager\Scripts\EmployeeInfo\List.js" />
     <Content Include="Areas\HRManager\Scripts\EmployeeRotate\Hd.js" />
     <Content Include="Areas\HRManager\Scripts\EmployeeRotate\List.js" />
+    <Content Include="Areas\HRManager\Scripts\EmployeeYearDetail\Hd.js" />
+    <Content Include="Areas\HRManager\Scripts\EmployeeYearDetail\List.js" />
+    <Content Include="Areas\HRManager\Scripts\EmployeeYearMain\Hd.js" />
+    <Content Include="Areas\HRManager\Scripts\EmployeeYearMain\List.js" />
     <Content Include="Areas\HRManager\Scripts\GoAbroad\Hd.js" />
     <Content Include="Areas\HRManager\Scripts\GoAbroad\List.js" />
     <Content Include="Areas\HRManager\Scripts\GroupEmployeeHis\Hd.js" />
@@ -735,8 +739,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Areas\HRManager\Scripts\EmployeeYearDetail\" />
-    <Folder Include="Areas\HRManager\Scripts\EmployeeYearMain\" />
     <Folder Include="Areas\PermissionManager\Models\" />
     <Folder Include="Areas\PermissionManager\Views\Permission\" />
     <Folder Include="Areas\PermissionManager\Views\Shared\" />

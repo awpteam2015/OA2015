@@ -19,7 +19,8 @@ namespace  Project.Map.HRManager
             this.MapPkidDefault<EmployeeYearMainEntity,int>();
  
             Map(p => p.DepartmentCode);    
-            Map(p => p.EmployeeCode);    
+            Map(p => p.EmployeeCode);
+            Map(p => p.EmployeeName);            
             Map(p => p.LeftCount);    
             Map(p => p.Remark);    
             Map(p => p.CreatorUserCode);    

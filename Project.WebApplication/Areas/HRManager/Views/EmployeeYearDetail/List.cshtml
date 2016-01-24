@@ -1,6 +1,6 @@
 ﻿
 
-  
+
 
 
 
@@ -14,145 +14,45 @@
 }
 
 <div title="年休登记" style="padding:1px;">
-    <table id="datagrid" style="height:auto;" iconcls=".icon-save" singleselect="true"  toolbar="#tb" fit="true"></table>
+    <table id="datagrid" style="height:auto;" iconcls=".icon-save" singleselect="true" toolbar="#tb" fit="true"></table>
     <div id="tb" style="padding:5px;height:auto">
-        <div  style="margin-bottom: 5px">
-            <a id="btnAdd" href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:true" >添加</a>
-  
-            <a id="btnDel" href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-remove',plain:true" >删除</a>
-           
-            <a id="btnEdit" href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-edit',plain:true" >编辑</a>
-          
-            <a id="btnRefresh" href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-reload',plain:true" >刷新</a>
-           
+        <div style="margin-bottom: 5px">
+            <a id="btnAdd" href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:true">添加</a>
+
+            <a id="btnDel" href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-remove',plain:true">删除</a>
+
+            <a id="btnEdit" href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-edit',plain:true">编辑</a>
+
+            <a id="btnRefresh" href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-reload',plain:true">刷新</a>
+
         </div>
-      
+
         <div id="divSearch">
             <form>
-            
-             <table class="mtable">
-            
-              <tr>
-            <td >
-                :
-            </td>
-            <td >
-                <input id="PkId" name="PkId"  type="text"  />
-            </td>
-        </tr>
-            
-              <tr>
-            <td >
-                部门编号:
-            </td>
-            <td >
-                <input id="DepartmentCode" name="DepartmentCode"  type="text"  />
-            </td>
-        </tr>
-            
-              <tr>
-            <td >
-                员工编号:
-            </td>
-            <td >
-                <input id="EmployeeCode" name="EmployeeCode"  type="text"  />
-            </td>
-        </tr>
-            
-              <tr>
-            <td >
-                :
-            </td>
-            <td >
-                <input id="BeginDate" name="BeginDate"  type="text"  />
-            </td>
-        </tr>
-            
-              <tr>
-            <td >
-                :
-            </td>
-            <td >
-                <input id="EndDate" name="EndDate"  type="text"  />
-            </td>
-        </tr>
-            
-              <tr>
-            <td >
-                _decimal合计天数:
-            </td>
-            <td >
-                <input id="UseCount" name="UseCount"  type="text"  />
-            </td>
-        </tr>
-            
-              <tr>
-            <td >
-                _decimal使用前天数:
-            </td>
-            <td >
-                <input id="BeforeUseCount" name="BeforeUseCount"  type="text"  />
-            </td>
-        </tr>
-            
-              <tr>
-            <td >
-                _decimal 年休余数:
-            </td>
-            <td >
-                <input id="LeftCount" name="LeftCount"  type="text"  />
-            </td>
-        </tr>
-            
-              <tr>
-            <td >
-                :
-            </td>
-            <td >
-                <input id="Remark" name="Remark"  type="text"  />
-            </td>
-        </tr>
-            
-              <tr>
-            <td >
-                :
-            </td>
-            <td >
-                <input id="CreatorUserCode" name="CreatorUserCode"  type="text"  />
-            </td>
-        </tr>
-            
-              <tr>
-            <td >
-                :
-            </td>
-            <td >
-                <input id="CreatorUserName" name="CreatorUserName"  type="text"  />
-            </td>
-        </tr>
-            
-              <tr>
-            <td >
-                :
-            </td>
-            <td >
-                <input id="CreateTime" name="CreateTime"  type="text"  />
-            </td>
-        </tr>
-            
-              <tr>
-            <td >
-                :
-            </td>
-            <td >
-                <input id="LastModificationTime" name="LastModificationTime"  type="text"  />
-            </td>
-        </tr>
-          <tr>
-        <td colspan="2">   <a href="#" class="easyui-linkbutton" iconcls="icon-search" id="btnSearch">搜索</a>
-        </td>
-        </tr>
-        </table>
+
+                <table class="mtable">
+
+
+                    <tr>
+                        <td>
+                            部门编号:
+                        </td>
+                        <td>
+                            <input id="DepartmentCode" name="DepartmentCode" type="text" />
+                        </td>
+
+                        <td>
+                            员工编号:
+                        </td>
+                        <td>
+                            <input id="EmployeeCode" name="EmployeeCode" type="text" />
+                        </td>
+
+                        <td colspan="2">
+                            <a href="#" class="easyui-linkbutton" iconcls="icon-search" id="btnSearch">搜索</a>
+                        </td>
+                    </tr>
+                </table>
             </form>
         </div>
     </div>
