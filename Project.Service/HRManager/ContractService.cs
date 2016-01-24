@@ -1,13 +1,15 @@
 ﻿
 /***************************************************************************
 *       功能：     HRContract业务处理层
-*       作者：     ROY
-*       日期：     2016-01-09
-*       描述：     用于记录合同
-  （合同内工资类型等都过滤暂时不考虑）
+*       作者：     李伟伟
+*       日期：     2016/1/23
+*       描述：     用于记录合同（合同内工资类型等都过滤暂时不考虑）
 * *************************************************************************/
+
+using System;
 using System.Linq;
 using System.Collections.Generic;
+using Project.Infrastructure.FrameworkCore.DataNhibernate;
 using Project.Infrastructure.FrameworkCore.DataNhibernate.Helpers;
 using Project.Model.HRManager;
 using Project.Repository.HRManager;
@@ -39,9 +41,28 @@ namespace Project.Service.HRManager
         /// </summary>
         /// <param name="entity"></param>
         /// <returns></returns>
-        public System.Int32 Add(ContractEntity entity)
+        public Tuple<bool, string> Add(ContractEntity entity)
         {
-            return _contractRepository.Save(entity);
+            using (var tx = NhTransactionHelper.BeginTransaction())
+            {
+                try
+                {
+                    _contractRepository.Save(entity);
+                    if (entity.ParentId > 0)
+                    {
+                        var parentEntity = this.GetModelByPk(entity.ParentId);
+                        parentEntity.IsActive = 2;
+                        _contractRepository.Update(parentEntity);
+                    }
+                    tx.Commit();
+                    return new Tuple<bool, string>(true, "");
+                }
+                catch (Exception e)
+                {
+                    tx.Rollback();
+                    throw;
+                }
+            }
         }
 
 
@@ -49,17 +70,17 @@ namespace Project.Service.HRManager
         /// 删除
         /// </summary>
         /// <param name="pkId"></param>
-        public bool DeleteByPkId(System.Int32 pkId)
+        public Tuple<bool, string> DeleteByPkId(System.Int32 pkId)
         {
             try
             {
                 var entity = _contractRepository.GetById(pkId);
                 _contractRepository.Delete(entity);
-                return true;
+                return new Tuple<bool, string>(true,"");
             }
             catch
             {
-                return false;
+                throw;
             }
         }
 
@@ -67,16 +88,16 @@ namespace Project.Service.HRManager
         /// 删除
         /// </summary>
         /// <param name="entity"></param>
-        public bool Delete(ContractEntity entity)
+        public Tuple<bool, string> Delete(ContractEntity entity)
         {
             try
             {
                 _contractRepository.Delete(entity);
-                return true;
+                return new Tuple<bool, string>(true,"");
             }
             catch
             {
-                return false;
+                throw;
             }
         }
 
@@ -84,16 +105,16 @@ namespace Project.Service.HRManager
         /// 更新
         /// </summary>
         /// <param name="entity"></param>
-        public bool Update(ContractEntity entity)
+        public Tuple<bool, string> Update(ContractEntity entity)
         {
             try
             {
                 _contractRepository.Update(entity);
-                return true;
+                return new Tuple<bool, string>(true, "");
             }
             catch
             {
-                return false;
+                throw;
             }
         }
 
@@ -115,9 +136,7 @@ namespace Project.Service.HRManager
         /// <param name="entity">条件实体</param>
         /// <param name="skipResults">开始</param>
         /// <param name="maxResults">结束</param>
-        /// <returns>获取当前页【用于记录合同
-        ////（合同内工资类型等都过滤暂时不考虑）】和总【用于记录合同
-        ///（合同内工资类型等都过滤暂时不考虑）】数
+        /// <returns>获取当前页【用于记录合同（合同内工资类型等都过滤暂时不考虑）】和总【用于记录合同（合同内工资类型等都过滤暂时不考虑）】数</returns>
         public System.Tuple<IList<ContractEntity>, int> Search(ContractEntity where, int skipResults, int maxResults)
         {
             var expr = PredicateBuilder.True<ContractEntity>();
@@ -128,6 +147,8 @@ namespace Project.Service.HRManager
             //  expr = expr.And(p => p.EmployeeCode == where.EmployeeCode);
             // if (!string.IsNullOrEmpty(where.DepartmentCode))
             //  expr = expr.And(p => p.DepartmentCode == where.DepartmentCode);
+            // if (!string.IsNullOrEmpty(where.DepartmentName))
+            //  expr = expr.And(p => p.DepartmentName == where.DepartmentName);
             // if (!string.IsNullOrEmpty(where.BeginDate))
             //  expr = expr.And(p => p.BeginDate == where.BeginDate);
             // if (!string.IsNullOrEmpty(where.EndDate))
@@ -136,14 +157,30 @@ namespace Project.Service.HRManager
             //  expr = expr.And(p => p.Remark == where.Remark);
             // if (!string.IsNullOrEmpty(where.CreatorUserCode))
             //  expr = expr.And(p => p.CreatorUserCode == where.CreatorUserCode);
-            // if (!string.IsNullOrEmpty(where.CreatorUserName))
-            //  expr = expr.And(p => p.CreatorUserName == where.CreatorUserName);
             // if (!string.IsNullOrEmpty(where.CreateTime))
             //  expr = expr.And(p => p.CreateTime == where.CreateTime);
+            // if (!string.IsNullOrEmpty(where.LastModifierUserCode))
+            //  expr = expr.And(p => p.LastModifierUserCode == where.LastModifierUserCode);
             // if (!string.IsNullOrEmpty(where.LastModificationTime))
             //  expr = expr.And(p => p.LastModificationTime == where.LastModificationTime);
+            // if (!string.IsNullOrEmpty(where.IsDelete))
+            //  expr = expr.And(p => p.IsDelete == where.IsDelete);
+            // if (!string.IsNullOrEmpty(where.State))
+            //  expr = expr.And(p => p.State == where.State);
+            // if (!string.IsNullOrEmpty(where.IsActive))
+            //  expr = expr.And(p => p.IsActive == where.IsActive);
+            // if (!string.IsNullOrEmpty(where.ContractNo))
+            //  expr = expr.And(p => p.ContractNo == where.ContractNo);
+            // if (!string.IsNullOrEmpty(where.FirstParty))
+            //  expr = expr.And(p => p.FirstParty == where.FirstParty);
+            // if (!string.IsNullOrEmpty(where.SecondParty))
+            //  expr = expr.And(p => p.SecondParty == where.SecondParty);
+            // if (!string.IsNullOrEmpty(where.ContractContent))
+            //  expr = expr.And(p => p.ContractContent == where.ContractContent);
+            // if (!string.IsNullOrEmpty(where.IdentityCardNo))
+            //  expr = expr.And(p => p.IdentityCardNo == where.IdentityCardNo);
             #endregion
-            var list = _contractRepository.Query().Where(expr).OrderBy(p => p.PkId).Skip(skipResults).Take(maxResults).ToList();
+            var list = _contractRepository.Query().Where(expr).OrderByDescending(p => p.PkId).Skip(skipResults).Take(maxResults).ToList();
             var count = _contractRepository.Query().Where(expr).Count();
             return new System.Tuple<IList<ContractEntity>, int>(list, count);
         }
@@ -163,6 +200,8 @@ namespace Project.Service.HRManager
             //  expr = expr.And(p => p.EmployeeCode == where.EmployeeCode);
             // if (!string.IsNullOrEmpty(where.DepartmentCode))
             //  expr = expr.And(p => p.DepartmentCode == where.DepartmentCode);
+            // if (!string.IsNullOrEmpty(where.DepartmentName))
+            //  expr = expr.And(p => p.DepartmentName == where.DepartmentName);
             // if (!string.IsNullOrEmpty(where.BeginDate))
             //  expr = expr.And(p => p.BeginDate == where.BeginDate);
             // if (!string.IsNullOrEmpty(where.EndDate))
@@ -171,12 +210,28 @@ namespace Project.Service.HRManager
             //  expr = expr.And(p => p.Remark == where.Remark);
             // if (!string.IsNullOrEmpty(where.CreatorUserCode))
             //  expr = expr.And(p => p.CreatorUserCode == where.CreatorUserCode);
-            // if (!string.IsNullOrEmpty(where.CreatorUserName))
-            //  expr = expr.And(p => p.CreatorUserName == where.CreatorUserName);
             // if (!string.IsNullOrEmpty(where.CreateTime))
             //  expr = expr.And(p => p.CreateTime == where.CreateTime);
+            // if (!string.IsNullOrEmpty(where.LastModifierUserCode))
+            //  expr = expr.And(p => p.LastModifierUserCode == where.LastModifierUserCode);
             // if (!string.IsNullOrEmpty(where.LastModificationTime))
             //  expr = expr.And(p => p.LastModificationTime == where.LastModificationTime);
+            // if (!string.IsNullOrEmpty(where.IsDelete))
+            //  expr = expr.And(p => p.IsDelete == where.IsDelete);
+            // if (!string.IsNullOrEmpty(where.State))
+            //  expr = expr.And(p => p.State == where.State);
+            // if (!string.IsNullOrEmpty(where.IsActive))
+            //  expr = expr.And(p => p.IsActive == where.IsActive);
+            // if (!string.IsNullOrEmpty(where.ContractNo))
+            //  expr = expr.And(p => p.ContractNo == where.ContractNo);
+            // if (!string.IsNullOrEmpty(where.FirstParty))
+            //  expr = expr.And(p => p.FirstParty == where.FirstParty);
+            // if (!string.IsNullOrEmpty(where.SecondParty))
+            //  expr = expr.And(p => p.SecondParty == where.SecondParty);
+            // if (!string.IsNullOrEmpty(where.ContractContent))
+            //  expr = expr.And(p => p.ContractContent == where.ContractContent);
+            // if (!string.IsNullOrEmpty(where.IdentityCardNo))
+            //  expr = expr.And(p => p.IdentityCardNo == where.IdentityCardNo);
             #endregion
             var list = _contractRepository.Query().Where(expr).OrderBy(p => p.PkId).ToList();
             return list;

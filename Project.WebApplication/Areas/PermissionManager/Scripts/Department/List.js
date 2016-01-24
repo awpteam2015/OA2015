@@ -15,35 +15,37 @@ var pro = pro || {};
             var tabObj = initObj.tabObj;
             var gridObj = initObj.gridObj;
             gridObj.grid({
-                url: '/PermissionManager/Department/GetList',
-                idField: "DepartmentCode",
-                treeField: "DepartmentCode",
-                fitColumns: false,
-                nowrap: false,
-                rownumbers: true, //行号
-                singleSelect: true,
-                columns: [[
-         { field: 'DepartmentCode', title: '部门编码', width: 300 },
-         { field: 'DepartmentName', title: '部门名称', width: 200 },
-         { field: 'ParentDepartmentCode', title: '上级部门编码', width: 100 },
-         //{
-         //    field: 'DepartmentType', title: '类型', width: 100, formatter: function (value, row, index) {
-         //        var ret = "";
-         //        switch (value) {
-         //            case 0:
-         //                ret = '机构'
-         //                break;
-         //            case 1:
-         //                ret = '科室'
-         //                break;
-         //        }
-         //        return ret;               
-         //    }
-         //},
-         { field: 'Remark', title: '备注', width:200 }
-                ]]
-            }
-               );
+                    url: '/PermissionManager/Department/GetList',
+                    idField: "DepartmentCode",
+                    treeField: "DepartmentCode",
+                    fitColumns: false,
+                    nowrap: false,
+                    rownumbers: true, //行号
+                    singleSelect: true,
+                    columns: [
+                        [
+                            { field: 'DepartmentCode', title: '部门编码', width: 300 },
+                            { field: 'DepartmentName', title: '部门名称', width: 200 },
+                            { field: 'ParentDepartmentCode', title: '上级部门编码', width: 100 },
+                            //{
+                            //    field: 'DepartmentType', title: '类型', width: 100, formatter: function (value, row, index) {
+                            //        var ret = "";
+                            //        switch (value) {
+                            //            case 0:
+                            //                ret = '机构'
+                            //                break;
+                            //            case 1:
+                            //                ret = '科室'
+                            //                break;
+                            //        }
+                            //        return ret;               
+                            //    }
+                            //},
+                            { field: 'Remark', title: '备注', width: 200 }
+                        ]
+                    ]
+                }
+            );
 
             $("#btnAdd").click(function () {
                 tabObj.add("/PermissionManager/Department/Hd","新增");

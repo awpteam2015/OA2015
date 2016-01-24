@@ -4,12 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Project.Model.Enum
+namespace Project.Model.Enum.HRManager
 {
-    public enum TreeInvalidCodeEnum
+    public enum ContractIsActiveEnum
     {
-        Invalid
+        有效=1,
+        无效=2
     }
-
-
 }

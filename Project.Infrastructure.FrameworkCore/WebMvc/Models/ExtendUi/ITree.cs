@@ -1,4 +1,4 @@
-﻿namespace Project.Model.ExtendUi
+﻿namespace Project.Infrastructure.FrameworkCore.WebMvc.Models.ExtendUi
 {
     public interface ITree
     {

@@ -5,14 +5,7 @@
     pro.Department.HdPage = {
         initPage: function () {
 
-            $('#ParentDepartmentCode').combotree({
-                required: true,
-                editable: false,
-                valueField: 'DepartmentCode',
-                textField: 'DepartmentName',
-                url: '/PermissionManager/Department/GetList_Combotree'
-            });
-
+            pro.DepartmentControl.init({ controlId: "ParentDepartmentCode" ,required:true});
 
             $("#btnAdd").click(function () {
                 pro.Department.HdPage.submit("Add");

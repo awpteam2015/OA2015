@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Web;
 using AutoMapper;
 using NHibernate.Mapping;
 using NHibernate.Util;
 using Project.Infrastructure.FrameworkCore.DataNhibernate;
 using Project.Infrastructure.FrameworkCore.DataNhibernate.Helpers;
+using Project.Infrastructure.FrameworkCore.Domain.Entities;
 using Project.Infrastructure.FrameworkCore.ToolKit;
 using Project.Model.PermissionManager;
 using Project.Repository.PermissionManager;
@@ -51,6 +53,7 @@ namespace Project.Service.PermissionManager
             if (userInfoEntity != null)
             {
                 userInfoEntity.UserFunctionDetailList_Checked = this.GetFunctionDetailList_Checked(userCode);
+               
 
                 var loginUserInfo = Mapper.Map<UserInfoEntity, LoginUserInfoDTO>(userInfoEntity);
                 return new Tuple<bool, string, LoginUserInfoDTO>(true, "", loginUserInfo);

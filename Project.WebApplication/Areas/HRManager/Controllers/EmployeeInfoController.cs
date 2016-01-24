@@ -9,11 +9,11 @@ using Project.Infrastructure.FrameworkCore.ToolKit.JsonHandler;
 using Project.Infrastructure.FrameworkCore.ToolKit.LinqExpansion;
 using Project.Infrastructure.FrameworkCore.ToolKit.StringHandler;
 using Project.Model.HRManager;
-using Project.Mvc.Controllers.Results;
-using Project.Mvc.Models;
 using Project.Service.HRManager;
 using Project.WebApplication.Controllers;
 using Project.Infrastructure.FrameworkCore.ToolKit;
+using Project.Infrastructure.FrameworkCore.WebMvc.Controllers.Results;
+using Project.Infrastructure.FrameworkCore.WebMvc.Models;
 
 namespace Project.WebApplication.Areas.HRManager.Controllers
 {
@@ -136,6 +136,29 @@ namespace Project.WebApplication.Areas.HRManager.Controllers
                 success = deleteResult
             };
             return new AbpJsonResult(result, new NHibernateContractResolver(new string[] { "result" }));
+        }
+
+
+        public AbpJsonResult GetEmployeeInfo(string employeeCode)
+        {
+
+            var list = EmployeeInfoService.GetInstance().GetList(new EmployeeInfoEntity() { EmployeeCode = employeeCode });
+
+            if (list.Any())
+            {
+                var result = new AjaxResponse<EmployeeInfoEntity>()
+                {
+                    success =true,
+                    result = list.FirstOrDefault()
+                };
+                return new AbpJsonResult(result, new NHibernateContractResolver(new string[] { "result" }));
+            }
+            else
+            {
+                return new AbpJsonResult(new AjaxResponse<string>(){success = false,error = new ErrorInfo(){message = "请输入正确的员工号！"}});
+            }
+
+           
         }
     }
 }

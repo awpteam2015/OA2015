@@ -4,7 +4,7 @@ using System.Text;
 namespace Project.Infrastructure.FrameworkCore.ToolKit
 {
     public sealed class Base64Helper
-    { 
+    {
         /// <summary> 
         /// Base64加密 
         /// </summary> 
@@ -44,6 +44,11 @@ namespace Project.Infrastructure.FrameworkCore.ToolKit
         /// <returns>解密后的字符串</returns> 
         public static string DecodeBase64(Encoding encode, string result)
         {
+            if (string.IsNullOrWhiteSpace(result))
+            {
+                return "";
+            }
+
             string decode = "";
             byte[] bytes = Convert.FromBase64String(result);
             try
@@ -62,9 +67,13 @@ namespace Project.Infrastructure.FrameworkCore.ToolKit
         /// </summary> 
         /// <param name="result">待解密的密文</param> 
         /// <returns>解密后的字符串</returns> 
-        public static string DecodeBase64(string result)
+        public static string DecodeBase64(object result)
         {
-            return DecodeBase64(Encoding.UTF8, result);
+            if (result==null)
+            {
+                return "";
+            }
+            return DecodeBase64(Encoding.UTF8, result.ToString());
         }
     }
 }

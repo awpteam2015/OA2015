@@ -30,6 +30,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AutoMapper, Version=4.1.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.4.1.1\lib\net45\AutoMapper.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="FluentNHibernate, Version=2.0.3.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\FluentNHibernate.2.0.3.0\lib\net40\FluentNHibernate.dll</HintPath>
       <Private>True</Private>
@@ -94,6 +98,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AutoMapper\AutoMapperExtend.cs" />
     <Compile Include="DataNhibernate\EntityMappings\FullMap.cs" />
     <Compile Include="DataNhibernate\EntityMappings\ViewBaseMap.cs" />
     <Compile Include="DataNhibernate\Helpers\CustomDialectSql.cs" />
@@ -123,6 +128,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Domain\Entities\Component\IHasCreationTime.cs" />
+    <Compile Include="Domain\Entities\Component\IHasRemark.cs" />
     <Compile Include="Domain\Entities\Component\IMustHaveSiteCode.cs" />
     <Compile Include="Domain\Entities\AuditedEntity.cs" />
     <Compile Include="Domain\Entities\FullAuditedEntity.cs" />
@@ -132,6 +138,7 @@
     <Compile Include="Domain\Entities\Auditing\Interface\IDeletionAudited.cs" />
     <Compile Include="Domain\Entities\Auditing\Interface\IModificationAudited.cs" />
     <Compile Include="Domain\Entities\Component\ISoftDelete.cs" />
+    <Compile Include="Domain\Entities\HttpContextUserInfo.cs" />
     <Compile Include="Domain\Entities\ModificationAuditedEntity.cs" />
     <Compile Include="DataNhibernate\EntityMappings\BaseMap.cs" />
     <Compile Include="Domain\Entities\Entity.cs" />
@@ -191,9 +198,24 @@
     <Compile Include="ToolKit\ValidateHandler\ValidateHelper.cs" />
     <Compile Include="ToolKit\ValidateHandler\ValidateRegExp.cs" />
     <Compile Include="ToolKit\XmlHelper.cs" />
-    <Compile Include="WebMvc\Controllers\Results\AbpJsonResult.cs" />
-    <Compile Include="WebMvc\Model\AjaxResponse.cs" />
-    <Compile Include="WebMvc\Model\ErrorInfo.cs" />
+    <Compile Include="WebMvc\Authorization\PermissionAuthorizeAttribute.cs" />
+    <Compile Include="WebMvc\Controllers\Results\AbpJsonResult.cs">
+      <SubType>
+      </SubType>
+    </Compile>
+    <Compile Include="WebMvc\Models\AjaxRequest.cs" />
+    <Compile Include="WebMvc\Models\AjaxResponse.cs">
+      <SubType>
+      </SubType>
+    </Compile>
+    <Compile Include="WebMvc\Models\DataGridResponse.cs" />
+    <Compile Include="WebMvc\Models\ErrorInfo.cs">
+      <SubType>
+      </SubType>
+    </Compile>
+    <Compile Include="WebMvc\Models\ExtendUi\TreeInvalidCodeEnum.cs" />
+    <Compile Include="WebMvc\Models\ExtendUi\ITree.cs" />
+    <Compile Include="WebMvc\Models\PermissionFunctionInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Logging\Config\log4net.config">

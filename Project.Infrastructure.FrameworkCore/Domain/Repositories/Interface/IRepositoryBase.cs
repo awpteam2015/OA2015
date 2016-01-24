@@ -12,7 +12,7 @@ namespace Project.Infrastructure.FrameworkCore.Domain.Repositories.Interface
 
         void Delete(TEntity entity);
 
-        void SaveOrUpdate(TEntity entity);
+       // void SaveOrUpdate(TEntity entity);
 
 
         /// <summary>

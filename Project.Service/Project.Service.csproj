@@ -44,6 +44,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -52,6 +53,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BootstrapperService.cs" />
+    <Compile Include="HRManager\AttendanceUploadRecordService.cs" />
     <Compile Include="HRManager\ContractService.cs" />
     <Compile Include="HRManager\DictionaryService.cs" />
     <Compile Include="HRManager\EmployeeChildrenService.cs" />

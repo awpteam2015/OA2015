@@ -1,81 +1,77 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Project.Infrastructure.FrameworkCore.WebMvc.Model
+namespace Project.Infrastructure.FrameworkCore.WebMvc.Models
 {
     [Serializable]
     public class AjaxResponse<TResult>
     {
         /// <summary>
         /// Indicates success status of the result.
-        /// Set <see cref="Error"/> if this value is false.
+        /// Set <see cref="error"/> if this value is false.
         /// </summary>
-        public bool Success { get; set; }
+        public bool success { get; set; }
 
         /// <summary>
         /// The actual result object of ajax request.
-        /// It is set if <see cref="Success"/> is true.
+        /// It is set if <see cref="success"/> is true.
         /// </summary>
-        public TResult Result { get; set; }
+        public TResult result { get; set; }
 
         /// <summary>
-        /// Error details (Must and only set if <see cref="Success"/> is false).
+        /// Error details (Must and only set if <see cref="success"/> is false).
         /// </summary>
-        public ErrorInfo Error { get; set; }
+        public ErrorInfo error { get; set; }
 
         /// <summary>
         /// This property can be used to indicate that the current user has no privilege to perform this request.
         /// </summary>
-        public bool UnAuthorizedRequest { get; set; }
+        public bool unauthorizedrequest { get; set; }
 
         /// <summary>
         /// This property can be used to redirect user to a specified URL.
         /// </summary>
-        public string TargetUrl { get; set; }
+        public string targeturl { get; set; }
 
         /// <summary>
-        /// Creates an <see cref="AjaxResponse"/> object with <see cref="Result"/> specified.
-        /// <see cref="Success"/> is set as true.
+        /// Creates an <see cref="AjaxResponse"/> object with <see cref="result"/> specified.
+        /// <see cref="success"/> is set as true.
         /// </summary>
         /// <param name="result">The actual result object of ajax request</param>
         public AjaxResponse(TResult result)
         {
-            Result = result;
-            Success = true;
+            result = result;
+            success = true;
         }
 
         /// <summary>
         /// Creates an <see cref="AjaxResponse"/> object.
-        /// <see cref="Success"/> is set as true.
+        /// <see cref="success"/> is set as true.
         /// </summary>
         public AjaxResponse()
         {
-            Success = true;
+            success = true;
         }
 
         /// <summary>
-        /// Creates an <see cref="AjaxResponse"/> object with <see cref="Success"/> specified.
+        /// Creates an <see cref="AjaxResponse"/> object with <see cref="success"/> specified.
         /// </summary>
         /// <param name="success">Indicates success status of the result</param>
         public AjaxResponse(bool success)
         {
-            Success = success;
+            success = success;
         }
 
         /// <summary>
-        /// Creates an <see cref="AjaxResponse"/> object with <see cref="Error"/> specified.
-        /// <see cref="Success"/> is set as false.
+        /// Creates an <see cref="AjaxResponse"/> object with <see cref="error"/> specified.
+        /// <see cref="success"/> is set as false.
         /// </summary>
         /// <param name="error">Error details</param>
         /// <param name="unAuthorizedRequest">Used to indicate that the current user has no privilege to perform this request</param>
         public AjaxResponse(ErrorInfo error, bool unAuthorizedRequest = false)
         {
-            Error = error;
-            UnAuthorizedRequest = unAuthorizedRequest;
-            Success = false;
+            error = error;
+            unauthorizedrequest = unAuthorizedRequest;
+            success = false;
         }
     }
 }

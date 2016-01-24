@@ -21,16 +21,22 @@ var pro = pro || {};
                 rownumbers: true, //行号
                 singleSelect: true,
                 columns: [[
-         { field: 'PkId', title: '', width: 100 },
-         { field: 'EmployeeCode', title: '', width: 100 },
-         { field: 'DepartmentCode', title: '', width: 100 },
-         { field: 'BeginDate', title: '', width: 100 },
-         { field: 'EndDate', title: '', width: 100 },
-         { field: 'Remark', title: '', width: 100 },
-         { field: 'CreatorUserCode', title: '', width: 100 },
-         { field: 'CreatorUserName', title: '', width: 100 },
-         { field: 'CreateTime', title: '', width: 100 },
-         { field: 'LastModificationTime', title: '', width: 100 },
+         { field: 'PkId', title: '序号', width: 50 },
+         { field: 'EmployeeCode', title: '工号', width: 100 },
+         { field: 'DepartmentCode', title: '部门编号', width: 100 },
+         { field: 'DepartmentName', title: '部门名称', width: 100 },
+         { field: 'BeginDate', title: '开始时间', width: 100 },
+         { field: 'EndDate', title: '结束时间', width: 100 },
+         { field: 'Attr_State', title: '状态 ', width: 100 },
+         { field: 'Attr_IsActive', title: '是否有效', width: 100 },
+         { field: 'ContractNo', title: '合同编号', width: 100 },
+         { field: 'FirstParty', title: '甲方', width: 100 },
+         { field: 'SecondParty', title: '已方', width: 100 },
+         { field: 'IdentityCardNo', title: '身份证', width: 100 },
+         { field: 'CreatorUserCode', title: '创建人', width: 100 },
+         { field: 'CreationTime', title: '创建时间', width: 100 },
+         { field: 'LastModifierUserCode', title: '修改人', width: 100 },
+         { field: 'LastModificationTime', title: '最后修改时间', width: 100 }
                 ]],
                 pagination: true,
                 pageSize: 20, //每页显示的记录条数，默认为10     
@@ -38,9 +44,54 @@ var pro = pro || {};
             }
                );
 
+            pro.DepartmentControl.init();
+
             $("#btnAdd").click(function () {
-               tabObj.add("/HRManager/Contract/Hd","新增");
+                tabObj.add("/HRManager/Contract/Hd?State=1&ParentId=0", "新增");
             });
+
+            $("#btnAdd2").click(function () {
+                if (!gridObj.isSelected()) {
+                    $.alertExtend.infoOp();
+                    return;
+                }
+                var getSelect = gridObj.getSelectedRow();
+                if (getSelect.IsActive!=1) {
+                    $.alertExtend.infoOp("请选择有效的合同！");
+                    return;
+                }
+                var PkId = gridObj.getSelectedRow().PkId;
+                tabObj.add("/HRManager/Contract/Hd?State=2&ParentId=" + PkId, "续订" + PkId);
+            });
+
+            $("#btnAdd3").click(function () {
+                if (!gridObj.isSelected()) {
+                    $.alertExtend.infoOp();
+                    return;
+                }
+                var getSelect = gridObj.getSelectedRow();
+                if (getSelect.IsActive != 1) {
+                    $.alertExtend.infoOp("请选择有效的合同！");
+                    return;
+                }
+                var PkId = gridObj.getSelectedRow().PkId;
+                tabObj.add("/HRManager/Contract/Hd?State=3&ParentId=" + PkId, "变更" + PkId);
+            });
+
+            $("#btnAdd4").click(function () {
+                if (!gridObj.isSelected()) {
+                    $.alertExtend.infoOp();
+                    return;
+                }
+                var getSelect = gridObj.getSelectedRow();
+                if (getSelect.IsActive != 1) {
+                    $.alertExtend.infoOp("请选择有效的合同！");
+                    return;
+                }
+                var PkId = gridObj.getSelectedRow().PkId;
+                tabObj.add("/HRManager/Contract/Hd?State=4&ParentId=" + PkId, "终止" + PkId);
+            });
+
 
             $("#btnEdit").click(function () {
                 if (!gridObj.isSelected()) {
