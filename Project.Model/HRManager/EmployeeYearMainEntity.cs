@@ -12,7 +12,7 @@ using Project.Infrastructure.FrameworkCore.Domain.Entities.Component;
 
 namespace Project.Model.HRManager
 {
-    public class EmployeeYearMainEntity : Entity
+    public class EmployeeYearMainEntity : Entity, ISoftDelete, IHasRemark
     {
         #region 属性
         /// <summary>
@@ -52,6 +52,7 @@ namespace Project.Model.HRManager
         /// 
         /// </summary>
         public virtual System.DateTime? LastModificationTime { get; set; }
+        public virtual bool IsDeleted { get; set; }
         #endregion
 
 
