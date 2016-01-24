@@ -1,6 +1,4 @@
-﻿
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
@@ -92,10 +90,12 @@ namespace Project.WebApplication.Areas.HRManager.Controllers
         [HttpPost]
         public AbpJsonResult Delete(int pkid)
         {
+
             var deleteResult = EmployeeYearMainService.GetInstance().DeleteByPkId(pkid);
             var result = new AjaxResponse<EmployeeYearMainEntity>()
             {
-                success = deleteResult
+                success = deleteResult.Item1,
+                error = deleteResult.Item1 ? null : new ErrorInfo(deleteResult.Item2)
             };
             return new AbpJsonResult(result, new NHibernateContractResolver(new string[] { "result" }));
         }

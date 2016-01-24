@@ -89,18 +89,32 @@ namespace Project.Service.HRManager
         /// 删除
         /// </summary>
         /// <param name="pkId"></param>
-        public bool DeleteByPkId(System.Int32 pkId)
+        public new Tuple<bool, string> DeleteByPkId(System.Int32 pkId)
         {
-            try
+            using (var tx = NhTransactionHelper.BeginTransaction())
             {
-                var entity = _employeeYearMainRepository.GetById(pkId);
-                _employeeYearMainRepository.Delete(entity);
-                return true;
+                try
+                {
+                    var entity = _employeeYearMainRepository.GetById(pkId);
+                    _employeeYearMainRepository.Delete(entity);
+                    EmployeeYearDetailEntity where = new EmployeeYearDetailEntity();
+                    where.EmployeeCode = entity.EmployeeCode;
+                    var expr = PredicateBuilder.True<EmployeeYearDetailEntity>();
+                    _employeeYearDetailRepository.Query().Where(expr).OrderBy(p => p.PkId).ToList().ForEach(item =>
+                    {
+                        _employeeYearDetailRepository.Delete(item);
+                    });
+
+                    tx.Commit();
+                    return new Tuple<bool, string>(true, ""); ;
+                }
+                catch (Exception e)
+                {
+                    tx.Rollback();
+                    throw;
+                }
             }
-            catch
-            {
-                return false;
-            }
+
         }
 
         /// <summary>
