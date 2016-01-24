@@ -19,7 +19,7 @@ namespace Project.Infrastructure.FrameworkCore.ToolKit.JsonHandler
         {
             var json = new JavaScriptSerializer().Serialize(new
             {
-                status = status ? "success" : "fail",
+                success = status,
                 msg = msg,
                 extension = extension
             });

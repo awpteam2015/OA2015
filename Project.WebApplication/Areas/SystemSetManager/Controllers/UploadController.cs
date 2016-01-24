@@ -5,7 +5,9 @@ using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Project.Infrastructure.FrameworkCore.ToolKit;
 using Project.Infrastructure.FrameworkCore.ToolKit.JsonHandler;
+using Project.WebApplication.Controllers;
 
 namespace Project.WebApplication.Areas.SystemSetManager.Controllers
 {
@@ -20,23 +22,29 @@ namespace Project.WebApplication.Areas.SystemSetManager.Controllers
         [HttpPost]
         public ContentResult UploadImage()
         {
-            var imagePath = Path.Combine(ConfigurationManager.AppSettings["UploadFile"], "Image");
-
+            var filePath = Path.Combine(ConfigurationManager.AppSettings["UploadFile"], RequestHelper.GetFormString("path"));
             var file = Request.Files["Filedata"];
             if (file == null)
             {
                 return Content(JsonHelper.ReturnMsg(false, "参数错误：文件不存在!"));
             }
-            var serverPath = Server.MapPath(imagePath);
+            var serverPath = Server.MapPath(filePath);
             if (Directory.Exists(serverPath) == false)
             {
                 Directory.CreateDirectory(serverPath);
             }
 
-            var filename = string.Format("{0}-{1}-{2}", "", Guid.NewGuid(), file.FileName);
+            var filename = string.Format("{0}-{1}-{2}", DateTime.Now.ToString("yyyyMMddHHmmss"), Guid.NewGuid(),file.FileName);
             file.SaveAs(serverPath + "/" + filename);
 
-            return Content(JsonHelper.ReturnMsg(true, "", new { imagePath = Path.Combine(imagePath, filename), fileName = filename, dataPath = Path.Combine("Image", filename) }));
+            return Content(JsonHelper.ReturnMsg(true, "", 
+                new
+            {
+                fileFullPath = Path.Combine(filePath, filename), 
+                fileName = filename, 
+                fileUrl = filePath,
+                orgfileName = file.FileName
+            }));
         }
 
     }

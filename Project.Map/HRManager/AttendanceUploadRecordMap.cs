@@ -18,12 +18,14 @@ namespace  Project.Map.HRManager
         {
             this.MapPkidDefault<AttendanceUploadRecordEntity,int>();
  
-            Map(p => p.DepartmentCode);    
+            Map(p => p.DepartmentCode);
+            Map(p => p.DepartmentName);  
             Map(p => p.Date);    
             Map(p => p.Remark);    
             Map(p => p.CreatorUserCode);     
-            Map(p => p.CreationTime);    
-            Map(p => p.FileUrl);    
+            Map(p => p.CreationTime);
+            Map(p => p.FileUrl);
+            Map(p => p.FileName);       
             Map(p => p.IsDelete);    
         }
     }
