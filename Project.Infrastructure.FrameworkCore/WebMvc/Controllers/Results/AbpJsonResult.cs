@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Web.Mvc;
 using Newtonsoft.Json.Serialization;
 using Project.Infrastructure.FrameworkCore.DataNhibernate.Helpers;

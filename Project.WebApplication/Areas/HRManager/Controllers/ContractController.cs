@@ -78,25 +78,17 @@ namespace Project.WebApplication.Areas.HRManager.Controllers
                 total = searchList.Item2,
                 rows = searchList.Item1
             };
-            return new AbpJsonResult(dataGridEntity, new NHibernateContractResolver(new string[] { "Remark", "ContractContent" }));
+            return new AbpJsonResult(dataGridEntity, new NHibernateContractResolver(new string[]{},new string[] { "Remark", "ContractContent" }));
         }
 
 
         [HttpPost]
-        public AbpJsonResult Add(AjaxRequest<ContractEntity> postData)
+        public AbpJsonResult<string> Add(AjaxRequest<ContractEntity> postData)
         {
             postData.RequestEntity.ContractContent = Base64Helper.DecodeBase64(postData.RequestEntity.ContractContent);
             postData.RequestEntity.IsActive = 1;
             var addResult = ContractService.GetInstance().Add(postData.RequestEntity);
-            var result = new AjaxResponse<ContractEntity>()
-               {
-                   success = true,
-                   result = postData.RequestEntity
-               };
-          
-            return new AbpJsonResult(result, new NHibernateContractResolver());
-
-
+            return new AbpJsonResult<string>(addResult);
         }
 
 
