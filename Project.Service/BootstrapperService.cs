@@ -23,10 +23,7 @@ namespace Project.Service
             Mapper.CreateMap<ContractEntity, ContractEntity>().IgnoreAllNull();
             Mapper.CreateMap<AttendanceEntity, AttendanceEntity>().IgnoreAllNull();
             Mapper.CreateMap<AttendanceUploadRecordEntity, AttendanceUploadRecordEntity>().IgnoreAllNull();
-
-
             Mapper.CreateMap<FunctionDetailEntity, PermissionFunctionDetailDTO>();
-
             Mapper.CreateMap<UserInfoEntity, LoginUserInfoDTO>().ForMember(a=>a.PermissionCodeList,b=>b.MapFrom(src=>src.UserFunctionDetailList_Checked));
         }
 
