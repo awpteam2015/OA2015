@@ -8,17 +8,19 @@
  * *************************************************************************/
 using System;
 using Project.Infrastructure.FrameworkCore.Domain.Entities;
+using Project.Infrastructure.FrameworkCore.Domain.Entities.Auditing.Interface;
 using Project.Infrastructure.FrameworkCore.Domain.Entities.Component;
 
 namespace Project.Model.HRManager
 {
-    public class AttendanceUploadRecordEntity : Entity, IHasRemark
+    public class AttendanceUploadRecordEntity : Entity, IHasRemark,ICreationAudited
     { 
         #region 属性
         /// <summary>
         /// 
         /// </summary>
-        public virtual System.String DepartmentCode{get; set;}
+        public virtual System.String DepartmentCode { get; set; }   
+        public virtual System.String DepartmentName { get; set; }
         /// <summary>
         /// 
         /// </summary>
@@ -40,6 +42,8 @@ namespace Project.Model.HRManager
         /// 
         /// </summary>
         public virtual System.String FileUrl{get; set;}
+
+        public virtual System.String FileName { get; set; }
         /// <summary>
         /// 
         /// </summary>

@@ -6,6 +6,7 @@
             var defaultParamter = {
                 controlId: "DepartmentCode",
                 editable: false,
+                width:300,
                 valueField: 'DepartmentCode',
                 textField: 'DepartmentName',
                 url: '/PermissionManager/Department/GetList_Combotree'

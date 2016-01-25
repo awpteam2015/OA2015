@@ -4,6 +4,9 @@
     pro.AttendanceUploadRecord.HdPage = pro.AttendanceUploadRecord.HdPage || {};
     pro.AttendanceUploadRecord.HdPage = {
         initPage: function () {
+
+            pro.DepartmentControl.init();
+
             $("#btnAdd").click(function () {
                 pro.AttendanceUploadRecord.HdPage.submit("Add");
             });
@@ -11,8 +14,8 @@
             $("#btnEdit").click(function () {
                 pro.AttendanceUploadRecord.HdPage.submit("Edit");
             });
-            
-             $("#btnClose").click(function () {
+
+            $("#btnClose").click(function () {
                 parent.pro.AttendanceUploadRecord.ListPage.closeTab("");
             });
 
@@ -29,6 +32,8 @@
         submit: function (command) {
             var postData = {};
             postData.RequestEntity = pro.submitKit.getHeadJson();
+            alert( $("#DepartmentCode").combotree("getText"));
+            postData.RequestEntity.DepartmentName = $("#DepartmentCode").combotree("getText");
 
             if (pro.commonKit.getUrlParam("PkId") != "") {
                 postData.RequestEntity.PkId = pro.commonKit.getUrlParam("PkId");
@@ -45,7 +50,7 @@
                 data: JSON.stringify(postData)
             }).done(
                 function (dataresult, data) {
-                   function afterSuccess() {
+                    function afterSuccess() {
                         parent.$("#btnSearch").trigger("click");
                         parent.pro.AttendanceUploadRecord.ListPage.closeTab();
                     }
@@ -53,7 +58,7 @@
                 }
             ).fail(
              function (errordetails, errormessage) {
-               //  $.alertExtend.error();
+                 //  $.alertExtend.error();
              }
             );
 
@@ -62,26 +67,20 @@
             addRule: function () {
                 $("#form1").validate({
                     rules: {
-          PkId: { required: true  },
-          DepartmentCode: { required: true  },
-          Date: { required: true  },
-          Remark: { required: true  },
-          CreatorUserCode: { required: true  },
-          CreatorUserName: { required: true  },
-          CreateTime: { required: true  },
-          FileUrl: { required: true  },
-          IsDelete: { required: true  },
+                        DepartmentCode: { required: true },
+                        Date: { required: true },
+                        Remark: { required: true }
                     },
                     messages: {
-          PkId:  "必填!",
-          DepartmentCode:  "必填!",
-          Date:  "必填!",
-          Remark:  "必填!",
-          CreatorUserCode:  "必填!",
-          CreatorUserName:  "必填!",
-          CreateTime:  "必填!",
-          FileUrl:  "必填!",
-          IsDelete:  "必填!",
+                        PkId: "必填!",
+                        DepartmentCode: "必填!",
+                        Date: "必填!",
+                        Remark: "必填!",
+                        CreatorUserCode: "必填!",
+                        CreatorUserName: "必填!",
+                        CreateTime: "必填!",
+                        FileUrl: "必填!",
+                        IsDelete: "必填!"
                     },
                     errorPlacement: function (error, element) {
                         pro.commonKit.errorPlacementHd(error, element);

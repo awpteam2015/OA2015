@@ -39,6 +39,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Aspose.Cells, Version=8.6.3.0, Culture=neutral, PublicKeyToken=716fcc553a201e56, processorArchitecture=MSIL">
+      <HintPath>..\packages\Aspose.Cells.8.6.3\lib\net40\Aspose.Cells.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="AutoMapper, Version=4.1.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
       <HintPath>..\packages\AutoMapper.4.1.1\lib\net45\AutoMapper.dll</HintPath>
       <Private>True</Private>
@@ -241,6 +245,12 @@
     <Content Include="Scripts\jqueryPlugins\jquery_tip\tip-yellow\tip-yellow_arrows.png" />
     <Content Include="Scripts\Account\Index.js" />
     <Content Include="Scripts\jqueryPlugins\jquery_validate\card.js" />
+    <Content Include="Scripts\jqueryPlugins\jquery_uploadify\jquery.uploadify.js" />
+    <Content Include="Scripts\jqueryPlugins\jquery_uploadify\jquery.uploadify.min.js" />
+    <Content Include="Scripts\jqueryPlugins\jquery_uploadify\uploadify-cancel.png" />
+    <Content Include="Scripts\jqueryPlugins\jquery_uploadify\uploadify.css" />
+    <Content Include="Scripts\jqueryPlugins\jquery_uploadify\uploadify.swf" />
+    <Content Include="Scripts\jqueryPlugins\jquery_uploadify\uploadify_jxp.css" />
     <Content Include="Scripts\Login\Login.js" />
     <Content Include="Scripts\Config\globalConfig.js" />
     <Content Include="Scripts\jqueryPlugins\jquery_tip\jquery.poshytip.js" />
@@ -697,6 +707,7 @@
     <Compile Include="Areas\PermissionManager\Controllers\UserRoleController.cs" />
     <Compile Include="Areas\PermissionManager\PermissionManagerAreaRegistration.cs" />
     <Compile Include="Areas\SystemSetManager\Controllers\HolidayDetailController.cs" />
+    <Compile Include="Areas\SystemSetManager\Controllers\UploadController.cs" />
     <Compile Include="Areas\SystemSetManager\SystemSetManagerAreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
@@ -730,6 +741,7 @@
     <Content Include="Views\Shared\_Head.cshtml" />
     <Content Include="Views\Shared\_LayoutList2.cshtml" />
     <Content Include="Views\Shared\InternalServer.cshtml" />
+    <Content Include="TemplateFile\考勤模版.xlsx" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -744,7 +756,9 @@
     <Folder Include="Areas\PermissionManager\Views\Shared\" />
     <Folder Include="Areas\SystemSetManager\Models\" />
     <Folder Include="Areas\SystemSetManager\Views\Shared\" />
+    <Folder Include="Areas\SystemSetManager\Views\Upload\" />
     <Folder Include="Models\" />
+    <Folder Include="UploadFile\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Project.Config\Project.Config.csproj">
@@ -767,6 +781,9 @@
       <Project>{CC818705-0142-46D9-A858-1575069C0ABE}</Project>
       <Name>Project.Service</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web.Script.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
@@ -14,6 +15,18 @@ namespace Project.Infrastructure.FrameworkCore.ToolKit.JsonHandler
 {
     public static class JsonHelper
     {
+        public static string ReturnMsg(bool status, string msg = "", object extension = null)
+        {
+            var json = new JavaScriptSerializer().Serialize(new
+            {
+                success = status,
+                msg = msg,
+                extension = extension
+            });
+            return json;
+        }
+
+
         /// <summary>
         /// 
         /// </summary>

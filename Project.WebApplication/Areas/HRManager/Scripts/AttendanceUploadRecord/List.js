@@ -4,7 +4,7 @@ var pro = pro || {};
     pro.AttendanceUploadRecord = pro.AttendanceUploadRecord || {};
     pro.AttendanceUploadRecord.ListPage = pro.AttendanceUploadRecord.ListPage || {};
     pro.AttendanceUploadRecord.ListPage = {
-      init: function () {
+        init: function () {
             return {
                 tabObj: new pro.TabBase(),
                 gridObj: new pro.GridBase("#datagrid", false)
@@ -21,23 +21,21 @@ var pro = pro || {};
                 rownumbers: true, //行号
                 singleSelect: true,
                 columns: [[
-         { field: 'PkId', title: '', width: 100 },
-         { field: 'DepartmentCode', title: '', width: 100 },
-         { field: 'Date', title: '', width: 100 },
-         { field: 'Remark', title: '', width: 100 },
-         { field: 'CreatorUserCode', title: '', width: 100 },
-         { field: 'CreationTime', title: '', width: 100 },
-         { field: 'FileUrl', title: '', width: 100 },
-         { field: 'IsDelete', title: '', width: 100 },
+         { field: 'DepartmentName', title: '部门', width: 100 },
+         { field: 'Date', title: '考勤月份', width: 100 },
+         //{ field: 'CreatorUserCode', title: '创建人编码', width: 100 },
+         //{ field: 'CreationTime', title: '创建时间', width: 100 },
+         { field: 'FileName', title: '文件', width: 500 }
                 ]],
                 pagination: true,
                 pageSize: 20, //每页显示的记录条数，默认为10     
                 pageList: [20, 30, 40] //可以设置每页记录条数的列表    
             }
                );
+            pro.DepartmentControl.init();
 
             $("#btnAdd").click(function () {
-               tabObj.add("/HRManager/AttendanceUploadRecord/Hd","新增");
+                tabObj.add("/HRManager/AttendanceUploadRecord/Hd", "新增");
             });
 
             $("#btnEdit").click(function () {
@@ -56,7 +54,7 @@ var pro = pro || {};
 
             $("#btnDel").click(function () {
                 if (!gridObj.isSelected()) {
-                $.alertExtend.infoOp();
+                    $.alertExtend.infoOp();
                     return;
                 }
                 $.messager.confirm("确认操作", "是否确认删除", function (bl) {
@@ -80,7 +78,7 @@ var pro = pro || {};
                 gridObj.refresh();
             });
         },
-         closeTab: function () {
+        closeTab: function () {
             this.init().tabObj.closeTab();
         }
     };

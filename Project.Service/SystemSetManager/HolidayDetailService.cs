@@ -47,6 +47,7 @@ namespace Project.Service.SystemSetManager
             //{
             try
             {
+              
                 List<HolidayDetailEntity> entityList = new List<HolidayDetailEntity>();
                 var difDays = (entity.HolidayDateEnd.Value - entity.HolidayDate.Value).Days + 1;
                 var tempdate = entity.HolidayDate.Value;
