@@ -13,6 +13,8 @@ using Project.Infrastructure.FrameworkCore.WebMvc.Controllers.Results;
 using Project.Infrastructure.FrameworkCore.WebMvc.Models;
 using Project.Model.HRManager;
 using Project.Service.HRManager;
+using Project.Service.PermissionManager;
+using Project.Service.PermissionManager.Validate;
 using Project.WebApplication.Controllers;
 
 namespace Project.WebApplication.Areas.HRManager.Controllers
@@ -71,10 +73,11 @@ namespace Project.WebApplication.Areas.HRManager.Controllers
             Cells cells = sheet.Cells;
             for (int i = 1; i < cells.MaxDataRow + 1; i++)
             {
-                var row=new AttendanceEntity();
+                var row = new AttendanceEntity();
                 row.DepartmentCode = cells[i, 0].StringValue.Trim();
+                row.DepartmentName = DepartmentService.GetInstance().GetModelByPk();
                 row.EmployeeCode = cells[i, 1].StringValue.Trim();
-                row.Date= cells[i, 2].DateTimeValue;
+                row.Date = cells[i, 2].DateTimeValue;
                 row.State = cells[i, 3].IntValue;
                 postData.RequestEntity.AttendanceList.Add(row);
             }
