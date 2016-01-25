@@ -130,6 +130,17 @@ namespace Project.Service.PermissionManager
             return _departmentRepository.GetById(pkId);
         }
 
+        public DepartmentEntity GetModelByDepartmentCode(System.String departmentCode)
+        {
+            var expr = PredicateBuilder.True<DepartmentEntity>();
+            #region
+            if (!string.IsNullOrEmpty(departmentCode))
+                expr = expr.And(p => p.DepartmentCode ==departmentCode);
+            #endregion
+            var list = _departmentRepository.Query().Where(expr).OrderBy(p => p.PkId).ToList();
+            return list.FirstOrDefault();
+        }
+
 
         /// <summary>
         /// 分页

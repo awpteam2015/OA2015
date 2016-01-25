@@ -754,7 +754,6 @@
     <Folder Include="Areas\PermissionManager\Models\" />
     <Folder Include="Areas\PermissionManager\Views\Permission\" />
     <Folder Include="Areas\PermissionManager\Views\Shared\" />
-    <Folder Include="Areas\ReportManager\" />
     <Folder Include="Areas\SystemSetManager\Models\" />
     <Folder Include="Areas\SystemSetManager\Views\Shared\" />
     <Folder Include="Areas\SystemSetManager\Views\Upload\" />

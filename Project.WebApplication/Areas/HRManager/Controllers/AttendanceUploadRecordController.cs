@@ -75,7 +75,7 @@ namespace Project.WebApplication.Areas.HRManager.Controllers
             {
                 var row = new AttendanceEntity();
                 row.DepartmentCode = cells[i, 0].StringValue.Trim();
-                row.DepartmentName = DepartmentService.GetInstance().GetModelByPk();
+                row.DepartmentName = DepartmentService.GetInstance().GetModelByDepartmentCode(row.DepartmentCode).DepartmentName;
                 row.EmployeeCode = cells[i, 1].StringValue.Trim();
                 row.Date = cells[i, 2].DateTimeValue;
                 row.State = cells[i, 3].IntValue;
@@ -83,7 +83,6 @@ namespace Project.WebApplication.Areas.HRManager.Controllers
             }
 
             var addResult = AttendanceUploadRecordService.GetInstance().Add(postData.RequestEntity);
-
 
             var result = new AjaxResponse<AttendanceUploadRecordEntity>()
                {
