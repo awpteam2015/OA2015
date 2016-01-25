@@ -12,7 +12,7 @@ using Project.Infrastructure.FrameworkCore.Domain.Entities.Component;
 
 namespace Project.Model.HRManager
 {
-    public class EmployeeYearDetailEntity : Entity, ISoftDelete
+    public class EmployeeYearDetailEntity : Entity, ISoftDelete, IHasRemark
     {
         #region 属性
         /// <summary>
@@ -27,7 +27,10 @@ namespace Project.Model.HRManager
         /// 员工姓名
         /// </summary>
         public virtual System.String EmployeeName { get; set; }
-        public virtual System.Int16? UseType { get; set; }
+        /// <summary>
+        /// 0 添加登记  1：使用登记
+        /// </summary>
+        public virtual System.Int32? UseType { get; set; }
         /// <summary>
         /// 
         /// </summary>

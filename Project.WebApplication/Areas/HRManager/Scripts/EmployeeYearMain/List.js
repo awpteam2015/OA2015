@@ -22,10 +22,14 @@ var pro = pro || {};
                 singleSelect: true,
                 columns: [[
          { field: 'PkId', title: '', hidden: true, width: 100 },
-         { field: 'DepartmentCode', title: '部门编号', width: 100 },
-         { field: 'EmployeeCode', title: '员工编号', width: 100 },
+         {
+             field: 'DepartmentCode', title: '部门', width: 100, formatter: function (value, row) {
+                 return row.DepartmentEntity.DepartmentName;
+             }
+         },
+         { field: 'EmployeeName', title: '员工', width: 100 },
          { field: 'LeftCount', title: '年休余数', width: 100 },
-         { field: 'Remark', title: '备注', width: 100 },
+         //{ field: 'Remark', title: '备注', width: 100 },
          { field: 'CreatorUserName', title: '创建人', width: 100 },
          { field: 'CreateTime', title: '创建时间', width: 100 },
          { field: 'LastModificationTime', title: '最后修改时间', width: 100 },
