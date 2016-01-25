@@ -75,6 +75,7 @@
     <Compile Include="PermissionManager\UserInfoRepository.cs" />
     <Compile Include="PermissionManager\UserRoleRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ReportManager\HrReportRepository.cs" />
     <Compile Include="SystemSetManager\HolidayDetailRepository.cs" />
   </ItemGroup>
   <ItemGroup>
