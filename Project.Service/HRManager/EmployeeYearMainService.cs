@@ -50,7 +50,7 @@ namespace Project.Service.HRManager
             var detailEntity = new EmployeeYearDetailEntity()
             {
                 CreatorUserName = entity.CreatorUserName,
-                UseType = 1,
+                UseType = 0,
                 DepartmentCode = entity.DepartmentCode,
                 EmployeeCode = entity.EmployeeCode,
                 EmployeeName = entity.EmployeeName,

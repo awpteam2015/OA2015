@@ -18,31 +18,19 @@
 <div class="mtable_div">
     <form id="form1">
         <table class="mtable">
-
-            <tr>
-                <td>
-                    <span style="color: Red">*</span>:
-                </td>
-                <td>
-                    <input id="PkId" name="PkId" type="text" />
-                </td>
-            </tr>
-
             <tr>
                 <td>
                     部门编号<span style="color: Red">*</span>:
                 </td>
                 <td>
-                    <input id="DepartmentCode" name="DepartmentCode" type="text" class="easyui-combobox" />
+                    <input id="DepartmentCode" name="DepartmentCode" type="text" class="easyui-combobox" style="width:180px;" />
                 </td>
-            </tr>
 
-            <tr>
                 <td>
                     员工编号<span style="color: Red">*</span>:
                 </td>
                 <td>
-                    <input id="EmployeeCode" name="EmployeeCode" type="text" class="easyui-combobox" />
+                    <input id="EmployeeCode" name="EmployeeCode" type="text" class="easyui-combobox" style="width:130px;"/>
                 </td>
             </tr>
 
@@ -53,9 +41,7 @@
                 <td>
                     <input id="BeginDate" name="BeginDate" type="text" class="Wdate" onclick="WdatePicker();" />
                 </td>
-            </tr>
 
-            <tr>
                 <td>
                     结束日期<span style="color: Red">*</span>:
                 </td>
@@ -68,8 +54,8 @@
                 <td>
                     合计天数<span style="color: Red">*</span>:
                 </td>
-                <td>
-                    <input id="UseCount" name="UseCount" type="text" />
+                <td colspan="3">
+                    <input id="UseCount" name="UseCount" type="text" class="easyui-numberbox"  precision="1" style="width:130px;"/>
                 </td>
             </tr>
 
@@ -77,8 +63,8 @@
                 <td>
                     备注 <span style="color: Red">*</span>:
                 </td>
-                <td>
-                    <textarea id="Remark" name="Remark"></textarea>
+                <td colspan="3">
+                    <textarea id="Remark" name="Remark" style="height:50px;width:180px;"></textarea>
                 </td>
             </tr>
 

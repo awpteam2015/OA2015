@@ -10,6 +10,9 @@ using System.Collections.Generic;
 using Project.Infrastructure.FrameworkCore.DataNhibernate.Helpers;
 using Project.Model.HRManager;
 using Project.Repository.HRManager;
+using System;
+using Project.Infrastructure.FrameworkCore.DataNhibernate;
+using Project.Infrastructure.FrameworkCore.ToolKit;
 
 namespace Project.Service.HRManager
 {
@@ -18,11 +21,13 @@ namespace Project.Service.HRManager
 
         #region 构造函数
         private readonly EmployeeYearDetailRepository _employeeYearDetailRepository;
+        private readonly EmployeeYearMainRepository _employeeYearMainRepository;
         private static readonly EmployeeYearDetailService Instance = new EmployeeYearDetailService();
 
         public EmployeeYearDetailService()
         {
             this._employeeYearDetailRepository = new EmployeeYearDetailRepository();
+            this._employeeYearMainRepository = new EmployeeYearMainRepository();
         }
 
         public static EmployeeYearDetailService GetInstance()
@@ -38,9 +43,39 @@ namespace Project.Service.HRManager
         /// </summary>
         /// <param name="entity"></param>
         /// <returns></returns>
-        public System.Int32 Add(EmployeeYearDetailEntity entity)
+        public Tuple<bool, string> Add(EmployeeYearDetailEntity entity)
         {
-            return _employeeYearDetailRepository.Save(entity);
+            using (var tx = NhTransactionHelper.BeginTransaction())
+            {
+                try
+                {
+                    var where = new EmployeeYearMainEntity()
+                    {
+                        EmployeeCode = entity.EmployeeCode
+                    };
+                    var expr = PredicateBuilder.True<EmployeeYearMainEntity>();
+                    if (!string.IsNullOrEmpty(where.EmployeeCode))
+                        expr = expr.And(p => p.EmployeeCode == where.EmployeeCode);
+                    var mainItem = _employeeYearMainRepository.Query().Where(expr).OrderBy(p => p.PkId).FirstOrDefault();
+                    if (mainItem == null || mainItem.PkId <= 0)
+                        return new Tuple<bool, string>(false, "不存在该员工年假");
+                    else if (mainItem.LeftCount < entity.UseCount)
+                        return new Tuple<bool, string>(false, "该员工年假天数不足");
+                    entity.BeforeUseCount = mainItem.LeftCount;
+                    entity.LeftCount = entity.BeforeUseCount - entity.UseCount;
+                    mainItem.LeftCount = entity.LeftCount;
+                    var pkId = _employeeYearDetailRepository.Save(entity);
+                    mainItem.Remark = Base64Helper.EncodeBase64(mainItem.Remark);
+                    _employeeYearMainRepository.Update(mainItem);
+                    tx.Commit();
+                    return new Tuple<bool, string>(true, "");
+                }
+                catch (Exception e)
+                {
+                    tx.Rollback();
+                    throw;
+                }
+            }
         }
 
 
@@ -48,18 +83,40 @@ namespace Project.Service.HRManager
         /// 删除
         /// </summary>
         /// <param name="pkId"></param>
-        public bool DeleteByPkId(System.Int32 pkId)
+        public Tuple<bool, string> DeleteByPkId(System.Int32 pkId)
         {
-            try
+            using (var tx = NhTransactionHelper.BeginTransaction())
             {
-                var entity = _employeeYearDetailRepository.GetById(pkId);
-                _employeeYearDetailRepository.Delete(entity);
-                return true;
+                try
+                {
+                    var entity = _employeeYearDetailRepository.GetById(pkId);
+
+                    var where = new EmployeeYearMainEntity()
+                    {
+                        EmployeeCode = entity.EmployeeCode
+                    };
+                    var expr = PredicateBuilder.True<EmployeeYearMainEntity>();
+                    if (!string.IsNullOrEmpty(where.EmployeeCode))
+                        expr = expr.And(p => p.EmployeeCode == where.EmployeeCode);
+                    var mainItem = _employeeYearMainRepository.Query().Where(expr).OrderBy(p => p.PkId).FirstOrDefault();
+                    if (mainItem == null || mainItem.PkId <= 0)
+                        return new Tuple<bool, string>(false, "不存在该员工年假");
+
+                    _employeeYearDetailRepository.Delete(entity);
+
+                    mainItem.LeftCount = entity.LeftCount + entity.UseCount;
+                    mainItem.Remark = Base64Helper.EncodeBase64(mainItem.Remark);
+                    _employeeYearMainRepository.Update(mainItem);
+                    tx.Commit();
+                    return new Tuple<bool, string>(true, "");
+                }
+                catch (Exception e)
+                {
+                    tx.Rollback();
+                    throw;
+                }
             }
-            catch
-            {
-                return false;
-            }
+
         }
 
         /// <summary>

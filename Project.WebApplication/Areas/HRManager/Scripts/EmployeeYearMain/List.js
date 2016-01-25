@@ -31,7 +31,7 @@ var pro = pro || {};
          { field: 'LeftCount', title: '年休余数', width: 100 },
          //{ field: 'Remark', title: '备注', width: 100 },
          { field: 'CreatorUserName', title: '创建人', width: 100 },
-         { field: 'CreateTime', title: '创建时间', width: 100 },
+         { field: 'CreationTime', title: '创建时间', width: 100 },
          { field: 'LastModificationTime', title: '最后修改时间', width: 100 },
                 ]],
                 pagination: true,

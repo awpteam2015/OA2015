@@ -15,6 +15,12 @@
             $("#btnClose").click(function () {
                 parent.pro.EmployeeYearDetail.ListPage.closeTab("");
             });
+            $("#BeginDate").blur(function () {
+                pro.EmployeeYearDetail.HdPage.Fn.setUseCount();
+            });
+            $("#EndDate").blur(function () {
+                pro.EmployeeYearDetail.HdPage.Fn.setUseCount();
+            });
             $('#DepartmentCode').combotree({
                 required: true,
                 editable: false,
@@ -50,7 +56,7 @@
             if (pro.commonKit.getUrlParam("PkId") != "") {
                 postData.RequestEntity.PkId = pro.commonKit.getUrlParam("PkId");
             }
-
+            postData.RequestEntity.UseCount=$('#UseCount').numberbox('getValue');
             this.submitExtend.addRule();
             if (!$("#form1").valid() && !this.submitExtend.logicValidate()) {
                 $.alertExtend.error();
@@ -79,7 +85,7 @@
             addRule: function () {
                 $("#form1").validate({
                     rules: {
-                        PkId: { required: true },
+                        //PkId: { required: true },
                         DepartmentCode: { required: true },
                         EmployeeCode: { required: true },
                         BeginDate: { required: true },
@@ -87,11 +93,11 @@
                         UseCount: { required: true },
                         BeforeUseCount: { required: true },
                         LeftCount: { required: true },
-                        Remark: { required: true },
-                        CreatorUserCode: { required: true },
-                        CreatorUserName: { required: true },
-                        CreateTime: { required: true },
-                        LastModificationTime: { required: true },
+                        //Remark: { required: true },
+                        //CreatorUserCode: { required: true },
+                        ///CreatorUserName: { required: true },
+                        //CreateTime: { required: true },
+                        //LastModificationTime: { required: true },
                     },
                     messages: {
                         PkId: "必填!",
@@ -118,7 +124,19 @@
                 return true;
             }
         },
+        Fn: {
+            setUseCount: function () {
+                var beginDate = new Date($('#BeginDate').val());  //开始时间
+                var endDate = new Date($('#EndDate').val());    //结束时间   
 
+                if (!(endDate.getDay() && endDate.getDay()))
+                    return;
+                var difDate = endDate.getTime() - beginDate.getTime()  //时间差的毫秒数
+
+                //计算出相差天数
+                $('#UseCount').numberbox('setValue', Math.floor(difDate / (24 * 3600 * 1000)) + 1);
+            }
+        },
         addTab: function (subtitle, url) {
 
         }

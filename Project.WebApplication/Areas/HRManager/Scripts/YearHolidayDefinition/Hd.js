@@ -64,14 +64,14 @@
             addRule: function () {
                 $("#form1").validate({
                     rules: {
-          PkId: { required: true  },
+          //PkId: { required: true  },
           YearsNum: { required: true  },
           BeginMonth: { required: true  },
           EndMonth: { required: true  },
-          CreatorUserCode: { required: true  },
-          CreatorUserName: { required: true  },
-          CreateTime: { required: true  },
-          LastModificationTime: { required: true  },
+          //CreatorUserCode: { required: true  },
+          //CreatorUserName: { required: true  },
+          //CreateTime: { required: true  },
+          //LastModificationTime: { required: true  },
                     },
                     messages: {
           PkId:  "必填!",

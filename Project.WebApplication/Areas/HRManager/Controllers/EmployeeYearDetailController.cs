@@ -66,15 +66,13 @@ namespace Project.WebApplication.Areas.HRManager.Controllers
 
 
         [HttpPost]
-        public AbpJsonResult Add(AjaxRequest<EmployeeYearDetailEntity> postData)
+        public AbpJsonResult<string> Add(AjaxRequest<EmployeeYearDetailEntity> postData)
         {
+            postData.RequestEntity.UseType = 1;//使用登记
+            postData.RequestEntity.CreatorUserName = LoginUserInfo.UserName;
             var addResult = EmployeeYearDetailService.GetInstance().Add(postData.RequestEntity);
-            var result = new AjaxResponse<EmployeeYearDetailEntity>()
-            {
-                success = true,
-                result = postData.RequestEntity
-            };
-            return new AbpJsonResult(result, new NHibernateContractResolver());
+
+            return new AbpJsonResult<string>(addResult);
         }
 
 
@@ -91,14 +89,14 @@ namespace Project.WebApplication.Areas.HRManager.Controllers
         }
 
         [HttpPost]
-        public AbpJsonResult Delete(int pkid)
+        public AbpJsonResult<string> Delete(int pkid)
         {
             var deleteResult = EmployeeYearDetailService.GetInstance().DeleteByPkId(pkid);
-            var result = new AjaxResponse<EmployeeYearDetailEntity>()
-            {
-                success = deleteResult
-            };
-            return new AbpJsonResult(result, new NHibernateContractResolver(new string[] { "result" }));
+            //var result = new AjaxResponse<EmployeeYearDetailEntity>()
+            //{
+            //    success = deleteResult
+            //};
+            return new AbpJsonResult<string>(deleteResult);
         }
     }
 }
