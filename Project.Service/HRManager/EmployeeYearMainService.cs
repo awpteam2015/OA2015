@@ -49,8 +49,6 @@ namespace Project.Service.HRManager
             where.EmployeeCode = entity.EmployeeCode;
             var detailEntity = new EmployeeYearDetailEntity()
             {
-                CreateTime = entity.CreateTime,
-                CreatorUserCode = entity.CreatorUserCode,
                 CreatorUserName = entity.CreatorUserName,
                 UseType = 1,
                 DepartmentCode = entity.DepartmentCode,
@@ -139,16 +137,16 @@ namespace Project.Service.HRManager
         /// 更新
         /// </summary>
         /// <param name="entity"></param>
-        public bool Update(EmployeeYearMainEntity entity)
+        public Tuple<bool, string> Update(EmployeeYearMainEntity entity)
         {
             try
             {
                 _employeeYearMainRepository.Update(entity);
-                return true;
+                return new Tuple<bool, string>(true, "");
             }
             catch
             {
-                return false;
+                throw;
             }
         }
 

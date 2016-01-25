@@ -9,10 +9,11 @@
 using System;
 using Project.Infrastructure.FrameworkCore.Domain.Entities;
 using Project.Infrastructure.FrameworkCore.Domain.Entities.Component;
+using Project.Infrastructure.FrameworkCore.Domain.Entities.Auditing.Interface;
 
 namespace Project.Model.HRManager
 {
-    public class EmployeeYearDetailEntity : Entity, ISoftDelete, IHasRemark
+    public class EmployeeYearDetailEntity : Entity, ISoftDelete, IHasRemark, IAudited
     {
         #region 属性
         /// <summary>
@@ -66,11 +67,16 @@ namespace Project.Model.HRManager
         /// <summary>
         /// 
         /// </summary>
-        public virtual System.DateTime? CreateTime { get; set; }
+        public virtual System.DateTime? CreationTime { get; set; }
         /// <summary>
         /// 
         /// </summary>
         public virtual System.DateTime? LastModificationTime { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public virtual string LastModifierUserCode { get; set; }
         public virtual bool IsDeleted { get; set; }
         #endregion
 

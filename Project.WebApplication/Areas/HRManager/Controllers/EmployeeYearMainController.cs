@@ -10,6 +10,7 @@ using Project.Infrastructure.FrameworkCore.WebMvc.Models;
 using Project.Model.HRManager;
 using Project.Service.HRManager;
 using Project.WebApplication.Controllers;
+using AutoMapper;
 
 namespace Project.WebApplication.Areas.HRManager.Controllers
 {
@@ -58,33 +59,32 @@ namespace Project.WebApplication.Areas.HRManager.Controllers
 
 
         [HttpPost]
-        public AbpJsonResult Add(AjaxRequest<EmployeeYearMainEntity> postData)
+        public AbpJsonResult<string> Add(AjaxRequest<EmployeeYearMainEntity> postData)
         {
-            postData.RequestEntity.CreateTime = DateTime.Now;
-            postData.RequestEntity.CreatorUserCode = LoginUserInfo.UserCode;
             postData.RequestEntity.CreatorUserName = LoginUserInfo.UserName;
             var addResult = EmployeeYearMainService.GetInstance().Add(postData.RequestEntity);
-            var result = new AjaxResponse<EmployeeYearMainEntity>()
-            {
-                success = addResult.Item1,
-                result = postData.RequestEntity,
-                error = new ErrorInfo() { message = addResult.Item2 }
-            };
-            return new AbpJsonResult(result, new NHibernateContractResolver());
+          
+            return new AbpJsonResult<string>(addResult);
         }
 
 
         [HttpPost]
-        public AbpJsonResult Edit(AjaxRequest<EmployeeYearMainEntity> postData)
+        public AbpJsonResult<string> Edit(AjaxRequest<EmployeeYearMainEntity> postData)
         {
-            postData.RequestEntity.LastModificationTime = DateTime.Now;
-            var updateResult = EmployeeYearMainService.GetInstance().Update(postData.RequestEntity);
-            var result = new AjaxResponse<EmployeeYearMainEntity>()
-            {
-                success = updateResult,
-                result = postData.RequestEntity
-            };
-            return new AbpJsonResult(result, new NHibernateContractResolver(new string[] { "result" }));
+            postData.RequestEntity.LastModificationTime = DateTime.Now;           
+
+            var newInfo = postData.RequestEntity;
+            var orgInfo = EmployeeYearMainService.GetInstance().GetModelByPk(postData.RequestEntity.PkId);
+            var mergInfo = Mapper.Map(newInfo, orgInfo);
+            var updateResult = EmployeeYearMainService.GetInstance().Update(mergInfo);
+            return new AbpJsonResult<string>(updateResult);
+            //var updateResult = EmployeeYearMainService.GetInstance().Update(postData.RequestEntity);
+            //var result = new AjaxResponse<EmployeeYearMainEntity>()
+            //{
+            //    success = updateResult,
+            //    result = postData.RequestEntity
+            //};
+            //return new AbpJsonResult(result, new NHibernateContractResolver(new string[] { "result" }));
         }
 
         [HttpPost]

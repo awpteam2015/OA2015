@@ -26,8 +26,9 @@ namespace Project.Map.HRManager
             Map(p => p.Remark);
             Map(p => p.CreatorUserCode);
             Map(p => p.CreatorUserName);
-            Map(p => p.CreateTime);
+            Map(p => p.CreationTime);
             Map(p => p.LastModificationTime);
+            Map(p => p.LastModifierUserCode);
             Map(p => p.IsDeleted);
 
             References(p => p.DepartmentEntity)
