@@ -10,6 +10,7 @@ using System;
 using Project.Infrastructure.FrameworkCore.Domain.Entities;
 using Project.Infrastructure.FrameworkCore.Domain.Entities.Component;
 using Project.Infrastructure.FrameworkCore.Domain.Entities.Auditing.Interface;
+using Project.Model.PermissionManager;
 
 namespace Project.Model.HRManager
 {
@@ -80,8 +81,12 @@ namespace Project.Model.HRManager
         public virtual bool IsDeleted { get; set; }
         #endregion
 
-
         #region 新增属性
+
+        /// <summary>
+        /// 部门
+        /// </summary>
+        public virtual DepartmentEntity DepartmentEntity { get; set; }
 
         #endregion
     }

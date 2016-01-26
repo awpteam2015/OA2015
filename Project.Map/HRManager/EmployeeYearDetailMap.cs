@@ -34,6 +34,12 @@ namespace Project.Map.HRManager
             Map(p => p.LastModificationTime);
             Map(p => p.LastModifierUserCode);
             Map(p => p.IsDeleted);
+
+            References(p => p.DepartmentEntity)
+                .Not.Insert()
+                .Not.Update()
+                .PropertyRef("DepartmentCode")
+                .Column("DepartmentCode");
         }
     }
 }
