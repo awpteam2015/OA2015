@@ -32,7 +32,6 @@
         submit: function (command) {
             var postData = {};
             postData.RequestEntity = pro.submitKit.getHeadJson();
-            alert( $("#DepartmentCode").combotree("getText"));
             postData.RequestEntity.DepartmentName = $("#DepartmentCode").combotree("getText");
 
             if (pro.commonKit.getUrlParam("PkId") != "") {
@@ -40,6 +39,7 @@
             }
 
             this.submitExtend.addRule();
+    
             if (!$("#form1").valid() && !this.submitExtend.logicValidate()) {
                 $.alertExtend.error();
                 return false;
@@ -89,6 +89,10 @@
                 });
             },
             logicValidate: function () {
+                if ($("#FileUrl").val() == "") {
+                    alert("请选择上传文件！");
+                    return false;
+                }
                 return true;
             }
         },

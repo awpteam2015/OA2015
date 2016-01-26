@@ -186,7 +186,15 @@ namespace Project.Infrastructure.FrameworkCore.Domain.Repositories
             if (entity is IHasRemark)
             {
                 var property = entity.GetType().GetProperty("Remark");
-                property.SetValue(entity, Base64Helper.DecodeBase64(property.GetValue(entity)));
+                try
+                {
+                    property.SetValue(entity, Base64Helper.DecodeBase64(property.GetValue(entity)));
+                }
+                catch (Exception)
+                {
+
+                    property.SetValue(entity, property.GetValue(entity));
+                }
             }
         }
 

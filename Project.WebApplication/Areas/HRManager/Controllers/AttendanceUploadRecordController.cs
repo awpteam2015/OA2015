@@ -4,13 +4,17 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
+using Aspose.Cells;
 using Project.Infrastructure.FrameworkCore.DataNhibernate.Helpers;
+using Project.Infrastructure.FrameworkCore.ToolKit;
 using Project.Infrastructure.FrameworkCore.ToolKit.JsonHandler;
 using Project.Infrastructure.FrameworkCore.ToolKit.LinqExpansion;
 using Project.Infrastructure.FrameworkCore.WebMvc.Controllers.Results;
 using Project.Infrastructure.FrameworkCore.WebMvc.Models;
 using Project.Model.HRManager;
 using Project.Service.HRManager;
+using Project.Service.PermissionManager;
+using Project.Service.PermissionManager.Validate;
 using Project.WebApplication.Controllers;
 
 namespace Project.WebApplication.Areas.HRManager.Controllers
@@ -28,7 +32,7 @@ namespace Project.WebApplication.Areas.HRManager.Controllers
             return View();
         }
 
- 
+
         public ActionResult List()
         {
             return View();
@@ -39,15 +43,15 @@ namespace Project.WebApplication.Areas.HRManager.Controllers
             var pIndex = this.Request["page"].ConvertTo<int>();
             var pSize = this.Request["rows"].ConvertTo<int>();
             var where = new AttendanceUploadRecordEntity();
-			//where.PkId = RequestHelper.GetFormString("PkId");
-			//where.DepartmentCode = RequestHelper.GetFormString("DepartmentCode");
-			//where.Date = RequestHelper.GetFormString("Date");
-			//where.Remark = RequestHelper.GetFormString("Remark");
-			//where.CreatorUserCode = RequestHelper.GetFormString("CreatorUserCode");
-			//where.CreatorUserName = RequestHelper.GetFormString("CreatorUserName");
-			//where.CreateTime = RequestHelper.GetFormString("CreateTime");
-			//where.FileUrl = RequestHelper.GetFormString("FileUrl");
-			//where.IsDelete = RequestHelper.GetFormString("IsDelete");
+            //where.PkId = RequestHelper.GetFormString("PkId");
+            where.DepartmentCode = RequestHelper.GetFormString("DepartmentCode");
+            where.Date = RequestHelper.GetDateTime("Date");
+            //where.Remark = RequestHelper.GetFormString("Remark");
+            //where.CreatorUserCode = RequestHelper.GetFormString("CreatorUserCode");
+            //where.CreatorUserName = RequestHelper.GetFormString("CreatorUserName");
+            //where.CreateTime = RequestHelper.GetFormString("CreateTime");
+            //where.FileUrl = RequestHelper.GetFormString("FileUrl");
+            //where.IsDelete = RequestHelper.GetFormString("IsDelete");
             var searchList = AttendanceUploadRecordService.GetInstance().Search(where, (pIndex - 1) * pSize, pSize);
 
             var dataGridEntity = new DataGridResponse()
@@ -62,7 +66,24 @@ namespace Project.WebApplication.Areas.HRManager.Controllers
         [HttpPost]
         public AbpJsonResult Add(AjaxRequest<AttendanceUploadRecordEntity> postData)
         {
+            var path = Server.MapPath(postData.RequestEntity.FileUrl + "/" + postData.RequestEntity.FileName);
+
+            Workbook workbook = new Workbook(path);
+            Worksheet sheet = workbook.Worksheets[0];
+            Cells cells = sheet.Cells;
+            for (int i = 1; i < cells.MaxDataRow + 1; i++)
+            {
+                var row = new AttendanceEntity();
+                row.DepartmentCode = cells[i, 0].StringValue.Trim();
+                row.DepartmentName = DepartmentService.GetInstance().GetModelByDepartmentCode(row.DepartmentCode).DepartmentName;
+                row.EmployeeCode = cells[i, 1].StringValue.Trim();
+                row.Date = cells[i, 2].DateTimeValue;
+                row.State = cells[i, 3].IntValue;
+                postData.RequestEntity.AttendanceList.Add(row);
+            }
+
             var addResult = AttendanceUploadRecordService.GetInstance().Add(postData.RequestEntity);
+
             var result = new AjaxResponse<AttendanceUploadRecordEntity>()
                {
                    success = true,
@@ -73,7 +94,7 @@ namespace Project.WebApplication.Areas.HRManager.Controllers
 
 
         [HttpPost]
-        public AbpJsonResult Edit( AjaxRequest<AttendanceUploadRecordEntity> postData)
+        public AbpJsonResult Edit(AjaxRequest<AttendanceUploadRecordEntity> postData)
         {
             var updateResult = AttendanceUploadRecordService.GetInstance().Update(postData.RequestEntity);
             var result = new AjaxResponse<AttendanceUploadRecordEntity>()

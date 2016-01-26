@@ -1,12 +1,16 @@
 ﻿
- /***************************************************************************
- *       功能：     HRAttendanceUploadRecord业务处理层
- *       作者：     李伟伟
- *       日期：     2016/1/23
- *       描述：     人事考勤上传记录
- * *************************************************************************/
+/***************************************************************************
+*       功能：     HRAttendanceUploadRecord业务处理层
+*       作者：     李伟伟
+*       日期：     2016/1/23
+*       描述：     人事考勤上传记录
+* *************************************************************************/
+
+using System;
 using System.Linq;
 using System.Collections.Generic;
+using NHibernate.Util;
+using Project.Infrastructure.FrameworkCore.DataNhibernate;
 using Project.Infrastructure.FrameworkCore.DataNhibernate.Helpers;
 using Project.Model.HRManager;
 using Project.Repository.HRManager;
@@ -15,51 +19,68 @@ namespace Project.Service.HRManager
 {
     public class AttendanceUploadRecordService
     {
-       
-       #region 构造函数
-        private readonly AttendanceUploadRecordRepository  _attendanceUploadRecordRepository;
-            private static readonly AttendanceUploadRecordService Instance = new AttendanceUploadRecordService();
+
+        #region 构造函数
+        private readonly AttendanceUploadRecordRepository _attendanceUploadRecordRepository;
+        private static readonly AttendanceUploadRecordService Instance = new AttendanceUploadRecordService();
 
         public AttendanceUploadRecordService()
         {
-           this._attendanceUploadRecordRepository =new AttendanceUploadRecordRepository();
+            this._attendanceUploadRecordRepository = new AttendanceUploadRecordRepository();
         }
-        
-         public static  AttendanceUploadRecordService GetInstance()
+
+        public static AttendanceUploadRecordService GetInstance()
         {
             return Instance;
         }
         #endregion
 
 
-        #region 基础方法 
-         /// <summary>
+        #region 基础方法
+        /// <summary>
         /// 新增
         /// </summary>
         /// <param name="entity"></param>
         /// <returns></returns>
-        public System.Int32 Add(AttendanceUploadRecordEntity entity)
+        public Tuple<bool, string> Add(AttendanceUploadRecordEntity entity)
         {
-            return _attendanceUploadRecordRepository.Save(entity);
+            using (var tx = NhTransactionHelper.BeginTransaction())
+            {
+                try
+                {
+                    var pkId = _attendanceUploadRecordRepository.Save(entity);
+                    entity.AttendanceList.ForEach(p =>
+                    {
+                        p.AttendanceUploadRecordId = pkId;
+                        AttendanceService.GetInstance().Add(p);
+                    });
+                    tx.Commit();
+                    return new Tuple<bool, string>(true, "");
+                }
+                catch (Exception e)
+                {
+                    throw e;
+                }
+            }
         }
-        
-        
-         /// <summary>
+
+
+        /// <summary>
         /// 删除
         /// </summary>
         /// <param name="pkId"></param>
         public bool DeleteByPkId(System.Int32 pkId)
         {
-         try
+            try
             {
-            var entity= _attendanceUploadRecordRepository.GetById(pkId);
-            _attendanceUploadRecordRepository.Delete(entity);
-             return true;
-        }
-        catch
-        {
-         return false;
-        }
+                var entity = _attendanceUploadRecordRepository.GetById(pkId);
+                _attendanceUploadRecordRepository.Delete(entity);
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
         }
 
         /// <summary>
@@ -68,15 +89,15 @@ namespace Project.Service.HRManager
         /// <param name="entity"></param>
         public bool Delete(AttendanceUploadRecordEntity entity)
         {
-         try
+            try
             {
-            _attendanceUploadRecordRepository.Delete(entity);
-             return true;
-        }
-        catch
-        {
-         return false;
-        }
+                _attendanceUploadRecordRepository.Delete(entity);
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
         }
 
         /// <summary>
@@ -85,15 +106,15 @@ namespace Project.Service.HRManager
         /// <param name="entity"></param>
         public bool Update(AttendanceUploadRecordEntity entity)
         {
-          try
+            try
             {
-            _attendanceUploadRecordRepository.Update(entity);
-         return true;
-        }
-        catch
-        {
-         return false;
-        }
+                _attendanceUploadRecordRepository.Update(entity);
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
         }
 
 
@@ -117,27 +138,27 @@ namespace Project.Service.HRManager
         /// <returns>获取当前页【人事考勤上传记录】和总【人事考勤上传记录】数</returns>
         public System.Tuple<IList<AttendanceUploadRecordEntity>, int> Search(AttendanceUploadRecordEntity where, int skipResults, int maxResults)
         {
-                var expr = PredicateBuilder.True<AttendanceUploadRecordEntity>();
-                  #region
-              // if (!string.IsNullOrEmpty(where.PkId))
-              //  expr = expr.And(p => p.PkId == where.PkId);
-              // if (!string.IsNullOrEmpty(where.DepartmentCode))
-              //  expr = expr.And(p => p.DepartmentCode == where.DepartmentCode);
-              // if (!string.IsNullOrEmpty(where.Date))
-              //  expr = expr.And(p => p.Date == where.Date);
-              // if (!string.IsNullOrEmpty(where.Remark))
-              //  expr = expr.And(p => p.Remark == where.Remark);
-              // if (!string.IsNullOrEmpty(where.CreatorUserCode))
-              //  expr = expr.And(p => p.CreatorUserCode == where.CreatorUserCode);
-              // if (!string.IsNullOrEmpty(where.CreatorUserName))
-              //  expr = expr.And(p => p.CreatorUserName == where.CreatorUserName);
-              // if (!string.IsNullOrEmpty(where.CreateTime))
-              //  expr = expr.And(p => p.CreateTime == where.CreateTime);
-              // if (!string.IsNullOrEmpty(where.FileUrl))
-              //  expr = expr.And(p => p.FileUrl == where.FileUrl);
-              // if (!string.IsNullOrEmpty(where.IsDelete))
-              //  expr = expr.And(p => p.IsDelete == where.IsDelete);
- #endregion
+            var expr = PredicateBuilder.True<AttendanceUploadRecordEntity>();
+            #region
+            // if (!string.IsNullOrEmpty(where.PkId))
+            //  expr = expr.And(p => p.PkId == where.PkId);
+            if (!string.IsNullOrEmpty(where.DepartmentCode))
+                expr = expr.And(p => p.DepartmentCode == where.DepartmentCode);
+            if (where.Date != null)
+                expr = expr.And(p => p.Date == where.Date);
+            // if (!string.IsNullOrEmpty(where.Remark))
+            //  expr = expr.And(p => p.Remark == where.Remark);
+            // if (!string.IsNullOrEmpty(where.CreatorUserCode))
+            //  expr = expr.And(p => p.CreatorUserCode == where.CreatorUserCode);
+            // if (!string.IsNullOrEmpty(where.CreatorUserName))
+            //  expr = expr.And(p => p.CreatorUserName == where.CreatorUserName);
+            // if (!string.IsNullOrEmpty(where.CreateTime))
+            //  expr = expr.And(p => p.CreateTime == where.CreateTime);
+            // if (!string.IsNullOrEmpty(where.FileUrl))
+            //  expr = expr.And(p => p.FileUrl == where.FileUrl);
+            // if (!string.IsNullOrEmpty(where.IsDelete))
+            //  expr = expr.And(p => p.IsDelete == where.IsDelete);
+            #endregion
             var list = _attendanceUploadRecordRepository.Query().Where(expr).OrderBy(p => p.PkId).Skip(skipResults).Take(maxResults).ToList();
             var count = _attendanceUploadRecordRepository.Query().Where(expr).Count();
             return new System.Tuple<IList<AttendanceUploadRecordEntity>, int>(list, count);
@@ -150,27 +171,27 @@ namespace Project.Service.HRManager
         /// <returns>返回列表</returns>
         public IList<AttendanceUploadRecordEntity> GetList(AttendanceUploadRecordEntity where)
         {
-               var expr = PredicateBuilder.True<AttendanceUploadRecordEntity>();
-             #region
-              // if (!string.IsNullOrEmpty(where.PkId))
-              //  expr = expr.And(p => p.PkId == where.PkId);
-              // if (!string.IsNullOrEmpty(where.DepartmentCode))
-              //  expr = expr.And(p => p.DepartmentCode == where.DepartmentCode);
-              // if (!string.IsNullOrEmpty(where.Date))
-              //  expr = expr.And(p => p.Date == where.Date);
-              // if (!string.IsNullOrEmpty(where.Remark))
-              //  expr = expr.And(p => p.Remark == where.Remark);
-              // if (!string.IsNullOrEmpty(where.CreatorUserCode))
-              //  expr = expr.And(p => p.CreatorUserCode == where.CreatorUserCode);
-              // if (!string.IsNullOrEmpty(where.CreatorUserName))
-              //  expr = expr.And(p => p.CreatorUserName == where.CreatorUserName);
-              // if (!string.IsNullOrEmpty(where.CreateTime))
-              //  expr = expr.And(p => p.CreateTime == where.CreateTime);
-              // if (!string.IsNullOrEmpty(where.FileUrl))
-              //  expr = expr.And(p => p.FileUrl == where.FileUrl);
-              // if (!string.IsNullOrEmpty(where.IsDelete))
-              //  expr = expr.And(p => p.IsDelete == where.IsDelete);
- #endregion
+            var expr = PredicateBuilder.True<AttendanceUploadRecordEntity>();
+            #region
+            // if (!string.IsNullOrEmpty(where.PkId))
+            //  expr = expr.And(p => p.PkId == where.PkId);
+            // if (!string.IsNullOrEmpty(where.DepartmentCode))
+            //  expr = expr.And(p => p.DepartmentCode == where.DepartmentCode);
+            // if (!string.IsNullOrEmpty(where.Date))
+            //  expr = expr.And(p => p.Date == where.Date);
+            // if (!string.IsNullOrEmpty(where.Remark))
+            //  expr = expr.And(p => p.Remark == where.Remark);
+            // if (!string.IsNullOrEmpty(where.CreatorUserCode))
+            //  expr = expr.And(p => p.CreatorUserCode == where.CreatorUserCode);
+            // if (!string.IsNullOrEmpty(where.CreatorUserName))
+            //  expr = expr.And(p => p.CreatorUserName == where.CreatorUserName);
+            // if (!string.IsNullOrEmpty(where.CreateTime))
+            //  expr = expr.And(p => p.CreateTime == where.CreateTime);
+            // if (!string.IsNullOrEmpty(where.FileUrl))
+            //  expr = expr.And(p => p.FileUrl == where.FileUrl);
+            // if (!string.IsNullOrEmpty(where.IsDelete))
+            //  expr = expr.And(p => p.IsDelete == where.IsDelete);
+            #endregion
             var list = _attendanceUploadRecordRepository.Query().Where(expr).OrderBy(p => p.PkId).ToList();
             return list;
         }
@@ -178,11 +199,11 @@ namespace Project.Service.HRManager
 
 
         #region 新增方法
-        
+
         #endregion
     }
 }
 
-    
- 
+
+
 

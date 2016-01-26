@@ -53,6 +53,23 @@ var pro = pro || {};
                 tabObj.add("/HRManager/EmployeeYearMain/Hd?PkId=" + PkId, "编辑" + PkId);
             });
 
+            $('#DepartmentCode').combotree({
+                required: true,
+                editable: false,
+                valueField: 'DepartmentCode',
+                textField: 'DepartmentName',
+                url: '/PermissionManager/Department/GetList_Combotree'
+            }).combotree({
+                onSelect: function (node) {
+                    $('#EmployeeCode').combobox({
+                        required: true,
+                        editable: false,
+                        valueField: 'EmployeeCode',
+                        textField: 'EmployeeName',
+                        url: '/HRManager/EmployeeInfo/GetAllList?DepartmentCode=' + node.DepartmentCode
+                    });
+                }
+            });
 
             $("#btnSearch").click(function () {
                 gridObj.search();

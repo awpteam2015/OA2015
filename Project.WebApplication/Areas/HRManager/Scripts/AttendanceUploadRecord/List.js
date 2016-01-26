@@ -22,7 +22,7 @@ var pro = pro || {};
                 singleSelect: true,
                 columns: [[
          { field: 'DepartmentName', title: '部门', width: 100 },
-         { field: 'Date', title: '考勤月份', width: 100 },
+         { field: 'Att_Date', title: '考勤月份', width: 100 },
          //{ field: 'CreatorUserCode', title: '创建人编码', width: 100 },
          //{ field: 'CreationTime', title: '创建时间', width: 100 },
          { field: 'FileName', title: '文件', width: 500 }

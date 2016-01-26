@@ -61,6 +61,23 @@ var pro = pro || {};
                 tabObj.add("/HRManager/EmployeeYearDetail/Hd", "新增");
             });
 
+            $('#DepartmentCode').combotree({
+                required: true,
+                editable: false,
+                valueField: 'DepartmentCode',
+                textField: 'DepartmentName',
+                url: '/PermissionManager/Department/GetList_Combotree'
+            }).combotree({
+                onSelect: function (node) {
+                    $('#EmployeeCode').combobox({
+                        required: true,
+                        editable: false,
+                        valueField: 'EmployeeCode',
+                        textField: 'EmployeeName',
+                        url: '/HRManager/EmployeeInfo/GetAllList?DepartmentCode=' + node.DepartmentCode
+                    });
+                }
+            });
             $("#btnEdit").click(function () {
                 if (!gridObj.isSelected()) {
                     $.alertExtend.infoOp();
