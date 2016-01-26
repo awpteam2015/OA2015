@@ -34,6 +34,11 @@ namespace Project.Model.HRManager
         /// 
         /// </summary>
         public virtual System.String KeyValue{get; set;}
+
+        /// <summary>
+        /// 说明
+        /// </summary>
+        public virtual System.String Instruction { get; set; }
         #endregion
 
 
