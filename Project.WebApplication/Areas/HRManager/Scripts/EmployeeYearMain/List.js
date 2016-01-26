@@ -57,7 +57,7 @@ var pro = pro || {};
                 required: true,
                 editable: false,
                 multiple: true,//支持多选
-                checkbox: true,
+                //checkbox: true,
                 cascadeCheck: false,
                 //lines: true,
                 valueField: 'DepartmentCode',

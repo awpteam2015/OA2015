@@ -255,7 +255,7 @@ namespace Project.Service.HRManager
         /// </summary>
         /// <param name="entity">条件实体</param>
         /// <returns>返回列表</returns>
-        public IList<EmployeeInfoEntity> GetList(EmployeeInfoEntity where)
+        public IList<EmployeeInfoEntity> GetList(EmployeeInfoEntity where, bool isShowTop = false)
         {
             var expr = PredicateBuilder.True<EmployeeInfoEntity>();
             #region
@@ -309,6 +309,11 @@ namespace Project.Service.HRManager
             //  expr = expr.And(p => p.LastModificationTime == where.LastModificationTime);
             #endregion
             var list = _employeeInfoRepository.Query().Where(expr).OrderBy(p => p.PkId).ToList();
+
+            if (isShowTop)
+            {
+                list.Insert(0, new EmployeeInfoEntity() { EmployeeCode = " ", EmployeeName = "全部" });
+            }
             return list;
         }
         #endregion

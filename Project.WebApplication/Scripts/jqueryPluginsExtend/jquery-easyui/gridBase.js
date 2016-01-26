@@ -55,9 +55,11 @@ var pro = pro || {};
                         else
                             strJson += "\"" + $(this).attr("comboname") + "\":\"" + $.trim($(this).combotree("getValue")) + "\",";
                     }
-                    else if ($(this).attr("class").indexOf("combobox-f ") > 0) {
+                    else if ($(this).attr("class").indexOf("combobox-f ") > 0)
                         strJson += "\"" + $(this).attr("comboname") + "\":\"" + $.trim($(this).combotree("getValue")) + "\",";
-                    }
+
+                    else
+                        strJson += "\"" + $(this).attr("name") + "\":\"" + $.trim($(this).val()) + "\",";
 
                 }
                 else
@@ -65,7 +67,15 @@ var pro = pro || {};
             });
 
             $("#divSearch select").each(function () {
-                strJson += "\"" + $(this).attr("name") + "\":\"" + $.trim($(this).val()) + "\",";
+                if ($(this).attr("class")) {
+                    if ($(this).attr("class").indexOf("combobox-f ") > 0)
+                        strJson += "\"" + $(this).attr("comboname") + "\":\"" + $.trim($(this).combotree("getValue")) + "\",";
+                    else
+                        strJson += "\"" + $(this).attr("name") + "\":\"" + $.trim($(this).val()) + "\",";
+
+                }
+                else
+                    strJson += "\"" + $(this).attr("name") + "\":\"" + $.trim($(this).val()) + "\",";
             });
             if (strJson.length > 1) strJson = strJson.substr(0, strJson.length - 1);
             strJson += "}";
