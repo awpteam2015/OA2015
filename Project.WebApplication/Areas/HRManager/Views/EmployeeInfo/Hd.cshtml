@@ -64,7 +64,7 @@
                     生日<span style="color: Red">*</span>:
                 </td>
                 <td>
-                    <input class="easyui-datebox" id="Birthday" name="Birthday"></input>
+                    <input class="easyui-datebox" id="Birthday" name="Birthday"/>
                 </td>
                 <td>
                     技术职称<span style="color: Red">*</span>:
@@ -106,17 +106,16 @@
 
                 </td>
             </tr>
-
             <tr>
                 <td>
-                    手机号<span style="color: Red">*</span>:
+                    手机号:
                 </td>
                 <td>
                     <input id="MobileNO" name="MobileNO" type="text" />
                 </td>
 
                 <td>
-                    图片地址<span style="color: Red">*</span>:
+                    图片地址:
                 </td>
                 <td>
                     <input id="ImageUrl" name="ImageUrl" type="text" />
@@ -129,13 +128,17 @@
                     <input id="Sort" name="Sort" type="text" />
                 </td>
             </tr>
-
             <tr>
-
+                <td>
+                    工龄<span style="color: Red">*</span>:
+                </td>
+                <td>
+                    <input id="WorkingYears" name="WorkingYears" type="text" class="easyui-numberbox"/>
+                </td>
                 <td>
                     家庭地址<span style="color: Red">*</span>:
                 </td>
-                <td colspan="5">
+                <td colspan="3">
                     <input id="HomeAddress" name="HomeAddress" type="text" style="width:350px" />
                 </td>
             </tr>
@@ -147,10 +150,8 @@
                     <textarea id="Remark" name="Remark" style="width:350px"></textarea>
                 </td>
             </tr>
-
         </table>
         <div id="tabs" class="easyui-tabs" data-options="fit:true,border:false">
-
             <div title="工作经历" style="padding:1px;height: 500px">
                 <table id="datagridwork" toolbar="#tbwork" fit="true"></table>
                 <div id="tbwork" style="padding: 5px; height: auto">

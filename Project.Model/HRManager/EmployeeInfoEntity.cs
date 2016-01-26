@@ -81,6 +81,10 @@ namespace Project.Model.HRManager
         /// </summary>
         public virtual System.String WorkState { get; set; }
         /// <summary>
+        /// 工龄
+        /// </summary>
+        public virtual System.Int32? WorkingYears { get; set; }
+        /// <summary>
         /// 员工类型
         /// </summary>
         public virtual System.String EmployeeType { get; set; }
