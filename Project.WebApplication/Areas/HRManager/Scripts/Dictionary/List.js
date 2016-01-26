@@ -24,7 +24,7 @@ var pro = pro || {};
                 singleSelect: true,
                 columns: [[
          { field: 'PkId', title: '', hidden: true, width: 100 },
-         { field: 'KeyCode', title: '字典Code', width: 100 },
+         { field: 'KeyCode', title: '字典Code', width: 200 },
          { field: 'ParentKeyCode', title: '父级Code', width: 100 },
          { field: 'KeyName', title: '名称', width: 180 },
          { field: 'KeyValue', title: '值', width: 100 },

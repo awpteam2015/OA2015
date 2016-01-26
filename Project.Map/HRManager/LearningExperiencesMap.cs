@@ -25,12 +25,14 @@ namespace Project.Map.HRManager
             Map(p => p.School);
             Map(p => p.Degree);
             Map(p => p.Education);
+            Map(p => p.SchoolYear);
+            Map(p => p.CertNumber);
             Map(p => p.BeginDate);
             Map(p => p.EndDate);
             Map(p => p.Remark);
             Map(p => p.CreatorUserCode);
             Map(p => p.CreatorUserName);
-            Map(p => p.CreateTime);
+            Map(p => p.CreationTime);
             Map(p => p.LastModificationTime);
         }
     }
