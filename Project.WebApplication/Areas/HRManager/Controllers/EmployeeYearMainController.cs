@@ -11,6 +11,7 @@ using Project.Model.HRManager;
 using Project.Service.HRManager;
 using Project.WebApplication.Controllers;
 using AutoMapper;
+using Project.Infrastructure.FrameworkCore.ToolKit;
 
 namespace Project.WebApplication.Areas.HRManager.Controllers
 {
@@ -39,8 +40,8 @@ namespace Project.WebApplication.Areas.HRManager.Controllers
             var pSize = this.Request["rows"].ConvertTo<int>();
             var where = new EmployeeYearMainEntity();
             //where.PkId = RequestHelper.GetFormString("PkId");
-            //where.DepartmentCode = RequestHelper.GetFormString("DepartmentCode");
-            //where.EmployeeCode = RequestHelper.GetFormString("EmployeeCode");
+            where.DepartmentCode = RequestHelper.GetFormString("DepartmentCode");
+            where.EmployeeCode = RequestHelper.GetFormString("EmployeeCode");
             //where.LeftCount = RequestHelper.GetFormString("LeftCount");
             //where.Remark = RequestHelper.GetFormString("Remark");
             //where.CreatorUserCode = RequestHelper.GetFormString("CreatorUserCode");

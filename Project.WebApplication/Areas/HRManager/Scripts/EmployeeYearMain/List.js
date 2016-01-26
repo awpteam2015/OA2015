@@ -56,17 +56,21 @@ var pro = pro || {};
             $('#DepartmentCode').combotree({
                 required: true,
                 editable: false,
+                multiple: true,//支持多选
+                checkbox: true,
+                cascadeCheck: false,
+                //lines: true,
                 valueField: 'DepartmentCode',
                 textField: 'DepartmentName',
                 url: '/PermissionManager/Department/GetList_Combotree'
             }).combotree({
-                onSelect: function (node) {
+                onChange: function (newValue, oldValue) {
                     $('#EmployeeCode').combobox({
                         required: true,
                         editable: false,
                         valueField: 'EmployeeCode',
                         textField: 'EmployeeName',
-                        url: '/HRManager/EmployeeInfo/GetAllList?DepartmentCode=' + node.DepartmentCode
+                        url: '/HRManager/EmployeeInfo/GetAllList?DepartmentCode=' + $('#DepartmentCode').combotree("getValues")
                     });
                 }
             });
