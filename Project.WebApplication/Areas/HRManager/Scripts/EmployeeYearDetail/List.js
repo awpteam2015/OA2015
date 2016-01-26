@@ -22,8 +22,9 @@ var pro = pro || {};
                 singleSelect: true,
                 columns: [[
          { field: 'PkId', title: '', hidden: true, width: 100 },
-         { field: 'DepartmentCode', title: '部门编号', width: 100 },
+         { field: 'DepartmentName', title: '部门', width: 100 },
          { field: 'EmployeeCode', title: '员工编号', width: 100 },
+         { field: 'EmployeeName', title: '员工', width: 100 },
          {
              field: 'UseType', title: '类型', width: 100,
              formatter: function (val) {
