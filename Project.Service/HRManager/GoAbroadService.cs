@@ -123,8 +123,10 @@ namespace Project.Service.HRManager
             //  expr = expr.And(p => p.PkId == where.PkId);
             // if (!string.IsNullOrEmpty(where.EmployeeCode))
             //  expr = expr.And(p => p.EmployeeCode == where.EmployeeCode);
-            if (!string.IsNullOrEmpty(where.DepartmentCode) && where.DepartmentCode != "0")
-                expr = expr.And(p => p.DepartmentCode == where.DepartmentCode);
+            if (!string.IsNullOrEmpty(where.DepartmentCode))
+            {
+                expr = expr.And(p => where.DepartmentCode.Split(',').Contains(p.DepartmentCode));
+            }
             // if (!string.IsNullOrEmpty(where.Country))
             //  expr = expr.And(p => p.Country == where.Country);
             // if (!string.IsNullOrEmpty(where.BeginDate))

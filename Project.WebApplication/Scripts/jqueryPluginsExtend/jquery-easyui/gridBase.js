@@ -47,7 +47,6 @@ var pro = pro || {};
             ///<summary>获取json格式搜索参数</summary>
             var strJson = "{";
             $("#divSearch input").each(function () {
-
                 if ($(this).attr("class")) {
                     if ($(this).attr("class").indexOf("combotree-f") > 0) {
                         if ($(this).combo("options").multiple)
@@ -58,8 +57,8 @@ var pro = pro || {};
                     else if ($(this).attr("class").indexOf("combobox-f ") > 0)
                         strJson += "\"" + $(this).attr("comboname") + "\":\"" + $.trim($(this).combotree("getValue")) + "\",";
 
-                    //else
-                    //    strJson += "\"" + $(this).attr("name") + "\":\"" + $.trim($(this).val()) + "\",";
+                    else
+                        strJson += "\"" + $(this).attr("id") + "\":\"" + $.trim($(this).val()) + "\",";
 
                 }
                 else
