@@ -58,8 +58,8 @@ var pro = pro || {};
                     else if ($(this).attr("class").indexOf("combobox-f ") > 0)
                         strJson += "\"" + $(this).attr("comboname") + "\":\"" + $.trim($(this).combotree("getValue")) + "\",";
 
-                    else
-                        strJson += "\"" + $(this).attr("name") + "\":\"" + $.trim($(this).val()) + "\",";
+                    //else
+                    //    strJson += "\"" + $(this).attr("name") + "\":\"" + $.trim($(this).val()) + "\",";
 
                 }
                 else
