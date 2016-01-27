@@ -25,9 +25,16 @@ namespace Project.Service.ReportManager
         }
         #endregion
 
-       public void GetList(AttendanceViewEntity where)
+       /// <summary>
+        /// 缺勤汇总
+       /// </summary>
+       /// <param name="where"></param>
+       /// <param name="skipResults"></param>
+       /// <param name="maxResults"></param>
+        public Tuple< IList<AttendanceViewEntity>,int> GerAttendanceReport1(AttendanceViewEntity where, int skipResults, int maxResults)
        {
-           _HrReportRepository.GerAttendanceView(where, 0, 10);
+        var list=   _HrReportRepository.GerAttendanceReport1(where, skipResults, maxResults);
+        return new System.Tuple<IList<AttendanceViewEntity>, int>(list, 0);
        }
 
 

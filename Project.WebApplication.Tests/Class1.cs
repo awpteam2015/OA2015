@@ -20,7 +20,7 @@ namespace Project.WebApplication.Tests
         [TestMethod]
         public void TestMethod1()
         {
-            HrReportService.GetInstance().GetList(new AttendanceViewEntity(){Attr_StartDate = DateTime.Now});
+            HrReportService.GetInstance().GerAttendanceReport1(new AttendanceViewEntity(){Attr_StartDate = DateTime.Now},0,10);
             //List<string> list1 = new List<string>() { "111", "222" };
 
             //List<string> list2 = new List<string>();
