@@ -8,5 +8,24 @@ namespace Project.Model.ReportManager
 {
   public  class AttendanceViewEntity
     {
+        public virtual System.String EmployeeCode { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public virtual System.String DepartmentCode { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public virtual System.String DepartmentName { get; set; }
+
+        public virtual System.Int32 WordkDays { get; set; }
+
+        public virtual System.Int32 NotWordkDays { get; set; }
+
+
+
+        public virtual DateTime? Attr_StartDate { get; set; }
+
+        public virtual DateTime? Attr_EndDate { get; set; }
     }
 }

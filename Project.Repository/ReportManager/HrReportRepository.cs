@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using NHibernate.Transform;
 using Project.Infrastructure.FrameworkCore.DataNhibernate;
 using Project.Model.ReportManager;
 
@@ -10,24 +11,47 @@ namespace Project.Repository.ReportManager
 {
     public class HrReportRepository
     {
-        /// <summary>
-        /// 角色能查看的页面
-        /// </summary>
-        /// <param name="logindId">用户Id</param>
-        /// <returns></returns>
-        public IList<AttendanceViewEntity> GetRoleBrowseFunction(string logindId)
-        {
-            var list = SessionFactoryManager.GetCurrentSession().CreateSQLQuery(
-                @"select distinct f.*
-      from pb_module_function f,pb_module m,pb_functionright fr,pb_rolepopedom rp,pb_user_role ur
-      where f.moduleid=m.moduleid
-      and f.functionid=fr.functionid
-      and fr.functionrightid=rp.functionrightid
-      and rp.roleid=ur.roleid
-      and fr.righttag='浏览'
-      and ur.loginid='" + logindId + "' and rp.popedomvalue=1 order by f.orderid").AddEntity(typeof(AttendanceViewEntity));
 
-            return list.List<AttendanceViewEntity>();
+        public IList<AttendanceViewEntity> GerAttendanceView(AttendanceViewEntity where, int skipResults, int maxResults)
+        {
+            var whereStr = " ";
+            if (!string.IsNullOrWhiteSpace(where.DepartmentCode))
+            {
+                whereStr += " and a.DepartmentCode=" + where.DepartmentCode;
+            }
+
+            if (!string.IsNullOrWhiteSpace(where.EmployeeCode))
+            {
+                whereStr += " and a.EmployeeCode=" + where.EmployeeCode;
+            }
+
+            if (where.Attr_StartDate != null)
+            {
+                whereStr += " and a.Date>='" + where.Attr_StartDate + "'";
+            }
+
+            if (where.Attr_EndDate != null)
+            {
+                whereStr += " and a.Date<='" + where.Attr_EndDate + "'";
+            }
+
+
+            string sqlStr = @"select a.*,b.WordkDays,c.NotWordkDays from
+(select distinct a.EmployeeCode,a.DepartmentCode,a.DepartmentName from  HR_Attendance a) as a
+left join 
+(select a.EmployeeCode,COUNT(*) as WordkDays from HR_Attendance a where a.State=1 " + whereStr + @" 
+  group by a.EmployeeCode) as b
+on a.EmployeeCode=b.EmployeeCode
+left join 
+(select a.EmployeeCode,COUNT(*) as NotWordkDays from HR_Attendance a   where a.State=-1 " + whereStr + @"  group by a.EmployeeCode) as c
+on a.EmployeeCode=c.EmployeeCode";
+
+            var list = SessionFactoryManager.GetCurrentSession().CreateSQLQuery(sqlStr)
+                    .SetFirstResult(skipResults)
+                    .SetMaxResults(maxResults)
+                    .SetResultTransformer(Transformers.AliasToBean(typeof(AttendanceViewEntity))).List<AttendanceViewEntity>();
+
+            return list;
         }
     }
 }
