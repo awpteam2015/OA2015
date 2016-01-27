@@ -126,8 +126,10 @@ namespace Project.Service.HRManager
             if (where.SanctionObjType > 0)
                 expr = expr.And(p => p.SanctionObjType == where.SanctionObjType);
 
-            if (!string.IsNullOrEmpty(where.DepartmentCode) && where.DepartmentCode != "0")
-                expr = expr.And(p => p.DepartmentCode == where.DepartmentCode);
+            if (!string.IsNullOrEmpty(where.DepartmentCode))
+            {
+                expr = expr.And(p => where.DepartmentCode.Split(',').Contains(p.DepartmentCode));
+            }
             //if (!string.IsNullOrEmpty(where.SanctionObj))
             //  expr = expr.And(p => p.SanctionObj == where.SanctionObj);
             // if (!string.IsNullOrEmpty(where.SanctionTitle))

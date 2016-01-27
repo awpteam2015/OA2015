@@ -32,6 +32,7 @@ namespace Project.Map.HRManager
             Map(p => p.TechnicalTitle);
             Map(p => p.DutiesName);
             Map(p => p.Duties);
+            Map(p => p.WorkingYears);
             Map(p => p.WorkState);
             Map(p => p.EmployeeType);
             Map(p => p.EmployeeTypeName);

@@ -22,12 +22,16 @@ var pro = pro || {};
                 singleSelect: true,
                 columns: [[
          { field: 'PkId', title: '', hidden: true, width: 100 },
-         { field: 'DepartmentCode', title: '部门编号', width: 100 },
-         { field: 'EmployeeCode', title: '员工编号', width: 100 },
+         {
+             field: 'DepartmentCode', title: '部门', width: 100, formatter: function (value, row) {
+                 return row.DepartmentEntity.DepartmentName;
+             }
+         },
+         { field: 'EmployeeName', title: '员工', width: 100 },
          { field: 'LeftCount', title: '年休余数', width: 100 },
-         { field: 'Remark', title: '备注', width: 100 },
+         //{ field: 'Remark', title: '备注', width: 100 },
          { field: 'CreatorUserName', title: '创建人', width: 100 },
-         { field: 'CreateTime', title: '创建时间', width: 100 },
+         { field: 'CreationTime', title: '创建时间', width: 100 },
          { field: 'LastModificationTime', title: '最后修改时间', width: 100 },
                 ]],
                 pagination: true,
@@ -49,6 +53,27 @@ var pro = pro || {};
                 tabObj.add("/HRManager/EmployeeYearMain/Hd?PkId=" + PkId, "编辑" + PkId);
             });
 
+            $('#DepartmentCode').combotree({
+                required: true,
+                editable: false,
+                multiple: true,//支持多选
+                //checkbox: true,
+                cascadeCheck: false,
+                //lines: true,
+                valueField: 'DepartmentCode',
+                textField: 'DepartmentName',
+                url: '/PermissionManager/Department/GetList_Combotree'
+            }).combotree({
+                onChange: function (newValue, oldValue) {
+                    $('#EmployeeCode').combobox({
+                        required: true,
+                        editable: false,
+                        valueField: 'EmployeeCode',
+                        textField: 'EmployeeName',
+                        url: '/HRManager/EmployeeInfo/GetAllList?DepartmentCode=' + $('#DepartmentCode').combotree("getValues")
+                    });
+                }
+            });
 
             $("#btnSearch").click(function () {
                 gridObj.search();

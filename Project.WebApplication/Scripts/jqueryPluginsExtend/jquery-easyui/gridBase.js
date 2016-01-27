@@ -18,11 +18,11 @@ var pro = pro || {};
     };
 
     pro.GridBase.prototype = {
-        grid: function (obj,data) {
+        grid: function (obj, data) {
             if (this.isTree) {
-                return data == undefined ? $(this.grdidId).treegrid(obj) : $(this.grdidId).treegrid(obj,data);
+                return data == undefined ? $(this.grdidId).treegrid(obj) : $(this.grdidId).treegrid(obj, data);
             } else {
-                return data == undefined ? $(this.grdidId).datagrid(obj) : $(this.grdidId).datagrid(obj,data);
+                return data == undefined ? $(this.grdidId).datagrid(obj) : $(this.grdidId).datagrid(obj, data);
             }
         },
         isSelected: function () {
@@ -47,15 +47,37 @@ var pro = pro || {};
             ///<summary>获取json格式搜索参数</summary>
             var strJson = "{";
             $("#divSearch input").each(function () {
-                strJson += "\"" + $(this).attr("name") + "\":\"" + $.trim($(this).val()) + "\",";
+                if ($(this).attr("class")) {
+                    if ($(this).attr("class").indexOf("combotree-f") > 0) {
+                        if ($(this).combo("options").multiple)
+                            strJson += "\"" + $(this).attr("comboname") + "\":\"" + $.trim($(this).combotree("getValues")) + "\",";
+                        else
+                            strJson += "\"" + $(this).attr("comboname") + "\":\"" + $.trim($(this).combotree("getValue")) + "\",";
+                    }
+                    else if ($(this).attr("class").indexOf("combobox-f ") > 0)
+                        strJson += "\"" + $(this).attr("comboname") + "\":\"" + $.trim($(this).combotree("getValue")) + "\",";
+
+                    else
+                        strJson += "\"" + $(this).attr("id") + "\":\"" + $.trim($(this).val()) + "\",";
+
+                }
+                else
+                    strJson += "\"" + $(this).attr("name") + "\":\"" + $.trim($(this).val()) + "\",";
             });
 
             $("#divSearch select").each(function () {
-                strJson += "\"" + $(this).attr("name") + "\":\"" + $.trim($(this).val()) + "\",";
+                if ($(this).attr("class")) {
+                    if ($(this).attr("class").indexOf("combobox-f ") > 0)
+                        strJson += "\"" + $(this).attr("comboname") + "\":\"" + $.trim($(this).combotree("getValue")) + "\",";
+                    else
+                        strJson += "\"" + $(this).attr("name") + "\":\"" + $.trim($(this).val()) + "\",";
+
+                }
+                else
+                    strJson += "\"" + $(this).attr("name") + "\":\"" + $.trim($(this).val()) + "\",";
             });
             if (strJson.length > 1) strJson = strJson.substr(0, strJson.length - 1);
             strJson += "}";
-
             var jsonSearch = $.parseJSON(strJson);
             return jsonSearch;
         },
@@ -90,7 +112,7 @@ var pro = pro || {};
                 index: obj.RowIndex,
                 row: rowJson
             });
-          
+
             obj.PkId--;
             //alert(this.grdidId);
             //alert(this.grdidId);

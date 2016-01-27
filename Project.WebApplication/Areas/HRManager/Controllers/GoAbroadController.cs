@@ -89,6 +89,7 @@ namespace Project.WebApplication.Areas.HRManager.Controllers
             postData.RequestEntity.LastModificationTime = DateTime.Now;
             postData.RequestEntity.Reason = Base64Helper.DecodeBase64(postData.RequestEntity.Reason);
             postData.RequestEntity.Remark = Base64Helper.DecodeBase64(postData.RequestEntity.Remark);
+            
             var updateResult = GoAbroadService.GetInstance().Update(postData.RequestEntity);
             var result = new AjaxResponse<GoAbroadEntity>()
             {

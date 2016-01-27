@@ -49,9 +49,8 @@ namespace Project.Service.HRManager
             where.EmployeeCode = entity.EmployeeCode;
             var detailEntity = new EmployeeYearDetailEntity()
             {
-                CreateTime = entity.CreateTime,
-                CreatorUserCode = entity.CreatorUserCode,
                 CreatorUserName = entity.CreatorUserName,
+                UseType = 0,
                 DepartmentCode = entity.DepartmentCode,
                 EmployeeCode = entity.EmployeeCode,
                 EmployeeName = entity.EmployeeName,
@@ -138,16 +137,16 @@ namespace Project.Service.HRManager
         /// 更新
         /// </summary>
         /// <param name="entity"></param>
-        public bool Update(EmployeeYearMainEntity entity)
+        public Tuple<bool, string> Update(EmployeeYearMainEntity entity)
         {
             try
             {
                 _employeeYearMainRepository.Update(entity);
-                return true;
+                return new Tuple<bool, string>(true, "");
             }
             catch
             {
-                return false;
+                throw;
             }
         }
 
@@ -176,10 +175,12 @@ namespace Project.Service.HRManager
             #region
             // if (!string.IsNullOrEmpty(where.PkId))
             //  expr = expr.And(p => p.PkId == where.PkId);
-            // if (!string.IsNullOrEmpty(where.DepartmentCode))
-            //  expr = expr.And(p => p.DepartmentCode == where.DepartmentCode);
-            // if (!string.IsNullOrEmpty(where.EmployeeCode))
-            //  expr = expr.And(p => p.EmployeeCode == where.EmployeeCode);
+            if (!string.IsNullOrEmpty(where.DepartmentCode))
+            {
+                expr = expr.And(p => where.DepartmentCode.Split(',').Contains(p.DepartmentCode));
+            }
+            if (!string.IsNullOrEmpty(where.EmployeeCode))
+                expr = expr.And(p => p.EmployeeCode == where.EmployeeCode);
             // if (!string.IsNullOrEmpty(where.LeftCount))
             //  expr = expr.And(p => p.LeftCount == where.LeftCount);
             // if (!string.IsNullOrEmpty(where.Remark))
@@ -211,8 +212,8 @@ namespace Project.Service.HRManager
             //  expr = expr.And(p => p.PkId == where.PkId);
             // if (!string.IsNullOrEmpty(where.DepartmentCode))
             //  expr = expr.And(p => p.DepartmentCode == where.DepartmentCode);
-            // if (!string.IsNullOrEmpty(where.EmployeeCode))
-            //  expr = expr.And(p => p.EmployeeCode == where.EmployeeCode);
+            if (!string.IsNullOrEmpty(where.EmployeeCode))
+                expr = expr.And(p => p.EmployeeCode == where.EmployeeCode);
             // if (!string.IsNullOrEmpty(where.LeftCount))
             //  expr = expr.And(p => p.LeftCount == where.LeftCount);
             // if (!string.IsNullOrEmpty(where.Remark))

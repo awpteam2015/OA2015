@@ -255,7 +255,7 @@ namespace Project.Service.HRManager
         /// </summary>
         /// <param name="entity">条件实体</param>
         /// <returns>返回列表</returns>
-        public IList<EmployeeInfoEntity> GetList(EmployeeInfoEntity where)
+        public IList<EmployeeInfoEntity> GetList(EmployeeInfoEntity where, bool isShowTop = false)
         {
             var expr = PredicateBuilder.True<EmployeeInfoEntity>();
             #region
@@ -266,7 +266,9 @@ namespace Project.Service.HRManager
             // if (!string.IsNullOrEmpty(where.EmployeeName))
             //  expr = expr.And(p => p.EmployeeName == where.EmployeeName);
             if (!string.IsNullOrEmpty(where.DepartmentCode))
-                expr = expr.And(p => p.DepartmentCode == where.DepartmentCode);
+            {
+                expr = expr.And(p => where.DepartmentCode.Split(',').Contains(p.DepartmentCode));
+            }
             // if (!string.IsNullOrEmpty(where.JobName))
             //  expr = expr.And(p => p.JobName == where.JobName);
             // if (!string.IsNullOrEmpty(where.PayCode))
@@ -307,6 +309,11 @@ namespace Project.Service.HRManager
             //  expr = expr.And(p => p.LastModificationTime == where.LastModificationTime);
             #endregion
             var list = _employeeInfoRepository.Query().Where(expr).OrderBy(p => p.PkId).ToList();
+
+            if (isShowTop)
+            {
+                list.Insert(0, new EmployeeInfoEntity() { EmployeeCode = " ", EmployeeName = "全部" });
+            }
             return list;
         }
         #endregion

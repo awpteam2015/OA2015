@@ -7,7 +7,8 @@
             return {
                 tabObj: new pro.TabBase(),
                 gridObjWork: new pro.GridBase("#datagridwork", false),
-                gridObjStudy: new pro.GridBase("#datagridstudy", false)
+                gridObjStudy: new pro.GridBase("#datagridstudy", false),
+                xzOptionHtml: ''//学制<option></option>
             };
         },
         initPage: function () {
@@ -33,6 +34,25 @@
                 textField: 'DepartmentName',
                 url: '/PermissionManager/Department/GetList_Combotree'
             });
+
+            abp.ajax({
+                url: "/HRManager/Dictionary/GetListByCode?ParentKeyCode=ShoochYears"
+                //,data: JSON.stringify(postData)
+            }).done(
+               function (dataresult, data) {
+                   initObj.xzOptionHtml = "";
+
+                   $.each(dataresult, function (i, item) {
+                       initObj.xzOptionHtml += "<option value='" + item.KeyValue + "'>" + item.KeyName + "</option>";
+                   });
+
+               }
+           ).fail(
+            function (errordetails, errormessage) {
+                //  $.alertExtend.error();
+            }
+           );
+
 
             $('#TechnicalTitle').combobox({
                 required: true,
@@ -151,8 +171,8 @@
                         },
                         {
                             field: 'School',
-                            title: '学校',
-                            width: 100,
+                            title: '毕业院校',
+                            width: 120,
                             formatter: function (value, row, index) {
                                 return pro.controlKit.getInputHtml("S_School_" + row.PkId, value);
                             }
@@ -160,33 +180,65 @@
                         {
                             field: 'ProfessionCode',
                             title: '专业',
-                            width: 100,
+                            width: 120,
                             formatter: function (value, row, index) {
                                 return pro.controlKit.getInputHtml("S_ProfessionCode_" + row.PkId, value);
                             }
                         },
                         {
-                            field: 'BeginDate',
-                            title: '开始日期',
-                            width: 150,
+                            field: 'Degree',
+                            title: '学位',
+                            width: 100,
                             formatter: function (value, row, index) {
-                                return pro.controlKit.getInputDateHtml("S_BeginDate_" + row.PkId, value, 145);
+                                return pro.controlKit.getInputHtml("S_Degree_" + row.PkId, value);
+                            }
+                        },
+                        {
+                            field: 'Education',
+                            title: '学历',
+                            width: 100,
+                            formatter: function (value, row, index) {
+                                return pro.controlKit.getInputHtml("S_Education_" + row.PkId, value);
+                            }
+                        },
+                        {
+                            field: 'SchoolYear',
+                            title: '学制',
+                            width: 100,
+                            formatter: function (value, row, index) {
+                                return pro.controlKit.getSelectHtml("S_SchoolYear_" + row.PkId, value, initObj.xzOptionHtml);
+                            }
+                        },
+                        {
+                            field: 'CertNumber',
+                            title: '证书编号',
+                            width: 120,
+                            formatter: function (value, row, index) {
+                                return pro.controlKit.getInputHtml("S_CertNumber_" + row.PkId, value);
+                            }
+                        },
+                        {
+                            field: 'BeginDate',
+                            title: '入学日期',
+                            width: 110,
+                            formatter: function (value, row, index) {
+                                return pro.controlKit.getInputDateHtml("S_BeginDate_" + row.PkId, value);
                             }
                         },
                         {
                             field: 'EndDate',
-                            title: '结束日期',
-                            width: 150,
+                            title: '毕业日期',
+                            width: 110,
                             formatter: function (value, row, index) {
-                                return pro.controlKit.getInputDateHtml("S_EndDate_" + row.PkId, value, 145);
+                                return pro.controlKit.getInputDateHtml("S_EndDate_" + row.PkId, value);
                             }
                         },
                         {
                             field: 'Remark',
                             title: '备注',
-                            width: 200,
+                            width: 160,
                             formatter: function (value, row, index) {
-                                return pro.controlKit.getTextAreaHtml("S_Remark_" + row.PkId, value, 180, 150);
+                                return pro.controlKit.getTextAreaHtml("S_Remark_" + row.PkId, value, 170, 50);
                             }
                         }
                     ]
@@ -255,7 +307,7 @@
 
             pro.submitKit.config.columnPkidName = "S_PkId";
             pro.submitKit.config.columnNamePreStr = "S_";
-            pro.submitKit.config.columns = ["School", "ProfessionCode", "BeginDate", "EndDate", "Remark"];
+            pro.submitKit.config.columns = ["School", "ProfessionCode", "Degree", "Education", "SchoolYear", "CertNumber", "BeginDate", "EndDate", "Remark"];
             postData.RequestEntity.LearningList = pro.submitKit.getRowJson();
 
             if (pro.commonKit.getUrlParam("PkId") != "") {
@@ -263,7 +315,7 @@
             }
 
             this.submitExtend.addRule();
-            if (!$("#form1").valid() && this.submitExtend.logicValidate()) {
+            if (!$("#form1").valid() && !this.submitExtend.logicValidate()) {
                 $.alertExtend.error();
                 return false;
             }

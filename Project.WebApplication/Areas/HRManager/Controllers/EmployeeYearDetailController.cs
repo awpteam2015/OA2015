@@ -12,6 +12,7 @@ using Project.Infrastructure.FrameworkCore.WebMvc.Models;
 using Project.Model.HRManager;
 using Project.Service.HRManager;
 using Project.WebApplication.Controllers;
+using Project.Infrastructure.FrameworkCore.ToolKit;
 
 namespace Project.WebApplication.Areas.HRManager.Controllers
 {
@@ -28,7 +29,7 @@ namespace Project.WebApplication.Areas.HRManager.Controllers
             return View();
         }
 
- 
+
         public ActionResult List()
         {
             return View();
@@ -39,19 +40,20 @@ namespace Project.WebApplication.Areas.HRManager.Controllers
             var pIndex = this.Request["page"].ConvertTo<int>();
             var pSize = this.Request["rows"].ConvertTo<int>();
             var where = new EmployeeYearDetailEntity();
-			//where.PkId = RequestHelper.GetFormString("PkId");
-			//where.DepartmentCode = RequestHelper.GetFormString("DepartmentCode");
-			//where.EmployeeCode = RequestHelper.GetFormString("EmployeeCode");
-			//where.BeginDate = RequestHelper.GetFormString("BeginDate");
-			//where.EndDate = RequestHelper.GetFormString("EndDate");
-			//where.UseCount = RequestHelper.GetFormString("UseCount");
-			//where.BeforeUseCount = RequestHelper.GetFormString("BeforeUseCount");
-			//where.LeftCount = RequestHelper.GetFormString("LeftCount");
-			//where.Remark = RequestHelper.GetFormString("Remark");
-			//where.CreatorUserCode = RequestHelper.GetFormString("CreatorUserCode");
-			//where.CreatorUserName = RequestHelper.GetFormString("CreatorUserName");
-			//where.CreateTime = RequestHelper.GetFormString("CreateTime");
-			//where.LastModificationTime = RequestHelper.GetFormString("LastModificationTime");
+            //where.PkId = RequestHelper.GetFormString("PkId");
+            where.DepartmentCode = RequestHelper.GetFormString("DepartmentCode");
+            where.EmployeeCode = RequestHelper.GetFormString("EmployeeCode");
+            where.UseType = RequestHelper.GetInt("UseType", -1);
+            //where.BeginDate = RequestHelper.GetFormString("BeginDate");
+            //where.EndDate = RequestHelper.GetFormString("EndDate");
+            //where.UseCount = RequestHelper.GetFormString("UseCount");
+            //where.BeforeUseCount = RequestHelper.GetFormString("BeforeUseCount");
+            //where.LeftCount = RequestHelper.GetFormString("LeftCount");
+            //where.Remark = RequestHelper.GetFormString("Remark");
+            //where.CreatorUserCode = RequestHelper.GetFormString("CreatorUserCode");
+            //where.CreatorUserName = RequestHelper.GetFormString("CreatorUserName");
+            //where.CreateTime = RequestHelper.GetFormString("CreateTime");
+            //where.LastModificationTime = RequestHelper.GetFormString("LastModificationTime");
             var searchList = EmployeeYearDetailService.GetInstance().Search(where, (pIndex - 1) * pSize, pSize);
 
             var dataGridEntity = new DataGridResponse()
@@ -59,25 +61,23 @@ namespace Project.WebApplication.Areas.HRManager.Controllers
                 total = searchList.Item2,
                 rows = searchList.Item1
             };
-            return new AbpJsonResult(dataGridEntity, new NHibernateContractResolver());
+            return new AbpJsonResult(dataGridEntity, new NHibernateContractResolver(new string[] { "DepartmentEntity" }, new string[] { "Remark" }));
         }
 
 
         [HttpPost]
-        public AbpJsonResult Add(AjaxRequest<EmployeeYearDetailEntity> postData)
+        public AbpJsonResult<string> Add(AjaxRequest<EmployeeYearDetailEntity> postData)
         {
+            postData.RequestEntity.UseType = 1;//使用登记
+            postData.RequestEntity.CreatorUserName = LoginUserInfo.UserName;
             var addResult = EmployeeYearDetailService.GetInstance().Add(postData.RequestEntity);
-            var result = new AjaxResponse<EmployeeYearDetailEntity>()
-               {
-                   success = true,
-                   result = postData.RequestEntity
-               };
-            return new AbpJsonResult(result, new NHibernateContractResolver());
+
+            return new AbpJsonResult<string>(addResult);
         }
 
 
         [HttpPost]
-        public AbpJsonResult Edit( AjaxRequest<EmployeeYearDetailEntity> postData)
+        public AbpJsonResult Edit(AjaxRequest<EmployeeYearDetailEntity> postData)
         {
             var updateResult = EmployeeYearDetailService.GetInstance().Update(postData.RequestEntity);
             var result = new AjaxResponse<EmployeeYearDetailEntity>()
@@ -89,14 +89,14 @@ namespace Project.WebApplication.Areas.HRManager.Controllers
         }
 
         [HttpPost]
-        public AbpJsonResult Delete(int pkid)
+        public AbpJsonResult<string> Delete(int pkid)
         {
             var deleteResult = EmployeeYearDetailService.GetInstance().DeleteByPkId(pkid);
-            var result = new AjaxResponse<EmployeeYearDetailEntity>()
-            {
-                success = deleteResult
-            };
-            return new AbpJsonResult(result, new NHibernateContractResolver(new string[] { "result" }));
+            //var result = new AjaxResponse<EmployeeYearDetailEntity>()
+            //{
+            //    success = deleteResult
+            //};
+            return new AbpJsonResult<string>(deleteResult);
         }
     }
 }

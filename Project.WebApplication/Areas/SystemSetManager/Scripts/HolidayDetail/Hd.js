@@ -62,7 +62,7 @@
             addRule: function () {
                 $("#form1").validate({
                     rules: {
-          PkId: { required: true  },
+          //PkId: { required: true  },
           HolidayName: { required: true  },
           HolidayDate: { required: true  },
           //Remark: { required: true  },

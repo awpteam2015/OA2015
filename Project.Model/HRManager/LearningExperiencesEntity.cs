@@ -9,10 +9,11 @@
 using System;
 using Project.Infrastructure.FrameworkCore.Domain.Entities;
 using Project.Infrastructure.FrameworkCore.Domain.Entities.Component;
+using Project.Infrastructure.FrameworkCore.Domain.Entities.Auditing.Interface;
 
 namespace Project.Model.HRManager
 {
-    public class LearningExperiencesEntity : Entity
+    public class LearningExperiencesEntity : Entity, IHasRemark, IAudited
     {
         #region 属性
         /// <summary>
@@ -40,11 +41,19 @@ namespace Project.Model.HRManager
         /// </summary>
         public virtual System.String Education { get; set; }
         /// <summary>
-        /// 开始时间
+        /// 学制
+        /// </summary>
+        public virtual System.String SchoolYear { get; set; }
+        /// <summary>
+        /// 证书编号
+        /// </summary>
+        public virtual System.String CertNumber { get; set; }
+        /// <summary>
+        /// 入学日期
         /// </summary>
         public virtual System.DateTime? BeginDate { get; set; }
         /// <summary>
-        /// 结束时间
+        /// 毕业日期
         /// </summary>
         public virtual System.DateTime? EndDate { get; set; }
         /// <summary>
@@ -62,11 +71,15 @@ namespace Project.Model.HRManager
         /// <summary>
         /// 
         /// </summary>
-        public virtual System.DateTime? CreateTime { get; set; }
+        public virtual System.DateTime? CreationTime { get; set; }
         /// <summary>
         /// 
         /// </summary>
         public virtual System.DateTime? LastModificationTime { get; set; }
+        /// <summary>
+        /// 修改人
+        /// </summary>
+        public virtual System.String LastModifierUserCode { get; set; }
         #endregion
 
 

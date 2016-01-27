@@ -21,7 +21,7 @@
 
             <a id="btnDel" href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-remove',plain:true">删除</a>
 
-            <a id="btnEdit" href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-edit',plain:true">编辑</a>
+            @*<a id="btnEdit" href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-edit',plain:true">编辑</a>*@
 
             <a id="btnRefresh" href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-reload',plain:true">刷新</a>
 
@@ -38,17 +38,27 @@
                             部门编号:
                         </td>
                         <td>
-                            <input id="DepartmentCode" name="DepartmentCode" type="text" />
+                            <input id="DepartmentCode" name="DepartmentCode" type="text" class="easyui-combobox" style="width:180px;" />
                         </td>
 
                         <td>
                             员工编号:
                         </td>
                         <td>
-                            <input id="EmployeeCode" name="EmployeeCode" type="text" />
+                            <input id="EmployeeCode" name="EmployeeCode" type="text" class="easyui-combobox" style="width:130px;" />
+                        </td>
+                        <td>
+                            类型:
+                        </td>
+                        <td>
+                            <select id="UseType" name="UseType" class="easyui-combobox">
+                                <option value="-1">全部</option>
+                                <option value="0">年假添加</option>
+                                <option value="1">使用登记</option>
+                            </select>
                         </td>
 
-                        <td colspan="2">
+                        <td>
                             <a href="#" class="easyui-linkbutton" iconcls="icon-search" id="btnSearch">搜索</a>
                         </td>
                     </tr>

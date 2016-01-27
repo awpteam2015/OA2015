@@ -85,7 +85,7 @@ namespace Project.WebApplication.Areas.HRManager.Controllers
             where.DepartmentCode = RequestHelper.QueryString["DepartmentCode"];
 
             //where.DepartmentCode = RequestHelper.GetFormString("DepartmentCode");
-            var searchList = EmployeeInfoService.GetInstance().GetList(where);
+            var searchList = EmployeeInfoService.GetInstance().GetList(where,true);
 
 
             return new AbpJsonResult(searchList, new NHibernateContractResolver());
