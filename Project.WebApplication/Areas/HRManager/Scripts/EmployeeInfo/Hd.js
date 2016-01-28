@@ -8,6 +8,7 @@
                 tabObj: new pro.TabBase(),
                 gridObjWork: new pro.GridBase("#datagridwork", false),
                 gridObjStudy: new pro.GridBase("#datagridstudy", false),
+                gridObjTechnical: new pro.GridBase("#datagridTechnical", false),
                 xzOptionHtml: ''//学制<option></option>
             };
         },
@@ -15,6 +16,7 @@
             var initObj = this.init();
             var gridObjWork = initObj.gridObjWork;
             var gridObjStudy = initObj.gridObjStudy;
+            var gridObjTechnical = initObj.gridObjTechnical;
             $("#btnAdd").click(function () {
                 pro.EmployeeInfo.HdPage.submit("Add");
             });
@@ -248,7 +250,60 @@
                 pageList: [20, 30, 40] //可以设置每页记录条数的列表    
             }
           );
-
+            gridObjTechnical.grid({
+                url: '/HRManager/Technical/GetAllList?EmployeeID=' + (pro.commonKit.getUrlParam("PkId") ? pro.commonKit.getUrlParam("PkId") : 0),
+                fitColumns: false,
+                nowrap: false,
+                rownumbers: true, //行号
+                singleSelect: true,
+                idField: "PkId",
+                columns: [
+                    [
+                        {
+                            field: 'PkId', title: '', hidden: true, width: 100,
+                            formatter: function (value, row, index) {
+                                return pro.controlKit.getInputHtml("S_PkId", row.PkId);
+                            }
+                        },
+                        {
+                            field: 'Title',
+                            title: '名称',
+                            width: 120,
+                            formatter: function (value, row, index) {
+                                return pro.controlKit.getInputHtml("S_School_" + row.PkId, value);
+                            }
+                        },
+                        {
+                            field: 'LevNum',
+                            title: '等级',
+                            width: 120,
+                            formatter: function (value, row, index) {
+                                return pro.controlKit.getInputHtml("S_ProfessionCode_" + row.PkId, value);
+                            }
+                        },
+                        {
+                            field: 'GetDate',
+                            title: '取得时间',
+                            width: 100,
+                            formatter: function (value, row, index) {
+                                return pro.controlKit.getInputHtml("S_Degree_" + row.PkId, value);
+                            }
+                        },
+                        {
+                            field: 'CerNo',
+                            title: '职称证书编号',
+                            width: 100,
+                            formatter: function (value, row, index) {
+                                return pro.controlKit.getInputHtml("S_Education_" + row.PkId, value);
+                            }
+                        }
+                    ]
+                ],
+                pagination: false,
+                pageSize: 20, //每页显示的记录条数，默认为10     
+                pageList: [20, 30, 40] //可以设置每页记录条数的列表    
+            }
+          );
             $("#btnAddWork_ToolBar").click(function () {
                 gridObjWork.insertRow({
                     PkId: gridObjWork.PkId,
@@ -268,6 +323,13 @@
 
                 $("#datagridstudy").datagrid('selectRecord', gridObjStudy.S_PkId + 1);
             });
+            $("#btnAddTechnical_ToolBar").click(function () {
+                gridObjTechnical.insertRow({
+                    PkId: gridObjTechnical.PkId
+                });
+
+                $("#datagridTechnical").datagrid('selectRecord', gridObjTechnical.S_PkId + 1);
+            });
 
 
             $("#btnDelWork_ToolBar").click(function () {
@@ -276,6 +338,10 @@
             $("#btnDelStudy_ToolBar").click(function () {
                 gridObjStudy.delRow();
             });
+            $("#btnDelTechnical_ToolBar").click(function () {
+                gridObjTechnical.delRow();
+            });
+
 
 
             if ($("#BindEntity").val()) {

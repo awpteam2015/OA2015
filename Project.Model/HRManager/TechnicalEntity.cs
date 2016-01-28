@@ -13,8 +13,12 @@ using Project.Infrastructure.FrameworkCore.Domain.Entities.Component;
 namespace Project.Model.HRManager
 {
     public class TechnicalEntity: Entity
-    { 
+    {
         #region 属性
+        /// <summary>
+        /// 员工编号
+        /// </summary>
+        public virtual System.Int32 EmployeeID { get; set; }
         /// <summary>
         /// 员工编号
         /// </summary>

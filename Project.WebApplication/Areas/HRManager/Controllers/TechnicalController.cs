@@ -63,7 +63,20 @@ namespace Project.WebApplication.Areas.HRManager.Controllers
             };
             return new AbpJsonResult(dataGridEntity, new NHibernateContractResolver());
         }
+        public AbpJsonResult GetAllList()
+        {
+            var where = new TechnicalEntity();
+            where.EmployeeID = TypeParse.StrToInt(RequestHelper.QueryString["EmployeeID"], 0);
+            //where.DepartmentCode = RequestHelper.GetFormString("DepartmentCode");
+            var searchList = TechnicalService.GetInstance().GetList(where);
 
+            var dataGridEntity = new DataGridResponse()
+            {
+                total = searchList.Count,
+                rows = searchList
+            };
+            return new AbpJsonResult(dataGridEntity, new NHibernateContractResolver());
+        }
 
         [HttpPost]
         public AbpJsonResult Add(AjaxRequest<TechnicalEntity> postData)
