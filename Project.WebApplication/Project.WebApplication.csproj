@@ -135,6 +135,8 @@
     <Content Include="Areas\HRManager\Scripts\LearningExperiences\List.js" />
     <Content Include="Areas\HRManager\Scripts\Sanction\Hd.js" />
     <Content Include="Areas\HRManager\Scripts\Sanction\List.js" />
+    <Content Include="Areas\HRManager\Scripts\Technical\Hd.js" />
+    <Content Include="Areas\HRManager\Scripts\Technical\List.js" />
     <Content Include="Areas\HRManager\Scripts\WorkExperience\Hd.js" />
     <Content Include="Areas\HRManager\Scripts\WorkExperience\List.js" />
     <Content Include="Areas\HRManager\Scripts\YearHolidayDefinition\Hd.js" />
@@ -235,6 +237,8 @@
     <Content Include="Areas\HRManager\Views\AttendanceUploadRecord\List.cshtml" />
     <Content Include="Areas\ReportManager\Views\web.config" />
     <Content Include="Areas\ReportManager\Views\HrReport\AttendanceReport.cshtml" />
+    <Content Include="Areas\HRManager\Views\Technical\Hd.cshtml" />
+    <Content Include="Areas\HRManager\Views\Technical\List.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\Control\DepartmentControl.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
@@ -694,6 +698,7 @@
     <Compile Include="Areas\HRManager\Controllers\GroupEmployeeHisController.cs" />
     <Compile Include="Areas\HRManager\Controllers\LearningExperiencesController.cs" />
     <Compile Include="Areas\HRManager\Controllers\SanctionController.cs" />
+    <Compile Include="Areas\HRManager\Controllers\TechnicalController.cs" />
     <Compile Include="Areas\HRManager\Controllers\WorkExperienceController.cs" />
     <Compile Include="Areas\HRManager\Controllers\YearHolidayDefinitionController.cs" />
     <Compile Include="Areas\HRManager\HRManagerAreaRegistration.cs" />

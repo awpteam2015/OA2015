@@ -117,7 +117,7 @@
                         {
                             field: 'Duties',
                             title: '职务',
-                            width: 100,
+                            width: 120,
                             formatter: function (value, row, index) {
                                 return pro.controlKit.getInputHtml("Duties_" + row.PkId, value);
                             }
@@ -133,7 +133,7 @@
                         {
                             field: 'EndDate',
                             title: '结束日期',
-                            width: 150,
+                            width: 120,
                             formatter: function (value, row, index) {
                                 return pro.controlKit.getInputDateHtml("EndDate_" + row.PkId, value, 145);
                             }
@@ -141,9 +141,9 @@
                         {
                             field: 'WorkContent',
                             title: '工作内容',
-                            width: 200,
+                            width: 160,
                             formatter: function (value, row, index) {
-                                return pro.controlKit.getTextAreaHtml("WorkContent_" + row.PkId, value, 180, 150);
+                                return pro.controlKit.getTextAreaHtml("WorkContent_" + row.PkId, value, 140, 50);
                             }
                         }
                     ]
