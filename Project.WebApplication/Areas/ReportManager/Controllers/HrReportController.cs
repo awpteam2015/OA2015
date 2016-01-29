@@ -22,7 +22,12 @@ namespace Project.WebApplication.Areas.ReportManager.Controllers
             return View();
         }
 
-        public AbpJsonResult AttendanceReport()
+        public ActionResult AttendanceReport()
+        {
+            return View();
+        }
+
+        public AbpJsonResult GetAttendanceReport1()
         {
             var pIndex = this.Request["page"].ConvertTo<int>();
             var pSize = this.Request["rows"].ConvertTo<int>();
