@@ -19,7 +19,7 @@ namespace Project.Repository.ReportManager
         /// <param name="skipResults"></param>
         /// <param name="maxResults"></param>
         /// <returns></returns>
-        public IList<AttendanceViewEntity> GerAttendanceReport1(AttendanceViewEntity where, int skipResults, int maxResults)
+        public Tuple<IList<AttendanceViewEntity>,int> GerAttendanceReport1(AttendanceViewEntity where, int skipResults, int maxResults,bool ifGetALL=false)
         {
             var whereStr = " ";
             if (!string.IsNullOrWhiteSpace(where.DepartmentCode))
@@ -55,12 +55,20 @@ on a.EmployeeCode=c.EmployeeCode";
             string countStr = "select count(*) as num from (" + sqlStr + ") as a ";
             var count = SessionFactoryManager.GetCurrentSession().CreateSQLQuery(countStr).AddScalar("num", NHibernateUtil.Int32).UniqueResult<Int32>();
 
-            var list = SessionFactoryManager.GetCurrentSession().CreateSQLQuery(sqlStr)
-                    .SetFirstResult(skipResults)
-                    .SetMaxResults(maxResults)
-                    .SetResultTransformer(Transformers.AliasToBean(typeof(AttendanceViewEntity))).List<AttendanceViewEntity>();
-
-            return list;
+            IList<AttendanceViewEntity> returnList = new List<AttendanceViewEntity>();
+            if (ifGetALL)
+            {
+                returnList = SessionFactoryManager.GetCurrentSession().CreateSQLQuery(sqlStr)
+                   .SetResultTransformer(Transformers.AliasToBean(typeof(AttendanceViewEntity))).List<AttendanceViewEntity>();
+            }
+            else
+            {
+                returnList = SessionFactoryManager.GetCurrentSession().CreateSQLQuery(sqlStr)
+                   .SetFirstResult(skipResults)
+                   .SetMaxResults(maxResults)
+                   .SetResultTransformer(Transformers.AliasToBean(typeof(AttendanceViewEntity))).List<AttendanceViewEntity>();
+            }
+            return new Tuple<IList<AttendanceViewEntity>, int>(returnList, count);
         }
 
 
