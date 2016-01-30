@@ -752,6 +752,7 @@
     <Content Include="Views\Shared\_LayoutList2.cshtml" />
     <Content Include="Views\Shared\InternalServer.cshtml" />
     <Content Include="TemplateFile\考勤模版.xlsx" />
+    <Content Include="Views\Login\IndexNew.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

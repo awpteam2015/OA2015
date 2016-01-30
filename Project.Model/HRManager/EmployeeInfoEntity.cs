@@ -21,6 +21,7 @@ namespace Project.Model.HRManager
 
             this.WorkList = new HashSet<WorkExperienceEntity>();
             this.LearningList = new HashSet<LearningExperiencesEntity>();
+            this.TechnicalList = new HashSet<TechnicalEntity>();
         }
         #region 属性
         /// <summary>
@@ -152,6 +153,12 @@ namespace Project.Model.HRManager
         /// 学习经历
         /// </summary>
         public virtual ISet<LearningExperiencesEntity> LearningList { get; set; }
+
+
+        /// <summary>
+        /// 职务经历
+        /// </summary>
+        public virtual ISet<TechnicalEntity> TechnicalList { get; set; }
 
         #endregion
     }

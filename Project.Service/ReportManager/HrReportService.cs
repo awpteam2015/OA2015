@@ -34,7 +34,7 @@ namespace Project.Service.ReportManager
         public Tuple< IList<AttendanceViewEntity>,int> GerAttendanceReport1(AttendanceViewEntity where, int skipResults, int maxResults)
        {
         var list=   _HrReportRepository.GerAttendanceReport1(where, skipResults, maxResults);
-        return new System.Tuple<IList<AttendanceViewEntity>, int>(list, 0);
+        return new System.Tuple<IList<AttendanceViewEntity>, int>(list.Item1, 0);
        }
 
 
