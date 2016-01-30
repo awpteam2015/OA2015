@@ -37,6 +37,45 @@ namespace Project.Service.ReportManager
             return list;
         }
 
+        /// <summary>
+        /// 缺勤汇总
+        /// </summary>
+        /// <param name="where"></param>
+        /// <param name="skipResults"></param>
+        /// <param name="maxResults"></param>
+        public Tuple<IList<AttendanceViewEntity2>, int> GerAttendanceReport2(AttendanceViewEntity2 where, int skipResults, int maxResults)
+        {
+            var list = _HrReportRepository.GerAttendanceReport2(where, skipResults, maxResults);
+            return list;
+        }
+
+
+
+        /// <summary>
+        /// 缺勤汇总
+        /// </summary>
+        /// <param name="where"></param>
+        /// <param name="skipResults"></param>
+        /// <param name="maxResults"></param>
+        public Tuple<IList<AttendanceViewEntity>, int> GerAttendanceReport3(AttendanceViewEntity where, int skipResults, int maxResults)
+        {
+            var list = _HrReportRepository.GerAttendanceReport3(where, skipResults, maxResults);
+            return list;
+        }
+
+
+        /// <summary>
+        /// 缺勤汇总
+        /// </summary>
+        /// <param name="where"></param>
+        /// <param name="skipResults"></param>
+        /// <param name="maxResults"></param>
+        public Tuple<IList<AttendanceViewEntity>, int> GerAttendanceReport4(AttendanceViewEntity where, int skipResults, int maxResults)
+        {
+            var list = _HrReportRepository.GerAttendanceReport4(where, skipResults, maxResults);
+            return list;
+        }
+
 
     }
 }

@@ -166,6 +166,7 @@
     <Content Include="Areas\PermissionManager\Views\Role\RoleFunctionDetailList.cshtml">
       <SubType>Code</SubType>
     </Content>
+    <Content Include="Areas\ReportManager\Scripts\HrReport\AttendanceReport2.js" />
     <Content Include="Areas\ReportManager\Scripts\HrReport\AttendanceReport.js" />
     <Content Include="Areas\SystemSetManager\Scripts\HolidayDetail\Hd.js" />
     <Content Include="Areas\SystemSetManager\Scripts\HolidayDetail\List.js" />
@@ -239,6 +240,7 @@
     <Content Include="Areas\ReportManager\Views\HrReport\AttendanceReport.cshtml" />
     <Content Include="Areas\HRManager\Views\Technical\Hd.cshtml" />
     <Content Include="Areas\HRManager\Views\Technical\List.cshtml" />
+    <Content Include="Areas\ReportManager\Views\HrReport\AttendanceRepor2.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\Control\DepartmentControl.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />

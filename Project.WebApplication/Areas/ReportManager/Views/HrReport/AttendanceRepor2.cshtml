@@ -1,0 +1,32 @@
+﻿@{
+    ViewBag.Title = "List";
+    Layout = "~/Views/Shared/_LayoutList.cshtml";
+}
+@section JavaScript{
+    <script src="~/Areas/ReportManager/Scripts/HrReport/AttendanceReport2.js"></script>
+}
+<div title="考勤报表" style="padding:1px;">
+    <table id="datagrid" style="height:auto;" iconcls=".icon-save" singleselect="true" toolbar="#tb" fit="true"></table>
+    <div id="tb" style="padding:5px;height:auto">
+
+        <div id="divSearch">
+            <form>
+                <table class="mtable">
+                    <tr>
+                        <td style="width: 100px">
+                            部门:
+                        </td>
+                        <td style="width: 100px">
+                            <input id="DepartmentCode" name="DepartmentCode" type="text" />
+                        </td>
+                        <td>
+                            <a href="#" class="easyui-linkbutton" iconcls="icon-search" id="btnSearch">搜索</a>
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+    </div>
+</div>
+
+
