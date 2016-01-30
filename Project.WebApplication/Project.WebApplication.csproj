@@ -172,6 +172,11 @@
     <Content Include="Config\hibernate.cfg.xml" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\images\login\bg1.gif" />
+    <Content Include="Content\images\login\bg2.gif" />
+    <Content Include="Content\images\login\bg2.jpg" />
+    <Content Include="Content\images\login\bg2.png" />
+    <Content Include="Content\images\login\go.gif" />
     <Content Include="Content\Site.css" />
     <Content Include="Global.asax" />
     <Content Include="HtmlPage1.html" />
@@ -735,7 +740,7 @@
     </Content>
     <Content Include="Areas\SystemSetManager\Views\web.config" />
     <Content Include="Areas\PermissionManager\Views\web.config" />
-    <Content Include="Views\Login\Index.cshtml" />
+    <Content Include="Views\Login\IndexNew.cshtml" />
     <Content Include="Views\Account\Index.cshtml" />
     <Content Include="Views\Account\Default.cshtml" />
     <Content Include="Views\Shared\_LayoutHandler.cshtml" />
@@ -752,7 +757,7 @@
     <Content Include="Views\Shared\_LayoutList2.cshtml" />
     <Content Include="Views\Shared\InternalServer.cshtml" />
     <Content Include="TemplateFile\考勤模版.xlsx" />
-    <Content Include="Views\Login\IndexNew.cshtml" />
+    <Content Include="Views\Login\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
