@@ -27,6 +27,11 @@ namespace Project.WebApplication.Areas.ReportManager.Controllers
             return View();
         }
 
+        public ActionResult AttendanceReport2()
+        {
+            return View();
+        }
+
         public AbpJsonResult GetAttendanceReport1()
         {
             var pIndex = this.Request["page"].ConvertTo<int>();
