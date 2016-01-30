@@ -21,12 +21,11 @@ var pro = pro || {};
                 rownumbers: true, //行号
                 singleSelect: true,
                 columns: [[
-         { field: 'EmployeeCode', title: '工号', width: 100 },
-           { field: 'EmployeeNum', title: '员工数', width: 100 },
+         //{ field: 'EmployeeCode', title: '工号', width: 100 },
          { field: 'DepartmentName', title: '部门', width: 100 },
+         { field: 'EmployeeNum', title: '员工数', width: 100 },
          { field: 'WordkDays', title: '在岗天数', width: 100 },
          { field: 'NotWordkDays', title: '缺勤天数', width: 100 }
-
                 ]],
                 pagination: true,
                 pageSize: 20, //每页显示的记录条数，默认为10     

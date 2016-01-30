@@ -46,7 +46,7 @@ namespace Project.Repository.ReportManager
 
             if (where.Attr_EndDate != null)
             {
-                whereStr += " and a.Date<='" + where.Attr_EndDate + "'";
+                whereStr += " and a.Date<'" + where.Attr_EndDate + "'";
             }
 
             string sqlStr = @"select a.*,b.WordkDays,c.NotWordkDays from
@@ -105,7 +105,7 @@ on a.EmployeeCode=c.EmployeeCode";
 
             if (where.Attr_EndDate != null)
             {
-                whereStr += " and a.Date<='" + where.Attr_EndDate + "'";
+                whereStr += " and a.Date<'" + where.Attr_EndDate + "'";
             }
 
             string sqlStr = @"select a.*,b.WordkDays,c.NotWordkDays,d.EmployeeNum from
@@ -171,7 +171,7 @@ on a.DepartmentCode=c.DepartmentCode
 
             if (where.Attr_EndDate != null)
             {
-                whereStr += " and a.Date<='" + where.Attr_EndDate + "'";
+                whereStr += " and a.Date<'" + where.Attr_EndDate + "'";
             }
 
             string sqlStr = @"select a.*,b.WordkDays,c.NotWordkDays,d.EmployeeNum from
@@ -234,7 +234,7 @@ on a.DepartmentCode=c.DepartmentCode
 
             if (where.Attr_EndDate != null)
             {
-                whereStr += " and a.Date<='" + where.Attr_EndDate + "'";
+                whereStr += " and a.Date<'" + where.Attr_EndDate + "'";
             }
 
             string sqlStr = @"select a.*,b.WordkDays,c.NotWordkDays,d.EmployeeNum from

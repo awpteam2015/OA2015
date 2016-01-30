@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Project.Infrastructure.FrameworkCore.DataNhibernate.Helpers;
+using Project.Infrastructure.FrameworkCore.ToolKit;
 using Project.Infrastructure.FrameworkCore.ToolKit.LinqExpansion;
 using Project.Infrastructure.FrameworkCore.WebMvc.Controllers.Results;
 using Project.Infrastructure.FrameworkCore.WebMvc.Models;
@@ -37,6 +38,15 @@ namespace Project.WebApplication.Areas.ReportManager.Controllers
             var pIndex = this.Request["page"].ConvertTo<int>();
             var pSize = this.Request["rows"].ConvertTo<int>();
             var where = new AttendanceViewEntity();
+            if (!string.IsNullOrWhiteSpace(RequestHelper.GetFormString("Date")))
+            {
+                var date = RequestHelper.GetDateTime("Date").GetValueOrDefault();
+                int days = DateTime.DaysInMonth(date.Year, date.Month);
+                where.Attr_StartDate = date;
+                where.Attr_EndDate = where.Attr_StartDate.GetValueOrDefault().AddDays(days);
+            }
+            where.DepartmentCode = RequestHelper.GetFormString("DepartmentCode");
+
             //where.PkId = RequestHelper.GetFormString("PkId");
             //where.AttendanceUploadRecordId = RequestHelper.GetFormString("AttendanceUploadRecordId");
             //where.EmployeeCode = RequestHelper.GetFormString("EmployeeCode");
@@ -65,6 +75,14 @@ namespace Project.WebApplication.Areas.ReportManager.Controllers
             var pIndex = this.Request["page"].ConvertTo<int>();
             var pSize = this.Request["rows"].ConvertTo<int>();
             var where = new AttendanceViewEntity2();
+            if (!string.IsNullOrWhiteSpace(RequestHelper.GetFormString("Date")))
+            {
+                var date = RequestHelper.GetDateTime("Date").GetValueOrDefault();
+                int days = DateTime.DaysInMonth(date.Year, date.Month);
+                where.Attr_StartDate = date;
+                where.Attr_EndDate = where.Attr_StartDate.GetValueOrDefault().AddDays(days);
+            }
+            where.DepartmentCode = RequestHelper.GetFormString("DepartmentCode");
             //where.PkId = RequestHelper.GetFormString("PkId");
             //where.AttendanceUploadRecordId = RequestHelper.GetFormString("AttendanceUploadRecordId");
             //where.EmployeeCode = RequestHelper.GetFormString("EmployeeCode");
