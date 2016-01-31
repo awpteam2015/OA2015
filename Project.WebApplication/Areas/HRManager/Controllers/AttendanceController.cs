@@ -3,6 +3,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
+using System.Web;
 using System.Web.Mvc;
 using AutoMapper;
 using Project.Infrastructure.FrameworkCore.DataNhibernate.Helpers;
@@ -12,7 +14,9 @@ using Project.Infrastructure.FrameworkCore.ToolKit.LinqExpansion;
 using Project.Infrastructure.FrameworkCore.WebMvc.Controllers.Results;
 using Project.Infrastructure.FrameworkCore.WebMvc.Models;
 using Project.Model.HRManager;
+using Project.Model.ReportManager;
 using Project.Service.HRManager;
+using Project.Service.ReportManager;
 using Project.WebApplication.Controllers;
 
 namespace Project.WebApplication.Areas.HRManager.Controllers
@@ -40,20 +44,7 @@ namespace Project.WebApplication.Areas.HRManager.Controllers
         {
             var pIndex = this.Request["page"].ConvertTo<int>();
             var pSize = this.Request["rows"].ConvertTo<int>();
-            var where = new AttendanceEntity();
-            //where.PkId = RequestHelper.GetFormString("PkId");
-            //where.AttendanceUploadRecordId = RequestHelper.GetFormString("AttendanceUploadRecordId");
-            //where.EmployeeCode = RequestHelper.GetFormString("EmployeeCode");
-            //where.DepartmentCode = RequestHelper.GetFormString("DepartmentCode");
-            //where.DepartmentName = RequestHelper.GetFormString("DepartmentName");
-            //where.State = RequestHelper.GetFormString("State");
-            //where.Date = RequestHelper.GetFormString("Date");
-            //where.Remark = RequestHelper.GetFormString("Remark");
-            //where.CreatorUserCode = RequestHelper.GetFormString("CreatorUserCode");
-            //where.CreatorUserName = RequestHelper.GetFormString("CreatorUserName");
-            //where.CreateTime = RequestHelper.GetFormString("CreateTime");
-            //where.IsDelete = RequestHelper.GetFormString("IsDelete");
-            var searchList = AttendanceService.GetInstance().Search(where, (pIndex - 1) * pSize, pSize);
+            var searchList = AttendanceService.GetInstance().Search(GetWhere(), (pIndex - 1) * pSize, pSize);
 
             var dataGridEntity = new DataGridResponse()
             {
@@ -61,6 +52,66 @@ namespace Project.WebApplication.Areas.HRManager.Controllers
                 rows = searchList.Item1
             };
             return new AbpJsonResult(dataGridEntity, new NHibernateContractResolver());
+        }
+
+        public void ExportReport()
+        {
+            string excelFileName = DateTime.Now.ToString() + ".xls";
+            //防止中文文件名IE下乱码的问题
+            // if (Request.Browser.Browser == "IE" || Request.Browser.Browser == "InternetExplorer")
+            if (Request.ServerVariables["http_user_agent"].ToLower().IndexOf("firefox") != -1)
+            {
+
+            }
+            else
+                excelFileName = HttpUtility.UrlPathEncode(excelFileName);
+
+            Response.Clear();
+            Response.AddHeader("content-disposition", "attachment;filename=" + excelFileName);
+            Response.AddHeader("Cache-Control", "max-age=0");
+            Response.Charset = "GB2312";
+            Response.ContentEncoding = Encoding.GetEncoding("GB2312");
+            Response.ContentType = "application/vnd.xls";
+
+
+            var searchList = AttendanceService.GetInstance().GetList(GetWhere());
+
+            var jsonBuilder = new StringBuilder();
+            jsonBuilder.AppendFormat(@"<table class='GridViewStyle' style='border-collapse:collapse;width:1000px;' cellspacing='0' rules='all' border='1'>
+                <tr>
+                    <th>工号</th>
+                    <th>部门编号</th>
+                    <th>部门名称</th>
+                    <th>状态</th>
+                    <th>考勤日期</th>
+                   </tr>");
+            searchList.ForEach(p =>
+            {
+                jsonBuilder.Append("<tr>");
+                jsonBuilder.AppendFormat("<td>{0}</td>", p.EmployeeCode);
+                jsonBuilder.AppendFormat("<td>{0}</td>", p.DepartmentCode);
+                jsonBuilder.AppendFormat("<td>{0}</td>", p.DepartmentName);
+                jsonBuilder.AppendFormat("<td>{0}</td>", p.Attr_State);
+                jsonBuilder.AppendFormat("<td>{0}</td>", p.Date.SetDate());
+                jsonBuilder.Append("</tr>");
+            });
+            jsonBuilder.Append("</table>");
+            Response.Write(jsonBuilder.ToString());
+            Response.End();
+        }
+
+        public AttendanceEntity GetWhere()
+        {
+            var where = new AttendanceEntity();
+            //where.PkId = RequestHelper.GetFormString("PkId");
+            //where.AttendanceUploadRecordId = RequestHelper.GetFormString("AttendanceUploadRecordId");
+            where.EmployeeCode = RequestHelper.GetString("EmployeeCode");
+            where.Attr_StartDate = RequestHelper.GetDateTime("Attr_StartDate");
+            where.Attr_EndDate = RequestHelper.GetDateTime("Attr_EndDate");
+            where.DepartmentCode = RequestHelper.GetString("DepartmentCode");
+            //where.DepartmentName = RequestHelper.GetFormString("DepartmentName");
+            where.State = RequestHelper.GetInt("State");
+            return where;
         }
 
 
@@ -103,6 +154,9 @@ namespace Project.WebApplication.Areas.HRManager.Controllers
             };
             return new AbpJsonResult(result, new NHibernateContractResolver(new string[] { "result" }));
         }
+
+
+
     }
 }
 

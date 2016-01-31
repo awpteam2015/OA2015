@@ -36,6 +36,21 @@ namespace Project.Model.HRManager
         /// -1代表缺勤 1代表正常
         /// </summary>
         public virtual System.Int32? State{get; set;}
+
+        public virtual string Attr_State {
+            get
+            {
+                if (State==1)
+                {
+                    return "在岗";
+                }
+                else
+                {
+                    return "缺勤";
+                }
+            }
+        }
+
         /// <summary>
         /// 考勤日期
         /// </summary>
@@ -65,7 +80,8 @@ namespace Project.Model.HRManager
         
 
         #region 新增属性
-        
+        public virtual DateTime? Attr_StartDate { get; set; }
+        public virtual DateTime? Attr_EndDate { get; set; }
         #endregion
 
 

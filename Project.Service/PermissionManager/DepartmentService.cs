@@ -195,6 +195,14 @@ namespace Project.Service.PermissionManager
 
         #region 新增方法
 
+        //public string GetChildDepartmentCode()
+        //{  var listAll = this.GetList(new DepartmentEntity());
+        //   GetChildList(listAll,new DepartmentEntity(){DepartmentCode = "01"});
+        //    return "";
+        //}
+
+
+
         public IList<DepartmentEntity> GetTreeList(DepartmentEntity entity, bool isShowTop = false)
         {
             var listAll = this.GetList(entity);

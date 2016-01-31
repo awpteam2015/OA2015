@@ -21,10 +21,10 @@ var pro = pro || {};
                 rownumbers: true, //行号
                 singleSelect: true,
                 columns: [[
-         { field: 'PkId', title: '序号', width: 100 },
+         //{ field: 'PkId', title: '序号', width: 100 },
          { field: 'EmployeeCode', title: '工号', width: 100 },
          { field: 'DepartmentName', title: '部门', width: 100 },
-         { field: 'State', title: '状态', width: 100 },
+         { field: 'Attr_State', title: '状态', width: 100 },
          { field: 'Date', title: '考勤日期', width: 100 },
          { field: 'CreatorUserCode', title: '创建人', width: 100 },
          { field: 'CreationTime', title: '创建时间', width: 100 },
@@ -38,6 +38,13 @@ var pro = pro || {};
                );
 
             pro.DepartmentControl.init();
+
+
+            $('#btnExport').click(function () {
+                var urlParam = pro.commonKit.parseParam(gridObj.searchForm());
+                location.href = "/HRManager/Attendance/ExportReport?" + urlParam;
+            });
+        
 
             $("#btnAdd").click(function () {
                 tabObj.add("/HRManager/Attendance/Hd", "新增");

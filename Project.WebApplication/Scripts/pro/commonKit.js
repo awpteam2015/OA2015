@@ -20,6 +20,18 @@
             }
             return paramValue;
         },
+        parseParam: function (param, key) {
+            var paramStr = "";
+            if (param instanceof String || param instanceof Number || param instanceof Boolean) {
+                paramStr += "&" + key + "=" + encodeURIComponent(param);
+            } else {
+                $.each(param, function (i) {
+                    var k = key == null ? i : key + (param instanceof Array ? "[" + i + "]" : "." + i);
+                    paramStr += '&' + pro.commonKit.parseParam(this, k);
+                });
+            }
+            return paramStr.substr(1);
+        },
         errorPlacementHd: function (error, element) {
             if (element.get(0).type.indexOf("select") == -1) {
                 element.attr('title', error.html());
