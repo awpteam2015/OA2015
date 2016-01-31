@@ -31,9 +31,9 @@ namespace Project.Service.ReportManager
         /// <param name="where"></param>
         /// <param name="skipResults"></param>
         /// <param name="maxResults"></param>
-        public Tuple<IList<AttendanceViewEntity>, int> GerAttendanceReport1(AttendanceViewEntity where, int skipResults, int maxResults)
+        public Tuple<IList<AttendanceViewEntity>, int> GerAttendanceReport1(AttendanceViewEntity where, int skipResults, int maxResults, bool ifGetALL = false)
         {
-            var list = _HrReportRepository.GerAttendanceReport1(where, skipResults, maxResults);
+            var list = _HrReportRepository.GerAttendanceReport1(where, skipResults, maxResults, ifGetALL);
             return list;
         }
 
@@ -43,9 +43,9 @@ namespace Project.Service.ReportManager
         /// <param name="where"></param>
         /// <param name="skipResults"></param>
         /// <param name="maxResults"></param>
-        public Tuple<IList<AttendanceViewEntity2>, int> GerAttendanceReport2(AttendanceViewEntity2 where, int skipResults, int maxResults)
+        public Tuple<IList<AttendanceViewEntity2>, int> GerAttendanceReport2(AttendanceViewEntity2 where, int skipResults, int maxResults, bool ifGetALL = false)
         {
-            var list = _HrReportRepository.GerAttendanceReport2(where, skipResults, maxResults);
+            var list = _HrReportRepository.GerAttendanceReport2(where, skipResults, maxResults, ifGetALL);
             return list;
         }
 
@@ -57,9 +57,9 @@ namespace Project.Service.ReportManager
         /// <param name="where"></param>
         /// <param name="skipResults"></param>
         /// <param name="maxResults"></param>
-        public Tuple<IList<AttendanceViewEntity>, int> GerAttendanceReport3(AttendanceViewEntity where, int skipResults, int maxResults)
+        public Tuple<IList<AttendanceViewEntity>, int> GerAttendanceReport3(AttendanceViewEntity where, int skipResults, int maxResults, bool ifGetALL = false)
         {
-            var list = _HrReportRepository.GerAttendanceReport3(where, skipResults, maxResults);
+            var list = _HrReportRepository.GerAttendanceReport3(where, skipResults, maxResults, ifGetALL);
             return list;
         }
 
@@ -70,9 +70,9 @@ namespace Project.Service.ReportManager
         /// <param name="where"></param>
         /// <param name="skipResults"></param>
         /// <param name="maxResults"></param>
-        public Tuple<IList<AttendanceViewEntity>, int> GerAttendanceReport4(AttendanceViewEntity where, int skipResults, int maxResults)
+        public Tuple<IList<AttendanceViewEntity>, int> GerAttendanceReport4(AttendanceViewEntity where, int skipResults, int maxResults, bool ifGetALL = false)
         {
-            var list = _HrReportRepository.GerAttendanceReport4(where, skipResults, maxResults);
+            var list = _HrReportRepository.GerAttendanceReport4(where, skipResults, maxResults, ifGetALL);
             return list;
         }
 

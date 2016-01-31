@@ -43,6 +43,11 @@ var pro = pro || {};
             $("#btnRefresh").click(function () {
                 gridObj.refresh();
             });
+
+            $('#btnExport').click(function () {
+                var departmentCode = $('#DepartmentCode').combotree("getValue");
+                location.href = "/ReportManager/HrReport/ExportReport1?Date=" + $("#Date").val() + "&DepartmentCode=" + departmentCode;
+            });
         },
         closeTab: function () {
             this.init().tabObj.closeTab();
