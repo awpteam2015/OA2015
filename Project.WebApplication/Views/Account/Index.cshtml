@@ -38,7 +38,7 @@
                     <ul class='menulist'>
                         @foreach (var child in p.MenuDTOList)
                         {
-                            <li><a target='mainFrame' href='javascript:void(0)' lang='@child.Url' >@child.Name</a></li>
+                            <li><a target='mainFrame' href='javascript:void(0)' lang='@child.Url'>@child.Name</a></li>
                         }
                     </ul>
                 </div>
@@ -100,7 +100,7 @@
     </div>
     <div data-options="region:'south',border:false" style="height: 20px; background: #D2E0F2;">
         <div style="text-align: center; font-weight: bold">
-            EIP系统 1.0
+            人事管理系统 1.0
         </div>
     </div>
     <div data-options="region:'center'" style="background: #eee; overflow: hidden;">
@@ -150,13 +150,13 @@
                 }
             }
         });
-            //右键菜单click
-            $("#tabs_menu").menu({
-                onClick: function (item) {
-                    closeTab(this, item.name);
-                }
-            });
-     
+        //右键菜单click
+        $("#tabs_menu").menu({
+            onClick: function (item) {
+                closeTab(this, item.name);
+            }
+        });
+
 
         //删除Tabs
         function closeTab(menu, type) {
