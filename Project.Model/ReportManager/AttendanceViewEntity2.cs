@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Project.Model.ReportManager
 {
-  public  class AttendanceViewEntity2
+  public  class AttendanceViewEntity
     {
         public virtual System.String EmployeeCode { get; set; }
         /// <summary>
@@ -22,7 +22,7 @@ namespace Project.Model.ReportManager
 
         public virtual System.Int32 NotWordkDays { get; set; }
 
-        public virtual System.Int32 EmployeeNum { get; set; }
+
 
         public virtual DateTime? Attr_StartDate { get; set; }
 
