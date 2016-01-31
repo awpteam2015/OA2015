@@ -34,7 +34,7 @@
 
             selectObj.each(
                 function () {
-                    if ($(this).attr("name") != undefined) {
+                    if ($(this).attr("name") != undefined && $(this).val() != undefined) {                        
                         json += '"' + $(this).attr("name") + '":"' + $(this).val().trim() + '",';
                     }
                 }
