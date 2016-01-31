@@ -9,93 +9,27 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>Login</title>
-    <style type="text/css">
-        body {
-            background: #001F6F url(/Content/images/login/bg1.gif) repeat-x 0 0;
-        }
-
-        .login {
-            width: 923px;
-            height: 526px;
-            background: url(/Content/images/login/bg2.jpg) no-repeat 0 0;
-            margin: 70px auto 0;
-            position: relative;
-        }
-
-        .loginForm {
-            position: absolute;
-            top: 238px;
-            left: 250px;
-            width: 600px;
-            z-index: 99;
-        }
-
-        .jszc {
-            position: absolute;
-            top: 350px;
-            left: 580px;
-            z-index: 99;
-        }
-
-        .loginForm div {
-            float: left;
-            display: inline;
-            margin: 15px 0;
-        }
-
-            .loginForm div.loginPwd {
-                margin-left: 55px;
-            }
-
-        .loginName input, .loginPwd input {
-            border: 1px solid #01468D;
-            background: #D3F1FF;
-            width: 155px;
-            height: 18px;
-            color: #002B78;
-        }
-
-        .loginForm div.loginBtn {
-            margin-top: 7px;
-            margin-left: 10px;
-        }
-
-        .loginBtn input {
-            background: url(/Content/images/login/go.gif) no-repeat 0 0;
-            border: 0;
-            width: 33px;
-            height: 33px;
-        }
-
-            .loginBtn input:hover {
-                cursor: pointer;
-            }
-    </style>
     @Html.Partial("_Head")
     <script src="~/Scripts/Login/Login.js?JsParamter=@SiteConfig.GetConfig().JsParamter"></script>
 </head>
-<body>  
-  
-    <div class="login">
+<body>
+    <div>
         @ViewBag.PermissionScript
-        <div class="loginForm">
-            <div class="loginName">
-                <input id="UserCode" name="UserCode" type="text" style="width:150px;" />
-            </div>
-            <div class="loginPwd">
-                <input id="Password" name="Password" type="password" style="width:145px;" />
-            </div>
-            <div class="loginBtn">
-                <input type="button" id="btn_Login"  name="btn_Login"/>
-            </div>
-        </div>
-        <div class="jszc">
-            <span style="font-size: 13px; color: White;">
-                技术支持：<a href="http://www.baidu.com"
-                        target="_blank" style="color: White;">浙江嘉康</a>
-            </span>
-        </div>
-    </div>
+        <table>
+            <tr>
+                <td>用户名：</td>
+                <td><input type="text" name="UserCode"/></td>
+            </tr>
+            <tr>
+                <td>密码：</td>
+                <td><input type="password" name="Password" /></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><input type="button" value="登录" id="btn_Login"/></td>
+            </tr>
+        </table>
+     </div>
 </body>
 
 
