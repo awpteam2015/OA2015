@@ -22,6 +22,11 @@ namespace Project.WebApplication.Controllers
             return View();
         }
 
+        public ActionResult Index2()
+        {
+
+            return View();
+        }
 
         [HttpPost]
         public JsonResult UserLogin(string userCode, string password)
