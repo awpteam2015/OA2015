@@ -88,6 +88,7 @@
     <Content Include="Config\hibernate.cfg.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="lww.txt" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
