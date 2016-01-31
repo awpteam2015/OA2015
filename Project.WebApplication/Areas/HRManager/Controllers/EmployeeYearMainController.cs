@@ -12,6 +12,7 @@ using Project.Service.HRManager;
 using Project.WebApplication.Controllers;
 using AutoMapper;
 using Project.Infrastructure.FrameworkCore.ToolKit;
+using Project.Service.PermissionManager;
 
 namespace Project.WebApplication.Areas.HRManager.Controllers
 {
@@ -41,6 +42,7 @@ namespace Project.WebApplication.Areas.HRManager.Controllers
             var where = new EmployeeYearMainEntity();
             //where.PkId = RequestHelper.GetFormString("PkId");
             where.DepartmentCode = RequestHelper.GetFormString("DepartmentCode");
+            where.DepartmentCode = string.Join(",", (DepartmentService.GetInstance().GetChiledArr(where.DepartmentCode)));
             where.EmployeeCode = RequestHelper.GetFormString("EmployeeCode");
             //where.LeftCount = RequestHelper.GetFormString("LeftCount");
             //where.Remark = RequestHelper.GetFormString("Remark");
@@ -55,7 +57,7 @@ namespace Project.WebApplication.Areas.HRManager.Controllers
                 total = searchList.Item2,
                 rows = searchList.Item1
             };
-            return new AbpJsonResult(dataGridEntity, new NHibernateContractResolver(new string[] { "DepartmentEntity" }, new string[] { "Remark"}));
+            return new AbpJsonResult(dataGridEntity, new NHibernateContractResolver(new string[] { "DepartmentEntity" }, new string[] { "Remark" }));
         }
 
 
@@ -64,7 +66,7 @@ namespace Project.WebApplication.Areas.HRManager.Controllers
         {
             postData.RequestEntity.CreatorUserName = LoginUserInfo.UserName;
             var addResult = EmployeeYearMainService.GetInstance().Add(postData.RequestEntity);
-          
+
             return new AbpJsonResult<string>(addResult);
         }
 
@@ -72,7 +74,7 @@ namespace Project.WebApplication.Areas.HRManager.Controllers
         [HttpPost]
         public AbpJsonResult<string> Edit(AjaxRequest<EmployeeYearMainEntity> postData)
         {
-            postData.RequestEntity.LastModificationTime = DateTime.Now;           
+            postData.RequestEntity.LastModificationTime = DateTime.Now;
 
             var newInfo = postData.RequestEntity;
             var orgInfo = EmployeeYearMainService.GetInstance().GetModelByPk(postData.RequestEntity.PkId);

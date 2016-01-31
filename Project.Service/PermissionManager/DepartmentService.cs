@@ -14,6 +14,7 @@ using Project.Infrastructure.FrameworkCore.ToolKit.LinqExpansion;
 using Project.Model.PermissionManager;
 using Project.Repository.PermissionManager;
 using Project.Service.PermissionManager.Validate;
+using AutoMapper;
 
 namespace Project.Service.PermissionManager
 {
@@ -49,7 +50,7 @@ namespace Project.Service.PermissionManager
             {
                 return validateResult;
             }
-            var addResult =_departmentRepository.Save(entity);
+            var addResult = _departmentRepository.Save(entity);
             if (addResult > 0)
             {
                 return new Tuple<bool, string>(true, "");
@@ -111,7 +112,7 @@ namespace Project.Service.PermissionManager
             try
             {
                 _departmentRepository.Merge(entity);
-                return new Tuple<bool, string>(true,"");
+                return new Tuple<bool, string>(true, "");
             }
             catch
             {
@@ -135,7 +136,7 @@ namespace Project.Service.PermissionManager
             var expr = PredicateBuilder.True<DepartmentEntity>();
             #region
             if (!string.IsNullOrEmpty(departmentCode))
-                expr = expr.And(p => p.DepartmentCode ==departmentCode);
+                expr = expr.And(p => p.DepartmentCode == departmentCode);
             #endregion
             var list = _departmentRepository.Query().Where(expr).OrderBy(p => p.PkId).ToList();
             return list.FirstOrDefault();
@@ -233,7 +234,41 @@ namespace Project.Service.PermissionManager
 
         }
 
+        public string[] GetChiledArr(System.String departmentCode)
+        {
+            if (string.IsNullOrEmpty(departmentCode) || departmentCode == "0")
+            {
+                return new string[] { };
+            }
 
+            var parentDepartmentEntity = GetModelByDepartmentCode(departmentCode);
+            var extEntity = new DepartmentExtEntity() { childrenAll = new List<DepartmentEntity>() };
+
+            var listAll = this.GetList(new DepartmentEntity());
+            GetChildList(listAll, parentDepartmentEntity);
+
+            Mapper.Map(extEntity, parentDepartmentEntity);
+            GetChildArry(extEntity, parentDepartmentEntity);
+            extEntity.childrenAll.Add(parentDepartmentEntity);
+            // parentDepartmentEntity.children.ForEach()
+            return extEntity.childrenAll.Select(item => item.DepartmentCode).ToList().ToArray();
+        }
+
+        private void GetChildArry(DepartmentExtEntity sourceDepartmentEntity, DepartmentEntity parentDepartmentEntity)
+        {
+
+            var childList = parentDepartmentEntity.children;
+
+            if (childList != null && childList.Any())
+            {
+                foreach (var item in childList)
+                {
+                    sourceDepartmentEntity.childrenAll.Add(item);
+                    GetChildArry(sourceDepartmentEntity, item);
+                };
+            }
+
+        }
 
         #endregion
     }

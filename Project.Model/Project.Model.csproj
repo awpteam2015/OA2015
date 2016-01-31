@@ -59,6 +59,7 @@
     <Compile Include="HRManager\TechnicalEntity.cs" />
     <Compile Include="HRManager\WorkExperienceEntity.cs" />
     <Compile Include="HRManager\YearHolidayDefinitionEntity.cs" />
+    <Compile Include="PermissionManager\DepartmentExtEntity.cs" />
     <Compile Include="PermissionManager\DepartmentEntity.cs" />
     <Compile Include="PermissionManager\FunctionDetailModel.cs" />
     <Compile Include="PermissionManager\FunctionModel.cs" />

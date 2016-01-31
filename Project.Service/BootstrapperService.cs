@@ -23,6 +23,7 @@ namespace Project.Service
             Mapper.CreateMap<EmployeeYearDetailEntity, EmployeeYearDetailEntity>().IgnoreAllNull();
             Mapper.CreateMap<EmployeeYearMainEntity, EmployeeYearMainEntity>().IgnoreAllNull();
             Mapper.CreateMap<ContractEntity, ContractEntity>().IgnoreAllNull();
+            Mapper.CreateMap<DepartmentExtEntity, DepartmentEntity>().IgnoreAllNull();
             Mapper.CreateMap<AttendanceEntity, AttendanceEntity>().IgnoreAllNull();
             Mapper.CreateMap<AttendanceUploadRecordEntity, AttendanceUploadRecordEntity>().IgnoreAllNull();
             Mapper.CreateMap<FunctionDetailEntity, PermissionFunctionDetailDTO>();

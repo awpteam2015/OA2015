@@ -56,9 +56,9 @@ var pro = pro || {};
             $('#DepartmentCode').combotree({
                 required: true,
                 editable: false,
-                multiple: true,//支持多选
+                //multiple: true,//支持多选
                 //checkbox: true,
-                cascadeCheck: false,
+                //cascadeCheck: false,
                 //lines: true,
                 valueField: 'DepartmentCode',
                 textField: 'DepartmentName',
