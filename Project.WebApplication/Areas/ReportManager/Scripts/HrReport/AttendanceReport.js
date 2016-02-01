@@ -45,8 +45,8 @@ var pro = pro || {};
             });
 
             $('#btnExport').click(function () {
-                var departmentCode = $('#DepartmentCode').combotree("getValue");
-                location.href = "/ReportManager/HrReport/ExportReport1?Date=" + $("#Date").val() + "&DepartmentCode=" + departmentCode;
+                var urlParam = pro.commonKit.parseParam(gridObj.searchForm());
+                location.href = "/ReportManager/HrReport/ExportReport1?" + urlParam;
             });
         },
         closeTab: function () {

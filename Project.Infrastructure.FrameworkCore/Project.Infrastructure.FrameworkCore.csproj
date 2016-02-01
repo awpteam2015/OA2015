@@ -163,6 +163,7 @@
     <Compile Include="ToolKit\ConvertHelper.cs" />
     <Compile Include="ToolKit\CookieHelper.cs" />
     <Compile Include="ToolKit\DataSetHelper.cs" />
+    <Compile Include="ToolKit\DateTimeExtend.cs" />
     <Compile Include="ToolKit\DateTimeHelper.cs" />
     <Compile Include="ToolKit\Encrypt.cs" />
     <Compile Include="ToolKit\EntityHelper.cs" />

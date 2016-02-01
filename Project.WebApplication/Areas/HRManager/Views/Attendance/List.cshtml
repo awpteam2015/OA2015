@@ -29,14 +29,14 @@
                             工号:
                         </td>
                         <td>
-                            <input id="EmployeeCode" name="EmployeeCode" type="text" />
+                            <input id="EmployeeCode" name="EmployeeCode" type="text"/>
                         </td>
 
                         <td>
                             部门:
                         </td>
                         <td>
-                            <input id="DepartmentCode" name="DepartmentCode" type="text" style="width: 300px" />
+                            <input id="DepartmentCode" name="DepartmentCode" type="text" style="width: 300px"/>
                         </td>
 
 
@@ -51,18 +51,26 @@
                                 <option value="-1">缺勤</option>
                             </select>
                         </td>
+                    </tr>
+                    <tr>
 
                         <td>
-                            考勤日期:
+                            考勤开始日期:
                         </td>
                         <td>
-                            <input id="Date" name="Date" type="text" onclick="WdatePicker();" />
+                            <input id="Attr_StartDate" name="Attr_StartDate" type="text" onclick="WdatePicker();" />
                         </td>
 
+                        <td>
+                            考勤结束日期:
+                        </td>
+                        <td>
+                            <input id="Attr_EndDate" name="Attr_EndDate" type="text" onclick="WdatePicker();" />
+                        </td>
 
-                  
-                        <td >
+                        <td>
                             <a href="#" class="easyui-linkbutton" iconcls="icon-search" id="btnSearch">搜索</a>
+                            <a href="#" class="easyui-linkbutton" iconcls="icon-add" id="btnExport">导出</a>
                         </td>
                     </tr>
                 </table>

@@ -92,7 +92,7 @@ namespace Project.Service.HRManager
                 _attendanceRepository.Update(entity);
                 return new Tuple<bool, string>(true, "");
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 throw;
             }
@@ -125,16 +125,18 @@ namespace Project.Service.HRManager
             //  expr = expr.And(p => p.PkId == where.PkId);
             // if (!string.IsNullOrEmpty(where.AttendanceUploadRecordId))
             //  expr = expr.And(p => p.AttendanceUploadRecordId == where.AttendanceUploadRecordId);
-            // if (!string.IsNullOrEmpty(where.EmployeeCode))
-            //  expr = expr.And(p => p.EmployeeCode == where.EmployeeCode);
-            // if (!string.IsNullOrEmpty(where.DepartmentCode))
-            //  expr = expr.And(p => p.DepartmentCode == where.DepartmentCode);
+            if (!string.IsNullOrEmpty(where.EmployeeCode))
+                expr = expr.And(p => p.EmployeeCode == where.EmployeeCode);
+            if (!string.IsNullOrEmpty(where.DepartmentCode))
+                expr = expr.And(p => p.DepartmentCode == where.DepartmentCode);
             // if (!string.IsNullOrEmpty(where.DepartmentName))
             //  expr = expr.And(p => p.DepartmentName == where.DepartmentName);
-            // if (!string.IsNullOrEmpty(where.State))
-            //  expr = expr.And(p => p.State == where.State);
-            // if (!string.IsNullOrEmpty(where.Date))
-            //  expr = expr.And(p => p.Date == where.Date);
+            if (where.State != 0)
+                expr = expr.And(p => p.State == where.State);
+            if (where.Attr_StartDate != null)
+                expr = expr.And(p => p.Date >= where.Attr_StartDate);
+            if (where.Attr_EndDate != null)
+                expr = expr.And(p => p.Date < where.Attr_EndDate);
             // if (!string.IsNullOrEmpty(where.Remark))
             //  expr = expr.And(p => p.Remark == where.Remark);
             // if (!string.IsNullOrEmpty(where.CreatorUserCode))
@@ -164,16 +166,18 @@ namespace Project.Service.HRManager
             //  expr = expr.And(p => p.PkId == where.PkId);
             // if (!string.IsNullOrEmpty(where.AttendanceUploadRecordId))
             //  expr = expr.And(p => p.AttendanceUploadRecordId == where.AttendanceUploadRecordId);
-            // if (!string.IsNullOrEmpty(where.EmployeeCode))
-            //  expr = expr.And(p => p.EmployeeCode == where.EmployeeCode);
-            // if (!string.IsNullOrEmpty(where.DepartmentCode))
-            //  expr = expr.And(p => p.DepartmentCode == where.DepartmentCode);
+            if (!string.IsNullOrEmpty(where.EmployeeCode))
+                expr = expr.And(p => p.EmployeeCode == where.EmployeeCode);
+            if (!string.IsNullOrEmpty(where.DepartmentCode))
+                expr = expr.And(p => p.DepartmentCode == where.DepartmentCode);
             // if (!string.IsNullOrEmpty(where.DepartmentName))
             //  expr = expr.And(p => p.DepartmentName == where.DepartmentName);
-            // if (!string.IsNullOrEmpty(where.State))
-            //  expr = expr.And(p => p.State == where.State);
-            // if (!string.IsNullOrEmpty(where.Date))
-            //  expr = expr.And(p => p.Date == where.Date);
+            if (where.State != 0)
+                expr = expr.And(p => p.State == where.State);
+            if (where.Attr_StartDate != null)
+                expr = expr.And(p => p.Date >= where.Attr_StartDate);
+            if (where.Attr_EndDate != null)
+                expr = expr.And(p => p.Date < where.Attr_EndDate);
             // if (!string.IsNullOrEmpty(where.Remark))
             //  expr = expr.And(p => p.Remark == where.Remark);
             // if (!string.IsNullOrEmpty(where.CreatorUserCode))

@@ -39,10 +39,11 @@ var pro = pro || {};
                 gridObj.search();
             });
 
-
-            $("#btnRefresh").click(function () {
-                gridObj.refresh();
+            $('#btnExport').click(function () {
+                var urlParam = pro.commonKit.parseParam(gridObj.searchForm());
+                location.href = "/ReportManager/HrReport/ExportReport1?" + urlParam;
             });
+
         },
         closeTab: function () {
             this.init().tabObj.closeTab();

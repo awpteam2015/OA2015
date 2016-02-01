@@ -53,7 +53,7 @@ namespace Project.WebApplication.Areas.ReportManager.Controllers
 
         public void ExportReport1()
         {
-            string excelFileName = "111.xls";
+            string excelFileName =DateTime.Now.ToString()+ ".xls";
             //防止中文文件名IE下乱码的问题
             // if (Request.Browser.Browser == "IE" || Request.Browser.Browser == "InternetExplorer")
             if (Request.ServerVariables["http_user_agent"].ToLower().IndexOf("firefox") != -1)

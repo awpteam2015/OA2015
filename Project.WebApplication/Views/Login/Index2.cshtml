@@ -1,5 +1,4 @@
-﻿
-@{
+﻿@{
     Layout = null;
 }
 
@@ -74,10 +73,15 @@
     @Html.Partial("_Head")
     <script src="~/Scripts/Login/Login.js?JsParamter=@SiteConfig.GetConfig().JsParamter"></script>
 </head>
-<body>  
-  
+<body>
+
     <div class="login">
         @ViewBag.PermissionScript
+        <div style="padding-top: 130px; padding-left: 350px; color: white">
+            <h1>人事档案管理平台</h1>
+            @*<h3>Ren shi dang an Platform</h3>*@
+        </div>
+      
         <div class="loginForm">
             <div class="loginName">
                 <input id="UserCode" name="UserCode" type="text" style="width:150px;" />
@@ -86,13 +90,12 @@
                 <input id="Password" name="Password" type="password" style="width:145px;" />
             </div>
             <div class="loginBtn">
-                <input type="button" id="btn_Login"  name="btn_Login"/>
+                <input type="button" id="btn_Login" name="btn_Login" />
             </div>
         </div>
         <div class="jszc">
             <span style="font-size: 13px; color: White;">
-                技术支持：<a href="http://www.baidu.com"
-                        target="_blank" style="color: White;">浙江嘉康</a>
+
             </span>
         </div>
     </div>
