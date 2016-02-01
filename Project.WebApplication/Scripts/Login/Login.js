@@ -8,7 +8,6 @@
             });
         },
         Login: function () {
-            debugger;
             var postData = pro.submitKit.getHeadJson();
             abp.ajax({
                 url: "/Login/UserLogin",

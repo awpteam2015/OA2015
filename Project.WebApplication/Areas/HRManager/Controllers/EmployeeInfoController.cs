@@ -14,6 +14,7 @@ using Project.WebApplication.Controllers;
 using Project.Infrastructure.FrameworkCore.ToolKit;
 using Project.Infrastructure.FrameworkCore.WebMvc.Controllers.Results;
 using Project.Infrastructure.FrameworkCore.WebMvc.Models;
+using Project.Service.PermissionManager;
 
 namespace Project.WebApplication.Areas.HRManager.Controllers
 {
@@ -83,7 +84,7 @@ namespace Project.WebApplication.Areas.HRManager.Controllers
         {
             var where = new EmployeeInfoEntity();
             where.DepartmentCode = RequestHelper.QueryString["DepartmentCode"];
-
+            where.DepartmentCode = string.Join(",", (DepartmentService.GetInstance().GetChiledArr(where.DepartmentCode)));
             //where.DepartmentCode = RequestHelper.GetFormString("DepartmentCode");
             var searchList = EmployeeInfoService.GetInstance().GetList(where,true);
 
