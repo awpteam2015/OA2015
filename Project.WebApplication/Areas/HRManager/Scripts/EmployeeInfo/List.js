@@ -90,7 +90,10 @@ var pro = pro || {};
                 editable: false,
                 valueField: 'KeyValue',
                 textField: 'KeyName',
-                url: '/HRManager/Dictionary/GetListByCode?ParentKeyCode=ZZZT'
+                url: '/HRManager/Dictionary/GetListByCode?ParentKeyCode=ZZZT&AllFlag=1',
+                onLoadSuccess: function () {
+                    $('#WorkState').combobox("setValue", "");
+                }
             });
 
             $('#EmployeeType').combobox({
@@ -98,7 +101,10 @@ var pro = pro || {};
                 editable: false,
                 valueField: 'KeyValue',
                 textField: 'KeyName',
-                url: '/HRManager/Dictionary/GetListByCode?ParentKeyCode=YGLY'
+                url: '/HRManager/Dictionary/GetListByCode?ParentKeyCode=YGLY&AllFlag=1',
+                onLoadSuccess: function () {
+                    $('#EmployeeType').combobox("setValue", "");
+                }
             });
             //$('#DepartmentCode').combotree({
             //    required: true,

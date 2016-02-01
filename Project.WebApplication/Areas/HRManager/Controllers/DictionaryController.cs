@@ -77,9 +77,9 @@ namespace Project.WebApplication.Areas.HRManager.Controllers
             //where.KeyName = RequestHelper.GetFormString("KeyName");
             //where.KeyValue = RequestHelper.GetFormString("KeyValue");
             var searchList = DictionaryService.GetInstance().GetList(where);
-            if (string.IsNullOrEmpty(RequestHelper.GetQueryString("AllFlag")))
+            if (!string.IsNullOrEmpty(RequestHelper.GetQueryString("AllFlag")))
             {
-                searchList.Insert(0, new DictionaryEntity() { KeyName = "全部" });
+                searchList.Insert(0, new DictionaryEntity() { KeyName = "全部", KeyValue = "" });
             }
             return new AbpJsonResult(searchList, new NHibernateContractResolver());
         }
