@@ -26,7 +26,7 @@ var pro = pro || {};
                      { field: 'DepartmentCode', title: '所属部门', width: 100 }
                 ]],
                 columns: [[
-         { field: 'PkId', title: '', width: 100 },
+         { field: 'PkId', title: '', hidden: true, width: 100 },
          { field: 'JobName', title: '工号', width: 100 },
          { field: 'PayCode', title: '中文简拼', width: 100 },
          {

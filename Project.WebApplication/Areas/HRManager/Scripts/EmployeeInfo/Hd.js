@@ -9,7 +9,8 @@
                 gridObjWork: new pro.GridBase("#datagridwork", false),
                 gridObjStudy: new pro.GridBase("#datagridstudy", false),
                 gridObjTechnical: new pro.GridBase("#datagridTechnical", false),
-                xzOptionHtml: ''//学制<option></option>
+                xzOptionHtml: '',//学制<option></option>
+                zcOptionHtml: ''//职称<option></option>
             };
         },
         initPage: function () {
@@ -55,6 +56,23 @@
             }
            );
 
+            abp.ajax({
+                url: "/HRManager/Dictionary/GetListByCode?ParentKeyCode=JSZC"
+                //,data: JSON.stringify(postData)
+            }).done(
+              function (dataresult, data) {
+                  initObj.zcOptionHtml = "";
+
+                  $.each(dataresult, function (i, item) {
+                      initObj.zcOptionHtml += "<option value='" + item.KeyValue + "'>" + item.KeyName + "</option>";
+                  });
+
+              }
+          ).fail(
+           function (errordetails, errormessage) {
+               //  $.alertExtend.error();
+           }
+          );
 
             $('#TechnicalTitle').combobox({
                 required: true,
@@ -278,21 +296,21 @@
                             title: '等级',
                             width: 120,
                             formatter: function (value, row, index) {
-                                return pro.controlKit.getInputHtml("T_LevNum_" + row.PkId, value);
+                                return pro.controlKit.getSelectHtml("T_LevNum_" + row.PkId, value, initObj.zcOptionHtml, 110);
                             }
                         },
                         {
                             field: 'GetDate',
                             title: '取得时间',
-                            width: 100,
+                            width: 120,
                             formatter: function (value, row, index) {
-                                return pro.controlKit.getInputHtml("T_GetDate_" + row.PkId, value);
+                                return pro.controlKit.getInputDateHtml("T_GetDate_" + row.PkId, value);
                             }
                         },
                         {
                             field: 'CerNo',
                             title: '职称证书编号',
-                            width: 100,
+                            width: 130,
                             formatter: function (value, row, index) {
                                 return pro.controlKit.getInputHtml("T_CerNo_" + row.PkId, value);
                             }
@@ -374,7 +392,7 @@
             pro.submitKit.config.columnNamePreStr = "S_";
             pro.submitKit.config.columns = ["School", "ProfessionCode", "Degree", "Education", "SchoolYear", "CertNumber", "BeginDate", "EndDate", "Remark"];
             postData.RequestEntity.LearningList = pro.submitKit.getRowJson();
-            
+
             pro.submitKit.config.columnPkidName = "T_PkId";
             pro.submitKit.config.columnNamePreStr = "T_";
             pro.submitKit.config.columns = ["Title", "LevNum", "GetDate", "CerNo"];
