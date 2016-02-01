@@ -53,17 +53,19 @@ var pro = pro || {};
                 tabObj.add("/HRManager/EmployeeYearMain/Hd?PkId=" + PkId, "编辑" + PkId);
             });
 
+            pro.DepartmentControl.init();
+            //$('#DepartmentCode').combotree({
+            //    required: true,
+            //    editable: false,
+            //    //multiple: true,//支持多选
+            //    //checkbox: true,
+            //    //cascadeCheck: false,
+            //    //lines: true,
+            //    valueField: 'DepartmentCode',
+            //    textField: 'DepartmentName',
+            //    url: '/PermissionManager/Department/GetList_Combotree'
+            //}); //本可以链式onChange
             $('#DepartmentCode').combotree({
-                required: true,
-                editable: false,
-                //multiple: true,//支持多选
-                //checkbox: true,
-                //cascadeCheck: false,
-                //lines: true,
-                valueField: 'DepartmentCode',
-                textField: 'DepartmentName',
-                url: '/PermissionManager/Department/GetList_Combotree'
-            }).combotree({
                 onChange: function (newValue, oldValue) {
                     $('#EmployeeCode').combobox({
                         required: true,
