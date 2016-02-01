@@ -13,6 +13,7 @@ using Project.Model.HRManager;
 using Project.Service.HRManager;
 using Project.WebApplication.Controllers;
 using Project.Infrastructure.FrameworkCore.ToolKit;
+using Project.Service.PermissionManager;
 
 namespace Project.WebApplication.Areas.HRManager.Controllers
 {
@@ -42,6 +43,7 @@ namespace Project.WebApplication.Areas.HRManager.Controllers
             var where = new EmployeeYearDetailEntity();
             //where.PkId = RequestHelper.GetFormString("PkId");
             where.DepartmentCode = RequestHelper.GetFormString("DepartmentCode");
+            where.DepartmentCode = string.Join(",", (DepartmentService.GetInstance().GetChiledArr(where.DepartmentCode)));
             where.EmployeeCode = RequestHelper.GetFormString("EmployeeCode");
             where.UseType = RequestHelper.GetInt("UseType", -1);
             //where.BeginDate = RequestHelper.GetFormString("BeginDate");

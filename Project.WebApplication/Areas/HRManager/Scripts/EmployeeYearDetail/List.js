@@ -65,16 +65,8 @@ var pro = pro || {};
             $("#btnAdd").click(function () {
                 tabObj.add("/HRManager/EmployeeYearDetail/Hd", "新增");
             });
-
+            pro.DepartmentControl.init();
             $('#DepartmentCode').combotree({
-                required: true,
-                editable: false,
-                multiple: true,//支持多选
-                cascadeCheck: false,
-                valueField: 'DepartmentCode',
-                textField: 'DepartmentName',
-                url: '/PermissionManager/Department/GetList_Combotree'
-            }).combotree({
                 onChange: function (newValue, oldValue) {
                     $('#EmployeeCode').combobox({
                         required: true,
