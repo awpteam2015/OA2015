@@ -13,6 +13,7 @@ using Project.WebApplication.Controllers;
 using Project.Infrastructure.FrameworkCore.ToolKit;
 using Project.Infrastructure.FrameworkCore.WebMvc.Controllers.Results;
 using Project.Infrastructure.FrameworkCore.WebMvc.Models;
+using Project.Service.PermissionManager;
 
 namespace Project.WebApplication.Areas.HRManager.Controllers
 {
@@ -42,7 +43,8 @@ namespace Project.WebApplication.Areas.HRManager.Controllers
             var where = new SanctionEntity();
             //where.PkId = RequestHelper.GetFormString("PkId");
             where.SanctionType = RequestHelper.GetFormInt("SanctionType",-1);
-            where.DepartmentCode = RequestHelper.GetFormString("DepartmentCode");            
+            where.DepartmentCode = RequestHelper.GetFormString("DepartmentCode");
+            where.DepartmentCode = string.Join(",", (DepartmentService.GetInstance().GetChiledArr(where.DepartmentCode)));
             //where.SanctionObjType = RequestHelper.GetFormInt("SanctionObjType", 0);
             //where.SanctionObj = RequestHelper.GetFormString("SanctionObj");
             //where.SanctionTitle = RequestHelper.GetFormString("SanctionTitle");
