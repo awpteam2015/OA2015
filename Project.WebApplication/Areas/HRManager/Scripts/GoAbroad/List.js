@@ -40,19 +40,19 @@ var pro = pro || {};
                 pageList: [20, 30, 40] //可以设置每页记录条数的列表    
             }
                );
-            $('#DepartmentCode').combotree({
-                required: true,
-                editable: false,
-                multiple: true,//支持多选
-                cascadeCheck: false,
-                valueField: 'DepartmentCode',
-                textField: 'DepartmentName',
-                url: '/PermissionManager/Department/GetList_Combotree',
-                onLoadSuccess: function (node, data) {
-                    $("#DepartmentCode").combotree('setValue', "0");
-                }
-            })
-
+            //$('#DepartmentCode').combotree({
+            //    required: true,
+            //    editable: false,
+            //    multiple: true,//支持多选
+            //    cascadeCheck: false,
+            //    valueField: 'DepartmentCode',
+            //    textField: 'DepartmentName',
+            //    url: '/PermissionManager/Department/GetList_Combotree',
+            //    onLoadSuccess: function (node, data) {
+            //        $("#DepartmentCode").combotree('setValue', "0");
+            //    }
+            //})
+            pro.DepartmentControl.init();
             $("#btnAdd").click(function () {
                 tabObj.add("/HRManager/GoAbroad/Hd", "新增");
             });
