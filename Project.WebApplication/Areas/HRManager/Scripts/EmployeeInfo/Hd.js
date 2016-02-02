@@ -9,6 +9,7 @@
                 gridObjWork: new pro.GridBase("#datagridwork", false),
                 gridObjStudy: new pro.GridBase("#datagridstudy", false),
                 gridObjTechnical: new pro.GridBase("#datagridTechnical", false),
+                gridObjProfession: new pro.GridBase("#datagridTechnical", false),
                 xzOptionHtml: '',//学制<option></option>
                 zcOptionHtml: ''//职称<option></option>
             };
@@ -267,7 +268,7 @@
                 pageSize: 20, //每页显示的记录条数，默认为10     
                 pageList: [20, 30, 40] //可以设置每页记录条数的列表    
             }
-          );
+            );
             gridObjTechnical.grid({
                 url: '/HRManager/Technical/GetAllList?EmployeeID=' + (pro.commonKit.getUrlParam("PkId") ? pro.commonKit.getUrlParam("PkId") : 0),
                 fitColumns: false,
@@ -321,7 +322,62 @@
                 pageSize: 20, //每页显示的记录条数，默认为10     
                 pageList: [20, 30, 40] //可以设置每页记录条数的列表    
             }
-          );
+            );
+            gridObjProfession.grid({
+                url: '/HRManager/Technical/GetAllList?EmployeeID=' + (pro.commonKit.getUrlParam("PkId") ? pro.commonKit.getUrlParam("PkId") : 0),
+                fitColumns: false,
+                nowrap: false,
+                rownumbers: true, //行号
+                singleSelect: true,
+                idField: "PkId",
+                columns: [
+                    [
+                        {
+                            field: 'PkId', title: '', hidden: true, width: 100,
+                            formatter: function (value, row, index) {
+                                return pro.controlKit.getInputHtml("P_PkId", row.PkId);
+                            }
+                        },
+                        {
+                            field: 'Title',
+                            title: '名称',
+                            width: 120,
+                            formatter: function (value, row, index) {
+                                return pro.controlKit.getInputHtml("T_Title_" + row.PkId, value);
+                            }
+                        },
+                        {
+                            field: 'LevNum',
+                            title: '等级',
+                            width: 120,
+                            formatter: function (value, row, index) {
+                                return pro.controlKit.getSelectHtml("T_LevNum_" + row.PkId, value, initObj.zcOptionHtml, 110);
+                            }
+                        },
+                        {
+                            field: 'GetDate',
+                            title: '取得时间',
+                            width: 120,
+                            formatter: function (value, row, index) {
+                                return pro.controlKit.getInputDateHtml("T_GetDate_" + row.PkId, value);
+                            }
+                        },
+                        {
+                            field: 'CerNo',
+                            title: '职称证书编号',
+                            width: 130,
+                            formatter: function (value, row, index) {
+                                return pro.controlKit.getInputHtml("T_CerNo_" + row.PkId, value);
+                            }
+                        }
+                    ]
+                ],
+                pagination: false,
+                pageSize: 20, //每页显示的记录条数，默认为10     
+                pageList: [20, 30, 40] //可以设置每页记录条数的列表    
+            }
+            );
+
             $("#btnAddWork_ToolBar").click(function () {
                 gridObjWork.insertRow({
                     PkId: gridObjWork.PkId,
@@ -349,7 +405,13 @@
 
                 $("#datagridTechnical").datagrid('selectRecord', gridObjTechnical.T_PkId + 1);
             });
+            $("#btnAddProfession_ToolBar").click(function () {
+                gridObjProfession.insertRow({
+                    PkId: gridObjProfession.PkId
+                });
 
+                $("#datagridProfession").datagrid('selectRecord', gridObjProfession.P_PkId + 1);
+            });
 
             $("#btnDelWork_ToolBar").click(function () {
                 gridObjWork.delRow();
@@ -360,7 +422,9 @@
             $("#btnDelTechnical_ToolBar").click(function () {
                 gridObjTechnical.delRow();
             });
-
+            $("#btnDelProfession_ToolBar").click(function () {
+                gridObjProfession.delRow();
+            });
 
             if ($("#BindEntity").val()) {
                 var bindField = pro.bindKit.getHeadJson();
