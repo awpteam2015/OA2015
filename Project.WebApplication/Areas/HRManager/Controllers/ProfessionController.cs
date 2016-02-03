@@ -13,6 +13,7 @@ using Project.Infrastructure.FrameworkCore.WebMvc.Models;
 using Project.Service.HRManager;
 using Project.WebApplication.Controllers;
 using AutoMapper;
+using Project.Infrastructure.FrameworkCore.ToolKit.StringHandler;
 
 namespace Project.WebApplication.Areas.HRManager.Controllers
 {
@@ -63,7 +64,20 @@ namespace Project.WebApplication.Areas.HRManager.Controllers
             };
             return new AbpJsonResult(dataGridEntity, new NHibernateContractResolver());
         }
+        public AbpJsonResult GetAllList()
+        {
+            var where = new ProfessionEntity();
+            where.EmployeeID = TypeParse.StrToInt(Infrastructure.FrameworkCore.ToolKit.RequestHelper.QueryString["EmployeeID"], 0);
+            //where.DepartmentCode = RequestHelper.GetFormString("DepartmentCode");
+            var searchList = ProfessionService.GetInstance().GetList(where);
 
+            var dataGridEntity = new DataGridResponse()
+            {
+                total = searchList.Count,
+                rows = searchList
+            };
+            return new AbpJsonResult(dataGridEntity, new NHibernateContractResolver());
+        }
 
         [HttpPost]
         public AbpJsonResult Add(AjaxRequest<ProfessionEntity> postData)

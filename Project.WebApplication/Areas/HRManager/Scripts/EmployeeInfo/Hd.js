@@ -9,7 +9,7 @@
                 gridObjWork: new pro.GridBase("#datagridwork", false),
                 gridObjStudy: new pro.GridBase("#datagridstudy", false),
                 gridObjTechnical: new pro.GridBase("#datagridTechnical", false),
-                gridObjProfession: new pro.GridBase("#datagridTechnical", false),
+                gridObjProfession: new pro.GridBase("#datagridProfession", false),
                 xzOptionHtml: '',//学制<option></option>
                 zcOptionHtml: ''//职称<option></option>
             };
@@ -19,6 +19,7 @@
             var gridObjWork = initObj.gridObjWork;
             var gridObjStudy = initObj.gridObjStudy;
             var gridObjTechnical = initObj.gridObjTechnical;
+            var gridObjProfession = initObj.gridObjProfession;
             $("#btnAdd").click(function () {
                 pro.EmployeeInfo.HdPage.submit("Add");
             });
@@ -324,7 +325,7 @@
             }
             );
             gridObjProfession.grid({
-                url: '/HRManager/Technical/GetAllList?EmployeeID=' + (pro.commonKit.getUrlParam("PkId") ? pro.commonKit.getUrlParam("PkId") : 0),
+                url: '/HRManager/Profession/GetAllList?EmployeeID=' + (pro.commonKit.getUrlParam("PkId") ? pro.commonKit.getUrlParam("PkId") : 0),
                 fitColumns: false,
                 nowrap: false,
                 rownumbers: true, //行号
@@ -343,15 +344,23 @@
                             title: '名称',
                             width: 120,
                             formatter: function (value, row, index) {
-                                return pro.controlKit.getInputHtml("T_Title_" + row.PkId, value);
+                                return pro.controlKit.getInputHtml("P_Title_" + row.PkId, value);
                             }
                         },
                         {
-                            field: 'LevNum',
-                            title: '等级',
+                            field: 'TypeName',
+                            title: '执业类别',
                             width: 120,
                             formatter: function (value, row, index) {
-                                return pro.controlKit.getSelectHtml("T_LevNum_" + row.PkId, value, initObj.zcOptionHtml, 110);
+                                return pro.controlKit.getInputHtml("P_TypeName_" + row.PkId, value);
+                            }
+                        },
+                        {
+                            field: 'RangeName',
+                            title: '执业范围',
+                            width: 120,
+                            formatter: function (value, row, index) {
+                                return pro.controlKit.getInputHtml("P_RangeName_" + row.PkId, value);
                             }
                         },
                         {
@@ -359,7 +368,7 @@
                             title: '取得时间',
                             width: 120,
                             formatter: function (value, row, index) {
-                                return pro.controlKit.getInputDateHtml("T_GetDate_" + row.PkId, value);
+                                return pro.controlKit.getInputDateHtml("P_GetDate_" + row.PkId, value);
                             }
                         },
                         {
@@ -367,7 +376,7 @@
                             title: '职称证书编号',
                             width: 130,
                             formatter: function (value, row, index) {
-                                return pro.controlKit.getInputHtml("T_CerNo_" + row.PkId, value);
+                                return pro.controlKit.getInputHtml("P_CerNo_" + row.PkId, value);
                             }
                         }
                     ]
@@ -461,6 +470,11 @@
             pro.submitKit.config.columnNamePreStr = "T_";
             pro.submitKit.config.columns = ["Title", "LevNum", "GetDate", "CerNo"];
             postData.RequestEntity.TechnicalList = pro.submitKit.getRowJson();
+
+            pro.submitKit.config.columnPkidName = "P_PkId";
+            pro.submitKit.config.columnNamePreStr = "P_";
+            pro.submitKit.config.columns = ["Title", "TypeName", "RangeName", "GetDate", "CerNo"];
+            postData.RequestEntity.ProfessionList = pro.submitKit.getRowJson();
 
             if (pro.commonKit.getUrlParam("PkId") != "") {
                 postData.RequestEntity.PkId = pro.commonKit.getUrlParam("PkId");
