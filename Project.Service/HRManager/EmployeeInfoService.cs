@@ -25,6 +25,9 @@ namespace Project.Service.HRManager
         private readonly EmployeeInfoRepository _employeeInfoRepository;
         private readonly WorkExperienceRepository _workExperienceRepository;
         private readonly LearningExperiencesRepository _learnExperienceRepository;
+        private readonly TechnicalRepository _technicalRepository;
+        private readonly ProfessionRepository _professionRepository;
+
         private static readonly EmployeeInfoService Instance = new EmployeeInfoService();
 
         public EmployeeInfoService()
@@ -33,6 +36,8 @@ namespace Project.Service.HRManager
 
             this._workExperienceRepository = new WorkExperienceRepository();
             this._learnExperienceRepository = new LearningExperiencesRepository();
+            this._technicalRepository = new TechnicalRepository();
+            this._professionRepository = new ProfessionRepository();
         }
 
         public static EmployeeInfoService GetInstance()
@@ -63,11 +68,23 @@ namespace Project.Service.HRManager
                     var pkId = _employeeInfoRepository.Save(entity);
                     entity.WorkList.ToList().ForEach(p =>
                     {
-                        p.EmployeeID = pkId;
+                        p.EmployeeID = pkId;                       
                     });
                     entity.LearningList.ToList().ForEach(p =>
                     {
                         p.EmployeeID = pkId;
+                    });
+                    entity.TechnicalList.ToList().ForEach(p =>
+                    {
+                        p.EmployeeID = pkId;
+                        p.EmployeeCode = entity.EmployeeCode;
+                        p.DepartmentCode = entity.DepartmentCode;
+                    });
+                    entity.ProfessionList.ToList().ForEach(p =>
+                    {
+                        p.EmployeeID = pkId;
+                        p.EmployeeCode = entity.EmployeeCode;
+                        p.DepartmentCode = entity.DepartmentCode;
                     });
                     tx.Commit();
                     return new Tuple<bool, string>(true, ""); ;
@@ -144,10 +161,19 @@ namespace Project.Service.HRManager
             var date = DateTime.Now;
             entity.WorkList.ToList().ForEach(item => item.EmployeeID = entity.PkId);
             entity.LearningList.ToList().ForEach(item => item.EmployeeID = entity.PkId);
+            entity.TechnicalList.ToList().ForEach(item => item.EmployeeID = entity.PkId);
+            entity.ProfessionList.ToList().ForEach(item => item.EmployeeID = entity.PkId);
             var deleteList = oldEntity.WorkList.Where(
                     p => entity.WorkList.All(x => x.PkId != p.PkId)).ToList();
             var deleteLearningList = oldEntity.LearningList.Where(
                               p => entity.LearningList.All(x => x.PkId != p.PkId)).ToList();
+
+            var deleteTechnicalList = oldEntity.TechnicalList.Where(
+                              p => entity.TechnicalList.All(x => x.PkId != p.PkId)).ToList();
+
+            var deleteProfessionList = oldEntity.ProfessionList.Where(
+                              p => entity.ProfessionList.All(x => x.PkId != p.PkId)).ToList();
+
             using (var tx = NhTransactionHelper.BeginTransaction())
             {
                 try
@@ -155,6 +181,8 @@ namespace Project.Service.HRManager
                     _employeeInfoRepository.Merge(entity);
                     deleteList.ForEach(p => { _workExperienceRepository.Delete(p); });
                     deleteLearningList.ForEach(p => { _learnExperienceRepository.Delete(p); });
+                    deleteTechnicalList.ForEach(p => { _technicalRepository.Delete(p); });
+                    deleteProfessionList.ForEach(p => { _professionRepository.Delete(p); });
                     tx.Commit();
                     return new Tuple<bool, string>(true, "");
                 }
@@ -200,14 +228,16 @@ namespace Project.Service.HRManager
             //    expr = expr.And(p => p.SexEntity.ParentKeyCode == "ZZTZ");
 
             //}
-            // if (!string.IsNullOrEmpty(where.EmployeeCode))
-            //  expr = expr.And(p => p.EmployeeCode == where.EmployeeCode);
-            // if (!string.IsNullOrEmpty(where.EmployeeName))
-            //  expr = expr.And(p => p.EmployeeName == where.EmployeeName);
-            // if (!string.IsNullOrEmpty(where.DepartmentCode))
-            //  expr = expr.And(p => p.DepartmentCode == where.DepartmentCode);
-            // if (!string.IsNullOrEmpty(where.JobName))
-            //  expr = expr.And(p => p.JobName == where.JobName);
+            if (!string.IsNullOrEmpty(where.EmployeeCode))
+                expr = expr.And(p => p.EmployeeCode == where.EmployeeCode);
+            if (!string.IsNullOrEmpty(where.EmployeeName))
+                expr = expr.And(p => p.EmployeeName.Contains(where.EmployeeName));
+            if (!string.IsNullOrEmpty(where.DepartmentCode))
+                expr = expr.And(p => where.DepartmentCode.Split(',').Contains(p.DepartmentCode));
+            //if (!string.IsNullOrEmpty(where.DepartmentCode))
+            //    expr = expr.And(p => p.DepartmentCode == where.DepartmentCode);
+            if (!string.IsNullOrEmpty(where.JobName))
+                expr = expr.And(p => p.JobName.Contains(where.JobName));
             // if (!string.IsNullOrEmpty(where.PayCode))
             //  expr = expr.And(p => p.PayCode == where.PayCode);
             // if (!string.IsNullOrEmpty(where.Sex))
@@ -220,10 +250,10 @@ namespace Project.Service.HRManager
             //  expr = expr.And(p => p.TechnicalTitle == where.TechnicalTitle);
             // if (!string.IsNullOrEmpty(where.Duties))
             //  expr = expr.And(p => p.Duties == where.Duties);
-            // if (!string.IsNullOrEmpty(where.WorkState))
-            //  expr = expr.And(p => p.WorkState == where.WorkState);
-            // if (!string.IsNullOrEmpty(where.EmployeeType))
-            //  expr = expr.And(p => p.EmployeeType == where.EmployeeType);
+            if (!string.IsNullOrEmpty(where.WorkState))
+                expr = expr.And(p => p.WorkState == where.WorkState);
+            if (!string.IsNullOrEmpty(where.EmployeeType))
+                expr = expr.And(p => p.EmployeeType == where.EmployeeType);
             // if (!string.IsNullOrEmpty(where.HomeAddress))
             //  expr = expr.And(p => p.HomeAddress == where.HomeAddress);
             // if (!string.IsNullOrEmpty(where.MobileNO))

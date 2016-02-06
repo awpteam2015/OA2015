@@ -104,7 +104,7 @@ var pro = pro || {};
         insertRow: function (rowJson) {
             var obj = this;
             var row = $(this.grdidId).datagrid('getSelected');
-            if (row) {
+            if (row && row != undefined) {
                 obj.RowIndex = $(this.grdidId).datagrid('getRowIndex', row);
             }
 
@@ -124,13 +124,16 @@ var pro = pro || {};
                 return false;
             }
             var selectrow = $(this.grdidId).datagrid("getSelected");
+            if (!selectrow)
+                return false;
             var nowIndex = $(this.grdidId).datagrid("getRowIndex", selectrow);
             $(this.grdidId).datagrid('deleteRow', nowIndex);
             if (nowIndex > 0) {
                 $(this.grdidId).datagrid('selectRow', nowIndex - 1);
-            } else {
-                $(this.grdidId).datagrid('selectRow', 0);
             }
+            //else {
+            //    $(this.grdidId).datagrid('selectRow', 0);
+            //}
             return true;
         }
     };

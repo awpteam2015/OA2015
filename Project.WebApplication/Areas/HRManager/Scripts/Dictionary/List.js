@@ -28,9 +28,9 @@ var pro = pro || {};
          { field: 'ParentKeyCode', title: '父级Code', width: 100 },
          { field: 'KeyName', title: '名称', width: 180 },
          { field: 'KeyValue', title: '值', width: 100 },
-         { field: 'Instruction', title: '说明', width: 280 },         
+         { field: 'Instruction', title: '说明', width: 280 },
                 ]],
-                pagination: true,
+                // pagination: true,
                 pageSize: 20, //每页显示的记录条数，默认为10     
                 pageList: [20, 30, 40] //可以设置每页记录条数的列表    
             }

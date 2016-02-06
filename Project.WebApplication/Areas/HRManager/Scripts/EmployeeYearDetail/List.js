@@ -20,30 +20,32 @@ var pro = pro || {};
                 nowrap: false,
                 rownumbers: true, //行号
                 singleSelect: true,
+                frozenColumns: [[
+                    {
+                        field: 'DepartmentCode', title: '部门', width: 100, formatter: function (value, row) {
+                            return row.DepartmentEntity.DepartmentName;
+                        }
+                    },
+                    { field: 'EmployeeCode', title: '员工编号', width: 100 },
+                    { field: 'EmployeeName', title: '员工', width: 100 }
+                ]],
                 columns: [[
-         { field: 'PkId', title: '', hidden: true, width: 100 },
-          {
-              field: 'DepartmentCode', title: '部门', width: 100, formatter: function (value, row) {
-                  return row.DepartmentEntity.DepartmentName;
-              }
-          },
-         { field: 'EmployeeCode', title: '员工编号', width: 100 },
-         { field: 'EmployeeName', title: '员工', width: 100 },
-         {
-             field: 'UseType', title: '类型', width: 100,
-             formatter: function (val) {
-                 var retStr = "";
-                 switch (val) {
-                     case 0:
-                         retStr = "年假添加";
-                         break;
-                     case 1:
-                         retStr = "使用登记";
-                         break;
-                 }
-                 return retStr;
-             }
-         },
+                    { field: 'PkId', title: '', hidden: true, width: 100 },
+                    {
+                        field: 'UseType', title: '类型', width: 100,
+                        formatter: function (val) {
+                            var retStr = "";
+                            switch (val) {
+                                case 0:
+                                    retStr = "年假添加";
+                                    break;
+                                case 1:
+                                    retStr = "使用登记";
+                                    break;
+                            }
+                            return retStr;
+                        }
+                    },
          { field: 'BeginDate', title: '开始日期', width: 100 },
          { field: 'EndDate', title: '结束日期', width: 100 },
          { field: 'BeforeUseCount', title: '使用前天数', width: 100 },

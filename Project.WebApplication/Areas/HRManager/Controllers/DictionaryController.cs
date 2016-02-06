@@ -69,7 +69,7 @@ namespace Project.WebApplication.Areas.HRManager.Controllers
         }
 
         public AbpJsonResult GetListByCode()
-        {         
+        {
             var where = new DictionaryEntity();
             //where.PkId = RequestHelper.GetFormString("PkId");
             //where.KeyCode = RequestHelper.GetFormString("KeyCode");
@@ -77,6 +77,10 @@ namespace Project.WebApplication.Areas.HRManager.Controllers
             //where.KeyName = RequestHelper.GetFormString("KeyName");
             //where.KeyValue = RequestHelper.GetFormString("KeyValue");
             var searchList = DictionaryService.GetInstance().GetList(where);
+            if (!string.IsNullOrEmpty(RequestHelper.GetQueryString("AllFlag")))
+            {
+                searchList.Insert(0, new DictionaryEntity() { KeyName = "全部", KeyValue = "" });
+            }
             return new AbpJsonResult(searchList, new NHibernateContractResolver());
         }
 
@@ -86,10 +90,10 @@ namespace Project.WebApplication.Areas.HRManager.Controllers
         {
             var addResult = DictionaryService.GetInstance().Add(postData.RequestEntity);
             var result = new AjaxResponse<DictionaryEntity>()
-               {
-                   success = true,
-                   result = postData.RequestEntity
-               };
+            {
+                success = true,
+                result = postData.RequestEntity
+            };
             return new AbpJsonResult(result, new NHibernateContractResolver());
         }
 

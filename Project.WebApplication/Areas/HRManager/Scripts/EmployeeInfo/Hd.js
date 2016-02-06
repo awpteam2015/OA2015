@@ -9,7 +9,9 @@
                 gridObjWork: new pro.GridBase("#datagridwork", false),
                 gridObjStudy: new pro.GridBase("#datagridstudy", false),
                 gridObjTechnical: new pro.GridBase("#datagridTechnical", false),
-                xzOptionHtml: ''//学制<option></option>
+                gridObjProfession: new pro.GridBase("#datagridProfession", false),
+                xzOptionHtml: '',//学制<option></option>
+                zcOptionHtml: ''//职称<option></option>
             };
         },
         initPage: function () {
@@ -17,6 +19,7 @@
             var gridObjWork = initObj.gridObjWork;
             var gridObjStudy = initObj.gridObjStudy;
             var gridObjTechnical = initObj.gridObjTechnical;
+            var gridObjProfession = initObj.gridObjProfession;
             $("#btnAdd").click(function () {
                 pro.EmployeeInfo.HdPage.submit("Add");
             });
@@ -55,6 +58,23 @@
             }
            );
 
+            abp.ajax({
+                url: "/HRManager/Dictionary/GetListByCode?ParentKeyCode=JSZC"
+                //,data: JSON.stringify(postData)
+            }).done(
+              function (dataresult, data) {
+                  initObj.zcOptionHtml = "";
+
+                  $.each(dataresult, function (i, item) {
+                      initObj.zcOptionHtml += "<option value='" + item.KeyValue + "'>" + item.KeyName + "</option>";
+                  });
+
+              }
+          ).fail(
+           function (errordetails, errormessage) {
+               //  $.alertExtend.error();
+           }
+          );
 
             $('#TechnicalTitle').combobox({
                 required: true,
@@ -249,7 +269,7 @@
                 pageSize: 20, //每页显示的记录条数，默认为10     
                 pageList: [20, 30, 40] //可以设置每页记录条数的列表    
             }
-          );
+            );
             gridObjTechnical.grid({
                 url: '/HRManager/Technical/GetAllList?EmployeeID=' + (pro.commonKit.getUrlParam("PkId") ? pro.commonKit.getUrlParam("PkId") : 0),
                 fitColumns: false,
@@ -278,21 +298,21 @@
                             title: '等级',
                             width: 120,
                             formatter: function (value, row, index) {
-                                return pro.controlKit.getInputHtml("T_LevNum_" + row.PkId, value);
+                                return pro.controlKit.getSelectHtml("T_LevNum_" + row.PkId, value, initObj.zcOptionHtml, 110);
                             }
                         },
                         {
                             field: 'GetDate',
                             title: '取得时间',
-                            width: 100,
+                            width: 120,
                             formatter: function (value, row, index) {
-                                return pro.controlKit.getInputHtml("T_GetDate_" + row.PkId, value);
+                                return pro.controlKit.getInputDateHtml("T_GetDate_" + row.PkId, value);
                             }
                         },
                         {
                             field: 'CerNo',
                             title: '职称证书编号',
-                            width: 100,
+                            width: 130,
                             formatter: function (value, row, index) {
                                 return pro.controlKit.getInputHtml("T_CerNo_" + row.PkId, value);
                             }
@@ -303,7 +323,70 @@
                 pageSize: 20, //每页显示的记录条数，默认为10     
                 pageList: [20, 30, 40] //可以设置每页记录条数的列表    
             }
-          );
+            );
+            gridObjProfession.grid({
+                url: '/HRManager/Profession/GetAllList?EmployeeID=' + (pro.commonKit.getUrlParam("PkId") ? pro.commonKit.getUrlParam("PkId") : 0),
+                fitColumns: false,
+                nowrap: false,
+                rownumbers: true, //行号
+                singleSelect: true,
+                idField: "PkId",
+                columns: [
+                    [
+                        {
+                            field: 'PkId', title: '', hidden: true, width: 100,
+                            formatter: function (value, row, index) {
+                                return pro.controlKit.getInputHtml("P_PkId", row.PkId);
+                            }
+                        },
+                        {
+                            field: 'Title',
+                            title: '名称',
+                            width: 120,
+                            formatter: function (value, row, index) {
+                                return pro.controlKit.getInputHtml("P_Title_" + row.PkId, value);
+                            }
+                        },
+                        {
+                            field: 'TypeName',
+                            title: '执业类别',
+                            width: 120,
+                            formatter: function (value, row, index) {
+                                return pro.controlKit.getInputHtml("P_TypeName_" + row.PkId, value);
+                            }
+                        },
+                        {
+                            field: 'RangeName',
+                            title: '执业范围',
+                            width: 120,
+                            formatter: function (value, row, index) {
+                                return pro.controlKit.getInputHtml("P_RangeName_" + row.PkId, value);
+                            }
+                        },
+                        {
+                            field: 'GetDate',
+                            title: '取得时间',
+                            width: 120,
+                            formatter: function (value, row, index) {
+                                return pro.controlKit.getInputDateHtml("P_GetDate_" + row.PkId, value);
+                            }
+                        },
+                        {
+                            field: 'CerNo',
+                            title: '职称证书编号',
+                            width: 130,
+                            formatter: function (value, row, index) {
+                                return pro.controlKit.getInputHtml("P_CerNo_" + row.PkId, value);
+                            }
+                        }
+                    ]
+                ],
+                pagination: false,
+                pageSize: 20, //每页显示的记录条数，默认为10     
+                pageList: [20, 30, 40] //可以设置每页记录条数的列表    
+            }
+            );
+
             $("#btnAddWork_ToolBar").click(function () {
                 gridObjWork.insertRow({
                     PkId: gridObjWork.PkId,
@@ -331,7 +414,13 @@
 
                 $("#datagridTechnical").datagrid('selectRecord', gridObjTechnical.T_PkId + 1);
             });
+            $("#btnAddProfession_ToolBar").click(function () {
+                gridObjProfession.insertRow({
+                    PkId: gridObjProfession.PkId
+                });
 
+                $("#datagridProfession").datagrid('selectRecord', gridObjProfession.P_PkId + 1);
+            });
 
             $("#btnDelWork_ToolBar").click(function () {
                 gridObjWork.delRow();
@@ -342,7 +431,9 @@
             $("#btnDelTechnical_ToolBar").click(function () {
                 gridObjTechnical.delRow();
             });
-
+            $("#btnDelProfession_ToolBar").click(function () {
+                gridObjProfession.delRow();
+            });
 
             if ($("#BindEntity").val()) {
                 var bindField = pro.bindKit.getHeadJson();
@@ -374,11 +465,16 @@
             pro.submitKit.config.columnNamePreStr = "S_";
             pro.submitKit.config.columns = ["School", "ProfessionCode", "Degree", "Education", "SchoolYear", "CertNumber", "BeginDate", "EndDate", "Remark"];
             postData.RequestEntity.LearningList = pro.submitKit.getRowJson();
-            
+
             pro.submitKit.config.columnPkidName = "T_PkId";
             pro.submitKit.config.columnNamePreStr = "T_";
             pro.submitKit.config.columns = ["Title", "LevNum", "GetDate", "CerNo"];
             postData.RequestEntity.TechnicalList = pro.submitKit.getRowJson();
+
+            pro.submitKit.config.columnPkidName = "P_PkId";
+            pro.submitKit.config.columnNamePreStr = "P_";
+            pro.submitKit.config.columns = ["Title", "TypeName", "RangeName", "GetDate", "CerNo"];
+            postData.RequestEntity.ProfessionList = pro.submitKit.getRowJson();
 
             if (pro.commonKit.getUrlParam("PkId") != "") {
                 postData.RequestEntity.PkId = pro.commonKit.getUrlParam("PkId");

@@ -20,11 +20,13 @@ var pro = pro || {};
                 nowrap: false,
                 rownumbers: true, //行号
                 singleSelect: true,
+                frozenColumns: [[
+                     { field: 'EmployeeCode', title: '员工编号', width: 100 },
+                     { field: 'EmployeeName', title: '员工名称', width: 100 },
+                     { field: 'DepartmentCode', title: '所属部门', width: 100 }
+                ]],
                 columns: [[
-         { field: 'PkId', title: '', width: 100 },
-         { field: 'EmployeeCode', title: '员工编号', width: 100 },
-         { field: 'EmployeeName', title: '员工名称', width: 100 },
-         { field: 'DepartmentCode', title: '所属部门', width: 100 },
+         { field: 'PkId', title: '', hidden: true, width: 100 },
          { field: 'JobName', title: '工号', width: 100 },
          { field: 'PayCode', title: '中文简拼', width: 100 },
          {
@@ -88,7 +90,10 @@ var pro = pro || {};
                 editable: false,
                 valueField: 'KeyValue',
                 textField: 'KeyName',
-                url: '/HRManager/Dictionary/GetListByCode?ParentKeyCode=ZZZT'
+                url: '/HRManager/Dictionary/GetListByCode?ParentKeyCode=ZZZT&AllFlag=1',
+                onLoadSuccess: function () {
+                    $('#WorkState').combobox("setValue", "");
+                }
             });
 
             $('#EmployeeType').combobox({
@@ -96,16 +101,20 @@ var pro = pro || {};
                 editable: false,
                 valueField: 'KeyValue',
                 textField: 'KeyName',
-                url: '/HRManager/Dictionary/GetListByCode?ParentKeyCode=YGLY'
+                url: '/HRManager/Dictionary/GetListByCode?ParentKeyCode=YGLY&AllFlag=1',
+                onLoadSuccess: function () {
+                    $('#EmployeeType').combobox("setValue", "");
+                }
             });
-            $('#DepartmentCode').combotree({
-                required: true,
-                editable: false,
-                valueField: 'DepartmentCode',
-                textField: 'DepartmentName',
-                url: '/PermissionManager/Department/GetList_Combotree'
-            });
+            //$('#DepartmentCode').combotree({
+            //    required: true,
+            //    editable: false,
+            //    valueField: 'DepartmentCode',
+            //    textField: 'DepartmentName',
+            //    url: '/PermissionManager/Department/GetList_Combotree'
+            //});
 
+            pro.DepartmentControl.init();
             $("#btnAdd").click(function () {
                 tabObj.add("/HRManager/EmployeeInfo/Hd", "新增");
             });

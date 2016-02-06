@@ -13,6 +13,7 @@ using Project.WebApplication.Controllers;
 using Project.Infrastructure.FrameworkCore.ToolKit;
 using Project.Infrastructure.FrameworkCore.WebMvc.Controllers.Results;
 using Project.Infrastructure.FrameworkCore.WebMvc.Models;
+using Project.Service.PermissionManager;
 
 namespace Project.WebApplication.Areas.HRManager.Controllers
 {
@@ -43,6 +44,7 @@ namespace Project.WebApplication.Areas.HRManager.Controllers
             //where.PkId = RequestHelper.GetFormString("PkId");
             //where.EmployeeCode = RequestHelper.GetFormString("EmployeeCode");
             where.DepartmentCode = RequestHelper.GetFormString("DepartmentCode");
+            where.DepartmentCode = string.Join(",", (DepartmentService.GetInstance().GetChiledArr(where.DepartmentCode)));
             //where.Country = RequestHelper.GetFormString("Country");
             //where.BeginDate = RequestHelper.GetFormString("BeginDate");
             //where.EndDate = RequestHelper.GetFormString("EndDate");
