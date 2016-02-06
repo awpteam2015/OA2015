@@ -18,11 +18,11 @@ var pro = pro || {};
     };
 
     pro.GridBase.prototype = {
-        grid: function (obj,data) {
+        grid: function (obj, data) {
             if (this.isTree) {
-                return data == undefined ? $(this.grdidId).treegrid(obj) : $(this.grdidId).treegrid(obj,data);
+                return data == undefined ? $(this.grdidId).treegrid(obj) : $(this.grdidId).treegrid(obj, data);
             } else {
-                return data == undefined ? $(this.grdidId).datagrid(obj) : $(this.grdidId).datagrid(obj,data);
+                return data == undefined ? $(this.grdidId).datagrid(obj) : $(this.grdidId).datagrid(obj, data);
             }
         },
         isSelected: function () {
@@ -47,15 +47,37 @@ var pro = pro || {};
             ///<summary>获取json格式搜索参数</summary>
             var strJson = "{";
             $("#divSearch input").each(function () {
+                /* if ($(this).attr("class")) {
+                     if ($(this).attr("class").indexOf("combotree-f") > 0) {
+                         if ($(this).combo("options").multiple)
+                             strJson += "\"" + $(this).attr("comboname") + "\":\"" + $.trim($(this).combotree("getValues")) + "\",";
+                         else
+                             strJson += "\"" + $(this).attr("comboname") + "\":\"" + $.trim($(this).combotree("getValue")) + "\",";
+                     }
+                     else if ($(this).attr("class").indexOf("combobox-f ") > 0)
+                         strJson += "\"" + $(this).attr("comboname") + "\":\"" + $.trim($(this).combotree("getValue")) + "\",";
+ 
+                     else
+                         strJson += "\"" + $(this).attr("id") + "\":\"" + $.trim($(this).val()) + "\",";
+ 
+                 }
+                 else*/
                 strJson += "\"" + $(this).attr("name") + "\":\"" + $.trim($(this).val()) + "\",";
             });
 
             $("#divSearch select").each(function () {
+                /*if ($(this).attr("class")) {
+                    if ($(this).attr("class").indexOf("combobox-f ") > 0)
+                        strJson += "\"" + $(this).attr("comboname") + "\":\"" + $.trim($(this).combotree("getValue")) + "\",";
+                    else
+                        strJson += "\"" + $(this).attr("name") + "\":\"" + $.trim($(this).val()) + "\",";
+
+                }
+                else*/
                 strJson += "\"" + $(this).attr("name") + "\":\"" + $.trim($(this).val()) + "\",";
             });
             if (strJson.length > 1) strJson = strJson.substr(0, strJson.length - 1);
             strJson += "}";
-
             var jsonSearch = $.parseJSON(strJson);
             return jsonSearch;
         },
@@ -82,7 +104,7 @@ var pro = pro || {};
         insertRow: function (rowJson) {
             var obj = this;
             var row = $(this.grdidId).datagrid('getSelected');
-            if (row) {
+            if (row && row != undefined) {
                 obj.RowIndex = $(this.grdidId).datagrid('getRowIndex', row);
             }
 
@@ -90,7 +112,7 @@ var pro = pro || {};
                 index: obj.RowIndex,
                 row: rowJson
             });
-          
+
             obj.PkId--;
             //alert(this.grdidId);
             //alert(this.grdidId);
@@ -102,13 +124,16 @@ var pro = pro || {};
                 return false;
             }
             var selectrow = $(this.grdidId).datagrid("getSelected");
+            if (!selectrow)
+                return false;
             var nowIndex = $(this.grdidId).datagrid("getRowIndex", selectrow);
             $(this.grdidId).datagrid('deleteRow', nowIndex);
             if (nowIndex > 0) {
                 $(this.grdidId).datagrid('selectRow', nowIndex - 1);
-            } else {
-                $(this.grdidId).datagrid('selectRow', 0);
             }
+            //else {
+            //    $(this.grdidId).datagrid('selectRow', 0);
+            //}
             return true;
         }
     };

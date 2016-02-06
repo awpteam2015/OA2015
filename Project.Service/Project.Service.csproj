@@ -44,6 +44,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -52,15 +53,24 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BootstrapperService.cs" />
+    <Compile Include="HRManager\AttendanceUploadRecordService.cs" />
     <Compile Include="HRManager\ContractService.cs" />
+    <Compile Include="HRManager\DictionaryService.cs" />
     <Compile Include="HRManager\EmployeeChildrenService.cs" />
     <Compile Include="HRManager\EmployeeRotateService.cs" />
+    <Compile Include="HRManager\EmployeeYearDetailService.cs" />
+    <Compile Include="HRManager\EmployeeYearMainService.cs" />
     <Compile Include="HRManager\GoAbroadService.cs" />
     <Compile Include="HRManager\GroupEmployeeHisService.cs" />
     <Compile Include="HRManager\GroupEmployeeService.cs" />
     <Compile Include="HRManager\GroupService.cs" />
     <Compile Include="HRManager\LearningExperiencesService.cs" />
+    <Compile Include="HRManager\ProfessionService.cs" />
     <Compile Include="HRManager\SanctionService.cs" />
+    <Compile Include="HRManager\TechnicalService.cs" />
+    <Compile Include="HRManager\Validate\YearHolidayDefinitionValidate.cs" />
+    <Compile Include="HRManager\Validate\GroupValidate.cs" />
+    <Compile Include="HRManager\Validate\EmployeeInfoValidate.cs" />
     <Compile Include="HRManager\WorkExperienceService.cs" />
     <Compile Include="PermissionManager\DepartmentService.cs" />
     <Compile Include="PermissionManager\DTO\MenuDTO.cs" />
@@ -83,6 +93,9 @@
     <Compile Include="HRManager\AttendanceService.cs" />
     <Compile Include="HRManager\EmployeeInfoService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ReportManager\HrReportService.cs" />
+    <Compile Include="SystemSetManager\HolidayDetailService.cs" />
+    <Compile Include="HRManager\YearHholidayDefinitionService.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Project.Infrastructure.FrameworkCore\Project.Infrastructure.FrameworkCore.csproj">

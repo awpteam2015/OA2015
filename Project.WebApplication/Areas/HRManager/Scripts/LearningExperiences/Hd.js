@@ -35,7 +35,7 @@
             }
 
             this.submitExtend.addRule();
-            if (!$("#form1").valid() && this.submitExtend.logicValidate()) {
+            if (!$("#form1").valid() && !this.submitExtend.logicValidate()) {
                 $.alertExtend.error();
                 return false;
             }
@@ -69,9 +69,8 @@
           School: { required: true  },
           Degree: { required: true  },
           Education: { required: true  },
-          VerifyPersone: { required: true  },
-          Reward: { required: true  },
-          Certificate: { required: true  },
+          BeginDate: { required: true  },
+          EndDate: { required: true  },
           Remark: { required: true  },
           CreatorUserCode: { required: true  },
           CreatorUserName: { required: true  },
@@ -82,15 +81,14 @@
           PkId:  "必填!",
           EmployeeCode:  "必填!",
           DepartmentCode:  "必填!",
-          ProfessionCode:  "数据字典维护必填!",
-          School:  "必填!",
-          Degree:  "手动输入必填!",
-          Education:  "手动输入必填!",
-          VerifyPersone:  "必填!",
-          Reward:  "必填!",
-          Certificate:  "必填!",
-          Remark:  "必填!",
-          CreatorUserCode:  "必填!",
+          ProfessionCode:  "专业必填!",
+          School:  "学校必填!",
+          Degree:  "学位必填!",
+          Education:  "学历必填!",
+          BeginDate:  "开始时间必填!",
+          EndDate:  "结束时间必填!",
+          Remark:  "备注必填!",
+          CreatorUserCode:  "操作人员必填!",
           CreatorUserName:  "必填!",
           CreateTime:  "必填!",
           LastModificationTime:  "必填!",

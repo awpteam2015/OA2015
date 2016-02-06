@@ -5,9 +5,10 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
 using Newtonsoft.Json;
+using Project.Infrastructure.FrameworkCore.Logging;
 using Project.Infrastructure.FrameworkCore.ToolKit;
-using Project.Mvc.Controllers.Results;
-using Project.Mvc.Models;
+using Project.Infrastructure.FrameworkCore.WebMvc.Controllers.Results;
+using Project.Infrastructure.FrameworkCore.WebMvc.Models;
 using Project.Service.PermissionManager;
 
 namespace Project.WebApplication.Controllers
@@ -17,9 +18,15 @@ namespace Project.WebApplication.Controllers
         // GET: Login
         public ActionResult Index()
         {
+           
             return View();
         }
 
+        public ActionResult Index2()
+        {
+
+            return View();
+        }
 
         [HttpPost]
         public JsonResult UserLogin(string userCode, string password)
@@ -37,13 +44,13 @@ namespace Project.WebApplication.Controllers
             1 /*version*/,
             Guid.NewGuid().ToString(),
             DateTime.Now,
-            DateTime.Now.AddMinutes(20),
+            DateTime.Now.AddMinutes(300),
             true,//持久性
             JsonConvert.SerializeObject(userInfo.Item3),
             FormsAuthentication.FormsCookiePath);
             var encryptedTicket = FormsAuthentication.Encrypt(ticket);
             var cookie = new HttpCookie(FormsAuthentication.FormsCookieName, encryptedTicket);
-            cookie.Expires = DateTime.Now.AddMinutes(20);
+            cookie.Expires = DateTime.Now.AddMinutes(300);
             cookie.HttpOnly = true;
             Response.Cookies.Add(cookie);
             return new AbpJsonResult

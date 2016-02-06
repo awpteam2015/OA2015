@@ -1,10 +1,4 @@
-﻿
-
-  
-
-
-
-@{
+﻿@{
     ViewBag.Title = "List";
     Layout = "~/Views/Shared/_LayoutList.cshtml";
 }
@@ -13,110 +7,73 @@
     <script src="/Areas/HRManager/Scripts/Attendance/List.js?JsParamter=@SiteConfig.GetConfig().JsParamter" type="text/javascript"></script>
 }
 
-<div title="人事考勤记录" style="padding:1px;">
-    <table id="datagrid" style="height:auto;" iconcls=".icon-save" singleselect="true"  toolbar="#tb" fit="true"></table>
+<div title="考勤列表" style="padding:1px;">
+    <table id="datagrid" style="height:auto;" iconcls=".icon-save" singleselect="true" toolbar="#tb" fit="true"></table>
     <div id="tb" style="padding:5px;height:auto">
-        <div  style="margin-bottom: 5px">
-            <a id="btnAdd" href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:true" >添加</a>
-  
-            <a id="btnDel" href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-remove',plain:true" >删除</a>
-           
-            <a id="btnEdit" href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-edit',plain:true" >编辑</a>
-          
-            <a id="btnRefresh" href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-reload',plain:true" >刷新</a>
-           
+        <div style="margin-bottom: 5px">
+            <a id="btnAdd" href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:true">添加</a>
+
+            <a id="btnDel" href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-remove',plain:true">删除</a>
+
+            <a id="btnEdit" href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-edit',plain:true">编辑</a>
+
+            <a id="btnRefresh" href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-reload',plain:true">刷新</a>
+
         </div>
-      
+
         <div id="divSearch">
             <form>
-            
-             <table class="mtable">
-            
-              <tr>
-            <td >
-                :
-            </td>
-            <td >
-                <input id="PkId" name="PkId"  type="text"  />
-            </td>
-        </tr>
-            
-              <tr>
-            <td >
-                :
-            </td>
-            <td >
-                <input id="EmployeeCode" name="EmployeeCode"  type="text"  />
-            </td>
-        </tr>
-            
-              <tr>
-            <td >
-                :
-            </td>
-            <td >
-                <input id="DepartmentCode" name="DepartmentCode"  type="text"  />
-            </td>
-        </tr>
-            
-              <tr>
-            <td >
-                :
-            </td>
-            <td >
-                <input id="State" name="State"  type="text"  />
-            </td>
-        </tr>
-            
-              <tr>
-            <td >
-                :
-            </td>
-            <td >
-                <input id="Date" name="Date"  type="text"  />
-            </td>
-        </tr>
-            
-              <tr>
-            <td >
-                :
-            </td>
-            <td >
-                <input id="Remark" name="Remark"  type="text"  />
-            </td>
-        </tr>
-            
-              <tr>
-            <td >
-                :
-            </td>
-            <td >
-                <input id="CreatorUserCode" name="CreatorUserCode"  type="text"  />
-            </td>
-        </tr>
-            
-              <tr>
-            <td >
-                :
-            </td>
-            <td >
-                <input id="CreatorUserName" name="CreatorUserName"  type="text"  />
-            </td>
-        </tr>
-            
-              <tr>
-            <td >
-                :
-            </td>
-            <td >
-                <input id="CreateTime" name="CreateTime"  type="text"  />
-            </td>
-        </tr>
-          <tr>
-        <td colspan="2">   <a href="#" class="easyui-linkbutton" iconcls="icon-search" id="btnSearch">搜索</a>
-        </td>
-        </tr>
-        </table>
+                <table class="mtable">
+                    <tr>
+                        <td>
+                            工号:
+                        </td>
+                        <td>
+                            <input id="EmployeeCode" name="EmployeeCode" type="text"/>
+                        </td>
+
+                        <td>
+                            部门:
+                        </td>
+                        <td>
+                            <input id="DepartmentCode" name="DepartmentCode" type="text" style="width: 300px"/>
+                        </td>
+
+
+
+                        <td>
+                            状态:
+                        </td>
+                        <td>
+                            <select id="State" name="State">
+                                <option value="0">全部</option>
+                                <option value="1">正常</option>
+                                <option value="-1">缺勤</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+
+                        <td>
+                            考勤开始日期:
+                        </td>
+                        <td>
+                            <input id="Attr_StartDate" name="Attr_StartDate" type="text" onclick="WdatePicker();" />
+                        </td>
+
+                        <td>
+                            考勤结束日期:
+                        </td>
+                        <td>
+                            <input id="Attr_EndDate" name="Attr_EndDate" type="text" onclick="WdatePicker();" />
+                        </td>
+
+                        <td>
+                            <a href="#" class="easyui-linkbutton" iconcls="icon-search" id="btnSearch">搜索</a>
+                            <a href="#" class="easyui-linkbutton" iconcls="icon-add" id="btnExport">导出</a>
+                        </td>
+                    </tr>
+                </table>
             </form>
         </div>
     </div>

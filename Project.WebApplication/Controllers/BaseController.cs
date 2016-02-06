@@ -8,10 +8,12 @@ using System.Web.Mvc.Filters;
 using System.Web.Security;
 using Newtonsoft.Json;
 using Project.Infrastructure.FrameworkCore.DataNhibernate.Helpers;
+using Project.Infrastructure.FrameworkCore.Domain.Entities;
+using Project.Infrastructure.FrameworkCore.Logging;
 using Project.Infrastructure.FrameworkCore.ToolKit.LinqExpansion;
+using Project.Infrastructure.FrameworkCore.WebMvc.Controllers.Results;
+using Project.Infrastructure.FrameworkCore.WebMvc.Models;
 using Project.Model.PermissionManager;
-using Project.Mvc.Controllers.Results;
-using Project.Mvc.Models;
 using Project.Service.PermissionManager;
 using Project.Service.PermissionManager.DTO;
 
@@ -49,6 +51,13 @@ namespace Project.WebApplication.Controllers
 
             var userData = ((FormsIdentity)User.Identity).Ticket.UserData;
             LoginUserInfo = JsonConvert.DeserializeObject<LoginUserInfoDTO>(userData);
+
+            HttpContext.Items.Add("UserInfo", new HttpContextUserInfo()
+            {
+                UserCode = LoginUserInfo.UserCode,
+                UserName = LoginUserInfo.UserName
+            });
+
             if (PermissionService.GetInstance().IsAdmin(LoginUserInfo.UserCode))
             {
                 base.OnActionExecuting(filterContext);
@@ -200,10 +209,63 @@ namespace Project.WebApplication.Controllers
 
         protected override void OnException(ExceptionContext filterContext)
         {
+            if (filterContext.ExceptionHandled)
+            {
+                return;
+            }
+            var exception = filterContext.Exception ?? new Exception("不存在进一步错误信息");
+
+            if (Request.IsAjaxRequest())
+            {
+                filterContext.Result = new AbpJsonResult
+                {
+                    Data = new AjaxResponse<object>() { success = false, error = new ErrorInfo(exception.ToString()) }
+                };
+            }
+            else
+            {
+                var controllerName = (string)filterContext.RouteData.Values["controller"];
+                var actionName = (string)filterContext.RouteData.Values["action"];
+                var model = new HandleErrorInfo(exception, controllerName, actionName);
+                filterContext.Result = new ViewResult
+                {
+                    ViewName = "~/Views/Shared/InternalServer.cshtml",
+                    ViewData = new ViewDataDictionary<HandleErrorInfo>(model),
+                };
+            }
+
+            filterContext.ExceptionHandled = true;
+
             //if (filterContext == null) return;
 
             //var exception = filterContext.Exception ?? new Exception("不存在进一步错误信息");
+            //LoggerHelper.Error(LogType.ErrorLogger, exception.Message);
 
+
+            //if (Request.IsAjaxRequest())
+            //{
+            //    filterContext.Result = new AbpJsonResult
+            //    {
+            //        Data = new AjaxResponse<object>() { success = false, error = new ErrorInfo(exception.ToString()) }
+            //    };
+            //}
+            //else
+            //{
+            //    var controllerName = (string)filterContext.RouteData.Values["controller"];
+            //    var actionName = (string)filterContext.RouteData.Values["action"];
+            //    var model = new HandleErrorInfo(exception, controllerName, actionName);
+            //    filterContext.Result = new ViewResult
+            //    {
+            //        ViewName = "InternalServer",
+            //        MasterName = "",
+            //        ViewData = new ViewDataDictionary<HandleErrorInfo>(model),
+            //        TempData = filterContext.Controller.TempData
+            //    };
+            //}
+            //filterContext.HttpContext.Response.Clear();
+            //filterContext.HttpContext.Response.StatusCode = 500;
+            //filterContext.HttpContext.Response.TrySkipIisCustomErrors = true;
+            // return;
             //string message;
             ////如果没有记录日常，就记录日志
             //if (exception is EipException)
@@ -244,7 +306,7 @@ namespace Project.WebApplication.Controllers
             //}
 
             //filterContext.HttpContext.Response.Clear();
-            //filterContext.HttpContext.Response.Clear();
+            // filterContext.HttpContext.Response.Clear();
             //filterContext.HttpContext.Response.StatusCode = 500;
             //filterContext.HttpContext.Response.TrySkipIisCustomErrors = true;
         }

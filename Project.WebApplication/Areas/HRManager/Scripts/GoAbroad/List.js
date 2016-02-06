@@ -4,7 +4,7 @@ var pro = pro || {};
     pro.GoAbroad = pro.GoAbroad || {};
     pro.GoAbroad.ListPage = pro.GoAbroad.ListPage || {};
     pro.GoAbroad.ListPage = {
-      init: function () {
+        init: function () {
             return {
                 tabObj: new pro.TabBase(),
                 gridObj: new pro.GridBase("#datagrid", false)
@@ -21,27 +21,40 @@ var pro = pro || {};
                 rownumbers: true, //行号
                 singleSelect: true,
                 columns: [[
-         { field: 'PkId', title: '', width: 100 },
-         { field: 'EmployeeCode', title: '', width: 100 },
-         { field: 'DepartmentCode', title: '', width: 100 },
-         { field: 'Country', title: '', width: 100 },
-         { field: 'BeginDate', title: '', width: 100 },
-         { field: 'EndDate', title: '', width: 100 },
-         { field: 'DaySum', title: '', width: 100 },
-         { field: 'Remark', title: '', width: 100 },
-         { field: 'CreatorUserCode', title: '', width: 100 },
-         { field: 'CreatorUserName', title: '', width: 100 },
-         { field: 'CreateTime', title: '', width: 100 },
-         { field: 'LastModificationTime', title: '', width: 100 },
+         { field: 'PkId', title: '', hidden: true, width: 100 },
+         { field: 'EmployeeName', title: '员工编号', width: 100 },
+         { field: 'DepartmentName', title: '员工部门', width: 100 },
+         { field: 'Country', title: '出访国家', width: 100 },
+         { field: 'BeginDate', title: '出国日期', width: 120 },
+         { field: 'EndDate', title: '回国日期', width: 120 },
+         { field: 'DaySum', title: '出国天数', width: 100 },
+         //{
+         //    field: 'Reason', title: '事由', width: 100, formate: function (val) {
+         //        alert();
+         //        Base64.decode(val);
+         //    }
+         //},
                 ]],
                 pagination: true,
                 pageSize: 20, //每页显示的记录条数，默认为10     
                 pageList: [20, 30, 40] //可以设置每页记录条数的列表    
             }
                );
-
+            //$('#DepartmentCode').combotree({
+            //    required: true,
+            //    editable: false,
+            //    multiple: true,//支持多选
+            //    cascadeCheck: false,
+            //    valueField: 'DepartmentCode',
+            //    textField: 'DepartmentName',
+            //    url: '/PermissionManager/Department/GetList_Combotree',
+            //    onLoadSuccess: function (node, data) {
+            //        $("#DepartmentCode").combotree('setValue', "0");
+            //    }
+            //})
+            pro.DepartmentControl.init();
             $("#btnAdd").click(function () {
-               tabObj.add("/HRManager/GoAbroad/Hd","新增");
+                tabObj.add("/HRManager/GoAbroad/Hd", "新增");
             });
 
             $("#btnEdit").click(function () {
@@ -60,7 +73,7 @@ var pro = pro || {};
 
             $("#btnDel").click(function () {
                 if (!gridObj.isSelected()) {
-                $.alertExtend.infoOp();
+                    $.alertExtend.infoOp();
                     return;
                 }
                 $.messager.confirm("确认操作", "是否确认删除", function (bl) {
@@ -84,7 +97,7 @@ var pro = pro || {};
                 gridObj.refresh();
             });
         },
-         closeTab: function () {
+        closeTab: function () {
             this.init().tabObj.closeTab();
         }
     };

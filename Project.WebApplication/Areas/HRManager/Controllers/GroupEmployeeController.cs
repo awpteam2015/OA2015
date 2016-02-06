@@ -8,10 +8,11 @@ using Project.Infrastructure.FrameworkCore.DataNhibernate.Helpers;
 using Project.Infrastructure.FrameworkCore.ToolKit.JsonHandler;
 using Project.Infrastructure.FrameworkCore.ToolKit.LinqExpansion;
 using Project.Model.HRManager;
-using Project.Mvc.Controllers.Results;
-using Project.Mvc.Models;
 using Project.Service.HRManager;
 using Project.WebApplication.Controllers;
+using Project.Infrastructure.FrameworkCore.ToolKit;
+using Project.Infrastructure.FrameworkCore.WebMvc.Controllers.Results;
+using Project.Infrastructure.FrameworkCore.WebMvc.Models;
 
 namespace Project.WebApplication.Areas.HRManager.Controllers
 {
@@ -28,7 +29,7 @@ namespace Project.WebApplication.Areas.HRManager.Controllers
             return View();
         }
 
- 
+
         public ActionResult List()
         {
             return View();
@@ -39,12 +40,12 @@ namespace Project.WebApplication.Areas.HRManager.Controllers
             var pIndex = this.Request["page"].ConvertTo<int>();
             var pSize = this.Request["rows"].ConvertTo<int>();
             var where = new GroupEmployeeEntity();
-			//where.PkId = RequestHelper.GetFormString("PkId");
-			//where.GroupCode = RequestHelper.GetFormString("GroupCode");
-			//where.EmployeeCode = RequestHelper.GetFormString("EmployeeCode");
-			//where.CreatorUserCode = RequestHelper.GetFormString("CreatorUserCode");
-			//where.CreatorUserName = RequestHelper.GetFormString("CreatorUserName");
-			//where.CreateTime = RequestHelper.GetFormString("CreateTime");
+            //where.PkId = RequestHelper.GetFormString("PkId");
+            where.GroupCode = RequestHelper.GetFormString("GroupCode");
+            //where.EmployeeCode = RequestHelper.GetFormString("EmployeeCode");
+            //where.CreatorUserCode = RequestHelper.GetFormString("CreatorUserCode");
+            //where.CreatorUserName = RequestHelper.GetFormString("CreatorUserName");
+            //where.CreateTime = RequestHelper.GetFormString("CreateTime");
             var searchList = GroupEmployeeService.GetInstance().Search(where, (pIndex - 1) * pSize, pSize);
 
             var dataGridEntity = new DataGridResponse()
@@ -70,7 +71,7 @@ namespace Project.WebApplication.Areas.HRManager.Controllers
 
 
         [HttpPost]
-        public AbpJsonResult Edit( AjaxRequest<GroupEmployeeEntity> postData)
+        public AbpJsonResult Edit(AjaxRequest<GroupEmployeeEntity> postData)
         {
             var updateResult = GroupEmployeeService.GetInstance().Update(postData.RequestEntity);
             var result = new AjaxResponse<GroupEmployeeEntity>()

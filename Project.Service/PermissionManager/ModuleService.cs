@@ -159,7 +159,7 @@ namespace Project.Service.PermissionManager
               // if (!string.IsNullOrEmpty(entity.Remark))
               //  expr = expr.And(p => p.Remark == entity.Remark);
  #endregion
-            var list = _moduleRepository.Query().Where(expr).OrderBy(p => p.PkId).ToList();
+            var list = _moduleRepository.Query().Where(expr).OrderBy(p => p.RankId).ToList();
             return list;
         }
         #endregion

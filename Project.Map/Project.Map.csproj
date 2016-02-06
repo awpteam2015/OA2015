@@ -52,17 +52,24 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="HRManager\AttendanceMap.cs" />
+    <Compile Include="HRManager\AttendanceUploadRecordMap.cs" />
     <Compile Include="HRManager\ContractMap.cs" />
+    <Compile Include="HRManager\DictionaryMap.cs" />
     <Compile Include="HRManager\EmployeeChildrenMap.cs" />
     <Compile Include="HRManager\EmployeeInfoMap.cs" />
     <Compile Include="HRManager\EmployeeRotateMap.cs" />
+    <Compile Include="HRManager\EmployeeYearDetailMap.cs" />
+    <Compile Include="HRManager\EmployeeYearMainMap.cs" />
     <Compile Include="HRManager\GoAbroadMap.cs" />
     <Compile Include="HRManager\GroupEmployeeHisMap.cs" />
     <Compile Include="HRManager\GroupEmployeeMap.cs" />
     <Compile Include="HRManager\GroupMap.cs" />
     <Compile Include="HRManager\LearningExperiencesMap.cs" />
+    <Compile Include="HRManager\ProfessionMap.cs" />
     <Compile Include="HRManager\SanctionMap.cs" />
+    <Compile Include="HRManager\TechnicalMap.cs" />
     <Compile Include="HRManager\WorkExperienceMap.cs" />
+    <Compile Include="HRManager\YearHolidayDefinitionMap.cs" />
     <Compile Include="PermissionManager\DepartmentMap.cs" />
     <Compile Include="PermissionManager\FunctionDetailMap.cs" />
     <Compile Include="PermissionManager\FunctionMap.cs" />
@@ -74,6 +81,7 @@
     <Compile Include="PermissionManager\UserInfoMap.cs" />
     <Compile Include="PermissionManager\UserRoleMap.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SystemSetManager\HolidayDetailMap.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

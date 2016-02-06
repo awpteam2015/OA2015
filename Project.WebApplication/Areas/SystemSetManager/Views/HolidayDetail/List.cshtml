@@ -1,0 +1,71 @@
+﻿@{
+    ViewBag.Title = "List";
+    Layout = "~/Views/Shared/_LayoutList.cshtml";
+}
+
+@section JavaScript{
+    <script src="/Areas/SystemSetManager/Scripts/HolidayDetail/List.js?JsParamter=@SiteConfig.GetConfig().JsParamter" type="text/javascript"></script>
+}
+
+<div title="节假日管理" style="padding:1px;">
+    <table id="datagrid" style="height:auto;" iconcls=".icon-save" singleselect="true" toolbar="#tb" fit="true"></table>
+    <div id="tb" style="padding:5px;height:auto">
+        <div style="margin-bottom: 5px">
+            <a id="btnAdd" href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:true">添加</a>
+
+            <a id="btnDel" href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-remove',plain:true">删除</a>
+
+            @*<a id="btnEdit" href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-edit',plain:true">编辑</a>*@
+
+            <a id="btnRefresh" href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-reload',plain:true">刷新</a>
+
+        </div>
+
+        <div id="divSearch">
+            <form>
+
+                <table class="mtable">
+                    <tr>
+                        <td>
+                            节假日名称:
+                        </td>
+                        <td>
+                            <input id="HolidayName" name="HolidayName" type="text" />
+                        </td>
+                        <td>
+                            类型:
+                        </td>
+                        <td>
+                            <select id="HolidayDateType" name="HolidayDateType" class="easyui-combobox">
+                                <option value="-1">全部</option>
+                                <option value="0">公休日</option>
+                                <option value="1">节假日</option>
+                            </select>
+                        </td>
+                        <td>
+                            开始日期:
+                        </td>
+                        <td>
+                            <input id="HolidayDate" name="HolidayDate" type="text" class="Wdate" onclick="WdatePicker();" />
+                        </td>
+                        <td>
+                            结束日期:
+                        </td>
+                        <td>
+                            <input id="HolidayDateEnd" name="HolidayDateEnd" type="text" class="Wdate" onclick="WdatePicker();" />
+                        </td>
+
+                        <td>
+                            <a href="#" class="easyui-linkbutton" iconcls="icon-search" id="btnSearch">搜索</a>
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+
+

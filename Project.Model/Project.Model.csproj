@@ -39,20 +39,28 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Enum\Class1.cs" />
-    <Compile Include="ExtendUi\ITree.cs" />
+    <Compile Include="Enum\HRManager\ContractIsActiveEnum.cs" />
+    <Compile Include="Enum\HRManager\ContractStateEnum.cs" />
     <Compile Include="HRManager\AttendanceEntity.cs" />
+    <Compile Include="HRManager\AttendanceUploadRecordEntity.cs" />
     <Compile Include="HRManager\ContractEntity.cs" />
+    <Compile Include="HRManager\DictionaryEntity.cs" />
     <Compile Include="HRManager\EmployeeChildrenEntity.cs" />
     <Compile Include="HRManager\EmployeeInfoEntity.cs" />
     <Compile Include="HRManager\EmployeeRotateEntity.cs" />
+    <Compile Include="HRManager\EmployeeYearDetailEntity.cs" />
+    <Compile Include="HRManager\EmployeeYearMainEntity.cs" />
     <Compile Include="HRManager\GoAbroadEntity.cs" />
     <Compile Include="HRManager\GroupEmployeeEntity.cs" />
     <Compile Include="HRManager\GroupEmployeeHisEntity.cs" />
     <Compile Include="HRManager\GroupEntity.cs" />
     <Compile Include="HRManager\LearningExperiencesEntity.cs" />
+    <Compile Include="HRManager\ProfessionEntity.cs" />
     <Compile Include="HRManager\SanctionEntity.cs" />
+    <Compile Include="HRManager\TechnicalEntity.cs" />
     <Compile Include="HRManager\WorkExperienceEntity.cs" />
+    <Compile Include="HRManager\YearHolidayDefinitionEntity.cs" />
+    <Compile Include="PermissionManager\DepartmentExtEntity.cs" />
     <Compile Include="PermissionManager\DepartmentEntity.cs" />
     <Compile Include="PermissionManager\FunctionDetailModel.cs" />
     <Compile Include="PermissionManager\FunctionModel.cs" />
@@ -65,6 +73,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="PermissionManager\UserRoleModel.cs" />
+    <Compile Include="ReportManager\AttendanceViewEntity2.cs" />
+    <Compile Include="ReportManager\AttendanceViewEntity.cs" />
+    <Compile Include="SystemSetManager\HolidayDetailEntity.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -73,7 +84,9 @@
       <Name>Project.Infrastructure.FrameworkCore</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Enum\PermissionManager\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

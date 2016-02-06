@@ -8,10 +8,12 @@ using Project.Infrastructure.FrameworkCore.DataNhibernate.Helpers;
 using Project.Infrastructure.FrameworkCore.ToolKit.JsonHandler;
 using Project.Infrastructure.FrameworkCore.ToolKit.LinqExpansion;
 using Project.Model.HRManager;
-using Project.Mvc.Controllers.Results;
-using Project.Mvc.Models;
 using Project.Service.HRManager;
 using Project.WebApplication.Controllers;
+using Project.Infrastructure.FrameworkCore.ToolKit;
+using Project.Infrastructure.FrameworkCore.ToolKit.StringHandler;
+using Project.Infrastructure.FrameworkCore.WebMvc.Controllers.Results;
+using Project.Infrastructure.FrameworkCore.WebMvc.Models;
 
 namespace Project.WebApplication.Areas.HRManager.Controllers
 {
@@ -28,7 +30,7 @@ namespace Project.WebApplication.Areas.HRManager.Controllers
             return View();
         }
 
- 
+
         public ActionResult List()
         {
             return View();
@@ -39,27 +41,41 @@ namespace Project.WebApplication.Areas.HRManager.Controllers
             var pIndex = this.Request["page"].ConvertTo<int>();
             var pSize = this.Request["rows"].ConvertTo<int>();
             var where = new LearningExperiencesEntity();
-			//where.PkId = RequestHelper.GetFormString("PkId");
-			//where.EmployeeCode = RequestHelper.GetFormString("EmployeeCode");
-			//where.DepartmentCode = RequestHelper.GetFormString("DepartmentCode");
-			//where.ProfessionCode = RequestHelper.GetFormString("ProfessionCode");
-			//where.School = RequestHelper.GetFormString("School");
-			//where.Degree = RequestHelper.GetFormString("Degree");
-			//where.Education = RequestHelper.GetFormString("Education");
-			//where.VerifyPersone = RequestHelper.GetFormString("VerifyPersone");
-			//where.Reward = RequestHelper.GetFormString("Reward");
-			//where.Certificate = RequestHelper.GetFormString("Certificate");
-			//where.Remark = RequestHelper.GetFormString("Remark");
-			//where.CreatorUserCode = RequestHelper.GetFormString("CreatorUserCode");
-			//where.CreatorUserName = RequestHelper.GetFormString("CreatorUserName");
-			//where.CreateTime = RequestHelper.GetFormString("CreateTime");
-			//where.LastModificationTime = RequestHelper.GetFormString("LastModificationTime");
+            //where.PkId = RequestHelper.GetFormString("PkId");
+            where.EmployeeID = RequestHelper.GetFormInt("EmployeeID", 0);
+            //where.DepartmentCode = RequestHelper.GetFormString("DepartmentCode");
+            //where.ProfessionCode = RequestHelper.GetFormString("ProfessionCode");
+            //where.School = RequestHelper.GetFormString("School");
+            //where.Degree = RequestHelper.GetFormString("Degree");
+            //where.Education = RequestHelper.GetFormString("Education");
+            //where.BeginDate = RequestHelper.GetFormString("BeginDate");
+            //where.EndDate = RequestHelper.GetFormString("EndDate");
+            //where.Remark = RequestHelper.GetFormString("Remark");
+            //where.CreatorUserCode = RequestHelper.GetFormString("CreatorUserCode");
+            //where.CreatorUserName = RequestHelper.GetFormString("CreatorUserName");
+            //where.CreateTime = RequestHelper.GetFormString("CreateTime");
+            //where.LastModificationTime = RequestHelper.GetFormString("LastModificationTime");
             var searchList = LearningExperiencesService.GetInstance().Search(where, (pIndex - 1) * pSize, pSize);
 
             var dataGridEntity = new DataGridResponse()
             {
                 total = searchList.Item2,
                 rows = searchList.Item1
+            };
+            return new AbpJsonResult(dataGridEntity, new NHibernateContractResolver());
+        }
+
+        public AbpJsonResult GetAllList()
+        {
+            var where = new LearningExperiencesEntity();
+            where.EmployeeID = TypeParse.StrToInt(RequestHelper.QueryString["EmployeeID"], 0);
+            //where.DepartmentCode = RequestHelper.GetFormString("DepartmentCode");
+            var searchList = LearningExperiencesService.GetInstance().GetList(where);
+
+            var dataGridEntity = new DataGridResponse()
+            {
+                total = searchList.Count,
+                rows = searchList
             };
             return new AbpJsonResult(dataGridEntity, new NHibernateContractResolver());
         }
@@ -79,7 +95,7 @@ namespace Project.WebApplication.Areas.HRManager.Controllers
 
 
         [HttpPost]
-        public AbpJsonResult Edit( AjaxRequest<LearningExperiencesEntity> postData)
+        public AbpJsonResult Edit(AjaxRequest<LearningExperiencesEntity> postData)
         {
             var updateResult = LearningExperiencesService.GetInstance().Update(postData.RequestEntity);
             var result = new AjaxResponse<LearningExperiencesEntity>()

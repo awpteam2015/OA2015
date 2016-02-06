@@ -19,6 +19,7 @@
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -38,6 +39,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Aspose.Cells, Version=8.6.3.0, Culture=neutral, PublicKeyToken=716fcc553a201e56, processorArchitecture=MSIL">
+      <HintPath>..\packages\Aspose.Cells.8.6.3\lib\net40\Aspose.Cells.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="AutoMapper, Version=4.1.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.4.1.1\lib\net45\AutoMapper.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Castle.Core, Version=3.2.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
       <HintPath>..\packages\Castle.Core.3.2.0\lib\net45\Castle.Core.dll</HintPath>
       <Private>True</Private>
@@ -96,16 +105,24 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Areas\HRManager\Scripts\AttendanceUploadRecord\Hd.js" />
+    <Content Include="Areas\HRManager\Scripts\AttendanceUploadRecord\List.js" />
     <Content Include="Areas\HRManager\Scripts\Attendance\Hd.js" />
     <Content Include="Areas\HRManager\Scripts\Attendance\List.js" />
     <Content Include="Areas\HRManager\Scripts\Contract\Hd.js" />
     <Content Include="Areas\HRManager\Scripts\Contract\List.js" />
+    <Content Include="Areas\HRManager\Scripts\Dictionary\Hd.js" />
+    <Content Include="Areas\HRManager\Scripts\Dictionary\List.js" />
     <Content Include="Areas\HRManager\Scripts\EmployeeChildren\Hd.js" />
     <Content Include="Areas\HRManager\Scripts\EmployeeChildren\List.js" />
     <Content Include="Areas\HRManager\Scripts\EmployeeInfo\Hd.js" />
     <Content Include="Areas\HRManager\Scripts\EmployeeInfo\List.js" />
     <Content Include="Areas\HRManager\Scripts\EmployeeRotate\Hd.js" />
     <Content Include="Areas\HRManager\Scripts\EmployeeRotate\List.js" />
+    <Content Include="Areas\HRManager\Scripts\EmployeeYearDetail\Hd.js" />
+    <Content Include="Areas\HRManager\Scripts\EmployeeYearDetail\List.js" />
+    <Content Include="Areas\HRManager\Scripts\EmployeeYearMain\Hd.js" />
+    <Content Include="Areas\HRManager\Scripts\EmployeeYearMain\List.js" />
     <Content Include="Areas\HRManager\Scripts\GoAbroad\Hd.js" />
     <Content Include="Areas\HRManager\Scripts\GoAbroad\List.js" />
     <Content Include="Areas\HRManager\Scripts\GroupEmployeeHis\Hd.js" />
@@ -116,10 +133,16 @@
     <Content Include="Areas\HRManager\Scripts\Group\List.js" />
     <Content Include="Areas\HRManager\Scripts\LearningExperiences\Hd.js" />
     <Content Include="Areas\HRManager\Scripts\LearningExperiences\List.js" />
+    <Content Include="Areas\HRManager\Scripts\Profession\Hd.js" />
+    <Content Include="Areas\HRManager\Scripts\Profession\List.js" />
     <Content Include="Areas\HRManager\Scripts\Sanction\Hd.js" />
     <Content Include="Areas\HRManager\Scripts\Sanction\List.js" />
+    <Content Include="Areas\HRManager\Scripts\Technical\Hd.js" />
+    <Content Include="Areas\HRManager\Scripts\Technical\List.js" />
     <Content Include="Areas\HRManager\Scripts\WorkExperience\Hd.js" />
     <Content Include="Areas\HRManager\Scripts\WorkExperience\List.js" />
+    <Content Include="Areas\HRManager\Scripts\YearHolidayDefinition\Hd.js" />
+    <Content Include="Areas\HRManager\Scripts\YearHolidayDefinition\List.js" />
     <Content Include="Areas\PermissionManager\Scripts\Department\Hd.js" />
     <Content Include="Areas\PermissionManager\Scripts\Department\List.js" />
     <Content Include="Areas\PermissionManager\Scripts\FunctionDetail\Hd.js" />
@@ -145,9 +168,18 @@
     <Content Include="Areas\PermissionManager\Views\Role\RoleFunctionDetailList.cshtml">
       <SubType>Code</SubType>
     </Content>
+    <Content Include="Areas\ReportManager\Scripts\HrReport\AttendanceReport2.js" />
+    <Content Include="Areas\ReportManager\Scripts\HrReport\AttendanceReport.js" />
+    <Content Include="Areas\SystemSetManager\Scripts\HolidayDetail\Hd.js" />
+    <Content Include="Areas\SystemSetManager\Scripts\HolidayDetail\List.js" />
     <Content Include="Config\hibernate.cfg.xml" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\images\login\bg1.gif" />
+    <Content Include="Content\images\login\bg2.gif" />
+    <Content Include="Content\images\login\bg2.jpg" />
+    <Content Include="Content\images\login\bg2.png" />
+    <Content Include="Content\images\login\go.gif" />
     <Content Include="Content\Site.css" />
     <Content Include="Global.asax" />
     <Content Include="HtmlPage1.html" />
@@ -197,6 +229,27 @@
     <Content Include="Areas\PermissionManager\Views\UserDepartment\List.cshtml" />
     <Content Include="Areas\PermissionManager\Views\UserRole\Hd.cshtml" />
     <Content Include="Areas\PermissionManager\Views\UserRole\List.cshtml" />
+    <Content Include="Areas\HRManager\Views\Dictionary\Hd.cshtml" />
+    <Content Include="Areas\HRManager\Views\Dictionary\List.cshtml" />
+    <Content Include="Areas\HRManager\Views\WorkExperience\Hd.cshtml" />
+    <Content Include="Areas\HRManager\Views\WorkExperience\List.cshtml" />
+    <Content Include="Areas\SystemSetManager\Views\HolidayDetail\Hd.cshtml" />
+    <Content Include="Areas\SystemSetManager\Views\HolidayDetail\List.cshtml" />
+    <Content Include="Areas\HRManager\Views\YearHolidayDefinition\Hd.cshtml" />
+    <Content Include="Areas\HRManager\Views\YearHolidayDefinition\List.cshtml" />
+    <Content Include="Areas\HRManager\Views\EmployeeYearDetail\Hd.cshtml" />
+    <Content Include="Areas\HRManager\Views\EmployeeYearDetail\List.cshtml" />
+    <Content Include="Areas\HRManager\Views\EmployeeYearMain\Hd.cshtml" />
+    <Content Include="Areas\HRManager\Views\EmployeeYearMain\List.cshtml" />
+    <Content Include="Areas\HRManager\Views\AttendanceUploadRecord\Hd.cshtml" />
+    <Content Include="Areas\HRManager\Views\AttendanceUploadRecord\List.cshtml" />
+    <Content Include="Areas\ReportManager\Views\web.config" />
+    <Content Include="Areas\ReportManager\Views\HrReport\AttendanceReport.cshtml" />
+    <Content Include="Areas\HRManager\Views\Technical\Hd.cshtml" />
+    <Content Include="Areas\HRManager\Views\Technical\List.cshtml" />
+    <Content Include="Areas\ReportManager\Views\HrReport\AttendanceReport2.cshtml" />
+    <Content Include="Areas\HRManager\Views\Profession\Hd.cshtml" />
+    <Content Include="Areas\HRManager\Views\Profession\List.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\Control\DepartmentControl.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
@@ -209,6 +262,13 @@
     <Content Include="Scripts\jqueryPlugins\jquery_tip\tip-yellow\tip-yellow.png" />
     <Content Include="Scripts\jqueryPlugins\jquery_tip\tip-yellow\tip-yellow_arrows.png" />
     <Content Include="Scripts\Account\Index.js" />
+    <Content Include="Scripts\jqueryPlugins\jquery_validate\card.js" />
+    <Content Include="Scripts\jqueryPlugins\jquery_uploadify\jquery.uploadify.js" />
+    <Content Include="Scripts\jqueryPlugins\jquery_uploadify\jquery.uploadify.min.js" />
+    <Content Include="Scripts\jqueryPlugins\jquery_uploadify\uploadify-cancel.png" />
+    <Content Include="Scripts\jqueryPlugins\jquery_uploadify\uploadify.css" />
+    <Content Include="Scripts\jqueryPlugins\jquery_uploadify\uploadify.swf" />
+    <Content Include="Scripts\jqueryPlugins\jquery_uploadify\uploadify_jxp.css" />
     <Content Include="Scripts\Login\Login.js" />
     <Content Include="Scripts\Config\globalConfig.js" />
     <Content Include="Scripts\jqueryPlugins\jquery_tip\jquery.poshytip.js" />
@@ -603,6 +663,31 @@
     <Content Include="Scripts\pro\commonKit.js" />
     <Content Include="Scripts\pro\controlKit.js" />
     <Content Include="Scripts\pro\debugKit.js" />
+    <Content Include="Scripts\pro\My97DatePicker\calendar.js" />
+    <Content Include="Scripts\pro\My97DatePicker\config.js" />
+    <Content Include="Scripts\pro\My97DatePicker\lang\en.js" />
+    <Content Include="Scripts\pro\My97DatePicker\lang\zh-cn.js" />
+    <Content Include="Scripts\pro\My97DatePicker\lang\zh-tw.js" />
+    <Content Include="Scripts\pro\My97DatePicker\My97DatePicker.htm" />
+    <Content Include="Scripts\pro\My97DatePicker\skin\datePicker.gif" />
+    <Content Include="Scripts\pro\My97DatePicker\skin\default\datepicker.css" />
+    <Content Include="Scripts\pro\My97DatePicker\skin\default\img.gif" />
+    <Content Include="Scripts\pro\My97DatePicker\skin\WdatePicker.css" />
+    <Content Include="Scripts\pro\My97DatePicker\skin\whyGreen\bg.jpg" />
+    <Content Include="Scripts\pro\My97DatePicker\skin\whyGreen\datepicker.css" />
+    <Content Include="Scripts\pro\My97DatePicker\skin\whyGreen\img.gif" />
+    <Content Include="Scripts\pro\My97DatePicker\WdatePicker.js" />
+    <Content Include="Scripts\pro\My97DatePicker\开发包\lang\en.js" />
+    <Content Include="Scripts\pro\My97DatePicker\开发包\lang\zh-cn.js" />
+    <Content Include="Scripts\pro\My97DatePicker\开发包\lang\zh-tw.js" />
+    <Content Include="Scripts\pro\My97DatePicker\开发包\readme.txt" />
+    <Content Include="Scripts\pro\My97DatePicker\开发包\skin\datePicker.gif" />
+    <Content Include="Scripts\pro\My97DatePicker\开发包\skin\default\datepicker.css" />
+    <Content Include="Scripts\pro\My97DatePicker\开发包\skin\default\img.gif" />
+    <Content Include="Scripts\pro\My97DatePicker\开发包\skin\WdatePicker.css" />
+    <Content Include="Scripts\pro\My97DatePicker\开发包\skin\whyGreen\bg.jpg" />
+    <Content Include="Scripts\pro\My97DatePicker\开发包\skin\whyGreen\datepicker.css" />
+    <Content Include="Scripts\pro\My97DatePicker\开发包\skin\whyGreen\img.gif" />
     <Content Include="Scripts\pro\submitKit.js" />
     <Content Include="Scripts\pro\abp.jquery.ajax.js" />
     <Content Include="Web.config" />
@@ -610,17 +695,24 @@
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Areas\HRManager\Controllers\AttendanceController.cs" />
+    <Compile Include="Areas\HRManager\Controllers\AttendanceUploadRecordController.cs" />
     <Compile Include="Areas\HRManager\Controllers\ContractController.cs" />
+    <Compile Include="Areas\HRManager\Controllers\DictionaryController.cs" />
     <Compile Include="Areas\HRManager\Controllers\EmployeeChildrenController.cs" />
     <Compile Include="Areas\HRManager\Controllers\EmployeeInfoController.cs" />
     <Compile Include="Areas\HRManager\Controllers\EmployeeRotateController.cs" />
+    <Compile Include="Areas\HRManager\Controllers\EmployeeYearDetailController.cs" />
+    <Compile Include="Areas\HRManager\Controllers\EmployeeYearMainController.cs" />
     <Compile Include="Areas\HRManager\Controllers\GoAbroadController.cs" />
     <Compile Include="Areas\HRManager\Controllers\GroupController.cs" />
     <Compile Include="Areas\HRManager\Controllers\GroupEmployeeController.cs" />
     <Compile Include="Areas\HRManager\Controllers\GroupEmployeeHisController.cs" />
     <Compile Include="Areas\HRManager\Controllers\LearningExperiencesController.cs" />
+    <Compile Include="Areas\HRManager\Controllers\ProfessionController.cs" />
     <Compile Include="Areas\HRManager\Controllers\SanctionController.cs" />
+    <Compile Include="Areas\HRManager\Controllers\TechnicalController.cs" />
     <Compile Include="Areas\HRManager\Controllers\WorkExperienceController.cs" />
+    <Compile Include="Areas\HRManager\Controllers\YearHolidayDefinitionController.cs" />
     <Compile Include="Areas\HRManager\HRManagerAreaRegistration.cs" />
     <Compile Include="Areas\PermissionManager\Controllers\DepartmentController.cs" />
     <Compile Include="Areas\PermissionManager\Controllers\FunctionController.cs" />
@@ -634,9 +726,12 @@
     <Compile Include="Areas\PermissionManager\Controllers\UserInfoController.cs" />
     <Compile Include="Areas\PermissionManager\Controllers\UserRoleController.cs" />
     <Compile Include="Areas\PermissionManager\PermissionManagerAreaRegistration.cs" />
+    <Compile Include="Areas\ReportManager\Controllers\HrReportController.cs" />
+    <Compile Include="Areas\ReportManager\ReportManagerAreaRegistration.cs" />
+    <Compile Include="Areas\SystemSetManager\Controllers\HolidayDetailController.cs" />
+    <Compile Include="Areas\SystemSetManager\Controllers\UploadController.cs" />
     <Compile Include="Areas\SystemSetManager\SystemSetManagerAreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\BaseController - 复制.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\DefaultController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
@@ -667,6 +762,9 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
     <Content Include="Views\Shared\_Head.cshtml" />
     <Content Include="Views\Shared\_LayoutList2.cshtml" />
+    <Content Include="Views\Shared\InternalServer.cshtml" />
+    <Content Include="TemplateFile\考勤模版.xlsx" />
+    <Content Include="Views\Login\Index2.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -679,10 +777,13 @@
     <Folder Include="Areas\PermissionManager\Models\" />
     <Folder Include="Areas\PermissionManager\Views\Permission\" />
     <Folder Include="Areas\PermissionManager\Views\Shared\" />
-    <Folder Include="Areas\SystemSetManager\Controllers\" />
+    <Folder Include="Areas\ReportManager\Models\" />
+    <Folder Include="Areas\ReportManager\Views\Shared\" />
     <Folder Include="Areas\SystemSetManager\Models\" />
     <Folder Include="Areas\SystemSetManager\Views\Shared\" />
+    <Folder Include="Areas\SystemSetManager\Views\Upload\" />
     <Folder Include="Models\" />
+    <Folder Include="UploadFile\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Project.Config\Project.Config.csproj">
@@ -701,14 +802,13 @@
       <Project>{3D26782A-3308-430B-B58F-5F8ABA1A50B3}</Project>
       <Name>Project.Model</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Project.Mvc\Project.Mvc.csproj">
-      <Project>{28697EFA-5FC7-4454-AE92-6DF284882EF8}</Project>
-      <Name>Project.Mvc</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Project.Service\Project.Service.csproj">
       <Project>{CC818705-0142-46D9-A858-1575069C0ABE}</Project>
       <Name>Project.Service</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

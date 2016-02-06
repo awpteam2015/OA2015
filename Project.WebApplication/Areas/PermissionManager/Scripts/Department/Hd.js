@@ -5,14 +5,7 @@
     pro.Department.HdPage = {
         initPage: function () {
 
-            $('#ParentDepartmentCode').combotree({
-                required:true,
-                editable: false,
-                valueField: 'DepartmentCode',
-                textField: 'DepartmentName',
-                url: '/PermissionManager/Department/GetList_Combotree'
-            });
-
+            pro.DepartmentControl.init({ controlId: "ParentDepartmentCode" ,required:true});
 
             $("#btnAdd").click(function () {
                 pro.Department.HdPage.submit("Add");
@@ -28,6 +21,7 @@
                 for (var filedname in bindField) {
                     $("[name=" + filedname + "]").val(bindEntity[filedname]);
                 }
+                //$('#DepartmentType').combobox('setValue', bindEntity["DepartmentType"]);
                 //行项目信息用json绑定控件
                 //alert(JSON.stringify(BindEntity.List));
             }
@@ -59,7 +53,7 @@
                 }
             ).fail(
              function (errordetails, errormessage) {
-                // $.alertExtend.error();
+                 // $.alertExtend.error();
              }
             );
         },

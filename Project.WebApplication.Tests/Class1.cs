@@ -5,6 +5,9 @@ using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Project.Model.ReportManager;
+using Project.Service.PermissionManager;
+using Project.Service.ReportManager;
 
 namespace Project.WebApplication.Tests
 {
@@ -18,16 +21,19 @@ namespace Project.WebApplication.Tests
         [TestMethod]
         public void TestMethod1()
         {
-            List<string> list1 = new List<string>() { "111", "222" };
+          //  DepartmentService.GetInstance().GetChildDepartmentCode();
 
-            List<string> list2 = new List<string>();
+            //HrReportService.GetInstance().GerAttendanceReport1(new AttendanceViewEntity(){Attr_StartDate = DateTime.Now},0,10);
+            //List<string> list1 = new List<string>() { "111", "222" };
+
+            //List<string> list2 = new List<string>();
 
 
 
-            var tt = (from a in list1
-                      from b in list2
-                      where a == b
-                      select a).ToList();
+            //var tt = (from a in list1
+            //          from b in list2
+            //          where a == b
+            //          select a).ToList();
 
 
 

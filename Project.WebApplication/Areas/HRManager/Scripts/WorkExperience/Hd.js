@@ -35,7 +35,7 @@
             }
 
             this.submitExtend.addRule();
-            if (!$("#form1").valid() && this.submitExtend.logicValidate()) {
+            if (!$("#form1").valid() && !this.submitExtend.logicValidate()) {
                 $.alertExtend.error();
                 return false;
             }
@@ -79,19 +79,19 @@
                     },
                     messages: {
           PkId:  "必填!",
-          EmployeeCode:  "必填!",
-          DepartmentCode:  "必填!",
-          WorkCompany:  "必填!",
-          Duties:  "单位职务（职位）必填!",
-          BeginDate:  "必填!",
-          EndDate:  "必填!",
-          WorkContent:  "必填!",
-          LeaveReason:  "必填!",
-          Remark:  "必填!",
-          CreatorUserCode:  "必填!",
-          CreatorUserName:  "必填!",
-          CreateTime:  "必填!",
-          LastModificationTime:  "必填!",
+          EmployeeCode:  "员工编号必填!",
+          DepartmentCode:  "所属部门必填!",
+          WorkCompany:  "工作单位必填!",
+          Duties:  "职务必填!",
+          BeginDate:  "开始日期必填!",
+          EndDate:  "结束日期必填!",
+          WorkContent:  "工作内容必填!",
+          LeaveReason:  "离职原因必填!",
+          Remark:  "备注必填!",
+          CreatorUserCode:  "操作人必填!",
+          CreatorUserName:  "操作人名称必填!",
+          CreateTime:  "创建时间必填!",
+          LastModificationTime:  "修改时间必填!",
                     },
                     errorPlacement: function (error, element) {
                         pro.commonKit.errorPlacementHd(error, element);

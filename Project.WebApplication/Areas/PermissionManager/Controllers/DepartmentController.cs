@@ -8,9 +8,9 @@ using Project.Infrastructure.FrameworkCore.DataNhibernate.Helpers;
 using Project.Infrastructure.FrameworkCore.ToolKit;
 using Project.Infrastructure.FrameworkCore.ToolKit.JsonHandler;
 using Project.Infrastructure.FrameworkCore.ToolKit.LinqExpansion;
+using Project.Infrastructure.FrameworkCore.WebMvc.Controllers.Results;
+using Project.Infrastructure.FrameworkCore.WebMvc.Models;
 using Project.Model.PermissionManager;
-using Project.Mvc.Controllers.Results;
-using Project.Mvc.Models;
 using Project.Service.PermissionManager;
 using Project.WebApplication.Controllers;
 
@@ -32,11 +32,13 @@ namespace Project.WebApplication.Areas.PermissionManager.Controllers
 
         public ActionResult List()
         {
+            //int.Parse("ssss");
             return View();
         }
 
         public AbpJsonResult GetList()
         {
+            //int.Parse("ssss");
             var where = new DepartmentEntity();
             where.DepartmentCode = RequestHelper.GetFormString("DepartmentCode");
             where.DepartmentName = RequestHelper.GetFormString("DepartmentName");

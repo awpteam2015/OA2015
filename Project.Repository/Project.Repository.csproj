@@ -30,6 +30,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Iesi.Collections, Version=4.0.0.0, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Iesi.Collections.4.0.0.4000\lib\net40\Iesi.Collections.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="NHibernate, Version=4.0.0.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
+      <HintPath>..\packages\NHibernate.4.0.4.4000\lib\net40\NHibernate.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -40,17 +48,24 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="HRManager\AttendanceRepository.cs" />
+    <Compile Include="HRManager\AttendanceUploadRecordRepository.cs" />
     <Compile Include="HRManager\ContractRepository.cs" />
+    <Compile Include="HRManager\DictionaryRepository.cs" />
     <Compile Include="HRManager\EmployeeChildrenRepository.cs" />
     <Compile Include="HRManager\EmployeeInfoRepository.cs" />
     <Compile Include="HRManager\EmployeeRotateRepository.cs" />
+    <Compile Include="HRManager\EmployeeYearDetailRepository.cs" />
+    <Compile Include="HRManager\EmployeeYearMainRepository.cs" />
     <Compile Include="HRManager\GoAbroadRepository.cs" />
     <Compile Include="HRManager\GroupEmployeeHisRepository.cs" />
     <Compile Include="HRManager\GroupEmployeeRepository.cs" />
     <Compile Include="HRManager\GroupRepository.cs" />
     <Compile Include="HRManager\LearningExperiencesRepository.cs" />
+    <Compile Include="HRManager\ProfessionRepository.cs" />
     <Compile Include="HRManager\SanctionRepository.cs" />
+    <Compile Include="HRManager\TechnicalRepository.cs" />
     <Compile Include="HRManager\WorkExperienceRepository.cs" />
+    <Compile Include="HRManager\YearHolidayDefinitionRepository.cs" />
     <Compile Include="PermissionManager\DepartmentRepository.cs" />
     <Compile Include="PermissionManager\FunctionDetailRepository.cs" />
     <Compile Include="PermissionManager\FunctionRepository.cs" />
@@ -62,6 +77,8 @@
     <Compile Include="PermissionManager\UserInfoRepository.cs" />
     <Compile Include="PermissionManager\UserRoleRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ReportManager\HrReportRepository.cs" />
+    <Compile Include="SystemSetManager\HolidayDetailRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Project.Infrastructure.FrameworkCore\Project.Infrastructure.FrameworkCore.csproj">
@@ -73,7 +90,9 @@
       <Name>Project.Model</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

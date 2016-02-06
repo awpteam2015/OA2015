@@ -1,0 +1,87 @@
+﻿
+
+
+
+
+@{
+    ViewBag.Title = "Hd";
+    Layout = "~/Views/Shared/_LayoutHandler.cshtml";
+}
+
+@section JavaScript{
+    <script src="/Areas/HRManager/Scripts/EmployeeYearDetail/Hd.js?JsParamter=@SiteConfig.GetConfig().JsParamter"></script>
+}
+<div style="display: none">
+    <input id="BindEntity" type="text" value="@ViewBag.BindEntity" />
+    <input id="Command" type="hidden" />
+</div>
+<div class="mtable_div">
+    <form id="form1">
+        <table class="mtable">
+            <tr>
+                <td>
+                    部门编号<span style="color: Red">*</span>:
+                </td>
+                <td>
+                    <input id="DepartmentCode" name="DepartmentCode" type="text" class="easyui-combobox" style="width:180px;" />
+                </td>
+
+                <td>
+                    员工编号<span style="color: Red">*</span>:
+                </td>
+                <td>
+                    <input id="EmployeeCode" name="EmployeeCode" type="text" class="easyui-combobox" style="width:130px;"/>
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    开始日期<span style="color: Red">*</span>:
+                </td>
+                <td>
+                    <input id="BeginDate" name="BeginDate" type="text" class="Wdate" onclick="WdatePicker();" />
+                </td>
+
+                <td>
+                    结束日期<span style="color: Red">*</span>:
+                </td>
+                <td>
+                    <input id="EndDate" name="EndDate" type="text" class="Wdate" onclick="WdatePicker();" />
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    合计天数<span style="color: Red">*</span>:
+                </td>
+                <td colspan="3">
+                    <input id="UseCount" name="UseCount" type="text" class="easyui-numberbox" precision="1" style="width:130px;"/>
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    备注 <span style="color: Red">*</span>:
+                </td>
+                <td colspan="3">
+                    <textarea id="Remark" name="Remark" style="height:50px;width:180px;"></textarea>
+                </td>
+            </tr>
+
+        </table>
+    </form>
+</div>
+<div style="padding: 10px 10px 0 10px; text-align: center;">
+    @if (Request["PkId"] == null || int.Parse(Request["PkId"]) == 0)
+    {
+        <a id="btnAdd" class="easyui-linkbutton" iconcls="icon-add" href="javascript:void(0)">新增</a>
+    }
+    else
+    {
+        <a id="btnEdit" class="easyui-linkbutton" iconcls="icon-ok" href="javascript:void(0)">编辑</a>
+    }
+    <a id="btnClose" class="easyui-linkbutton" iconcls="icon-cancel" href="javascript:void(0)">关闭</a>
+</div>
+
+
+

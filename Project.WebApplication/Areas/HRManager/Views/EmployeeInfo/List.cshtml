@@ -2,33 +2,21 @@
     ViewBag.Title = "List";
     Layout = "~/Views/Shared/_LayoutList.cshtml";
 }
-
 @section JavaScript{
     <script src="/Areas/HrManager/Scripts/EmployeeInfo/List.js?JsParamter=@SiteConfig.GetConfig().JsParamter" type="text/javascript"></script>
 }
-
-<div title="通过FSate字段进行过滤是还是历史记录
-   人员基础信息，如需要增加多字段请使用扩展表" style="padding:1px;">
+<div title="人员信息管理" style="padding:1px;">
     <table id="datagrid" style="height:auto;" iconcls=".icon-save" singleselect="true" toolbar="#tb" fit="true"></table>
     <div id="tb" style="padding:5px;height:auto">
         <div style="margin-bottom: 5px">
             <a id="btnAdd" href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:true">添加</a>
-
             <a id="btnDel" href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-remove',plain:true">删除</a>
-
             <a id="btnEdit" href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-edit',plain:true">编辑</a>
-
             <a id="btnRefresh" href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-reload',plain:true">刷新</a>
-
         </div>
-
         <div id="divSearch">
             <form>
-
                 <table class="mtable">
-
-
-
                     <tr>
                         <td>
                             员工编号:
@@ -36,7 +24,6 @@
                         <td>
                             <input id="EmployeeCode" name="EmployeeCode" type="text" />
                         </td>
-
                         <td>
                             员工名称:
                         </td>
@@ -56,9 +43,7 @@
                             <input id="JobName" name="JobName" type="text" />
                         </td>
                     </tr>
-
                     <tr>
-
                         <td>
                             在职状态:
                         </td>
@@ -75,7 +60,6 @@
                             <a href="#" class="easyui-linkbutton" iconcls="icon-search" id="btnSearch">搜索</a>
                         </td>
                     </tr>
-
                     @*<tr>
                             <td>
                                 身份证:
@@ -84,7 +68,6 @@
                                 <input id="CertNo" name="CertNo" type="text" />
                             </td>
                         </tr>*@
-
                     @*<tr>
                             <td>
                                 生日:
@@ -111,7 +94,6 @@
                                 <input id="Duties" name="Duties" type="text" />
                             </td>
                         </tr>*@
-
                     @*<tr>
                             <td>
                                 家庭地址:
@@ -206,8 +188,5 @@
         </div>
     </div>
 </div>
-
-
-
 
 

@@ -1,21 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Hosting;
-using System.Web.Mvc;
-using System.Web.Routing;
-using System.Web.Security;
-using System.Web.UI;
-using Newtonsoft.Json;
-using Project.Infrastructure.FrameworkCore.ToolKit;
-using Project.Model.PermissionManager;
-using Project.Mvc.Authorization;
-using Project.Mvc.Controllers.Results;
-using Project.Mvc.Models;
-using Project.Mvc.Views;
+﻿using System.Web.Mvc;
+using Project.Infrastructure.FrameworkCore.WebMvc.Controllers.Results;
+using Project.Infrastructure.FrameworkCore.WebMvc.Models;
 using Project.Service.PermissionManager;
-using Project.Service.PermissionManager.DTO;
 
 
 namespace Project.WebApplication.Controllers

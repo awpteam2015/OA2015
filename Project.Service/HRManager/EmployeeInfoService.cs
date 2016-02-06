@@ -8,10 +8,13 @@
 * *************************************************************************/
 using System;
 using System.Linq;
+using NHibernate.Linq;
 using System.Collections.Generic;
 using Project.Infrastructure.FrameworkCore.DataNhibernate.Helpers;
 using Project.Model.HRManager;
 using Project.Repository.HRManager;
+using Project.Service.HRManager.Validate;
+using Project.Infrastructure.FrameworkCore.DataNhibernate;
 
 namespace Project.Service.HRManager
 {
@@ -20,11 +23,21 @@ namespace Project.Service.HRManager
 
         #region 构造函数
         private readonly EmployeeInfoRepository _employeeInfoRepository;
+        private readonly WorkExperienceRepository _workExperienceRepository;
+        private readonly LearningExperiencesRepository _learnExperienceRepository;
+        private readonly TechnicalRepository _technicalRepository;
+        private readonly ProfessionRepository _professionRepository;
+
         private static readonly EmployeeInfoService Instance = new EmployeeInfoService();
 
         public EmployeeInfoService()
         {
             this._employeeInfoRepository = new EmployeeInfoRepository();
+
+            this._workExperienceRepository = new WorkExperienceRepository();
+            this._learnExperienceRepository = new LearningExperiencesRepository();
+            this._technicalRepository = new TechnicalRepository();
+            this._professionRepository = new ProfessionRepository();
         }
 
         public static EmployeeInfoService GetInstance()
@@ -40,9 +53,60 @@ namespace Project.Service.HRManager
         /// </summary>
         /// <param name="entity"></param>
         /// <returns></returns>
-        public System.Int32 Add(EmployeeInfoEntity entity)
+        public Tuple<bool, string> Add(EmployeeInfoEntity entity)
         {
-            return _employeeInfoRepository.Save(entity);
+            var validateResult = EmployeeInfoValidate.GetInstance().IsHasSameEmployeeCode(entity.EmployeeCode);
+            if (!validateResult.Item1)
+            {
+                return validateResult;
+            }
+
+            using (var tx = NhTransactionHelper.BeginTransaction())
+            {
+                try
+                {
+                    var pkId = _employeeInfoRepository.Save(entity);
+                    entity.WorkList.ToList().ForEach(p =>
+                    {
+                        p.EmployeeID = pkId;                       
+                    });
+                    entity.LearningList.ToList().ForEach(p =>
+                    {
+                        p.EmployeeID = pkId;
+                    });
+                    entity.TechnicalList.ToList().ForEach(p =>
+                    {
+                        p.EmployeeID = pkId;
+                        p.EmployeeCode = entity.EmployeeCode;
+                        p.DepartmentCode = entity.DepartmentCode;
+                    });
+                    entity.ProfessionList.ToList().ForEach(p =>
+                    {
+                        p.EmployeeID = pkId;
+                        p.EmployeeCode = entity.EmployeeCode;
+                        p.DepartmentCode = entity.DepartmentCode;
+                    });
+                    tx.Commit();
+                    return new Tuple<bool, string>(true, ""); ;
+                }
+                catch (Exception e)
+                {
+                    tx.Rollback();
+                    throw;
+                }
+            }
+            //var addResult = _employeeInfoRepository.Save(entity);
+
+
+
+            //if (addResult > 0)
+            //{
+
+            //}
+            //else
+            //{
+            //    return new Tuple<bool, string>(false, "");
+            //}
         }
 
 
@@ -85,17 +149,53 @@ namespace Project.Service.HRManager
         /// 更新
         /// </summary>
         /// <param name="entity"></param>
-        public bool Update(EmployeeInfoEntity entity)
+        public Tuple<bool, string> Update(EmployeeInfoEntity entity)
         {
-            try
+
+            var validateResult = EmployeeInfoValidate.GetInstance().IsHasSameEmployeeCode(entity.EmployeeCode, entity.PkId);
+            if (!validateResult.Item1)
             {
-                _employeeInfoRepository.Update(entity);
-                return true;
+                return validateResult;
             }
-            catch
+            var oldEntity = EmployeeInfoService.GetInstance().GetModelByPk(entity.PkId);
+            var date = DateTime.Now;
+            entity.WorkList.ToList().ForEach(item => item.EmployeeID = entity.PkId);
+            entity.LearningList.ToList().ForEach(item => item.EmployeeID = entity.PkId);
+            entity.TechnicalList.ToList().ForEach(item => item.EmployeeID = entity.PkId);
+            entity.ProfessionList.ToList().ForEach(item => item.EmployeeID = entity.PkId);
+            var deleteList = oldEntity.WorkList.Where(
+                    p => entity.WorkList.All(x => x.PkId != p.PkId)).ToList();
+            var deleteLearningList = oldEntity.LearningList.Where(
+                              p => entity.LearningList.All(x => x.PkId != p.PkId)).ToList();
+
+            var deleteTechnicalList = oldEntity.TechnicalList.Where(
+                              p => entity.TechnicalList.All(x => x.PkId != p.PkId)).ToList();
+
+            var deleteProfessionList = oldEntity.ProfessionList.Where(
+                              p => entity.ProfessionList.All(x => x.PkId != p.PkId)).ToList();
+
+            using (var tx = NhTransactionHelper.BeginTransaction())
             {
-                return false;
+                try
+                {
+                    _employeeInfoRepository.Merge(entity);
+                    deleteList.ForEach(p => { _workExperienceRepository.Delete(p); });
+                    deleteLearningList.ForEach(p => { _learnExperienceRepository.Delete(p); });
+                    deleteTechnicalList.ForEach(p => { _technicalRepository.Delete(p); });
+                    deleteProfessionList.ForEach(p => { _professionRepository.Delete(p); });
+                    tx.Commit();
+                    return new Tuple<bool, string>(true, "");
+                }
+                catch
+                {
+                    tx.Rollback();
+                    throw;
+                }
             }
+
+
+
+
         }
 
 
@@ -123,16 +223,21 @@ namespace Project.Service.HRManager
         {
             var expr = PredicateBuilder.True<EmployeeInfoEntity>();
             #region
-            // if (!string.IsNullOrEmpty(where.PkId))
-            //  expr = expr.And(p => p.PkId == where.PkId);
-            // if (!string.IsNullOrEmpty(where.EmployeeCode))
-            //  expr = expr.And(p => p.EmployeeCode == where.EmployeeCode);
-            // if (!string.IsNullOrEmpty(where.EmployeeName))
-            //  expr = expr.And(p => p.EmployeeName == where.EmployeeName);
-            // if (!string.IsNullOrEmpty(where.DepartmentCode))
-            //  expr = expr.And(p => p.DepartmentCode == where.DepartmentCode);
-            // if (!string.IsNullOrEmpty(where.JobName))
-            //  expr = expr.And(p => p.JobName == where.JobName);
+            //if (where.SexEntity == null)
+            //{
+            //    expr = expr.And(p => p.SexEntity.ParentKeyCode == "ZZTZ");
+
+            //}
+            if (!string.IsNullOrEmpty(where.EmployeeCode))
+                expr = expr.And(p => p.EmployeeCode == where.EmployeeCode);
+            if (!string.IsNullOrEmpty(where.EmployeeName))
+                expr = expr.And(p => p.EmployeeName.Contains(where.EmployeeName));
+            if (!string.IsNullOrEmpty(where.DepartmentCode))
+                expr = expr.And(p => where.DepartmentCode.Split(',').Contains(p.DepartmentCode));
+            //if (!string.IsNullOrEmpty(where.DepartmentCode))
+            //    expr = expr.And(p => p.DepartmentCode == where.DepartmentCode);
+            if (!string.IsNullOrEmpty(where.JobName))
+                expr = expr.And(p => p.JobName.Contains(where.JobName));
             // if (!string.IsNullOrEmpty(where.PayCode))
             //  expr = expr.And(p => p.PayCode == where.PayCode);
             // if (!string.IsNullOrEmpty(where.Sex))
@@ -145,10 +250,10 @@ namespace Project.Service.HRManager
             //  expr = expr.And(p => p.TechnicalTitle == where.TechnicalTitle);
             // if (!string.IsNullOrEmpty(where.Duties))
             //  expr = expr.And(p => p.Duties == where.Duties);
-            // if (!string.IsNullOrEmpty(where.WorkState))
-            //  expr = expr.And(p => p.WorkState == where.WorkState);
-            // if (!string.IsNullOrEmpty(where.EmployeeType))
-            //  expr = expr.And(p => p.EmployeeType == where.EmployeeType);
+            if (!string.IsNullOrEmpty(where.WorkState))
+                expr = expr.And(p => p.WorkState == where.WorkState);
+            if (!string.IsNullOrEmpty(where.EmployeeType))
+                expr = expr.And(p => p.EmployeeType == where.EmployeeType);
             // if (!string.IsNullOrEmpty(where.HomeAddress))
             //  expr = expr.And(p => p.HomeAddress == where.HomeAddress);
             // if (!string.IsNullOrEmpty(where.MobileNO))
@@ -180,18 +285,20 @@ namespace Project.Service.HRManager
         /// </summary>
         /// <param name="entity">条件实体</param>
         /// <returns>返回列表</returns>
-        public IList<EmployeeInfoEntity> GetList(EmployeeInfoEntity where)
+        public IList<EmployeeInfoEntity> GetList(EmployeeInfoEntity where, bool isShowTop = false)
         {
             var expr = PredicateBuilder.True<EmployeeInfoEntity>();
             #region
             // if (!string.IsNullOrEmpty(where.PkId))
             //  expr = expr.And(p => p.PkId == where.PkId);
-            // if (!string.IsNullOrEmpty(where.EmployeeCode))
-            //  expr = expr.And(p => p.EmployeeCode == where.EmployeeCode);
+            if (!string.IsNullOrEmpty(where.EmployeeCode))
+                expr = expr.And(p => p.EmployeeCode == where.EmployeeCode);
             // if (!string.IsNullOrEmpty(where.EmployeeName))
             //  expr = expr.And(p => p.EmployeeName == where.EmployeeName);
-            // if (!string.IsNullOrEmpty(where.DepartmentCode))
-            //  expr = expr.And(p => p.DepartmentCode == where.DepartmentCode);
+            if (!string.IsNullOrEmpty(where.DepartmentCode))
+            {
+                expr = expr.And(p => where.DepartmentCode.Split(',').Contains(p.DepartmentCode));
+            }
             // if (!string.IsNullOrEmpty(where.JobName))
             //  expr = expr.And(p => p.JobName == where.JobName);
             // if (!string.IsNullOrEmpty(where.PayCode))
@@ -232,13 +339,22 @@ namespace Project.Service.HRManager
             //  expr = expr.And(p => p.LastModificationTime == where.LastModificationTime);
             #endregion
             var list = _employeeInfoRepository.Query().Where(expr).OrderBy(p => p.PkId).ToList();
+
+            if (isShowTop)
+            {
+                list.Insert(0, new EmployeeInfoEntity() { EmployeeCode = " ", EmployeeName = "全部" });
+            }
             return list;
         }
         #endregion
 
 
         #region 新增方法
-
+        public string GetMaxEmployeeCode()
+        {
+            string retStr = _employeeInfoRepository.GetMaxEmployeeCode();
+            return retStr;
+        }
         #endregion
     }
 }

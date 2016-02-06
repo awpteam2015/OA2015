@@ -1,9 +1,4 @@
-﻿
-
-  
-
-
-@{
+﻿@{
     ViewBag.Title = "Hd";
     Layout = "~/Views/Shared/_LayoutHandler.cshtml";
 }
@@ -12,218 +7,200 @@
     <script src="/Areas/HrManager/Scripts/EmployeeInfo/Hd.js?JsParamter=@SiteConfig.GetConfig().JsParamter"></script>
 }
 <div style="display: none">
-<input id="BindEntity" type="text" value="@ViewBag.BindEntity" />
-<input id="Command" type="hidden" />
+    <input id="BindEntity" type="text" value="@ViewBag.BindEntity" />
+    <input id="Command" type="hidden" />
 </div>
 <div class="mtable_div">
     <form id="form1">
         <table class="mtable">
-            
-          
-            
-              <tr>
-            <td  >
-                员工编号<span style="color: Red">*</span>:
-            </td>
-            <td >
-                <input id="EmployeeCode" name="EmployeeCode"  type="text"  />
-            </td>
-        </tr>
-            
-              <tr>
-            <td  >
-                员工名称<span style="color: Red">*</span>:
-            </td>
-            <td >
-                <input id="EmployeeName" name="EmployeeName"  type="text"  />
-            </td>
-        </tr>
-            
-              <tr>
-            <td  >
-                所属部门<span style="color: Red">*</span>:
-            </td>
-            <td >
-                <input id="DepartmentCode" name="DepartmentCode"  type="text"  />
-            </td>
-        </tr>
-            
-              <tr>
-            <td  >
-                工号<span style="color: Red">*</span>:
-            </td>
-            <td >
-                <input id="JobName" name="JobName"  type="text"  />
-            </td>
-        </tr>
-            
-              <tr>
-            <td  >
-                中文简拼<span style="color: Red">*</span>:
-            </td>
-            <td >
-                <input id="PayCode" name="PayCode"  type="text"  />
-            </td>
-        </tr>
-            
-              <tr>
-            <td  >
-                姓别<span style="color: Red">*</span>:
-            </td>
-            <td >
-                <input id="Sex" name="Sex"  type="text"  />
-            </td>
-        </tr>
-            
-              <tr>
-            <td  >
-                身份证<span style="color: Red">*</span>:
-            </td>
-            <td >
-                <input id="CertNo" name="CertNo"  type="text"  />
-            </td>
-        </tr>
-            
-              <tr>
-            <td  >
-                生日<span style="color: Red">*</span>:
-            </td>
-            <td >
-                <input id="Birthday" name="Birthday"  type="text"  />
-            </td>
-        </tr>
-            
-              <tr>
-            <td  >
-                技术职称<span style="color: Red">*</span>:
-            </td>
-            <td >
-                <input id="TechnicalTitle" name="TechnicalTitle"  type="text"  />
-            </td>
-        </tr>
-            
-              <tr>
-            <td  >
-                单位职务<span style="color: Red">*</span>:
-            </td>
-            <td >
-                <input id="Duties" name="Duties"  type="text"  />
-            </td>
-        </tr>
-            
-              <tr>
-            <td  >
-                在职状态<span style="color: Red">*</span>:
-            </td>
-            <td >
-                <input id="WorkState" name="WorkState"  type="text"  />
-            </td>
-        </tr>
-            
-              <tr>
-            <td  >
-                员工类型<span style="color: Red">*</span>:
-            </td>
-            <td >
-                <input id="EmployeeType" name="EmployeeType"  type="text"  />
-            </td>
-        </tr>
-            
-              <tr>
-            <td  >
-                家庭地址<span style="color: Red">*</span>:
-            </td>
-            <td >
-                <input id="HomeAddress" name="HomeAddress"  type="text"  />
-            </td>
-        </tr>
-            
-              <tr>
-            <td  >
-                手机号<span style="color: Red">*</span>:
-            </td>
-            <td >
-                <input id="MobileNO" name="MobileNO"  type="text"  />
-            </td>
-        </tr>
-            
-              <tr>
-            <td  >
-                图片地址<span style="color: Red">*</span>:
-            </td>
-            <td >
-                <input id="ImageUrl" name="ImageUrl"  type="text"  />
-            </td>
-        </tr>
-            
-              <tr>
-            <td  >
-                排序<span style="color: Red">*</span>:
-            </td>
-            <td >
-                <input id="Sort" name="Sort"  type="text"  />
-            </td>
-        </tr>
-            
-              <tr>
-            <td  >
-                状态<span style="color: Red">*</span>:
-            </td>
-            <td >
-                <input id="State" name="State"  type="text"  />
-            </td>
-        </tr>
-            
-              <tr>
-            <td  >
-                备注<span style="color: Red">*</span>:
-            </td>
-            <td >
-                <input id="Remark" name="Remark"  type="text"  />
-            </td>
-        </tr>
-            
-              <tr>
-            <td  >
-                操作员<span style="color: Red">*</span>:
-            </td>
-            <td >
-                <input id="CreatorUserCode" name="CreatorUserCode"  type="text"  />
-            </td>
-        </tr>
-            
-              <tr>
-            <td  >
-                操作员名称<span style="color: Red">*</span>:
-            </td>
-            <td >
-                <input id="CreatorUserName" name="CreatorUserName"  type="text"  />
-            </td>
-        </tr>
-            
-              <tr>
-            <td  >
-                创建时间<span style="color: Red">*</span>:
-            </td>
-            <td >
-                <input id="CreateTime" name="CreateTime"  type="text"  />
-            </td>
-        </tr>
-            
-              <tr>
-            <td  >
-                修改时间<span style="color: Red">*</span>:
-            </td>
-            <td >
-                <input id="LastModificationTime" name="LastModificationTime"  type="text"  />
-            </td>
-        </tr>
-          
+            <tr>
+                <td>
+                    员工编号<span style="color: Red">*</span>:
+                </td>
+                <td>
+                    <input id="EmployeeCode" name="EmployeeCode" type="text" />
+                </td>
+                <td>
+                    员工名称<span style="color: Red">*</span>:
+                </td>
+                <td>
+                    <input id="EmployeeName" name="EmployeeName" type="text" />
+                </td>
+                <td>
+                    所属部门<span style="color: Red">*</span>:
+                </td>
+                <td>
+                    <input id="DepartmentCode" name="DepartmentCode" type="text" style="width: 200px" />
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    工号<span style="color: Red">*</span>:
+                </td>
+                <td>
+                    <input id="JobName" name="JobName" type="text" />
+                </td>
+                <td>
+                    姓别<span style="color: Red">*</span>:
+                </td>
+                <td>
+                    <select id="Sex" name="Sex" class="easyui-combobox">
+                        <option value="0">女</option>
+                        <option value="1">男</option>
+                        <option value="-1">未知</option>
+                    </select>
+                </td>
+                <td>
+                    身份证<span style="color: Red">*</span>:
+                </td>
+                <td>
+                    <input id="CertNo" name="CertNo" type="text" style="width:160px;" />
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    生日<span style="color: Red">*</span>:
+                </td>
+                <td>
+                    <input class="easyui-datebox" id="Birthday" name="Birthday"/>
+                </td>
+                <td>
+                    技术职称<span style="color: Red">*</span>:
+                </td>
+                <td>
+                    <input id="TechnicalTitle" name="TechnicalTitle" type="text" />
+                </td>
+
+                <td>
+                    单位职务<span style="color: Red">*</span>:
+                </td>
+                <td>
+                    <input id="Duties" name="Duties" type="text" />
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    在职状态<span style="color: Red">*</span>:
+                </td>
+                <td>
+                    <input id="WorkState" name="WorkState" type="text" />
+                </td>
+
+                <td>
+                    员工类型<span style="color: Red">*</span>:
+                </td>
+                <td>
+                    <input id="EmployeeType" name="EmployeeType" type="text" />
+                </td>
+                <td>
+                    状态:
+                </td>
+                <td>
+                    <select id="State" name="State" class="easyui-combobox">
+                        <option value="0">停用</option>
+                        <option value="1">启用</option>
+                    </select>
+
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    手机号:
+                </td>
+                <td>
+                    <input id="MobileNO" name="MobileNO" type="text" />
+                </td>
+
+                <td>
+                    图片地址:
+                </td>
+                <td>
+                    <input id="ImageUrl" name="ImageUrl" type="text" />
+                </td>
+
+                <td>
+                    排序:
+                </td>
+                <td>
+                    <input id="Sort" name="Sort" type="text" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    工龄<span style="color: Red">*</span>:
+                </td>
+                <td>
+                    <input id="WorkingYears" name="WorkingYears" type="text" class="easyui-numberbox"/>
+                </td>
+                <td>
+                    家庭地址<span style="color: Red">*</span>:
+                </td>
+                <td colspan="3">
+                    <input id="HomeAddress" name="HomeAddress" type="text" style="width:350px" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    备注:
+                </td>
+                <td colspan="5">
+                    <textarea id="Remark" name="Remark" style="width:350px"></textarea>
+                </td>
+            </tr>
         </table>
+        <div id="tabs" class="easyui-tabs" data-options="fit:true,border:false">
+            <div title="工作经历" style="padding:1px;height: 500px">
+                <table id="datagridwork" toolbar="#tbwork" fit="true"></table>
+                <div id="tbwork" style="padding: 5px; height: auto">
+                    <div style="margin-bottom: 5px">
+                        <a id="btnAddWork_ToolBar" href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:true">添加</a>
+                        <a id="btnDelWork_ToolBar" href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-remove',plain:true">删除</a>
+                    </div>
+                    <div id="divSearch">
+                    </div>
+                </div>
+            </div>
+            <div title="学习经历" style="padding:1px;height: 500px">
+                <table id="datagridstudy" toolbar="#tbstudy" fit="true"></table>
+                <div id="tbstudy" style="padding: 5px; height: auto">
+                    <div style="margin-bottom: 5px">
+                        <a id="btnAddStudy_ToolBar" href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:true">添加</a>
+                        <a id="btnDelStudy_ToolBar" href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-remove',plain:true">删除</a>
+                    </div>
+                    <div id="divSearchStudy">
+                    </div>
+                </div>
+            </div>
+            <div title="职称记录" style="padding:1px;height: 500px">
+                <table id="datagridTechnical" toolbar="#tbTechnical" fit="true"></table>
+                <div id="tbTechnical" style="padding: 5px; height: auto">
+                    <div style="margin-bottom: 5px">
+                        <a id="btnAddTechnical_ToolBar" href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:true">添加</a>
+                        <a id="btnDelTechnical_ToolBar" href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-remove',plain:true">删除</a>
+                    </div>
+                    <div id="divSearchTechnical">
+                    </div>
+                </div>
+            </div>
+            <div title="职业资格" style="padding:1px;height: 500px">
+                <table id="datagridProfession" toolbar="#tbProfession" fit="true"></table>
+                <div id="tbProfession" style="padding: 5px; height: auto">
+                    <div style="margin-bottom: 5px">
+                        <a id="btnAddProfession_ToolBar" href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:true">添加</a>
+                        <a id="btnDelProfession_ToolBar" href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-remove',plain:true">删除</a>
+                    </div>
+                    <div id="divSearchProfession">
+                    </div>
+                </div>
+            </div>
+        </div>
     </form>
 </div>
 <div style="padding: 10px 10px 0 10px; text-align: center;">
-    @if (Request["PkId"]==null||int.Parse(Request["PkId"]) == 0)
+    @if (Request["PkId"] == null || int.Parse(Request["PkId"]) == 0)
     {
         <a id="btnAdd" class="easyui-linkbutton" iconcls="icon-add" href="javascript:void(0)">新增</a>
     }
@@ -233,8 +210,6 @@
     }
     <a id="btnClose" class="easyui-linkbutton" iconcls="icon-cancel" href="javascript:void(0)">关闭</a>
 </div>
-
-
 
 
 
