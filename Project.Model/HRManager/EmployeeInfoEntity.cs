@@ -105,7 +105,9 @@ namespace Project.Model.HRManager
         /// <summary>
         /// 图片地址
         /// </summary>
-        public virtual System.String ImageUrl { get; set; }
+        public virtual System.String FileUrl { get; set; }
+
+        public virtual System.String FileName { get; set; }
         /// <summary>
         /// 排序
         /// </summary>

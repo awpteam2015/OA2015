@@ -5,6 +5,8 @@
 
 @section JavaScript{
     <script src="/Areas/HrManager/Scripts/EmployeeInfo/Hd.js?JsParamter=@SiteConfig.GetConfig().JsParamter"></script>
+    <script src="~/Scripts/jqueryPlugins/jquery_uploadify/jquery.uploadify.js"></script>
+    <link href="~/Scripts/jqueryPlugins/jquery_uploadify/uploadify.css" rel="stylesheet" />
 }
 <div style="display: none">
     <input id="BindEntity" type="text" value="@ViewBag.BindEntity" />
@@ -55,7 +57,7 @@
                     身份证<span style="color: Red">*</span>:
                 </td>
                 <td>
-                    <input id="CertNo" name="CertNo" type="text" style="width:160px;" />
+                    <input id="CertNo" name="CertNo" type="text" style="width:160px;" isIdCardNo="请输入正确身份证号" />
                 </td>
             </tr>
 
@@ -64,14 +66,20 @@
                     生日<span style="color: Red">*</span>:
                 </td>
                 <td>
-                    <input class="easyui-datebox" id="Birthday" name="Birthday"/>
+                    <input class="easyui-datebox" id="Birthday" name="Birthday" />
                 </td>
                 <td>
-                    技术职称<span style="color: Red">*</span>:
+                    工龄<span style="color: Red">*</span>:
                 </td>
                 <td>
-                    <input id="TechnicalTitle" name="TechnicalTitle" type="text" />
+                    <input id="WorkingYears" name="WorkingYears" type="text" class="easyui-numberbox" />
                 </td>
+                @*<td>
+                        技术职称<span style="color: Red">*</span>:
+                    </td>
+                    <td>
+                        <input id="TechnicalTitle" name="TechnicalTitle" type="text" />
+                    </td>*@
 
                 <td>
                     单位职务<span style="color: Red">*</span>:
@@ -114,12 +122,7 @@
                     <input id="MobileNO" name="MobileNO" type="text" />
                 </td>
 
-                <td>
-                    图片地址:
-                </td>
-                <td>
-                    <input id="ImageUrl" name="ImageUrl" type="text" />
-                </td>
+
 
                 <td>
                     排序:
@@ -127,18 +130,27 @@
                 <td>
                     <input id="Sort" name="Sort" type="text" />
                 </td>
+                <td>
+                    图片地址:
+                </td>
+                <td rowspan="2">
+                    @*<input id="ImageUrl" name="ImageUrl" type="text" />*@
+                    <div style="display: none">
+                        <input id="FileUrl" name="FileUrl" type="text" />
+                        <input id="FileName" name="FileName" type="text" />
+                    </div>
+
+                    <div style="float: left; width: 150px;">
+                        <input id="file_upload" name="file_upload" type="file" />
+                    </div>
+                    <div style="float: left; line-height: 40px;" id="div_filename"></div>
+                </td>
             </tr>
             <tr>
                 <td>
-                    工龄<span style="color: Red">*</span>:
+                    家庭地址:
                 </td>
-                <td>
-                    <input id="WorkingYears" name="WorkingYears" type="text" class="easyui-numberbox"/>
-                </td>
-                <td>
-                    家庭地址<span style="color: Red">*</span>:
-                </td>
-                <td colspan="3">
+                <td colspan="4">
                     <input id="HomeAddress" name="HomeAddress" type="text" style="width:350px" />
                 </td>
             </tr>
@@ -152,7 +164,7 @@
             </tr>
         </table>
         <div id="tabs" class="easyui-tabs" data-options="fit:true,border:false">
-            <div title="工作经历" style="padding:1px;height: 500px">
+            <div title="工作经历" style="padding:1px;height: 300px">
                 <table id="datagridwork" toolbar="#tbwork" fit="true"></table>
                 <div id="tbwork" style="padding: 5px; height: auto">
                     <div style="margin-bottom: 5px">
@@ -163,7 +175,7 @@
                     </div>
                 </div>
             </div>
-            <div title="学习经历" style="padding:1px;height: 500px">
+            <div title="学习经历" style="padding:1px;height: 300px">
                 <table id="datagridstudy" toolbar="#tbstudy" fit="true"></table>
                 <div id="tbstudy" style="padding: 5px; height: auto">
                     <div style="margin-bottom: 5px">
@@ -174,7 +186,7 @@
                     </div>
                 </div>
             </div>
-            <div title="职称记录" style="padding:1px;height: 500px">
+            <div title="职称记录" style="padding:1px;height: 300px">
                 <table id="datagridTechnical" toolbar="#tbTechnical" fit="true"></table>
                 <div id="tbTechnical" style="padding: 5px; height: auto">
                     <div style="margin-bottom: 5px">
@@ -185,7 +197,7 @@
                     </div>
                 </div>
             </div>
-            <div title="职业资格" style="padding:1px;height: 500px">
+            <div title="职业资格" style="padding:1px;height: 300px">
                 <table id="datagridProfession" toolbar="#tbProfession" fit="true"></table>
                 <div id="tbProfession" style="padding: 5px; height: auto">
                     <div style="margin-bottom: 5px">
@@ -211,5 +223,38 @@
     <a id="btnClose" class="easyui-linkbutton" iconcls="icon-cancel" href="javascript:void(0)">关闭</a>
 </div>
 
+<script type="text/javascript">
+    $('#file_upload').uploadify({
+        'formData': { "path": "ImgFile" },
+        'swf': '/Scripts/jqueryPlugins/jquery_uploadify/uploadify.swf',
+        'uploader': '/SystemSetManager/Upload/UploadImage',
+        'buttonText': '上传图片',
+        //'fileSizeLimit': '99999999999',//5MB
+        //'sizeLimit': '99999999999',
+        //'auto': true,
+        //'method':'Post ',
+        //'multi': true,
+        'fileTypeDesc': 'Image Files',
+        'fileTypeExts': '*.jpg;*.bmp;*.png;*.gif',
+        'onUploadSuccess': function (file, data, response) {
+
+            var json = $.parseJSON(data);
+            if (json.success) {
+                $('#div_filename').html("<span ><img name=\"listP\" style=\"height:50px;width:160px;\" src=\"" + json.extension.fileFullPath + "\">" + "</img> <a href=\"javascript:void(0)\" onclick=\"delImg(this);\">删除</a></span>");//+ json.extension.orgfileName
+                $("#FileUrl").val(json.extension.fileUrl);
+                $("#FileName").val(json.extension.fileName);
+            } else {
+                alert(json.msg);
+            }
+        }
+    });
+    function delImg(obj) {
+        $(obj).parent().remove();
+        $("#FileUrl").val("");
+        $("#FileName").val("");
+    }
+
+
+</script>
 
 

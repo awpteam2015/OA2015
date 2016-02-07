@@ -38,7 +38,8 @@ namespace Project.Map.HRManager
             Map(p => p.EmployeeTypeName);
             Map(p => p.HomeAddress);
             Map(p => p.MobileNO);
-            Map(p => p.ImageUrl);
+            Map(p => p.FileUrl);
+            Map(p => p.FileName);
             Map(p => p.Sort);
             Map(p => p.State);
             Map(p => p.Remark);
