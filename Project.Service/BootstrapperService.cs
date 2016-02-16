@@ -20,6 +20,7 @@ namespace Project.Service
 
         private static void InitAutoMapper()
         {
+            Mapper.CreateMap<EmployeeInfoEntity, EmployeeInfoHisEntity>().IgnoreAllNull();
             Mapper.CreateMap<EmployeeYearDetailEntity, EmployeeYearDetailEntity>().IgnoreAllNull();
             Mapper.CreateMap<EmployeeYearMainEntity, EmployeeYearMainEntity>().IgnoreAllNull();
             Mapper.CreateMap<ContractEntity, ContractEntity>().IgnoreAllNull();
