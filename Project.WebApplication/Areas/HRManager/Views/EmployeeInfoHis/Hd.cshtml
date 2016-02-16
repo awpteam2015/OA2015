@@ -1,0 +1,301 @@
+﻿
+
+  
+
+
+@{
+    ViewBag.Title = "Hd";
+    Layout = "~/Views/Shared/_LayoutHandler.cshtml";
+}
+
+@section JavaScript{
+    <script src="/Areas/HRManager/Scripts/EmployeeInfoHis/Hd.js?JsParamter=@SiteConfig.GetConfig().JsParamter"></script>
+}
+<div style="display: none">
+<input id="BindEntity" type="text" value="@ViewBag.BindEntity" />
+<input id="Command" type="hidden" />
+</div>
+<div class="mtable_div">
+    <form id="form1">
+        <table class="mtable">
+            
+              <tr>
+            <td  >
+                <span style="color: Red">*</span>:
+            </td>
+            <td >
+                <input id="PkId" name="PkId"  type="text"  />
+            </td>
+        </tr>
+            
+              <tr>
+            <td  >
+                员工表ID<span style="color: Red">*</span>:
+            </td>
+            <td >
+                <input id="EmployeeID" name="EmployeeID"  type="text"  />
+            </td>
+        </tr>
+            
+              <tr>
+            <td  >
+                员工编号<span style="color: Red">*</span>:
+            </td>
+            <td >
+                <input id="EmployeeCode" name="EmployeeCode"  type="text"  />
+            </td>
+        </tr>
+            
+              <tr>
+            <td  >
+                员工名称<span style="color: Red">*</span>:
+            </td>
+            <td >
+                <input id="EmployeeName" name="EmployeeName"  type="text"  />
+            </td>
+        </tr>
+            
+              <tr>
+            <td  >
+                所属部门<span style="color: Red">*</span>:
+            </td>
+            <td >
+                <input id="DepartmentCode" name="DepartmentCode"  type="text"  />
+            </td>
+        </tr>
+            
+              <tr>
+            <td  >
+                工号<span style="color: Red">*</span>:
+            </td>
+            <td >
+                <input id="JobName" name="JobName"  type="text"  />
+            </td>
+        </tr>
+            
+              <tr>
+            <td  >
+                中文简拼<span style="color: Red">*</span>:
+            </td>
+            <td >
+                <input id="PayCode" name="PayCode"  type="text"  />
+            </td>
+        </tr>
+            
+              <tr>
+            <td  >
+                姓别<span style="color: Red">*</span>:
+            </td>
+            <td >
+                <input id="Sex" name="Sex"  type="text"  />
+            </td>
+        </tr>
+            
+              <tr>
+            <td  >
+                身份证<span style="color: Red">*</span>:
+            </td>
+            <td >
+                <input id="CertNo" name="CertNo"  type="text"  />
+            </td>
+        </tr>
+            
+              <tr>
+            <td  >
+                生日<span style="color: Red">*</span>:
+            </td>
+            <td >
+                <input id="Birthday" name="Birthday"  type="text"  />
+            </td>
+        </tr>
+            
+              <tr>
+            <td  >
+                技术职称名称<span style="color: Red">*</span>:
+            </td>
+            <td >
+                <input id="TechnicalTitleName" name="TechnicalTitleName"  type="text"  />
+            </td>
+        </tr>
+            
+              <tr>
+            <td  >
+                技术职称<span style="color: Red">*</span>:
+            </td>
+            <td >
+                <input id="TechnicalTitle" name="TechnicalTitle"  type="text"  />
+            </td>
+        </tr>
+            
+              <tr>
+            <td  >
+                职务名称<span style="color: Red">*</span>:
+            </td>
+            <td >
+                <input id="DutiesName" name="DutiesName"  type="text"  />
+            </td>
+        </tr>
+            
+              <tr>
+            <td  >
+                单位职务<span style="color: Red">*</span>:
+            </td>
+            <td >
+                <input id="Duties" name="Duties"  type="text"  />
+            </td>
+        </tr>
+            
+              <tr>
+            <td  >
+                工龄<span style="color: Red">*</span>:
+            </td>
+            <td >
+                <input id="WorkingYears" name="WorkingYears"  type="text"  />
+            </td>
+        </tr>
+            
+              <tr>
+            <td  >
+                在职状态<span style="color: Red">*</span>:
+            </td>
+            <td >
+                <input id="WorkState" name="WorkState"  type="text"  />
+            </td>
+        </tr>
+            
+              <tr>
+            <td  >
+                员工类型<span style="color: Red">*</span>:
+            </td>
+            <td >
+                <input id="EmployeeType" name="EmployeeType"  type="text"  />
+            </td>
+        </tr>
+            
+              <tr>
+            <td  >
+                员工类型名称<span style="color: Red">*</span>:
+            </td>
+            <td >
+                <input id="EmployeeTypeName" name="EmployeeTypeName"  type="text"  />
+            </td>
+        </tr>
+            
+              <tr>
+            <td  >
+                家庭地址<span style="color: Red">*</span>:
+            </td>
+            <td >
+                <input id="HomeAddress" name="HomeAddress"  type="text"  />
+            </td>
+        </tr>
+            
+              <tr>
+            <td  >
+                手机号<span style="color: Red">*</span>:
+            </td>
+            <td >
+                <input id="MobileNO" name="MobileNO"  type="text"  />
+            </td>
+        </tr>
+            
+              <tr>
+            <td  >
+                图片地址<span style="color: Red">*</span>:
+            </td>
+            <td >
+                <input id="ImageUrl" name="ImageUrl"  type="text"  />
+            </td>
+        </tr>
+            
+              <tr>
+            <td  >
+                排序<span style="color: Red">*</span>:
+            </td>
+            <td >
+                <input id="Sort" name="Sort"  type="text"  />
+            </td>
+        </tr>
+            
+              <tr>
+            <td  >
+                状态<span style="color: Red">*</span>:
+            </td>
+            <td >
+                <input id="State" name="State"  type="text"  />
+            </td>
+        </tr>
+            
+              <tr>
+            <td  >
+                备注<span style="color: Red">*</span>:
+            </td>
+            <td >
+                <input id="Remark" name="Remark"  type="text"  />
+            </td>
+        </tr>
+            
+              <tr>
+            <td  >
+                操作员<span style="color: Red">*</span>:
+            </td>
+            <td >
+                <input id="CreatorUserCode" name="CreatorUserCode"  type="text"  />
+            </td>
+        </tr>
+            
+              <tr>
+            <td  >
+                操作员名称<span style="color: Red">*</span>:
+            </td>
+            <td >
+                <input id="CreatorUserName" name="CreatorUserName"  type="text"  />
+            </td>
+        </tr>
+            
+              <tr>
+            <td  >
+                创建时间<span style="color: Red">*</span>:
+            </td>
+            <td >
+                <input id="CreateTime" name="CreateTime"  type="text"  />
+            </td>
+        </tr>
+            
+              <tr>
+            <td  >
+                修改时间<span style="color: Red">*</span>:
+            </td>
+            <td >
+                <input id="LastModificationTime" name="LastModificationTime"  type="text"  />
+            </td>
+        </tr>
+            
+              <tr>
+            <td  >
+                在职状态名称<span style="color: Red">*</span>:
+            </td>
+            <td >
+                <input id="WorkStateName" name="WorkStateName"  type="text"  />
+            </td>
+        </tr>
+          
+        </table>
+    </form>
+</div>
+<div style="padding: 10px 10px 0 10px; text-align: center;">
+    @if (Request["PkId"]==null||int.Parse(Request["PkId"]) == 0)
+    {
+        <a id="btnAdd" class="easyui-linkbutton" iconcls="icon-add" href="javascript:void(0)">新增</a>
+    }
+    else
+    {
+        <a id="btnEdit" class="easyui-linkbutton" iconcls="icon-ok" href="javascript:void(0)">编辑</a>
+    }
+    <a id="btnClose" class="easyui-linkbutton" iconcls="icon-cancel" href="javascript:void(0)">关闭</a>
+</div>
+
+
+
+
+
