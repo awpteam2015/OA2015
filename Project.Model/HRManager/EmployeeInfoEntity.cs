@@ -14,7 +14,7 @@ using System.Collections.Generic;
 
 namespace Project.Model.HRManager
 {
-    public class EmployeeInfoEntity : Entity
+    public class EmployeeInfoEntity : Entity,ISoftDelete
     {
         public EmployeeInfoEntity()
         {
@@ -141,6 +141,8 @@ namespace Project.Model.HRManager
         /// 在职状态名称
         /// </summary>
         public virtual System.String WorkStateName { get; set; }
+
+        public virtual bool IsDeleted { get; set; }
         #endregion
 
 

@@ -13,7 +13,7 @@ using Project.Infrastructure.FrameworkCore.Domain.Entities.Component;
 
 namespace Project.Model.HRManager
 {
-    public class EmployeeInfoHisEntity: Entity
+    public class EmployeeInfoHisEntity: Entity, ISoftDelete
     { 
         #region 属性
         /// <summary>
@@ -127,12 +127,13 @@ namespace Project.Model.HRManager
         /// <summary>
         /// 在职状态名称
         /// </summary>
-        public virtual System.String WorkStateName{get; set;}
-		#endregion
-        
+        public virtual System.String WorkStateName{get; set; }
+        public virtual bool IsDeleted { get; set; }
+        #endregion
+
 
         #region 新增属性
-        
+
         #endregion
     }
 }

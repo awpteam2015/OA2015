@@ -46,7 +46,8 @@ namespace  Project.Map.HRManager
             Map(p => p.CreatorUserName);    
             Map(p => p.CreateTime);    
             Map(p => p.LastModificationTime);    
-            Map(p => p.WorkStateName);    
+            Map(p => p.WorkStateName);
+            Map(p => p.IsDeleted);
         }
     }
 }

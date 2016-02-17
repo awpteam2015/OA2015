@@ -15,6 +15,7 @@ using Project.Model.HRManager;
 using Project.Repository.HRManager;
 using Project.Service.HRManager.Validate;
 using Project.Infrastructure.FrameworkCore.DataNhibernate;
+using AutoMapper;
 
 namespace Project.Service.HRManager
 {
@@ -27,6 +28,7 @@ namespace Project.Service.HRManager
         private readonly LearningExperiencesRepository _learnExperienceRepository;
         private readonly TechnicalRepository _technicalRepository;
         private readonly ProfessionRepository _professionRepository;
+        private readonly EmployeeInfoHisRepository _employeeInfoHisRepository;
 
         private static readonly EmployeeInfoService Instance = new EmployeeInfoService();
 
@@ -38,6 +40,7 @@ namespace Project.Service.HRManager
             this._learnExperienceRepository = new LearningExperiencesRepository();
             this._technicalRepository = new TechnicalRepository();
             this._professionRepository = new ProfessionRepository();
+            this._employeeInfoHisRepository = new EmployeeInfoHisRepository();
         }
 
         public static EmployeeInfoService GetInstance()
@@ -68,7 +71,7 @@ namespace Project.Service.HRManager
                     var pkId = _employeeInfoRepository.Save(entity);
                     entity.WorkList.ToList().ForEach(p =>
                     {
-                        p.EmployeeID = pkId;                       
+                        p.EmployeeID = pkId;
                     });
                     entity.LearningList.ToList().ForEach(p =>
                     {
@@ -136,6 +139,7 @@ namespace Project.Service.HRManager
         {
             try
             {
+                //需要记录数据？
                 _employeeInfoRepository.Delete(entity);
                 return true;
             }
@@ -177,8 +181,17 @@ namespace Project.Service.HRManager
             using (var tx = NhTransactionHelper.BeginTransaction())
             {
                 try
-                {
+                { 
+                    //记录条件 哪些条件需要记录
+                    if (oldEntity.DepartmentCode != entity.DepartmentCode|| oldEntity.EmployeeType != entity.EmployeeType)
+                    {
+                        var employeeHisEntity = Mapper.Map<EmployeeInfoEntity, EmployeeInfoHisEntity>(oldEntity);
+                        employeeHisEntity.EmployeeID = employeeHisEntity.PkId;
+                        employeeHisEntity.PkId = 0;
+                        _employeeInfoHisRepository.Save(employeeHisEntity);
+                    }
                     _employeeInfoRepository.Merge(entity);
+                   
                     deleteList.ForEach(p => { _workExperienceRepository.Delete(p); });
                     deleteLearningList.ForEach(p => { _learnExperienceRepository.Delete(p); });
                     deleteTechnicalList.ForEach(p => { _technicalRepository.Delete(p); });

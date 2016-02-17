@@ -39,7 +39,14 @@
                 textField: 'DepartmentName',
                 url: '/PermissionManager/Department/GetList_Combotree'
             });
-
+            $("#CertNo").blur(function () {
+                
+                var UUserCard = $("#CertNo").val();
+             
+                //获取出生日期
+                if (UUserCard && UUserCard.length >= 15)
+                    $('#Birthday').val(UUserCard.substring(6, 10) + "-" + UUserCard.substring(10, 12) + "-" + UUserCard.substring(12, 14));
+            });
             abp.ajax({
                 url: "/HRManager/Dictionary/GetListByCode?ParentKeyCode=ShoochYears"
                 //,data: JSON.stringify(postData)
@@ -458,9 +465,11 @@
 
             postData.RequestEntity = pro.submitKit.getHeadJson();
             //postData.RequestEntity.TechnicalTitleName = $('#TechnicalTitle').combobox('getText');
+
             postData.RequestEntity.DutiesName = $('#Duties').combobox('getText');
             postData.RequestEntity.WorkStateName = $('#WorkState').combobox('getText');
             postData.RequestEntity.EmployeeTypeName = $('#EmployeeType').combobox('getText');
+            postData.RequestEntity.DepartmentName = $('#DepartmentCode').combotree('getText');
 
             pro.submitKit.config.columnPkidName = "PkId";
             pro.submitKit.config.columnNamePreStr = "";
@@ -487,7 +496,7 @@
             }
 
             this.submitExtend.addRule();
-           
+
             if (!$("#form1").valid() || !this.submitExtend.logicValidate()) {
                 $.alertExtend.error();
                 return false;

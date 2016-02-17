@@ -23,7 +23,7 @@ var pro = pro || {};
                 frozenColumns: [[
                      { field: 'EmployeeCode', title: '员工编号', width: 100 },
                      { field: 'EmployeeName', title: '员工名称', width: 100 },
-                     { field: 'DepartmentCode', title: '所属部门', width: 100 }
+                     { field: 'DepartmentName', title: '所属部门', width: 100 }
                 ]],
                 columns: [[
          { field: 'PkId', title: '', hidden: true, width: 100 },
