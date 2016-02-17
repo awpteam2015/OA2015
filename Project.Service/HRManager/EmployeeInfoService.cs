@@ -242,7 +242,7 @@ namespace Project.Service.HRManager
 
             //}
             if (!string.IsNullOrEmpty(where.EmployeeCode))
-                expr = expr.And(p => p.EmployeeCode == where.EmployeeCode);
+                expr = expr.And(p => p.EmployeeCode.Contains(where.EmployeeCode));
             if (!string.IsNullOrEmpty(where.EmployeeName))
                 expr = expr.And(p => p.EmployeeName.Contains(where.EmployeeName));
             if (!string.IsNullOrEmpty(where.DepartmentCode))
