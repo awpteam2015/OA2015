@@ -156,7 +156,7 @@ var pro = pro || {};
             });
 
             $("#btnRefresh").click(function () {
-                gridObj.refresh();
+                gridObj.search();
             });
         },
         closeTab: function () {
