@@ -22,7 +22,8 @@ namespace Project.Map.HRManager
 
             Map(p => p.EmployeeCode);
             Map(p => p.EmployeeName);
-            Map(p => p.DepartmentCode); Map(p => p.DepartmentName);
+            Map(p => p.DepartmentCode);
+            Map(p => p.DepartmentName);
             Map(p => p.JobName);
             Map(p => p.PayCode);
             Map(p => p.Sex);

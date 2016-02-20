@@ -31,7 +31,11 @@ namespace Project.Model.HRManager
         /// <summary>
         /// 所属部门
         /// </summary>
-        public virtual System.String DepartmentCode{get; set;}
+        public virtual System.String DepartmentCode{get; set; }
+        /// <summary>
+        /// 所属部门名称
+        /// </summary>
+        public virtual System.String DepartmentName { get; set; }
         /// <summary>
         /// 工号
         /// </summary>

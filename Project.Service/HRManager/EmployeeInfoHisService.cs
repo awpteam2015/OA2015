@@ -126,8 +126,8 @@ namespace Project.Service.HRManager
             //  expr = expr.And(p => p.PkId == where.PkId);
             // if (!string.IsNullOrEmpty(where.EmployeeID))
             //  expr = expr.And(p => p.EmployeeID == where.EmployeeID);
-            // if (!string.IsNullOrEmpty(where.EmployeeCode))
-            //  expr = expr.And(p => p.EmployeeCode == where.EmployeeCode);
+            if (!string.IsNullOrEmpty(where.EmployeeCode))
+                expr = expr.And(p => p.EmployeeCode == where.EmployeeCode);
             // if (!string.IsNullOrEmpty(where.EmployeeName))
             //  expr = expr.And(p => p.EmployeeName == where.EmployeeName);
             // if (!string.IsNullOrEmpty(where.DepartmentCode))
@@ -199,8 +199,8 @@ namespace Project.Service.HRManager
             //  expr = expr.And(p => p.PkId == where.PkId);
             // if (!string.IsNullOrEmpty(where.EmployeeID))
             //  expr = expr.And(p => p.EmployeeID == where.EmployeeID);
-            // if (!string.IsNullOrEmpty(where.EmployeeCode))
-            //  expr = expr.And(p => p.EmployeeCode == where.EmployeeCode);
+            if (!string.IsNullOrEmpty(where.EmployeeCode))
+                expr = expr.And(p => p.EmployeeCode == where.EmployeeCode);
             // if (!string.IsNullOrEmpty(where.EmployeeName))
             //  expr = expr.And(p => p.EmployeeName == where.EmployeeName);
             // if (!string.IsNullOrEmpty(where.DepartmentCode))

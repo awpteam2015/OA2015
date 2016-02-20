@@ -47,7 +47,7 @@ var pro = pro || {};
              }
          },
          { field: 'CertNo', title: '身份证', width: 100 },
-         { field: 'Birthday', title: '生日', width: 100 },        
+         { field: 'Birthday', title: '生日', width: 100 },
          { field: 'DutiesName', title: '单位职务', width: 100 },
          { field: 'WorkStateName', title: '在职状态', width: 100 },
          { field: 'EmployeeTypeName', title: '员工类型', width: 100 },
@@ -131,6 +131,14 @@ var pro = pro || {};
 
             $("#btnSearch").click(function () {
                 gridObj.search();
+            });
+            $("#btnHistory").click(function () {
+                if (!gridObj.isSelected()) {
+                    $.alertExtend.infoOp();
+                    return;
+                }
+                var EmployeeCode = gridObj.getSelectedRow().EmployeeCode;
+                tabObj.add("/HRManager/EmployeeInfoHis/List?EmployeeCode=" + EmployeeCode, "历史信息");
             });
 
             $("#btnDel").click(function () {

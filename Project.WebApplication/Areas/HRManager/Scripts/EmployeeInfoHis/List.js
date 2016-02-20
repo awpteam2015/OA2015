@@ -4,7 +4,7 @@ var pro = pro || {};
     pro.EmployeeInfoHis = pro.EmployeeInfoHis || {};
     pro.EmployeeInfoHis.ListPage = pro.EmployeeInfoHis.ListPage || {};
     pro.EmployeeInfoHis.ListPage = {
-      init: function () {
+        init: function () {
             return {
                 tabObj: new pro.TabBase(),
                 gridObj: new pro.GridBase("#datagrid", false)
@@ -15,7 +15,7 @@ var pro = pro || {};
             var tabObj = initObj.tabObj;
             var gridObj = initObj.gridObj;
             gridObj.grid({
-                url: '/HRManager/EmployeeInfoHis/GetList',
+                url: '/HRManager/EmployeeInfoHis/GetList?EmployeeCode=' + (pro.commonKit.getUrlParam("EmployeeCode")),
                 fitColumns: false,
                 nowrap: false,
                 rownumbers: true, //行号
@@ -58,7 +58,7 @@ var pro = pro || {};
                );
 
             $("#btnAdd").click(function () {
-               tabObj.add("/HRManager/EmployeeInfoHis/Hd","新增");
+                tabObj.add("/HRManager/EmployeeInfoHis/Hd", "新增");
             });
 
             $("#btnEdit").click(function () {
@@ -74,10 +74,20 @@ var pro = pro || {};
             $("#btnSearch").click(function () {
                 gridObj.search();
             });
+            //查看
+            $("#btnView").click(function () {
+                if (!gridObj.isSelected()) {
+                    $.alertExtend.infoOp();
+                    return;
+                }
+                var PkId = gridObj.getSelectedRow().EmployeeID;
+                var EmployeeCode = gridObj.getSelectedRow().EmployeeCode;
+                tabObj.add("/HRManager/EmployeeInfo/Hd?PkId=" + PkId + "&EmployeeCode=" + EmployeeCode + "&View=true", "查看" + PkId);
+            });
 
             $("#btnDel").click(function () {
                 if (!gridObj.isSelected()) {
-                $.alertExtend.infoOp();
+                    $.alertExtend.infoOp();
                     return;
                 }
                 $.messager.confirm("确认操作", "是否确认删除", function (bl) {
@@ -101,7 +111,7 @@ var pro = pro || {};
                 gridObj.refresh();
             });
         },
-         closeTab: function () {
+        closeTab: function () {
             this.init().tabObj.closeTab();
         }
     };

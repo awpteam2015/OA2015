@@ -13,6 +13,7 @@ using Project.Infrastructure.FrameworkCore.WebMvc.Models;
 using Project.Service.HRManager;
 using Project.WebApplication.Controllers;
 using AutoMapper;
+using Project.Infrastructure.FrameworkCore.ToolKit;
 
 namespace Project.WebApplication.Areas.HRManager.Controllers
 {
@@ -29,7 +30,7 @@ namespace Project.WebApplication.Areas.HRManager.Controllers
             return View();
         }
 
- 
+
         public ActionResult List()
         {
             return View();
@@ -40,35 +41,35 @@ namespace Project.WebApplication.Areas.HRManager.Controllers
             var pIndex = this.Request["page"].ConvertTo<int>();
             var pSize = this.Request["rows"].ConvertTo<int>();
             var where = new EmployeeInfoHisEntity();
-			//where.PkId = RequestHelper.GetFormString("PkId");
-			//where.EmployeeID = RequestHelper.GetFormString("EmployeeID");
-			//where.EmployeeCode = RequestHelper.GetFormString("EmployeeCode");
-			//where.EmployeeName = RequestHelper.GetFormString("EmployeeName");
-			//where.DepartmentCode = RequestHelper.GetFormString("DepartmentCode");
-			//where.JobName = RequestHelper.GetFormString("JobName");
-			//where.PayCode = RequestHelper.GetFormString("PayCode");
-			//where.Sex = RequestHelper.GetFormString("Sex");
-			//where.CertNo = RequestHelper.GetFormString("CertNo");
-			//where.Birthday = RequestHelper.GetFormString("Birthday");
-			//where.TechnicalTitleName = RequestHelper.GetFormString("TechnicalTitleName");
-			//where.TechnicalTitle = RequestHelper.GetFormString("TechnicalTitle");
-			//where.DutiesName = RequestHelper.GetFormString("DutiesName");
-			//where.Duties = RequestHelper.GetFormString("Duties");
-			//where.WorkingYears = RequestHelper.GetFormString("WorkingYears");
-			//where.WorkState = RequestHelper.GetFormString("WorkState");
-			//where.EmployeeType = RequestHelper.GetFormString("EmployeeType");
-			//where.EmployeeTypeName = RequestHelper.GetFormString("EmployeeTypeName");
-			//where.HomeAddress = RequestHelper.GetFormString("HomeAddress");
-			//where.MobileNO = RequestHelper.GetFormString("MobileNO");
-			//where.ImageUrl = RequestHelper.GetFormString("ImageUrl");
-			//where.Sort = RequestHelper.GetFormString("Sort");
-			//where.State = RequestHelper.GetFormString("State");
-			//where.Remark = RequestHelper.GetFormString("Remark");
-			//where.CreatorUserCode = RequestHelper.GetFormString("CreatorUserCode");
-			//where.CreatorUserName = RequestHelper.GetFormString("CreatorUserName");
-			//where.CreateTime = RequestHelper.GetFormString("CreateTime");
-			//where.LastModificationTime = RequestHelper.GetFormString("LastModificationTime");
-			//where.WorkStateName = RequestHelper.GetFormString("WorkStateName");
+            //where.PkId = RequestHelper.GetFormString("PkId");
+            //where.EmployeeID = RequestHelper.GetFormString("EmployeeID");
+            where.EmployeeCode = RequestHelper.GetQueryString("EmployeeCode");
+            //where.EmployeeName = RequestHelper.GetFormString("EmployeeName");
+            //where.DepartmentCode = RequestHelper.GetFormString("DepartmentCode");
+            //where.JobName = RequestHelper.GetFormString("JobName");
+            //where.PayCode = RequestHelper.GetFormString("PayCode");
+            //where.Sex = RequestHelper.GetFormString("Sex");
+            //where.CertNo = RequestHelper.GetFormString("CertNo");
+            //where.Birthday = RequestHelper.GetFormString("Birthday");
+            //where.TechnicalTitleName = RequestHelper.GetFormString("TechnicalTitleName");
+            //where.TechnicalTitle = RequestHelper.GetFormString("TechnicalTitle");
+            //where.DutiesName = RequestHelper.GetFormString("DutiesName");
+            //where.Duties = RequestHelper.GetFormString("Duties");
+            //where.WorkingYears = RequestHelper.GetFormString("WorkingYears");
+            //where.WorkState = RequestHelper.GetFormString("WorkState");
+            //where.EmployeeType = RequestHelper.GetFormString("EmployeeType");
+            //where.EmployeeTypeName = RequestHelper.GetFormString("EmployeeTypeName");
+            //where.HomeAddress = RequestHelper.GetFormString("HomeAddress");
+            //where.MobileNO = RequestHelper.GetFormString("MobileNO");
+            //where.ImageUrl = RequestHelper.GetFormString("ImageUrl");
+            //where.Sort = RequestHelper.GetFormString("Sort");
+            //where.State = RequestHelper.GetFormString("State");
+            //where.Remark = RequestHelper.GetFormString("Remark");
+            //where.CreatorUserCode = RequestHelper.GetFormString("CreatorUserCode");
+            //where.CreatorUserName = RequestHelper.GetFormString("CreatorUserName");
+            //where.CreateTime = RequestHelper.GetFormString("CreateTime");
+            //where.LastModificationTime = RequestHelper.GetFormString("LastModificationTime");
+            //where.WorkStateName = RequestHelper.GetFormString("WorkStateName");
             var searchList = EmployeeInfoHisService.GetInstance().Search(where, (pIndex - 1) * pSize, pSize);
 
             var dataGridEntity = new DataGridResponse()
@@ -85,22 +86,22 @@ namespace Project.WebApplication.Areas.HRManager.Controllers
         {
             var addResult = EmployeeInfoHisService.GetInstance().Add(postData.RequestEntity);
             var result = new AjaxResponse<EmployeeInfoHisEntity>()
-               {
-                   success = true,
-                   result = postData.RequestEntity
-               };
+            {
+                success = true,
+                result = postData.RequestEntity
+            };
             return new AbpJsonResult(result, new NHibernateContractResolver());
         }
 
 
         [HttpPost]
-        public AbpJsonResult Edit( AjaxRequest<EmployeeInfoHisEntity> postData)
+        public AbpJsonResult Edit(AjaxRequest<EmployeeInfoHisEntity> postData)
         {
             var newInfo = postData.RequestEntity;
             var orgInfo = EmployeeInfoHisService.GetInstance().GetModelByPk(postData.RequestEntity.PkId);
             var mergInfo = Mapper.Map(newInfo, orgInfo);
             var updateResult = EmployeeInfoHisService.GetInstance().Update(mergInfo);
-            
+
             var result = new AjaxResponse<EmployeeInfoHisEntity>()
             {
                 success = updateResult,

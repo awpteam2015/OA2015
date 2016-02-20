@@ -20,13 +20,20 @@
             var gridObjStudy = initObj.gridObjStudy;
             var gridObjTechnical = initObj.gridObjTechnical;
             var gridObjProfession = initObj.gridObjProfession;
+            //隐藏编辑按钮
+            if (pro.commonKit.getUrlParam("View")) {
+                $('#btnEdit').css("display", "none");
+            }
+            else {
+                $("#btnEdit").click(function () {
+                    pro.EmployeeInfo.HdPage.submit("Edit");
+                });
+            }
             $("#btnAdd").click(function () {
                 pro.EmployeeInfo.HdPage.submit("Add");
             });
 
-            $("#btnEdit").click(function () {
-                pro.EmployeeInfo.HdPage.submit("Edit");
-            });
+
 
             $("#btnClose").click(function () {
                 parent.pro.EmployeeInfo.ListPage.closeTab("");
@@ -40,9 +47,9 @@
                 url: '/PermissionManager/Department/GetList_Combotree'
             });
             $("#CertNo").blur(function () {
-                
+
                 var UUserCard = $("#CertNo").val();
-             
+
                 //获取出生日期
                 if (UUserCard && UUserCard.length >= 15)
                     $('#Birthday').val(UUserCard.substring(6, 10) + "-" + UUserCard.substring(10, 12) + "-" + UUserCard.substring(12, 14));
