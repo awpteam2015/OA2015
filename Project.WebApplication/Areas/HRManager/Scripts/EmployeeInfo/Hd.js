@@ -20,6 +20,9 @@
             var gridObjStudy = initObj.gridObjStudy;
             var gridObjTechnical = initObj.gridObjTechnical;
             var gridObjProfession = initObj.gridObjProfession;
+            $('#WorkingYears').numberbox({
+                min: 0
+            });
             //隐藏编辑按钮
             if (pro.commonKit.getUrlParam("View")) {
                 $('#btnEdit').css("display", "none");

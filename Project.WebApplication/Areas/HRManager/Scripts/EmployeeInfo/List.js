@@ -26,7 +26,7 @@ var pro = pro || {};
                      { field: 'DepartmentName', title: '所属部门', width: 100 }
                 ]],
                 columns: [[
-         { field: 'PkId', title: '', hidden: true, width: 100 },
+         //{ field: 'PkId', title: '', hidden: true, width: 100 },
          { field: 'JobName', title: '工号', width: 100 },
          { field: 'PayCode', title: '中文简拼', width: 100 },
          {
@@ -75,7 +75,7 @@ var pro = pro || {};
          //{ field: 'Remark', title: '备注', width: 100 },
          //{ field: 'CreatorUserCode', title: '操作员', width: 100 },
          { field: 'CreatorUserName', title: '操作员名称', width: 100 },
-         { field: 'CreateTime', title: '创建时间', width: 100 },
+         { field: 'CreationTime', title: '创建时间', width: 100 },
          { field: 'LastModificationTime', title: '修改时间', width: 100 },
                 ]],
                 pagination: true,

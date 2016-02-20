@@ -11,10 +11,11 @@ using System;
 using Project.Infrastructure.FrameworkCore.Domain.Entities;
 using Project.Infrastructure.FrameworkCore.Domain.Entities.Component;
 using System.Collections.Generic;
+using Project.Infrastructure.FrameworkCore.Domain.Entities.Auditing.Interface;
 
 namespace Project.Model.HRManager
 {
-    public class EmployeeInfoEntity : Entity,ISoftDelete
+    public class EmployeeInfoEntity : Entity,ISoftDelete, IHasRemark, IAudited
     {
         public EmployeeInfoEntity()
         {
@@ -132,11 +133,12 @@ namespace Project.Model.HRManager
         /// <summary>
         /// 创建时间
         /// </summary>
-        public virtual System.DateTime? CreateTime { get; set; }
+        public virtual System.DateTime? CreationTime { get; set; }
         /// <summary>
         /// 修改时间
         /// </summary>
         public virtual System.DateTime? LastModificationTime { get; set; }
+        public virtual string LastModifierUserCode { get; set; }
         /// <summary>
         /// 在职状态名称
         /// </summary>
