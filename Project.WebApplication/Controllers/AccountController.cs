@@ -1,7 +1,9 @@
 ﻿using System.Web.Mvc;
+using Project.Config;
 using Project.Infrastructure.FrameworkCore.WebMvc.Controllers.Results;
 using Project.Infrastructure.FrameworkCore.WebMvc.Models;
 using Project.Service.PermissionManager;
+using Project.Service.SystemSetManager;
 
 
 namespace Project.WebApplication.Controllers
@@ -44,6 +46,7 @@ namespace Project.WebApplication.Controllers
 
         public ActionResult Default()
         {
+            ViewBag.Des = IndexPageSetService.GetInstance().GetModelByPk(SiteConfig.GetConfig().IndexPagePkId).Des;
             return View();
         }
 
