@@ -28,6 +28,10 @@ namespace Project.WebApplication.Areas.HRManager.Controllers
                 var entity = ContractService.GetInstance().GetModelByPk(pkId);
                 ViewBag.BindEntity = JsonHelper.JsonSerializer(entity);
             }
+            else
+            {
+                ViewBag.BindEntity = JsonHelper.JsonSerializer(new ContractEntity(){State =1,IsActive = 1});
+            }
 
             if (RequestHelper.GetInt("ParentId") > 0)
             {

@@ -28,7 +28,12 @@
                  function (dataresult, data) {
                      $("#DepartmentCode").val(dataresult.DepartmentCode);
                      $("#DepartmentName").val(dataresult.DepartmentName);
+
+                     $("#DepartmentCode_span").html(dataresult.DepartmentCode);
+                     $("#DepartmentName_span").html(dataresult.DepartmentName);
+
                      $("#IdentityCardNo").val(dataresult.CertNo);
+                     $("#SecondParty").val(dataresult.EmployeeName);
                  }
              ).fail(
               function (errordetails, errormessage) {
@@ -44,6 +49,9 @@
                 for (var filedname in bindField) {
                     $("[name=" + filedname + "]").val(bindEntity[filedname]);
                 }
+
+                $("#DepartmentCode_span").html(bindEntity.DepartmentCode);
+                $("#DepartmentName_span").html(bindEntity.DepartmentName);
 
                 $("#State").html(bindEntity.Attr_State);
 
