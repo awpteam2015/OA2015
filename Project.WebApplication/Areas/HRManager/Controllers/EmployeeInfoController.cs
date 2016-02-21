@@ -110,6 +110,7 @@ namespace Project.WebApplication.Areas.HRManager.Controllers
             //where.EmployeeCode = postData.RequestEntity.EmployeeCode;
             //EmployeeInfoService.GetInstance().GetList(where);
             postData.RequestEntity.CreatorUserCode = LoginUserInfo.UserCode;
+            postData.RequestEntity.CreatorUserName = LoginUserInfo.UserName;
             postData.RequestEntity.CreationTime = DateTime.Now;
             if (!string.IsNullOrEmpty(postData.RequestEntity.EmployeeName))
             {

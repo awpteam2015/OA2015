@@ -351,7 +351,7 @@ namespace Project.Service.HRManager
             // if (!string.IsNullOrEmpty(where.LastModificationTime))
             //  expr = expr.And(p => p.LastModificationTime == where.LastModificationTime);
             #endregion
-            var list = _employeeInfoRepository.Query().Where(expr).OrderBy(p => p.PkId).ToList();
+            var list = _employeeInfoRepository.Query().Where(expr).OrderByDescending(p => p.Sort).ToList();
 
             if (isShowTop)
             {
