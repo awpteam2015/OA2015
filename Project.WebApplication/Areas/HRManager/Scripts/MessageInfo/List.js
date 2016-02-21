@@ -52,6 +52,14 @@ var pro = pro || {};
                 var PkId = gridObj.getSelectedRow().PkId;
                 tabObj.add("/HRManager/MessageInfo/Hd?PkId=" + PkId, "编辑" + PkId);
             });
+            $("#btnView").click(function () {
+                if (!gridObj.isSelected()) {
+                    $.alertExtend.infoOp();
+                    return;
+                }
+                var PkId = gridObj.getSelectedRow().PkId;
+                tabObj.add("/HRManager/MessageInfo/Hd?PkId=" + PkId + "&View=true", "查看" + PkId);
+            });
 
 
             $("#btnSearch").click(function () {

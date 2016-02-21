@@ -13,7 +13,7 @@
     <script src="/Areas/HRManager/Scripts/MessageInfo/List.js?JsParamter=@SiteConfig.GetConfig().JsParamter" type="text/javascript"></script>
 }
 
-<div title="站内短信" style="padding:1px;">
+<div title="信息提醒列表" style="padding:1px;">
     <table id="datagrid" style="height:auto;" iconcls=".icon-save" singleselect="true" toolbar="#tb" fit="true"></table>
     <div id="tb" style="padding:5px;height:auto">
         <div style="margin-bottom: 5px">
@@ -22,7 +22,7 @@
                 <a id="btnDel" href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-remove',plain:true">删除</a>
 
                 <a id="btnEdit" href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-edit',plain:true">编辑</a>*@
-            <a id="btnEdit" href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-edit',plain:true">查看</a>
+            <a id="btnView" href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-edit',plain:true">查看</a>
             <a id="btnRefresh" href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-reload',plain:true">刷新</a>
 
         </div>
@@ -33,17 +33,17 @@
                 <table class="mtable">
 
                     <tr>
-                        <td>
+                        <td style="width:60px;">
                             开始日期:
                         </td>
-                        <td>
-                            <input id="CreationTime" name="CreationTime" type="text" />
+                        <td style="width:120px;">
+                            <input id="CreationTime" name="CreationTime" type="text"  class="Wdate" onclick="WdatePicker();" />
                         </td>
-                        <td>
+                        <td style="width:20px;">
                             至:
                         </td>
-                        <td>
-                            <input id="CreationEndTime" name="CreationEndTime" type="text" />
+                        <td style="width:120px;">
+                            <input id="CreationTimeEnd" name="CreationTimeEnd" type="text"  class="Wdate" onclick="WdatePicker();" />
                         </td>
                         <td>
                             <a href="#" class="easyui-linkbutton" iconcls="icon-search" id="btnSearch">搜索</a>
