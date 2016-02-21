@@ -67,11 +67,15 @@ namespace Project.Model.HRManager
         /// 
         /// </summary>
         public virtual System.DateTime? DeletionTime{get; set;}
-		#endregion
-        
+        #endregion
+
 
         #region 新增属性
-        
+
+        /// <summary>
+        /// 查询专用
+        /// </summary>
+        public virtual System.DateTime? CreationTimeEnd { get; set; }
         #endregion
     }
 }

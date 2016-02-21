@@ -118,32 +118,34 @@ namespace Project.Service.HRManager
         public System.Tuple<IList<MessageInfoEntity>, int> Search(MessageInfoEntity where, int skipResults, int maxResults)
         {
                 var expr = PredicateBuilder.True<MessageInfoEntity>();
-                  #region
-              // if (!string.IsNullOrEmpty(where.PkId))
-              //  expr = expr.And(p => p.PkId == where.PkId);
-              // if (!string.IsNullOrEmpty(where.MesTitle))
-              //  expr = expr.And(p => p.MesTitle == where.MesTitle);
-              // if (!string.IsNullOrEmpty(where.MesContent))
-              //  expr = expr.And(p => p.MesContent == where.MesContent);
-              // if (!string.IsNullOrEmpty(where.ReceiveUserCode))
-              //  expr = expr.And(p => p.ReceiveUserCode == where.ReceiveUserCode);
-              // if (!string.IsNullOrEmpty(where.IsAll))
-              //  expr = expr.And(p => p.IsAll == where.IsAll);
-              // if (!string.IsNullOrEmpty(where.CreatorUserCode))
-              //  expr = expr.And(p => p.CreatorUserCode == where.CreatorUserCode);
-              // if (!string.IsNullOrEmpty(where.CreatorUserName))
-              //  expr = expr.And(p => p.CreatorUserName == where.CreatorUserName);
-              // if (!string.IsNullOrEmpty(where.CreationTime))
-              //  expr = expr.And(p => p.CreationTime == where.CreationTime);
-              // if (!string.IsNullOrEmpty(where.LastModificationTime))
-              //  expr = expr.And(p => p.LastModificationTime == where.LastModificationTime);
-              // if (!string.IsNullOrEmpty(where.LastModifierUserCode))
-              //  expr = expr.And(p => p.LastModifierUserCode == where.LastModifierUserCode);
-              // if (!string.IsNullOrEmpty(where.DeleterUserCode))
-              //  expr = expr.And(p => p.DeleterUserCode == where.DeleterUserCode);
-              // if (!string.IsNullOrEmpty(where.DeletionTime))
-              //  expr = expr.And(p => p.DeletionTime == where.DeletionTime);
- #endregion
+            #region
+            // if (!string.IsNullOrEmpty(where.PkId))
+            //  expr = expr.And(p => p.PkId == where.PkId);
+            // if (!string.IsNullOrEmpty(where.MesTitle))
+            //  expr = expr.And(p => p.MesTitle == where.MesTitle);
+            // if (!string.IsNullOrEmpty(where.MesContent))
+            //  expr = expr.And(p => p.MesContent == where.MesContent);
+            // if (!string.IsNullOrEmpty(where.ReceiveUserCode))
+            //  expr = expr.And(p => p.ReceiveUserCode == where.ReceiveUserCode);
+            // if (!string.IsNullOrEmpty(where.IsAll))
+            //  expr = expr.And(p => p.IsAll == where.IsAll);
+            // if (!string.IsNullOrEmpty(where.CreatorUserCode))
+            //  expr = expr.And(p => p.CreatorUserCode == where.CreatorUserCode);
+            // if (!string.IsNullOrEmpty(where.CreatorUserName))
+            //  expr = expr.And(p => p.CreatorUserName == where.CreatorUserName);
+            if (where.CreationTime.HasValue && where.CreationTime.Value.Year > 1)
+                expr = expr.And(p => p.CreationTime >= where.CreationTime);           
+            if (where.CreationTimeEnd.HasValue && where.CreationTimeEnd.Value.Year > 1)
+                expr = expr.And(p => p.CreationTime <= where.CreationTimeEnd.Value.AddDays(1));
+            // if (!string.IsNullOrEmpty(where.LastModificationTime))
+            //  expr = expr.And(p => p.LastModificationTime == where.LastModificationTime);
+            // if (!string.IsNullOrEmpty(where.LastModifierUserCode))
+            //  expr = expr.And(p => p.LastModifierUserCode == where.LastModifierUserCode);
+            // if (!string.IsNullOrEmpty(where.DeleterUserCode))
+            //  expr = expr.And(p => p.DeleterUserCode == where.DeleterUserCode);
+            // if (!string.IsNullOrEmpty(where.DeletionTime))
+            //  expr = expr.And(p => p.DeletionTime == where.DeletionTime);
+            #endregion
             var list = _messageInfoRepository.Query().Where(expr).OrderBy(p => p.PkId).Skip(skipResults).Take(maxResults).ToList();
             var count = _messageInfoRepository.Query().Where(expr).Count();
             return new System.Tuple<IList<MessageInfoEntity>, int>(list, count);

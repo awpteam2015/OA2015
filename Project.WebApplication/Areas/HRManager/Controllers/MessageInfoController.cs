@@ -13,6 +13,7 @@ using Project.Infrastructure.FrameworkCore.WebMvc.Models;
 using Project.Service.HRManager;
 using Project.WebApplication.Controllers;
 using AutoMapper;
+using Project.Infrastructure.FrameworkCore.ToolKit;
 
 namespace Project.WebApplication.Areas.HRManager.Controllers
 {
@@ -56,7 +57,8 @@ namespace Project.WebApplication.Areas.HRManager.Controllers
             //where.IsAll = RequestHelper.GetFormString("IsAll");
             //where.CreatorUserCode = RequestHelper.GetFormString("CreatorUserCode");
             //where.CreatorUserName = RequestHelper.GetFormString("CreatorUserName");
-            //where.CreationTime = RequestHelper.GetFormString("CreationTime");
+            where.CreationTime = RequestHelper.GetFormDateTime("CreationTime");
+            where.CreationTimeEnd = RequestHelper.GetFormDateTime("CreationTimeEnd");
             //where.LastModificationTime = RequestHelper.GetFormString("LastModificationTime");
             //where.LastModifierUserCode = RequestHelper.GetFormString("LastModifierUserCode");
             //where.DeleterUserCode = RequestHelper.GetFormString("DeleterUserCode");
