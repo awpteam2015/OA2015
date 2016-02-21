@@ -66,6 +66,7 @@
     <Compile Include="HRManager\GroupEmployeeMap.cs" />
     <Compile Include="HRManager\GroupMap.cs" />
     <Compile Include="HRManager\LearningExperiencesMap.cs" />
+    <Compile Include="HRManager\MessageInfoMap.cs" />
     <Compile Include="HRManager\ProfessionMap.cs" />
     <Compile Include="HRManager\SanctionMap.cs" />
     <Compile Include="HRManager\TechnicalMap.cs" />
@@ -83,6 +84,7 @@
     <Compile Include="PermissionManager\UserRoleMap.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SystemSetManager\HolidayDetailMap.cs" />
+    <Compile Include="SystemSetManager\IndexPageSetMap.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

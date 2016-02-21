@@ -21,8 +21,8 @@ var pro = pro || {};
                 rownumbers: true, //行号
                 singleSelect: true,
                 columns: [[
-         { field: 'PkId', title: '', hidden: true, width: 100 },
-         { field: 'EmployeeID', title: '员工表ID', width: 100 },
+         //{ field: 'PkId', title: '', hidden: true, width: 100 },
+         //{ field: 'EmployeeID', title: '员工表ID', width: 100 },
          { field: 'EmployeeCode', title: '员工编号', width: 100 },
          { field: 'EmployeeName', title: '员工名称', width: 100 },
          { field: 'DepartmentName', title: '所属部门', width: 100 },

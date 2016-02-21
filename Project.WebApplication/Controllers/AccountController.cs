@@ -19,11 +19,8 @@ namespace Project.WebApplication.Controllers
             //UrlRoutingModule
             //   MvcHandler
 
-
-
+            ViewBag.User = LoginUserInfo;
             ViewBag.ModuleList = UserInfoService.GetInstance().GetMenuDTOList(LoginUserInfo.UserCode,LoginUserInfo.PermissionCodeList);
-
-
 
             return View();
         }

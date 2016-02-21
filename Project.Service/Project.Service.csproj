@@ -66,6 +66,7 @@
     <Compile Include="HRManager\GroupEmployeeService.cs" />
     <Compile Include="HRManager\GroupService.cs" />
     <Compile Include="HRManager\LearningExperiencesService.cs" />
+    <Compile Include="HRManager\MessageInfoService.cs" />
     <Compile Include="HRManager\ProfessionService.cs" />
     <Compile Include="HRManager\SanctionService.cs" />
     <Compile Include="HRManager\TechnicalService.cs" />
@@ -97,6 +98,7 @@
     <Compile Include="ReportManager\HrReportService.cs" />
     <Compile Include="SystemSetManager\HolidayDetailService.cs" />
     <Compile Include="HRManager\YearHholidayDefinitionService.cs" />
+    <Compile Include="SystemSetManager\IndexPageSetService.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Project.Infrastructure.FrameworkCore\Project.Infrastructure.FrameworkCore.csproj">

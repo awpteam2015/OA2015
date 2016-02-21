@@ -56,6 +56,7 @@
     <Compile Include="HRManager\GroupEmployeeHisEntity.cs" />
     <Compile Include="HRManager\GroupEntity.cs" />
     <Compile Include="HRManager\LearningExperiencesEntity.cs" />
+    <Compile Include="HRManager\MessageInfoEntity.cs" />
     <Compile Include="HRManager\ProfessionEntity.cs" />
     <Compile Include="HRManager\SanctionEntity.cs" />
     <Compile Include="HRManager\TechnicalEntity.cs" />
@@ -78,6 +79,7 @@
     <Compile Include="ReportManager\AttendanceViewEntity.cs" />
     <Compile Include="SystemSetManager\HolidayDetailEntity.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SystemSetManager\IndexPageSetEntity.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Project.Infrastructure.FrameworkCore\Project.Infrastructure.FrameworkCore.csproj">

@@ -62,6 +62,7 @@
     <Compile Include="HRManager\GroupEmployeeRepository.cs" />
     <Compile Include="HRManager\GroupRepository.cs" />
     <Compile Include="HRManager\LearningExperiencesRepository.cs" />
+    <Compile Include="HRManager\MessageInfoRepository.cs" />
     <Compile Include="HRManager\ProfessionRepository.cs" />
     <Compile Include="HRManager\SanctionRepository.cs" />
     <Compile Include="HRManager\TechnicalRepository.cs" />
@@ -80,6 +81,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ReportManager\HrReportRepository.cs" />
     <Compile Include="SystemSetManager\HolidayDetailRepository.cs" />
+    <Compile Include="SystemSetManager\IndexPageSetRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Project.Infrastructure.FrameworkCore\Project.Infrastructure.FrameworkCore.csproj">

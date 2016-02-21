@@ -135,6 +135,8 @@
     <Content Include="Areas\HRManager\Scripts\Group\List.js" />
     <Content Include="Areas\HRManager\Scripts\LearningExperiences\Hd.js" />
     <Content Include="Areas\HRManager\Scripts\LearningExperiences\List.js" />
+    <Content Include="Areas\HRManager\Scripts\MessageInfo\Hd.js" />
+    <Content Include="Areas\HRManager\Scripts\MessageInfo\List.js" />
     <Content Include="Areas\HRManager\Scripts\Profession\Hd.js" />
     <Content Include="Areas\HRManager\Scripts\Profession\List.js" />
     <Content Include="Areas\HRManager\Scripts\Sanction\Hd.js" />
@@ -174,6 +176,8 @@
     <Content Include="Areas\ReportManager\Scripts\HrReport\AttendanceReport.js" />
     <Content Include="Areas\SystemSetManager\Scripts\HolidayDetail\Hd.js" />
     <Content Include="Areas\SystemSetManager\Scripts\HolidayDetail\List.js" />
+    <Content Include="Areas\SystemSetManager\Scripts\IndexPageSet\Hd.js" />
+    <Content Include="Areas\SystemSetManager\Scripts\IndexPageSet\List.js" />
     <Content Include="Config\hibernate.cfg.xml" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
@@ -254,6 +258,10 @@
     <Content Include="Areas\HRManager\Views\Profession\List.cshtml" />
     <Content Include="Areas\HRManager\Views\EmployeeInfoHis\Hd.cshtml" />
     <Content Include="Areas\HRManager\Views\EmployeeInfoHis\List.cshtml" />
+    <Content Include="Areas\HRManager\Views\MessageInfo\Hd.cshtml" />
+    <Content Include="Areas\HRManager\Views\MessageInfo\List.cshtml" />
+    <Content Include="Areas\SystemSetManager\Views\IndexPageSet\Hd.cshtml" />
+    <Content Include="Areas\SystemSetManager\Views\IndexPageSet\List.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\Control\DepartmentControl.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
@@ -713,6 +721,7 @@
     <Compile Include="Areas\HRManager\Controllers\GroupEmployeeController.cs" />
     <Compile Include="Areas\HRManager\Controllers\GroupEmployeeHisController.cs" />
     <Compile Include="Areas\HRManager\Controllers\LearningExperiencesController.cs" />
+    <Compile Include="Areas\HRManager\Controllers\MessageInfoController.cs" />
     <Compile Include="Areas\HRManager\Controllers\ProfessionController.cs" />
     <Compile Include="Areas\HRManager\Controllers\SanctionController.cs" />
     <Compile Include="Areas\HRManager\Controllers\TechnicalController.cs" />
@@ -734,6 +743,7 @@
     <Compile Include="Areas\ReportManager\Controllers\HrReportController.cs" />
     <Compile Include="Areas\ReportManager\ReportManagerAreaRegistration.cs" />
     <Compile Include="Areas\SystemSetManager\Controllers\HolidayDetailController.cs" />
+    <Compile Include="Areas\SystemSetManager\Controllers\IndexPageSetController.cs" />
     <Compile Include="Areas\SystemSetManager\Controllers\UploadController.cs" />
     <Compile Include="Areas\SystemSetManager\SystemSetManagerAreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
