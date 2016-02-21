@@ -66,6 +66,7 @@
     <Compile Include="HRManager\GroupEmployeeMap.cs" />
     <Compile Include="HRManager\GroupMap.cs" />
     <Compile Include="HRManager\LearningExperiencesMap.cs" />
+    <Compile Include="HRManager\MessageInfoMap.cs" />
     <Compile Include="HRManager\ProfessionMap.cs" />
     <Compile Include="HRManager\SanctionMap.cs" />
     <Compile Include="HRManager\TechnicalMap.cs" />

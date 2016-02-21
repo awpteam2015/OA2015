@@ -1,0 +1,155 @@
+﻿
+
+  
+
+
+
+@{
+    ViewBag.Title = "List";
+    Layout = "~/Views/Shared/_LayoutList.cshtml";
+}
+
+@section JavaScript{
+    <script src="/Areas/HRManager/Scripts/MessageInfo/List.js?JsParamter=@SiteConfig.GetConfig().JsParamter" type="text/javascript"></script>
+}
+
+<div title="站内短信" style="padding:1px;">
+    <table id="datagrid" style="height:auto;" iconcls=".icon-save" singleselect="true"  toolbar="#tb" fit="true"></table>
+    <div id="tb" style="padding:5px;height:auto">
+        <div  style="margin-bottom: 5px">
+            <a id="btnAdd" href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:true" >添加</a>
+  
+            <a id="btnDel" href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-remove',plain:true" >删除</a>
+           
+            <a id="btnEdit" href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-edit',plain:true" >编辑</a>
+          
+            <a id="btnRefresh" href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-reload',plain:true" >刷新</a>
+           
+        </div>
+      
+        <div id="divSearch">
+            <form>
+            
+             <table class="mtable">
+            
+              <tr>
+            <td >
+                :
+            </td>
+            <td >
+                <input id="PkId" name="PkId"  type="text"  />
+            </td>
+        </tr>
+            
+              <tr>
+            <td >
+                标题:
+            </td>
+            <td >
+                <input id="MesTitle" name="MesTitle"  type="text"  />
+            </td>
+        </tr>
+            
+              <tr>
+            <td >
+                内容:
+            </td>
+            <td >
+                <input id="MesContent" name="MesContent"  type="text"  />
+            </td>
+        </tr>
+            
+              <tr>
+            <td >
+                接收人:
+            </td>
+            <td >
+                <input id="ReceiveUserCode" name="ReceiveUserCode"  type="text"  />
+            </td>
+        </tr>
+            
+              <tr>
+            <td >
+                是否所有人:
+            </td>
+            <td >
+                <input id="IsAll" name="IsAll"  type="text"  />
+            </td>
+        </tr>
+            
+              <tr>
+            <td >
+                发送人:
+            </td>
+            <td >
+                <input id="CreatorUserCode" name="CreatorUserCode"  type="text"  />
+            </td>
+        </tr>
+            
+              <tr>
+            <td >
+                发送姓名:
+            </td>
+            <td >
+                <input id="CreatorUserName" name="CreatorUserName"  type="text"  />
+            </td>
+        </tr>
+            
+              <tr>
+            <td >
+                :
+            </td>
+            <td >
+                <input id="CreationTime" name="CreationTime"  type="text"  />
+            </td>
+        </tr>
+            
+              <tr>
+            <td >
+                :
+            </td>
+            <td >
+                <input id="LastModificationTime" name="LastModificationTime"  type="text"  />
+            </td>
+        </tr>
+            
+              <tr>
+            <td >
+                :
+            </td>
+            <td >
+                <input id="LastModifierUserCode" name="LastModifierUserCode"  type="text"  />
+            </td>
+        </tr>
+            
+              <tr>
+            <td >
+                :
+            </td>
+            <td >
+                <input id="DeleterUserCode" name="DeleterUserCode"  type="text"  />
+            </td>
+        </tr>
+            
+              <tr>
+            <td >
+                :
+            </td>
+            <td >
+                <input id="DeletionTime" name="DeletionTime"  type="text"  />
+            </td>
+        </tr>
+          <tr>
+        <td colspan="2">   <a href="#" class="easyui-linkbutton" iconcls="icon-search" id="btnSearch">搜索</a>
+        </td>
+        </tr>
+        </table>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+
+

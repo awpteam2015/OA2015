@@ -1,0 +1,148 @@
+﻿
+
+  
+
+
+@{
+    ViewBag.Title = "Hd";
+    Layout = "~/Views/Shared/_LayoutHandler.cshtml";
+}
+
+@section JavaScript{
+    <script src="/Areas/HRManager/Scripts/MessageInfo/Hd.js?JsParamter=@SiteConfig.GetConfig().JsParamter"></script>
+}
+<div style="display: none">
+<input id="BindEntity" type="text" value="@ViewBag.BindEntity" />
+<input id="Command" type="hidden" />
+</div>
+<div class="mtable_div">
+    <form id="form1">
+        <table class="mtable">
+            
+              <tr>
+            <td  >
+                <span style="color: Red">*</span>:
+            </td>
+            <td >
+                <input id="PkId" name="PkId"  type="text"  />
+            </td>
+        </tr>
+            
+              <tr>
+            <td  >
+                标题<span style="color: Red">*</span>:
+            </td>
+            <td >
+                <input id="MesTitle" name="MesTitle"  type="text"  />
+            </td>
+        </tr>
+            
+              <tr>
+            <td  >
+                内容<span style="color: Red">*</span>:
+            </td>
+            <td >
+                <input id="MesContent" name="MesContent"  type="text"  />
+            </td>
+        </tr>
+            
+              <tr>
+            <td  >
+                接收人<span style="color: Red">*</span>:
+            </td>
+            <td >
+                <input id="ReceiveUserCode" name="ReceiveUserCode"  type="text"  />
+            </td>
+        </tr>
+            
+              <tr>
+            <td  >
+                是否所有人<span style="color: Red">*</span>:
+            </td>
+            <td >
+                <input id="IsAll" name="IsAll"  type="text"  />
+            </td>
+        </tr>
+            
+              <tr>
+            <td  >
+                发送人<span style="color: Red">*</span>:
+            </td>
+            <td >
+                <input id="CreatorUserCode" name="CreatorUserCode"  type="text"  />
+            </td>
+        </tr>
+            
+              <tr>
+            <td  >
+                发送姓名<span style="color: Red">*</span>:
+            </td>
+            <td >
+                <input id="CreatorUserName" name="CreatorUserName"  type="text"  />
+            </td>
+        </tr>
+            
+              <tr>
+            <td  >
+                <span style="color: Red">*</span>:
+            </td>
+            <td >
+                <input id="CreationTime" name="CreationTime"  type="text"  />
+            </td>
+        </tr>
+            
+              <tr>
+            <td  >
+                <span style="color: Red">*</span>:
+            </td>
+            <td >
+                <input id="LastModificationTime" name="LastModificationTime"  type="text"  />
+            </td>
+        </tr>
+            
+              <tr>
+            <td  >
+                <span style="color: Red">*</span>:
+            </td>
+            <td >
+                <input id="LastModifierUserCode" name="LastModifierUserCode"  type="text"  />
+            </td>
+        </tr>
+            
+              <tr>
+            <td  >
+                <span style="color: Red">*</span>:
+            </td>
+            <td >
+                <input id="DeleterUserCode" name="DeleterUserCode"  type="text"  />
+            </td>
+        </tr>
+            
+              <tr>
+            <td  >
+                <span style="color: Red">*</span>:
+            </td>
+            <td >
+                <input id="DeletionTime" name="DeletionTime"  type="text"  />
+            </td>
+        </tr>
+          
+        </table>
+    </form>
+</div>
+<div style="padding: 10px 10px 0 10px; text-align: center;">
+    @if (Request["PkId"]==null||int.Parse(Request["PkId"]) == 0)
+    {
+        <a id="btnAdd" class="easyui-linkbutton" iconcls="icon-add" href="javascript:void(0)">新增</a>
+    }
+    else
+    {
+        <a id="btnEdit" class="easyui-linkbutton" iconcls="icon-ok" href="javascript:void(0)">编辑</a>
+    }
+    <a id="btnClose" class="easyui-linkbutton" iconcls="icon-cancel" href="javascript:void(0)">关闭</a>
+</div>
+
+
+
+
+
