@@ -15,6 +15,10 @@
                 pro.Department.HdPage.submit("Edit");
             });
 
+            $("#btnClose").click(function () {
+                parent.pro.Department.ListPage.closeTab("");
+            });
+
             if ($("#BindEntity").val()) {
                 var bindField = pro.bindKit.getHeadJson();
                 var bindEntity = JSON.parse($("#BindEntity").val());

@@ -194,13 +194,13 @@ namespace Project.WebApplication.Areas.PermissionManager.Controllers
             var url = postData.RequestEntity.FunctionUrl;
             var urlRoute = url.Split('/');
 
-            if (!postData.RequestEntity.FunctionDetailList.Any() && urlRoute.Count()>=3)
+            if (!postData.RequestEntity.FunctionDetailList.Any() && urlRoute.Count()>=4)
             {
                 postData.RequestEntity.FunctionDetailList.Add(new FunctionDetailEntity()
                 {
-                    Area = urlRoute[0],
-                    Action = urlRoute[1],
+                    Area = urlRoute[1],
                     Controller = urlRoute[2],
+                    Action = urlRoute[3],
                     CreationTime = DateTime.Now,
                     CreatorUserCode = LoginUserInfo.UserCode,
                     FunctionDetailCode = "btn_View",
