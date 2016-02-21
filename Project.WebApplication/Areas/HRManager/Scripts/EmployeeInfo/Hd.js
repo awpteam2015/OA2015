@@ -20,7 +20,7 @@
             var gridObjStudy = initObj.gridObjStudy;
             var gridObjTechnical = initObj.gridObjTechnical;
             var gridObjProfession = initObj.gridObjProfession;
-            if(pro.commonKit.getUrlParam(""))
+
             //隐藏编辑按钮
             if (pro.commonKit.getUrlParam("View")) {
                 $('#btnEdit').css("display", "none");
