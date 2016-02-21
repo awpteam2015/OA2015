@@ -32,6 +32,9 @@ namespace Project.Model.HRManager
         /// </summary>
         public virtual System.Int32? IsAll{get; set;}
         /// <summary>
+        /// 已读人员
+        /// </summary>
+        public virtual System.String ReadUser { get; set; }
         /// 发送人
         /// </summary>
         public virtual System.String CreatorUserCode{get; set;}
