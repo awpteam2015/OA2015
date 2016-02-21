@@ -31,6 +31,11 @@ namespace Project.Model.HRManager
         /// 是否所有人
         /// </summary>
         public virtual System.Int32? IsAll{get; set;}
+
+        /// <summary>
+        /// 类型 1：生日提醒 2：退休提醒 3：合同过期提醒 4：合同到期提醒 5：其它提醒
+        /// </summary>
+        public virtual System.Int32? InfoType { get; set; }
         /// <summary>
         /// 已读人员
         /// </summary>

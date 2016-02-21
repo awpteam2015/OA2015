@@ -23,7 +23,7 @@
                     标题<span style="color: Red">*</span>:
                 </td>
                 <td>
-                    <input id="MesTitle" name="MesTitle" type="text" />
+                    <input id="MesTitle" name="MesTitle" type="text" style="width:400px" />
                 </td>
             </tr>
 
@@ -32,23 +32,23 @@
                     内容<span style="color: Red">*</span>:
                 </td>
                 <td>
-                    <textarea id="MesContent" name="MesContent"></textarea>
+                    <textarea id="MesContent" name="MesContent" style="width:500px;height:150px;"></textarea>
                 </td>
             </tr>
         </table>
     </form>
 </div>
 <div style="padding: 10px 10px 0 10px; text-align: center;">
-    @if (Request["PkId"] == null || int.Parse(Request["PkId"]) == 0)
+    @if (Request["nullView"] != null)
     {
-        <a id="btnAdd" class="easyui-linkbutton" iconcls="icon-add" href="javascript:void(0)">新增</a>
-    }
-    else
-    {
-        <a id="btnEdit" class="easyui-linkbutton" iconcls="icon-ok" href="javascript:void(0)">编辑</a>
+        if (Request["PkId"] == null || int.Parse(Request["PkId"]) == 0)
+        {
+            <a id="btnAdd" class="easyui-linkbutton" iconcls="icon-add" href="javascript:void(0)">新增</a>
+        }
+        else
+        {
+            <a id="btnEdit" class="easyui-linkbutton" iconcls="icon-ok" href="javascript:void(0)">编辑</a>
+        }
     }
     <a id="btnClose" class="easyui-linkbutton" iconcls="icon-cancel" href="javascript:void(0)">关闭</a>
 </div>
-
-
-

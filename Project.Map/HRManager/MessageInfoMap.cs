@@ -22,6 +22,7 @@ namespace Project.Map.HRManager
             Map(p => p.MesContent);
             Map(p => p.ReceiveUserCode);
             Map(p => p.IsAll);
+            Map(p => p.InfoType);
             Map(p => p.ReadUser);
             Map(p => p.CreatorUserCode);
             Map(p => p.CreatorUserName);
