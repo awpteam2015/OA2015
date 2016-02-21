@@ -147,6 +147,11 @@ namespace Project.WebApplication.Areas.ReportManager.Controllers
             return new AbpJsonResult(dataGridEntity, new NHibernateContractResolver());
         }
 
-     
+        public ActionResult EmployeeInOutReport()
+        {
+            return View();
+        }
+
+
     }
 }
