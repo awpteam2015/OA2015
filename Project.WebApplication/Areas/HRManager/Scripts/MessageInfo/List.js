@@ -4,7 +4,7 @@ var pro = pro || {};
     pro.MessageInfo = pro.MessageInfo || {};
     pro.MessageInfo.ListPage = pro.MessageInfo.ListPage || {};
     pro.MessageInfo.ListPage = {
-      init: function () {
+        init: function () {
             return {
                 tabObj: new pro.TabBase(),
                 gridObj: new pro.GridBase("#datagrid", false)
@@ -21,18 +21,18 @@ var pro = pro || {};
                 rownumbers: true, //行号
                 singleSelect: true,
                 columns: [[
-         { field: 'PkId', title: '', width: 100 },
-         { field: 'MesTitle', title: '标题', width: 100 },
-         { field: 'MesContent', title: '内容', width: 100 },
-         { field: 'ReceiveUserCode', title: '接收人', width: 100 },
-         { field: 'IsAll', title: '是否所有人', width: 100 },
-         { field: 'CreatorUserCode', title: '发送人', width: 100 },
-         { field: 'CreatorUserName', title: '发送姓名', width: 100 },
-         { field: 'CreationTime', title: '', width: 100 },
-         { field: 'LastModificationTime', title: '', width: 100 },
-         { field: 'LastModifierUserCode', title: '', width: 100 },
-         { field: 'DeleterUserCode', title: '', width: 100 },
-         { field: 'DeletionTime', title: '', width: 100 },
+         { field: 'PkId', title: '', hidden: true, width: 100 },
+         { field: 'MesTitle', title: '标题', width: 200 },
+         { field: 'MesContent', title: '内容', width: 280 },
+         //{ field: 'ReceiveUserCode', title: '接收人', width: 100 },
+         //{ field: 'IsAll', title: '是否所有人', width: 100 },
+         //{ field: 'CreatorUserCode', title: '发送人', width: 100 },
+         { field: 'CreatorUserName', title: '发送人', width: 100 },
+         //{ field: 'CreationTime', title: '', width: 100 },
+         //{ field: 'LastModificationTime', title: '', width: 100 },
+         //{ field: 'LastModifierUserCode', title: '', width: 100 },
+         //{ field: 'DeleterUserCode', title: '', width: 100 },
+         //{ field: 'DeletionTime', title: '', width: 100 },
                 ]],
                 pagination: true,
                 pageSize: 20, //每页显示的记录条数，默认为10     
@@ -41,7 +41,7 @@ var pro = pro || {};
                );
 
             $("#btnAdd").click(function () {
-               tabObj.add("/HRManager/MessageInfo/Hd","新增");
+                tabObj.add("/HRManager/MessageInfo/Hd", "新增");
             });
 
             $("#btnEdit").click(function () {
@@ -60,7 +60,7 @@ var pro = pro || {};
 
             $("#btnDel").click(function () {
                 if (!gridObj.isSelected()) {
-                $.alertExtend.infoOp();
+                    $.alertExtend.infoOp();
                     return;
                 }
                 $.messager.confirm("确认操作", "是否确认删除", function (bl) {
@@ -84,7 +84,7 @@ var pro = pro || {};
                 gridObj.refresh();
             });
         },
-         closeTab: function () {
+        closeTab: function () {
             this.init().tabObj.closeTab();
         }
     };

@@ -17,12 +17,12 @@
     <table id="datagrid" style="height:auto;" iconcls=".icon-save" singleselect="true" toolbar="#tb" fit="true"></table>
     <div id="tb" style="padding:5px;height:auto">
         <div style="margin-bottom: 5px">
-            <a id="btnAdd" href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:true">添加</a>
+            @*<a id="btnAdd" href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:true">添加</a>
 
-            <a id="btnDel" href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-remove',plain:true">删除</a>
+                <a id="btnDel" href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-remove',plain:true">删除</a>
 
-            <a id="btnEdit" href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-edit',plain:true">编辑</a>
-
+                <a id="btnEdit" href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-edit',plain:true">编辑</a>*@
+            <a id="btnEdit" href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-edit',plain:true">查看</a>
             <a id="btnRefresh" href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-reload',plain:true">刷新</a>
 
         </div>
@@ -34,15 +34,18 @@
 
                     <tr>
                         <td>
-                            是否系统:
+                            开始日期:
                         </td>
                         <td>
-                            <input id="IsAll" name="IsAll" type="text" />
+                            <input id="CreationTime" name="CreationTime" type="text" />
                         </td>
-                    </tr>
-
-                    <tr>
-                        <td colspan="2">
+                        <td>
+                            至:
+                        </td>
+                        <td>
+                            <input id="CreationEndTime" name="CreationEndTime" type="text" />
+                        </td>
+                        <td>
                             <a href="#" class="easyui-linkbutton" iconcls="icon-search" id="btnSearch">搜索</a>
                         </td>
                     </tr>
