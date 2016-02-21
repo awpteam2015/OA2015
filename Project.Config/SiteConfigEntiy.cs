@@ -13,7 +13,10 @@ namespace Project.Config
             get { return ConfigurationManager.AppSettings["JsParamter"]; }
         }
 
-
+        public int IndexPagePkId
+        {
+      get { return int.Parse(ConfigurationManager.AppSettings["IndexPagePkId"]); }
+        }
     }
 
 

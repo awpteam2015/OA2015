@@ -45,11 +45,11 @@
                 data: JSON.stringify(postData)
             }).done(
                 function (dataresult, data) {
-                   function afterSuccess() {
-                        parent.$("#btnSearch").trigger("click");
-                        parent.pro.IndexPageSet.ListPage.closeTab();
-                    }
-                    parent.$.alertExtend.info("", afterSuccess());
+                   //function afterSuccess() {
+                   //     parent.$("#btnSearch").trigger("click");
+                   //     parent.pro.IndexPageSet.ListPage.closeTab();
+                   // }
+                   // parent.$.alertExtend.info("", afterSuccess());
                 }
             ).fail(
              function (errordetails, errormessage) {
