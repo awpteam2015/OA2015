@@ -84,6 +84,7 @@
     <Compile Include="PermissionManager\UserRoleMap.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SystemSetManager\HolidayDetailMap.cs" />
+    <Compile Include="SystemSetManager\IndexPageSetMap.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

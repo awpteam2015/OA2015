@@ -79,6 +79,7 @@
     <Compile Include="ReportManager\AttendanceViewEntity.cs" />
     <Compile Include="SystemSetManager\HolidayDetailEntity.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SystemSetManager\IndexPageSetEntity.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Project.Infrastructure.FrameworkCore\Project.Infrastructure.FrameworkCore.csproj">
