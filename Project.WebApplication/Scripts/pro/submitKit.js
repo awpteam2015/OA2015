@@ -72,7 +72,7 @@
                     json += "{" + rowJson.substring(0, rowJson.length - 1) + "},";
                 }
             );
-            alert(json);
+            //alert(json);
             return jQuery.parseJSON("[" + json.substring(0, json.length - 1) + "]");
         }
     };

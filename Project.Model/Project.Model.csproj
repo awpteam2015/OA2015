@@ -47,6 +47,7 @@
     <Compile Include="HRManager\DictionaryEntity.cs" />
     <Compile Include="HRManager\EmployeeChildrenEntity.cs" />
     <Compile Include="HRManager\EmployeeInfoEntity.cs" />
+    <Compile Include="HRManager\EmployeeInfoHisEntity.cs" />
     <Compile Include="HRManager\EmployeeRotateEntity.cs" />
     <Compile Include="HRManager\EmployeeYearDetailEntity.cs" />
     <Compile Include="HRManager\EmployeeYearMainEntity.cs" />

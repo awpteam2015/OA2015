@@ -115,6 +115,8 @@
     <Content Include="Areas\HRManager\Scripts\Dictionary\List.js" />
     <Content Include="Areas\HRManager\Scripts\EmployeeChildren\Hd.js" />
     <Content Include="Areas\HRManager\Scripts\EmployeeChildren\List.js" />
+    <Content Include="Areas\HRManager\Scripts\EmployeeInfoHis\Hd.js" />
+    <Content Include="Areas\HRManager\Scripts\EmployeeInfoHis\List.js" />
     <Content Include="Areas\HRManager\Scripts\EmployeeInfo\Hd.js" />
     <Content Include="Areas\HRManager\Scripts\EmployeeInfo\List.js" />
     <Content Include="Areas\HRManager\Scripts\EmployeeRotate\Hd.js" />
@@ -250,6 +252,8 @@
     <Content Include="Areas\ReportManager\Views\HrReport\AttendanceReport2.cshtml" />
     <Content Include="Areas\HRManager\Views\Profession\Hd.cshtml" />
     <Content Include="Areas\HRManager\Views\Profession\List.cshtml" />
+    <Content Include="Areas\HRManager\Views\EmployeeInfoHis\Hd.cshtml" />
+    <Content Include="Areas\HRManager\Views\EmployeeInfoHis\List.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\Control\DepartmentControl.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
@@ -700,6 +704,7 @@
     <Compile Include="Areas\HRManager\Controllers\DictionaryController.cs" />
     <Compile Include="Areas\HRManager\Controllers\EmployeeChildrenController.cs" />
     <Compile Include="Areas\HRManager\Controllers\EmployeeInfoController.cs" />
+    <Compile Include="Areas\HRManager\Controllers\EmployeeInfoHisController.cs" />
     <Compile Include="Areas\HRManager\Controllers\EmployeeRotateController.cs" />
     <Compile Include="Areas\HRManager\Controllers\EmployeeYearDetailController.cs" />
     <Compile Include="Areas\HRManager\Controllers\EmployeeYearMainController.cs" />

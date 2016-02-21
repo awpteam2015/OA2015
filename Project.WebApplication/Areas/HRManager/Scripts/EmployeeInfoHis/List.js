@@ -1,9 +1,9 @@
 ﻿
 var pro = pro || {};
 (function () {
-    pro.EmployeeInfo = pro.EmployeeInfo || {};
-    pro.EmployeeInfo.ListPage = pro.EmployeeInfo.ListPage || {};
-    pro.EmployeeInfo.ListPage = {
+    pro.EmployeeInfoHis = pro.EmployeeInfoHis || {};
+    pro.EmployeeInfoHis.ListPage = pro.EmployeeInfoHis.ListPage || {};
+    pro.EmployeeInfoHis.ListPage = {
         init: function () {
             return {
                 tabObj: new pro.TabBase(),
@@ -15,18 +15,17 @@ var pro = pro || {};
             var tabObj = initObj.tabObj;
             var gridObj = initObj.gridObj;
             gridObj.grid({
-                url: '/HRManager/EmployeeInfo/GetList',
+                url: '/HRManager/EmployeeInfoHis/GetList?EmployeeCode=' + (pro.commonKit.getUrlParam("EmployeeCode")),
                 fitColumns: false,
                 nowrap: false,
                 rownumbers: true, //行号
                 singleSelect: true,
-                frozenColumns: [[
-                     { field: 'EmployeeCode', title: '员工编号', width: 100 },
-                     { field: 'EmployeeName', title: '员工名称', width: 100 },
-                     { field: 'DepartmentName', title: '所属部门', width: 100 }
-                ]],
                 columns: [[
-         //{ field: 'PkId', title: '', hidden: true, width: 100 },
+         { field: 'PkId', title: '', hidden: true, width: 100 },
+         { field: 'EmployeeID', title: '员工表ID', width: 100 },
+         { field: 'EmployeeCode', title: '员工编号', width: 100 },
+         { field: 'EmployeeName', title: '员工名称', width: 100 },
+         { field: 'DepartmentName', title: '所属部门', width: 100 },
          { field: 'JobName', title: '工号', width: 100 },
          { field: 'PayCode', title: '中文简拼', width: 100 },
          {
@@ -48,12 +47,14 @@ var pro = pro || {};
          },
          { field: 'CertNo', title: '身份证', width: 100 },
          { field: 'Birthday', title: '生日', width: 100 },
-         { field: 'DutiesName', title: '单位职务', width: 100 },
+
+         { field: 'DutiesName', title: '职务名称', width: 100 },
+         //{ field: 'Duties', title: '单位职务', width: 100 },
          { field: 'WorkStateName', title: '在职状态', width: 100 },
+        // { field: 'EmployeeType', title: '员工类型', width: 100 },
          { field: 'EmployeeTypeName', title: '员工类型', width: 100 },
          //{ field: 'HomeAddress', title: '家庭地址', width: 100 },
          //{ field: 'MobileNO', title: '手机号', width: 100 },
-         //{ field: 'ImageUrl', title: '图片地址', width: 100 },
          { field: 'Sort', title: '排序', width: 100 },
          {
              field: 'State', title: '状态', width: 100, formatter: function (value, row, index) {
@@ -84,38 +85,8 @@ var pro = pro || {};
             }
                );
 
-            $('#WorkState').combobox({
-                required: true,
-                editable: false,
-                valueField: 'KeyValue',
-                textField: 'KeyName',
-                url: '/HRManager/Dictionary/GetListByCode?ParentKeyCode=ZZZT&AllFlag=1',
-                onLoadSuccess: function () {
-                    $('#WorkState').combobox("setValue", "");
-                }
-            });
-
-            $('#EmployeeType').combobox({
-                required: true,
-                editable: false,
-                valueField: 'KeyValue',
-                textField: 'KeyName',
-                url: '/HRManager/Dictionary/GetListByCode?ParentKeyCode=YGLY&AllFlag=1',
-                onLoadSuccess: function () {
-                    $('#EmployeeType').combobox("setValue", "");
-                }
-            });
-            //$('#DepartmentCode').combotree({
-            //    required: true,
-            //    editable: false,
-            //    valueField: 'DepartmentCode',
-            //    textField: 'DepartmentName',
-            //    url: '/PermissionManager/Department/GetList_Combotree'
-            //});
-
-            pro.DepartmentControl.init();
             $("#btnAdd").click(function () {
-                tabObj.add("/HRManager/EmployeeInfo/Hd", "新增");
+                tabObj.add("/HRManager/EmployeeInfoHis/Hd", "新增");
             });
 
             $("#btnEdit").click(function () {
@@ -124,21 +95,22 @@ var pro = pro || {};
                     return;
                 }
                 var PkId = gridObj.getSelectedRow().PkId;
-                var EmployeeCode = gridObj.getSelectedRow().EmployeeCode;
-                tabObj.add("/HRManager/EmployeeInfo/Hd?PkId=" + PkId + "&EmployeeCode=" + EmployeeCode, "编辑" + PkId);
+                tabObj.add("/HRManager/EmployeeInfoHis/Hd?PkId=" + PkId, "编辑" + PkId);
             });
 
 
             $("#btnSearch").click(function () {
                 gridObj.search();
             });
-            $("#btnHistory").click(function () {
+            //查看
+            $("#btnView").click(function () {
                 if (!gridObj.isSelected()) {
                     $.alertExtend.infoOp();
                     return;
                 }
+                var PkId = gridObj.getSelectedRow().EmployeeID;
                 var EmployeeCode = gridObj.getSelectedRow().EmployeeCode;
-                tabObj.add("/HRManager/EmployeeInfoHis/List?EmployeeCode=" + EmployeeCode, "历史信息");
+                tabObj.add("/HRManager/EmployeeInfo/Hd?PkId=" + PkId + "&EmployeeCode=" + EmployeeCode + "&View=true", "查看" + PkId);
             });
 
             $("#btnDel").click(function () {
@@ -149,7 +121,7 @@ var pro = pro || {};
                 $.messager.confirm("确认操作", "是否确认删除", function (bl) {
                     if (!bl) return;
                     abp.ajax({
-                        url: "/HRManager/EmployeeInfo/Delete?PkId=" + gridObj.getSelectedRow().PkId
+                        url: "/HRManager/EmployeeInfoHis/Delete?PkId=" + gridObj.getSelectedRow().PkId
                     }).done(
                     function (dataresult, data) {
                         $.alertExtend.info();
@@ -164,7 +136,7 @@ var pro = pro || {};
             });
 
             $("#btnRefresh").click(function () {
-                gridObj.search();
+                gridObj.refresh();
             });
         },
         closeTab: function () {
@@ -176,7 +148,7 @@ var pro = pro || {};
 
 
 $(function () {
-    pro.EmployeeInfo.ListPage.initPage();
+    pro.EmployeeInfoHis.ListPage.initPage();
 });
 
 

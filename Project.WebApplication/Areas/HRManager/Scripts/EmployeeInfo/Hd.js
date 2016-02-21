@@ -20,13 +20,23 @@
             var gridObjStudy = initObj.gridObjStudy;
             var gridObjTechnical = initObj.gridObjTechnical;
             var gridObjProfession = initObj.gridObjProfession;
+            $('#WorkingYears').numberbox({
+                min: 0
+            });
+            //隐藏编辑按钮
+            if (pro.commonKit.getUrlParam("View")) {
+                $('#btnEdit').css("display", "none");
+            }
+            else {
+                $("#btnEdit").click(function () {
+                    pro.EmployeeInfo.HdPage.submit("Edit");
+                });
+            }
             $("#btnAdd").click(function () {
                 pro.EmployeeInfo.HdPage.submit("Add");
             });
 
-            $("#btnEdit").click(function () {
-                pro.EmployeeInfo.HdPage.submit("Edit");
-            });
+
 
             $("#btnClose").click(function () {
                 parent.pro.EmployeeInfo.ListPage.closeTab("");
@@ -39,7 +49,14 @@
                 textField: 'DepartmentName',
                 url: '/PermissionManager/Department/GetList_Combotree'
             });
+            $("#CertNo").blur(function () {
 
+                var UUserCard = $("#CertNo").val();
+
+                //获取出生日期
+                if (UUserCard && UUserCard.length >= 15)
+                    $('#Birthday').val(UUserCard.substring(6, 10) + "-" + UUserCard.substring(10, 12) + "-" + UUserCard.substring(12, 14));
+            });
             abp.ajax({
                 url: "/HRManager/Dictionary/GetListByCode?ParentKeyCode=ShoochYears"
                 //,data: JSON.stringify(postData)
@@ -442,6 +459,12 @@
                 for (var filedname in bindField) {
                     $("[name=" + filedname + "]").val(bindEntity[filedname]);
                 }
+
+                if (bindEntity["FileName"] != undefined && bindEntity["FileName"] != "") {
+                    var fullPath = bindEntity["FileUrl"] + "\\" + bindEntity["FileName"];
+                    $('#div_filename').html("<span ><img name=\"listP\" style=\"height:50px;width:160px;\" src=\"" + fullPath + "\">" + "</img> <a href=\"javascript:void(0)\" onclick=\"delImg(this);\">删除</a></span>");//+ json.extension.orgfileName
+
+                }
                 //行项目信息用json绑定控件
                 //alert(JSON.stringify(BindEntity.List));
             }
@@ -451,10 +474,12 @@
             var postData = {};
 
             postData.RequestEntity = pro.submitKit.getHeadJson();
-            postData.RequestEntity.TechnicalTitleName = $('#TechnicalTitle').combobox('getText');
+            //postData.RequestEntity.TechnicalTitleName = $('#TechnicalTitle').combobox('getText');
+
             postData.RequestEntity.DutiesName = $('#Duties').combobox('getText');
             postData.RequestEntity.WorkStateName = $('#WorkState').combobox('getText');
             postData.RequestEntity.EmployeeTypeName = $('#EmployeeType').combobox('getText');
+            postData.RequestEntity.DepartmentName = $('#DepartmentCode').combotree('getText');
 
             pro.submitKit.config.columnPkidName = "PkId";
             pro.submitKit.config.columnNamePreStr = "";
@@ -481,7 +506,8 @@
             }
 
             this.submitExtend.addRule();
-            if (!$("#form1").valid() && !this.submitExtend.logicValidate()) {
+
+            if (!$("#form1").valid() || !this.submitExtend.logicValidate()) {
                 $.alertExtend.error();
                 return false;
             }
@@ -523,7 +549,7 @@
                         //WorkState: { required: true  },
                         //EmployeeType: { required: true  },
                         //HomeAddress: { required: true  },
-                        //MobileNO: {  },
+                        MobileNO: { isMobile: '输入正确手机号' },
                         //ImageUrl: { required: true  },
                         //Sort: { required: true  },
                         //State: { required: true  },
@@ -541,14 +567,14 @@
                         JobName: "工号必填!",
                         PayCode: "中文简拼必填!",
                         Sex: "姓别必填!",
-                        CertNo: "身份证必填!",
+                        CertNo: "输入正确身份证号!",
                         Birthday: "生日必填!",
                         TechnicalTitle: "技术职称必填!",
                         Duties: "单位职务必填!",
                         WorkState: "在职状态必填!",
                         EmployeeType: "员工类型必填!",
                         HomeAddress: "家庭地址必填!",
-                        MobileNO: "手机号必填!",
+                        MobileNO: "输入正确手机号!",
                         ImageUrl: "图片地址必填!",
                         Sort: "排序必填!",
                         State: "状态必填!",

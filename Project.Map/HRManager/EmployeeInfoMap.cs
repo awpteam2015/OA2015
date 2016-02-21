@@ -22,7 +22,8 @@ namespace Project.Map.HRManager
 
             Map(p => p.EmployeeCode);
             Map(p => p.EmployeeName);
-            Map(p => p.DepartmentCode); Map(p => p.DepartmentName);
+            Map(p => p.DepartmentCode);
+            Map(p => p.DepartmentName);
             Map(p => p.JobName);
             Map(p => p.PayCode);
             Map(p => p.Sex);
@@ -38,14 +39,17 @@ namespace Project.Map.HRManager
             Map(p => p.EmployeeTypeName);
             Map(p => p.HomeAddress);
             Map(p => p.MobileNO);
-            Map(p => p.ImageUrl);
+            Map(p => p.FileUrl);
+            Map(p => p.FileName);
             Map(p => p.Sort);
             Map(p => p.State);
             Map(p => p.Remark);
             Map(p => p.CreatorUserCode);
             Map(p => p.CreatorUserName);
-            Map(p => p.CreateTime);
+            Map(p => p.CreationTime);
+            Map(p => p.IsDeleted);
             Map(p => p.LastModificationTime);
+            Map(p => p.LastModifierUserCode);
             Map(p => p.WorkStateName);
 
             HasMany(p => p.WorkList)

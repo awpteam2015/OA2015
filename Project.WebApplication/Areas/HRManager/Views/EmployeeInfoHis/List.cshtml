@@ -1,0 +1,171 @@
+﻿
+
+
+
+
+
+@{
+    ViewBag.Title = "List";
+    Layout = "~/Views/Shared/_LayoutList.cshtml";
+}
+
+@section JavaScript{
+    <script src="/Areas/HRManager/Scripts/EmployeeInfoHis/List.js?JsParamter=@SiteConfig.GetConfig().JsParamter" type="text/javascript"></script>
+}
+
+<div title="人员历史记录信息" style="padding:1px;">
+    <table id="datagrid" style="height:auto;" iconcls=".icon-save" singleselect="true" toolbar="#tb" fit="true"></table>
+    <div id="tb" style="padding:5px;height:auto">
+        <div style="margin-bottom: 5px">
+            @*<a id="btnAdd" href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:true">添加</a>
+
+            <a id="btnDel" href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-remove',plain:true">删除</a>
+
+            <a id="btnEdit" href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-edit',plain:true">编辑</a>
+
+            <a id="btnRefresh" href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-reload',plain:true">刷新</a>*@
+            <a id="btnView" href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-search',plain:true">查看</a>
+            <a id="btnRefresh" href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-reload',plain:true">刷新</a>
+            
+        </div>
+
+        <div id="divSearch">
+            <form>
+
+                <table class="mtable">
+
+
+
+                    @*<tr>
+                            <td >
+                                员工编号:
+                            </td>
+                            <td >
+                                <input id="EmployeeCode" name="EmployeeCode"  type="text"  />
+                            </td>
+                        </tr>
+                              <tr>
+                            <td >
+                                员工名称:
+                            </td>
+                            <td >
+                                <input id="EmployeeName" name="EmployeeName"  type="text"  />
+                            </td>
+                        </tr>
+                              <tr>
+                            <td >
+                                所属部门:
+                            </td>
+                            <td >
+                                <input id="DepartmentCode" name="DepartmentCode"  type="text"  />
+                            </td>
+                        </tr>
+
+                              <tr>
+                            <td >
+                                工号:
+                            </td>
+                            <td >
+                                <input id="JobName" name="JobName"  type="text"  />
+                            </td>
+                        </tr>
+
+                              <tr>
+                            <td >
+                                中文简拼:
+                            </td>
+                            <td >
+                                <input id="PayCode" name="PayCode"  type="text"  />
+                            </td>
+                        </tr>
+
+                              <tr>
+                            <td >
+                                姓别:
+                            </td>
+                            <td >
+                                <input id="Sex" name="Sex"  type="text"  />
+                            </td>
+                        </tr>
+
+                              <tr>
+                            <td >
+                                身份证:
+                            </td>
+                            <td >
+                                <input id="CertNo" name="CertNo"  type="text"  />
+                            </td>
+                        </tr>
+
+
+
+                              <tr>
+                            <td >
+                                技术职称:
+                            </td>
+                            <td >
+                                <input id="TechnicalTitle" name="TechnicalTitle"  type="text"  />
+                            </td>
+                        </tr>
+
+
+
+
+
+                              <tr>
+                            <td >
+                                在职状态:
+                            </td>
+                            <td >
+                                <input id="WorkState" name="WorkState"  type="text"  />
+                            </td>
+                        </tr>
+
+                              <tr>
+                            <td >
+                                员工类型:
+                            </td>
+                            <td >
+                                <input id="EmployeeType" name="EmployeeType"  type="text"  />
+                            </td>
+                        </tr>
+
+
+
+
+                              <tr>
+                            <td >
+                                手机号:
+                            </td>
+                            <td >
+                                <input id="MobileNO" name="MobileNO"  type="text"  />
+                            </td>
+                        </tr>
+
+
+                              <tr>
+                            <td >
+                                状态:
+                            </td>
+                            <td >
+                                <input id="State" name="State"  type="text"  />
+                            </td>
+                        </tr>
+
+
+
+
+                          <tr>
+                        <td colspan="2">   <a href="#" class="easyui-linkbutton" iconcls="icon-search" id="btnSearch">搜索</a>
+                        </td>
+                        </tr>*@
+                </table>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+
+

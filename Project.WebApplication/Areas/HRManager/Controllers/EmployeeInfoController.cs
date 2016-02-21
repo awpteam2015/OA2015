@@ -31,7 +31,16 @@ namespace Project.WebApplication.Areas.HRManager.Controllers
             else
             {
                 var maxCode = ((TypeParse.StrToInt(EmployeeInfoService.GetInstance().GetMaxEmployeeCode(), 0) + 1) + "").PadLeft(8, '0');
-                ViewBag.BindEntity = JsonHelper.JsonSerializer(new EmployeeInfoEntity() { EmployeeCode = maxCode });
+                ViewBag.BindEntity = JsonHelper.JsonSerializer(new EmployeeInfoEntity()
+                {
+                    EmployeeCode = maxCode,
+                    Duties = "0",
+                    EmployeeType = "0",
+                    Sex = 0,
+                    WorkingYears = 1,
+                    WorkState = "1",
+                    State = 1
+                });
             }
             return View();
         }
@@ -87,7 +96,7 @@ namespace Project.WebApplication.Areas.HRManager.Controllers
             where.DepartmentCode = RequestHelper.QueryString["DepartmentCode"];
             where.DepartmentCode = string.Join(",", (DepartmentService.GetInstance().GetChiledArr(where.DepartmentCode)));
             //where.DepartmentCode = RequestHelper.GetFormString("DepartmentCode");
-            var searchList = EmployeeInfoService.GetInstance().GetList(where,true);
+            var searchList = EmployeeInfoService.GetInstance().GetList(where, true);
 
 
             return new AbpJsonResult(searchList, new NHibernateContractResolver());
@@ -101,15 +110,18 @@ namespace Project.WebApplication.Areas.HRManager.Controllers
             //where.EmployeeCode = postData.RequestEntity.EmployeeCode;
             //EmployeeInfoService.GetInstance().GetList(where);
             postData.RequestEntity.CreatorUserCode = LoginUserInfo.UserCode;
-            postData.RequestEntity.CreateTime = DateTime.Now;
-            postData.RequestEntity.PayCode = postData.RequestEntity.EmployeeName.GetStringSpellCode();
+            postData.RequestEntity.CreationTime = DateTime.Now;
+            if (!string.IsNullOrEmpty(postData.RequestEntity.EmployeeName))
+            {
+                postData.RequestEntity.PayCode = postData.RequestEntity.EmployeeName.GetStringSpellCode();
+            }
             var addResult = EmployeeInfoService.GetInstance().Add(postData.RequestEntity);
             var result = new AjaxResponse<EmployeeInfoEntity>()
-               {
-                   success = addResult.Item1,
-                   result = postData.RequestEntity,
-                   error = addResult.Item1 ? null : new ErrorInfo(addResult.Item2)
-               };
+            {
+                success = addResult.Item1,
+                result = postData.RequestEntity,
+                error = addResult.Item1 ? null : new ErrorInfo(addResult.Item2)
+            };
             return new AbpJsonResult(result, new NHibernateContractResolver());
         }
 
@@ -118,7 +130,10 @@ namespace Project.WebApplication.Areas.HRManager.Controllers
         public AbpJsonResult Edit(AjaxRequest<EmployeeInfoEntity> postData)
         {
             postData.RequestEntity.LastModificationTime = DateTime.Now;
-            postData.RequestEntity.PayCode = postData.RequestEntity.EmployeeName.GetStringSpellCode();
+            if (!string.IsNullOrEmpty(postData.RequestEntity.EmployeeName))
+            {
+                postData.RequestEntity.PayCode = postData.RequestEntity.EmployeeName.GetStringSpellCode();
+            }
             var updateResult = EmployeeInfoService.GetInstance().Update(postData.RequestEntity);
             var result = new AjaxResponse<EmployeeInfoEntity>()
             {
@@ -150,17 +165,17 @@ namespace Project.WebApplication.Areas.HRManager.Controllers
             {
                 var result = new AjaxResponse<EmployeeInfoEntity>()
                 {
-                    success =true,
+                    success = true,
                     result = list.FirstOrDefault()
                 };
                 return new AbpJsonResult(result, new NHibernateContractResolver(new string[] { "result" }));
             }
             else
             {
-                return new AbpJsonResult(new AjaxResponse<string>(){success = false,error = new ErrorInfo(){message = "请输入正确的员工号！"}});
+                return new AbpJsonResult(new AjaxResponse<string>() { success = false, error = new ErrorInfo() { message = "请输入正确的员工号！" } });
             }
 
-           
+
         }
     }
 }
