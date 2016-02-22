@@ -87,7 +87,7 @@ namespace Project.Service.SystemSetManager
         {
           try
             {
-            _indexPageSetRepository.Update(entity);
+            _indexPageSetRepository.Merge(entity);
          return true;
         }
         catch

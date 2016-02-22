@@ -22,28 +22,29 @@
 
 <script type="text/javascript" charset="utf-8" src="/Scripts/pro/kindeditor/plugins/code/prettify.js"></script>
 
-<script type="text/javascript">
-    KindEditor.ready(function (K) {
-        var editor1 = K.create('#Des', {
-            cssPath: '/Scripts/pro/kindeditor/plugins/code/prettify.css',
-            uploadJson: '/Scripts/pro/kindeditor/upload_json.ashx',
-            fileManagerJson: '/Scripts/pro/kindeditor/file_manager_json.ashx',
-            allowFileManager: true,
-            afterCreate: function () {
-                var self = this;
-                K.ctrl(document, 13, function () {
-                    self.sync();
-                    K('form[name=example]')[0].submit();
-                });
-                K.ctrl(self.edit.doc, 13, function () {
-                    self.sync();
-                    K('form[name=example]')[0].submit();
-                });
-            }
+    <script type="text/javascript">
+        var editor1;
+        KindEditor.ready(function (K) {
+             editor1 = K.create('#Des', {
+                cssPath: '/Scripts/pro/kindeditor/plugins/code/prettify.css',
+                uploadJson: '/Scripts/pro/kindeditor/upload_json.ashx',
+                fileManagerJson: '/Scripts/pro/kindeditor/file_manager_json.ashx',
+                allowFileManager: true,
+                afterCreate: function () {
+                    var self = this;
+                    K.ctrl(document, 13, function () {
+                        self.sync();
+                        K('form[name=example]')[0].submit();
+                    });
+                    K.ctrl(self.edit.doc, 13, function () {
+                        self.sync();
+                        K('form[name=example]')[0].submit();
+                    });
+                }
+            });
+            prettyPrint();
         });
-        prettyPrint();
-    });
-</script>
+    </script>
 
 }
 <div style="display:none ">
@@ -65,7 +66,7 @@
     {
         <a id="btnEdit" class="easyui-linkbutton" iconcls="icon-ok" href="javascript:void(0)">编辑</a>
     }
-    <a id="btnClose" class="easyui-linkbutton" iconcls="icon-cancel" href="javascript:void(0)">关闭</a>
+  
 </div>
 
 
