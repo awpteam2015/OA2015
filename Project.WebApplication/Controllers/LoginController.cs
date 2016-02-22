@@ -16,7 +16,7 @@ namespace Project.WebApplication.Controllers
     public class LoginController : Controller
     {
         // GET: Login
-        public ActionResult Index()
+        public ActionResult Index3()
         {
            
             return View();

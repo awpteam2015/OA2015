@@ -13,6 +13,7 @@ using Project.Infrastructure.FrameworkCore.WebMvc.Models;
 using Project.Service.SystemSetManager;
 using Project.WebApplication.Controllers;
 using AutoMapper;
+using Project.Infrastructure.FrameworkCore.ToolKit;
 
 namespace Project.WebApplication.Areas.SystemSetManager.Controllers
 {
@@ -56,6 +57,7 @@ namespace Project.WebApplication.Areas.SystemSetManager.Controllers
         [HttpPost]
         public AbpJsonResult Add(AjaxRequest<IndexPageSetEntity> postData)
         {
+            postData.RequestEntity.Des = Base64Helper.DecodeBase64(postData.RequestEntity.Des);
             var addResult = IndexPageSetService.GetInstance().Add(postData.RequestEntity);
             var result = new AjaxResponse<IndexPageSetEntity>()
                {

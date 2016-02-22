@@ -10,14 +10,50 @@
 
 @section JavaScript{
     <script src="/Areas/SystemSetManager/Scripts/IndexPageSet/Hd.js?JsParamter=@SiteConfig.GetConfig().JsParamter"></script>
+
+
+
+<link rel="stylesheet" href="/Scripts/pro/kindeditor/themes/default/default.css" />
+<link rel="stylesheet" href="//Scripts/pro/kindeditor/plugins/code/prettify.css" />
+
+<script type="text/javascript" charset="utf-8" src="/Scripts/pro/kindeditor/kindeditor.js"></script>
+
+<script type="text/javascript" charset="utf-8" src="/Scripts/pro/kindeditor/lang/zh_CN.js"></script>
+
+<script type="text/javascript" charset="utf-8" src="/Scripts/pro/kindeditor/plugins/code/prettify.js"></script>
+
+<script type="text/javascript">
+    KindEditor.ready(function (K) {
+        var editor1 = K.create('#Des', {
+            cssPath: '/Scripts/pro/kindeditor/plugins/code/prettify.css',
+            uploadJson: '/Scripts/pro/kindeditor/upload_json.ashx',
+            fileManagerJson: '/Scripts/pro/kindeditor/file_manager_json.ashx',
+            allowFileManager: true,
+            afterCreate: function () {
+                var self = this;
+                K.ctrl(document, 13, function () {
+                    self.sync();
+                    K('form[name=example]')[0].submit();
+                });
+                K.ctrl(self.edit.doc, 13, function () {
+                    self.sync();
+                    K('form[name=example]')[0].submit();
+                });
+            }
+        });
+        prettyPrint();
+    });
+</script>
+
 }
-<div style="display: none">
+<div style="display:none ">
 <input id="BindEntity" type="text" value="@ViewBag.BindEntity" />
 <input id="Command" type="hidden" />
 </div>
 <div class="mtable_div">
     <form id="form1">
-        <input id="Des" name="Des" type="text" />
+
+        <textarea id="Des" name="Des" cols="100" rows="8" style="width: 700px; height: 400px; visibility: hidden;"></textarea>
     </form>
 </div>
 <div style="padding: 10px 10px 0 10px; text-align: center;">
