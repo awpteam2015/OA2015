@@ -215,6 +215,8 @@ namespace Project.WebApplication.Controllers
             }
             var exception = filterContext.Exception ?? new Exception("不存在进一步错误信息");
 
+            LoggerHelper.Error(LogType.ErrorLogger, exception.Message);
+
             if (Request.IsAjaxRequest())
             {
                 filterContext.Result = new AbpJsonResult
