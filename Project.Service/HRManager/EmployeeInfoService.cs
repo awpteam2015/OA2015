@@ -192,6 +192,7 @@ namespace Project.Service.HRManager
                         employeeHisEntity.InDepartmentName = entity.DepartmentName;
                         employeeHisEntity.InWorkState = entity.WorkState;
                         employeeHisEntity.InWorkStateName = entity.WorkStateName;
+                        employeeHisEntity.CreateTime = DateTime.Now;
                         _employeeInfoHisRepository.Save(employeeHisEntity);
                     }
                     _employeeInfoRepository.Merge(entity);

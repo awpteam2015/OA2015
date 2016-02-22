@@ -42,7 +42,7 @@ namespace Project.Model.ReportManager
         /// <summary>
         /// 进出类型  0：进 1：出
         /// </summary>
-        public virtual System.Int16 InOrOut { get; set; }
+        public virtual System.Int32 InOrOut { get; set; }
 
     }
 }

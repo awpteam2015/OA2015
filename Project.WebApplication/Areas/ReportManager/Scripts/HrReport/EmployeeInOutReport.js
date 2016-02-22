@@ -15,17 +15,70 @@ var pro = pro || {};
             var tabObj = initObj.tabObj;
             var gridObj = initObj.gridObj;
             gridObj.grid({
-                url: '/ReportManager/HrReport/GetAttendanceReport2',
+                url: '/ReportManager/HrReport/GetEmployeeInOutReport',
                 fitColumns: false,
                 nowrap: false,
                 rownumbers: true, //行号
                 singleSelect: true,
                 columns: [[
-         //{ field: 'EmployeeCode', title: '工号', width: 100 },
-         { field: 'DepartmentName', title: '部门', width: 100 },
-         { field: 'EmployeeNum', title: '员工数', width: 100 },
-         { field: 'WordkDays', title: '在岗天数', width: 100 },
-         { field: 'NotWordkDays', title: '缺勤天数', width: 100 }
+         { field: 'EmployeeCode', title: '员工编号', width: 100 },
+         { field: 'EmployeeName', title: '员工名称', width: 100 },
+         { field: 'CertNo', title: '身份证', width: 100 },
+         {
+             field: 'Birthday', title: '生日', width: 100
+         },
+         {
+             field: 'Sex', title: '姓别', width: 100, formatter: function (value, row, index) {
+                 var ret = "";
+                 switch (value) {
+                     case 0:
+                         ret = '女'
+                         break;
+                     case 1:
+                         ret = '男'
+                         break;
+                     default:
+                         ret = '未知'
+                         break;
+                 }
+                 return ret;
+             }
+         },
+         { field: 'EmployeeTypeName', title: '员工类型', width: 100 },
+
+         { field: 'DepartmentName', title: '部门名称', width: 100 },
+         { field: 'InDepartmentName', title: '部门名称（修改后）', width: 100 },
+         { field: 'WorkStateName', title: '在职状态', width: 100 },
+         { field: 'InWorkStateName', title: '在职状态（修改后）', width: 100 },
+         {
+             field: 'IsDeleted', title: '删除状态', width: 100, formatter: function (value, row, index) {
+                 var ret = "";
+                 switch (value) {
+                     case 0:
+                         ret = '正常'
+                         break;
+                     case 1:
+                         ret = '删除'
+                         break;
+                 }
+                 return ret;
+             }
+         },
+         {
+             field: 'InOrOut', title: '进出类型', width: 100, formatter: function (value, row, index) {
+                 var ret = "";
+                 switch (value) {
+                     case 0:
+                         ret = '进'
+                         break;
+                     case 1:
+                         ret = '出'
+                         break;
+                 }
+                 return ret;
+             }
+         },
+
                 ]],
                 pagination: true,
                 pageSize: 20, //每页显示的记录条数，默认为10     
@@ -54,7 +107,7 @@ var pro = pro || {};
 
 
 $(function () {
-    pro.HrReport.AttendanceReportPage.initPage();
+    pro.HrReport.EmployeeInOutReportPage.initPage();
 });
 
 

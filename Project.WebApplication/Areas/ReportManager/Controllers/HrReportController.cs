@@ -15,6 +15,7 @@ using Project.Model.HRManager;
 using Project.Model.ReportManager;
 using Project.Service.HRManager;
 using Project.Service.ReportManager;
+using Project.Service.PermissionManager;
 
 namespace Project.WebApplication.Areas.ReportManager.Controllers
 {
@@ -53,7 +54,7 @@ namespace Project.WebApplication.Areas.ReportManager.Controllers
 
         public void ExportReport1()
         {
-            string excelFileName =DateTime.Now.ToString()+ ".xls";
+            string excelFileName = DateTime.Now.ToString() + ".xls";
             //防止中文文件名IE下乱码的问题
             // if (Request.Browser.Browser == "IE" || Request.Browser.Browser == "InternetExplorer")
             if (Request.ServerVariables["http_user_agent"].ToLower().IndexOf("firefox") != -1)
@@ -166,6 +167,11 @@ namespace Project.WebApplication.Areas.ReportManager.Controllers
                 where.CreationTimeEnd = dateEnd.AddDays(1);
             }
             where.DepartmentCode = RequestHelper.GetFormString("DepartmentCode");
+            if (!string.IsNullOrWhiteSpace(where.DepartmentCode))
+            {
+                where.DepartmentCode = string.Join("','", (DepartmentService.GetInstance().GetChiledArr(where.DepartmentCode)));
+            }
+            where.InOrOut = RequestHelper.GetFormInt("InOrOut", -1);
             //where.PkId = RequestHelper.GetFormString("PkId");
             //where.AttendanceUploadRecordId = RequestHelper.GetFormString("AttendanceUploadRecordId");
             //where.EmployeeCode = RequestHelper.GetFormString("EmployeeCode");
