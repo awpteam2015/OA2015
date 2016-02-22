@@ -183,11 +183,15 @@ namespace Project.Service.HRManager
                 try
                 { 
                     //记录条件 哪些条件需要记录
-                    if (oldEntity.DepartmentCode != entity.DepartmentCode|| oldEntity.EmployeeType != entity.EmployeeType)
+                    if (oldEntity.DepartmentCode != entity.DepartmentCode|| oldEntity.EmployeeType != entity.EmployeeType||oldEntity.WorkState!= entity.WorkState)
                     {
                         var employeeHisEntity = Mapper.Map<EmployeeInfoEntity, EmployeeInfoHisEntity>(oldEntity);
                         employeeHisEntity.EmployeeID = employeeHisEntity.PkId;
                         employeeHisEntity.PkId = 0;
+                        employeeHisEntity.InDepartmentCode = entity.DepartmentCode;
+                        employeeHisEntity.InDepartmentName = entity.DepartmentName;
+                        employeeHisEntity.InWorkState = entity.WorkState;
+                        employeeHisEntity.InWorkStateName = entity.WorkStateName;
                         _employeeInfoHisRepository.Save(employeeHisEntity);
                     }
                     _employeeInfoRepository.Merge(entity);

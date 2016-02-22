@@ -36,6 +36,15 @@ namespace Project.Model.HRManager
         /// 所属部门名称
         /// </summary>
         public virtual System.String DepartmentName { get; set; }
+
+        /// <summary>
+        /// 修改后部门
+        /// </summary>
+        public virtual System.String InDepartmentCode { get; set; }
+        /// <summary>
+        /// 所属部门名称
+        /// </summary>
+        public virtual System.String InDepartmentName { get; set; }
         /// <summary>
         /// 工号
         /// </summary>
@@ -80,6 +89,11 @@ namespace Project.Model.HRManager
         /// 在职状态
         /// </summary>
         public virtual System.String WorkState{get; set;}
+
+        /// <summary>
+        /// 修改后状态
+        /// </summary>
+        public virtual System.String InWorkState { get; set; }
         /// <summary>
         /// 员工类型
         /// </summary>
@@ -132,6 +146,11 @@ namespace Project.Model.HRManager
         /// 在职状态名称
         /// </summary>
         public virtual System.String WorkStateName{get; set; }
+
+
+        /// 修改后状态
+        /// </summary>
+        public virtual System.String InWorkStateName { get; set; }
         public virtual bool IsDeleted { get; set; }
         #endregion
 

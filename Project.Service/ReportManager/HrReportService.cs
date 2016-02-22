@@ -49,8 +49,19 @@ namespace Project.Service.ReportManager
             return list;
         }
 
-
-
+        /// <summary>
+        /// 人员出入统计
+        /// </summary>
+        /// <param name="where"></param>
+        /// <param name="skipResults"></param>
+        /// <param name="maxResults"></param>
+        /// <param name="ifGetALL"></param>
+        /// <returns></returns>
+        public Tuple<IList<HREmployeeViewEntity>, int> GetHREmployeeReport(HREmployeeViewEntity where, int skipResults, int maxResults, bool ifGetALL = false)
+        {
+            var list = _HrReportRepository.GerInOutEmployeeReport(where, skipResults, maxResults, ifGetALL);
+            return list;
+        }
         /// <summary>
         /// 缺勤汇总
         /// </summary>

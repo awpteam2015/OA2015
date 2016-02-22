@@ -269,6 +269,60 @@ on a.DepartmentCode=c.DepartmentCode
             return new Tuple<IList<AttendanceViewEntity>, int>(returnList, count);
         }
 
+        public Tuple<IList<HREmployeeViewEntity>, int> GerInOutEmployeeReport(HREmployeeViewEntity where, int skipResults, int maxResults, bool ifGetALL = false)
+        {
+            var whereStr = " ";
+            if (!string.IsNullOrWhiteSpace(where.DepartmentCode))
+            {
+                whereStr += " and a.DepartmentCode=" + where.DepartmentCode;
+            }
+
+            if (!string.IsNullOrWhiteSpace(where.EmployeeCode))
+            {
+                whereStr += " and a.EmployeeCode=" + where.EmployeeCode;
+            }
+
+            //if (where.Attr_StartDate != null)
+            //{
+            //    whereStr += " and a.Date>='" + where.Attr_StartDate + "'";
+            //}
+
+            //if (where.Attr_EndDate != null)
+            //{
+            //    whereStr += " and a.Date<'" + where.Attr_EndDate + "'";
+            //}
+
+            string sqlStr = @"select a.*,b.WordkDays,c.NotWordkDays,d.EmployeeNum from
+(select distinct a.DepartmentCode,a.DepartmentName from  HR_Attendance a) as a
+left join 
+(select a.DepartmentCode,COUNT(*) as WordkDays from HR_Attendance a where a.State=1 " + whereStr + @"  group by a.DepartmentCode) as b
+on a.DepartmentCode=b.DepartmentCode
+left join 
+(select a.DepartmentCode,COUNT(*) as NotWordkDays from HR_Attendance a   where a.State=-1 " + whereStr + @"  group by a.DepartmentCode) as c
+on a.DepartmentCode=c.DepartmentCode
+left join 
+(select a.DepartmentCode,COUNT(EmployeeCode) as EmployeeNum from dbo.HR_EmployeeInfo a   group by a.DepartmentCode) as d
+on a.DepartmentCode=c.DepartmentCode 
+";
+
+            string countStr = "select count(*) as num from (" + sqlStr + ") as a ";
+            var count = SessionFactoryManager.GetCurrentSession().CreateSQLQuery(countStr).AddScalar("num", NHibernateUtil.Int32).UniqueResult<Int32>();
+
+            IList<HREmployeeViewEntity> returnList = new List<HREmployeeViewEntity>();
+            if (ifGetALL)
+            {
+                returnList = SessionFactoryManager.GetCurrentSession().CreateSQLQuery(sqlStr)
+                   .SetResultTransformer(Transformers.AliasToBean(typeof(AttendanceViewEntity2))).List<HREmployeeViewEntity>();
+            }
+            else
+            {
+                returnList = SessionFactoryManager.GetCurrentSession().CreateSQLQuery(sqlStr)
+                   .SetFirstResult(skipResults)
+                   .SetMaxResults(maxResults)
+                   .SetResultTransformer(Transformers.AliasToBean(typeof(HREmployeeViewEntity))).List<HREmployeeViewEntity>();
+            }
+            return new Tuple<IList<HREmployeeViewEntity>, int>(returnList, count);
+        }
 
 
 

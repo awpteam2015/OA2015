@@ -156,13 +156,14 @@ namespace Project.WebApplication.Areas.ReportManager.Controllers
         {
             var pIndex = this.Request["page"].ConvertTo<int>();
             var pSize = this.Request["rows"].ConvertTo<int>();
-            var where = new AttendanceViewEntity2();
+            var where = new HREmployeeViewEntity();
             if (!string.IsNullOrWhiteSpace(RequestHelper.GetFormString("Date")))
             {
                 var date = RequestHelper.GetDateTime("Date").GetValueOrDefault();
-                int days = DateTime.DaysInMonth(date.Year, date.Month);
-                where.Attr_StartDate = date;
-                where.Attr_EndDate = where.Attr_StartDate.GetValueOrDefault().AddDays(days);
+                var dateEnd = RequestHelper.GetDateTime("EndDate").GetValueOrDefault();
+                //int days = DateTime.DaysInMonth(date.Year, date.Month);
+                where.CreationTime = date;
+                where.CreationTimeEnd = dateEnd.AddDays(1);
             }
             where.DepartmentCode = RequestHelper.GetFormString("DepartmentCode");
             //where.PkId = RequestHelper.GetFormString("PkId");
@@ -177,7 +178,7 @@ namespace Project.WebApplication.Areas.ReportManager.Controllers
             //where.CreatorUserName = RequestHelper.GetFormString("CreatorUserName");
             //where.CreateTime = RequestHelper.GetFormString("CreateTime");
             //where.IsDelete = RequestHelper.GetFormString("IsDelete");
-            var searchList = HrReportService.GetInstance().GerAttendanceReport2(where, (pIndex - 1) * pSize, pSize);
+            var searchList = HrReportService.GetInstance().GetHREmployeeReport(where, (pIndex - 1) * pSize, pSize);
 
             var dataGridEntity = new DataGridResponse()
             {
