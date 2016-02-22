@@ -71,6 +71,7 @@ namespace Project.WebApplication.Areas.SystemSetManager.Controllers
         [HttpPost]
         public AbpJsonResult Edit( AjaxRequest<IndexPageSetEntity> postData)
         {
+            postData.RequestEntity.Des = Base64Helper.DecodeBase64(postData.RequestEntity.Des);
             var newInfo = postData.RequestEntity;
             var orgInfo = IndexPageSetService.GetInstance().GetModelByPk(postData.RequestEntity.PkId);
             var mergInfo = Mapper.Map(newInfo, orgInfo);

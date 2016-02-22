@@ -27,6 +27,7 @@
             }
         },
         submit: function (command) {
+            editor1.sync();
             var postData = {};
             postData.RequestEntity = pro.submitKit.getHeadJson();
             postData.RequestEntity.Des = Base64.encode($("#Des").val());
