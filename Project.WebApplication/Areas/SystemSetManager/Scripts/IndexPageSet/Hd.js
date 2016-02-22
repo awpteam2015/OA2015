@@ -29,7 +29,7 @@
         submit: function (command) {
             var postData = {};
             postData.RequestEntity = pro.submitKit.getHeadJson();
-
+            postData.RequestEntity.Des = Base64.encode($("#Des").val());
             if (pro.commonKit.getUrlParam("PkId") != "") {
                 postData.RequestEntity.PkId = pro.commonKit.getUrlParam("PkId");
             }

@@ -18,7 +18,7 @@ var pro = pro || {};
                         url: "/Login/UserLogoff"
                     }).done(
               function (data, data2) {
-                  window.location.href = "/Login/Index2";
+                  window.location.href = "/Login/Index3";
               }
           );
                 }
