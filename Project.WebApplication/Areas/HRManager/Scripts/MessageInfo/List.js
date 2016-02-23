@@ -16,6 +16,18 @@ var pro = pro || {};
             var gridObj = initObj.gridObj;
             gridObj.grid({
                 url: '/HRManager/MessageInfo/GetList',
+                onLoadSuccess: function () {
+                    alert("onLoadSuccess");
+                },
+                onBeforeLoad: function (params) {
+                    alert(params)
+                },
+                onBeforeRender:function()
+                {
+                    alert("onBeforeRender")
+                },
+                onLoadError: function () {
+                alert("aaa")},
                 fitColumns: false,
                 nowrap: false,
                 rownumbers: true, //行号
@@ -28,6 +40,20 @@ var pro = pro || {};
          //{ field: 'IsAll', title: '是否所有人', width: 100 },
          //{ field: 'CreatorUserCode', title: '发送人', width: 100 },
          { field: 'CreatorUserName', title: '发送人', width: 100 },
+         {
+             field: 'IsRead', title: '是否已读', width: 100, formatter: function (value, row, index) {
+                 var ret = "";
+                 switch (value) {
+                     case true:
+                         ret = '已读'
+                         break;
+                     case false:
+                         ret = '未读'
+                         break;                    
+                 }
+                 return ret;
+             }
+         },
          //{ field: 'CreationTime', title: '', width: 100 },
          //{ field: 'LastModificationTime', title: '', width: 100 },
          //{ field: 'LastModifierUserCode', title: '', width: 100 },

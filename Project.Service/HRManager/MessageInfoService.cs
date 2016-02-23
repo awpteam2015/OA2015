@@ -1,10 +1,10 @@
 ﻿
- /***************************************************************************
- *       功能：     SysMessageInfo业务处理层
- *       作者：     Roy
- *       日期：     2016-02-21
- *       描述：     站内短信
- * *************************************************************************/
+/***************************************************************************
+*       功能：     SysMessageInfo业务处理层
+*       作者：     Roy
+*       日期：     2016-02-21
+*       描述：     站内短信
+* *************************************************************************/
 using System.Linq;
 using System.Collections.Generic;
 using Project.Infrastructure.FrameworkCore.DataNhibernate.Helpers;
@@ -15,17 +15,17 @@ namespace Project.Service.HRManager
 {
     public class MessageInfoService
     {
-       
-       #region 构造函数
-        private readonly MessageInfoRepository  _messageInfoRepository;
-            private static readonly MessageInfoService Instance = new MessageInfoService();
+
+        #region 构造函数
+        private readonly MessageInfoRepository _messageInfoRepository;
+        private static readonly MessageInfoService Instance = new MessageInfoService();
 
         public MessageInfoService()
         {
-           this._messageInfoRepository =new MessageInfoRepository();
+            this._messageInfoRepository = new MessageInfoRepository();
         }
-        
-         public static  MessageInfoService GetInstance()
+
+        public static MessageInfoService GetInstance()
         {
             return Instance;
         }
@@ -33,7 +33,7 @@ namespace Project.Service.HRManager
 
 
         #region 基础方法 
-         /// <summary>
+        /// <summary>
         /// 新增
         /// </summary>
         /// <param name="entity"></param>
@@ -42,24 +42,24 @@ namespace Project.Service.HRManager
         {
             return _messageInfoRepository.Save(entity);
         }
-        
-        
-         /// <summary>
+
+
+        /// <summary>
         /// 删除
         /// </summary>
         /// <param name="pkId"></param>
         public bool DeleteByPkId(System.Int32 pkId)
         {
-         try
+            try
             {
-            var entity= _messageInfoRepository.GetById(pkId);
-            _messageInfoRepository.Delete(entity);
-             return true;
-        }
-        catch
-        {
-         return false;
-        }
+                var entity = _messageInfoRepository.GetById(pkId);
+                _messageInfoRepository.Delete(entity);
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
         }
 
         /// <summary>
@@ -68,15 +68,15 @@ namespace Project.Service.HRManager
         /// <param name="entity"></param>
         public bool Delete(MessageInfoEntity entity)
         {
-         try
+            try
             {
-            _messageInfoRepository.Delete(entity);
-             return true;
-        }
-        catch
-        {
-         return false;
-        }
+                _messageInfoRepository.Delete(entity);
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
         }
 
         /// <summary>
@@ -85,15 +85,15 @@ namespace Project.Service.HRManager
         /// <param name="entity"></param>
         public bool Update(MessageInfoEntity entity)
         {
-          try
+            try
             {
-            _messageInfoRepository.Update(entity);
-         return true;
-        }
-        catch
-        {
-         return false;
-        }
+                _messageInfoRepository.Update(entity);
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
         }
 
 
@@ -117,7 +117,7 @@ namespace Project.Service.HRManager
         /// <returns>获取当前页【站内短信】和总【站内短信】数</returns>
         public System.Tuple<IList<MessageInfoEntity>, int> Search(MessageInfoEntity where, int skipResults, int maxResults)
         {
-                var expr = PredicateBuilder.True<MessageInfoEntity>();
+            var expr = PredicateBuilder.True<MessageInfoEntity>();
             #region
             // if (!string.IsNullOrEmpty(where.PkId))
             //  expr = expr.And(p => p.PkId == where.PkId);
@@ -134,7 +134,7 @@ namespace Project.Service.HRManager
             // if (!string.IsNullOrEmpty(where.CreatorUserName))
             //  expr = expr.And(p => p.CreatorUserName == where.CreatorUserName);
             if (where.CreationTime.HasValue && where.CreationTime.Value.Year > 1)
-                expr = expr.And(p => p.CreationTime >= where.CreationTime);           
+                expr = expr.And(p => p.CreationTime >= where.CreationTime);
             if (where.CreationTimeEnd.HasValue && where.CreationTimeEnd.Value.Year > 1)
                 expr = expr.And(p => p.CreationTime <= where.CreationTimeEnd.Value.AddDays(1));
             // if (!string.IsNullOrEmpty(where.LastModificationTime))
@@ -145,8 +145,11 @@ namespace Project.Service.HRManager
             //  expr = expr.And(p => p.DeleterUserCode == where.DeleterUserCode);
             // if (!string.IsNullOrEmpty(where.DeletionTime))
             //  expr = expr.And(p => p.DeletionTime == where.DeletionTime);
+            //if (!string.IsNullOrEmpty(where.CurUserCode))
+            //    expr = expr.And(p => p.ReadUser.Contains(where.CurUserCode + ","));
             #endregion
             var list = _messageInfoRepository.Query().Where(expr).OrderBy(p => p.PkId).Skip(skipResults).Take(maxResults).ToList();
+            list.ForEach(item => item.IsRead = string.IsNullOrWhiteSpace(item.ReadUser) ? false : item.ReadUser.Contains(where.CurUserCode + ","));
             var count = _messageInfoRepository.Query().Where(expr).Count();
             return new System.Tuple<IList<MessageInfoEntity>, int>(list, count);
         }
@@ -158,33 +161,33 @@ namespace Project.Service.HRManager
         /// <returns>返回列表</returns>
         public IList<MessageInfoEntity> GetList(MessageInfoEntity where)
         {
-               var expr = PredicateBuilder.True<MessageInfoEntity>();
-             #region
-              // if (!string.IsNullOrEmpty(where.PkId))
-              //  expr = expr.And(p => p.PkId == where.PkId);
-              // if (!string.IsNullOrEmpty(where.MesTitle))
-              //  expr = expr.And(p => p.MesTitle == where.MesTitle);
-              // if (!string.IsNullOrEmpty(where.MesContent))
-              //  expr = expr.And(p => p.MesContent == where.MesContent);
-              // if (!string.IsNullOrEmpty(where.ReceiveUserCode))
-              //  expr = expr.And(p => p.ReceiveUserCode == where.ReceiveUserCode);
-              // if (!string.IsNullOrEmpty(where.IsAll))
-              //  expr = expr.And(p => p.IsAll == where.IsAll);
-              // if (!string.IsNullOrEmpty(where.CreatorUserCode))
-              //  expr = expr.And(p => p.CreatorUserCode == where.CreatorUserCode);
-              // if (!string.IsNullOrEmpty(where.CreatorUserName))
-              //  expr = expr.And(p => p.CreatorUserName == where.CreatorUserName);
-              // if (!string.IsNullOrEmpty(where.CreationTime))
-              //  expr = expr.And(p => p.CreationTime == where.CreationTime);
-              // if (!string.IsNullOrEmpty(where.LastModificationTime))
-              //  expr = expr.And(p => p.LastModificationTime == where.LastModificationTime);
-              // if (!string.IsNullOrEmpty(where.LastModifierUserCode))
-              //  expr = expr.And(p => p.LastModifierUserCode == where.LastModifierUserCode);
-              // if (!string.IsNullOrEmpty(where.DeleterUserCode))
-              //  expr = expr.And(p => p.DeleterUserCode == where.DeleterUserCode);
-              // if (!string.IsNullOrEmpty(where.DeletionTime))
-              //  expr = expr.And(p => p.DeletionTime == where.DeletionTime);
- #endregion
+            var expr = PredicateBuilder.True<MessageInfoEntity>();
+            #region
+            // if (!string.IsNullOrEmpty(where.PkId))
+            //  expr = expr.And(p => p.PkId == where.PkId);
+            // if (!string.IsNullOrEmpty(where.MesTitle))
+            //  expr = expr.And(p => p.MesTitle == where.MesTitle);
+            // if (!string.IsNullOrEmpty(where.MesContent))
+            //  expr = expr.And(p => p.MesContent == where.MesContent);
+            // if (!string.IsNullOrEmpty(where.ReceiveUserCode))
+            //  expr = expr.And(p => p.ReceiveUserCode == where.ReceiveUserCode);
+            // if (!string.IsNullOrEmpty(where.IsAll))
+            //  expr = expr.And(p => p.IsAll == where.IsAll);
+            // if (!string.IsNullOrEmpty(where.CreatorUserCode))
+            //  expr = expr.And(p => p.CreatorUserCode == where.CreatorUserCode);
+            // if (!string.IsNullOrEmpty(where.CreatorUserName))
+            //  expr = expr.And(p => p.CreatorUserName == where.CreatorUserName);
+            // if (!string.IsNullOrEmpty(where.CreationTime))
+            //  expr = expr.And(p => p.CreationTime == where.CreationTime);
+            // if (!string.IsNullOrEmpty(where.LastModificationTime))
+            //  expr = expr.And(p => p.LastModificationTime == where.LastModificationTime);
+            // if (!string.IsNullOrEmpty(where.LastModifierUserCode))
+            //  expr = expr.And(p => p.LastModifierUserCode == where.LastModifierUserCode);
+            // if (!string.IsNullOrEmpty(where.DeleterUserCode))
+            //  expr = expr.And(p => p.DeleterUserCode == where.DeleterUserCode);
+            // if (!string.IsNullOrEmpty(where.DeletionTime))
+            //  expr = expr.And(p => p.DeletionTime == where.DeletionTime);
+            #endregion
             var list = _messageInfoRepository.Query().Where(expr).OrderBy(p => p.PkId).ToList();
             return list;
         }
@@ -192,11 +195,11 @@ namespace Project.Service.HRManager
 
 
         #region 新增方法
-        
+
         #endregion
     }
 }
 
-    
- 
+
+
 
