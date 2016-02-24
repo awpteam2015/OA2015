@@ -984,6 +984,7 @@
     <Content Include="Views\Login\Index2.cshtml" />
     <Content Include="Scripts\pro\kindeditor\file_manager_json.ashx" />
     <Content Include="Scripts\pro\kindeditor\upload_json.ashx" />
+    <Content Include="TemplateFile\员工模版.xlsx" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
