@@ -121,6 +121,7 @@
     <Content Include="Areas\HRManager\Scripts\EmployeeInfoHis\List.js" />
     <Content Include="Areas\HRManager\Scripts\EmployeeInfo\Hd.js" />
     <Content Include="Areas\HRManager\Scripts\EmployeeInfo\List.js" />
+    <Content Include="Areas\HRManager\Scripts\EmployeeInfo\Up.js" />
     <Content Include="Areas\HRManager\Scripts\EmployeeRotate\Hd.js" />
     <Content Include="Areas\HRManager\Scripts\EmployeeRotate\List.js" />
     <Content Include="Areas\HRManager\Scripts\EmployeeYearDetail\Hd.js" />
@@ -266,6 +267,7 @@
     <Content Include="Areas\SystemSetManager\Views\IndexPageSet\Hd.cshtml" />
     <Content Include="Areas\SystemSetManager\Views\IndexPageSet\List.cshtml" />
     <Content Include="Areas\ReportManager\Views\HrReport\EmployeeInOutReport.cshtml" />
+    <Content Include="Areas\HRManager\Views\EmployeeInfo\Up.cshtml" />
     <None Include="Properties\PublishProfiles\OA.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\Control\DepartmentControl.js" />
