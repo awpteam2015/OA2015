@@ -11,7 +11,7 @@ namespace Project.Service.HRManager.Validate
 {
     public class EmployeeInfoValidate
     {
-           #region
+        #region
         private static readonly EmployeeInfoValidate Instance = new EmployeeInfoValidate();
         private readonly EmployeeInfoRepository _employeeInfoRepository;
 
@@ -46,7 +46,31 @@ namespace Project.Service.HRManager.Validate
                 return new Tuple<bool, string>(false, "存在重复的员工编号！");
             }
 
-            return new Tuple<bool, string>(true, "存在重复的员工编号！");
+            return new Tuple<bool, string>(true, "");
+        }
+
+        /// <summary>
+        /// 是否存在相同的员工编号
+        /// </summary>
+        /// <param name="newUserCode"></param>
+        /// <param name="pkId"></param>
+        /// <returns></returns>
+        public Tuple<bool, string> IsHasSameCertNo(string newCertNo, int pkId = 0)
+        {
+            if (string.IsNullOrEmpty(newCertNo) || string.IsNullOrWhiteSpace(newCertNo))
+                return new Tuple<bool, string>(true, "");
+            var list = EmployeeInfoService.GetInstance().GetList(new EmployeeInfoEntity() { CertNo = newCertNo });
+            if (pkId > 0 && list.Any(p => p.PkId != pkId))
+            {
+                return new Tuple<bool, string>(false, "存在重复的身份证号！");
+            }
+
+            if (pkId <= 0 && list.Any())
+            {
+                return new Tuple<bool, string>(false, "存在重复的身份证号！");
+            }
+
+            return new Tuple<bool, string>(true, "");
         }
     }
 }

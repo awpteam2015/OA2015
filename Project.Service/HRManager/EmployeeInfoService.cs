@@ -63,6 +63,13 @@ namespace Project.Service.HRManager
             {
                 return validateResult;
             }
+            //二代证验证
+            var certnoValidateResult = EmployeeInfoValidate.GetInstance().IsHasSameCertNo(entity.CertNo);
+
+            if (!certnoValidateResult.Item1)
+            {
+                return certnoValidateResult;
+            }
 
             using (var tx = NhTransactionHelper.BeginTransaction())
             {
@@ -161,6 +168,13 @@ namespace Project.Service.HRManager
             {
                 return validateResult;
             }
+            //二代证验证
+            var certnoValidateResult = EmployeeInfoValidate.GetInstance().IsHasSameCertNo(entity.CertNo, entity.PkId);
+            if (!certnoValidateResult.Item1)
+            {
+                return certnoValidateResult;
+            }
+
             var oldEntity = EmployeeInfoService.GetInstance().GetModelByPk(entity.PkId);
             var date = DateTime.Now;
             entity.WorkList.ToList().ForEach(item => item.EmployeeID = entity.PkId);
@@ -181,9 +195,9 @@ namespace Project.Service.HRManager
             using (var tx = NhTransactionHelper.BeginTransaction())
             {
                 try
-                { 
+                {
                     //记录条件 哪些条件需要记录
-                    if (oldEntity.DepartmentCode != entity.DepartmentCode|| oldEntity.EmployeeType != entity.EmployeeType||oldEntity.WorkState!= entity.WorkState)
+                    if (oldEntity.DepartmentCode != entity.DepartmentCode || oldEntity.EmployeeType != entity.EmployeeType || oldEntity.WorkState != entity.WorkState)
                     {
                         var employeeHisEntity = Mapper.Map<EmployeeInfoEntity, EmployeeInfoHisEntity>(oldEntity);
                         employeeHisEntity.EmployeeID = employeeHisEntity.PkId;
@@ -196,7 +210,7 @@ namespace Project.Service.HRManager
                         _employeeInfoHisRepository.Save(employeeHisEntity);
                     }
                     _employeeInfoRepository.Merge(entity);
-                   
+
                     deleteList.ForEach(p => { _workExperienceRepository.Delete(p); });
                     deleteLearningList.ForEach(p => { _learnExperienceRepository.Delete(p); });
                     deleteTechnicalList.ForEach(p => { _technicalRepository.Delete(p); });
@@ -323,8 +337,8 @@ namespace Project.Service.HRManager
             //  expr = expr.And(p => p.PayCode == where.PayCode);
             // if (!string.IsNullOrEmpty(where.Sex))
             //  expr = expr.And(p => p.Sex == where.Sex);
-            // if (!string.IsNullOrEmpty(where.CertNo))
-            //  expr = expr.And(p => p.CertNo == where.CertNo);
+            if (!string.IsNullOrEmpty(where.CertNo))
+                expr = expr.And(p => p.CertNo == where.CertNo);
             // if (!string.IsNullOrEmpty(where.Birthday))
             //  expr = expr.And(p => p.Birthday == where.Birthday);
             // if (!string.IsNullOrEmpty(where.TechnicalTitle))
