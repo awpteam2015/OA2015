@@ -16,18 +16,6 @@ var pro = pro || {};
             var gridObj = initObj.gridObj;
             gridObj.grid({
                 url: '/HRManager/MessageInfo/GetList',
-                onLoadSuccess: function () {
-                    alert("onLoadSuccess");
-                },
-                onBeforeLoad: function (params) {
-                    alert(params)
-                },
-                onBeforeRender:function()
-                {
-                    alert("onBeforeRender")
-                },
-                onLoadError: function () {
-                alert("aaa")},
                 fitColumns: false,
                 nowrap: false,
                 rownumbers: true, //行号
@@ -49,7 +37,7 @@ var pro = pro || {};
                          break;
                      case false:
                          ret = '未读'
-                         break;                    
+                         break;
                  }
                  return ret;
              }
