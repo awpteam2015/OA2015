@@ -107,6 +107,23 @@ namespace Project.Service.HRManager
             return _dictionaryRepository.GetById(pkId);
         }
 
+        /// <summary>
+        /// 通过主键获取实体
+        /// </summary>
+        /// <param name="pkId">主键</param>
+        /// <returns></returns>
+        public DictionaryEntity GetModelByKeyCode(System.String parentKeyCode, System.String keyValue)
+        {
+            DictionaryEntity where = new DictionaryEntity();
+            where.ParentKeyCode = parentKeyCode;
+            where.KeyCode = keyValue;
+            var list = GetList(where);
+            if (list.Count > 0)
+                return list[0];
+            else
+                return new DictionaryEntity();
+        }
+
 
         /// <summary>
         /// 分页
@@ -152,8 +169,8 @@ namespace Project.Service.HRManager
                 expr = expr.And(p => p.ParentKeyCode == where.ParentKeyCode);
             // if (!string.IsNullOrEmpty(where.KeyName))
             //  expr = expr.And(p => p.KeyName == where.KeyName);
-            // if (!string.IsNullOrEmpty(where.KeyValue))
-            //  expr = expr.And(p => p.KeyValue == where.KeyValue);
+            if (!string.IsNullOrEmpty(where.KeyValue))
+                expr = expr.And(p => p.KeyValue == where.KeyValue);
             #endregion
             var list = _dictionaryRepository.Query().Where(expr).OrderBy(p => p.PkId).ToList();
             return list;

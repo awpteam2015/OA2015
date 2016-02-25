@@ -72,5 +72,21 @@ namespace Project.Service.HRManager.Validate
 
             return new Tuple<bool, string>(true, "");
         }
+
+        /// <summary>
+        /// 通过主键获取实体
+        /// </summary>
+        /// <param name="pkId">主键</param>
+        /// <returns></returns>
+        public EmployeeInfoEntity GetModelByCertNo(System.String newCertNo)
+        {
+            if (string.IsNullOrEmpty(newCertNo) || string.IsNullOrWhiteSpace(newCertNo))
+                return new EmployeeInfoEntity();
+            var list = EmployeeInfoService.GetInstance().GetList(new EmployeeInfoEntity() { CertNo = newCertNo });
+            if (list.Count > 0)
+                return list[0];
+            else
+                return new EmployeeInfoEntity();
+        }
     }
 }

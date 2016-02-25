@@ -128,6 +128,9 @@ var pro = pro || {};
                 tabObj.add("/HRManager/EmployeeInfo/Hd?PkId=" + PkId + "&EmployeeCode=" + EmployeeCode, "编辑" + PkId);
             });
 
+            $("#btnUpload").click(function () {                
+                tabObj.add("/HRManager/EmployeeInfo/Up", "上传");
+            });
 
             $("#btnSearch").click(function () {
                 gridObj.search();

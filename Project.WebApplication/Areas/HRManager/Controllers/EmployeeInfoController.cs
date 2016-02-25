@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
+using Aspose.Cells;
 using Project.Infrastructure.FrameworkCore.DataNhibernate.Helpers;
 using Project.Infrastructure.FrameworkCore.ToolKit.JsonHandler;
 using Project.Infrastructure.FrameworkCore.ToolKit.LinqExpansion;
@@ -15,6 +16,7 @@ using Project.Infrastructure.FrameworkCore.ToolKit;
 using Project.Infrastructure.FrameworkCore.WebMvc.Controllers.Results;
 using Project.Infrastructure.FrameworkCore.WebMvc.Models;
 using Project.Service.PermissionManager;
+using Project.Service.HRManager.Validate;
 
 namespace Project.WebApplication.Areas.HRManager.Controllers
 {
@@ -44,7 +46,6 @@ namespace Project.WebApplication.Areas.HRManager.Controllers
             }
             return View();
         }
-
 
         public ActionResult List()
         {
@@ -101,7 +102,6 @@ namespace Project.WebApplication.Areas.HRManager.Controllers
 
             return new AbpJsonResult(searchList, new NHibernateContractResolver());
         }
-
 
         [HttpPost]
         public AbpJsonResult Add(AjaxRequest<EmployeeInfoEntity> postData)
@@ -177,6 +177,65 @@ namespace Project.WebApplication.Areas.HRManager.Controllers
             }
 
 
+        }
+
+        public ActionResult Up(int pkId = 0)
+        {
+            //var entity = EmployeeInfoService.GetInstance().GetModelByPk(pkId);
+            //ViewBag.BindEntity = JsonHelper.JsonSerializer(entity);
+            return View();
+        }
+
+        [HttpPost]
+        public AbpJsonResult Upload(AjaxRequest<EmployeeInfoEntity> postData)
+        {
+            var path = Server.MapPath(postData.RequestEntity.FileUrl + "/" + postData.RequestEntity.FileName);
+
+            Workbook workbook = new Workbook(path);
+            Worksheet sheet = workbook.Worksheets[0];
+            Cells cells = sheet.Cells;
+            int sucessNum = 0, failNum = 0;
+            for (int i = 1; i < cells.MaxDataRow + 1; i++)
+            {
+                //var row = new AttendanceEntity();
+                //postData.RequestEntity.DepartmentCode = cells[i, 0].StringValue.Trim();
+                //postData.RequestEntity.DepartmentName = DepartmentService.GetInstance().GetModelByDepartmentCode(postData.RequestEntity.DepartmentCode).DepartmentName;
+                postData.RequestEntity.EmployeeCode = cells[i, 2].StringValue.Trim();
+                postData.RequestEntity.EmployeeName = cells[i, 1].StringValue.Trim();
+                postData.RequestEntity.Sex = cells[i, 3].IntValue;
+                postData.RequestEntity.CertNo = cells[i, 4].StringValue.Trim();
+                postData.RequestEntity.Birthday = cells[i, 5].DateTimeValue;
+                postData.RequestEntity.WorkState = cells[i, 6].StringValue.Trim();
+                postData.RequestEntity.WorkStateName = DictionaryService.GetInstance().GetModelByKeyCode("ZZZT", postData.RequestEntity.WorkState).KeyName;
+                postData.RequestEntity.EmployeeType = cells[i, 7].StringValue.Trim();
+                postData.RequestEntity.EmployeeTypeName = DictionaryService.GetInstance().GetModelByKeyCode("YGLY", postData.RequestEntity.EmployeeType).KeyName;
+                postData.RequestEntity.Duties = cells[i, 8].StringValue;
+                postData.RequestEntity.DutiesName = DictionaryService.GetInstance().GetModelByKeyCode("DWZW", postData.RequestEntity.Duties).KeyName; ;
+                postData.RequestEntity.WorkingYears = cells[i, 9].IntValue;
+                postData.RequestEntity.MobileNO = cells[i, 10].StringValue.Trim();
+                postData.RequestEntity.HomeAddress = cells[i, 11].StringValue.Trim();
+                postData.RequestEntity.State = 1;
+                Tuple<bool, string> addResult;
+                var oldentity = EmployeeInfoValidate.GetInstance().GetModelByCertNo(postData.RequestEntity.CertNo);
+                if (oldentity != null && oldentity.PkId > 0)
+                {
+                    postData.RequestEntity.PkId = oldentity.PkId;
+                    addResult = EmployeeInfoService.GetInstance().Update(postData.RequestEntity);
+                }
+                else
+                     addResult = EmployeeInfoService.GetInstance().Add(postData.RequestEntity);
+                if (addResult.Item1)
+                    sucessNum++;
+                else
+                    failNum++;
+            }
+
+            var result = new AjaxResponse<EmployeeInfoEntity>()
+            {
+                success = true,
+                error = new ErrorInfo(string.Format("成功条数：{0},失败条数：{1}", sucessNum, failNum))
+            };
+            return new AbpJsonResult(result, new NHibernateContractResolver());
         }
     }
 }
