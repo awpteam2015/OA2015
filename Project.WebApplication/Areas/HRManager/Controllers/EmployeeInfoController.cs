@@ -2,6 +2,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Web.Mvc;
 using Aspose.Cells;
@@ -237,19 +238,21 @@ namespace Project.WebApplication.Areas.HRManager.Controllers
             };
             return new AbpJsonResult(result, new NHibernateContractResolver());
         }
-        
+
         public AbpJsonResult ExportExcel()
         {
             var filepath = "/UploadFile/Temp/";
-            var path = this.Request.MapPath("/") + filepath;
+            var rootpath = this.Request.MapPath("/");
             var fileName = DateTime.Now.ToString("yyyyMMHHddmmssfff") + ".xls";
 
             var where = new EmployeeInfoEntity();
             //where.DepartmentCode = RequestHelper.GetFormString("DepartmentCode");
-            var searchList = EmployeeInfoService.GetInstance().GetList(where, true);
+            var searchList = EmployeeInfoService.GetInstance().GetList(where, false);
 
 
-            var bl = AsposeCellsHelper.ListsToExcelFile<List<EmployeeInfoEntity>>(searchList.ToList(), path + fileName);
+            var bl = AsposeCellsHelper.ExportToExcel<List<EmployeeInfoEntity>>(searchList.ToList(), "EmployeeInfo", $"{rootpath}/TemplateFile/EmployeeExport.xlsx", $"{rootpath}{filepath}{fileName}", new Dictionary<string, object>());
+
+
 
             var result = new AjaxResponse<EmployeeInfoEntity>()
             {
@@ -257,7 +260,7 @@ namespace Project.WebApplication.Areas.HRManager.Controllers
                 targeturl = filepath + fileName
             };
             return new AbpJsonResult(result, new NHibernateContractResolver());
-            
+
         }
     }
 }

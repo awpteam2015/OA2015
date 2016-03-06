@@ -123,6 +123,69 @@ namespace Project.Infrastructure.FrameworkCore.ToolKit
             book.Save(fileName);
         }
 
+
+        public static bool ExportToExcel(DataTable dt, string templateFilePath, string filepath, Dictionary<string, object> dict)
+        {
+            try
+            {
+                WorkbookDesigner designer = new WorkbookDesigner();
+                designer.Workbook = new Workbook(templateFilePath);
+                designer.SetDataSource(dt);
+                foreach (var dc in dict)
+                {
+                    designer.SetDataSource(dc.Key, dc.Value);
+                }
+
+                designer.Process();
+
+
+                if (File.Exists(filepath))
+                {
+                    File.Delete(filepath);
+                }
+                designer.Save(filepath);
+                //打开文件
+                //Process.Start(filepath);
+
+                return true;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+        }
+
+        public static bool ExportToExcel<T>(T list, string listName, string templateFilePath, string filepath, Dictionary<string, object> dict)
+        {
+            try
+            {
+                WorkbookDesigner designer = new WorkbookDesigner();
+                designer.Workbook = new Workbook(templateFilePath);
+                designer.SetDataSource(listName, list);
+                foreach (var dc in dict)
+                {
+                    designer.SetDataSource(dc.Key, dc.Value);
+                }
+
+                designer.Process();
+
+
+                if (File.Exists(filepath))
+                {
+                    File.Delete(filepath);
+                }
+                designer.Save(filepath);
+                //打开文件
+                //Process.Start(filepath);
+
+                return true;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+        }
+
         /// <summary>
         ///DataTable导出到Excel文件 add by hxj 20120319
         /// </summary>

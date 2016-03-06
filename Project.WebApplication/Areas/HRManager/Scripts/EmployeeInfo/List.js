@@ -140,8 +140,10 @@ var pro = pro || {};
                     }).done(
                     function (dataresult, data) {
                         //
-                        debugger;
-                        $.alertExtend.info();
+                        if (data&&data.success) {
+                            location.href = data.targeturl;
+                        }
+                        //$.alertExtend.info();
                         //gridObj.search();
                     }
                     ).fail(
