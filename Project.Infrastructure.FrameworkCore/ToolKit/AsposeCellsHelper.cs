@@ -7,7 +7,7 @@ using System.IO;
 using System.Diagnostics;
 using System.Collections.Generic;
 
-namespace NT.Model.Utils
+namespace Project.Infrastructure.FrameworkCore.ToolKit
 {
     public class AsposeCellsHelper
     {

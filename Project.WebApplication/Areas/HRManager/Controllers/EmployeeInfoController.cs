@@ -223,7 +223,7 @@ namespace Project.WebApplication.Areas.HRManager.Controllers
                     addResult = EmployeeInfoService.GetInstance().Update(postData.RequestEntity);
                 }
                 else
-                     addResult = EmployeeInfoService.GetInstance().Add(postData.RequestEntity);
+                    addResult = EmployeeInfoService.GetInstance().Add(postData.RequestEntity);
                 if (addResult.Item1)
                     sucessNum++;
                 else
@@ -236,6 +236,28 @@ namespace Project.WebApplication.Areas.HRManager.Controllers
                 error = new ErrorInfo(string.Format("成功条数：{0},失败条数：{1}", sucessNum, failNum))
             };
             return new AbpJsonResult(result, new NHibernateContractResolver());
+        }
+        
+        public AbpJsonResult ExportExcel()
+        {
+            var filepath = "/UploadFile/Temp/";
+            var path = this.Request.MapPath("/") + filepath;
+            var fileName = DateTime.Now.ToString("yyyyMMHHddmmssfff") + ".xls";
+
+            var where = new EmployeeInfoEntity();
+            //where.DepartmentCode = RequestHelper.GetFormString("DepartmentCode");
+            var searchList = EmployeeInfoService.GetInstance().GetList(where, true);
+
+
+            var bl = AsposeCellsHelper.ListsToExcelFile<List<EmployeeInfoEntity>>(searchList.ToList(), path + fileName);
+
+            var result = new AjaxResponse<EmployeeInfoEntity>()
+            {
+                success = bl,
+                targeturl = filepath + fileName
+            };
+            return new AbpJsonResult(result, new NHibernateContractResolver());
+            
         }
     }
 }

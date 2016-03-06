@@ -19,6 +19,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Project.Repository", "Proje
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Lib", "Lib", "{9123F07D-16C6-44DA-A42B-DE99A9DC80DD}"
 	ProjectSection(SolutionItems) = preProject
+		Lib\Aspose.Cells.dll = Lib\Aspose.Cells.dll
 		Lib\HibernatingRhinos.Profiler.Appender.v4.0.dll = Lib\HibernatingRhinos.Profiler.Appender.v4.0.dll
 	EndProjectSection
 EndProject

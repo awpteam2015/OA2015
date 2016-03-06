@@ -132,6 +132,26 @@ var pro = pro || {};
                 tabObj.add("/HRManager/EmployeeInfo/Up", "上传");
             });
 
+            $("#btnDown").click(function () {
+                $.messager.confirm("确认操作", "是否确认导出", function (bl) {
+                    if (!bl) return;
+                    abp.ajax({
+                        url: "/HRManager/EmployeeInfo/ExportExcel"
+                    }).done(
+                    function (dataresult, data) {
+                        //
+                        debugger;
+                        $.alertExtend.info();
+                        //gridObj.search();
+                    }
+                    ).fail(
+                    function (errordetails, errormessage) {
+                        $.alertExtend.error();
+                    }
+                    );
+                });
+            });
+
             $("#btnSearch").click(function () {
                 gridObj.search();
             });
