@@ -22,7 +22,8 @@ var pro = pro || {};
                 singleSelect: true,
                 columns: [[
          { field: 'PkId', title: '', hidden: true, width: 100 },
-         { field: 'EmployeeName', title: '员工编号', width: 100 },
+         { field: 'EmployeeCode', title: '员工编号', width: 100 },
+         { field: 'EmployeeName', title: '员工姓名', width: 100 },
          { field: 'DepartmentName', title: '员工部门', width: 100 },
          { field: 'Country', title: '出访国家', width: 100 },
          { field: 'BeginDate', title: '出国日期', width: 120 },
