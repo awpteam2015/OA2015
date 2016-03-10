@@ -72,7 +72,7 @@ var pro = pro || {};
                     return;
                 }
                 var PkId = gridObj.getSelectedRow().PkId;
-                tabObj.add("/HRManager/MessageInfo/Hd?PkId=" + PkId + "&View=true", "查看" + PkId);
+                tabObj.add("/HRManager/MessageInfo/Hd?PkId=" + PkId + "&View=true", "提醒详情");
             });
 
 
