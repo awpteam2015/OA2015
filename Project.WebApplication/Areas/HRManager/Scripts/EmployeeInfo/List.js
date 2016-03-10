@@ -125,10 +125,11 @@ var pro = pro || {};
                 }
                 var PkId = gridObj.getSelectedRow().PkId;
                 var EmployeeCode = gridObj.getSelectedRow().EmployeeCode;
-                tabObj.add("/HRManager/EmployeeInfo/Hd?PkId=" + PkId + "&EmployeeCode=" + EmployeeCode, "编辑" + PkId);
+                var employeeName = gridObj.getSelectedRow().EmployeeName;
+                tabObj.add("/HRManager/EmployeeInfo/Hd?PkId=" + PkId + "&EmployeeCode=" + EmployeeCode, "编辑(" + employeeName + ")");
             });
 
-            $("#btnUpload").click(function () {                
+            $("#btnUpload").click(function () {
                 tabObj.add("/HRManager/EmployeeInfo/Up", "上传");
             });
 
@@ -140,7 +141,7 @@ var pro = pro || {};
                     }).done(
                     function (dataresult, data) {
                         //
-                        if (data&&data.success) {
+                        if (data && data.success) {
                             location.href = data.targeturl;
                         }
                         //$.alertExtend.info();
