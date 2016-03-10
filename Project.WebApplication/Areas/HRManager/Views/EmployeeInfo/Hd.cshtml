@@ -132,7 +132,7 @@
                 <td>
                     图片地址:
                 </td>
-                <td rowspan="2">
+                <td rowspan="3">
                     @*<input id="ImageUrl" name="ImageUrl" type="text" />*@
                     <div style="display: none">
                         <input id="FileUrl" name="FileUrl" type="text" />
@@ -157,8 +157,8 @@
                 <td>
                     备注:
                 </td>
-                <td colspan="5">
-                    <textarea id="Remark" name="Remark" style="width:350px"></textarea>
+                <td colspan="4">
+                    <textarea id="Remark" name="Remark" style="width: 350px; height: 100px;"></textarea>
                 </td>
             </tr>
         </table>
@@ -239,7 +239,7 @@
 
             var json = $.parseJSON(data);
             if (json.success) {
-                $('#div_filename').html("<span ><img name=\"listP\" style=\"height:50px;width:160px;\" src=\"" + json.extension.fileFullPath + "\">" + "</img> <a href=\"javascript:void(0)\" onclick=\"delImg(this);\">删除</a></span>");//+ json.extension.orgfileName
+                $('#div_filename').html("<span ><img name=\"listP\" style=\"height:206px;width:148px;\" src=\"" + json.extension.fileFullPath + "\">" + "</img> <a href=\"javascript:void(0)\" onclick=\"delImg(this);\">删除</a></span>");//+ json.extension.orgfileName
                 $("#FileUrl").val(json.extension.fileUrl);
                 $("#FileName").val(json.extension.fileName);
             } else {

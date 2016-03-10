@@ -460,7 +460,7 @@
 
                 if (bindEntity["FileName"] != undefined && bindEntity["FileName"] != "") {
                     var fullPath = bindEntity["FileUrl"] + "\\" + bindEntity["FileName"];
-                    $('#div_filename').html("<span ><img name=\"listP\" style=\"height:50px;width:160px;\" src=\"" + fullPath + "\">" + "</img> <a href=\"javascript:void(0)\" onclick=\"delImg(this);\">删除</a></span>");//+ json.extension.orgfileName
+                    $('#div_filename').html("<span ><img name=\"listP\" style=\"height:206px;width:148px;\" src=\"" + fullPath + "\">" + "</img> <a href=\"javascript:void(0)\" onclick=\"delImg(this);\">删除</a></span>");//+ json.extension.orgfileName
 
                 }
                 //行项目信息用json绑定控件
