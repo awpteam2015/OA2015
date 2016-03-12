@@ -262,6 +262,32 @@ namespace Project.WebApplication.Areas.HRManager.Controllers
             return new AbpJsonResult(result, new NHibernateContractResolver());
 
         }
+
+
+        public ActionResult Look(int pkId = 0)
+        {
+            if (pkId > 0)
+            {
+                var entity = EmployeeInfoService.GetInstance().GetModelByPk(pkId);
+                ViewBag.BindEntity = JsonHelper.JsonSerializer(entity);
+            }
+            else
+            {
+                // var maxCode = ((TypeParse.StrToInt(EmployeeInfoService.GetInstance().GetMaxEmployeeCode(), 0) + 1) + "").PadLeft(8, '0');
+                ViewBag.BindEntity = JsonHelper.JsonSerializer(new EmployeeInfoEntity()
+                {
+                    EmployeeCode = "",
+                    Duties = "0",
+                    EmployeeType = "0",
+                    Sex = 0,
+                    WorkingYears = 1,
+                    WorkState = "1",
+                    State = 1
+                });
+            }
+            return View();
+        }
+
     }
 }
 
