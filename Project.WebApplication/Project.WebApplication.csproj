@@ -117,6 +117,8 @@
     <Content Include="Areas\HRManager\Scripts\Dictionary\List.js" />
     <Content Include="Areas\HRManager\Scripts\EmployeeChildren\Hd.js" />
     <Content Include="Areas\HRManager\Scripts\EmployeeChildren\List.js" />
+    <Content Include="Areas\HRManager\Scripts\EmployeeInfoDutiesTransfer\Hd.js" />
+    <Content Include="Areas\HRManager\Scripts\EmployeeInfoDutiesTransfer\List.js" />
     <Content Include="Areas\HRManager\Scripts\EmployeeInfoHis\Hd.js" />
     <Content Include="Areas\HRManager\Scripts\EmployeeInfoHis\List.js" />
     <Content Include="Areas\HRManager\Scripts\EmployeeInfoTransfer\Hd.js" />
@@ -274,6 +276,8 @@
     <Content Include="Areas\HRManager\Views\EmployeeInfo\Up.cshtml" />
     <Content Include="Areas\HRManager\Views\EmployeeInfoTransfer\Hd.cshtml" />
     <Content Include="Areas\HRManager\Views\EmployeeInfo\Look.cshtml" />
+    <Content Include="Areas\HRManager\Views\EmployeeInfoDutiesTransfer\Hd.cshtml" />
+    <Content Include="Areas\HRManager\Views\EmployeeInfoDutiesTransfer\List.cshtml" />
     <None Include="Properties\PublishProfiles\OA.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\Control\DepartmentControl.js" />
@@ -922,6 +926,7 @@
     <Compile Include="Areas\HRManager\Controllers\DictionaryController.cs" />
     <Compile Include="Areas\HRManager\Controllers\EmployeeChildrenController.cs" />
     <Compile Include="Areas\HRManager\Controllers\EmployeeInfoController.cs" />
+    <Compile Include="Areas\HRManager\Controllers\EmployeeInfoDutiesTransferController.cs" />
     <Compile Include="Areas\HRManager\Controllers\EmployeeInfoHisController.cs" />
     <Compile Include="Areas\HRManager\Controllers\EmployeeInfoTransferController.cs" />
     <Compile Include="Areas\HRManager\Controllers\EmployeeRotateController.cs" />

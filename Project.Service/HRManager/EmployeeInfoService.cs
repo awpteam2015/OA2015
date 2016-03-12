@@ -162,7 +162,6 @@ namespace Project.Service.HRManager
         /// <param name="entity"></param>
         public Tuple<bool, string> Update(EmployeeInfoEntity entity)
         {
-
             var validateResult = EmployeeInfoValidate.GetInstance().IsHasSameEmployeeCode(entity.EmployeeCode, entity.PkId);
             if (!validateResult.Item1)
             {
@@ -197,7 +196,8 @@ namespace Project.Service.HRManager
                 try
                 {
                     //记录条件 哪些条件需要记录
-                    if (oldEntity.DepartmentCode != entity.DepartmentCode || oldEntity.EmployeeType != entity.EmployeeType || oldEntity.WorkState != entity.WorkState)
+                    //部门变动、类型变动、工作状态变动、单位职务
+                    if (oldEntity.DepartmentCode != entity.DepartmentCode || oldEntity.EmployeeType != entity.EmployeeType || oldEntity.WorkState != entity.WorkState || oldEntity.Duties != entity.Duties)
                     {
                         var employeeHisEntity = Mapper.Map<EmployeeInfoEntity, EmployeeInfoHisEntity>(oldEntity);
                         employeeHisEntity.EmployeeID = employeeHisEntity.PkId;
@@ -307,7 +307,7 @@ namespace Project.Service.HRManager
             // if (!string.IsNullOrEmpty(where.LastModificationTime))
             //  expr = expr.And(p => p.LastModificationTime == where.LastModificationTime);
             #endregion
-            var list = _employeeInfoRepository.Query().Where(expr).OrderByDescending(p => p.Sort).OrderByDescending(p=>p.EmployeeCode).Skip(skipResults).Take(maxResults).ToList();
+            var list = _employeeInfoRepository.Query().Where(expr).OrderByDescending(p => p.Sort).OrderByDescending(p => p.EmployeeCode).Skip(skipResults).Take(maxResults).ToList();
             var count = _employeeInfoRepository.Query().Where(expr).Count();
             return new System.Tuple<IList<EmployeeInfoEntity>, int>(list, count);
         }
