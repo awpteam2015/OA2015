@@ -127,6 +127,16 @@ var pro = pro || {};
                 tabObj.add("/HRManager/EmployeeInfoTransfer/Hd?PkId=" + PkId + "&EmployeeCode=" + EmployeeCode, "调动(" + employeeName + ")");
             });
 
+            $("#btnView").click(function () {
+                if (!gridObj.isSelected()) {
+                    $.alertExtend.infoOp();
+                    return;
+                }
+                var PkId = gridObj.getSelectedRow().PkId;
+                var EmployeeCode = gridObj.getSelectedRow().EmployeeCode;
+                var employeeName = gridObj.getSelectedRow().EmployeeName;
+                tabObj.add("/HRManager/EmployeeInfo/Look?PkId=" + PkId + "&EmployeeCode=" + EmployeeCode, "查看(" + employeeName + ")");
+            });
 
             $("#btnSearch").click(function () {
                 gridObj.search();

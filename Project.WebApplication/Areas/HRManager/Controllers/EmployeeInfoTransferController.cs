@@ -126,12 +126,14 @@ namespace Project.WebApplication.Areas.HRManager.Controllers
         [HttpPost]
         public AbpJsonResult Edit(AjaxRequest<EmployeeInfoEntity> postData)
         {
-            postData.RequestEntity.LastModificationTime = DateTime.Now;
-            if (!string.IsNullOrEmpty(postData.RequestEntity.EmployeeName))
-            {
-                postData.RequestEntity.PayCode = postData.RequestEntity.EmployeeName.GetStringSpellCode();
-            }
-            var updateResult = EmployeeInfoService.GetInstance().Update(postData.RequestEntity);
+
+            var oldEmployeeInfo = EmployeeInfoService.GetInstance().GetModelByPk(postData.RequestEntity.PkId);
+            var tempEntiy = oldEmployeeInfo.Clone() as EmployeeInfoEntity;
+            if (tempEntiy == null)
+                tempEntiy = new EmployeeInfoEntity();
+            tempEntiy.DepartmentCode = postData.RequestEntity.DepartmentCode;
+            tempEntiy.DepartmentName = postData.RequestEntity.DepartmentName;
+            var updateResult = EmployeeInfoService.GetInstance().Update(tempEntiy);
             var result = new AjaxResponse<EmployeeInfoEntity>()
             {
                 success = updateResult.Item1,

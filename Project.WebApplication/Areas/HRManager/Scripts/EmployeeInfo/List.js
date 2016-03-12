@@ -46,7 +46,7 @@ var pro = pro || {};
                  return ret;
              }
          },
-         { field: 'CertNo', title: '身份证', width: 120 },
+         { field: 'CertNo', title: '身份证', width: 150 },
          { field: 'Birthday', title: '生日', width: 100 },
          { field: 'DutiesName', title: '单位职务', width: 100 },
          { field: 'WorkStateName', title: '在职状态', width: 100 },
