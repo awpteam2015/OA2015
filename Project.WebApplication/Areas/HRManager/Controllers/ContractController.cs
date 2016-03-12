@@ -56,25 +56,18 @@ namespace Project.WebApplication.Areas.HRManager.Controllers
             var pIndex = this.Request["page"].ConvertTo<int>();
             var pSize = this.Request["rows"].ConvertTo<int>();
             var where = new ContractEntity();
-            //where.PkId = RequestHelper.GetFormString("PkId");
-            //where.EmployeeCode = RequestHelper.GetFormString("EmployeeCode");
-            //where.DepartmentCode = RequestHelper.GetFormString("DepartmentCode");
-            //where.DepartmentName = RequestHelper.GetFormString("DepartmentName");
-            //where.BeginDate = RequestHelper.GetFormString("BeginDate");
-            //where.EndDate = RequestHelper.GetFormString("EndDate");
-            //where.Remark = RequestHelper.GetFormString("Remark");
-            //where.CreatorUserCode = RequestHelper.GetFormString("CreatorUserCode");
-            //where.CreateTime = RequestHelper.GetFormString("CreateTime");
-            //where.LastModifierUserCode = RequestHelper.GetFormString("LastModifierUserCode");
-            //where.LastModificationTime = RequestHelper.GetFormString("LastModificationTime");
-            //where.IsDelete = RequestHelper.GetFormString("IsDelete");
-            //where.State = RequestHelper.GetFormString("State");
-            //where.IsActive = RequestHelper.GetFormString("IsActive");
-            //where.ContractNo = RequestHelper.GetFormString("ContractNo");
-            //where.FirstParty = RequestHelper.GetFormString("FirstParty");
-            //where.SecondParty = RequestHelper.GetFormString("SecondParty");
-            //where.ContractContent = RequestHelper.GetFormString("ContractContent");
-            //where.IdentityCardNo = RequestHelper.GetFormString("IdentityCardNo");
+  
+            where.EmployeeCode = RequestHelper.GetFormString("EmployeeCode");
+            where.DepartmentCode = RequestHelper.GetFormString("DepartmentCode");
+            where.BeginDate = RequestHelper.GetDateTime("BeginDate");
+            where.EndDate = RequestHelper.GetDateTime("EndDate");
+            where.State = RequestHelper.GetInt("State");
+            where.IsActive = RequestHelper.GetInt("IsActive");
+            where.ContractNo = RequestHelper.GetFormString("ContractNo");
+            where.FirstParty = RequestHelper.GetFormString("FirstParty");
+            where.SecondParty = RequestHelper.GetFormString("SecondParty");
+            where.ContractContent = RequestHelper.GetFormString("ContractContent");
+            where.IdentityCardNo = RequestHelper.GetFormString("IdentityCardNo");
             var searchList = ContractService.GetInstance().Search(where, (pIndex - 1) * pSize, pSize);
 
             var dataGridEntity = new DataGridResponse()

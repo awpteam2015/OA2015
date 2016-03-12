@@ -23,10 +23,10 @@
                 </td>
 
                 <td>
-                    部门编号<span style="color: Red">*</span>:
+                    部门名称<span style="color: Red">*</span>:
                 </td>
                 <td>
-                    <span id="DepartmentCode_span"></span>
+                    <span id="DepartmentCode_span" style="display: none"></span>
                     <span id="DepartmentName_span"></span>
 
                     <input id="DepartmentCode" name="DepartmentCode" type="text" style="display: none" />
@@ -110,13 +110,21 @@
     </form>
 </div>
 <div style="padding: 10px 10px 0 10px; text-align: center;">
+
+   @{ var title = Request["Title"] == null ? "新增" : Request["Title"].ToString(); }
+
     @if (Request["PkId"] == null || int.Parse(Request["PkId"]) == 0)
     {
-        <a id="btnAdd" class="easyui-linkbutton" iconcls="icon-add" href="javascript:void(0)">新增</a>
+
+        <a id="btnAdd" class="easyui-linkbutton" iconcls="icon-add" href="javascript:void(0)">@title</a>
     }
     else
     {
-        <a id="btnEdit" class="easyui-linkbutton" iconcls="icon-ok" href="javascript:void(0)">编辑</a>
+        if (title != "查看")
+        {
+            <a id="btnEdit" class="easyui-linkbutton" iconcls="icon-ok" href="javascript:void(0)">编辑</a>
+        }
+
     }
     <a id="btnClose" class="easyui-linkbutton" iconcls="icon-cancel" href="javascript:void(0)">关闭</a>
 </div>

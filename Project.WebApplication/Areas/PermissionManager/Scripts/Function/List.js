@@ -33,7 +33,16 @@ var pro = pro || {};
          //{ field: 'Area', title: '', width: 100 },
          //{ field: 'Controller', title: '', width: 100 },
          //{ field: 'Action', title: '', width: 100 },
-         { field: 'IsDisplayOnMenu', title: '是否在菜单上显示1是 0不是', width: 100 },
+         {
+             field: 'IsDisplayOnMenu', title: '是否在菜单上显示', width: 100, formatter: function (value, row) {
+                 if (row.IsDisplayOnMenu == 1) {
+                     return "是";
+                 } else {
+                     return "否";
+                 }
+                
+             }
+         },
          { field: 'RankId', title: '顺序', width: 100 },
          { field: 'Remark', title: '备注', width: 100 },
                 ]],

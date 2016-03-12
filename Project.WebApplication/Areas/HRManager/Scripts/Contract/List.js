@@ -61,7 +61,7 @@ var pro = pro || {};
                     return;
                 }
                 var PkId = gridObj.getSelectedRow().PkId;
-                tabObj.add("/HRManager/Contract/Hd?State=2&ParentId=" + PkId, "续订" + PkId);
+                tabObj.add("/HRManager/Contract/Hd?State=2&Title=续订&ParentId=" + PkId, "续订合同" + PkId);
             });
 
             $("#btnAdd3").click(function () {
@@ -75,7 +75,7 @@ var pro = pro || {};
                     return;
                 }
                 var PkId = gridObj.getSelectedRow().PkId;
-                tabObj.add("/HRManager/Contract/Hd?State=3&ParentId=" + PkId, "变更" + PkId);
+                tabObj.add("/HRManager/Contract/Hd?State=3&Title=变更&ParentId=" + PkId, "变更合同" + PkId);
             });
 
             $("#btnAdd4").click(function () {
@@ -89,7 +89,7 @@ var pro = pro || {};
                     return;
                 }
                 var PkId = gridObj.getSelectedRow().PkId;
-                tabObj.add("/HRManager/Contract/Hd?State=4&ParentId=" + PkId, "终止" + PkId);
+                tabObj.add("/HRManager/Contract/Hd?State=4&Title=终止&ParentId=" + PkId, "终止合同" + PkId);
             });
 
 
@@ -100,6 +100,15 @@ var pro = pro || {};
                 }
                 var PkId = gridObj.getSelectedRow().PkId;
                 tabObj.add("/HRManager/Contract/Hd?PkId=" + PkId, "编辑" + PkId);
+            });
+
+            $("#btnView").click(function () {
+                if (!gridObj.isSelected()) {
+                    $.alertExtend.infoOp();
+                    return;
+                }
+                var PkId = gridObj.getSelectedRow().PkId;
+                tabObj.add("/HRManager/Contract/Hd?&Title=查看&PkId=" + PkId, "查看" + PkId);
             });
 
 
