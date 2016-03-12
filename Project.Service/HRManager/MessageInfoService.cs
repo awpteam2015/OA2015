@@ -137,6 +137,9 @@ namespace Project.Service.HRManager
                 expr = expr.And(p => p.CreationTime >= where.CreationTime);
             if (where.CreationTimeEnd.HasValue && where.CreationTimeEnd.Value.Year > 1)
                 expr = expr.And(p => p.CreationTime <= where.CreationTimeEnd.Value.AddDays(1));
+
+            if (where.InfoType.HasValue && where.InfoType.Value >= 1)
+                expr = expr.And(p => p.InfoType == where.InfoType);
             // if (!string.IsNullOrEmpty(where.LastModificationTime))
             //  expr = expr.And(p => p.LastModificationTime == where.LastModificationTime);
             // if (!string.IsNullOrEmpty(where.LastModifierUserCode))

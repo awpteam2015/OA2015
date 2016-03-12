@@ -278,6 +278,7 @@
     <Content Include="Areas\HRManager\Views\EmployeeInfo\Up.cshtml" />
     <Content Include="Areas\HRManager\Views\EmployeeInfoTransfer\Hd.cshtml" />
     <Content Include="Areas\HRManager\Views\EmployeeInfo\Look.cshtml" />
+    <Content Include="Areas\HRManager\Views\EmployeeInfoHis\Index.cshtml" />
     <None Include="Properties\PublishProfiles\OA.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\Control\DepartmentControl.js" />

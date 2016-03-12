@@ -60,6 +60,7 @@ namespace Project.WebApplication.Areas.HRManager.Controllers
             where.CreationTime = RequestHelper.GetFormDateTime("CreationTime");
             where.CreationTimeEnd = RequestHelper.GetFormDateTime("CreationTimeEnd");
             where.CurUserCode = LoginUserInfo.UserCode;
+            where.InfoType = RequestHelper.GetFormInt("InfoType",0);
             //where.LastModificationTime = RequestHelper.GetFormString("LastModificationTime");
             //where.LastModifierUserCode = RequestHelper.GetFormString("LastModifierUserCode");
             //where.DeleterUserCode = RequestHelper.GetFormString("DeleterUserCode");
