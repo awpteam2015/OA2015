@@ -52,8 +52,15 @@
 
                 $("#DepartmentCode_span").html(bindEntity.DepartmentCode);
                 $("#DepartmentName_span").html(bindEntity.DepartmentName);
-
                 $("#State").html(bindEntity.Attr_State);
+
+                if (pro.commonKit.getUrlParam("State") == "2") {
+                    $("#EmployeeCode").attr("disabled", "disabled");
+                    $("#IdentityCardNo").attr("disabled", "disabled");
+                    $("#FirstParty").attr("disabled", "disabled");
+                    $("#SecondParty").attr("disabled", "disabled");
+                    $("#ContractContent").attr("disabled", "disabled");
+                }
 
                 //行项目信息用json绑定控件
                 //alert(JSON.stringify(BindEntity.List));

@@ -141,44 +141,30 @@ namespace Project.Service.HRManager
         {
             var expr = PredicateBuilder.True<ContractEntity>();
             #region
-            // if (!string.IsNullOrEmpty(where.PkId))
-            //  expr = expr.And(p => p.PkId == where.PkId);
-            // if (!string.IsNullOrEmpty(where.EmployeeCode))
-            //  expr = expr.And(p => p.EmployeeCode == where.EmployeeCode);
-            // if (!string.IsNullOrEmpty(where.DepartmentCode))
-            //  expr = expr.And(p => p.DepartmentCode == where.DepartmentCode);
-            // if (!string.IsNullOrEmpty(where.DepartmentName))
-            //  expr = expr.And(p => p.DepartmentName == where.DepartmentName);
-            // if (!string.IsNullOrEmpty(where.BeginDate))
-            //  expr = expr.And(p => p.BeginDate == where.BeginDate);
-            // if (!string.IsNullOrEmpty(where.EndDate))
-            //  expr = expr.And(p => p.EndDate == where.EndDate);
-            // if (!string.IsNullOrEmpty(where.Remark))
-            //  expr = expr.And(p => p.Remark == where.Remark);
-            // if (!string.IsNullOrEmpty(where.CreatorUserCode))
-            //  expr = expr.And(p => p.CreatorUserCode == where.CreatorUserCode);
-            // if (!string.IsNullOrEmpty(where.CreateTime))
-            //  expr = expr.And(p => p.CreateTime == where.CreateTime);
-            // if (!string.IsNullOrEmpty(where.LastModifierUserCode))
-            //  expr = expr.And(p => p.LastModifierUserCode == where.LastModifierUserCode);
-            // if (!string.IsNullOrEmpty(where.LastModificationTime))
-            //  expr = expr.And(p => p.LastModificationTime == where.LastModificationTime);
-            // if (!string.IsNullOrEmpty(where.IsDelete))
-            //  expr = expr.And(p => p.IsDelete == where.IsDelete);
-            // if (!string.IsNullOrEmpty(where.State))
-            //  expr = expr.And(p => p.State == where.State);
-            // if (!string.IsNullOrEmpty(where.IsActive))
-            //  expr = expr.And(p => p.IsActive == where.IsActive);
-            // if (!string.IsNullOrEmpty(where.ContractNo))
-            //  expr = expr.And(p => p.ContractNo == where.ContractNo);
-            // if (!string.IsNullOrEmpty(where.FirstParty))
-            //  expr = expr.And(p => p.FirstParty == where.FirstParty);
-            // if (!string.IsNullOrEmpty(where.SecondParty))
-            //  expr = expr.And(p => p.SecondParty == where.SecondParty);
-            // if (!string.IsNullOrEmpty(where.ContractContent))
-            //  expr = expr.And(p => p.ContractContent == where.ContractContent);
-            // if (!string.IsNullOrEmpty(where.IdentityCardNo))
-            //  expr = expr.And(p => p.IdentityCardNo == where.IdentityCardNo);
+        
+            if (!string.IsNullOrEmpty(where.EmployeeCode))
+                expr = expr.And(p => p.EmployeeCode == where.EmployeeCode);
+            if (!string.IsNullOrEmpty(where.DepartmentCode))
+                expr = expr.And(p => p.DepartmentCode == where.DepartmentCode);
+
+            if (where.BeginDate != null && where.BeginDate != DateTime.MinValue)
+                expr = expr.And(p => p.BeginDate >= where.BeginDate);
+            if (where.EndDate != null && where.EndDate!=DateTime.MinValue)
+                expr = expr.And(p => p.EndDate <= where.EndDate);
+            if (where.State>0)
+                expr = expr.And(p => p.State == where.State);
+            if (where.IsActive>0)
+                expr = expr.And(p => p.IsActive == where.IsActive);
+            if (!string.IsNullOrEmpty(where.ContractNo))
+                expr = expr.And(p => p.ContractNo == where.ContractNo);
+            if (!string.IsNullOrEmpty(where.FirstParty))
+                expr = expr.And(p => p.FirstParty == where.FirstParty);
+            if (!string.IsNullOrEmpty(where.SecondParty))
+                expr = expr.And(p => p.SecondParty == where.SecondParty);
+            if (!string.IsNullOrEmpty(where.ContractContent))
+                expr = expr.And(p => p.ContractContent == where.ContractContent);
+            if (!string.IsNullOrEmpty(where.IdentityCardNo))
+                expr = expr.And(p => p.IdentityCardNo == where.IdentityCardNo);
             #endregion
             var list = _contractRepository.Query().Where(expr).OrderByDescending(p => p.PkId).Skip(skipResults).Take(maxResults).ToList();
             var count = _contractRepository.Query().Where(expr).Count();

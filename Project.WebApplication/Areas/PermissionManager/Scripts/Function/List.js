@@ -23,11 +23,9 @@ var pro = pro || {};
                 frozenColumns: [[
                      { field: 'PkId', title: '', width: 50 },
          { field: 'FunctionnName', title: '模块名称', width: 100 },
-         {
-             field: 'ModuleId', title: '模块ID', width: 100, formatter: function (value, row) {
-                 return row.ModuleEntity.ModuleName;
-             }
-         }
+         { field: 'ModuleId', title: '模块ID', width: 100,formatter: function(value,row) {
+             return row.ModuleEntity.ModuleName;
+         } }
                 ]],
                 columns: [[
 
@@ -35,24 +33,18 @@ var pro = pro || {};
          //{ field: 'Area', title: '', width: 100 },
          //{ field: 'Controller', title: '', width: 100 },
          //{ field: 'Action', title: '', width: 100 },
-                    {
-                        field: 'IsDisplayOnMenu',
-                        title: '是否显示',
-                        width: 100,
-                        formatter: function (val) {
-                            switch (val) {
-                                case 0:
-                                    return "否";
-                                case 1:
-                                    return "是";
-                                default:
-                                    return "否";
-                            }
-
-                        }
-                    },
-                { field: 'RankId', title: '顺序', width: 100 },
-    { field: 'Remark', title: '备注', width: 100 },
+         {
+             field: 'IsDisplayOnMenu', title: '是否在菜单上显示', width: 100, formatter: function (value, row) {
+                 if (row.IsDisplayOnMenu == 1) {
+                     return "是";
+                 } else {
+                     return "否";
+                 }
+                
+             }
+         },
+         { field: 'RankId', title: '顺序', width: 100 },
+         { field: 'Remark', title: '备注', width: 100 },
                 ]],
                 pagination: true,
                 pageSize: 20, //每页显示的记录条数，默认为10     
@@ -61,7 +53,7 @@ var pro = pro || {};
                );
 
             $("#btnAdd").click(function () {
-                tabObj.add("/PermissionManager/Function/Hd?ModuleId=" + $('#ModuleId').combobox("getValue"), "新增");
+                tabObj.add("/PermissionManager/Function/Hd?ModuleId="+$('#ModuleId').combobox("getValue"), "新增");
             });
 
             $("#btnEdit").click(function () {
