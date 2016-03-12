@@ -30,7 +30,7 @@ var pro = pro || {};
          { field: 'EndDate', title: '回国日期', width: 120 },
          { field: 'DaySum', title: '出国天数', width: 100 },
          //{
-         //    field: 'Reason', title: '事由', width: 100, formate: function (val) {
+         //    field: 'Reason', title: '事由', width: 100, formatter: function (val) {
          //        alert();
          //        Base64.decode(val);
          //    }
