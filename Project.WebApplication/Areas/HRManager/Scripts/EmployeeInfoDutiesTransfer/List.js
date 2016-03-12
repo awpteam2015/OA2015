@@ -1,9 +1,9 @@
 ﻿
 var pro = pro || {};
 (function () {
-    pro.EmployeeInfoTransfer = pro.EmployeeInfoTransfer || {};
-    pro.EmployeeInfoTransfer.ListPage = pro.EmployeeInfoTransfer.ListPage || {};
-    pro.EmployeeInfoTransfer.ListPage = {
+    pro.EmployeeInfoDutiesTransfer = pro.EmployeeInfoDutiesTransfer || {};
+    pro.EmployeeInfoDutiesTransfer.ListPage = pro.EmployeeInfoDutiesTransfer.ListPage || {};
+    pro.EmployeeInfoDutiesTransfer.ListPage = {
         init: function () {
             return {
                 tabObj: new pro.TabBase(),
@@ -15,7 +15,7 @@ var pro = pro || {};
             var tabObj = initObj.tabObj;
             var gridObj = initObj.gridObj;
             gridObj.grid({
-                url: '/HRManager/EmployeeInfoTransfer/GetList',
+                url: '/HRManager/EmployeeInfo/GetList',
                 fitColumns: false,
                 nowrap: false,
                 rownumbers: true, //行号
@@ -124,7 +124,7 @@ var pro = pro || {};
                 var PkId = gridObj.getSelectedRow().PkId;
                 var EmployeeCode = gridObj.getSelectedRow().EmployeeCode;
                 var employeeName = gridObj.getSelectedRow().EmployeeName;
-                tabObj.add("/HRManager/EmployeeInfoTransfer/Hd?PkId=" + PkId + "&EmployeeCode=" + EmployeeCode, "调动(" + employeeName + ")");
+                tabObj.add("/HRManager/EmployeeInfoDutiesTransfer/Hd?PkId=" + PkId + "&EmployeeCode=" + EmployeeCode, "调动(" + employeeName + ")");
             });
 
             $("#btnView").click(function () {
@@ -163,7 +163,7 @@ var pro = pro || {};
 
 
 $(function () {
-    pro.EmployeeInfoTransfer.ListPage.initPage();
+    pro.EmployeeInfoDutiesTransfer.ListPage.initPage();
 });
 
 

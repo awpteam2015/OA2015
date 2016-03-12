@@ -4,7 +4,7 @@
 }
 
 @section JavaScript{
-    <script src="/Areas/HrManager/Scripts/EmployeeInfoTransfer/Hd.js?JsParamter=@SiteConfig.GetConfig().JsParamter"></script>
+    <script src="/Areas/HrManager/Scripts/EmployeeInfoDutiesTransfer/Hd.js?JsParamter=@SiteConfig.GetConfig().JsParamter"></script>
 }
 <div style="display: none">
     <input id="BindEntity" type="text" value="@ViewBag.BindEntity" />
@@ -30,16 +30,16 @@
             </tr>
             <tr>
                 <td>
-                    调入部门<span style="color: Red">*</span>:
+                    原先职务<span style="color: Red">*</span>:
                 </td>
                 <td>
-                    <input id="OldDepartmentName" name="EmployeeName" type="text" disabled="disabled" />
+                    <input id="OldDuties" name="OldDuties" type="text" disabled="disabled" />
                 </td>
                 <td>
-                    调动部门<span style="color: Red">*</span>:
+                    新职务<span style="color: Red">*</span>:
                 </td>
                 <td>
-                    <input id="DepartmentCode" name="DepartmentCode" type="text" style="width: 200px" />
+                    <input id="Duties" name="Duties" type="text" style="width: 200px" />
                 </td>
             </tr>
 

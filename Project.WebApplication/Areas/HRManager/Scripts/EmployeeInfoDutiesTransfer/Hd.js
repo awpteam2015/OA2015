@@ -1,8 +1,8 @@
 ﻿var pro = pro || {};
 (function () {
-    pro.EmployeeInfoTransfer = pro.EmployeeInfoTransfer || {};
-    pro.EmployeeInfoTransfer.HdPage = pro.EmployeeInfoTransfer.HdPage || {};
-    pro.EmployeeInfoTransfer.HdPage = {
+    pro.EmployeeInfoDutiesTransfer = pro.EmployeeInfoDutiesTransfer || {};
+    pro.EmployeeInfoDutiesTransfer.HdPage = pro.EmployeeInfoDutiesTransfer.HdPage || {};
+    pro.EmployeeInfoDutiesTransfer.HdPage = {
         init: function () {
             return {
                 tabObj: new pro.TabBase()
@@ -12,15 +12,15 @@
             var initObj = this.init();
 
             $("#btnClose").click(function () {
-                parent.pro.EmployeeInfoTransfer.ListPage.closeTab("");
+                parent.pro.EmployeeInfoDutiesTransfer.ListPage.closeTab("");
             });
 
             $("#btnEdit").click(function () {
-                pro.EmployeeInfoTransfer.HdPage.submit("Edit");
+                pro.EmployeeInfoDutiesTransfer.HdPage.submit("Edit");
             });
 
-            //部门初始化
-            pro.DepartmentControl.init();
+            //职务初始化
+            pro.DutiesControl.init();
 
 
             if ($("#BindEntity").val()) {
@@ -30,9 +30,9 @@
                 for (var filedname in bindField) {
                     $("[name=" + filedname + "]").val(bindEntity[filedname]);
                 }
-                if (bindEntity["DepartmentName"] != undefined && bindEntity["DepartmentName"] != "") {
+                if (bindEntity["DutiesName"] != undefined && bindEntity["DutiesName"] != "") {
 
-                    $("#OldDepartmentName").val(bindEntity["DepartmentName"]);
+                    $("#OldDuties").val(bindEntity["DutiesName"]);
                 }
 
                 //行项目信息用json绑定控件
@@ -45,7 +45,7 @@
             postData.RequestEntity = pro.submitKit.getHeadJson();
             //postData.RequestEntity.TechnicalTitleName = $('#TechnicalTitle').combobox('getText');
 
-            postData.RequestEntity.DepartmentName = $('#DepartmentCode').combotree('getText');
+            postData.RequestEntity.DutiesName = $('#Duties').combotree('getText');
             if (pro.commonKit.getUrlParam("PkId") != "") {
                 postData.RequestEntity.PkId = pro.commonKit.getUrlParam("PkId");
             }
@@ -58,13 +58,13 @@
             }
 
             abp.ajax({
-                url: "/HRManager/EmployeeInfoTransfer/" + command,
+                url: "/HRManager/EmployeeInfoDutiesTransfer/" + command,
                 data: JSON.stringify(postData)
             }).done(
                 function (dataresult, data) {
                     function afterSuccess() {
                         parent.$("#btnSearch").trigger("click");
-                        parent.pro.EmployeeInfoTransfer.ListPage.closeTab();
+                        parent.pro.EmployeeInfoDutiesTransfer.ListPage.closeTab();
                     }
                     parent.$.alertExtend.info("", afterSuccess());
                 }
@@ -81,14 +81,12 @@
                     rules: {
 
                         EmployeeCode: { required: true },
-                        EmployeeName: { required: true },
-                        DepartmentCode: { required: true }
+                        EmployeeName: { required: true }
                     },
                     messages: {
                         PkId: "必填!",
                         EmployeeCode: "员工编号必填!",
-                        EmployeeName: "员工名称必填!",
-                        DepartmentCode: "所属部门必填!"
+                        EmployeeName: "员工名称必填!"
                     },
                     errorPlacement: function (error, element) {
                         pro.commonKit.errorPlacementHd(error, element);
@@ -107,7 +105,7 @@
 })();
 
 $(function () {
-    pro.EmployeeInfoTransfer.HdPage.initPage();
+    pro.EmployeeInfoDutiesTransfer.HdPage.initPage();
 });
 
 

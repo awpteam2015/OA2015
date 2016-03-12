@@ -15,7 +15,7 @@ var pro = pro || {};
             var tabObj = initObj.tabObj;
             var gridObj = initObj.gridObj;
             gridObj.grid({
-                url: '/HRManager/EmployeeInfoTransfer/GetList',
+                url: '/HRManager/EmployeeInfo/GetList',
                 fitColumns: false,
                 nowrap: false,
                 rownumbers: true, //行号

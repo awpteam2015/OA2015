@@ -37,11 +37,13 @@ var pro = pro || {};
          //{ field: 'Action', title: '', width: 100 },
          {
              field: 'IsDisplayOnMenu', title: '是否显示', width: 100, formatter: function (value, row) {
-                 switch (val) {
+                 switch (value) {
                      case 0:
                          return '否';
                      case 1:
                          return '是';
+                     default:
+                         return '否';
                  }
              }
          },
