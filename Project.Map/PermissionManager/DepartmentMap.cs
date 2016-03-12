@@ -13,7 +13,7 @@ namespace Project.Map.PermissionManager
 {
     public class DepartmentMap : BaseMap<DepartmentEntity, int>
     {
-        public DepartmentMap(): base("PM_Department")
+        public DepartmentMap() : base("PM_Department")
         {
             this.MapPkidDefault<DepartmentEntity, int>();
 
@@ -23,12 +23,18 @@ namespace Project.Map.PermissionManager
             Map(p => p.DepartmentType);
             Map(p => p.Remark);
 
-       //     HasMany(p => p.children)
-       //.AsSet()
-       //.LazyLoad()
-       //.Cascade.All().Inverse()
-       //.PropertyRef("DepartmentCode")
-       //.KeyColumn("ParentDepartmentCode");
+            //References(p => p.PDepartModel)
+            //  .Not.Insert()
+            //  .Not.Update()
+            //  .PropertyRef("DepartmentCode")
+            //  .Column("ParentDepartmentCode");//本Model
+
+            //     HasMany(p => p.children)
+            //.AsSet()
+            //.LazyLoad()
+            //.Cascade.All().Inverse()
+            //.PropertyRef("DepartmentCode")
+            //.KeyColumn("ParentDepartmentCode");
         }
     }
 }

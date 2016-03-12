@@ -12,10 +12,11 @@ using Project.Infrastructure.FrameworkCore.Domain.Entities;
 using Project.Infrastructure.FrameworkCore.Domain.Entities.Component;
 using System.Collections.Generic;
 using Project.Infrastructure.FrameworkCore.Domain.Entities.Auditing.Interface;
+using Project.Model.PermissionManager;
 
 namespace Project.Model.HRManager
 {
-    public class EmployeeInfoEntity : Entity,ISoftDelete, IHasRemark, IAudited
+    public class EmployeeInfoEntity : Entity, ISoftDelete, IHasRemark, IAudited
     {
         public EmployeeInfoEntity()
         {
@@ -23,6 +24,7 @@ namespace Project.Model.HRManager
             this.LearningList = new HashSet<LearningExperiencesEntity>();
             this.TechnicalList = new HashSet<TechnicalEntity>();
             this.ProfessionList = new HashSet<ProfessionEntity>();
+            //this.DepartModel = new DepartmentEntity();
         }
         #region 属性
         /// <summary>
@@ -170,6 +172,8 @@ namespace Project.Model.HRManager
         /// </summary>
         public virtual ISet<ProfessionEntity> ProfessionList { get; set; }
 
+
+        //public virtual DepartmentEntity DepartModel { get; set; }
         #endregion
     }
 }

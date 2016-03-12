@@ -71,6 +71,8 @@ namespace Project.Model.PermissionManager
 
         public virtual bool Attr_IsCheck { get; set; }
         public virtual int Attr_UserDepartmentPkId { get; set; }
+
+        public virtual string ParentDepartmentName { get; set; }
         #endregion
 
         // public virtual string _parentId { get; set; }
