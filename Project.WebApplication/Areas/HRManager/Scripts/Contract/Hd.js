@@ -60,16 +60,28 @@
                 $("#DepartmentName_span").html(bindEntity.DepartmentName);
                 $("#State").html(bindEntity.Attr_State);
                 $("#SecondParty_span").html(bindEntity.SecondParty);
-                
 
-                if (pro.commonKit.getUrlParam("State") == "2") {
+              
+               
+
+                var State = pro.commonKit.getUrlParam("State");
+                if (State == "2" || State=="4") {
                     $("#EmployeeCode").attr("disabled", "disabled");
                     $("#IdentityCardNo").attr("disabled", "disabled");
                     $("#FirstParty").attr("disabled", "disabled");
                     $("#SecondParty").attr("disabled", "disabled");
                     $("#ContractContent").attr("disabled", "disabled");
+                    $('#FirstParty').combotree({ disabled: true });
+                
+                    
                 }
 
+                if (State == "4") {
+                    $("#ContractNo").attr("disabled", "disabled");
+                    $("#BeginDate").attr("disabled", "disabled");
+                    $("#EndDate").attr("disabled", "disabled");
+                }
+                $('#FirstParty').combotree("setValue", bindEntity.FirstParty);
                 //行项目信息用json绑定控件
                 //alert(JSON.stringify(BindEntity.List));
             }
@@ -115,27 +127,15 @@
             addRule: function () {
                 $("#form1").validate({
                     rules: {
-                        PkId: { required: true },
                         EmployeeCode: { required: true },
-                        DepartmentCode: { required: true },
-                        DepartmentName: { required: true },
                         BeginDate: { required: true },
                         EndDate: { required: true },
-                        CreatorUserCode: { required: true },
-                        CreateTime: { required: true },
-                        LastModifierUserCode: { required: true },
-                        LastModificationTime: { required: true },
-                        IsDelete: { required: true },
-                        State: { required: true },
-                        IsActive: { required: true },
+
                         ContractNo: { required: true },
-                        FirstParty: { required: true },
-                        SecondParty: { required: true },
-                        ContractContent: { required: true },
+                     
                         IdentityCardNo: { required: true }
                     },
                     messages: {
-                        PkId: "必填!",
                         EmployeeCode: "工号必填!",
                         DepartmentCode: "部门编号必填!",
                         DepartmentName: "部门名称必填!",
