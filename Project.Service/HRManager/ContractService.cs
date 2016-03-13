@@ -46,7 +46,7 @@ namespace Project.Service.HRManager
         {
 
             var validateResult = ContractValidate.GetInstance().IsHasSameContractCode(entity.ContractNo);
-            if (!validateResult.Item1)
+            if (!validateResult.Item1 && entity.State!=4)
             {
                 return validateResult;
             }
@@ -117,7 +117,7 @@ namespace Project.Service.HRManager
         public Tuple<bool, string> Update(ContractEntity entity)
         {
             var validateResult = ContractValidate.GetInstance().IsHasSameContractCode(entity.ContractNo);
-            if (!validateResult.Item1)
+            if (!validateResult.Item1 && entity.State != 4)
             {
                 return validateResult;
             }

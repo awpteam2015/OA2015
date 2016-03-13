@@ -36,10 +36,14 @@ namespace Project.WebApplication.Areas.HRManager.Controllers
             if (RequestHelper.GetInt("ParentId") > 0)
             {
                 var entity = ContractService.GetInstance().GetModelByPk(RequestHelper.GetInt("ParentId"));
-                entity.BeginDate = null;
-                entity.EndDate = null;
-                entity.ContractContent = null;
-                entity.ContractNo = null;
+                if (RequestHelper.GetInt("State")!=4)
+                {
+                    entity.BeginDate = null;
+                    entity.EndDate = null;
+                    entity.ContractContent = null;
+                    entity.ContractNo = null;
+                }
+               
                 ViewBag.BindEntity = JsonHelper.JsonSerializer(entity);
             }
             return View();
