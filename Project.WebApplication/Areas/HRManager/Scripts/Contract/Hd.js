@@ -151,7 +151,7 @@
                         IsActive: "是否有效 1有效 2无效必填!",
                         ContractNo: "合同编号必填!",
                         FirstParty: "甲方必填!",
-                        SecondParty: "已方必填!",
+                        SecondParty: "乙方必填!",
                         ContractContent: "合同内容必填!",
                         IdentityCardNo: "身份证必填!"
                     },

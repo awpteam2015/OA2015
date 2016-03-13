@@ -31,7 +31,7 @@ var pro = pro || {};
          { field: 'Attr_IsActive', title: '是否有效', width: 100 },
          { field: 'ContractNo', title: '合同编号', width: 100 },
          { field: 'FirstParty', title: '甲方', width: 100 },
-         { field: 'SecondParty', title: '已方', width: 100 },
+         { field: 'SecondParty', title: '乙方', width: 100 },
          { field: 'IdentityCardNo', title: '身份证', width: 100 },
          { field: 'CreatorUserCode', title: '创建人', width: 100 },
          { field: 'CreationTime', title: '创建时间', width: 100 },
