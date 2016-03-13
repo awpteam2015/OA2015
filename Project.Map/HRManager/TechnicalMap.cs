@@ -18,7 +18,7 @@ namespace Project.Map.HRManager
         {
             this.MapPkidDefault<TechnicalEntity, int>();
             Map(p => p.EmployeeID);
-            Map(p => p.EmployeeCode);
+            //Map(p => p.EmployeeCode);
             Map(p => p.DepartmentCode);
             Map(p => p.Title);
             Map(p => p.LevNum);

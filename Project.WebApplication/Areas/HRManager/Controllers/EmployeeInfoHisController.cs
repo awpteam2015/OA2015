@@ -19,7 +19,10 @@ namespace Project.WebApplication.Areas.HRManager.Controllers
 {
     public class EmployeeInfoHisController : BaseController
     {
-
+        public ActionResult Index()
+        {
+            return View();
+        }
         public ActionResult Hd(int pkId = 0)
         {
             if (pkId > 0)

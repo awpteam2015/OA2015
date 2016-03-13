@@ -37,13 +37,25 @@
                             开始日期:
                         </td>
                         <td style="width:120px;">
-                            <input id="CreationTime" name="CreationTime" type="text"  class="Wdate" onclick="WdatePicker();" />
+                            <input id="CreationTime" name="CreationTime" type="text" class="Wdate" onclick="WdatePicker();" />
                         </td>
                         <td style="width:20px;">
                             至:
                         </td>
-                        <td style="width:120px;">
-                            <input id="CreationTimeEnd" name="CreationTimeEnd" type="text"  class="Wdate" onclick="WdatePicker();" />
+                        <td style="width: 120px;">
+                            <input id="CreationTimeEnd" name="CreationTimeEnd" type="text" class="Wdate" onclick="WdatePicker();" />
+                        </td>
+                        <td style="width:60px;">
+                            类型:
+                        </td>
+                        <td>
+                            <select id="InfoType" name="InfoType">
+                                <option value="0">全部</option>
+                                <option value="1">生日提醒</option>
+                                <option value="2">退休提醒</option>
+                                <option value="3">合同过期提醒</option>
+                                <option value="4">合同到期提醒</option>
+                            </select>
                         </td>
                         <td>
                             <a href="#" class="easyui-linkbutton" iconcls="icon-search" id="btnSearch">搜索</a>

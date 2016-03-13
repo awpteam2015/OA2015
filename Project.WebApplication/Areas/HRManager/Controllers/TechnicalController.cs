@@ -81,6 +81,9 @@ namespace Project.WebApplication.Areas.HRManager.Controllers
         [HttpPost]
         public AbpJsonResult Add(AjaxRequest<TechnicalEntity> postData)
         {
+
+            postData.RequestEntity.EmployeeID = postData.RequestEntity.PkId;
+            postData.RequestEntity.PkId = 0;
             var addResult = TechnicalService.GetInstance().Add(postData.RequestEntity);
             var result = new AjaxResponse<TechnicalEntity>()
                {

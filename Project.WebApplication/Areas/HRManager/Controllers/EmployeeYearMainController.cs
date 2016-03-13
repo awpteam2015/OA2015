@@ -51,13 +51,21 @@ namespace Project.WebApplication.Areas.HRManager.Controllers
             //where.CreateTime = RequestHelper.GetFormString("CreateTime");
             //where.LastModificationTime = RequestHelper.GetFormString("LastModificationTime");
             var searchList = EmployeeYearMainService.GetInstance().Search(where, (pIndex - 1) * pSize, pSize);
-
+            foreach (var employeeYearMainEntity in searchList.Item1)
+            {
+                if (!string.IsNullOrEmpty(employeeYearMainEntity.DepartmentEntity.ParentDepartmentCode))
+                    employeeYearMainEntity.DepartmentEntity.ParentDepartmentName =
+                        DepartmentService.GetInstance()
+                            .GetModelByDepartmentCode(employeeYearMainEntity.DepartmentEntity.ParentDepartmentCode)
+                            .DepartmentName;
+            }
             var dataGridEntity = new DataGridResponse()
             {
                 total = searchList.Item2,
                 rows = searchList.Item1
             };
             return new AbpJsonResult(dataGridEntity, new NHibernateContractResolver(new string[] { "DepartmentEntity" }, new string[] { "Remark" }));
+            //return new AbpJsonResult(dataGridEntity, new NHibernateContractResolver(new string[] { "DepartmentEntity" , "PDepartModel" }, new string[] { "Remark" }));
         }
 
 

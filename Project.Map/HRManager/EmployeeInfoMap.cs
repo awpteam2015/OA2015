@@ -77,6 +77,12 @@ namespace Project.Map.HRManager
             .Cascade.All().Inverse()
             .KeyColumn("EmployeeID");
 
+            //References(p => p.DepartModel)
+            //  .Not.Insert()
+            //  .Not.Update()
+            //  .PropertyRef("DepartmentCode")
+            //  .Column("DepartmentCode");
+
             //HasMany(p => p.LearningList)
             //.AsSet()
             //.LazyLoad()

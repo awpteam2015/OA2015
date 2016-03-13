@@ -42,8 +42,8 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Aspose.Cells, Version=8.6.3.0, Culture=neutral, PublicKeyToken=716fcc553a201e56, processorArchitecture=MSIL">
-      <HintPath>..\packages\Aspose.Cells.8.6.3\lib\net40\Aspose.Cells.dll</HintPath>
-      <Private>True</Private>
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Lib\Aspose.Cells.dll</HintPath>
     </Reference>
     <Reference Include="AutoMapper, Version=4.1.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
       <HintPath>..\packages\AutoMapper.4.1.1\lib\net45\AutoMapper.dll</HintPath>
@@ -117,10 +117,17 @@
     <Content Include="Areas\HRManager\Scripts\Dictionary\List.js" />
     <Content Include="Areas\HRManager\Scripts\EmployeeChildren\Hd.js" />
     <Content Include="Areas\HRManager\Scripts\EmployeeChildren\List.js" />
+    <Content Include="Areas\HRManager\Scripts\EmployeeInfoDutiesTransfer\Hd.js" />
+    <Content Include="Areas\HRManager\Scripts\EmployeeInfoDutiesTransfer\List.js" />
     <Content Include="Areas\HRManager\Scripts\EmployeeInfoHis\Hd.js" />
     <Content Include="Areas\HRManager\Scripts\EmployeeInfoHis\List.js" />
+    <Content Include="Areas\HRManager\Scripts\EmployeeInfoTechnical\Hd.js" />
+    <Content Include="Areas\HRManager\Scripts\EmployeeInfoTechnical\List.js" />
+    <Content Include="Areas\HRManager\Scripts\EmployeeInfoTransfer\Hd.js" />
+    <Content Include="Areas\HRManager\Scripts\EmployeeInfoTransfer\List.js" />
     <Content Include="Areas\HRManager\Scripts\EmployeeInfo\Hd.js" />
     <Content Include="Areas\HRManager\Scripts\EmployeeInfo\List.js" />
+    <Content Include="Areas\HRManager\Scripts\EmployeeInfo\Look.js" />
     <Content Include="Areas\HRManager\Scripts\EmployeeInfo\Up.js" />
     <Content Include="Areas\HRManager\Scripts\EmployeeRotate\Hd.js" />
     <Content Include="Areas\HRManager\Scripts\EmployeeRotate\List.js" />
@@ -150,6 +157,10 @@
     <Content Include="Areas\HRManager\Scripts\WorkExperience\List.js" />
     <Content Include="Areas\HRManager\Scripts\YearHolidayDefinition\Hd.js" />
     <Content Include="Areas\HRManager\Scripts\YearHolidayDefinition\List.js" />
+    <Content Include="Areas\HRManager\Views\EmployeeInfoDutiesTransfer\Hd.cshtml" />
+    <Content Include="Areas\HRManager\Views\EmployeeInfoDutiesTransfer\List.cshtml" />
+    <Content Include="Areas\HRManager\Views\EmployeeInfoTechnical\List.cshtml" />
+    <Content Include="Areas\HRManager\Views\EmployeeInfoTransfer\List.cshtml" />
     <Content Include="Areas\PermissionManager\Scripts\Department\Hd.js" />
     <Content Include="Areas\PermissionManager\Scripts\Department\List.js" />
     <Content Include="Areas\PermissionManager\Scripts\FunctionDetail\Hd.js" />
@@ -195,6 +206,7 @@
     <Content Include="HtmlPage1.html" />
     <Content Include="HtmlPage12.html" />
     <Content Include="Resources\Css\Site.css" />
+    <Content Include="Scripts\jqueryPlugins\jquery-easyui\jquery.messager.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Areas\PermissionManager\Views\Department\List.cshtml" />
@@ -268,13 +280,19 @@
     <Content Include="Areas\SystemSetManager\Views\IndexPageSet\List.cshtml" />
     <Content Include="Areas\ReportManager\Views\HrReport\EmployeeInOutReport.cshtml" />
     <Content Include="Areas\HRManager\Views\EmployeeInfo\Up.cshtml" />
+    <Content Include="Areas\HRManager\Views\EmployeeInfoTransfer\Hd.cshtml" />
+    <Content Include="Areas\HRManager\Views\EmployeeInfo\Look.cshtml" />
+    <Content Include="Areas\HRManager\Views\EmployeeInfoHis\Index.cshtml" />
+    <Content Include="Areas\HRManager\Views\EmployeeInfoTechnical\Hd.cshtml" />
     <None Include="Properties\PublishProfiles\OA.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\Control\DepartmentControl.js" />
+    <Content Include="Scripts\Control\DutiesControl.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <Content Include="Scripts\jqueryPluginsExtend\jquery-easyui\tabBase.js" />
     <Content Include="Scripts\jqueryPlugins\jquery-easyui\extend\datagrid-detailview.js" />
+    <Content Include="Scripts\jqueryPlugins\jquery-easyui\jquery-browser.js" />
     <Content Include="Scripts\jqueryPlugins\jquery_tip\tip-yellowsimple\tip-yellowsimple.css" />
     <Content Include="Scripts\jqueryPlugins\jquery_tip\tip-yellowsimple\tip-yellowsimple_arrows.gif" />
     <Content Include="Scripts\jqueryPlugins\jquery_tip\tip-yellow\tip-yellow.css" />
@@ -916,7 +934,10 @@
     <Compile Include="Areas\HRManager\Controllers\DictionaryController.cs" />
     <Compile Include="Areas\HRManager\Controllers\EmployeeChildrenController.cs" />
     <Compile Include="Areas\HRManager\Controllers\EmployeeInfoController.cs" />
+    <Compile Include="Areas\HRManager\Controllers\EmployeeInfoDutiesTransferController.cs" />
     <Compile Include="Areas\HRManager\Controllers\EmployeeInfoHisController.cs" />
+    <Compile Include="Areas\HRManager\Controllers\EmployeeInfoTechnicalController.cs" />
+    <Compile Include="Areas\HRManager\Controllers\EmployeeInfoTransferController.cs" />
     <Compile Include="Areas\HRManager\Controllers\EmployeeRotateController.cs" />
     <Compile Include="Areas\HRManager\Controllers\EmployeeYearDetailController.cs" />
     <Compile Include="Areas\HRManager\Controllers\EmployeeYearMainController.cs" />
@@ -987,6 +1008,7 @@
     <Content Include="Scripts\pro\kindeditor\file_manager_json.ashx" />
     <Content Include="Scripts\pro\kindeditor\upload_json.ashx" />
     <Content Include="TemplateFile\员工模版.xlsx" />
+    <Content Include="TemplateFile\EmployeeExport.xlsx" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

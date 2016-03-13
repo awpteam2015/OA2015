@@ -21,22 +21,31 @@ var pro = pro || {};
                 rownumbers: true, //行号
                 singleSelect: true,
                 frozenColumns: [[
-               {
-                   field: 'DepartmentCode', title: '部门', width: 100, formatter: function (value, row) {
-                       return row.DepartmentEntity.DepartmentName;
-                   }
-               },
-         { field: 'EmployeeName', title: '员工', width: 100 }
+                { field: 'EmployeeName', title: '员工姓名', width: 100 },
+                {
+                    field: 'DepartmentCode',
+                    title: '部门名称',
+                    width: 100,
+                    formatter: function (value, row) {
+                        return row.DepartmentEntity.DepartmentName;
+                    },
+                },
+                {
+                    field: 'DepartmentName', title: '机构名称', width: 100, formatter: function (value, row) {
+                     
+                        return row.DepartmentEntity.ParentDepartmentName;
+                    }
+                }
                 ]],
 
                 columns: [[
-         { field: 'PkId', title: '', hidden: true, width: 100 },
+            { field: 'PkId', title: '', hidden: true, width: 100 },
 
-         { field: 'LeftCount', title: '年休余数', width: 100 },
-         //{ field: 'Remark', title: '备注', width: 100 },
-         { field: 'CreatorUserName', title: '创建人', width: 100 },
-         { field: 'CreationTime', title: '创建时间', width: 100 },
-         { field: 'LastModificationTime', title: '最后修改时间', width: 100 },
+            { field: 'LeftCount', title: '年休余数', width: 100 },
+            //{ field: 'Remark', title: '备注', width: 100 },
+            { field: 'CreatorUserName', title: '创建人', width: 100 },
+            { field: 'CreationTime', title: '创建时间', width: 100 },
+            { field: 'LastModificationTime', title: '最后修改时间', width: 100 },
                 ]],
                 pagination: true,
                 pageSize: 20, //每页显示的记录条数，默认为10     

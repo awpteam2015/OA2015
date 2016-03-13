@@ -42,9 +42,10 @@ namespace Project.WebApplication.Areas.HRManager.Controllers
             var pSize = this.Request["rows"].ConvertTo<int>();
             var where = new GoAbroadEntity();
             //where.PkId = RequestHelper.GetFormString("PkId");
-            //where.EmployeeCode = RequestHelper.GetFormString("EmployeeCode");
+            where.EmployeeCode = RequestHelper.GetFormString("EmployeeCode");
             where.DepartmentCode = RequestHelper.GetFormString("DepartmentCode");
             where.DepartmentCode = string.Join(",", (DepartmentService.GetInstance().GetChiledArr(where.DepartmentCode)));
+            where.EmployeeName = RequestHelper.GetFormString("EmployeeName");
             //where.Country = RequestHelper.GetFormString("Country");
             //where.BeginDate = RequestHelper.GetFormString("BeginDate");
             //where.EndDate = RequestHelper.GetFormString("EndDate");

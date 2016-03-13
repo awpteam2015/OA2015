@@ -7,7 +7,7 @@ using System.IO;
 using System.Diagnostics;
 using System.Collections.Generic;
 
-namespace NT.Model.Utils
+namespace Project.Infrastructure.FrameworkCore.ToolKit
 {
     public class AsposeCellsHelper
     {
@@ -121,6 +121,69 @@ namespace NT.Model.Utils
             sheet.AutoFitColumns();
             sheet.AutoFitRows();
             book.Save(fileName);
+        }
+
+
+        public static bool ExportToExcel(DataTable dt, string templateFilePath, string filepath, Dictionary<string, object> dict)
+        {
+            try
+            {
+                WorkbookDesigner designer = new WorkbookDesigner();
+                designer.Workbook = new Workbook(templateFilePath);
+                designer.SetDataSource(dt);
+                foreach (var dc in dict)
+                {
+                    designer.SetDataSource(dc.Key, dc.Value);
+                }
+
+                designer.Process();
+
+
+                if (File.Exists(filepath))
+                {
+                    File.Delete(filepath);
+                }
+                designer.Save(filepath);
+                //打开文件
+                //Process.Start(filepath);
+
+                return true;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+        }
+
+        public static bool ExportToExcel<T>(T list, string listName, string templateFilePath, string filepath, Dictionary<string, object> dict)
+        {
+            try
+            {
+                WorkbookDesigner designer = new WorkbookDesigner();
+                designer.Workbook = new Workbook(templateFilePath);
+                designer.SetDataSource(listName, list);
+                foreach (var dc in dict)
+                {
+                    designer.SetDataSource(dc.Key, dc.Value);
+                }
+
+                designer.Process();
+
+
+                if (File.Exists(filepath))
+                {
+                    File.Delete(filepath);
+                }
+                designer.Save(filepath);
+                //打开文件
+                //Process.Start(filepath);
+
+                return true;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
         }
 
         /// <summary>

@@ -27,6 +27,32 @@ var pro = pro || {};
          //{ field: 'ReceiveUserCode', title: '接收人', width: 100 },
          //{ field: 'IsAll', title: '是否所有人', width: 100 },
          //{ field: 'CreatorUserCode', title: '发送人', width: 100 },
+         {
+             field: 'InfoType', title: '类型', width: 100, formatter: function (value, row, index) {
+                 var ret = "";
+                 switch (value) {
+                     case 1:
+                         ret = '生日提醒';
+                         break;
+                     case 2:
+                         ret = '退休提醒';
+                         break;
+
+                     case 3:
+                         ret = '合同过期提醒';
+                         break;
+
+                     case 4:
+                         ret = '合同到期提醒';
+                         break;
+                     case 5:
+                         ret = '其它提醒';
+                         break;
+                 }
+                 return ret;
+             }
+         },
+
          { field: 'CreatorUserName', title: '发送人', width: 100 },
          {
              field: 'IsRead', title: '是否已读', width: 100, formatter: function (value, row, index) {
@@ -72,7 +98,7 @@ var pro = pro || {};
                     return;
                 }
                 var PkId = gridObj.getSelectedRow().PkId;
-                tabObj.add("/HRManager/MessageInfo/Hd?PkId=" + PkId + "&View=true", "查看" + PkId);
+                tabObj.add("/HRManager/MessageInfo/Hd?PkId=" + PkId + "&View=true", "提醒详情");
             });
 
 

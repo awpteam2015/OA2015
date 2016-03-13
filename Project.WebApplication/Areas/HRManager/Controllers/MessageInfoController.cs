@@ -26,7 +26,7 @@ namespace Project.WebApplication.Areas.HRManager.Controllers
             {
                 var entity = MessageInfoService.GetInstance().GetModelByPk(pkId);
                 //修改浏览记录
-                if (entity.ReadUser == null || entity.ReadUser.Contains(LoginUserInfo.UserCode + ","))
+                if (entity.ReadUser == null || !entity.ReadUser.Contains(LoginUserInfo.UserCode + ","))
                 {
                     if (entity.ReadUser == null)
                         entity.ReadUser = LoginUserInfo.UserCode + ",";
@@ -60,6 +60,7 @@ namespace Project.WebApplication.Areas.HRManager.Controllers
             where.CreationTime = RequestHelper.GetFormDateTime("CreationTime");
             where.CreationTimeEnd = RequestHelper.GetFormDateTime("CreationTimeEnd");
             where.CurUserCode = LoginUserInfo.UserCode;
+            where.InfoType = RequestHelper.GetFormInt("InfoType", 0);
             //where.LastModificationTime = RequestHelper.GetFormString("LastModificationTime");
             //where.LastModifierUserCode = RequestHelper.GetFormString("LastModifierUserCode");
             //where.DeleterUserCode = RequestHelper.GetFormString("DeleterUserCode");

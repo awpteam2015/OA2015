@@ -46,7 +46,7 @@ var pro = pro || {};
                  return ret;
              }
          },
-         { field: 'CertNo', title: '身份证', width: 120 },
+         { field: 'CertNo', title: '身份证', width: 150 },
          { field: 'Birthday', title: '生日', width: 100 },
          { field: 'DutiesName', title: '单位职务', width: 100 },
          { field: 'WorkStateName', title: '在职状态', width: 100 },
@@ -118,6 +118,17 @@ var pro = pro || {};
                 tabObj.add("/HRManager/EmployeeInfo/Hd", "新增");
             });
 
+            $("#btnView").click(function () {
+                if (!gridObj.isSelected()) {
+                    $.alertExtend.infoOp();
+                    return;
+                }
+                var PkId = gridObj.getSelectedRow().PkId;
+                var EmployeeCode = gridObj.getSelectedRow().EmployeeCode;
+                var employeeName = gridObj.getSelectedRow().EmployeeName;
+                tabObj.add("/HRManager/EmployeeInfo/Look?PkId=" + PkId + "&EmployeeCode=" + EmployeeCode, "查看(" + employeeName + ")");
+            });
+
             $("#btnEdit").click(function () {
                 if (!gridObj.isSelected()) {
                     $.alertExtend.infoOp();
@@ -125,11 +136,34 @@ var pro = pro || {};
                 }
                 var PkId = gridObj.getSelectedRow().PkId;
                 var EmployeeCode = gridObj.getSelectedRow().EmployeeCode;
-                tabObj.add("/HRManager/EmployeeInfo/Hd?PkId=" + PkId + "&EmployeeCode=" + EmployeeCode, "编辑" + PkId);
+                var employeeName = gridObj.getSelectedRow().EmployeeName;
+                tabObj.add("/HRManager/EmployeeInfo/Hd?PkId=" + PkId + "&EmployeeCode=" + EmployeeCode, "编辑(" + employeeName + ")");
             });
 
-            $("#btnUpload").click(function () {                
+            $("#btnUpload").click(function () {
                 tabObj.add("/HRManager/EmployeeInfo/Up", "上传");
+            });
+
+            $("#btnDown").click(function () {
+                $.messager.confirm("确认操作", "是否确认导出", function (bl) {
+                    if (!bl) return;
+                    abp.ajax({
+                        url: "/HRManager/EmployeeInfo/ExportExcel"
+                    }).done(
+                    function (dataresult, data) {
+                        //
+                        if (data && data.success) {
+                            location.href = data.targeturl;
+                        }
+                        //$.alertExtend.info();
+                        //gridObj.search();
+                    }
+                    ).fail(
+                    function (errordetails, errormessage) {
+                        $.alertExtend.error();
+                    }
+                    );
+                });
             });
 
             $("#btnSearch").click(function () {

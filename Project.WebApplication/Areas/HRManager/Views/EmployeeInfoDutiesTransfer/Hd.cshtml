@@ -1,0 +1,54 @@
+﻿@{
+    ViewBag.Title = "Hd";
+    Layout = "~/Views/Shared/_LayoutHandler.cshtml";
+}
+
+@section JavaScript{
+    <script src="/Areas/HrManager/Scripts/EmployeeInfoDutiesTransfer/Hd.js?JsParamter=@SiteConfig.GetConfig().JsParamter"></script>
+}
+<div style="display: none">
+    <input id="BindEntity" type="text" value="@ViewBag.BindEntity" />
+    <input id="Command" type="hidden" />
+</div>
+<div class="mtable_div">
+    <form id="form1">
+        <table class="mtable">
+            <tr>
+                <td>
+                    员工编号<span style="color: Red">*</span>:
+                </td>
+                <td>
+                    <input id="EmployeeCode" name="EmployeeCode" type="text" disabled="disabled" />
+                </td>
+                <td>
+                    员工名称<span style="color: Red">*</span>:
+                </td>
+                <td>
+                    <input id="EmployeeName" name="EmployeeName" type="text" disabled="disabled" />
+                </td>
+
+            </tr>
+            <tr>
+                <td>
+                    原先职务<span style="color: Red">*</span>:
+                </td>
+                <td>
+                    <input id="OldDuties" name="OldDuties" type="text" disabled="disabled" />
+                </td>
+                <td>
+                    新职务<span style="color: Red">*</span>:
+                </td>
+                <td>
+                    <input id="Duties" name="Duties" type="text" style="width: 200px" />
+                </td>
+            </tr>
+
+        </table>
+    </form>
+</div>
+<div style="padding: 10px 10px 0 10px; text-align: center;">
+    <a id="btnEdit" class="easyui-linkbutton" iconcls="icon-ok" href="javascript:void(0)">调动</a>
+    <a id="btnClose" class="easyui-linkbutton" iconcls="icon-cancel" href="javascript:void(0)">关闭</a>
+</div>
+
+

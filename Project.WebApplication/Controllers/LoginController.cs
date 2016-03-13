@@ -18,7 +18,7 @@ namespace Project.WebApplication.Controllers
         // GET: Login
         public ActionResult Index3()
         {
-           
+
             return View();
         }
 
@@ -31,6 +31,7 @@ namespace Project.WebApplication.Controllers
         [HttpPost]
         public JsonResult UserLogin(string userCode, string password)
         {
+            LoggerHelper.Info("登陆前：");
             var userInfo = UserInfoService.GetInstance().Login(userCode, password);
             if (!userInfo.Item1)
             {
@@ -53,6 +54,8 @@ namespace Project.WebApplication.Controllers
             cookie.Expires = DateTime.Now.AddMinutes(300);
             cookie.HttpOnly = true;
             Response.Cookies.Add(cookie);
+
+            LoggerHelper.Info("登陆结束：");
             return new AbpJsonResult
             {
                 Data = new AjaxResponse<object>() { success = true }

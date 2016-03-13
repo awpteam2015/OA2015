@@ -2,6 +2,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Web.Mvc;
 using Aspose.Cells;
@@ -88,7 +89,7 @@ namespace Project.WebApplication.Areas.HRManager.Controllers
                 total = searchList.Item2,
                 rows = searchList.Item1
             };
-            return new AbpJsonResult(dataGridEntity, new NHibernateContractResolver());
+            return new AbpJsonResult(dataGridEntity, new NHibernateContractResolver(new string[] { "result" }));
         }
 
         public AbpJsonResult GetAllList()
@@ -223,7 +224,7 @@ namespace Project.WebApplication.Areas.HRManager.Controllers
                     addResult = EmployeeInfoService.GetInstance().Update(postData.RequestEntity);
                 }
                 else
-                     addResult = EmployeeInfoService.GetInstance().Add(postData.RequestEntity);
+                    addResult = EmployeeInfoService.GetInstance().Add(postData.RequestEntity);
                 if (addResult.Item1)
                     sucessNum++;
                 else
@@ -237,6 +238,56 @@ namespace Project.WebApplication.Areas.HRManager.Controllers
             };
             return new AbpJsonResult(result, new NHibernateContractResolver());
         }
+
+        public AbpJsonResult ExportExcel()
+        {
+            var filepath = "/UploadFile/Temp/";
+            var rootpath = this.Request.MapPath("/");
+            var fileName = DateTime.Now.ToString("yyyyMMHHddmmssfff") + ".xls";
+
+            var where = new EmployeeInfoEntity();
+            //where.DepartmentCode = RequestHelper.GetFormString("DepartmentCode");
+            var searchList = EmployeeInfoService.GetInstance().GetList(where, false);
+
+
+            var bl = AsposeCellsHelper.ExportToExcel<IList<EmployeeInfoEntity>>(searchList, "EmployeeInfo", $"{rootpath}/TemplateFile/EmployeeExport.xlsx", $"{rootpath}{filepath}{fileName}", new Dictionary<string, object>());
+
+
+
+            var result = new AjaxResponse<EmployeeInfoEntity>()
+            {
+                success = bl,
+                targeturl = filepath + fileName
+            };
+            return new AbpJsonResult(result, new NHibernateContractResolver());
+
+        }
+
+
+        public ActionResult Look(int pkId = 0)
+        {
+            if (pkId > 0)
+            {
+                var entity = EmployeeInfoService.GetInstance().GetModelByPk(pkId);
+                ViewBag.BindEntity = JsonHelper.JsonSerializer(entity);
+            }
+            else
+            {
+                // var maxCode = ((TypeParse.StrToInt(EmployeeInfoService.GetInstance().GetMaxEmployeeCode(), 0) + 1) + "").PadLeft(8, '0');
+                ViewBag.BindEntity = JsonHelper.JsonSerializer(new EmployeeInfoEntity()
+                {
+                    EmployeeCode = "",
+                    Duties = "0",
+                    EmployeeType = "0",
+                    Sex = 0,
+                    WorkingYears = 1,
+                    WorkState = "1",
+                    State = 1
+                });
+            }
+            return View();
+        }
+
     }
 }
 
