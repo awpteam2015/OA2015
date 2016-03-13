@@ -13,6 +13,7 @@ using Project.Infrastructure.FrameworkCore.DataNhibernate;
 using Project.Infrastructure.FrameworkCore.DataNhibernate.Helpers;
 using Project.Model.HRManager;
 using Project.Repository.HRManager;
+using Project.Service.HRManager.Validate;
 
 namespace Project.Service.HRManager
 {
@@ -43,6 +44,14 @@ namespace Project.Service.HRManager
         /// <returns></returns>
         public Tuple<bool, string> Add(ContractEntity entity)
         {
+
+            var validateResult = ContractValidate.GetInstance().IsHasSameContractCode(entity.ContractNo);
+            if (!validateResult.Item1)
+            {
+                return validateResult;
+            }
+
+
             using (var tx = NhTransactionHelper.BeginTransaction())
             {
                 try
@@ -107,6 +116,11 @@ namespace Project.Service.HRManager
         /// <param name="entity"></param>
         public Tuple<bool, string> Update(ContractEntity entity)
         {
+            var validateResult = ContractValidate.GetInstance().IsHasSameContractCode(entity.ContractNo);
+            if (!validateResult.Item1)
+            {
+                return validateResult;
+            }
             try
             {
                 _contractRepository.Update(entity);
@@ -208,8 +222,8 @@ namespace Project.Service.HRManager
             //  expr = expr.And(p => p.State == where.State);
             // if (!string.IsNullOrEmpty(where.IsActive))
             //  expr = expr.And(p => p.IsActive == where.IsActive);
-            // if (!string.IsNullOrEmpty(where.ContractNo))
-            //  expr = expr.And(p => p.ContractNo == where.ContractNo);
+            if (!string.IsNullOrEmpty(where.ContractNo))
+                expr = expr.And(p => p.ContractNo == where.ContractNo);
             // if (!string.IsNullOrEmpty(where.FirstParty))
             //  expr = expr.And(p => p.FirstParty == where.FirstParty);
             // if (!string.IsNullOrEmpty(where.SecondParty))
