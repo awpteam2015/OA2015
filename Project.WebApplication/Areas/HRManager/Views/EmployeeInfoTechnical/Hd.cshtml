@@ -1,8 +1,84 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "Hd";
-    Layout = "~/Views/Shared/_LayoutList.cshtml";
+    Layout = "~/Views/Shared/_LayoutHandler.cshtml";
 }
 
-<h2>Hd</h2>
+@section JavaScript{
+    <script src="/Areas/HRManager/Scripts/EmployeeInfoTechnical/Hd.js?JsParamter=@SiteConfig.GetConfig().JsParamter"></script>
+}
+<div style="display: none">
+    <input id="BindEntity" type="text" value="@ViewBag.BindEntity" />
+    <input id="Command" type="hidden" />
+</div>
+<div class="mtable_div">
+    <form id="form1">
+        <table class="mtable">
+            <tr>
+                <td>
+                    员工编号<span style="color: Red">*</span>:
+                </td>
+                <td>
+                    <input id="EmployeeCode" name="EmployeeCode" type="text" disabled="disabled" />
+                </td>
+
+                <td>
+                    员工名称<span style="color: Red">*</span>:
+                </td>
+                <td>
+                    <input id="EmployeeName" name="EmployeeName" type="text" disabled="disabled" style="width: 200px;" />
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    职称名称<span style="color: Red">*</span>:
+                </td>
+                <td>
+                    <input id="Title" name="Title" type="text" style="width: 200px;" />
+                </td>
+
+                <td>
+                    等级<span style="color: Red">*</span>:
+                </td>
+                <td>
+                    <input id="LevNum" name="LevNum" type="text" style="width: 120px;" />
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    取得时间<span style="color: Red">*</span>:
+                </td>
+                <td>
+                    <input id="GetDate" name="GetDate" type="text" class="Wdate" onclick="WdatePicker();" style="width: 120px;" />
+                </td>
+
+                <td>
+                    职称证书编号<span style="color: Red">*</span>:
+                </td>
+                <td>
+                    <input id="CerNo" name="CerNo" type="text" style="width: 200px;" />
+                </td>
+            </tr>
+
+
+
+        </table>
+    </form>
+</div>
+<div style="padding: 10px 10px 0 10px; text-align: center;">
+    <a id="btnAdd" class="easyui-linkbutton" iconcls="icon-add" href="javascript:void(0)">保存</a>
+    @*@if (Request["PkId"] == null || int.Parse(Request["PkId"]) == 0)
+    {
+        <a id="btnAdd" class="easyui-linkbutton" iconcls="icon-add" href="javascript:void(0)">保存</a>
+    }
+    else
+    {
+        <a id="btnEdit" class="easyui-linkbutton" iconcls="icon-ok" href="javascript:void(0)">编辑</a>
+    }*@
+    <a id="btnClose" class="easyui-linkbutton" iconcls="icon-cancel" href="javascript:void(0)">关闭</a>
+</div>
+
+
+
 

@@ -89,7 +89,7 @@ namespace Project.WebApplication.Areas.HRManager.Controllers
                 total = searchList.Item2,
                 rows = searchList.Item1
             };
-            return new AbpJsonResult(dataGridEntity, new NHibernateContractResolver());
+            return new AbpJsonResult(dataGridEntity, new NHibernateContractResolver(new string[] { "result" }));
         }
 
         public AbpJsonResult GetAllList()

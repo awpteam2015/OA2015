@@ -13,6 +13,7 @@
 <head>
     @Html.Partial("_Head")
     <script src="~/Scripts/Account/Index.js"></script>
+    <script src="~/Scripts/jqueryPlugins/jquery-easyui/jquery-browser.js"></script>
     <script src="~/Scripts/jqueryPlugins/jquery-easyui/jquery.messager.js"></script>
 </head>
 <body class="easyui-layout">
@@ -206,20 +207,23 @@
             }
         }
 
-        @{
-            var isshow = false;
-            var str = "<div title='' data-options=\"iconCls:'icon-asterisk_yellow'\"><ul class='menulist'>";
-            foreach (MessageInfoEntity p in ViewBag.MessagList)
+        $(function () {
+            @{
+                var isshow = false;
+                var str = "<div title='' data-options=\"iconCls:'icon-asterisk_yellow'\"><ul class='menulist'>";
+                foreach (MessageInfoEntity p in ViewBag.MessagList)
             {
                 isshow = true;
-                   str += "<li><a target='mainFrame' href='javascript:void(0)' lang='/HRManager/MessageInfo/Hd?PkId="+@p.PkId+ "&View=true&Close=true'>" + @p.MesTitle + "</a></li>";
+                str += "<li><a target='mainFrame' href='javascript:void(0)' lang='/HRManager/MessageInfo/Hd?PkId="+@p.PkId+ "&View=true&Close=true'>" + @p.MesTitle + "</a></li>";
             }
             str += "</ul></div>";
         }
-        if ('@isshow'=="True") {
-            $.cusmessager.lays(300, 200);
-            $.cusmessager.show(0, $('<div/>').html('@str').text());
-        }
+            if ('@isshow' == "True") {
+                //$.cusmessager.lays(300, 200);
+                $.cusmessager.show(0, $('<div/>').html('@str').text(), 5000);
+            }
+        });
+
 
     </script>
 

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
+using AutoMapper;
 using Project.Infrastructure.FrameworkCore.DataNhibernate.Helpers;
 using Project.Infrastructure.FrameworkCore.ToolKit.JsonHandler;
 using Project.Infrastructure.FrameworkCore.ToolKit.LinqExpansion;
@@ -24,21 +25,16 @@ namespace Project.WebApplication.Areas.HRManager.Controllers
             if (pkId > 0)
             {
                 var entity = EmployeeInfoService.GetInstance().GetModelByPk(pkId);
-                ViewBag.BindEntity = JsonHelper.JsonSerializer(entity);
+                var technicalEntity=new TechnicalEntity();
+                Mapper.Map(entity, technicalEntity);
+                technicalEntity.EmployeeID = entity.PkId;
+                technicalEntity.PkId = 0;
+                ViewBag.BindEntity = JsonHelper.JsonSerializer(technicalEntity);
             }
             else
             {
                 var maxCode = ((TypeParse.StrToInt(EmployeeInfoService.GetInstance().GetMaxEmployeeCode(), 0) + 1) + "").PadLeft(8, '0');
-                ViewBag.BindEntity = JsonHelper.JsonSerializer(new EmployeeInfoEntity()
-                {
-                    EmployeeCode = maxCode,
-                    Duties = "0",
-                    EmployeeType = "0",
-                    Sex = 0,
-                    WorkingYears = 1,
-                    WorkState = "1",
-                    State = 1
-                });
+                ViewBag.BindEntity = JsonHelper.JsonSerializer(new TechnicalEntity());
             }
             return View();
         }
