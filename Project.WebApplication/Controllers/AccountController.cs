@@ -3,6 +3,8 @@ using Project.Config;
 using Project.Infrastructure.FrameworkCore.Logging;
 using Project.Infrastructure.FrameworkCore.WebMvc.Controllers.Results;
 using Project.Infrastructure.FrameworkCore.WebMvc.Models;
+using Project.Model.HRManager;
+using Project.Service.HRManager;
 using Project.Service.PermissionManager;
 using Project.Service.SystemSetManager;
 
@@ -12,7 +14,7 @@ namespace Project.WebApplication.Controllers
     public class AccountController : BaseController
     {
 
-         //[PermissionAuthorize]
+        //[PermissionAuthorize]
         // GET: Account
         public ActionResult Index()
         {  // ISAPIRuntime
@@ -23,7 +25,11 @@ namespace Project.WebApplication.Controllers
             //   MvcHandler
 
             ViewBag.User = LoginUserInfo;
-            ViewBag.ModuleList = UserInfoService.GetInstance().GetMenuDTOList(LoginUserInfo.UserCode,LoginUserInfo.PermissionCodeList);
+            ViewBag.ModuleList = UserInfoService.GetInstance().GetMenuDTOList(LoginUserInfo.UserCode, LoginUserInfo.PermissionCodeList);
+            ViewBag.MessagList = MessageInfoService.GetInstance().Search(new MessageInfoEntity()
+            {
+                SreachNoReadUserCode = LoginUserInfo.UserCode
+            }, 0, 4).Item1;
 
             return View();
         }
@@ -42,7 +48,7 @@ namespace Project.WebApplication.Controllers
             };
         }
 
-       
+
 
 
         public ActionResult Default()

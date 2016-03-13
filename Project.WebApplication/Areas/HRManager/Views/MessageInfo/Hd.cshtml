@@ -23,7 +23,7 @@
                     标题<span style="color: Red">*</span>:
                 </td>
                 <td>
-                    <input id="MesTitle" name="MesTitle" type="text" style="width: 400px;" readonly="readonly" disabled="disabled"/>
+                    <input id="MesTitle" name="MesTitle" type="text" style="width: 400px;" readonly="readonly" disabled="disabled" />
                 </td>
             </tr>
 
@@ -50,5 +50,8 @@
             <a id="btnEdit" class="easyui-linkbutton" iconcls="icon-ok" href="javascript:void(0)">编辑</a>
         }
     }
-    <a id="btnClose" class="easyui-linkbutton" iconcls="icon-cancel" href="javascript:void(0)">关闭</a>
+    @if (Request["Close"] == null)
+    {
+        <a id="btnClose" class="easyui-linkbutton" iconcls="icon-cancel" href="javascript:void(0)">关闭</a>
+    }
 </div>

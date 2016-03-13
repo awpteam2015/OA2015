@@ -86,6 +86,11 @@ namespace Project.Model.HRManager
         /// 是否已读
         /// </summary>
         public virtual System.Boolean? IsRead { get; set; }
+
+        /// <summary>
+        /// 用于查未读人员
+        /// </summary>
+        public virtual  System.String SreachNoReadUserCode { get; set; }
         #endregion
     }
 }

@@ -140,6 +140,10 @@ namespace Project.Service.HRManager
 
             if (where.InfoType.HasValue && where.InfoType.Value >= 1)
                 expr = expr.And(p => p.InfoType == where.InfoType);
+            if (!string.IsNullOrEmpty(where.SreachNoReadUserCode))
+            {
+                expr = expr.And(p => p.ReadUser.ToUpper().IndexOf($"{where.SreachNoReadUserCode},".ToUpper()) <=0);
+            }
             // if (!string.IsNullOrEmpty(where.LastModificationTime))
             //  expr = expr.And(p => p.LastModificationTime == where.LastModificationTime);
             // if (!string.IsNullOrEmpty(where.LastModifierUserCode))
