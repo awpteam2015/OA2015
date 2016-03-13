@@ -121,6 +121,8 @@
     <Content Include="Areas\HRManager\Scripts\EmployeeInfoDutiesTransfer\List.js" />
     <Content Include="Areas\HRManager\Scripts\EmployeeInfoHis\Hd.js" />
     <Content Include="Areas\HRManager\Scripts\EmployeeInfoHis\List.js" />
+    <Content Include="Areas\HRManager\Scripts\EmployeeInfoTechnical\Hd.js" />
+    <Content Include="Areas\HRManager\Scripts\EmployeeInfoTechnical\List.js" />
     <Content Include="Areas\HRManager\Scripts\EmployeeInfoTransfer\Hd.js" />
     <Content Include="Areas\HRManager\Scripts\EmployeeInfoTransfer\List.js" />
     <Content Include="Areas\HRManager\Scripts\EmployeeInfo\Hd.js" />
@@ -157,6 +159,7 @@
     <Content Include="Areas\HRManager\Scripts\YearHolidayDefinition\List.js" />
     <Content Include="Areas\HRManager\Views\EmployeeInfoDutiesTransfer\Hd.cshtml" />
     <Content Include="Areas\HRManager\Views\EmployeeInfoDutiesTransfer\List.cshtml" />
+    <Content Include="Areas\HRManager\Views\EmployeeInfoTechnical\List.cshtml" />
     <Content Include="Areas\HRManager\Views\EmployeeInfoTransfer\List.cshtml" />
     <Content Include="Areas\PermissionManager\Scripts\Department\Hd.js" />
     <Content Include="Areas\PermissionManager\Scripts\Department\List.js" />
@@ -280,6 +283,7 @@
     <Content Include="Areas\HRManager\Views\EmployeeInfoTransfer\Hd.cshtml" />
     <Content Include="Areas\HRManager\Views\EmployeeInfo\Look.cshtml" />
     <Content Include="Areas\HRManager\Views\EmployeeInfoHis\Index.cshtml" />
+    <Content Include="Areas\HRManager\Views\EmployeeInfoTechnical\Hd.cshtml" />
     <None Include="Properties\PublishProfiles\OA.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\Control\DepartmentControl.js" />
@@ -932,6 +936,7 @@
     <Compile Include="Areas\HRManager\Controllers\EmployeeInfoController.cs" />
     <Compile Include="Areas\HRManager\Controllers\EmployeeInfoDutiesTransferController.cs" />
     <Compile Include="Areas\HRManager\Controllers\EmployeeInfoHisController.cs" />
+    <Compile Include="Areas\HRManager\Controllers\EmployeeInfoTechnicalController.cs" />
     <Compile Include="Areas\HRManager\Controllers\EmployeeInfoTransferController.cs" />
     <Compile Include="Areas\HRManager\Controllers\EmployeeRotateController.cs" />
     <Compile Include="Areas\HRManager\Controllers\EmployeeYearDetailController.cs" />
