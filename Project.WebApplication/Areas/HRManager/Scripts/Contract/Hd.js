@@ -34,14 +34,20 @@
 
                      $("#IdentityCardNo").val(dataresult.CertNo);
                      $("#SecondParty").val(dataresult.EmployeeName);
+                     $("#SecondParty_span").html(dataresult.EmployeeName);
                  }
              ).fail(
               function (errordetails, errormessage) {
-                  //  $.alertExtend.error();
+                  $("#EmployeeCode").val("");
               }
              );
 
             });
+
+
+
+            pro.DepartmentControl.init({ controlId: "FirstParty" });
+
 
             if ($("#BindEntity").val()) {
                 var bindField = pro.bindKit.getHeadJson();
@@ -53,6 +59,8 @@
                 $("#DepartmentCode_span").html(bindEntity.DepartmentCode);
                 $("#DepartmentName_span").html(bindEntity.DepartmentName);
                 $("#State").html(bindEntity.Attr_State);
+                $("#SecondParty_span").html(bindEntity.SecondParty);
+                
 
                 if (pro.commonKit.getUrlParam("State") == "2") {
                     $("#EmployeeCode").attr("disabled", "disabled");
