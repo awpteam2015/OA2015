@@ -250,8 +250,8 @@ namespace Project.WebApplication.Areas.HRManager.Controllers
             var searchList = EmployeeInfoService.GetInstance().GetList(where, false);
 
 
-            var bl = AsposeCellsHelper.ExportToExcel<IList<EmployeeInfoEntity>>(searchList, "EmployeeInfo", $"{rootpath}/TemplateFile/EmployeeExport.xlsx", $"{rootpath}{filepath}{fileName}", new Dictionary<string, object>());
-
+            //var bl = AsposeCellsHelper.ExportToExcel<IList<EmployeeInfoEntity>>(searchList, "EmployeeInfo", $"{rootpath}/TemplateFile/EmployeeExport.xlsx", $"{rootpath}{filepath}{fileName}", new Dictionary<string, object>());
+            var bl = true;
 
 
             var result = new AjaxResponse<EmployeeInfoEntity>()

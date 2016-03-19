@@ -142,7 +142,7 @@ namespace Project.Service.HRManager
                 expr = expr.And(p => p.InfoType == where.InfoType);
             if (!string.IsNullOrEmpty(where.SreachNoReadUserCode))
             {
-                expr = expr.And(p => p.ReadUser.ToUpper().IndexOf($"{where.SreachNoReadUserCode},".ToUpper()) <=0);
+                //expr = expr.And(p => p.ReadUser.ToUpper().IndexOf($"{where.SreachNoReadUserCode},".ToUpper()) <=0);
             }
             // if (!string.IsNullOrEmpty(where.LastModificationTime))
             //  expr = expr.And(p => p.LastModificationTime == where.LastModificationTime);
