@@ -147,6 +147,24 @@ namespace Project.Model.HRManager
         public virtual System.String WorkStateName { get; set; }
 
         public virtual bool IsDeleted { get; set; }
+
+        /// <summary>
+        /// 开始工作时间
+        /// </summary>
+        public virtual  DateTime? StartWork { get; set; }
+
+        /// <summary>
+        /// 入党时间
+        /// </summary>
+        public virtual DateTime? JoinCommy { get; set; }
+
+        public virtual System.String PostLevel { get; set; }
+
+        public virtual  System.String PostLevelName { get; set; }
+
+        public virtual  System.String PostProperty { get; set; }
+        public virtual System.String PostPropertyName { get; set; }
+
         #endregion
 
 

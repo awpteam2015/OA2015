@@ -65,12 +65,18 @@
                     生日@*<span style="color: Red">*</span>*@:
                 </td>
                 <td>
-                    <input id="Birthday" name="Birthday" class="Wdate" onclick="WdatePicker();"  />
+                    <input id="Birthday" name="Birthday" class="Wdate" onclick="WdatePicker();"/>
                 </td>
                 <td>
+                    参加工作时间<span style="color: Red">*</span>:
+                </td>
+                <td>
+                    <input id="StartWork" name="StartWork" type="text" class="Wdate" onclick="WdatePicker();" />
+                </td>
+                <td style="display: none">
                     工龄<span style="color: Red">*</span>:
                 </td>
-                <td>
+                <td style="display: none">
                     <input id="WorkingYears" name="WorkingYears" type="text" />
                 </td>
                 @*<td>
@@ -87,7 +93,21 @@
                     <input id="Duties" name="Duties" type="text" />
                 </td>
             </tr>
+            <tr>
 
+                <td>
+                    岗位性质<span style="color: Red">*</span>:
+                </td>
+                <td>
+                    <input id="PostProperty" name="PostProperty" type="text" />
+                </td>
+                <td>
+                    入党时间:
+                </td>
+                <td colspan="3">
+                    <input id="JoinCommy" name="JoinCommy" type="text"  class="Wdate" onclick="WdatePicker();" />
+                </td>
+            </tr>
             <tr>
                 <td>
                     在职状态<span style="color: Red">*</span>:
@@ -100,12 +120,18 @@
                     员工类型<span style="color: Red">*</span>:
                 </td>
                 <td>
-                    <input id="EmployeeType" name="EmployeeType" type="text" />
+                    <input id="EmployeeType" name="EmployeeType" type="text"/>
                 </td>
                 <td>
+                    岗位等级:
+                </td>
+                <td>
+                    <input id="PostLevel" name="PostLevel" type="text" />
+                </td>
+                <td style="display: none">
                     状态:
                 </td>
-                <td>
+                <td style="display: none">
                     <select id="State" name="State" class="easyui-combobox">
                         <option value="0">停用</option>
                         <option value="1">启用</option>
@@ -196,7 +222,7 @@
                     </div>
                 </div>
             </div>
-            <div title="职业资格" style="padding:1px;height: 300px">
+            <div title="专业技术资格" style="padding:1px;height: 300px">
                 <table id="datagridProfession" toolbar="#tbProfession" fit="true"></table>
                 <div id="tbProfession" style="padding: 5px; height: auto">
                     <div style="margin-bottom: 5px">

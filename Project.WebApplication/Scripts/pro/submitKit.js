@@ -28,14 +28,14 @@
             inputObj.each(
                 function () {
                     if ($(this).attr("name") != undefined) {
-                        json += '"' + $(this).attr("name") + '":"' + $(this).val().trim() + '",';
+                        json += '"' + $(this).attr("name") + '":"' + $.trim($(this).val()) + '",';
                     }
                 });
 
             selectObj.each(
                 function () {
-                    if ($(this).attr("name") != undefined && $(this).val() != undefined) {                        
-                        json += '"' + $(this).attr("name") + '":"' + $(this).val().trim() + '",';
+                    if ($(this).attr("name") != undefined && $(this).val() != undefined) {
+                        json += '"' + $(this).attr("name") + '":"' + $.trim($(this).val()) + '",';
                     }
                 }
             );
@@ -43,7 +43,7 @@
             $("textarea").each(
                 function () {
                     if ($(this).attr("name") != undefined) {
-                        json += '"' + $(this).attr("name") + '":"' + Base64.encode($(this).val().trim()) + '",';
+                        json += '"' + $(this).attr("name") + '":"' + $.trim(Base64.encode($(this).val())) + '",';
                     }
                 }
             );
