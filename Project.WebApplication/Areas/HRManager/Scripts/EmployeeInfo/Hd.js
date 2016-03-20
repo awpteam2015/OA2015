@@ -199,15 +199,15 @@
                             title: '开始日期',
                             width: 150,
                             formatter: function (value, row, index) {
-                                return pro.controlKit.getInputDateHtml("BeginDate_" + row.PkId, value, 145);
+                                return pro.controlKit.getInputDateHtml("BeginDate_" + row.PkId, value, 130);
                             }
                         },
                         {
                             field: 'EndDate',
                             title: '结束日期',
-                            width: 120,
+                            width: 150,
                             formatter: function (value, row, index) {
-                                return pro.controlKit.getInputDateHtml("EndDate_" + row.PkId, value, 145);
+                                return pro.controlKit.getInputDateHtml("EndDate_" + row.PkId, value, 130);
                             }
                         },
                         {
@@ -268,7 +268,7 @@
                         {
                             field: 'Education',
                             title: '学历',
-                            width: 100,
+                            width: 140,
                             formatter: function (value, row, index) {
                                 return pro.controlKit.getSelectHtml("S_Education_" + row.PkId, value, initObj.xlOptionHtml);
                             }
@@ -455,9 +455,9 @@
                         {
                             field: 'KHYear',
                             title: '考核年度',
-                            width: 120,
+                            width: 180,
                             formatter: function (value, row, index) {
-                                return pro.controlKit.getInputDateHtml("Y_KHYear_" + row.PkId, value,'yyyy');
+                                return pro.controlKit.getInputDateHtml("Y_KHYear_" + row.PkId, value,150,'yyyy');
                             }
                         },
                         {
@@ -465,7 +465,7 @@
                             title: '评价',
                             width: 200,
                             formatter: function (value, row, index) {
-                                return pro.controlKit.getInputHtml("Y_KHComment_" + row.PkId, value,200);
+                                return pro.controlKit.getInputHtml("Y_KHComment_" + row.PkId, value,180);
                             }
                         }
                     ]

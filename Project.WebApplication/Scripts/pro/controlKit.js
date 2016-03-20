@@ -42,15 +42,18 @@
             return html;
         },
         //获取Input的格式
-        getInputDateHtml: function (name, value, farmatedateFmt) {
+        getInputDateHtml: function (name, value,width, farmatedateFmt) {
             if (value == undefined) {
                 value = "";
             }
+            if (width == undefined) {
+                width = "100";
+            }
             var html=''
             if (farmatedateFmt == undefined) {
-                html = '<input class="Wdate"   name="' + name + '" value="' + value + '"  onclick="WdatePicker();"  type="text"/>';
+                html = '<input class="Wdate"   name="' + name + '" value="' + value + '"  onclick="WdatePicker();"  type="text" style="width:' + width + 'px;"/>';
             } else {
-                html = '<input class="Wdate" id="' + name + '"   name="' + name + '" value="' + value + '"  onclick="WdatePicker({\'dateFmt\':\'' + farmatedateFmt + '\'});" />';
+                html = '<input class="Wdate" id="' + name + '"   name="' + name + '" value="' + value + '"  onclick="WdatePicker({\'dateFmt\':\'' + farmatedateFmt + '\'});" style="width:' + width + 'px;"/>';
             }
             
             return html;
