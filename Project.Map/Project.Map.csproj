@@ -69,6 +69,7 @@
     <Compile Include="HRManager\MessageInfoMap.cs" />
     <Compile Include="HRManager\ProfessionMap.cs" />
     <Compile Include="HRManager\SanctionMap.cs" />
+    <Compile Include="HRManager\YearAssessmentMap.cs" />
     <Compile Include="HRManager\TechnicalMap.cs" />
     <Compile Include="HRManager\WorkExperienceMap.cs" />
     <Compile Include="HRManager\YearHolidayDefinitionMap.cs" />

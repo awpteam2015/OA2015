@@ -55,6 +55,7 @@
     <Compile Include="HRManager\GroupEmployeeEntity.cs" />
     <Compile Include="HRManager\GroupEmployeeHisEntity.cs" />
     <Compile Include="HRManager\GroupEntity.cs" />
+    <Compile Include="HRManager\YearAssessmentEntity.cs" />
     <Compile Include="HRManager\LearningExperiencesEntity.cs" />
     <Compile Include="HRManager\MessageInfoEntity.cs" />
     <Compile Include="HRManager\ProfessionEntity.cs" />

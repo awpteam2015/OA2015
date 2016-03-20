@@ -10,6 +10,7 @@
                 gridObjStudy: new pro.GridBase("#datagridstudy", false),
                 gridObjTechnical: new pro.GridBase("#datagridTechnical", false),
                 gridObjProfession: new pro.GridBase("#datagridProfession", false),
+                gridObjYear: new pro.GridBase("#datagridYear", false),
                 xlOptionHtml: '',//学历<option></option>
                 xzOptionHtml: '',//学制<option></option>
                 zcOptionHtml: ''//职称<option></option>
@@ -21,6 +22,7 @@
             var gridObjStudy = initObj.gridObjStudy;
             var gridObjTechnical = initObj.gridObjTechnical;
             var gridObjProfession = initObj.gridObjProfession;
+            var gridObjYear = initObj.gridObjYear;
 
             //隐藏编辑按钮
             if (pro.commonKit.getUrlParam("View")) {
@@ -435,6 +437,45 @@
             }
             );
 
+            gridObjYear.grid({
+                url: '/HRManager/YearAssessment/GetAllList?EmployeeID=' + (pro.commonKit.getUrlParam("PkId") ? pro.commonKit.getUrlParam("PkId") : 0),
+                fitColumns: false,
+                nowrap: false,
+                rownumbers: true, //行号
+                singleSelect: true,
+                idField: "PkId",
+                columns: [
+                    [
+                        {
+                            field: 'PkId', title: '', hidden: true, width: 100,
+                            formatter: function (value, row, index) {
+                                return pro.controlKit.getInputHtml("Y_PkId", row.PkId);
+                            }
+                        },
+                        {
+                            field: 'KHYear',
+                            title: '考核年度',
+                            width: 120,
+                            formatter: function (value, row, index) {
+                                return pro.controlKit.getInputDateHtml("Y_KHYear_" + row.PkId, value,'yyyy');
+                            }
+                        },
+                        {
+                            field: 'KHComment',
+                            title: '评价',
+                            width: 200,
+                            formatter: function (value, row, index) {
+                                return pro.controlKit.getInputHtml("Y_KHComment_" + row.PkId, value,200);
+                            }
+                        }
+                    ]
+                ],
+                pagination: false,
+                pageSize: 20, //每页显示的记录条数，默认为10     
+                pageList: [20, 30, 40] //可以设置每页记录条数的列表    
+            }
+          );
+
             $("#btnAddWork_ToolBar").click(function () {
                 gridObjWork.insertRow({
                     PkId: gridObjWork.PkId,
@@ -470,6 +511,14 @@
                 $("#datagridProfession").datagrid('selectRecord', gridObjProfession.P_PkId + 1);
             });
 
+            $("#btnAddYear_ToolBar").click(function () {
+                gridObjYear.insertRow({
+                    PkId: gridObjYear.PkId
+                });
+
+                $("#datagridYear").datagrid('selectRecord', gridObjYear.P_PkId + 1);
+            });
+
             $("#btnDelWork_ToolBar").click(function () {
                 gridObjWork.delRow();
             });
@@ -481,6 +530,9 @@
             });
             $("#btnDelProfession_ToolBar").click(function () {
                 gridObjProfession.delRow();
+            });
+            $("#btnDelYear_ToolBar").click(function () {
+                gridObjYear.delRow();
             });
 
             if ($("#BindEntity").val()) {
@@ -536,6 +588,11 @@
             pro.submitKit.config.columnNamePreStr = "P_";
             pro.submitKit.config.columns = ["Title", "TypeName", "RangeName", "GetDate", "CerNo"];
             postData.RequestEntity.ProfessionList = pro.submitKit.getRowJson();
+
+            pro.submitKit.config.columnPkidName = "Y_PkId";
+            pro.submitKit.config.columnNamePreStr = "Y_";
+            pro.submitKit.config.columns = ["KHYear", "KHComment"];
+            postData.RequestEntity.YearAssessmentList = pro.submitKit.getRowJson();
 
             if (pro.commonKit.getUrlParam("PkId") != "") {
                 postData.RequestEntity.PkId = pro.commonKit.getUrlParam("PkId");

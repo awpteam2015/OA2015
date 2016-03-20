@@ -42,11 +42,17 @@
             return html;
         },
         //获取Input的格式
-        getInputDateHtml: function (name, value) {
+        getInputDateHtml: function (name, value, farmatedateFmt) {
             if (value == undefined) {
                 value = "";
             }
-            var html = '<input class="Wdate"   name="' + name + '" value="' + value + '"  onclick="WdatePicker();"  type="text"/>';
+            var html=''
+            if (farmatedateFmt == undefined) {
+                html = '<input class="Wdate"   name="' + name + '" value="' + value + '"  onclick="WdatePicker();"  type="text"/>';
+            } else {
+                html = '<input class="Wdate" id="' + name + '"   name="' + name + '" value="' + value + '"  onclick="WdatePicker({\'dateFmt\':\'' + farmatedateFmt + '\'});" />';
+            }
+            
             return html;
         },
         //获取Span的格式

@@ -28,6 +28,7 @@ namespace Project.Service.HRManager
         private readonly LearningExperiencesRepository _learnExperienceRepository;
         private readonly TechnicalRepository _technicalRepository;
         private readonly ProfessionRepository _professionRepository;
+        private readonly YearAssessmentRepository _yearAssessmentRepository;
         private readonly EmployeeInfoHisRepository _employeeInfoHisRepository;
 
         private static readonly EmployeeInfoService Instance = new EmployeeInfoService();
@@ -95,6 +96,10 @@ namespace Project.Service.HRManager
                         p.EmployeeID = pkId;
                         p.EmployeeCode = entity.EmployeeCode;
                         p.DepartmentCode = entity.DepartmentCode;
+                    });
+                    entity.YearAssessmentList.ToList().ForEach(p =>
+                    {
+                        p.EmployeeID = pkId;
                     });
                     tx.Commit();
                     return new Tuple<bool, string>(true, ""); ;
@@ -180,6 +185,7 @@ namespace Project.Service.HRManager
             entity.LearningList.ToList().ForEach(item => item.EmployeeID = entity.PkId);
             entity.TechnicalList.ToList().ForEach(item => item.EmployeeID = entity.PkId);
             entity.ProfessionList.ToList().ForEach(item => item.EmployeeID = entity.PkId);
+            entity.YearAssessmentList.ToList().ForEach(item => item.EmployeeID = entity.PkId);
             var deleteList = oldEntity.WorkList.Where(
                     p => entity.WorkList.All(x => x.PkId != p.PkId)).ToList();
             var deleteLearningList = oldEntity.LearningList.Where(
@@ -190,6 +196,10 @@ namespace Project.Service.HRManager
 
             var deleteProfessionList = oldEntity.ProfessionList.Where(
                               p => entity.ProfessionList.All(x => x.PkId != p.PkId)).ToList();
+
+
+            var deleteYearAssessmentList = oldEntity.YearAssessmentList.Where(
+                              p => entity.YearAssessmentList.All(x => x.PkId != p.PkId)).ToList();
 
             using (var tx = NhTransactionHelper.BeginTransaction())
             {
@@ -215,6 +225,7 @@ namespace Project.Service.HRManager
                     deleteLearningList.ForEach(p => { _learnExperienceRepository.Delete(p); });
                     deleteTechnicalList.ForEach(p => { _technicalRepository.Delete(p); });
                     deleteProfessionList.ForEach(p => { _professionRepository.Delete(p); });
+                    deleteYearAssessmentList.ForEach(p => { _yearAssessmentRepository.Delete(p); });
                     tx.Commit();
                     return new Tuple<bool, string>(true, "");
                 }

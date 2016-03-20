@@ -65,6 +65,7 @@
     <Compile Include="HRManager\MessageInfoRepository.cs" />
     <Compile Include="HRManager\ProfessionRepository.cs" />
     <Compile Include="HRManager\SanctionRepository.cs" />
+    <Compile Include="HRManager\YearAssessmentRepository.cs" />
     <Compile Include="HRManager\TechnicalRepository.cs" />
     <Compile Include="HRManager\WorkExperienceRepository.cs" />
     <Compile Include="HRManager\YearHolidayDefinitionRepository.cs" />

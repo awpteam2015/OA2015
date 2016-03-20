@@ -24,6 +24,7 @@ namespace Project.Model.HRManager
             this.LearningList = new HashSet<LearningExperiencesEntity>();
             this.TechnicalList = new HashSet<TechnicalEntity>();
             this.ProfessionList = new HashSet<ProfessionEntity>();
+            this.YearAssessmentList = new HashSet<YearAssessmentEntity>();
             //this.DepartModel = new DepartmentEntity();
         }
         #region 属性
@@ -189,6 +190,11 @@ namespace Project.Model.HRManager
         /// 职业资格
         /// </summary>
         public virtual ISet<ProfessionEntity> ProfessionList { get; set; }
+
+        /// <summary>
+        /// 年度考核
+        /// </summary>
+        public  virtual  ISet<YearAssessmentEntity> YearAssessmentList { get; set; }
 
 
         //public virtual DepartmentEntity DepartModel { get; set; }

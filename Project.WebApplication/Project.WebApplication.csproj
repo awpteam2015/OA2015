@@ -951,6 +951,7 @@
     <Compile Include="Areas\HRManager\Controllers\SanctionController.cs" />
     <Compile Include="Areas\HRManager\Controllers\TechnicalController.cs" />
     <Compile Include="Areas\HRManager\Controllers\WorkExperienceController.cs" />
+    <Compile Include="Areas\HRManager\Controllers\YearAssessmentController.cs" />
     <Compile Include="Areas\HRManager\Controllers\YearHolidayDefinitionController.cs" />
     <Compile Include="Areas\HRManager\HRManagerAreaRegistration.cs" />
     <Compile Include="Areas\PermissionManager\Controllers\DepartmentController.cs" />
@@ -1018,6 +1019,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Areas\HRManager\Views\YearAssessment\" />
     <Folder Include="Areas\PermissionManager\Models\" />
     <Folder Include="Areas\PermissionManager\Views\Permission\" />
     <Folder Include="Areas\PermissionManager\Views\Shared\" />
