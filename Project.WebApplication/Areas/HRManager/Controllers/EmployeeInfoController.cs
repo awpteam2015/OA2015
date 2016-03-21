@@ -264,6 +264,86 @@ namespace Project.WebApplication.Areas.HRManager.Controllers
         }
 
 
+        public AbpJsonResult ExportWord(int employeeId)
+        {
+            var entity = EmployeeInfoService.GetInstance().GetModelByPk(employeeId);
+            var workStr = string.Empty;
+            string studyStr = string.Empty;
+            string technicalStr = string.Empty;
+            string yearStr = string.Empty;
+            foreach (var workItem in entity.WorkList)
+            {
+                workStr += string.Format(@"{0}至{1};{2};{3};<br/>",
+                    workItem.BeginDate.HasValue ? workItem.BeginDate.Value.ToString("yyyy年MM月") : "",
+                    workItem.EndDate.HasValue ? workItem.EndDate.Value.ToString("yyyy年MM月") : "",
+                    workItem.WorkCompany,
+                    workItem.Duties);
+
+            }
+            foreach (var learningItem in entity.LearningList)
+            {
+                studyStr += string.Format(@"{0}至{1};{2};{3};<br/>",
+                    learningItem.BeginDate.HasValue ? learningItem.BeginDate.Value.ToString("yyyy年MM月") : "",
+                    learningItem.EndDate.HasValue ? learningItem.EndDate.Value.ToString("yyyy年MM月") : "",
+                    learningItem.School,
+                    learningItem.Education);
+
+            }
+            foreach (TechnicalEntity technicalEntity in entity.TechnicalList)
+            {
+                technicalStr += string.Format(@"取得时间：{0};{1};证书编号：{2};<br/>",
+                      technicalEntity.GetDate.HasValue ? technicalEntity.GetDate.Value.ToString("yyyy年") : "",
+                      technicalEntity.Title,
+                      technicalEntity.CerNo);
+
+            }
+            foreach (var yearAssessmentEntity in entity.YearAssessmentList)
+            {
+                yearStr += string.Format(@"{0}年度考核;{1};<br/>",
+                      yearAssessmentEntity.KHYear,
+                      yearAssessmentEntity.KHComment);
+
+            }
+            var filepath = "/UploadFile/Temp/";
+            var rootpath = this.Request.MapPath("/");
+            var fileName = DateTime.Now.ToString("yyyyMMHHddmmssfff") + ".doc";
+            Dictionary<string, string> dict = new Dictionary<string, string>();
+            dict.Add("EmployeeCode", entity.EmployeeCode);
+            dict.Add("EmployeeName", entity.EmployeeName);
+            dict.Add("SexName", entity.Sex.HasValue ? (entity.Sex.Value == 1 ? "男" : "女") : "未知");
+            dict.Add("CertNo", entity.CertNo);
+            dict.Add("Birthday", entity.Birthday.HasValue ? entity.Birthday.Value.ToString("yyyy-MM-dd") : "");
+            dict.Add("StartWork", entity.StartWork.HasValue ? entity.StartWork.Value.ToString("yyyy-MM-dd") : "");
+            dict.Add("DepartmentName", entity.DepartmentName);
+            dict.Add("DutiesName", entity.DutiesName);
+            dict.Add("EmployeeTypeName", entity.EmployeeTypeName);
+            dict.Add("PostLevelName", entity.PostLevelName);
+            dict.Add("PostPropertyName", entity.PostPropertyName);
+            dict.Add("MobileNO", string.IsNullOrEmpty(entity.MobileNO) ? "" : entity.MobileNO);
+            dict.Add("HomeAddress", string.IsNullOrEmpty(entity.HomeAddress) ? "" : entity.HomeAddress);
+            dict.Add("JoinCommy", entity.JoinCommy.HasValue ? entity.JoinCommy.Value.ToString("yyyy-MM-dd") : "");
+            dict.Add("WorkList", workStr);
+            dict.Add("StudyList", studyStr);
+            dict.Add("ProfessionList", technicalStr);
+            dict.Add("YearList", yearStr);
+            var imagePath = rootpath + entity.FileUrl + "/" + entity.FileName;
+
+            if (string.IsNullOrEmpty(entity.FileName))
+            {
+                imagePath = rootpath+"/Content/images/NoImage.jpg";
+            }
+            dict.Add("IMGPhoto", imagePath.Length > 0 ? imagePath : "");
+
+            AsposeWordsHelper.SaveWordByTemplate($"{rootpath}/TemplateFile/EmployeeTemplate.doc", dict, $"{rootpath}{filepath}{fileName}", 78, 140);
+            var result = new AjaxResponse<EmployeeInfoEntity>()
+            {
+                success = true,
+                targeturl = filepath + fileName
+            };
+            return new AbpJsonResult(result, new NHibernateContractResolver());
+        }
+
+
         public ActionResult Look(int pkId = 0)
         {
             if (pkId > 0)

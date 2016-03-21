@@ -201,6 +201,7 @@
     <Content Include="Content\images\login\bg2.jpg" />
     <Content Include="Content\images\login\bg2.png" />
     <Content Include="Content\images\login\go.gif" />
+    <Content Include="Content\images\NoImage.jpg" />
     <Content Include="Content\Site.css" />
     <Content Include="Global.asax" />
     <Content Include="HtmlPage1.html" />
@@ -1010,6 +1011,7 @@
     <Content Include="Scripts\pro\kindeditor\upload_json.ashx" />
     <Content Include="TemplateFile\员工模版.xlsx" />
     <Content Include="TemplateFile\EmployeeExport.xlsx" />
+    <Content Include="TemplateFile\EmployeeTemplate.doc" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

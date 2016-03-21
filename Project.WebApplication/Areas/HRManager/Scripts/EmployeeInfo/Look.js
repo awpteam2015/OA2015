@@ -23,25 +23,45 @@
             var gridObjProfession = initObj.gridObjProfession;
             var gridObjYear = initObj.gridObjYear;
 
-            //隐藏编辑按钮
-            if (pro.commonKit.getUrlParam("View")) {
-                $('#btnEdit').css("display", "none");
-            }
-            else {
-                $("#btnEdit").click(function () {
-                    pro.EmployeeInfo.LookPage.submit("Edit");
-                });
-            }
-            $("#btnAdd").click(function () {
-                pro.EmployeeInfo.LookPage.submit("Add");
-            });
+            ////隐藏编辑按钮
+            //if (pro.commonKit.getUrlParam("View")) {
+            //    $('#btnEdit').css("display", "none");
+            //}
+            //else {
+            //    $("#btnEdit").click(function () {
+            //        pro.EmployeeInfo.LookPage.submit("Edit");
+            //    });
+            //}
+            //$("#btnAdd").click(function () {
+            //    pro.EmployeeInfo.LookPage.submit("Add");
+            //});
 
 
 
             $("#btnClose").click(function () {
                 parent.pro.EmployeeInfo.ListPage.closeTab("");
             });
-
+            $("#btnExport").click(function () {
+                $.messager.confirm("确认操作", "是否确认导出", function (bl) {
+                    if (!bl) return;
+                    abp.ajax({
+                        url: "/HRManager/EmployeeInfo/ExportWord?employeeId="+(pro.commonKit.getUrlParam("PkId") ? pro.commonKit.getUrlParam("PkId") : 0)
+                    }).done(
+                    function (dataresult, data) {
+                        //
+                        if (data && data.success) {
+                            location.href = data.targeturl;
+                        }
+                        //$.alertExtend.info();
+                        //gridObj.search();
+                    }
+                    ).fail(
+                    function (errordetails, errormessage) {
+                        $.alertExtend.error();
+                    }
+                    );
+                });
+            });
             $('#DepartmentCode').combotree({
                 required: true,
                 editable: false,
