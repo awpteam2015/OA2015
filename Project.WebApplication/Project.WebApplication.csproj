@@ -188,6 +188,7 @@
     </Content>
     <Content Include="Areas\ReportManager\Scripts\HrReport\AttendanceReport2.js" />
     <Content Include="Areas\ReportManager\Scripts\HrReport\AttendanceReport.js" />
+    <Content Include="Areas\ReportManager\Scripts\HrReport\EmployeeDYReport.js" />
     <Content Include="Areas\ReportManager\Scripts\HrReport\EmployeeInOutReport.js" />
     <Content Include="Areas\SystemSetManager\Scripts\HolidayDetail\Hd.js" />
     <Content Include="Areas\SystemSetManager\Scripts\HolidayDetail\List.js" />
@@ -285,6 +286,7 @@
     <Content Include="Areas\HRManager\Views\EmployeeInfo\Look.cshtml" />
     <Content Include="Areas\HRManager\Views\EmployeeInfoHis\Index.cshtml" />
     <Content Include="Areas\HRManager\Views\EmployeeInfoTechnical\Hd.cshtml" />
+    <Content Include="Areas\ReportManager\Views\HrReport\EmployeeDYReport.cshtml" />
     <None Include="Properties\PublishProfiles\OA.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\Control\DepartmentControl.js" />

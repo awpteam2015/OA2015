@@ -347,7 +347,63 @@ on a.DepartmentCode=c.DepartmentCode
             return new Tuple<IList<HREmployeeViewEntity>, int>(returnList, count);
         }
 
+        public Tuple<IList<HREmployeeViewEntity>, int> GerEmployeeDYReport(HREmployeeViewEntity where, int skipResults, int maxResults, bool ifGetALL = false)
+        {
+            var whereStr = " ";
+            if (!string.IsNullOrWhiteSpace(where.DepartmentCode))
+            {
+                whereStr += " and a.DepartmentCode in('" + where.DepartmentCode.TrimEnd('\'').Trim(',') + "')";
 
+            }
+
+            if (!string.IsNullOrWhiteSpace(where.EmployeeCode))
+            {
+
+                whereStr += " and a.EmployeeCode=" + where.EmployeeCode;
+            }
+
+            if (where.CreationTime != null)
+            {
+                whereStr += " and a.CreationTime>='" + where.CreationTime + "'";
+            }
+
+            if (where.CreationTimeEnd != null)
+            {
+                whereStr += " and a.CreationTime<'" + where.CreationTimeEnd + "'";
+            }
+            if (where.IsCommy > -1)
+            {
+                if (where.IsCommy == 1)
+                    whereStr += " and JoinCommy is not null";
+                else
+
+                    whereStr += " and JoinCommy is  null";
+            }
+            StringBuilder sqlStr = new StringBuilder();
+            sqlStr.AppendFormat(@"select  a.EmployeeCode,a.EmployeeName,a.Sex,a.CertNo,a.Birthday,a.EmployeeTypeName,a.DepartmentName,a.DepartmentName InDepartmentName,
+                a.WorkStateName,a.WorkStateName InWorkStateName,a.IsDeleted,1 InOrOut,JoinCommy,
+			(	CASE WHEN ISNULL(JoinCommy,0)=0 THEN 0
+            ELSE 1
+            END) IsCommy    from [HR_EmployeeInfo] a where 1=1 {0}", whereStr);
+
+            string countStr = "select count(*) as num from (" + sqlStr.ToString() + ") as b ";
+            var count = SessionFactoryManager.GetCurrentSession().CreateSQLQuery(countStr).AddScalar("num", NHibernateUtil.Int32).UniqueResult<Int32>();
+
+            IList<HREmployeeViewEntity> returnList = new List<HREmployeeViewEntity>();
+            if (ifGetALL)
+            {
+                returnList = SessionFactoryManager.GetCurrentSession().CreateSQLQuery(sqlStr.ToString())
+                   .SetResultTransformer(Transformers.AliasToBean(typeof(HREmployeeViewEntity))).List<HREmployeeViewEntity>();
+            }
+            else
+            {
+                returnList = SessionFactoryManager.GetCurrentSession().CreateSQLQuery(sqlStr.ToString())
+                   .SetFirstResult(skipResults)
+                   .SetMaxResults(maxResults)
+                   .SetResultTransformer(Transformers.AliasToBean(typeof(HREmployeeViewEntity))).List<HREmployeeViewEntity>();
+            }
+            return new Tuple<IList<HREmployeeViewEntity>, int>(returnList, count);
+        }
 
     }
 }

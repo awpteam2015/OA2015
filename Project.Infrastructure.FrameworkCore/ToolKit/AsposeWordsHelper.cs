@@ -41,6 +41,20 @@ namespace Project.Infrastructure.FrameworkCore.ToolKit
                 return new Tuple<bool, string>(false, ex.Message);
             }
         }
+
+        public static Boolean IsImage(string path)
+        {
+            try
+            {
+                System.Drawing.Image img = System.Drawing.Image.FromFile(path);
+                return true;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+        }
+
     }
 
     public class ReplaceAndInsertImage : IReplacingCallback

@@ -18,6 +18,7 @@ using Project.Infrastructure.FrameworkCore.WebMvc.Controllers.Results;
 using Project.Infrastructure.FrameworkCore.WebMvc.Models;
 using Project.Service.PermissionManager;
 using Project.Service.HRManager.Validate;
+ 
 
 namespace Project.WebApplication.Areas.HRManager.Controllers
 {
@@ -306,7 +307,7 @@ namespace Project.WebApplication.Areas.HRManager.Controllers
             }
             var filepath = "/UploadFile/Temp/";
             var rootpath = this.Request.MapPath("/");
-            var fileName = DateTime.Now.ToString("yyyyMMHHddmmssfff") + ".doc";
+            var fileName = entity.EmployeeName+"_人员档案" + ".doc";
             Dictionary<string, string> dict = new Dictionary<string, string>();
             dict.Add("EmployeeCode", entity.EmployeeCode);
             dict.Add("EmployeeName", entity.EmployeeName);
@@ -330,7 +331,15 @@ namespace Project.WebApplication.Areas.HRManager.Controllers
 
             if (string.IsNullOrEmpty(entity.FileName))
             {
-                imagePath = rootpath+"/Content/images/NoImage.jpg";
+                imagePath = rootpath + "/Content/images/NoImage.jpg";
+            }
+            if (System.IO.File.Exists(imagePath) && AsposeWordsHelper.IsImage(imagePath))
+            {
+                //存在
+            }
+            else
+            {
+                imagePath = rootpath + "/Content/images/NoImage.jpg";
             }
             dict.Add("IMGPhoto", imagePath.Length > 0 ? imagePath : "");
 

@@ -44,5 +44,17 @@ namespace Project.Model.ReportManager
         /// </summary>
         public virtual System.Int32 InOrOut { get; set; }
 
+        /// <summary>
+        /// 入党时间 
+        /// </summary>
+        public virtual System.DateTime? JoinCommy { get; set; }
+
+
+        /// <summary>
+        /// 是否党员 
+        /// </summary>
+        public virtual System.Int32 IsCommy { get; set; }
+
+
     }
 }
