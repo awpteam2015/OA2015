@@ -55,6 +55,11 @@ namespace Project.Model.ReportManager
         /// </summary>
         public virtual System.Int32 IsCommy { get; set; }
 
+        /// <summary>
+        /// 学历
+        /// </summary>
+        public virtual  System.String EducationName { get; set; }
+
 
     }
 }

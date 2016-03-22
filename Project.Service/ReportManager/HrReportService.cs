@@ -77,6 +77,21 @@ namespace Project.Service.ReportManager
             var list = _HrReportRepository.GerEmployeeDYReport(where, skipResults, maxResults, ifGetALL);
             return list;
         }
+
+        /// <summary>
+        /// 学历统计
+        /// </summary>
+        /// <param name="where"></param>
+        /// <param name="skipResults"></param>
+        /// <param name="maxResults"></param>
+        /// <param name="ifGetALL"></param>
+        /// <returns></returns>
+        public Tuple<IList<HREmployeeViewEntity>, int> GerEmployeeXLReport(HREmployeeViewEntity where, int skipResults, int maxResults, bool ifGetALL = false)
+        {
+            var list = _HrReportRepository.GerEmployeeXLReport(where, skipResults, maxResults, ifGetALL);
+            return list;
+        }
+
         /// <summary>
         /// 缺勤汇总
         /// </summary>
