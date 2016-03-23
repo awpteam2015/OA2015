@@ -9,6 +9,7 @@ using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml.Linq;
 using Aspose.Words;
 using Project.Infrastructure.FrameworkCore.DataNhibernate;
 using Project.Service.PermissionManager;
@@ -84,6 +85,31 @@ namespace WindowsFormsApplicationTest
             //Console.ReadKey();
         }
 
+        private void button4_Click(object sender, EventArgs e)
+        {
+            #region 动态调用 webservices地址
+
+            try
+            {
+                //正式地址 ：http://10.173.64.156:8085/platform/services/HR/getStringHRdept
+                // Http Post 请求响应方式
+                //string url = m_WebServiceUrl + EMethod.Add.ToString();  //@"http://localhost:25060/testService.asmx/Add";
+                // Dictionary<string, string> parameters = new Dictionary<string, string> { { "parameter1", TextBox1.Text }, { "parameter2", TextBox2.Text } };
+
+                string result = HttpHelper.Helper.GetResponseString(textBox2.Text.Trim(), "Get", new Dictionary<string, string> { }, Encoding.Default, Encoding.UTF8, 10000);
+                //超时时间请设置久点
+                XElement root = XElement.Parse(result);
+                textBox1.Text = root.Value;
+            }
+
+            catch (Exception ex)
+            {
+                textBox1.Text = ex.Message;
+                MessageBox.Show(ex.Message);
+            }
+
+            #endregion
+        }
     }
 
     public class ReplaceAndInsertImage : IReplacingCallback
