@@ -154,13 +154,26 @@ namespace Project.WebApplication.Areas.ReportManager.Controllers
         }
 
         /// <summary>
-        /// 党员统一报表
+        /// 综合报表
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult EmployeeZHReport()
+        {
+            return View();
+        }
+
+        /// <summary>
+        /// 党员统计报表
         /// </summary>
         /// <returns></returns>
         public ActionResult EmployeeDYReport()
         {
             return View();
         }
+        /// <summary>
+        /// 学历统计报表
+        /// </summary>
+        /// <returns></returns>
         public ActionResult EmployeeXLReport()
         {
             return View();
@@ -197,6 +210,53 @@ namespace Project.WebApplication.Areas.ReportManager.Controllers
             //where.CreateTime = RequestHelper.GetFormString("CreateTime");
             //where.IsDelete = RequestHelper.GetFormString("IsDelete");
             var searchList = HrReportService.GetInstance().GetHREmployeeReport(where, (pIndex - 1) * pSize, pSize);
+
+            var dataGridEntity = new DataGridResponse()
+            {
+                total = searchList.Item2,
+                rows = searchList.Item1
+            };
+            return new AbpJsonResult(dataGridEntity, new NHibernateContractResolver());
+        }
+
+        public AbpJsonResult GetEmployeeZHReport()
+        {
+            var pIndex = this.Request["page"].ConvertTo<int>();
+            var pSize = this.Request["rows"].ConvertTo<int>();
+            var where = new HREmployeeViewEntity();
+            if (!string.IsNullOrWhiteSpace(RequestHelper.GetFormString("Date")))
+            {
+                var date = RequestHelper.GetDateTime("Date").GetValueOrDefault();
+                var dateEnd = RequestHelper.GetDateTime("EndDate").GetValueOrDefault();
+                //int days = DateTime.DaysInMonth(date.Year, date.Month);
+                where.CreationTime = date;
+                where.CreationTimeEnd = dateEnd.AddDays(1);
+            }
+            where.DepartmentCode = RequestHelper.GetFormString("DepartmentCode");
+            if (!string.IsNullOrWhiteSpace(where.DepartmentCode))
+            {
+                where.DepartmentCode = string.Join("','", (DepartmentService.GetInstance().GetChiledArr(where.DepartmentCode)));
+            }
+            where.Sex = RequestHelper.GetFormInt("Sex", -1);
+            where.IsCommy = RequestHelper.GetFormInt("IsCommy", -1);
+
+            where.EmployeeType = RequestHelper.GetFormString("EmployeeType");
+            where.Duties = RequestHelper.GetFormString("Duties");
+            where.PostLevel = RequestHelper.GetFormString("PostLevel");
+            where.PostProperty = RequestHelper.GetFormString("PostProperty");
+            //where.PkId = RequestHelper.GetFormString("PkId");
+            //where.AttendanceUploadRecordId = RequestHelper.GetFormString("AttendanceUploadRecordId");
+            //where.EmployeeCode = RequestHelper.GetFormString("EmployeeCode");
+            //where.DepartmentCode = RequestHelper.GetFormString("DepartmentCode");
+            //where.DepartmentName = RequestHelper.GetFormString("DepartmentName");
+            //where.State = RequestHelper.GetFormString("State");
+            //where.Date = RequestHelper.GetFormString("Date");
+            //where.Remark = RequestHelper.GetFormString("Remark");
+            //where.CreatorUserCode = RequestHelper.GetFormString("CreatorUserCode");
+            //where.CreatorUserName = RequestHelper.GetFormString("CreatorUserName");
+            //where.CreateTime = RequestHelper.GetFormString("CreateTime");
+            //where.IsDelete = RequestHelper.GetFormString("IsDelete");
+            var searchList = HrReportService.GetInstance().GetEmployeeZHReport(where, (pIndex - 1) * pSize, pSize);
 
             var dataGridEntity = new DataGridResponse()
             {

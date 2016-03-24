@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Project.Infrastructure.FrameworkCore.Domain.Entities;
+using Project.Infrastructure.FrameworkCore.Domain.Entities.Component;
+using Project.Infrastructure.FrameworkCore.Domain.Entities.Auditing.Interface;
 
 namespace Project.Model.ReportManager
 {
@@ -23,12 +26,17 @@ namespace Project.Model.ReportManager
 
         public virtual int? Sex { get; set; }
 
-        public virtual  System.String Duties { get; set; }
+        public virtual System.String Duties { get; set; }
+
+        /// <summary>
+        /// 单位职务
+        /// </summary>
+        public virtual System.String DutiesName { get; set; }
 
         public virtual System.String CertNo { get; set; }
 
         public virtual System.DateTime? Birthday { get; set; }
-
+        public virtual System.String EmployeeType { get; set; }
         public virtual System.String EmployeeTypeName { get; set; }
 
         public virtual System.String WorkStateName { get; set; }
@@ -49,21 +57,21 @@ namespace Project.Model.ReportManager
         /// <summary>
         ///  岗位等级
         /// </summary>
-        public virtual  System.String PostLevel { get; set; }
+        public virtual System.String PostLevel { get; set; }
 
         /// <summary>
         /// 岗位等级名称 
         /// </summary>
-        public virtual  System.String PostLevelName { get; set; }
+        public virtual System.String PostLevelName { get; set; }
         /// <summary>
         /// 岗位性质
         /// </summary>
-        public virtual  System.String PostProperty { get; set; }
+        public virtual System.String PostProperty { get; set; }
 
         /// <summary>
         ///  岗位性质名称
         /// </summary>
-        public virtual  System.String PostPropertyName { get; set; }
+        public virtual System.String PostPropertyName { get; set; }
 
         /// <summary>
         /// 入党时间 
@@ -79,8 +87,12 @@ namespace Project.Model.ReportManager
         /// <summary>
         /// 学历
         /// </summary>
-        public virtual  System.String EducationName { get; set; }
+        public virtual System.String EducationName { get; set; }
 
-
+        public virtual long __hibernate_sort_row
+        {
+            set;
+            get;
+        }
     }
 }

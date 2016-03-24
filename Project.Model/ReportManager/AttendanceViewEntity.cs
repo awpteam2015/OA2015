@@ -27,5 +27,10 @@ namespace Project.Model.ReportManager
         public virtual DateTime? Attr_StartDate { get; set; }
 
         public virtual DateTime? Attr_EndDate { get; set; }
+        public virtual long __hibernate_sort_row
+        {
+            set;
+            get;
+        }
     }
 }

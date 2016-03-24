@@ -50,6 +50,20 @@ namespace Project.Service.ReportManager
         }
 
         /// <summary>
+        /// 综合
+        /// </summary>
+        /// <param name="where"></param>
+        /// <param name="skipResults"></param>
+        /// <param name="maxResults"></param>
+        /// <param name="ifGetAll"></param>
+        /// <returns></returns>
+        public Tuple<IList<HREmployeeViewEntity>, int> GetEmployeeZHReport(HREmployeeViewEntity where, int skipResults, int maxResults, bool ifGetAll = false)
+        {
+            var list = _HrReportRepository.GerEmployeeZHReport(where, skipResults, maxResults, ifGetAll);
+            return list;
+        }
+
+        /// <summary>
         /// 人员出入统计
         /// </summary>
         /// <param name="where"></param>

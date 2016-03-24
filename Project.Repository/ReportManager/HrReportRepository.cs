@@ -140,10 +140,6 @@ on a.DepartmentCode=c.DepartmentCode
             return new Tuple<IList<AttendanceViewEntity2>, int>(returnList, count);
         }
 
-
-
-
-
         /// <summary>
         /// 考勤汇总
         /// </summary>
@@ -347,6 +343,93 @@ on a.DepartmentCode=c.DepartmentCode
             return new Tuple<IList<HREmployeeViewEntity>, int>(returnList, count);
         }
 
+        public Tuple<IList<HREmployeeViewEntity>, int> GerEmployeeZHReport(HREmployeeViewEntity where, int skipResults,
+            int maxResults, bool ifGetAll = false)
+        {
+            var whereStr = " ";
+            if (!string.IsNullOrWhiteSpace(where.DepartmentCode))
+            {
+                whereStr += " and a.DepartmentCode in('" + where.DepartmentCode.TrimEnd('\'').Trim(',') + "')";
+            }
+
+            if (!string.IsNullOrWhiteSpace(where.EmployeeCode))
+            {
+
+                whereStr += " and a.EmployeeCode=" + where.EmployeeCode;
+            }
+
+            if (where.CreationTime != null)
+            {
+                whereStr += " and a.CreationTime>='" + where.CreationTime + "'";
+            }
+
+            if (where.CreationTimeEnd != null)
+            {
+                whereStr += " and a.CreationTime<'" + where.CreationTimeEnd + "'";
+            }
+            if (where.IsCommy > -1)
+            {
+                if (where.IsCommy == 1)
+                    whereStr += " and JoinCommy is not null";
+                else
+
+                    whereStr += " and JoinCommy is  null";
+            }
+            if (where.Sex.HasValue && where.Sex.Value > -1)
+            {
+                whereStr += " and Sex=" + where.Sex.Value;
+            }
+            if (!string.IsNullOrWhiteSpace(where.EmployeeType))
+            {
+                whereStr += " and EmployeeType=" + where.EmployeeType;
+            }
+            if (!string.IsNullOrWhiteSpace(where.PostLevel))
+            {
+                whereStr += " and PostLevel=" + where.PostLevel;
+            }
+            if (!string.IsNullOrWhiteSpace(where.PostProperty))
+            {
+                whereStr += " and PostProperty=" + where.PostProperty;
+            }
+            if (!string.IsNullOrWhiteSpace(where.Duties))
+            {
+                whereStr += " and Duties=" + where.Duties;
+            }
+            StringBuilder sqlStr = new StringBuilder();
+            sqlStr.AppendFormat(@"select  a.EmployeeCode,a.EmployeeName,a.Sex,a.CertNo,a.Birthday,a.EmployeeTypeName,a.DepartmentName,a.DepartmentName InDepartmentName,
+                a.WorkStateName,a.WorkStateName InWorkStateName,a.IsDeleted,1 InOrOut,JoinCommy,Duties,DutiesName,PostLevel,PostLevelName,PostProperty,PostPropertyName,
+			(	CASE WHEN ISNULL(JoinCommy,0)=0 THEN 0
+            ELSE 1
+            END) IsCommy ,(select t.KeyName from SM_Dictionary t where t.ParentKeyCode='Education' and t.KeyValue =(select Max(b.Education) from HR_LearningExperiences b where b.EmployeeID=a.PkId))
+            EducationName    from [HR_EmployeeInfo] a where  a.IsDeleted=0 {0}", whereStr);
+
+            string countStr = "select count(*) as num from (" + sqlStr.ToString() + ") as b ";
+            var count = SessionFactoryManager.GetCurrentSession().CreateSQLQuery(countStr).AddScalar("num", NHibernateUtil.Int32).UniqueResult<Int32>();
+
+            IList<HREmployeeViewEntity> returnList = new List<HREmployeeViewEntity>();
+            if (ifGetAll)
+            {
+                returnList = SessionFactoryManager.GetCurrentSession().CreateSQLQuery(sqlStr.ToString())
+                   .SetResultTransformer(Transformers.AliasToBean(typeof(HREmployeeViewEntity))).List<HREmployeeViewEntity>();
+            }
+            else
+            {
+                returnList = SessionFactoryManager.GetCurrentSession().CreateSQLQuery(sqlStr.ToString())
+                   .SetFirstResult(skipResults)
+                   .SetMaxResults(maxResults)
+                   .SetResultTransformer(Transformers.AliasToBean(typeof(HREmployeeViewEntity))).List<HREmployeeViewEntity>();
+            }
+            return new Tuple<IList<HREmployeeViewEntity>, int>(returnList, count);
+        }
+
+        /// <summary>
+        /// 党员统计
+        /// </summary>
+        /// <param name="where"></param>
+        /// <param name="skipResults"></param>
+        /// <param name="maxResults"></param>
+        /// <param name="ifGetALL"></param>
+        /// <returns></returns>
         public Tuple<IList<HREmployeeViewEntity>, int> GerEmployeeDYReport(HREmployeeViewEntity where, int skipResults, int maxResults, bool ifGetALL = false)
         {
             var whereStr = " ";
@@ -384,7 +467,7 @@ on a.DepartmentCode=c.DepartmentCode
                 a.WorkStateName,a.WorkStateName InWorkStateName,a.IsDeleted,1 InOrOut,JoinCommy,
 			(	CASE WHEN ISNULL(JoinCommy,0)=0 THEN 0
             ELSE 1
-            END) IsCommy    from [HR_EmployeeInfo] a where 1=1 {0}", whereStr);
+            END) IsCommy    from [HR_EmployeeInfo] a where a.IsDeleted=0 {0}", whereStr);
 
             string countStr = "select count(*) as num from (" + sqlStr.ToString() + ") as b ";
             var count = SessionFactoryManager.GetCurrentSession().CreateSQLQuery(countStr).AddScalar("num", NHibernateUtil.Int32).UniqueResult<Int32>();
@@ -446,7 +529,7 @@ on a.DepartmentCode=c.DepartmentCode
             ELSE 1
             END) IsCommy,
         (select t.KeyName from SM_Dictionary t where t.ParentKeyCode='Education' and t.KeyValue =(select Max(b.Education) from HR_LearningExperiences b where b.EmployeeID=a.PkId))
-        EducationName    from [HR_EmployeeInfo] a where 1=1 {0}", whereStr);
+        EducationName    from [HR_EmployeeInfo] a where a.IsDeleted=0 {0}", whereStr);
 
             string countStr = "select count(*) as num from (" + sqlStr.ToString() + ") as b ";
             var count = SessionFactoryManager.GetCurrentSession().CreateSQLQuery(countStr).AddScalar("num", NHibernateUtil.Int32).UniqueResult<Int32>();
