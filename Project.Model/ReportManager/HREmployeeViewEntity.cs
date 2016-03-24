@@ -23,6 +23,8 @@ namespace Project.Model.ReportManager
 
         public virtual int? Sex { get; set; }
 
+        public virtual  System.String Duties { get; set; }
+
         public virtual System.String CertNo { get; set; }
 
         public virtual System.DateTime? Birthday { get; set; }
@@ -43,6 +45,25 @@ namespace Project.Model.ReportManager
         /// 进出类型  0：进 1：出
         /// </summary>
         public virtual System.Int32 InOrOut { get; set; }
+
+        /// <summary>
+        ///  岗位等级
+        /// </summary>
+        public virtual  System.String PostLevel { get; set; }
+
+        /// <summary>
+        /// 岗位等级名称 
+        /// </summary>
+        public virtual  System.String PostLevelName { get; set; }
+        /// <summary>
+        /// 岗位性质
+        /// </summary>
+        public virtual  System.String PostProperty { get; set; }
+
+        /// <summary>
+        ///  岗位性质名称
+        /// </summary>
+        public virtual  System.String PostPropertyName { get; set; }
 
         /// <summary>
         /// 入党时间 
