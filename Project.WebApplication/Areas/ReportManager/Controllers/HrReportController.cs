@@ -157,8 +157,30 @@ namespace Project.WebApplication.Areas.ReportManager.Controllers
         /// 综合报表
         /// </summary>
         /// <returns></returns>
-        public ActionResult EmployeeZHReport()
+        public ActionResult EmployeeZHReport(string type)
         {
+            ViewBag.ReportType = type;
+            switch (type)
+            {
+                case null:
+                    ViewBag.TitleStr = "员工综合统计报表";
+                    break;
+                case "1":
+                    ViewBag.TitleStr = "员工类型统计报表";
+                    break;
+                case "2":
+                    ViewBag.TitleStr = "员工岗位统计报表";
+                    break;
+                case "3":
+                    ViewBag.TitleStr = "员工部门统计报表";
+                    break;
+                case "4":
+                    ViewBag.TitleStr = "员工党员统计报表";
+                    break;
+                case "5":
+                    ViewBag.TitleStr = "员工学历统计报表";
+                    break;
+            }
             return View();
         }
 
@@ -244,6 +266,7 @@ namespace Project.WebApplication.Areas.ReportManager.Controllers
             where.Duties = RequestHelper.GetFormString("Duties");
             where.PostLevel = RequestHelper.GetFormString("PostLevel");
             where.PostProperty = RequestHelper.GetFormString("PostProperty");
+            where.Education = RequestHelper.GetFormString("Education");
             //where.PkId = RequestHelper.GetFormString("PkId");
             //where.AttendanceUploadRecordId = RequestHelper.GetFormString("AttendanceUploadRecordId");
             //where.EmployeeCode = RequestHelper.GetFormString("EmployeeCode");

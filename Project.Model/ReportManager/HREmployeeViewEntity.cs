@@ -83,9 +83,13 @@ namespace Project.Model.ReportManager
         /// 是否党员 
         /// </summary>
         public virtual System.Int32 IsCommy { get; set; }
-
         /// <summary>
         /// 学历
+        /// </summary>
+        public virtual System.String Education { get; set; }
+
+        /// <summary>
+        /// 学历名称
         /// </summary>
         public virtual System.String EducationName { get; set; }
 

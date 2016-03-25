@@ -395,6 +395,12 @@ on a.DepartmentCode=c.DepartmentCode
             {
                 whereStr += " and Duties=" + where.Duties;
             }
+            if (!string.IsNullOrWhiteSpace(where.Education))
+            {
+                whereStr +=
+                    string.Format(
+                        " and a.PkId in(select c.EmployeeID  from HR_LearningExperiences c where c.Education='{0}')", where.Education);
+            }
             StringBuilder sqlStr = new StringBuilder();
             sqlStr.AppendFormat(@"select  a.EmployeeCode,a.EmployeeName,a.Sex,a.CertNo,a.Birthday,a.EmployeeTypeName,a.DepartmentName,a.DepartmentName InDepartmentName,
                 a.WorkStateName,a.WorkStateName InWorkStateName,a.IsDeleted,1 InOrOut,JoinCommy,Duties,DutiesName,PostLevel,PostLevelName,PostProperty,PostPropertyName,

@@ -77,51 +77,66 @@ var pro = pro || {};
          { field: 'WorkStateName', title: '在职状态', width: 100 }
                );
 
-            pro.DepartmentControl.init();
+            var ReportType = $('#ReportType').val();
 
-            $('#EmployeeType').combobox({
-                required: true,
-                editable: false,
-                valueField: 'KeyValue',
-                textField: 'KeyName',
-                url: '/HRManager/Dictionary/GetListByCode?ParentKeyCode=YGLY&AllFlag=1',
-                onLoadSuccess: function () {
-                    $('#EmployeeType').combobox("setValue", "");
-                }
-            });
 
-            $('#PostLevel').combobox({
-                required: true,
-                editable: false,
-                valueField: 'KeyValue',
-                textField: 'KeyName',
-                url: '/HRManager/Dictionary/GetListByCode?ParentKeyCode=GWDJ&AllFlag=1',
-                onLoadSuccess: function () {
-                    $('#PostLevel').combobox("setValue", "");
-                }
-            });
-            $('#PostProperty').combobox({
-                required: true,
-                editable: false,
-                valueField: 'KeyValue',
-                textField: 'KeyName',
-                url: '/HRManager/Dictionary/GetListByCode?ParentKeyCode=GWXZ&AllFlag=1',
-                onLoadSuccess: function () {
-                    $('#PostProperty').combobox("setValue", "");
-                }
-            });
-
-            $('#Duties').combobox({
-                required: true,
-                editable: false,
-                valueField: 'KeyValue',
-                textField: 'KeyName',
-                url: '/HRManager/Dictionary/GetListByCode?ParentKeyCode=DWZW&AllFlag=1',
-                onLoadSuccess: function () {
-                    $('#Duties').combobox("setValue", "");
-                }
-            });
-
+            if (ReportType == '' || ReportType == '3' || ReportType == '4' || ReportType == '5')
+                pro.DepartmentControl.init();
+            if (ReportType == '' || ReportType == '1')
+                $('#EmployeeType').combobox({
+                    required: true,
+                    editable: false,
+                    valueField: 'KeyValue',
+                    textField: 'KeyName',
+                    url: '/HRManager/Dictionary/GetListByCode?ParentKeyCode=YGLY&AllFlag=1',
+                    onLoadSuccess: function () {
+                        $('#EmployeeType').combobox("setValue", "");
+                    }
+                });
+            if (ReportType == '' || ReportType == '2') {
+                $('#PostLevel').combobox({
+                    required: true,
+                    editable: false,
+                    valueField: 'KeyValue',
+                    textField: 'KeyName',
+                    url: '/HRManager/Dictionary/GetListByCode?ParentKeyCode=GWDJ&AllFlag=1',
+                    onLoadSuccess: function () {
+                        $('#PostLevel').combobox("setValue", "");
+                    }
+                });
+                $('#PostProperty').combobox({
+                    required: true,
+                    editable: false,
+                    valueField: 'KeyValue',
+                    textField: 'KeyName',
+                    url: '/HRManager/Dictionary/GetListByCode?ParentKeyCode=GWXZ&AllFlag=1',
+                    onLoadSuccess: function () {
+                        $('#PostProperty').combobox("setValue", "");
+                    }
+                });
+            }
+            if (ReportType == '' || ReportType == '3')
+                $('#Duties').combobox({
+                    required: true,
+                    editable: false,
+                    valueField: 'KeyValue',
+                    textField: 'KeyName',
+                    url: '/HRManager/Dictionary/GetListByCode?ParentKeyCode=DWZW&AllFlag=1',
+                    onLoadSuccess: function () {
+                        $('#Duties').combobox("setValue", "");
+                    }
+                });
+            if (ReportType == '' || ReportType == '5')
+                $('#Education').combobox({
+                    required: true,
+                    editable: false,
+                    valueField: 'KeyValue',
+                    textField: 'KeyName',
+                    url: '/HRManager/Dictionary/GetListByCode?ParentKeyCode=Education&AllFlag=1',
+                    onLoadSuccess: function () {
+                        $('#Education').combobox("setValue", "");
+                    }
+                });
 
             $("#btnSearch").click(function () {
                 gridObj.search();

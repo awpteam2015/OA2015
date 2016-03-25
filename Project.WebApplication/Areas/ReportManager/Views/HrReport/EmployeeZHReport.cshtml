@@ -7,85 +7,499 @@
 @section JavaScript{
     <script src="~/Areas/ReportManager/Scripts/HrReport/EmployeeZHReport.js"></script>
 }
-<div title="员工综合统计报表" style="padding:1px;">
-    <table id="datagrid" style="height:auto;" iconcls=".icon-save" singleselect="true" toolbar="#tb" fit="true"></table>
-    <div id="tb" style="padding:5px;height:auto">
+
+<div title="@ViewBag.TitleStr" style="padding:1px;">
+    <table id="datagrid" style="height: auto;" iconcls=".icon-save" singleselect="true" toolbar="#tb" fit="true"></table>
+
+    <div id="tb" style="padding: 5px; height: auto">
         <div id="divSearch">
             <form>
                 <table class="mtable">
-                    <tr>
-                        <td style="width: 100px">
-                            员工类型:
-                        </td>
-                        <td style="width: 100px">
-                            <input id="EmployeeType" name="EmployeeType" type="text" />
-                        </td>
-                        <td style="width: 100px">
-                            岗位等级:
-                        </td>
-                        <td style="width: 100px">
-                            <input id="PostLevel" name="PostLevel" type="text" />
-                        </td>
-                        <td style="width: 100px">
-                            岗位性质:
-                        </td>
-                        <td style="width: 100px">
-                            <input id="PostProperty" name="PostProperty" type="text"/>
-                        </td>
-                        <td style="width: 100px">
-                            单位职务:
-                        </td>
-                        <td style="width: 100px">
-                            <input id="Duties" name="Duties" type="text" />
-                        </td>
-                        <td style="width: 100px">
-                            性别:
-                        </td>
-                        <td style="width: 100px">
-                            <select id="Sex" name="Sex" class="easyui-combobox">
-                                <option value="-1">全部</option>
-                                <option value="0">女</option>
-                                <option value="1">男</option>
-                            </select>
-                        </td>
+                    @if (string.IsNullOrEmpty(ViewBag.ReportType))
+                    {
+                        <tr>
+                            <td style="width: 100px">
+                                员工类型:
+                            </td>
+                            <td style="width: 100px">
+                                <input id="EmployeeType" name="EmployeeType" type="text" />
+                            </td>
+                            <td style="width: 100px">
+                                岗位等级:
+                            </td>
+                            <td style="width: 100px">
+                                <input id="PostLevel" name="PostLevel" type="text" />
+                            </td>
+                            <td style="width: 100px">
+                                岗位性质:
+                            </td>
+                            <td style="width: 100px">
+                                <input id="PostProperty" name="PostProperty" type="text" />
+                            </td>
+                            <td style="width: 100px">
+                                单位职务:
+                            </td>
+                            <td style="width: 100px">
+                                <input id="Duties" name="Duties" type="text" />
+                            </td>
+                            <td style="width: 100px">
+                                性别:
+                            </td>
+                            <td style="width: 100px">
+                                <select id="Sex" name="Sex" class="easyui-combobox">
+                                    <option value="-1">全部</option>
+                                    <option value="0">女</option>
+                                    <option value="1">男</option>
+                                </select>
+                            </td>
 
 
-                    </tr>
-                    <tr>
-                        <td style="width: 100px">
-                            部门:
-                        </td>
-                        <td style="width: 100px">
-                            <input id="DepartmentCode" name="DepartmentCode" type="text" />
-                        </td>
-                        <td style="width: 100px">
-                            是否党员:
-                        </td>
-                        <td style="width: 100px">
-                            <select id="IsCommy" name="IsCommy" class="easyui-combobox">
-                                <option value="-1">全部</option>
-                                <option value="0">否</option>
-                                <option value="1">是</option>
-                            </select>
-                        </td>
-                        <td style="width: 100px">
-                            开始时间:
-                        </td>
-                        <td style="width: 100px">
-                            <input id="Date" name="Date" type="text" class="Wdate" onclick="WdatePicker();" />
-                        </td>
-                        <td style="width: 100px">
-                            至:
-                        </td>
-                        <td style="width: 100px">
-                            <input id="EndDate" name="EndDate" type="text" class="Wdate" onclick="WdatePicker();" />
-                        </td>
-                        <td>
-                            <a href="#" class="easyui-linkbutton" iconcls="icon-search" id="btnSearch">搜索</a>
-                        </td>
-                    </tr>
+                        </tr>
+                        <tr>
+                            <td style="width: 100px">
+                                部门:
+                            </td>
+                            <td style="width: 100px" colspan="3">
+                                <input id="DepartmentCode" name="DepartmentCode" type="text" />
+                            </td>
+                            <td style="width: 100px">
+                                是否党员:
+                            </td>
+                            <td style="width: 100px">
+                                <select id="IsCommy" name="IsCommy" class="easyui-combobox">
+                                    <option value="-1">全部</option>
+                                    <option value="0">否</option>
+                                    <option value="1">是</option>
+                                </select>
+                            </td>
+                            <td style="width: 100px">
+                                开始时间:
+                            </td>
+                            <td style="width: 100px">
+                                <input id="Date" name="Date" type="text" class="Wdate" onclick="WdatePicker();" />
+                            </td>
+                            <td style="width: 100px">
+                                至:
+                            </td>
+                            <td style="width: 100px">
+                                <input id="EndDate" name="EndDate" type="text" class="Wdate" onclick="WdatePicker();" />
+                            </td>
+
+                        </tr>
+                        <tr>
+                            <td style="width: 100px">
+                                学历:
+                            </td>
+                            <td style="width: 100px">
+                                <input id="Education" name="Education" type="text" />
+                            </td>
+                            <td colspan="8">
+                                <a href="#" class="easyui-linkbutton" iconcls="icon-search" id="btnSearch">搜索</a>
+                            </td>
+                        </tr>
+                    }
+                    else if (ViewBag.ReportType == "1") //类型统计
+                    {
+                        <tr>
+                            <td style="width: 100px">
+                                员工类型:
+                            </td>
+                            <td style="width: 100px">
+                                <input id="EmployeeType" name="EmployeeType" type="text" />
+                            </td>
+                            <td style="width: 100px">
+                                性别:
+                            </td>
+                            <td style="width: 100px">
+                                <select id="Sex" name="Sex" class="easyui-combobox">
+                                    <option value="-1">全部</option>
+                                    <option value="0">女</option>
+                                    <option value="1">男</option>
+                                </select>
+                            </td>
+                            <td style="width: 100px">
+                                开始时间:
+                            </td>
+                            <td style="width: 100px">
+                                <input id="Date" name="Date" type="text" class="Wdate" onclick="WdatePicker();" />
+                            </td>
+                            <td style="width: 100px">
+                                至:
+                            </td>
+                            <td style="width: 100px">
+                                <input id="EndDate" name="EndDate" type="text" class="Wdate" onclick="WdatePicker();" />
+                            </td>
+                            <td>
+                                <a href="#" class="easyui-linkbutton" iconcls="icon-search" id="btnSearch">搜索</a>
+                            </td>
+                        </tr>
+                        <tr style="display: none">
+                            <td style="width: 100px">
+                                岗位等级:
+                            </td>
+                            <td style="width: 100px">
+                                <input id="PostLevel" name="PostLevel" type="text" />
+                            </td>
+                            <td style="width: 100px">
+                                岗位性质:
+                            </td>
+                            <td style="width: 100px">
+                                <input id="PostProperty" name="PostProperty" type="text" />
+                            </td>
+                            <td style="width: 100px">
+                                单位职务:
+                            </td>
+                            <td style="width: 100px">
+                                <input id="Duties" name="Duties" type="text" />
+                            </td>
+
+
+                            <td style="width: 100px">
+                                部门:
+                            </td>
+                            <td style="width: 100px">
+                                <input id="DepartmentCode" name="DepartmentCode" type="text" />
+                            </td>
+                            <td style="width: 100px">
+                                是否党员:
+                            </td>
+                            <td style="width: 100px">
+                                <select id="IsCommy" name="IsCommy" class="easyui-combobox">
+                                    <option value="-1">全部</option>
+                                    <option value="0">否</option>
+                                    <option value="1">是</option>
+                                </select>
+                            </td>
+                            <td style="width: 100px">
+                                学历:
+                            </td>
+                            <td style="width: 100px">
+                                <input id="Education" name="Education" type="text" />
+                            </td>
+                        </tr>
+                    }
+                    else if (ViewBag.ReportType == "2") //岗位统计
+                    {
+                        <tr>
+                            <td style="width: 100px">
+                                岗位等级:
+                            </td>
+                            <td style="width: 100px">
+                                <input id="PostLevel" name="PostLevel" type="text" />
+                            </td>
+                            <td style="width: 100px">
+                                岗位性质:
+                            </td>
+                            <td style="width: 100px">
+                                <input id="PostProperty" name="PostProperty" type="text" />
+                            </td>
+
+                            <td style="width: 100px">
+                                开始时间:
+                            </td>
+                            <td style="width: 100px">
+                                <input id="Date" name="Date" type="text" class="Wdate" onclick="WdatePicker();" />
+                            </td>
+                            <td style="width: 100px">
+                                至:
+                            </td>
+                            <td style="width: 100px">
+                                <input id="EndDate" name="EndDate" type="text" class="Wdate" onclick="WdatePicker();" />
+                            </td>
+                            <td>
+                                <a href="#" class="easyui-linkbutton" iconcls="icon-search" id="btnSearch">搜索</a>
+                            </td>
+                        </tr>
+                        <tr style="display: none">
+                            <td style="width: 100px">
+                                员工类型:
+                            </td>
+                            <td style="width: 100px">
+                                <input id="EmployeeType" name="EmployeeType" type="text" />
+                            </td>
+                            <td style="width: 100px">
+                                性别:
+                            </td>
+                            <td style="width: 100px">
+                                <select id="Sex" name="Sex" class="easyui-combobox">
+                                    <option value="-1">全部</option>
+                                    <option value="0">女</option>
+                                    <option value="1">男</option>
+                                </select>
+                            </td>
+                            <td style="width: 100px">
+                                单位职务:
+                            </td>
+                            <td style="width: 100px">
+                                <input id="Duties" name="Duties" type="text" />
+                            </td>
+
+
+                            <td style="width: 100px">
+                                部门:
+                            </td>
+                            <td style="width: 100px">
+                                <input id="DepartmentCode" name="DepartmentCode" type="text" />
+                            </td>
+                            <td style="width: 100px">
+                                是否党员:
+                            </td>
+                            <td style="width: 100px">
+                                <select id="IsCommy" name="IsCommy" class="easyui-combobox">
+                                    <option value="-1">全部</option>
+                                    <option value="0">否</option>
+                                    <option value="1">是</option>
+                                </select>
+                            </td>
+                            <td style="width: 100px">
+                                学历:
+                            </td>
+                            <td style="width: 100px">
+                                <input id="Education" name="Education" type="text" />
+                            </td>
+                        </tr>
+                    }
+                    else if (ViewBag.ReportType == "3") //部门统计
+                    {
+                        <tr>
+                            <td style="width: 100px">
+                                部门:
+                            </td>
+                            <td style="width: 100px">
+                                <input id="DepartmentCode" name="DepartmentCode" type="text" />
+                            </td>
+                            <td style="width: 100px">
+                                单位职务:
+                            </td>
+                            <td style="width: 100px">
+                                <input id="Duties" name="Duties" type="text" />
+                            </td>
+                            <td style="width: 100px">
+                                开始时间:
+                            </td>
+                            <td style="width: 100px">
+                                <input id="Date" name="Date" type="text" class="Wdate" onclick="WdatePicker();" />
+                            </td>
+                            <td style="width: 100px">
+                                至:
+                            </td>
+                            <td style="width: 100px">
+                                <input id="EndDate" name="EndDate" type="text" class="Wdate" onclick="WdatePicker();" />
+                            </td>
+                            <td>
+                                <a href="#" class="easyui-linkbutton" iconcls="icon-search" id="btnSearch">搜索</a>
+                            </td>
+                        </tr>
+                        <tr style="display: none">
+                            <td style="width: 100px">
+                                员工类型:
+                            </td>
+                            <td style="width: 100px">
+                                <input id="EmployeeType" name="EmployeeType" type="text" />
+                            </td>
+                            <td style="width: 100px">
+                                性别:
+                            </td>
+                            <td style="width: 100px">
+                                <select id="Sex" name="Sex" class="easyui-combobox">
+                                    <option value="-1">全部</option>
+                                    <option value="0">女</option>
+                                    <option value="1">男</option>
+                                </select>
+                            </td>
+                            <td style="width: 100px">
+                                岗位等级:
+                            </td>
+                            <td style="width: 100px">
+                                <input id="PostLevel" name="PostLevel" type="text" />
+                            </td>
+                            <td style="width: 100px">
+                                岗位性质:
+                            </td>
+                            <td style="width: 100px">
+                                <input id="PostProperty" name="PostProperty" type="text" />
+                            </td>
+                            <td style="width: 100px">
+                                是否党员:
+                            </td>
+                            <td style="width: 100px">
+                                <select id="IsCommy" name="IsCommy" class="easyui-combobox">
+                                    <option value="-1">全部</option>
+                                    <option value="0">否</option>
+                                    <option value="1">是</option>
+                                </select>
+                            </td>
+                            <td style="width: 100px">
+                                学历:
+                            </td>
+                            <td style="width: 100px">
+                                <input id="Education" name="Education" type="text" />
+                            </td>
+                        </tr>
+                    }
+                    else if (ViewBag.ReportType == "4") //党员统计
+                    {
+                        <tr>
+                            <td style="width: 100px">
+                                是否党员:
+                            </td>
+                            <td style="width: 100px">
+                                <select id="IsCommy" name="IsCommy" class="easyui-combobox">
+                                    <option value="-1">全部</option>
+                                    <option value="0">否</option>
+                                    <option value="1">是</option>
+                                </select>
+                            </td>
+                            <td style="width: 100px">
+                                部门:
+                            </td>
+                            <td style="width: 100px">
+                                <input id="DepartmentCode" name="DepartmentCode" type="text" />
+                            </td>
+
+                            <td style="width: 100px">
+                                开始时间:
+                            </td>
+                            <td style="width: 100px">
+                                <input id="Date" name="Date" type="text" class="Wdate" onclick="WdatePicker();" />
+                            </td>
+                            <td style="width: 100px">
+                                至:
+                            </td>
+                            <td style="width: 100px">
+                                <input id="EndDate" name="EndDate" type="text" class="Wdate" onclick="WdatePicker();" />
+                            </td>
+                            <td>
+                                <a href="#" class="easyui-linkbutton" iconcls="icon-search" id="btnSearch">搜索</a>
+                            </td>
+                        </tr>
+                        <tr style="display: none">
+                            <td style="width: 100px">
+                                员工类型:
+                            </td>
+                            <td style="width: 100px">
+                                <input id="EmployeeType" name="EmployeeType" type="text" />
+                            </td>
+                            <td style="width: 100px">
+                                性别:
+                            </td>
+                            <td style="width: 100px">
+                                <select id="Sex" name="Sex" class="easyui-combobox">
+                                    <option value="-1">全部</option>
+                                    <option value="0">女</option>
+                                    <option value="1">男</option>
+                                </select>
+                            </td>
+                            <td style="width: 100px">
+                                岗位等级:
+                            </td>
+                            <td style="width: 100px">
+                                <input id="PostLevel" name="PostLevel" type="text" />
+                            </td>
+                            <td style="width: 100px">
+                                岗位性质:
+                            </td>
+                            <td style="width: 100px">
+                                <input id="PostProperty" name="PostProperty" type="text" />
+                            </td>
+                            <td style="width: 100px">
+                                单位职务:
+                            </td>
+                            <td style="width: 100px">
+                                <input id="Duties" name="Duties" type="text" />
+                            </td>
+                            <td style="width: 100px">
+                                学历:
+                            </td>
+                            <td style="width: 100px">
+                                <input id="Education" name="Education" type="text" />
+                            </td>
+                        </tr>
+                    }
+                    else if (ViewBag.ReportType == "5") //学历统计
+                    {
+                        <tr>
+                            <td style="width: 100px">
+                                学历:
+                            </td>
+                            <td style="width: 100px">
+                                <input id="Education" name="Education" type="text" />
+                            </td>
+                            <td style="width: 100px">
+                                部门:
+                            </td>
+                            <td style="width: 100px">
+                                <input id="DepartmentCode" name="DepartmentCode" type="text" />
+                            </td>
+
+                            <td style="width: 100px">
+                                开始时间:
+                            </td>
+                            <td style="width: 100px">
+                                <input id="Date" name="Date" type="text" class="Wdate" onclick="WdatePicker();" />
+                            </td>
+                            <td style="width: 100px">
+                                至:
+                            </td>
+                            <td style="width: 100px">
+                                <input id="EndDate" name="EndDate" type="text" class="Wdate" onclick="WdatePicker();" />
+                            </td>
+                            <td>
+                                <a href="#" class="easyui-linkbutton" iconcls="icon-search" id="btnSearch">搜索</a>
+                            </td>
+                        </tr>
+                        <tr style="display: none">
+                            <td style="width: 100px">
+                                员工类型:
+                            </td>
+                            <td style="width: 100px">
+                                <input id="EmployeeType" name="EmployeeType" type="text" />
+                            </td>
+                            <td style="width: 100px">
+                                性别:
+                            </td>
+                            <td style="width: 100px">
+                                <select id="Sex" name="Sex" class="easyui-combobox">
+                                    <option value="-1">全部</option>
+                                    <option value="0">女</option>
+                                    <option value="1">男</option>
+                                </select>
+                            </td>
+                            <td style="width: 100px">
+                                岗位等级:
+                            </td>
+                            <td style="width: 100px">
+                                <input id="PostLevel" name="PostLevel" type="text" />
+                            </td>
+                            <td style="width: 100px">
+                                岗位性质:
+                            </td>
+                            <td style="width: 100px">
+                                <input id="PostProperty" name="PostProperty" type="text" />
+                            </td>
+                            <td style="width: 100px">
+                                单位职务:
+                            </td>
+                            <td style="width: 100px">
+                                <input id="Duties" name="Duties" type="text" />
+                            </td>
+                            <td style="width: 100px">
+                                是否党员:
+                            </td>
+                            <td style="width: 100px">
+                                <select id="IsCommy" name="IsCommy" class="easyui-combobox">
+                                    <option value="-1">全部</option>
+                                    <option value="0">否</option>
+                                    <option value="1">是</option>
+                                </select>
+                            </td>
+                        </tr>
+                    }
                 </table>
             </form>
         </div>
+    </div>
+    <div style="display: none">
+        <input id="ReportType" type="text" value="@ViewBag.ReportType" />
     </div>
 </div>
