@@ -219,7 +219,8 @@ namespace Project.Service.HRManager
                         employeeHisEntity.CreateTime = DateTime.Now;
                         _employeeInfoHisRepository.Save(employeeHisEntity);
                     }
-                    _employeeInfoRepository.Merge(entity);
+                    var mergInfo = Mapper.Map(entity, oldEntity);
+                    _employeeInfoRepository.Merge(mergInfo);
 
                     deleteList.ForEach(p => { _workExperienceRepository.Delete(p); });
                     deleteLearningList.ForEach(p => { _learnExperienceRepository.Delete(p); });

@@ -540,6 +540,8 @@
 
                 var bindEntity = JSON.parse($("#BindEntity").val());
                 for (var filedname in bindField) {
+                    if (filedname == 'CreationTime')
+                        alert(bindEntity[filedname]);
                     $("[name=" + filedname + "]").val(bindEntity[filedname]);
                 }
 

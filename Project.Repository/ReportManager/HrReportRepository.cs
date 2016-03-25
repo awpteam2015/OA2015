@@ -301,21 +301,21 @@ on a.DepartmentCode=c.DepartmentCode
             }
             StringBuilder sqlStr = new StringBuilder();
             sqlStr.AppendFormat(@"select * from (select a.EmployeeCode,a.EmployeeName,a.Sex,a.CertNo,a.Birthday,a.EmployeeTypeName,a.DepartmentName,a.DepartmentName InDepartmentName,
-                a.WorkStateName,a.WorkStateName InWorkStateName,a.IsDeleted,1 InOrOut from [dbo].[HR_EmployeeInfo] a   where a.IsDeleted=1 {0}
+                a.WorkStateName,a.WorkStateName InWorkStateName,a.IsDeleted,1 InOrOut,A.CreationTime CreateTime from [dbo].[HR_EmployeeInfo] a   where a.IsDeleted=1 {0}
                 ", whereStr.Replace("CreationTime", "LastModificationTime"));
             sqlStr.AppendFormat(@"
             union
             select a.EmployeeCode,a.EmployeeName,a.Sex,a.CertNo,a.Birthday,a.EmployeeTypeName,a.DepartmentName,a.DepartmentName InDepartmentName,
-            a.WorkStateName,a.WorkStateName InWorkStateName, a.IsDeleted, 0 InOrOut from[dbo].[HR_EmployeeInfo]
-            a where  1=1 {0}", whereStr);
+            a.WorkStateName,a.WorkStateName InWorkStateName, a.IsDeleted, 0 InOrOut,A.CreationTime CreateTime from[dbo].[HR_EmployeeInfo]
+            a where  a.IsDeleted=0 {0}", whereStr);
             sqlStr.AppendFormat(@"union
             select a.EmployeeCode,a.EmployeeName,a.Sex,a.CertNo,a.Birthday,a.EmployeeTypeName,a.DepartmentName,a.DepartmentName InDepartmentName,
-            a.WorkStateName,a.WorkStateName InWorkStateName, 0 IsDeleted,0 InOrOut from[dbo].[HR_EmployeeInfoHis]
+            a.WorkStateName,a.WorkStateName InWorkStateName, 0 IsDeleted,0 InOrOut,A.CreateTime from[dbo].[HR_EmployeeInfoHis]
             a where((a.DepartmentCode<> a.InDepartmentCode {0})
             or(a.WorkState<> a.InWorkState and  a.InWorkState= 1)) {1}", departStr, otherWhereStr);
             sqlStr.AppendFormat(@"union          
                        select a.EmployeeCode,a.EmployeeName,a.Sex,a.CertNo,a.Birthday,a.EmployeeTypeName,a.DepartmentName,a.DepartmentName InDepartmentName,
-            a.WorkStateName,a.WorkStateName InWorkStateName, 0 IsDeleted,1 InOrOut from[dbo].[HR_EmployeeInfoHis]
+            a.WorkStateName,a.WorkStateName InWorkStateName, 0 IsDeleted,1 InOrOut,A.CreateTime from[dbo].[HR_EmployeeInfoHis]
             a where((a.DepartmentCode<> a.InDepartmentCode {0})
              or(a.WorkState<> a.InWorkState and  a.InWorkState!=1)) {1}
             ", departStr, otherWhereStr);
@@ -324,9 +324,10 @@ on a.DepartmentCode=c.DepartmentCode
             {
                 sqlStr.AppendFormat("{0}", inoutType);
             }
+           
             string countStr = "select count(*) as num from (" + sqlStr.ToString() + ") as b ";
             var count = SessionFactoryManager.GetCurrentSession().CreateSQLQuery(countStr).AddScalar("num", NHibernateUtil.Int32).UniqueResult<Int32>();
-
+            sqlStr.AppendFormat("{0}", " order by CreateTime desc");
             IList<HREmployeeViewEntity> returnList = new List<HREmployeeViewEntity>();
             if (ifGetALL)
             {

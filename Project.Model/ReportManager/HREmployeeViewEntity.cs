@@ -98,5 +98,11 @@ namespace Project.Model.ReportManager
             set;
             get;
         }
+
+        public virtual System.DateTime? CreateTime
+        {
+            get;
+            set;
+        }
     }
 }
