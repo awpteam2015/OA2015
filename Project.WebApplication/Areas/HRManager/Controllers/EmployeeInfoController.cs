@@ -14,11 +14,12 @@ using Project.Model.HRManager;
 using Project.Service.HRManager;
 using Project.WebApplication.Controllers;
 using Project.Infrastructure.FrameworkCore.ToolKit;
+using Project.Infrastructure.FrameworkCore.ToolKit.Extensions;
 using Project.Infrastructure.FrameworkCore.WebMvc.Controllers.Results;
 using Project.Infrastructure.FrameworkCore.WebMvc.Models;
 using Project.Service.PermissionManager;
 using Project.Service.HRManager.Validate;
- 
+
 
 namespace Project.WebApplication.Areas.HRManager.Controllers
 {
@@ -116,7 +117,7 @@ namespace Project.WebApplication.Areas.HRManager.Controllers
             postData.RequestEntity.CreationTime = DateTime.Now;
             if (!string.IsNullOrEmpty(postData.RequestEntity.EmployeeName))
             {
-                postData.RequestEntity.PayCode = postData.RequestEntity.EmployeeName.GetStringSpellCode();
+                postData.RequestEntity.PayCode = Chinese.GetFirstPinYin(postData.RequestEntity.EmployeeName).ToUpper();
             }
             var addResult = EmployeeInfoService.GetInstance().Add(postData.RequestEntity);
             var result = new AjaxResponse<EmployeeInfoEntity>()
@@ -135,7 +136,7 @@ namespace Project.WebApplication.Areas.HRManager.Controllers
             postData.RequestEntity.LastModificationTime = DateTime.Now;
             if (!string.IsNullOrEmpty(postData.RequestEntity.EmployeeName))
             {
-                postData.RequestEntity.PayCode = postData.RequestEntity.EmployeeName.GetStringSpellCode();
+                postData.RequestEntity.PayCode = Chinese.GetFirstPinYin(postData.RequestEntity.EmployeeName).ToUpper();
             }
             var updateResult = EmployeeInfoService.GetInstance().Update(postData.RequestEntity);
             var result = new AjaxResponse<EmployeeInfoEntity>()
@@ -307,7 +308,7 @@ namespace Project.WebApplication.Areas.HRManager.Controllers
             }
             var filepath = "/UploadFile/Temp/";
             var rootpath = this.Request.MapPath("/");
-            var fileName = entity.EmployeeName+"_人员档案" + ".doc";
+            var fileName = entity.EmployeeName + "_人员档案" + ".doc";
             Dictionary<string, string> dict = new Dictionary<string, string>();
             dict.Add("EmployeeCode", entity.EmployeeCode);
             dict.Add("EmployeeName", entity.EmployeeName);

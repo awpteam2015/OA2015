@@ -180,6 +180,7 @@
     <Compile Include="ToolKit\ExtensionMethods..cs" />
     <Compile Include="ToolKit\Extensions\DataTableExtensions.cs" />
     <Compile Include="ToolKit\Extensions\DictionaryExtessions.cs" />
+    <Compile Include="ToolKit\Extensions\PinYinExtessions.cs" />
     <Compile Include="ToolKit\FileHandler\FileHelper.cs" />
     <Compile Include="ToolKit\FileHandler\FileUpload.cs" />
     <Compile Include="ToolKit\ImageHandler\ImageHelper.cs" />
