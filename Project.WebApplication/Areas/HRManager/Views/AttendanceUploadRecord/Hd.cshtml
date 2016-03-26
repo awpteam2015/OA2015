@@ -85,7 +85,6 @@
         'fileTypeDesc': 'Image Files',
         'fileTypeExts': '*.xlsx',
         'onUploadSuccess': function (file, data, response) {
-            alert(data);
             var json = $.parseJSON(data);
             if (json.success) {
                 $('#div_filename').html("<span ><a name=\"listP\" target=\"_blank\" href=\"" + json.extension.fileFullPath + "\">" + json.extension.orgfileName + "</a> <a href=\"javascript:void(0)\" onclick=\"$(this).parent().remove()\">删除</a></span>");

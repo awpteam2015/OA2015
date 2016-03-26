@@ -110,6 +110,7 @@ namespace Project.WebApplication.Areas.HRManager.Controllers
             var deleteResult = ContractService.GetInstance().DeleteByPkId(pkid);
             return new AbpJsonResult<string>(deleteResult);
         }
+
     }
 }
 

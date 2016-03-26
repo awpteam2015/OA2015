@@ -116,7 +116,7 @@ namespace Project.Service.HRManager
         /// <param name="entity"></param>
         public Tuple<bool, string> Update(ContractEntity entity)
         {
-            var validateResult = ContractValidate.GetInstance().IsHasSameContractCode(entity.ContractNo);
+            var validateResult = ContractValidate.GetInstance().IsHasSameContractCode(entity.ContractNo, entity.PkId);
             if (!validateResult.Item1 && entity.State != 4)
             {
                 return validateResult;

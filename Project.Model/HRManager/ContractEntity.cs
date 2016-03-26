@@ -96,6 +96,9 @@ namespace Project.Model.HRManager
         /// 上级信息
         /// </summary>
         public virtual System.Int16 ParentId { get; set; }
+
+        public virtual System.String FileUrl { get; set; }
+        public virtual System.String FileName { get; set; }
         #endregion
 
 

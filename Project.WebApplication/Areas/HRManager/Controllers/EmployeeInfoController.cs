@@ -106,6 +106,15 @@ namespace Project.WebApplication.Areas.HRManager.Controllers
             return new AbpJsonResult(searchList, new NHibernateContractResolver());
         }
 
+        public AbpJsonResult GetAllList2()
+        {
+            var where = new EmployeeInfoEntity();
+            var searchList = EmployeeInfoService.GetInstance().GetList(where, false);
+            return new AbpJsonResult(searchList, new NHibernateContractResolver());
+        }
+
+
+
         [HttpPost]
         public AbpJsonResult Add(AjaxRequest<EmployeeInfoEntity> postData)
         {
@@ -252,8 +261,8 @@ namespace Project.WebApplication.Areas.HRManager.Controllers
             var searchList = EmployeeInfoService.GetInstance().GetList(where, false);
 
 
-            var bl = AsposeCellsHelper.ExportToExcel<IList<EmployeeInfoEntity>>(searchList, "EmployeeInfo", $"{rootpath}/TemplateFile/EmployeeExport.xlsx", $"{rootpath}{filepath}{fileName}", new Dictionary<string, object>());
-
+            //var bl = AsposeCellsHelper.ExportToExcel<IList<EmployeeInfoEntity>>(searchList, "EmployeeInfo", $"{rootpath}/TemplateFile/EmployeeExport.xlsx", $"{rootpath}{filepath}{fileName}", new Dictionary<string, object>());
+            var bl = true;
 
 
             var result = new AjaxResponse<EmployeeInfoEntity>()

@@ -36,6 +36,12 @@ namespace Project.Model.HRManager
         /// 员工名称
         /// </summary>
         public virtual System.String EmployeeName { get; set; }
+
+        public virtual System.String EmployeeNameAndEmployeeCode
+        {
+            get { return EmployeeCode+EmployeeName; }
+        }
+
         /// <summary>
         /// 所属部门
         /// </summary>
@@ -152,7 +158,7 @@ namespace Project.Model.HRManager
         /// <summary>
         /// 开始工作时间
         /// </summary>
-        public virtual  DateTime? StartWork { get; set; }
+        public virtual DateTime? StartWork { get; set; }
 
         /// <summary>
         /// 入党时间
@@ -161,9 +167,9 @@ namespace Project.Model.HRManager
 
         public virtual System.String PostLevel { get; set; }
 
-        public virtual  System.String PostLevelName { get; set; }
+        public virtual System.String PostLevelName { get; set; }
 
-        public virtual  System.String PostProperty { get; set; }
+        public virtual System.String PostProperty { get; set; }
         public virtual System.String PostPropertyName { get; set; }
 
         #endregion

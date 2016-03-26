@@ -38,7 +38,10 @@ namespace  Project.Map.HRManager
             Map(p => p.SecondParty);    
             Map(p => p.ContractContent);    
             Map(p => p.IdentityCardNo);
-            Map(p => p.ParentId);    
+            Map(p => p.ParentId);
+
+            Map(p => p.FileName);
+            Map(p => p.FileUrl); 
         }
     }
 }

@@ -16,33 +16,65 @@
                 parent.pro.Contract.ListPage.closeTab("");
             });
 
-            $("#EmployeeCode").change(function () {
 
-                var postData = {};
-                postData.employeeCode = $("#EmployeeCode").val();
+            $('#EmployeeCode').combobox({
+                url: '/HRManager/EmployeeInfo/GetAllList2',
+                valueField: 'EmployeeCode',
+                textField: 'EmployeeNameAndEmployeeCode',
+                onSelect: function(rec){
+                    var postData = {};
+                    postData.employeeCode = rec.EmployeeCode;
 
-                abp.ajax({
-                    url: "/HRManager/EmployeeInfo/GetEmployeeInfo",
-                    data: JSON.stringify(postData)
-                }).done(
-                 function (dataresult, data) {
-                     $("#DepartmentCode").val(dataresult.DepartmentCode);
-                     $("#DepartmentName").val(dataresult.DepartmentName);
+                    abp.ajax({
+                        url: "/HRManager/EmployeeInfo/GetEmployeeInfo",
+                        data: JSON.stringify(postData)
+                    }).done(
+                     function (dataresult, data) {
+                         $("#DepartmentCode").val(dataresult.DepartmentCode);
+                         $("#DepartmentName").val(dataresult.DepartmentName);
 
-                     $("#DepartmentCode_span").html(dataresult.DepartmentCode);
-                     $("#DepartmentName_span").html(dataresult.DepartmentName);
+                         $("#DepartmentCode_span").html(dataresult.DepartmentCode);
+                         $("#DepartmentName_span").html(dataresult.DepartmentName);
 
-                     $("#IdentityCardNo").val(dataresult.CertNo);
-                     $("#SecondParty").val(dataresult.EmployeeName);
-                     $("#SecondParty_span").html(dataresult.EmployeeName);
-                 }
-             ).fail(
-              function (errordetails, errormessage) {
-                  $("#EmployeeCode").val("");
-              }
-             );
-
+                         $("#IdentityCardNo").val(dataresult.CertNo);
+                         $("#SecondParty").val(dataresult.EmployeeName);
+                         $("#SecondParty_span").html(dataresult.EmployeeName);
+                     }
+                 ).fail(
+                  function (errordetails, errormessage) {
+                      $("#EmployeeCode").val("");
+                  }
+                 );
+                }
             });
+
+            //$("#EmployeeCode").change(function () {
+
+            //    var postData = {};
+            //    postData.employeeCode = $("#EmployeeCode").val();
+
+            //    abp.ajax({
+            //        url: "/HRManager/EmployeeInfo/GetEmployeeInfo",
+            //        data: JSON.stringify(postData)
+            //    }).done(
+            //     function (dataresult, data) {
+            //         $("#DepartmentCode").val(dataresult.DepartmentCode);
+            //         $("#DepartmentName").val(dataresult.DepartmentName);
+
+            //         $("#DepartmentCode_span").html(dataresult.DepartmentCode);
+            //         $("#DepartmentName_span").html(dataresult.DepartmentName);
+
+            //         $("#IdentityCardNo").val(dataresult.CertNo);
+            //         $("#SecondParty").val(dataresult.EmployeeName);
+            //         $("#SecondParty_span").html(dataresult.EmployeeName);
+            //     }
+            // ).fail(
+            //  function (errordetails, errormessage) {
+            //      $("#EmployeeCode").val("");
+            //  }
+            // );
+
+            //});
 
 
 
@@ -61,8 +93,10 @@
                 $("#State").html(bindEntity.Attr_State);
                 $("#SecondParty_span").html(bindEntity.SecondParty);
 
-              
-               
+                if (bindEntity.FileUrl!="") {
+                    $('#div_filename').html("<span ><a name=\"listP\" target=\"_blank\" href=\"" + bindEntity.FileUrl +"/"+ bindEntity.FileName + "\">合同下载</a> </span>");
+                }
+
 
                 var State = pro.commonKit.getUrlParam("State");
                 if (State == "2" || State=="4") {

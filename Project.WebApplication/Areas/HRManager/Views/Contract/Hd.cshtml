@@ -5,6 +5,9 @@
 
 @section JavaScript{
     <script src="/Areas/HRManager/Scripts/Contract/Hd.js?JsParamter=@SiteConfig.GetConfig().JsParamter"></script>
+
+<script src="~/Scripts/jqueryPlugins/jquery_uploadify/jquery.uploadify.js"></script>
+<link href="~/Scripts/jqueryPlugins/jquery_uploadify/uploadify.css" rel="stylesheet" />
 }
 <div style="display: none">
     <input id="BindEntity" type="text" value="@ViewBag.BindEntity" />
@@ -19,7 +22,7 @@
                     工号<span style="color: Red">*</span>:
                 </td>
                 <td>
-                    <input id="EmployeeCode" name="EmployeeCode" type="text" />
+                    <input id="EmployeeCode" name="EmployeeCode" type="text" style="width: 200px" />
                 </td>
 
                 <td>
@@ -94,9 +97,26 @@
                 </td>
                 <td colspan="5">
 
-                    <textarea id="ContractContent" name="ContractContent" style="width: 500px;height: 300px"></textarea>
+                    <textarea id="ContractContent" name="ContractContent" style="width: 500px; height: 300px"></textarea>
                 </td>
 
+            </tr>
+
+            <tr>
+                <td>
+                    上传文件<span style="color: Red">*</span>:
+                </td>
+                <td>
+                    <div style="display: none">
+                        <input id="FileUrl" name="FileUrl" type="text" />
+                        <input id="FileName" name="FileName" type="text" />
+                    </div>
+
+                    <div style="float: left; width: 150px;">
+                        <input id="file_upload" name="file_upload" type="file" />
+                    </div>
+                    <div style="float: left; line-height: 40px;" id="div_filename"></div>
+                </td>
             </tr>
             <tr>
                 <td>
@@ -130,5 +150,29 @@
     <a id="btnClose" class="easyui-linkbutton" iconcls="icon-cancel" href="javascript:void(0)">关闭</a>
 </div>
 
+<script type="text/javascript">
 
+    $('#file_upload').uploadify({
+        'formData': { "path": "AttendanceFile" },
+        'swf': '/Scripts/jqueryPlugins/jquery_uploadify/uploadify.swf',
+        'uploader': '/SystemSetManager/Upload/UploadImage',
+        'buttonText': '上传文件',
+        'fileSizeLimit': '5MB',
+        'fileTypeDesc': 'Image Files',
+        'fileTypeExts': '*.xlsx',
+        'onUploadSuccess': function (file, data, response) {
+            var json = $.parseJSON(data);
+            if (json.success) {
+                $('#div_filename').html("<span ><a name=\"listP\" target=\"_blank\" href=\"" + json.extension.fileFullPath + "\">" + json.extension.orgfileName + "</a> <a href=\"javascript:void(0)\" onclick=\"$(this).parent().remove()\">删除</a></span>");
+                $("#FileUrl").val(json.extension.fileUrl);
+                $("#FileName").val(json.extension.fileName);
+            } else {
+                alert(json.msg);
+            }
+        }
+    });
+
+
+
+</script>
 
