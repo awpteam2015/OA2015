@@ -127,6 +127,20 @@
                 textField: 'KeyName',
                 url: '/HRManager/Dictionary/GetListByCode?ParentKeyCode=ZT'
             });
+            $('#PostLevel').combobox({
+                required: true,
+                editable: false,
+                valueField: 'KeyValue',
+                textField: 'KeyName',
+                url: '/HRManager/Dictionary/GetListByCode?ParentKeyCode=GWDJ'
+            });
+            $('#PostProperty').combobox({
+                required: true,
+                editable: false,
+                valueField: 'KeyValue',
+                textField: 'KeyName',
+                url: '/HRManager/Dictionary/GetListByCode?ParentKeyCode=GWXZ'
+            });
 
             gridObjWork.grid({
                 url: '/HRManager/WorkExperience/GetAllList?EmployeeID=' + (pro.commonKit.getUrlParam("PkId") ? pro.commonKit.getUrlParam("PkId") : 0),

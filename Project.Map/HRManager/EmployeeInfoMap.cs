@@ -51,6 +51,12 @@ namespace Project.Map.HRManager
             Map(p => p.LastModificationTime);
             Map(p => p.LastModifierUserCode);
             Map(p => p.WorkStateName);
+            Map(p => p.StartWork);
+            Map(p => p.JoinCommy);
+            Map(p => p.PostLevel);
+            Map(p => p.PostLevelName);
+            Map(p => p.PostProperty);
+            Map(p => p.PostPropertyName);
 
             HasMany(p => p.WorkList)
             .AsSet()

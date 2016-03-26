@@ -10,6 +10,7 @@
                 gridObjStudy: new pro.GridBase("#datagridstudy", false),
                 gridObjTechnical: new pro.GridBase("#datagridTechnical", false),
                 gridObjProfession: new pro.GridBase("#datagridProfession", false),
+                xlOptionHtml: '',//学历<option></option>
                 xzOptionHtml: '',//学制<option></option>
                 zcOptionHtml: ''//职称<option></option>
             };
@@ -91,6 +92,24 @@
            }
           );
 
+            abp.ajax({
+                url: "/HRManager/Dictionary/GetListByCode?ParentKeyCode=Education"
+                //,data: JSON.stringify(postData)
+            }).done(
+            function (dataresult, data) {
+                initObj.xlOptionHtml = "";
+
+                $.each(dataresult, function (i, item) {
+                    initObj.xlOptionHtml += "<option value='" + item.KeyValue + "'>" + item.KeyName + "</option>";
+                });
+
+            }
+            ).fail(
+             function (errordetails, errormessage) {
+                 //  $.alertExtend.error();
+             }
+        );
+
             $('#TechnicalTitle').combobox({
                 required: true,
                 editable: false,
@@ -126,6 +145,20 @@
                 valueField: 'KeyValue',
                 textField: 'KeyName',
                 url: '/HRManager/Dictionary/GetListByCode?ParentKeyCode=ZT'
+            });
+            $('#PostLevel').combobox({
+                required: true,
+                editable: false,
+                valueField: 'KeyValue',
+                textField: 'KeyName',
+                url: '/HRManager/Dictionary/GetListByCode?ParentKeyCode=GWDJ'
+            });
+            $('#PostProperty').combobox({
+                required: true,
+                editable: false,
+                valueField: 'KeyValue',
+                textField: 'KeyName',
+                url: '/HRManager/Dictionary/GetListByCode?ParentKeyCode=GWXZ'
             });
 
             gridObjWork.grid({
@@ -235,7 +268,7 @@
                             title: '学历',
                             width: 100,
                             formatter: function (value, row, index) {
-                                return pro.controlKit.getInputHtml("S_Education_" + row.PkId, value);
+                                return pro.controlKit.getSelectHtml("S_Education_" + row.PkId, value, initObj.xlOptionHtml);
                             }
                         },
                         {
@@ -481,6 +514,8 @@
             postData.RequestEntity.WorkStateName = $('#WorkState').combobox('getText');
             postData.RequestEntity.EmployeeTypeName = $('#EmployeeType').combobox('getText');
             postData.RequestEntity.DepartmentName = $('#DepartmentCode').combotree('getText');
+            postData.RequestEntity.PostLevelName = $('#PostLevel').combotree('getText');
+            postData.RequestEntity.PostPropertyName = $('#PostProperty').combotree('getText');
 
             pro.submitKit.config.columnPkidName = "PkId";
             pro.submitKit.config.columnNamePreStr = "";
