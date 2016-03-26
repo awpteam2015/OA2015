@@ -104,6 +104,15 @@ namespace Project.WebApplication.Areas.HRManager.Controllers
             return new AbpJsonResult(searchList, new NHibernateContractResolver());
         }
 
+        public AbpJsonResult GetAllList2()
+        {
+            var where = new EmployeeInfoEntity();
+            var searchList = EmployeeInfoService.GetInstance().GetList(where, false);
+            return new AbpJsonResult(searchList, new NHibernateContractResolver());
+        }
+
+
+
         [HttpPost]
         public AbpJsonResult Add(AjaxRequest<EmployeeInfoEntity> postData)
         {
