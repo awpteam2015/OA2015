@@ -4,6 +4,10 @@
     pro.EmployeeInfo.HdPage = pro.EmployeeInfo.HdPage || {};
     pro.EmployeeInfo.HdPage = {
         init: function () {
+            $('#tabs').tabs({
+                width: $("#tabs").parent().width(),
+                height: $(window).height()-550
+        });
             return {
                 tabObj: new pro.TabBase(),
                 gridObjWork: new pro.GridBase("#datagridwork", false),
@@ -23,7 +27,7 @@
             var gridObjTechnical = initObj.gridObjTechnical;
             var gridObjProfession = initObj.gridObjProfession;
             var gridObjYear = initObj.gridObjYear;
-
+           
             //隐藏编辑按钮
             if (pro.commonKit.getUrlParam("View")) {
                 $('#btnEdit').css("display", "none");
@@ -428,6 +432,14 @@
                             formatter: function (value, row, index) {
                                 return pro.controlKit.getInputHtml("P_CerNo_" + row.PkId, value);
                             }
+                        },
+                        {
+                            field: 'EmployDate',
+                            title: '聘用时间',
+                            width: 130,
+                            formatter: function (value, row, index) {
+                                return pro.controlKit.getInputDateHtml("P_EmployDate_" + row.PkId, value);
+                            }
                         }
                     ]
                 ],
@@ -588,7 +600,7 @@
 
             pro.submitKit.config.columnPkidName = "P_PkId";
             pro.submitKit.config.columnNamePreStr = "P_";
-            pro.submitKit.config.columns = ["Title", "TypeName", "RangeName", "GetDate", "CerNo"];
+            pro.submitKit.config.columns = ["Title", "TypeName", "RangeName", "GetDate", "CerNo", "EmployDate"];
             postData.RequestEntity.ProfessionList = pro.submitKit.getRowJson();
 
             pro.submitKit.config.columnPkidName = "Y_PkId";

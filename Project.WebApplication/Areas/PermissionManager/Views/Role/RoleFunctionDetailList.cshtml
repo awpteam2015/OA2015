@@ -2,29 +2,27 @@
     ViewBag.Title = "List";
     Layout = "~/Views/Shared/_LayoutList2.cshtml";
 }
-
 @section JavaScript{
     <script src="/Areas/PermissionManager/Scripts/Role/RoleFunctionDetailList.js?JsParamter=@SiteConfig.GetConfig()" type="text/javascript"></script>
 }
 
-
-    <div region="west" split="true" title="角色" style="width:520px;" border="false">
-        <table id="datagrid" style="height:auto;" iconcls=".icon-save" singleselect="true" toolbar="#tb" fit="true"></table>
-        <div id="tb" style="padding:5px;height:auto">
-            <div id="divSearch" style="margin-bottom:5px;">
-                角色名称：<input id="RoleName" name="RoleName" type="text" style="width:100px;" />
-                <a href="#" class="easyui-linkbutton" iconcls="icon-search" id="btnSearchRole" plain="true">搜索</a>
-                <a href="#" class="easyui-linkbutton" iconcls="icon-reload" id="btnReload" plain="true">刷新</a>
-            </div>
+<div region="west" split="true" title="角色" style="width:400px;" border="false">
+    <table id="datagrid" style="height:auto;" iconcls=".icon-save" singleselect="true" toolbar="#tb" fit="true"></table>
+    <div id="tb" style="padding:5px;height:auto">
+        <div id="divSearch" style="margin-bottom:5px;">
+            角色名称：<input id="RoleName" name="RoleName" type="text" style="width:100px;" />
+            <a href="#" class="easyui-linkbutton" iconcls="icon-search" id="btnSearchRole" plain="true">搜索</a>
+            <a href="#" class="easyui-linkbutton" iconcls="icon-reload" id="btnReload" plain="true">刷新</a>
         </div>
     </div>
-    <div region="center" title="模块权限" id="center" border="false">
-        <table id="datagrid2" style="height:auto;" iconcls=".icon-save" singleselect="true"  fit="true"></table>
+</div>
+<div region="center" title="模块权限" id="center" border="false">
+    <table id="datagrid2" style="height: auto;" iconcls=".icon-save" singleselect="true" fit="true"></table>
 
-    </div>
-
-
-
+</div>
+@*<div region="east" title="科室权限" id="east" border="false" style="width:300px;" >
+    <table id="datagrid3" style="height:auto;" iconcls=".icon-save" singleselect="true" fit="true"></table>
+</div>*@
 
 
 

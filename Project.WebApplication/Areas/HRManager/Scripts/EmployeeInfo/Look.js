@@ -4,6 +4,10 @@
     pro.EmployeeInfo.LookPage = pro.EmployeeInfo.LookPage || {};
     pro.EmployeeInfo.LookPage = {
         init: function () {
+            $('#tabs').tabs({
+                width: $("#tabs").parent().width(),
+                height: $(window).height() - 550
+            });
             return {
                 tabObj: new pro.TabBase(),
                 gridObjWork: new pro.GridBase("#datagridwork", false),
@@ -11,6 +15,7 @@
                 gridObjTechnical: new pro.GridBase("#datagridTechnical", false),
                 gridObjProfession: new pro.GridBase("#datagridProfession", false),
                 gridObjYear: new pro.GridBase("#datagridYear", false),
+                xlOptionHtml: '',//学历<option></option>
                 xzOptionHtml: '',//学制<option></option>
                 zcOptionHtml: ''//职称<option></option>
             };
@@ -45,7 +50,7 @@
                 $.messager.confirm("确认操作", "是否确认导出", function (bl) {
                     if (!bl) return;
                     abp.ajax({
-                        url: "/HRManager/EmployeeInfo/ExportWord?employeeId="+(pro.commonKit.getUrlParam("PkId") ? pro.commonKit.getUrlParam("PkId") : 0)
+                        url: "/HRManager/EmployeeInfo/ExportWord?employeeId=" + (pro.commonKit.getUrlParam("PkId") ? pro.commonKit.getUrlParam("PkId") : 0)
                     }).done(
                     function (dataresult, data) {
                         //
@@ -112,6 +117,23 @@
                //  $.alertExtend.error();
            }
           );
+            abp.ajax({
+                url: "/HRManager/Dictionary/GetListByCode?ParentKeyCode=Education"
+                //,data: JSON.stringify(postData)
+            }).done(
+          function (dataresult, data) {
+              initObj.xlOptionHtml = "";
+
+              $.each(dataresult, function (i, item) {
+                  initObj.xlOptionHtml += "<option value='" + item.KeyValue + "'>" + item.KeyName + "</option>";
+              });
+
+          }
+          ).fail(
+           function (errordetails, errormessage) {
+               //  $.alertExtend.error();
+           }
+      );
 
             $('#TechnicalTitle').combobox({
                 required: true,
@@ -271,7 +293,7 @@
                             title: '学历',
                             width: 100,
                             formatter: function (value, row, index) {
-                                return pro.controlKit.getInputHtml("S_Education_" + row.PkId, value);
+                                return pro.controlKit.getSelectHtml("S_Education_" + row.PkId, value, initObj.xlOptionHtml);
                             }
                         },
                         {
@@ -428,6 +450,14 @@
                             width: 130,
                             formatter: function (value, row, index) {
                                 return pro.controlKit.getInputHtml("P_CerNo_" + row.PkId, value);
+                            }
+                        },
+                        {
+                            field: 'EmployDate',
+                            title: '聘用时间',
+                            width: 130,
+                            formatter: function (value, row, index) {
+                                return pro.controlKit.getInputDateHtml("P_EmployDate_" + row.PkId, value);
                             }
                         }
                     ]

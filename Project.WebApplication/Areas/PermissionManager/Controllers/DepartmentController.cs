@@ -42,7 +42,28 @@ namespace Project.WebApplication.Areas.PermissionManager.Controllers
             var where = new DepartmentEntity();
             where.DepartmentCode = RequestHelper.GetFormString("DepartmentCode");
             where.DepartmentName = RequestHelper.GetFormString("DepartmentName");
+
+            var checkList = new List<int>();
+            var userCode = RequestHelper.GetString("UserCode");
+            var roleId = RequestHelper.GetInt("RoleId");
+            if (!string.IsNullOrWhiteSpace(userCode))
+            {
+                checkList = UserInfoService.GetInstance().GetFunctionDetailList_Checked(userCode);
+            }
+
+            if (roleId > 0)
+            {
+                checkList = DepartmentService.GetInstance().GetDepartList_Checked(roleId);
+            }
+
             var searchList = DepartmentService.GetInstance().GetList(where);
+
+            searchList.ForEach(p =>
+            {
+                p.Attr_IsCheck = checkList.Any(y => y == p.PkId);
+            });
+
+
             var dataGridEntity = new DataGridTreeResponse<DepartmentEntity>(searchList.Count, searchList);
             return new AbpJsonResult(dataGridEntity, new NHibernateContractResolver());
         }
@@ -95,6 +116,25 @@ namespace Project.WebApplication.Areas.PermissionManager.Controllers
             };
             return new AbpJsonResult(result, new NHibernateContractResolver(new string[] { "result" }));
         }
+
+
+        [HttpPost]
+        public AbpJsonResult SetRowDepart()
+        {
+            var t = this.Request["RolePkId"];
+            var rolePkId = RequestHelper.GetInt("RolePkId");
+            var functionPkId = RequestHelper.GetInt("FunctionPkId");
+            var functionDetailPkId = RequestHelper.GetInt("FunctionDetailPkId");
+            var isCheck = RequestHelper.GetInt("IsCheck") == 1;
+            var addResult = RoleService.GetInstance().SetRowFunction(rolePkId, functionPkId, functionDetailPkId, isCheck);
+            var result = new AjaxResponse<RoleEntity>()
+            {
+                success = addResult,
+                result = null
+            };
+            return new AbpJsonResult(result, null);
+        }
+
     }
 }
 

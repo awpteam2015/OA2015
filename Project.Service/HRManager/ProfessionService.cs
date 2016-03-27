@@ -164,7 +164,7 @@ namespace Project.Service.HRManager
             #region
             // if (!string.IsNullOrEmpty(where.PkId))
             //  expr = expr.And(p => p.PkId == where.PkId);
-            if (where.EmployeeID.HasValue && where.EmployeeID.Value > 0)
+            if (where.EmployeeID.HasValue && where.EmployeeID.Value >= 0)
                 expr = expr.And(p => p.EmployeeID == where.EmployeeID);
             // if (!string.IsNullOrEmpty(where.EmployeeCode))
             //  expr = expr.And(p => p.EmployeeCode == where.EmployeeCode);

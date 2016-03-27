@@ -8,7 +8,8 @@ var pro = pro || {};
             return {
                 tabObj: new pro.TabBase(),
                 gridObj: new pro.GridBase("#datagrid", false),
-                gridObj2: new pro.GridBase("#datagrid2", false)
+                gridObj2: new pro.GridBase("#datagrid2", false),
+                //gridObj3: new pro.GridBase("#datagrid3", true)
             };
         },
         initPage: function () {
@@ -28,6 +29,52 @@ var pro = pro || {};
                 onClickRow: function (index, row) {
 
                     initObj.gridObj2.reload({ RoleId: row.PkId });
+
+
+                    //initObj.gridObj3.grid({
+                    //    url: '/PermissionManager/Department/GetList?RoleId=' + row.PkId,
+                    //    idField: "DepartmentCode",
+                    //    treeField: "DepartmentCode",
+                    //    fitColumns: false,
+                    //    nowrap: true,
+                    //    rownumbers: false, //行号
+                    //    singleSelect: true,
+                    //    columns: [[
+                    //    {
+                    //        field: 'DepartmentCode', title: '部门编码', width: 150, formatter: function (value, row) {
+                    //            var checkHtml = row.Attr_IsCheck ? 'checked="checked"' : "";
+                    //            return '<input  name="DepartmentCode" type="checkbox" value="' + row.DepartmentCode + '" ' + checkHtml + '/>' + row.DepartmentCode;
+                    //        }
+                    //    },
+                    //    { field: 'DepartmentName', title: '部门名称', width: 100 }
+                    //    ]],
+                    //    onLoadSuccess: function () {
+                    //        $("input[name=DepartmentCode]").click(function () {
+
+                    //            var postData = {};
+                    //            postData.RolePkId = RoleId;
+                    //            postData.DepartmentCode = $(this).val();
+                    //            postData.IsCheck = $(this).is(':checked') ? 1 : 0;
+
+                    //            abp.ajax({
+                    //                contentType: abp.ajax.contentTypeForm,
+                    //                url: "/PermissionManager/Department/SetRowDepart",
+                    //                data: postData
+                    //            }).done(
+                    //            function (dataresult, data) {
+                    //                $("input[name=FunctionDetail_" + postData.FunctionPkId + "]").attr("checked", postData.IsCheck == 1);
+                    //            }
+                    //            ).fail(
+                    //            function (errordetails, errormessage) {
+                    //                // $.alertExtend.error(errormessage);
+                    //            }
+                    //            );
+                    //        });
+
+                    //}
+                    //}
+                    //);
+
                 },
                 pagination: true,
                 pageSize: 20, //每页显示的记录条数，默认为10     
@@ -44,7 +91,7 @@ var pro = pro || {};
                 singleSelect: true,
                 columns: [[
                 { field: 'PkId', title: '模块PkId', width: 100 },
-                { field: 'RoleName', title: '模块', width: 600 }
+                { field: 'ModuleName', title: '模块', width: 600 }
                 ]],
                 detailFormatter: function (index, row) {
                     return '<div style="padding:2px"><table   id="ddv-' + index + '"></table></div>';
@@ -153,7 +200,6 @@ var pro = pro || {};
                 pageList: [20, 30, 40] //可以设置每页记录条数的列表    
             }
              );
-
 
 
 
