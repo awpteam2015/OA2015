@@ -44,7 +44,7 @@ var pro = pro || {};
                 singleSelect: true,
                 columns: [[
                 { field: 'PkId', title: '模块PkId', width: 100 },
-                { field: 'RoleName', title: '模块', width: 600 }
+                { field: 'ModuleName', title: '模块', width: 600 }
                 ]],
                 detailFormatter: function (index, row) {
                     return '<div style="padding:2px"><table   id="ddv-' + index + '"></table></div>';

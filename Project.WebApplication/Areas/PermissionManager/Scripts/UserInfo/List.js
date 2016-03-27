@@ -4,7 +4,7 @@ var pro = pro || {};
     pro.UserInfo = pro.UserInfo || {};
     pro.UserInfo.ListPage = pro.UserInfo.ListPage || {};
     pro.UserInfo.ListPage = {
-      init: function () {
+        init: function () {
             return {
                 tabObj: new pro.TabBase(),
                 gridObj: new pro.GridBase("#datagrid", false)
@@ -21,8 +21,8 @@ var pro = pro || {};
                 rownumbers: true, //行号
                 singleSelect: true,
                 columns: [[
-         { field: 'UserCode', title: '员工号', width: 100 },
-         { field: 'UserName', title: '用户名', width: 100 },
+         { field: 'UserCode', title: '用户名', width: 100 },
+         { field: 'UserName', title: '姓名', width: 100 },
          { field: 'Email', title: '电子邮件', width: 100 },
          { field: 'Mobile', title: '手机号', width: 100 },
          { field: 'Tel', title: '家庭电话', width: 100 },
@@ -39,7 +39,7 @@ var pro = pro || {};
                );
 
             $("#btnAdd").click(function () {
-               tabObj.add("/PermissionManager/UserInfo/Hd","新增");
+                tabObj.add("/PermissionManager/UserInfo/Hd", "新增");
             });
 
             $("#btnEdit").click(function () {
@@ -58,7 +58,7 @@ var pro = pro || {};
 
             $("#btnDel").click(function () {
                 if (!gridObj.isSelected()) {
-                $.alertExtend.infoOp();
+                    $.alertExtend.infoOp();
                     return;
                 }
                 $.messager.confirm("确认操作", "是否确认删除", function (bl) {
@@ -82,7 +82,7 @@ var pro = pro || {};
                 gridObj.refresh();
             });
         },
-         closeTab: function () {
+        closeTab: function () {
             this.init().tabObj.closeTab();
         }
     };
