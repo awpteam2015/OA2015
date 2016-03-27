@@ -240,7 +240,7 @@ namespace Project.Service.PermissionManager
                 for (int i = 0; i < listAll.Count; i++)
                 {
                     if (!sourceList.Any(p => p.DepartmentCode == listAll[i].DepartmentCode))
-                    { 
+                    {
                         listAll.RemoveAt(i);
                         i--;
                     }
@@ -288,12 +288,18 @@ namespace Project.Service.PermissionManager
 
         }
 
-        public string[] GetChiledArr(System.String departmentCode)
+        public string[] GetChiledArr(System.String departmentCode, List<UserDepartmentEntity> userDepartList, bool isAdmin)
         {
+            if(isAdmin)
+                return new string[] { };
             if (string.IsNullOrEmpty(departmentCode) || departmentCode == "0")
             {
-                return new string[] { };
+                var retList= userDepartList.Select(p => p.DepartmentCode).ToList().ToArray();
+                if (retList.Length <= 0)
+                    return new string[] {"999999"};
+                return retList;
             }
+            return new string[] { departmentCode };
 
             var parentDepartmentEntity = GetModelByDepartmentCode(departmentCode);
             var extEntity = new DepartmentExtEntity() { childrenAll = new List<DepartmentEntity>() };

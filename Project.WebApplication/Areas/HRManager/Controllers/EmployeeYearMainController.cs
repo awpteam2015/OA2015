@@ -42,7 +42,7 @@ namespace Project.WebApplication.Areas.HRManager.Controllers
             var where = new EmployeeYearMainEntity();
             //where.PkId = RequestHelper.GetFormString("PkId");
             where.DepartmentCode = RequestHelper.GetFormString("DepartmentCode");
-            where.DepartmentCode = string.Join(",", (DepartmentService.GetInstance().GetChiledArr(where.DepartmentCode)));
+            where.DepartmentCode = string.Join(",", (DepartmentService.GetInstance().GetChiledArr(where.DepartmentCode, LoginUserInfo.UserDepartmentList.ToList(), LoginUserInfo.UserCode.ToUpper() == "ADMIN")));
             where.EmployeeCode = RequestHelper.GetFormString("EmployeeCode");
             //where.LeftCount = RequestHelper.GetFormString("LeftCount");
             //where.Remark = RequestHelper.GetFormString("Remark");
