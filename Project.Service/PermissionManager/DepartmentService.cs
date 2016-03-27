@@ -23,6 +23,9 @@ namespace Project.Service.PermissionManager
 
         #region 构造函数
         private readonly DepartmentRepository _departmentRepository;
+
+        private readonly RoleDepartmentRepository _roleDepartmentRepository;
+
         private static readonly DepartmentService Instance = new DepartmentService();
 
         public DepartmentService()
@@ -276,6 +279,16 @@ namespace Project.Service.PermissionManager
                 };
             }
 
+        }
+
+        /// <summary>
+        /// 角色所对用的部门详情
+        /// </summary>
+        /// <param name="roleId"></param>
+        /// <returns></returns>
+        public List<int> GetDepartList_Checked(int roleId)
+        {
+            return _roleDepartmentRepository.Query().Where(p => p.RoleId == roleId).Select(p => p.DepartId).ToList();
         }
 
         #endregion

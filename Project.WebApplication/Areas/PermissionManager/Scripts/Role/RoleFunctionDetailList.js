@@ -9,7 +9,7 @@ var pro = pro || {};
                 tabObj: new pro.TabBase(),
                 gridObj: new pro.GridBase("#datagrid", false),
                 gridObj2: new pro.GridBase("#datagrid2", false),
-                gridObj3: new pro.GridBase("#datagrid3", true)
+                //gridObj3: new pro.GridBase("#datagrid3", true)
             };
         },
         initPage: function () {
@@ -31,25 +31,49 @@ var pro = pro || {};
                     initObj.gridObj2.reload({ RoleId: row.PkId });
 
 
-                    initObj.gridObj3.grid({
-                        url: '/PermissionManager/Department/GetList?RoleId=' + row.PkId,
-                        idField: "DepartmentCode",
-                        treeField: "DepartmentCode",
-                        fitColumns: false,
-                        nowrap: true,
-                        rownumbers: false, //行号
-                        singleSelect: true,
-                        columns: [[
-                        {
-                            field: 'DepartmentCode', title: '部门编码', width: 150, formatter: function (value, row) {
-                                var checkHtml = row.Attr_IsCheck ? 'checked="checked"' : "";
-                                return '<input  name="DepartmentCode" type="checkbox" value="' + row.DepartmentCode + '" ' + checkHtml + '/>' + row.DepartmentCode;
-                            }
-                        },
-                        { field: 'DepartmentName', title: '部门名称', width: 100 }
-                        ]]
-                    }
-                 );
+                    //initObj.gridObj3.grid({
+                    //    url: '/PermissionManager/Department/GetList?RoleId=' + row.PkId,
+                    //    idField: "DepartmentCode",
+                    //    treeField: "DepartmentCode",
+                    //    fitColumns: false,
+                    //    nowrap: true,
+                    //    rownumbers: false, //行号
+                    //    singleSelect: true,
+                    //    columns: [[
+                    //    {
+                    //        field: 'DepartmentCode', title: '部门编码', width: 150, formatter: function (value, row) {
+                    //            var checkHtml = row.Attr_IsCheck ? 'checked="checked"' : "";
+                    //            return '<input  name="DepartmentCode" type="checkbox" value="' + row.DepartmentCode + '" ' + checkHtml + '/>' + row.DepartmentCode;
+                    //        }
+                    //    },
+                    //    { field: 'DepartmentName', title: '部门名称', width: 100 }
+                    //    ]],
+                    //    onLoadSuccess: function () {
+                    //        $("input[name=DepartmentCode]").click(function () {
+
+                    //            var postData = {};
+                    //            postData.RolePkId = RoleId;
+                    //            postData.DepartmentCode = $(this).val();
+                    //            postData.IsCheck = $(this).is(':checked') ? 1 : 0;
+
+                    //            abp.ajax({
+                    //                contentType: abp.ajax.contentTypeForm,
+                    //                url: "/PermissionManager/Department/SetRowDepart",
+                    //                data: postData
+                    //            }).done(
+                    //            function (dataresult, data) {
+                    //                $("input[name=FunctionDetail_" + postData.FunctionPkId + "]").attr("checked", postData.IsCheck == 1);
+                    //            }
+                    //            ).fail(
+                    //            function (errordetails, errormessage) {
+                    //                // $.alertExtend.error(errormessage);
+                    //            }
+                    //            );
+                    //        });
+
+                    //}
+                    //}
+                    //);
 
                 },
                 pagination: true,
