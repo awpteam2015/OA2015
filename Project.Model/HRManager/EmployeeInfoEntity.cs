@@ -39,7 +39,7 @@ namespace Project.Model.HRManager
 
         public virtual System.String EmployeeNameAndEmployeeCode
         {
-            get { return EmployeeCode+EmployeeName; }
+            get { return PayCode+EmployeeName; }
         }
 
         /// <summary>

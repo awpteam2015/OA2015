@@ -183,6 +183,7 @@
     <Compile Include="ToolKit\Extensions\PinYinExtessions.cs" />
     <Compile Include="ToolKit\FileHandler\FileHelper.cs" />
     <Compile Include="ToolKit\FileHandler\FileUpload.cs" />
+    <Compile Include="ToolKit\HttpHelper.cs" />
     <Compile Include="ToolKit\ImageHandler\ImageHelper.cs" />
     <Compile Include="ToolKit\ImageHandler\ImageUtil.cs" />
     <Compile Include="ToolKit\ImageHandler\VerificationImage.cs" />

@@ -4,24 +4,35 @@ using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NHibernate.Util;
+using Project.Model.PermissionManager;
 using Project.Model.ReportManager;
 using Project.Service.PermissionManager;
 using Project.Service.ReportManager;
 
 namespace Project.WebApplication.Tests
 {
+  
+
+
     [TestClass]
     public class UnitTest2
     {
         public UnitTest2()
         {
+
+
         }
 
         [TestMethod]
         public void TestMethod1()
         {
-          //  DepartmentService.GetInstance().GetChildDepartmentCode();
+
+        
+
+            //  DepartmentService.GetInstance().GetChildDepartmentCode();
 
             //HrReportService.GetInstance().GerAttendanceReport1(new AttendanceViewEntity(){Attr_StartDate = DateTime.Now},0,10);
             //List<string> list1 = new List<string>() { "111", "222" };
@@ -91,7 +102,7 @@ namespace Project.WebApplication.Tests
 
             List<A> list2 = new List<A>()
             {
-                new A() { code = "111", name = "222" }, 
+                new A() { code = "111", name = "222" },
                 new A() { code = "111", name = "333" }
             };
 
