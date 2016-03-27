@@ -217,7 +217,7 @@ namespace Project.WebApplication.Areas.ReportManager.Controllers
             where.DepartmentCode = RequestHelper.GetFormString("DepartmentCode");
             if (!string.IsNullOrWhiteSpace(where.DepartmentCode))
             {
-                where.DepartmentCode = string.Join("','", (DepartmentService.GetInstance().GetChiledArr(where.DepartmentCode, LoginUserInfo.UserDepartmentList.ToList(), LoginUserInfo.UserCode.ToUpper() == "ADMIN")));
+                where.DepartmentCode = string.Join("','", (DepartmentService.GetInstance().GetChiledArr(where.DepartmentCode, LoginUserInfo.UserDepartmentList.ToList(), LoginUserInfo.IsAdmin)));
             }
             where.InOrOut = RequestHelper.GetFormInt("InOrOut", -1);
             //where.PkId = RequestHelper.GetFormString("PkId");
@@ -258,7 +258,7 @@ namespace Project.WebApplication.Areas.ReportManager.Controllers
             where.DepartmentCode = RequestHelper.GetFormString("DepartmentCode");
             if (!string.IsNullOrWhiteSpace(where.DepartmentCode))
             {
-                where.DepartmentCode = string.Join("','", (DepartmentService.GetInstance().GetChiledArr(where.DepartmentCode, LoginUserInfo.UserDepartmentList.ToList(), LoginUserInfo.UserCode.ToUpper() == "ADMIN")));
+                where.DepartmentCode = string.Join("','", (DepartmentService.GetInstance().GetChiledArr(where.DepartmentCode, LoginUserInfo.UserDepartmentList.ToList(), LoginUserInfo.IsAdmin)));
             }
             where.Sex = RequestHelper.GetFormInt("Sex", -1);
             where.IsCommy = RequestHelper.GetFormInt("IsCommy", -1);
@@ -306,7 +306,7 @@ namespace Project.WebApplication.Areas.ReportManager.Controllers
             where.DepartmentCode = RequestHelper.GetFormString("DepartmentCode");
             if (!string.IsNullOrWhiteSpace(where.DepartmentCode))
             {
-                where.DepartmentCode = string.Join("','", (DepartmentService.GetInstance().GetChiledArr(where.DepartmentCode, LoginUserInfo.UserDepartmentList.ToList(), LoginUserInfo.UserCode.ToUpper() == "ADMIN")));
+                where.DepartmentCode = string.Join("','", (DepartmentService.GetInstance().GetChiledArr(where.DepartmentCode, LoginUserInfo.UserDepartmentList.ToList(), LoginUserInfo.IsAdmin)));
             }
             where.IsCommy = RequestHelper.GetFormInt("IsCommy", -1);
             //where.PkId = RequestHelper.GetFormString("PkId");
@@ -348,7 +348,7 @@ namespace Project.WebApplication.Areas.ReportManager.Controllers
             where.DepartmentCode = RequestHelper.GetFormString("DepartmentCode");
             if (!string.IsNullOrWhiteSpace(where.DepartmentCode))
             {
-                where.DepartmentCode = string.Join("','", (DepartmentService.GetInstance().GetChiledArr(where.DepartmentCode, LoginUserInfo.UserDepartmentList.ToList(), LoginUserInfo.UserCode.ToUpper() == "ADMIN")));
+                where.DepartmentCode = string.Join("','", (DepartmentService.GetInstance().GetChiledArr(where.DepartmentCode, LoginUserInfo.UserDepartmentList.ToList(),LoginUserInfo.IsAdmin)));
             }
             //where.IsCommy = RequestHelper.GetFormInt("IsCommy", -1);
             //where.PkId = RequestHelper.GetFormString("PkId");

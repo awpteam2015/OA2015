@@ -53,9 +53,10 @@ namespace Project.Service.PermissionManager
             if (userInfoEntity != null)
             {
                 userInfoEntity.UserFunctionDetailList_Checked = this.GetFunctionDetailList_Checked(userCode);
-               
+
 
                 var loginUserInfo = Mapper.Map<UserInfoEntity, LoginUserInfoDTO>(userInfoEntity);
+                loginUserInfo.IsAdmin = loginUserInfo.UserCode.ToUpper() == "ADMIN";
                 return new Tuple<bool, string, LoginUserInfoDTO>(true, "", loginUserInfo);
             }
             else
