@@ -30,7 +30,8 @@ namespace  Project.Map.HRManager
             Map(p => p.CreatorUserName);    
             Map(p => p.CreationTime);    
             Map(p => p.LastModificationTime);    
-            Map(p => p.LastModifierUserCode);    
+            Map(p => p.LastModifierUserCode);
+            Map(p => p.EmployDate);
         }
     }
 }

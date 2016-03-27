@@ -67,11 +67,17 @@ namespace Project.Model.HRManager
         /// 修改人
         /// </summary>
         public virtual System.String LastModifierUserCode{get; set;}
-		#endregion
-        
+
+        /// <summary>
+        /// 聘用时间
+        /// </summary>
+        public  virtual  System.DateTime? EmployDate { get; set; }
+
+        #endregion
+
 
         #region 新增属性
-        
+
         #endregion
     }
 }
