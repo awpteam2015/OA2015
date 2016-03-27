@@ -73,6 +73,7 @@
     <Compile Include="PermissionManager\FunctionDetailRepository.cs" />
     <Compile Include="PermissionManager\FunctionRepository.cs" />
     <Compile Include="PermissionManager\ModuleRepository.cs" />
+    <Compile Include="PermissionManager\RoleDepartmentRepository.cs" />
     <Compile Include="PermissionManager\RoleFunctionDetailRepository.cs" />
     <Compile Include="PermissionManager\RoleRepository.cs" />
     <Compile Include="PermissionManager\UserDepartmentRepository.cs" />

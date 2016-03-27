@@ -169,6 +169,8 @@
     <Content Include="Areas\PermissionManager\Scripts\Function\List.js" />
     <Content Include="Areas\PermissionManager\Scripts\Module\Hd.js" />
     <Content Include="Areas\PermissionManager\Scripts\Module\List.js" />
+    <Content Include="Areas\PermissionManager\Scripts\RoleDepartment\Hd.js" />
+    <Content Include="Areas\PermissionManager\Scripts\RoleDepartment\List.js" />
     <Content Include="Areas\PermissionManager\Scripts\RoleFunctionDetail\Hd.js" />
     <Content Include="Areas\PermissionManager\Scripts\RoleFunctionDetail\List.js" />
     <Content Include="Areas\PermissionManager\Scripts\Role\Hd.js" />
@@ -291,6 +293,8 @@
     <Content Include="Areas\ReportManager\Views\HrReport\EmployeeDYReport.cshtml" />
     <Content Include="Areas\ReportManager\Views\HrReport\EmployeeXLReport.cshtml" />
     <Content Include="Areas\ReportManager\Views\HrReport\EmployeeZHReport.cshtml" />
+    <Content Include="Areas\PermissionManager\Views\RoleDepartment\Hd.cshtml" />
+    <Content Include="Areas\PermissionManager\Views\RoleDepartment\List.cshtml" />
     <None Include="Properties\PublishProfiles\OA.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\Control\DepartmentControl.js" />
@@ -967,6 +971,7 @@
     <Compile Include="Areas\PermissionManager\Controllers\ModuleController.cs" />
     <Compile Include="Areas\PermissionManager\Controllers\PermissionController.cs" />
     <Compile Include="Areas\PermissionManager\Controllers\RoleController.cs" />
+    <Compile Include="Areas\PermissionManager\Controllers\RoleDepartmentController.cs" />
     <Compile Include="Areas\PermissionManager\Controllers\RoleFunctionDetailController.cs" />
     <Compile Include="Areas\PermissionManager\Controllers\UserDepartmentController.cs" />
     <Compile Include="Areas\PermissionManager\Controllers\UserFunctionDetailController.cs" />

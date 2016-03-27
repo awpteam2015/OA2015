@@ -42,6 +42,20 @@ namespace Project.WebApplication.Areas.PermissionManager.Controllers
             var where = new DepartmentEntity();
             where.DepartmentCode = RequestHelper.GetFormString("DepartmentCode");
             where.DepartmentName = RequestHelper.GetFormString("DepartmentName");
+
+            var checkList = new List<int>();
+            var userCode = RequestHelper.GetString("UserCode");
+            var roleId = RequestHelper.GetInt("RoleId");
+            if (!string.IsNullOrWhiteSpace(userCode))
+            {
+                checkList = UserInfoService.GetInstance().GetFunctionDetailList_Checked(userCode);
+            }
+
+            if (roleId > 0)
+            {
+                checkList = RoleService.GetInstance().GetFunctionDetailList_Checked(roleId);
+            }
+
             var searchList = DepartmentService.GetInstance().GetList(where);
             var dataGridEntity = new DataGridTreeResponse<DepartmentEntity>(searchList.Count, searchList);
             return new AbpJsonResult(dataGridEntity, new NHibernateContractResolver());
