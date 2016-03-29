@@ -225,7 +225,9 @@
     <Content Include="Areas\PermissionManager\Views\Role\List.cshtml" />
     <Content Include="Areas\PermissionManager\Views\UserFunctionDetail\Hd.cshtml" />
     <Content Include="Areas\PermissionManager\Views\UserFunctionDetail\List.cshtml" />
-    <Content Include="Config\appSettings.config" />
+    <Content Include="Config\appSettings.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Areas\PermissionManager\Views\UserInfo\UserFunctionDetailList.cshtml" />
     <Content Include="Areas\HRManager\Views\Attendance\Hd.cshtml" />
     <Content Include="Areas\HRManager\Views\Attendance\List.cshtml" />

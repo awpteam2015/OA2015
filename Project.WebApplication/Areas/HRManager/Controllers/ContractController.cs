@@ -14,6 +14,7 @@ using Project.Infrastructure.FrameworkCore.WebMvc.Controllers.Results;
 using Project.Infrastructure.FrameworkCore.WebMvc.Models;
 using Project.Model.HRManager;
 using Project.Service.HRManager;
+using Project.Service.PermissionManager;
 using Project.WebApplication.Controllers;
 
 namespace Project.WebApplication.Areas.HRManager.Controllers
@@ -62,7 +63,8 @@ namespace Project.WebApplication.Areas.HRManager.Controllers
             var where = new ContractEntity();
   
             where.EmployeeCode = RequestHelper.GetFormString("EmployeeCode");
-            where.DepartmentCode = RequestHelper.GetFormString("DepartmentCode");
+            where.DepartmentCode = string.Join(",", (DepartmentService.GetInstance().GetChiledArr(where.DepartmentCode, LoginUserInfo.UserDepartmentList.ToList(), LoginUserInfo.IsAdmin)));
+            //RequestHelper.GetFormString("DepartmentCode");
             where.BeginDate = RequestHelper.GetDateTime("BeginDate");
             where.EndDate = RequestHelper.GetDateTime("EndDate");
             where.State = RequestHelper.GetInt("State");

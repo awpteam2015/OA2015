@@ -16,6 +16,7 @@ using Project.Infrastructure.FrameworkCore.WebMvc.Models;
 using Project.Model.HRManager;
 using Project.Model.ReportManager;
 using Project.Service.HRManager;
+using Project.Service.PermissionManager;
 using Project.Service.ReportManager;
 using Project.WebApplication.Controllers;
 
@@ -108,7 +109,8 @@ namespace Project.WebApplication.Areas.HRManager.Controllers
             where.EmployeeCode = RequestHelper.GetString("EmployeeCode");
             where.Attr_StartDate = RequestHelper.GetDateTime("Attr_StartDate");
             where.Attr_EndDate = RequestHelper.GetDateTime("Attr_EndDate");
-            where.DepartmentCode = RequestHelper.GetString("DepartmentCode");
+            where.DepartmentCode = string.Join(",", (DepartmentService.GetInstance().GetChiledArr(where.DepartmentCode, LoginUserInfo.UserDepartmentList.ToList(), LoginUserInfo.IsAdmin)));
+            // RequestHelper.GetString("DepartmentCode");
             //where.DepartmentName = RequestHelper.GetFormString("DepartmentName");
             where.State = RequestHelper.GetInt("State");
             return where;
