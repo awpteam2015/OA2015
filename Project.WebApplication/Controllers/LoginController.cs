@@ -60,8 +60,10 @@ namespace Project.WebApplication.Controllers
     {
         public static DateTime UpdateTime=DateTime.Now.AddDays(-1);
 
-       // GET: Login
-       public ActionResult Index3()
+       // public static int dd = 1;
+
+        // GET: Login
+        public ActionResult Index3()
         {
 
             return View();
@@ -69,7 +71,8 @@ namespace Project.WebApplication.Controllers
 
         public ActionResult Index2()
         {
-
+        //    dd++;
+        //    ViewBag.dd = dd;
             var Third_DepartmentWebServiceUrl =
                 System.Configuration.ConfigurationManager.AppSettings["Third_DepartmentWebServiceUrl"];
             if (Third_DepartmentWebServiceUrl != "" && DateTime.Now.Subtract(UpdateTime).Days >= 1)

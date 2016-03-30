@@ -29,17 +29,25 @@ namespace Project.WebApplication.Areas.PermissionManager.Controllers
 
                 ViewBag.BindEntity = JsonHelper.JsonSerializer(entity, new NHibernateContractResolver());
 
-                roleList.Where(p => entity.UserRoleList.Any(x => x.RoleId == p.PkId)).ForEach(p =>
-                {
-                    p.Attr_UserRolePkId = entity.UserRoleList.SingleOrDefault(x => x.RoleId == p.PkId).PkId;
-                    p.Attr_IsCheck = true;
-                });
+                if (entity.UserRoleList.Count > 0) {
+                    roleList.Where(p => entity.UserRoleList.Any(x => x.RoleId == p.PkId)).ForEach(p =>
+                    {
+                        p.Attr_UserRolePkId = entity.UserRoleList.SingleOrDefault(x => x.RoleId == p.PkId).PkId;
+                        p.Attr_IsCheck = true;
+                    });
+                }
 
-                departmentList.Where(p => entity.UserDepartmentList.Any(x => x.DepartmentCode == p.DepartmentCode)).ForEach(p =>
+                if (entity.UserDepartmentList.Count > 0)
                 {
-                    p.Attr_UserDepartmentPkId = entity.UserDepartmentList.SingleOrDefault(x => x.DepartmentCode == p.DepartmentCode).PkId;
-                    p.Attr_IsCheck = true;
-                });
+                    departmentList.Where(p => entity.UserDepartmentList.Any(x => x.DepartmentCode == p.DepartmentCode))
+                        .ForEach(p =>
+                        {
+                            p.Attr_UserDepartmentPkId =
+                                entity.UserDepartmentList.SingleOrDefault(x => x.DepartmentCode == p.DepartmentCode)
+                                    .PkId;
+                            p.Attr_IsCheck = true;
+                        });
+                }
             }
 
             ViewBag.RoleList = JsonHelper.JsonSerializer(new DataGridResponse()
