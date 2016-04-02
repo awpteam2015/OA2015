@@ -71,6 +71,17 @@ namespace Project.WebApplication.Controllers
 
         public ActionResult Index2()
         {
+
+
+
+
+
+
+
+
+
+
+
         //    dd++;
         //    ViewBag.dd = dd;
             var Third_DepartmentWebServiceUrl =
