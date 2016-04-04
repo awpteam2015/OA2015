@@ -6,11 +6,14 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
 using System.Xml.Linq;
+using Aspose.Cells;
 using Newtonsoft.Json;
 using Project.Infrastructure.FrameworkCore.Logging;
 using Project.Infrastructure.FrameworkCore.ToolKit;
+using Project.Infrastructure.FrameworkCore.ToolKit.Extensions;
 using Project.Infrastructure.FrameworkCore.WebMvc.Controllers.Results;
 using Project.Infrastructure.FrameworkCore.WebMvc.Models;
+using Project.Model.Other;
 using Project.Model.PermissionManager;
 using Project.Service.PermissionManager;
 
@@ -72,6 +75,32 @@ namespace Project.WebApplication.Controllers
         public ActionResult Index2()
         {
 
+            //var exportMonth =DateTime.Parse("2016-01") ;
+            //int days = DateTime.DaysInMonth(exportMonth.Year, exportMonth.Month);
+            //var Table3List=new List<ExcelData>().ToDataTable();
+
+         
+
+            //DataSetHelper.ConvertRCDataTable(Table3List);
+
+
+            //var designer = new WorkbookDesigner();
+            //designer.Open(Server.MapPath("~/TemplateFile/考勤模版2.xlsx"));
+            //var datatable = searchList.ToDataTable();
+            //datatable.TableName = "Table1";
+            //designer.SetDataSource(datatable);
+
+            //designer.SetDataSource("KS", "KS顶顶顶顶");
+            //designer.SetDataSource("RQ", "RQDDDDDDD");
+
+
+            //designer.Process();
+
+            //designer.Save("门店促销导出商品.xls");
+            //Response.Flush();
+            //Response.Close();
+            //designer = null;
+            //Response.End();
 
 
 
@@ -81,9 +110,8 @@ namespace Project.WebApplication.Controllers
 
 
 
-
-        //    dd++;
-        //    ViewBag.dd = dd;
+            //    dd++;
+            //    ViewBag.dd = dd;
             var Third_DepartmentWebServiceUrl =
                 System.Configuration.ConfigurationManager.AppSettings["Third_DepartmentWebServiceUrl"];
             if (Third_DepartmentWebServiceUrl != "" && DateTime.Now.Subtract(UpdateTime).Days >= 1)
