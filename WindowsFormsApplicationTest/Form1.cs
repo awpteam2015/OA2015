@@ -99,9 +99,9 @@ namespace WindowsFormsApplicationTest
                 string result = HttpHelper.Helper.GetResponseString(textBox2.Text.Trim(), "Get", new Dictionary<string, string> { }, Encoding.Default, Encoding.UTF8, 10000);
                 //超时时间请设置久点
                 XElement root = XElement.Parse(result);
-                root.
+               // root.
 
-                 textBox1.Text = root.Value;
+                 //textBox1.Text = root.Value;
             }
 
             catch (Exception ex)

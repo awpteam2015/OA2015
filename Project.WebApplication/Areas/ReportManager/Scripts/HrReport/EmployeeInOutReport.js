@@ -21,8 +21,16 @@ var pro = pro || {};
                 rownumbers: true, //行号
                 singleSelect: true,
                 columns: [[
-         { field: 'EmployeeCode', title: '员工编号', width: 100 },
-         { field: 'EmployeeName', title: '员工名称', width: 100 },
+         { field: 'ParnetDepartmentName', title: '单位名称', width: 200 },
+         { field: 'Zjxj', title: '增加小计', width: 100 },
+         { field: 'Bxdl', title: '本系统调入', width: 100 },
+         { field: 'Ly', title: '新录用', width: 100 },
+         { field: 'Dl', title: '调入', width: 100 },
+         { field: 'Jsxj', title: '减少小计', width: 100 },
+         { field: 'Tx', title: '退休', width: 100 },
+         { field: 'Cz', title: '调出或辞职', width: 100 },
+         { field: 'Bxttc', title: '(本系统)调出', width: 100 }
+        /* { field: 'EmployeeName', title: '员工名称', width: 100 },
          { field: 'CertNo', title: '身份证', width: 100 },
          {
              field: 'Birthday', title: '生日', width: 100
@@ -77,7 +85,7 @@ var pro = pro || {};
                  }
                  return ret;
              }
-         },
+         },*/
 
                 ]],
                 pagination: true,

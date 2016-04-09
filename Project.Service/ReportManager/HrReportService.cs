@@ -71,7 +71,7 @@ namespace Project.Service.ReportManager
         /// <param name="maxResults"></param>
         /// <param name="ifGetALL"></param>
         /// <returns></returns>
-        public Tuple<IList<HREmployeeViewEntity>, int> GetHREmployeeReport(HREmployeeViewEntity where, int skipResults, int maxResults, bool ifGetALL = false)
+        public Tuple<IList<EmployeeInOutEntity>, int> GetHREmployeeReport(HREmployeeViewEntity where, int skipResults, int maxResults, bool ifGetALL = false)
         {
             var list = _HrReportRepository.GerInOutEmployeeReport(where, skipResults, maxResults, ifGetALL);
             return list;

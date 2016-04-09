@@ -152,6 +152,10 @@ namespace Project.Model.HRManager
         /// </summary>
         public virtual System.String InWorkStateName { get; set; }
         public virtual bool IsDeleted { get; set; }
+        /// <summary>
+        /// 是否录入
+        /// </summary>
+        public virtual int? IsInsert { get; set; }
         #endregion
 
 
