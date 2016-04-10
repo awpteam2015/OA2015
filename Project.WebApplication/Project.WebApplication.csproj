@@ -1026,6 +1026,7 @@
     <Content Include="TemplateFile\员工模版.xlsx" />
     <Content Include="TemplateFile\EmployeeExport.xlsx" />
     <Content Include="TemplateFile\EmployeeTemplate.doc" />
+    <Content Include="TemplateFile\考勤模版2.xlsx" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -21,11 +21,11 @@
                 columns: [[
                 {
                     field: 'DepartmentCode', title: '部门编码', width: 300, formatter: function (value, row) {
-                        var checkHtml = row.Attr_IsCheck ? 'checked="checked"' : "";
-                        return '<input  name="DepartmentCode" type="checkbox" value="' + row.DepartmentCode + '" ' + checkHtml + '/>' + row.DepartmentCode;
+                        var checkHtml = row.Attr_IsCheck ? 'checked="checked"' : '';
+                        return '<input  name="DepartmentCode" nameFz="DepartmentCode_' + row.ParentDepartmentCode + '" type="checkbox"  value="' + row.DepartmentCode + '" ' + checkHtml + '/>' + row.DepartmentCode;
                     }
                 },
-                { field: 'DepartmentName', title: '部门名称', width: 100 },
+                { field: 'DepartmentName', title: '部门名称', width: 300 },
                 { field: 'ParentDepartmentCode', title: '上级部门编码', width: 100 },
                   {
                       field: 'Attr_UserDepartmentPkId',hidden:true, title: 'Attr_UserDepartmentPkId', width: 200, formatter: function (value, row) {
@@ -94,6 +94,28 @@
                 //行项目信息用json绑定控件
                 //alert(JSON.stringify(BindEntity.List));
             }
+
+            //$("input[nameFz^=DepartmentCode_]").on("click", function () {
+            //    var result = !($(this).attr("checked") == "checked");
+            //    if (result) {
+            //        $(this).removeAttr("checked");
+            //        $(this).attr("checked", true);
+            //    } else {
+            //        $(this).removeAttr("checked");
+            //    }
+            
+            //    $("input[nameFz=DepartmentCode_" + $(this).val() + "]").each(function () {
+            //        //alert(result);
+            //        if (result) {
+            //            $(this).removeAttr("checked");
+            //            $(this).attr("checked", true);
+            //        } else {
+            //            $(this).removeAttr("checked");
+            //        }
+                 
+            //    });
+               
+            //});
 
 
         },

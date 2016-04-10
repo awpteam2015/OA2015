@@ -6,9 +6,11 @@ using System.Linq;
 using System.Text;
 using System.Web;
 using System.Web.Mvc;
+using Aspose.Cells;
 using AutoMapper;
 using Project.Infrastructure.FrameworkCore.DataNhibernate.Helpers;
 using Project.Infrastructure.FrameworkCore.ToolKit;
+using Project.Infrastructure.FrameworkCore.ToolKit.Extensions;
 using Project.Infrastructure.FrameworkCore.ToolKit.JsonHandler;
 using Project.Infrastructure.FrameworkCore.ToolKit.LinqExpansion;
 using Project.Infrastructure.FrameworkCore.WebMvc.Controllers.Results;
@@ -57,47 +59,23 @@ namespace Project.WebApplication.Areas.HRManager.Controllers
 
         public void ExportReport()
         {
-            string excelFileName = DateTime.Now.ToString() + ".xls";
-            //防止中文文件名IE下乱码的问题
-            // if (Request.Browser.Browser == "IE" || Request.Browser.Browser == "InternetExplorer")
-            if (Request.ServerVariables["http_user_agent"].ToLower().IndexOf("firefox") != -1)
-            {
-
-            }
-            else
-                excelFileName = HttpUtility.UrlPathEncode(excelFileName);
-
-            Response.Clear();
-            Response.AddHeader("content-disposition", "attachment;filename=" + excelFileName);
-            Response.AddHeader("Cache-Control", "max-age=0");
-            Response.Charset = "GB2312";
-            Response.ContentEncoding = Encoding.GetEncoding("GB2312");
-            Response.ContentType = "application/vnd.xls";
-
-
             var searchList = AttendanceService.GetInstance().GetList(GetWhere());
+            var designer = new WorkbookDesigner();
+            designer.Open(Server.MapPath("~/TemplateFile/考勤模版2.xlsx"));
+            var datatable = searchList.ToDataTable();
+            datatable.TableName = "Table1";
+            designer.SetDataSource(datatable);
 
-            var jsonBuilder = new StringBuilder();
-            jsonBuilder.AppendFormat(@"<table class='GridViewStyle' style='border-collapse:collapse;width:1000px;' cellspacing='0' rules='all' border='1'>
-                <tr>
-                    <th>工号</th>
-                    <th>部门编号</th>
-                    <th>部门名称</th>
-                    <th>状态</th>
-                    <th>考勤日期</th>
-                   </tr>");
-            searchList.ForEach(p =>
-            {
-                jsonBuilder.Append("<tr>");
-                jsonBuilder.AppendFormat("<td>{0}</td>", p.EmployeeCode);
-                jsonBuilder.AppendFormat("<td>{0}</td>", p.DepartmentCode);
-                jsonBuilder.AppendFormat("<td>{0}</td>", p.DepartmentName);
-                jsonBuilder.AppendFormat("<td>{0}</td>", p.Attr_State);
-                jsonBuilder.AppendFormat("<td>{0}</td>", p.Date.SetDate());
-                jsonBuilder.Append("</tr>");
-            });
-            jsonBuilder.Append("</table>");
-            Response.Write(jsonBuilder.ToString());
+            designer.SetDataSource("KS", "KS顶顶顶顶");
+            designer.SetDataSource("RQ", "RQDDDDDDD");
+
+
+            designer.Process();
+
+            designer.Save("门店促销导出商品.xls");
+            Response.Flush();
+            Response.Close();
+            designer = null;
             Response.End();
         }
 

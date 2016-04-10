@@ -707,7 +707,7 @@ namespace  Project.Infrastructure.FrameworkCore.ToolKit
             return dt;
         }
 
-        public DataTable CreateTable(string tableName, string fieldList, string keyFieldList)
+        public  DataTable CreateTable(string tableName, string fieldList, string keyFieldList)
         {
             DataTable dt = CreateTable(tableName, fieldList);
             string[] KeyFields = keyFieldList.Split(',');
@@ -783,6 +783,64 @@ namespace  Project.Infrastructure.FrameworkCore.ToolKit
             return dataTable;
         }
         #endregion
+
+
+
+        public static  DataTable ConvertRCDataTable(DataTable dt)
+        {
+            try
+            {
+                int rowCount = dt.Rows.Count + 1;
+                int columnsCount = dt.Columns.Count;
+                DataTable newDt = new DataTable();
+                DataColumn dc = new DataColumn();
+
+
+                for (int rowi = 0; rowi < rowCount; rowi++)
+                {
+                    if (rowi == 0)
+                    {
+                        if (dt.Columns[0].ToString() == "Name" || dt.Columns[0].ToString() == "Sales")
+                        {
+                            dt.Columns["Name"].ColumnName = "月份";
+                            dt.Columns["Sales"].ColumnName = "价格";
+                        }
+
+                        newDt.Columns.Add(dt.Columns[0].ToString());
+                    }
+                    else
+                    {
+                        newDt.Columns.Add(dt.Rows[rowi - 1][0].ToString());
+                    }
+                }
+
+                for (int columnsi = 0; columnsi < columnsCount; columnsi++)
+                {
+                    DataRow dr = newDt.NewRow();
+                    for (int rowj = 0; rowj < rowCount; rowj++)
+                    {
+                        if (rowj == 0)
+                        {
+                            dr[rowj] = dt.Columns[columnsi].ToString();
+                        }
+                        else
+                        {
+                            dr[rowj] = dt.Rows[rowj - 1][columnsi].ToString();
+                        }
+                    }
+
+                    if (columnsi != 0)
+                        newDt.Rows.Add(dr);
+                }
+                return newDt;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.ToString());
+            }
+        }
+
+
     }
 
     /// <summary>
