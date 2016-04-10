@@ -22,7 +22,7 @@ var pro = pro || {};
                 singleSelect: true,
                 frozenColumns: [[
                      { field: 'PkId', title: '', width: 50 },
-         { field: 'FunctionnName', title: '模块名称', width: 100 },
+         { field: 'FunctionnName', title: '模块名称', width: 200 },
          {
              field: 'ModuleId', title: '模块ID', width: 100, formatter: function (value, row) {
                  return row.ModuleEntity.ModuleName;

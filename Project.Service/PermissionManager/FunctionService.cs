@@ -190,7 +190,7 @@ namespace Project.Service.PermissionManager
             // if (!string.IsNullOrEmpty(entity.Remark))
             //  expr = expr.And(p => p.Remark == entity.Remark);
             #endregion
-            var list = _functionRepository.Query().Where(expr).OrderBy(p => p.PkId).Skip(skipResults).Take(maxResults).ToList();
+            var list = _functionRepository.Query().Where(expr).OrderBy(p=>p.RankId).ThenByDescending(p => p.PkId).Skip(skipResults).Take(maxResults).ToList();
             var count = _functionRepository.Query().Where(expr).Count();
             return new System.Tuple<IList<FunctionEntity>, int>(list, count);
         }

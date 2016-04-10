@@ -22,7 +22,7 @@ var pro = pro || {};
                 singleSelect: true,
                 columns: [[
          { field: 'PkId', title: 'ID', width: 100 },
-         { field: 'ModuleName', title: '模块名称', width: 100 },
+         { field: 'ModuleName', title: '模块名称', width: 200 },
          //{ field: 'ParentId', title: '父级 预留', width: 100 },
          //{ field: 'ModuleLevel', title: '层级', width: 100 },
          { field: 'RankId', title: '排序', width: 100 },
