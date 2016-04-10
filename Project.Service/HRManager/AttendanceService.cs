@@ -125,7 +125,7 @@ namespace Project.Service.HRManager
             }
             else
             {
-                return "";
+                return "缺";
             }
 
         }
