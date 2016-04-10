@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Project.Model.PermissionManager;
 
 namespace Project.Service.PermissionManager.DTO
 {
@@ -20,6 +21,13 @@ namespace Project.Service.PermissionManager.DTO
         /// <summary>
         /// 授予的权限代号
         /// </summary>
-        public IList<int>  PermissionCodeList { get; set; }
+        public IList<int> PermissionCodeList { get; set; }
+
+        /// <summary>
+        /// 是否管理员
+        /// </summary>
+        public bool IsAdmin { get; set; }
+
+        public ISet<UserDepartmentEntity> UserDepartmentList { get; set; }
     }
 }

@@ -73,7 +73,7 @@ namespace Project.WebApplication.Areas.PermissionManager.Controllers
             var where = new DepartmentEntity();
             where.DepartmentCode = RequestHelper.GetFormString("DepartmentCode");
             where.DepartmentName = RequestHelper.GetFormString("DepartmentName");
-            var searchList = DepartmentService.GetInstance().GetTreeList(where,true);
+            var searchList = DepartmentService.GetInstance().GetTreeList(where, LoginUserInfo.UserDepartmentList.ToList(), LoginUserInfo.UserCode.ToUpper() == "ADMIN", true);
 
             return new AbpJsonResult(searchList, new NHibernateContractResolver(new[] { "children" }));
         }
@@ -87,7 +87,7 @@ namespace Project.WebApplication.Areas.PermissionManager.Controllers
             {
                 success = addResult.Item1,
                 result = postData.RequestEntity,
-                error = addResult.Item1 ? null : new ErrorInfo(addResult.Item2) 
+                error = addResult.Item1 ? null : new ErrorInfo(addResult.Item2)
             };
             return new AbpJsonResult(result, new NHibernateContractResolver());
         }
@@ -101,7 +101,7 @@ namespace Project.WebApplication.Areas.PermissionManager.Controllers
             {
                 success = updateResult.Item1,
                 result = postData.RequestEntity,
-                error = updateResult.Item1 ? null : new ErrorInfo(updateResult.Item2) 
+                error = updateResult.Item1 ? null : new ErrorInfo(updateResult.Item2)
             };
             return new AbpJsonResult(result, new NHibernateContractResolver(new string[] { "result" }));
         }

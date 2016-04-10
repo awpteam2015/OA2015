@@ -230,6 +230,49 @@ namespace Project.Service.PermissionManager
             return list;
         }
 
+        public IList<DepartmentEntity> GetTreeList(DepartmentEntity entity, List<UserDepartmentEntity> sourceList, bool isAdmin, bool isShowTop = false)
+        {
+
+            var listAll = this.GetList(entity);
+
+            if (!isAdmin)
+            {
+                for (int i = 0; i < listAll.Count; i++)
+                {
+                    if (!sourceList.Any(p => p.DepartmentCode == listAll[i].DepartmentCode))
+                    {
+                        listAll.RemoveAt(i);
+                        i--;
+                    }
+
+                }
+
+                if (!listAll.Any(item => item.ParentDepartmentCode == "0"))
+                {
+                    listAll.ForEach(p => p.ParentDepartmentCode = (p.ParentDepartmentCode == "330110" ? "0" : p.ParentDepartmentCode));
+                }
+            }
+
+            var list = new List<DepartmentEntity>();
+            if (isShowTop)
+            {
+                list.Add(new DepartmentEntity() { DepartmentCode = "0", DepartmentName = "顶级节点" });
+            }
+            else
+            {
+                list.AddRange(listAll.Where(p => p.ParentDepartmentCode == "0"));
+            }
+
+            list.ForEach(p =>
+            {
+                GetChildList(listAll, p);
+            }
+            );
+
+            return list;
+        }
+
+
         private void GetChildList(IList<DepartmentEntity> allList, DepartmentEntity parentDepartmentEntity)
         {
 
@@ -245,12 +288,18 @@ namespace Project.Service.PermissionManager
 
         }
 
-        public string[] GetChiledArr(System.String departmentCode)
+        public string[] GetChiledArr(System.String departmentCode, List<UserDepartmentEntity> userDepartList, bool isAdmin)
         {
+            if(isAdmin)
+                return new string[] { };
             if (string.IsNullOrEmpty(departmentCode) || departmentCode == "0")
             {
-                return new string[] { };
+                var retList= userDepartList.Select(p => p.DepartmentCode).ToList().ToArray();
+                if (retList.Length <= 0)
+                    return new string[] {"999999"};
+                return retList;
             }
+            return new string[] { departmentCode };
 
             var parentDepartmentEntity = GetModelByDepartmentCode(departmentCode);
             var extEntity = new DepartmentExtEntity() { childrenAll = new List<DepartmentEntity>() };

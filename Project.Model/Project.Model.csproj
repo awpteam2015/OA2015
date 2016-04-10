@@ -80,6 +80,8 @@
     <Compile Include="PermissionManager\UserRoleModel.cs" />
     <Compile Include="ReportManager\AttendanceViewEntity2.cs" />
     <Compile Include="ReportManager\AttendanceViewEntity.cs" />
+    <Compile Include="ReportManager\EmployeeInOutEntity.cs" />
+    <Compile Include="ReportManager\EmployeeRsEntity.cs" />
     <Compile Include="ReportManager\HREmployeeViewEntity.cs" />
     <Compile Include="SystemSetManager\HolidayDetailEntity.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

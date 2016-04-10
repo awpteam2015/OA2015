@@ -64,7 +64,7 @@ namespace Project.WebApplication.Areas.HRManager.Controllers
             where.EmployeeCode = RequestHelper.GetFormString("EmployeeCode");
             where.EmployeeName = RequestHelper.GetFormString("EmployeeName");
             where.DepartmentCode = RequestHelper.GetFormString("DepartmentCode");
-            where.DepartmentCode = string.Join(",", (DepartmentService.GetInstance().GetChiledArr(where.DepartmentCode)));
+            where.DepartmentCode = string.Join(",", (DepartmentService.GetInstance().GetChiledArr(where.DepartmentCode,LoginUserInfo.UserDepartmentList.ToList(),LoginUserInfo.IsAdmin)));
             where.JobName = RequestHelper.GetFormString("JobName");
             //where.PayCode = RequestHelper.GetFormString("PayCode");
             //where.Sex = RequestHelper.GetFormString("Sex");
@@ -98,7 +98,7 @@ namespace Project.WebApplication.Areas.HRManager.Controllers
         {
             var where = new EmployeeInfoEntity();
             where.DepartmentCode = RequestHelper.QueryString["DepartmentCode"];
-            where.DepartmentCode = string.Join(",", (DepartmentService.GetInstance().GetChiledArr(where.DepartmentCode)));
+            where.DepartmentCode = string.Join(",", (DepartmentService.GetInstance().GetChiledArr(where.DepartmentCode, LoginUserInfo.UserDepartmentList.ToList(), LoginUserInfo.IsAdmin)));
             //where.DepartmentCode = RequestHelper.GetFormString("DepartmentCode");
             var searchList = EmployeeInfoService.GetInstance().GetList(where, true);
 

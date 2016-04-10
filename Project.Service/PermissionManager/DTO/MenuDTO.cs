@@ -14,6 +14,7 @@ namespace Project.Service.PermissionManager.DTO
         }
         public string Name { get; set; }
         public string Url { get; set; }
+        public int? RankId { get; set; }
 
         public IList<MenuDTO> MenuDTOList { get; set; }
     }

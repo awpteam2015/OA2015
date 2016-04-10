@@ -44,7 +44,7 @@ namespace Project.WebApplication.Areas.HRManager.Controllers
             //where.PkId = RequestHelper.GetFormString("PkId");
             where.SanctionType = RequestHelper.GetFormInt("SanctionType",-1);
             where.DepartmentCode = RequestHelper.GetFormString("DepartmentCode");
-            where.DepartmentCode = string.Join(",", (DepartmentService.GetInstance().GetChiledArr(where.DepartmentCode)));
+            where.DepartmentCode = string.Join(",", (DepartmentService.GetInstance().GetChiledArr(where.DepartmentCode, LoginUserInfo.UserDepartmentList.ToList(), LoginUserInfo.IsAdmin)));
             //where.SanctionObjType = RequestHelper.GetFormInt("SanctionObjType", 0);
             //where.SanctionObj = RequestHelper.GetFormString("SanctionObj");
             //where.SanctionTitle = RequestHelper.GetFormString("SanctionTitle");

@@ -43,7 +43,7 @@ namespace Project.WebApplication.Areas.HRManager.Controllers
             var where = new EmployeeYearDetailEntity();
             //where.PkId = RequestHelper.GetFormString("PkId");
             where.DepartmentCode = RequestHelper.GetFormString("DepartmentCode");
-            where.DepartmentCode = string.Join(",", (DepartmentService.GetInstance().GetChiledArr(where.DepartmentCode)));
+            where.DepartmentCode = string.Join(",", (DepartmentService.GetInstance().GetChiledArr(where.DepartmentCode, LoginUserInfo.UserDepartmentList.ToList(), LoginUserInfo.IsAdmin)));
             where.EmployeeCode = RequestHelper.GetFormString("EmployeeCode");
             where.UseType = RequestHelper.GetInt("UseType", -1);
             //where.BeginDate = RequestHelper.GetFormString("BeginDate");

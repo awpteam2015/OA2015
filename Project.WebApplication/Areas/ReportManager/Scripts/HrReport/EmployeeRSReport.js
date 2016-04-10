@@ -2,8 +2,8 @@
 var pro = pro || {};
 (function () {
     pro.HrReport = pro.HrReport || {};
-    pro.HrReport.EmployeeInOutReportPage = pro.HrReport.EmployeeInOutReportPage || {};
-    pro.HrReport.EmployeeInOutReportPage = {
+    pro.HrReport.EmployeeRSReportPage = pro.HrReport.EmployeeRSReportPage || {};
+    pro.HrReport.EmployeeRSReportPage = {
         init: function () {
             return {
                 tabObj: new pro.TabBase(),
@@ -15,7 +15,7 @@ var pro = pro || {};
             var tabObj = initObj.tabObj;
             var gridObj = initObj.gridObj;
             gridObj.grid({
-                url: '/ReportManager/HrReport/GetEmployeeInOutReport',
+                url: '/ReportManager/HrReport/GetEmployeeRsReport',
                 fitColumns: false,
                 nowrap: false,
                 rownumbers: true, //行号
@@ -115,7 +115,7 @@ var pro = pro || {};
 
 
 $(function () {
-    pro.HrReport.EmployeeInOutReportPage.initPage();
+    pro.HrReport.EmployeeRSReportPage.initPage();
 });
 
 

@@ -53,6 +53,7 @@ namespace  Project.Map.HRManager
             Map(p => p.CreateTime);    
             Map(p => p.LastModificationTime);    
             Map(p => p.IsDeleted);
+            Map(p => p.IsInsert);
         }
     }
 }

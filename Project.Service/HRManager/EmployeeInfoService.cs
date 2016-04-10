@@ -77,6 +77,18 @@ namespace Project.Service.HRManager
                 try
                 {
                     var pkId = _employeeInfoRepository.Save(entity);
+
+                    var employeeHisEntity = Mapper.Map<EmployeeInfoEntity, EmployeeInfoHisEntity>(entity);
+                    employeeHisEntity.EmployeeID = employeeHisEntity.PkId;
+                    employeeHisEntity.PkId = 0;
+                    employeeHisEntity.InDepartmentCode = entity.DepartmentCode;
+                    employeeHisEntity.InDepartmentName = entity.DepartmentName;
+                    employeeHisEntity.InWorkState = entity.WorkState;
+                    employeeHisEntity.InWorkStateName = entity.WorkStateName;
+                    employeeHisEntity.IsInsert = 1;
+                    employeeHisEntity.CreateTime = DateTime.Now;
+                    _employeeInfoHisRepository.Save(employeeHisEntity);
+
                     entity.WorkList.ToList().ForEach(p =>
                     {
                         p.EmployeeID = pkId;
