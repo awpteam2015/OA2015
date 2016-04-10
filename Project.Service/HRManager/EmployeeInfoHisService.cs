@@ -180,6 +180,7 @@ namespace Project.Service.HRManager
             //  expr = expr.And(p => p.LastModificationTime == where.LastModificationTime);
             // if (!string.IsNullOrEmpty(where.WorkStateName))
             //  expr = expr.And(p => p.WorkStateName == where.WorkStateName);
+            expr = expr.And(p => p.IsInsert != 1);
             #endregion
             var list = _employeeInfoHisRepository.Query().Where(expr).OrderBy(p => p.PkId).Skip(skipResults).Take(maxResults).ToList();
             var count = _employeeInfoHisRepository.Query().Where(expr).Count();

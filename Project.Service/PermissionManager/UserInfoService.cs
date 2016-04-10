@@ -89,7 +89,8 @@ namespace Project.Service.PermissionManager
                 var temp = new MenuDTO()
                 {
                     Url = "",
-                    Name = p.ModuleName
+                    Name = p.ModuleName,
+                    RankId = p.RankId
                 };
 
                 var list = p.FunctionEntityList.Where(x => function.Contains(x.PkId)).ToList();
@@ -102,17 +103,19 @@ namespace Project.Service.PermissionManager
                             temp.MenuDTOList.Add(new MenuDTO()
                             {
                                 Url = x.FunctionUrl,
-                                Name = x.FunctionnName
+                                Name = x.FunctionnName,
+                                RankId = x.RankId
                             });
                         }
                     }
                     );
                 if (temp.MenuDTOList.Any())
                 {
+                    temp.MenuDTOList = temp.MenuDTOList.OrderBy(item => item.RankId).ToList();
                     menuDtoList.Add(temp);
                 }
             });
-            return menuDtoList;
+            return menuDtoList.OrderBy(item => item.RankId).ToList();
         }
 
 
