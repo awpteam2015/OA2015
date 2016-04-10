@@ -14,6 +14,7 @@ using Project.Infrastructure.FrameworkCore.DataNhibernate;
 using Project.Infrastructure.FrameworkCore.DataNhibernate.Helpers;
 using Project.Model.HRManager;
 using Project.Repository.HRManager;
+using Project.Service.HRManager.Validate;
 
 namespace Project.Service.HRManager
 {
@@ -44,6 +45,13 @@ namespace Project.Service.HRManager
         /// <returns></returns>
         public Tuple<bool, string> Add(AttendanceUploadRecordEntity entity)
         {
+            var validateResult = AttendanceUploadValidate.GetInstance()
+                .IsCanUpload(entity.DepartmentCode, entity.Date.GetValueOrDefault());
+            if (!validateResult.Item1)
+            {
+                return validateResult;
+            }
+
             using (var tx = NhTransactionHelper.BeginTransaction())
             {
                 try
