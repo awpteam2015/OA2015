@@ -73,7 +73,7 @@ namespace Project.WebApplication.Areas.HRManager.Controllers
             Cells cells = sheet.Cells;
 
 
-            var date = cells[2, 25].DateTimeValue;
+            var date =DateTime.Parse(cells[2, 25].StringValue.Trim());
 
             for (int i = 5; i < cells.MaxDataRow + 1; i++)
             {
