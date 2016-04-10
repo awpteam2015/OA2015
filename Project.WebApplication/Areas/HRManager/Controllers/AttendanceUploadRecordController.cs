@@ -71,24 +71,46 @@ namespace Project.WebApplication.Areas.HRManager.Controllers
             Workbook workbook = new Workbook(path);
             Worksheet sheet = workbook.Worksheets[0];
             Cells cells = sheet.Cells;
-            for (int i = 1; i < cells.MaxDataRow + 1; i++)
+
+            var dateStr = cells[2, 9].StringValue.ToString();
+
+            var date = new DateTime(int.Parse(dateStr.Substring(0, 4)), int.Parse(dateStr.Substring(5, 2)), 1);
+
+            for (int i = 5; i < cells.MaxDataRow + 1; i++)
             {
-                var row = new AttendanceEntity();
-                row.DepartmentCode = cells[i, 0].StringValue.Trim();
-                row.DepartmentName = DepartmentService.GetInstance().GetModelByDepartmentCode(row.DepartmentCode).DepartmentName;
-                row.EmployeeCode = cells[i, 1].StringValue.Trim();
-                row.Date = cells[i, 2].DateTimeValue;
-                row.State = cells[i, 3].IntValue;
-                postData.RequestEntity.AttendanceList.Add(row);
+
+                for (int j = 3; j < 34; j++)
+                {
+                    if (!string.IsNullOrEmpty(cells[4, j].StringValue))
+                    {
+                        var row = new AttendanceEntity();
+                        row.EmployeeCode = cells[i, 1].StringValue.Trim();
+                        
+                        var employeeInfo = EmployeeInfoService.GetInstance().GetEmployeeNameByCode2(row.EmployeeCode);
+                        row.EmployeeName = employeeInfo.EmployeeName;
+                        row.DepartmentCode = employeeInfo.DepartmentCode;
+                        row.DepartmentName = employeeInfo.DepartmentName;
+                        row.Date = date.AddDays(int.Parse(cells[4, j].StringValue) - 1);
+                        row.State = cells[i, j].StringValue;
+                        if (row.State=="")
+                        {
+                            row.State = "缺";
+                        }
+                        postData.RequestEntity.AttendanceList.Add(row);
+                    }
+                }
+
             }
+
 
             var addResult = AttendanceUploadRecordService.GetInstance().Add(postData.RequestEntity);
 
-            var result = new AjaxResponse<AttendanceUploadRecordEntity>()
-               {
-                   success = true,
-                   result = postData.RequestEntity
-               };
+            var result = new AjaxResponse<string>()
+            {
+                success = addResult.Item1,
+                result = addResult.Item2,
+                error = addResult.Item1 ? null : new ErrorInfo(addResult.Item2)
+            };
             return new AbpJsonResult(result, new NHibernateContractResolver());
         }
 

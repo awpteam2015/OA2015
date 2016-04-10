@@ -8,6 +8,7 @@ namespace Project.Model.Other
 {
     public class ExcelData
     {
+        public string title { get; set; }
         public string data1 { get; set; }
         public string data2 { get; set; }
         public string data3 { get; set; }
@@ -23,6 +24,7 @@ namespace Project.Model.Other
         public string data13 { get; set; }
         public string data14 { get; set; }
         public string data15 { get; set; }
+        public string data16 { get; set; }
         public string data17 { get; set; }
         public string data18 { get; set; }
         public string data19 { get; set; }

@@ -19,7 +19,8 @@ namespace  Project.Map.HRManager
             this.MapPkidDefault<AttendanceEntity,int>();
  
             Map(p => p.AttendanceUploadRecordId);    
-            Map(p => p.EmployeeCode);    
+            Map(p => p.EmployeeCode);
+            Map(p => p.EmployeeName);   
             Map(p => p.DepartmentCode);    
             Map(p => p.DepartmentName);    
             Map(p => p.State);    

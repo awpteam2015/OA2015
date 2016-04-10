@@ -58,7 +58,8 @@
                 }
             ).fail(
              function (errordetails, errormessage) {
-                 //  $.alertExtend.error();
+                 //alert();
+                 //$.alertExtend.error(errormessage);
              }
             );
 
@@ -68,8 +69,8 @@
                 $("#form1").validate({
                     rules: {
                         DepartmentCode: { required: true },
-                        Date: { required: true },
-                        Remark: { required: true }
+                        Date: { required: true }
+                     
                     },
                     messages: {
                         PkId: "必填!",

@@ -198,7 +198,9 @@
     <Content Include="Areas\SystemSetManager\Scripts\HolidayDetail\List.js" />
     <Content Include="Areas\SystemSetManager\Scripts\IndexPageSet\Hd.js" />
     <Content Include="Areas\SystemSetManager\Scripts\IndexPageSet\List.js" />
-    <Content Include="Config\hibernate.cfg.xml" />
+    <Content Include="Config\hibernate.cfg.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Config\XMLFile1.xml" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />

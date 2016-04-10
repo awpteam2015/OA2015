@@ -110,6 +110,28 @@ namespace Project.Service.HRManager
         }
 
 
+        public string GetStateStr(string EmployeeCode, DateTime kqDate)
+        {
+            var expr = PredicateBuilder.True<AttendanceEntity>();
+
+            expr = expr.And(p => p.EmployeeCode == EmployeeCode);
+
+            expr = expr.And(p => p.Date == kqDate);
+
+            var list = _attendanceRepository.Query().Where(expr).OrderBy(p => p.PkId).ToList();
+            if (list.Any())
+            {
+                return list.FirstOrDefault().State;
+            }
+            else
+            {
+                return "";
+            }
+
+        }
+
+
+
         /// <summary>
         /// 分页
         /// </summary>
@@ -127,11 +149,11 @@ namespace Project.Service.HRManager
             //  expr = expr.And(p => p.AttendanceUploadRecordId == where.AttendanceUploadRecordId);
             if (!string.IsNullOrEmpty(where.EmployeeCode))
                 expr = expr.And(p => p.EmployeeCode == where.EmployeeCode);
-            if (!string.IsNullOrEmpty(where.DepartmentCode))
+            if (!string.IsNullOrEmpty(where.DepartmentCode)&& where.DepartmentCode!="0")
                 expr = expr.And(p => p.DepartmentCode == where.DepartmentCode);
             // if (!string.IsNullOrEmpty(where.DepartmentName))
             //  expr = expr.And(p => p.DepartmentName == where.DepartmentName);
-            if (where.State != 0)
+            if (!string.IsNullOrEmpty(where.State))
                 expr = expr.And(p => p.State == where.State);
             if (where.Attr_StartDate != null)
                 expr = expr.And(p => p.Date >= where.Attr_StartDate);
@@ -172,7 +194,7 @@ namespace Project.Service.HRManager
                 expr = expr.And(p => p.DepartmentCode == where.DepartmentCode);
             // if (!string.IsNullOrEmpty(where.DepartmentName))
             //  expr = expr.And(p => p.DepartmentName == where.DepartmentName);
-            if (where.State != 0)
+            if (where.State != null)
                 expr = expr.And(p => p.State == where.State);
             if (where.Attr_StartDate != null)
                 expr = expr.And(p => p.Date >= where.Attr_StartDate);

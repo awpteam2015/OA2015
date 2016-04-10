@@ -399,6 +399,34 @@ namespace Project.Service.HRManager
             string retStr = _employeeInfoRepository.GetMaxEmployeeCode();
             return retStr;
         }
+
+
+        public string GetEmployeeNameByCode(string employeeCode)
+        {
+            var expr = PredicateBuilder.True<EmployeeInfoEntity>();
+            expr = expr.And(p => p.EmployeeCode == employeeCode);
+            var list = _employeeInfoRepository.Query().Where(expr).ToList();
+
+            if (list.Any())
+            {
+                return list.FirstOrDefault().EmployeeName;
+            }
+            return "";
+        }
+
+
+        public EmployeeInfoEntity GetEmployeeNameByCode2(string employeeCode)
+        {
+            var expr = PredicateBuilder.True<EmployeeInfoEntity>();
+            expr = expr.And(p => p.EmployeeCode == employeeCode);
+            var list = _employeeInfoRepository.Query().Where(expr).ToList();
+
+            if (list.Any())
+            {
+                return list.FirstOrDefault();
+            }
+            return null;
+        }
         #endregion
     }
 }

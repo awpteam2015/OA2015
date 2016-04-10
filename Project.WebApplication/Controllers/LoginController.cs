@@ -19,7 +19,7 @@ using Project.Service.PermissionManager;
 
 namespace Project.WebApplication.Controllers
 {
-   
+
 
     public class DepatmentTemp
     {
@@ -61,9 +61,9 @@ namespace Project.WebApplication.Controllers
     }
     public class LoginController : Controller
     {
-        public static DateTime UpdateTime=DateTime.Now.AddDays(-1);
+        public static DateTime UpdateTime = DateTime.Now.AddDays(-1);
 
-       // public static int dd = 1;
+        // public static int dd = 1;
 
         // GET: Login
         public ActionResult Index3()
@@ -75,48 +75,13 @@ namespace Project.WebApplication.Controllers
         public ActionResult Index2()
         {
 
-            //var exportMonth =DateTime.Parse("2016-01") ;
-            //int days = DateTime.DaysInMonth(exportMonth.Year, exportMonth.Month);
-            //var Table3List=new List<ExcelData>().ToDataTable();
-
-         
-
-            //DataSetHelper.ConvertRCDataTable(Table3List);
-
-
-            //var designer = new WorkbookDesigner();
-            //designer.Open(Server.MapPath("~/TemplateFile/考勤模版2.xlsx"));
-            //var datatable = searchList.ToDataTable();
-            //datatable.TableName = "Table1";
-            //designer.SetDataSource(datatable);
-
-            //designer.SetDataSource("KS", "KS顶顶顶顶");
-            //designer.SetDataSource("RQ", "RQDDDDDDD");
-
-
-            //designer.Process();
-
-            //designer.Save("门店促销导出商品.xls");
-            //Response.Flush();
-            //Response.Close();
-            //designer = null;
-            //Response.End();
-
-
-
-
-
-
-
-
-
             //    dd++;
             //    ViewBag.dd = dd;
             var Third_DepartmentWebServiceUrl =
                 System.Configuration.ConfigurationManager.AppSettings["Third_DepartmentWebServiceUrl"];
             if (Third_DepartmentWebServiceUrl != "" && DateTime.Now.Subtract(UpdateTime).Days >= 1)
             {
-                UpdateTime=DateTime.Now;
+                UpdateTime = DateTime.Now;
 
                 string result = HttpHelper.Helper.GetResponseString(System.Configuration.ConfigurationManager.AppSettings["Third_DepartmentWebServiceUrl"], "Get", new Dictionary<string, string> { }, Encoding.Default, Encoding.UTF8, 10000);
 
@@ -161,7 +126,7 @@ namespace Project.WebApplication.Controllers
                     {
                         DepartmentCode = a.JGDM,
                         DepartmentName = a.JGMC,
-                        ParentDepartmentCode = a.JGDM== "330110"?"0": "330110"
+                        ParentDepartmentCode = a.JGDM == "330110" ? "0" : "330110"
                     });
 
                     departmentThirdList.Add(new DepartmentEntity()

@@ -23,8 +23,9 @@ var pro = pro || {};
                 columns: [[
          //{ field: 'PkId', title: '序号', width: 100 },
          { field: 'EmployeeCode', title: '工号', width: 100 },
+         { field: 'EmployeeName', title: '名称', width: 100 },
          { field: 'DepartmentName', title: '部门', width: 100 },
-         { field: 'Attr_State', title: '状态', width: 100 },
+         { field: 'State', title: '状态', width: 100 },
          { field: 'Date', title: '考勤日期', width: 100 },
          { field: 'CreatorUserCode', title: '创建人', width: 100 },
          { field: 'CreationTime', title: '创建时间', width: 100 },
@@ -41,6 +42,12 @@ var pro = pro || {};
 
 
             $('#btnExport').click(function () {
+      
+                if ($("#Attr_ExportDate").val() == "" || $('#DepartmentCode').combotree("getValue") == "") {
+                    $.alertExtend.infoOp("请选择导出部门及导出月份！");
+                    return false;
+                }
+
                 var urlParam = pro.commonKit.parseParam(gridObj.searchForm());
                 location.href = "/HRManager/Attendance/ExportReport?" + urlParam;
             });
