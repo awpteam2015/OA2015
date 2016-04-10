@@ -22,8 +22,8 @@ var pro = pro || {};
                 singleSelect: true,
                 columns: [[
          //{ field: 'PkId', title: '序号', width: 100 },
-         { field: 'EmployeeCode', title: '工号', width: 100 },
-         { field: 'EmployeeName', title: '名称', width: 100 },
+         { field: 'EmployeeCode', title: '员工编号', width: 100 },
+         { field: 'EmployeeName', title: '员工姓名', width: 100 },
          { field: 'DepartmentName', title: '部门', width: 100 },
          { field: 'State', title: '状态', width: 100 },
          { field: 'Date', title: '考勤日期', width: 100 },
