@@ -290,7 +290,7 @@ namespace Project.Service.PermissionManager
 
         public string[] GetChiledArr(System.String departmentCode, List<UserDepartmentEntity> userDepartList, bool isAdmin)
         {
-            if(isAdmin)
+            if(isAdmin&& (string.IsNullOrEmpty(departmentCode)|| departmentCode == "0"))
                 return new string[] { };
             if (string.IsNullOrEmpty(departmentCode) || departmentCode == "0")
             {

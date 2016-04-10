@@ -224,10 +224,9 @@ namespace Project.WebApplication.Areas.ReportManager.Controllers
                 where.CreationTimeEnd = dateEnd.AddDays(1);
             }
             where.DepartmentCode = RequestHelper.GetFormString("DepartmentCode");
-            if (!string.IsNullOrWhiteSpace(where.DepartmentCode))
-            {
-                where.DepartmentCode = string.Join("','", (DepartmentService.GetInstance().GetChiledArr(where.DepartmentCode, LoginUserInfo.UserDepartmentList.ToList(), LoginUserInfo.IsAdmin)));
-            }
+
+            where.DepartmentCode = string.Join("','", (DepartmentService.GetInstance().GetChiledArr(where.DepartmentCode, LoginUserInfo.UserDepartmentList.ToList(), LoginUserInfo.IsAdmin)));
+
             where.InOrOut = RequestHelper.GetFormInt("InOrOut", -1);
             //where.PkId = RequestHelper.GetFormString("PkId");
             //where.AttendanceUploadRecordId = RequestHelper.GetFormString("AttendanceUploadRecordId");
@@ -265,11 +264,10 @@ namespace Project.WebApplication.Areas.ReportManager.Controllers
                 where.CreationTimeEnd = dateEnd.AddDays(1);
             }
             where.DepartmentCode = RequestHelper.GetFormString("DepartmentCode");
-            if (!string.IsNullOrWhiteSpace(where.DepartmentCode))
-            {
-                where.DepartmentCode = string.Join("','", (DepartmentService.GetInstance().GetChiledArr(where.DepartmentCode, LoginUserInfo.UserDepartmentList.ToList(), LoginUserInfo.IsAdmin)));
-            }
-            where.InOrOut = RequestHelper.GetFormInt("InOrOut", -1);
+
+            where.DepartmentCode = string.Join("','", (DepartmentService.GetInstance().GetChiledArr(where.DepartmentCode, LoginUserInfo.UserDepartmentList.ToList(), LoginUserInfo.IsAdmin)));
+
+            //where.InOrOut = RequestHelper.GetFormInt("InOrOut", -1);
             //where.PkId = RequestHelper.GetFormString("PkId");
             //where.AttendanceUploadRecordId = RequestHelper.GetFormString("AttendanceUploadRecordId");
             //where.EmployeeCode = RequestHelper.GetFormString("EmployeeCode");
@@ -282,7 +280,7 @@ namespace Project.WebApplication.Areas.ReportManager.Controllers
             //where.CreatorUserName = RequestHelper.GetFormString("CreatorUserName");
             //where.CreateTime = RequestHelper.GetFormString("CreateTime");
             //where.IsDelete = RequestHelper.GetFormString("IsDelete");
-            var searchList = HrReportService.GetInstance().GetHREmployeeReport(where, (pIndex - 1) * pSize, pSize);
+            var searchList = HrReportService.GetInstance().GerEmployeeRsReport(where, (pIndex - 1) * pSize, pSize);
 
             var dataGridEntity = new DataGridResponse()
             {

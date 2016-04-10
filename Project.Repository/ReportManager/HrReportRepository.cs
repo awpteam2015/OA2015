@@ -338,117 +338,6 @@ on a.DepartmentCode=c.DepartmentCode
 			from[dbo].[HR_EmployeeInfoHis]
             a where(a.WorkState<> a.InWorkState and  a.InWorkState=1) {0}
             ", whereStr.Replace("CreationTime", "CreateTime"));
-           
-            sqlStr.AppendFormat(@"   ) as c 
-			left join PM_Department e  on c.DepartmentCode=e.DepartmentCode
-			left join PM_Department f on e.ParentDepartmentCode=f.DepartmentCode	
-			where 1=1 )");
-            exeSqlStr = string.Format(@"select ParnetDepartmentName,sum(CASE InOrOut WHEN '0' THEN  1 else 0 end) Zjxj,
-			sum(CASE InorOutType WHEN 1 THEN  1 else 0 end) Bxdl,
-			sum(CASE InorOutType WHEN 0 THEN  1 else 0 end) Ly,
-			sum(CASE InorOutType WHEN 3 THEN  1 else 0 end) Dl,
-			sum(CASE InOrOut WHEN '1' THEN  1 else 0 end) Jsxj,
-			sum(CASE InorOutType WHEN 4 THEN  1 else 0 end) Tx,
-			sum(CASE InorOutType WHEN 5 THEN  1 else 0 end) Cz,
-			sum(CASE InorOutType WHEN 6 THEN  1 else 0 end) Bxttc
-			 from  tempSour a   group by ParnetDepartmentCode,ParnetDepartmentName order by ParnetDepartmentCode");
-            //if (!string.IsNullOrWhiteSpace(inoutType))
-            //{
-            //    sqlStr.AppendFormat("{0}", inoutType);
-            //}
-
-            string countStr =string.Format("{0} select count(*) as num from tempSour as b ", sqlStr.ToString());
-            var count = SessionFactoryManager.GetCurrentSession().CreateSQLQuery(countStr).AddScalar("num", NHibernateUtil.Int32).UniqueResult<Int32>();
-            //sqlStr.AppendFormat("{0}", " order by CreateTime desc");
-            IList<EmployeeInOutEntity> returnList = new List<EmployeeInOutEntity>();
-            if (ifGetALL)
-            {
-                returnList = SessionFactoryManager.GetCurrentSession().CreateSQLQuery( string.Format("{0} {1} ", sqlStr.ToString(), exeSqlStr))
-                   .SetResultTransformer(Transformers.AliasToBean(typeof(EmployeeInOutEntity))).List<EmployeeInOutEntity>();
-            }
-            else
-            {
-                returnList = SessionFactoryManager.GetCurrentSession().CreateSQLQuery(string.Format("{0} {1} ", sqlStr.ToString(), exeSqlStr))
-                   .SetFirstResult(skipResults)
-                   .SetMaxResults(maxResults)
-                   .SetResultTransformer(Transformers.AliasToBean(typeof(EmployeeInOutEntity))).List<EmployeeInOutEntity>();
-            }
-            return new Tuple<IList<EmployeeInOutEntity>, int>(returnList, count);
-        }
-
-        /// <summary>
-        /// 人数汇总情况报表
-        /// </summary>
-        /// <param name="where"></param>
-        /// <param name="skipResults"></param>
-        /// <param name="maxResults"></param>
-        /// <param name="ifGetALL"></param>
-        /// <returns></returns>
-        public Tuple<IList<EmployeeInOutEntity>, int> GerEmployeeRsReport(HREmployeeViewEntity where, int skipResults, int maxResults, bool ifGetALL = false)
-        {
-            var whereStr = " ";
-            var inoutType = " ";
-            if (!string.IsNullOrWhiteSpace(where.DepartmentCode))
-            {
-                whereStr += " and a.DepartmentCode in('" + where.DepartmentCode.TrimEnd('\'').Trim(',') + "')";
-            }
-
-            if (!string.IsNullOrWhiteSpace(where.EmployeeCode))
-            {
-
-                whereStr += " and a.EmployeeCode=" + where.EmployeeCode;
-            }
-
-            if (where.CreationTime != null)
-            {
-                whereStr += " and a.CreationTime>='" + where.CreationTime + "'";
-            }
-
-            if (where.CreationTimeEnd != null)
-            {
-                whereStr += " and a.CreationTime<'" + where.CreationTimeEnd + "'";
-            }
-            if (where.InOrOut > -1)
-            {
-                inoutType = " and InOrOut=" + where.InOrOut;
-            }
-            string exeSqlStr = string.Empty;
-            StringBuilder sqlStr = new StringBuilder();
-            sqlStr.AppendFormat(@"with tempSour as(  
-            select c.*,f.DepartmentCode ParnetDepartmentCode,f.DepartmentName ParnetDepartmentName from
-            (");
-            sqlStr.AppendFormat(@"select a.EmployeeCode,a.EmployeeName,a.Sex,a.CertNo,a.Birthday,a.EmployeeTypeName,a.DepartmentName,
-			a.DepartmentCode,a.WorkState,a.IsDeleted,1 InOrOut,A.CreationTime CreateTime, 5 InorOutType
-			from [dbo].[HR_EmployeeInfo] a 				
-			where a.IsDeleted=1  {0}
-            ", whereStr.Replace("CreationTime", "LastModificationTime"));
-            sqlStr.AppendFormat(@" union
-            select a.EmployeeCode,a.EmployeeName,a.Sex,a.CertNo,a.Birthday,a.EmployeeTypeName,a.DepartmentName,
-            a.DepartmentCode,a.WorkState,a.IsDeleted,0 InOrOut,A.CreateTime,0 InorOutType
-			from[dbo].[HR_EmployeeInfoHis]
-            a where  a.isInsert=1 {0}", whereStr.Replace("CreationTime", "CreateTime"));
-            sqlStr.AppendFormat(@" union
-            select a.EmployeeCode,a.EmployeeName,a.Sex,a.CertNo,a.Birthday,a.EmployeeTypeName,a.InDepartmentName DepartmentName,
-			a.InDepartmentCode DepartmentCode,a.WorkState, 0 IsDeleted,0 InOrOut,A.CreateTime ,1 InorOutType
-			from[dbo].[HR_EmployeeInfoHis]
-            a where(a.DepartmentCode<> a.InDepartmentCode and  a.WorkState=a.InWorkState and a.WorkState=1) {0}", whereStr.Replace("CreationTime", "CreateTime"));
-            sqlStr.AppendFormat(@"union
-            select a.EmployeeCode,a.EmployeeName,a.Sex,a.CertNo,a.Birthday,a.EmployeeTypeName,a.DepartmentName,
-             a.DepartmentCode,a.WorkState, 0 IsDeleted,1 InOrOut,A.CreateTime,6 InorOutType
-             from[dbo].[HR_EmployeeInfoHis]
-             a where(a.DepartmentCode<> a.InDepartmentCode and  a.WorkState= a.InWorkState and a.WorkState= 1) {0}", whereStr.Replace("CreationTime", "CreateTime"));
-            sqlStr.AppendFormat(@" union          
-             select a.EmployeeCode,a.EmployeeName,a.Sex,a.CertNo,a.Birthday,a.EmployeeTypeName,a.DepartmentName,
-            a.DepartmentCode,a.WorkState, 0 IsDeleted,1 InOrOut,A.CreateTime,(case  InWorkState when '2' then 5 else 4 end) InorOutType 
-			from[dbo].[HR_EmployeeInfoHis]
-            a where(a.WorkState<> a.InWorkState and  a.InWorkState!=1) {0}
-            ", whereStr.Replace("CreationTime", "CreateTime"));
-            sqlStr.AppendFormat(@" union				          
-             select a.EmployeeCode,a.EmployeeName,a.Sex,a.CertNo,a.Birthday,a.EmployeeTypeName,a.DepartmentName,
-            a.DepartmentCode,a.WorkState, 0 IsDeleted,0 InOrOut,A.CreateTime,1 InorOutType 
-			from[dbo].[HR_EmployeeInfoHis]
-            a where(a.WorkState<> a.InWorkState and  a.InWorkState=1) {0}
-            ", whereStr.Replace("CreationTime", "CreateTime"));
 
             sqlStr.AppendFormat(@"   ) as c 
 			left join PM_Department e  on c.DepartmentCode=e.DepartmentCode
@@ -485,6 +374,90 @@ on a.DepartmentCode=c.DepartmentCode
                    .SetResultTransformer(Transformers.AliasToBean(typeof(EmployeeInOutEntity))).List<EmployeeInOutEntity>();
             }
             return new Tuple<IList<EmployeeInOutEntity>, int>(returnList, count);
+        }
+
+        /// <summary>
+        /// 人数汇总情况报表
+        /// </summary>
+        /// <param name="where"></param>
+        /// <param name="skipResults"></param>
+        /// <param name="maxResults"></param>
+        /// <param name="ifGetALL"></param>
+        /// <returns></returns>
+        public Tuple<IList<EmployeeRsEntity>, int> GerEmployeeRsReport(HREmployeeViewEntity where, int skipResults, int maxResults, bool ifGetALL = false)
+        {
+            var whereStr = " ";
+            if (!string.IsNullOrWhiteSpace(where.DepartmentCode))
+            {
+                whereStr += " and c.DepartmentCode in('" + where.DepartmentCode.TrimEnd('\'').Trim(',') + "')";
+            }
+
+            if (!string.IsNullOrWhiteSpace(where.EmployeeCode))
+            {
+
+                whereStr += " and a.EmployeeCode=" + where.EmployeeCode;
+            }
+
+            if (where.CreationTime != null)
+            {
+                whereStr += " and a.CreationTime>='" + where.CreationTime + "'";
+            }
+
+            if (where.CreationTimeEnd != null)
+            {
+                whereStr += " and a.CreationTime<'" + where.CreationTimeEnd + "'";
+            }
+
+            StringBuilder sqlStr = new StringBuilder();
+            sqlStr.AppendFormat(@"select isnull(c.DepartmentName,'顶级')  DepartmentName,
+                sum(case when a.PostProperty= '1' and a.PostLevel='3' then 1 else 0 end ) Zyry3J,
+                sum(case when a.PostProperty= '1' and a.PostLevel='4' then 1 else 0 end ) Zyry4J,
+                sum(case when a.PostProperty= '1' and a.PostLevel='5' then 1 else 0 end ) Zyry5J,
+                sum(case when a.PostProperty= '1' and a.PostLevel='6' then 1 else 0 end ) Zyry6J,
+                sum(case when a.PostProperty= '1' and a.PostLevel='7' then 1 else 0 end ) Zyry7J,
+                sum(case when a.PostProperty= '1' and a.PostLevel='8' then 1 else 0 end ) Zyry8J,
+                sum(case when a.PostProperty= '1' and a.PostLevel='9' then 1 else 0 end ) Zyry9J,
+                sum(case when a.PostProperty= '1' and a.PostLevel='10' then 1 else 0 end ) Zyry10J,
+                sum(case when a.PostProperty= '1' and a.PostLevel='11' then 1 else 0 end ) Zyry11J,
+                sum(case when a.PostProperty= '1' and a.PostLevel='12' then 1 else 0 end ) Zyry12J,
+                sum(case when a.PostProperty= '1' and a.PostLevel='13' then 1 else 0 end ) Zyry13J,
+                sum(case when a.PostProperty= '2' then 1 else 0 end ) Glrysl,
+                sum(case when a.PostProperty= '3' and a.PostLevel='3' then 1 else 0 end ) Gqry3J,
+                sum(case when a.PostProperty= '3' and a.PostLevel='4' then 1 else 0 end ) Gqry4J,
+                sum(case when a.PostProperty= '3' and a.PostLevel='5' then 1 else 0 end ) Gqry5J,
+                sum(case when a.PostProperty= '3' and a.PostLevel='6' then 1 else 0 end ) Gqry6J,
+                sum(case when a.PostProperty= '3' and a.PostLevel='7' then 1 else 0 end ) Gqry7J,
+                sum(case when a.PostProperty= '3' and a.PostLevel='8' then 1 else 0 end ) Gqry8J,
+                sum(case when a.PostProperty= '3' and a.PostLevel='9' then 1 else 0 end ) Gqry9J,
+                sum(case when a.PostProperty= '3' and a.PostLevel='10' then 1 else 0 end ) Gqry10J,
+                sum(case when a.PostProperty= '3' and a.PostLevel='11' then 1 else 0 end ) Gqry11J,
+                sum(case when a.PostProperty= '3' and a.PostLevel='12' then 1 else 0 end ) Gqry12J,
+                sum(case when a.PostProperty= '3' and a.PostLevel='13' then 1 else 0 end ) Gqry13J,
+                count(*) Ryzs
+                from [dbo].[HR_EmployeeInfo] a 
+                left join PM_Department b  on a.DepartmentCode=b.DepartmentCode
+			    left join PM_Department c on b.ParentDepartmentCode=c.DepartmentCode
+                where a.WorkState=1 and a.IsDeleted=0 {0}", whereStr);
+            sqlStr.Append(" group by c.DepartmentName ");
+
+
+            string countStr = string.Format(" select count(*) as num from ({0}) as e ", sqlStr.ToString());
+            var count = SessionFactoryManager.GetCurrentSession().CreateSQLQuery(countStr).AddScalar("num", NHibernateUtil.Int32).UniqueResult<Int32>();
+            sqlStr.Append(" order by DepartmentName");
+            IList<EmployeeRsEntity> returnList = new List<EmployeeRsEntity>();
+            if (ifGetALL)
+            {
+                returnList = SessionFactoryManager.GetCurrentSession().CreateSQLQuery(sqlStr.ToString())
+                   .SetResultTransformer(Transformers.AliasToBean(typeof(EmployeeRsEntity))).List<EmployeeRsEntity>();
+            }
+            else
+            {
+                returnList = SessionFactoryManager.GetCurrentSession().CreateSQLQuery(sqlStr.ToString())
+                   .SetFirstResult(skipResults)
+                   .SetMaxResults(maxResults)
+                   .SetResultTransformer(Transformers.AliasToBean(typeof(EmployeeRsEntity))).List<EmployeeRsEntity>();
+            }
+            return new Tuple<IList<EmployeeRsEntity>, int>(returnList, count);
         }
 
         public Tuple<IList<HREmployeeViewEntity>, int> GerEmployeeZHReport(HREmployeeViewEntity where, int skipResults,

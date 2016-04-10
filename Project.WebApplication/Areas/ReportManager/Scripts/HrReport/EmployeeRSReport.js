@@ -12,7 +12,6 @@ var pro = pro || {};
         },
         initPage: function () {
             var initObj = this.init();
-            var tabObj = initObj.tabObj;
             var gridObj = initObj.gridObj;
             gridObj.grid({
                 url: '/ReportManager/HrReport/GetEmployeeRsReport',
@@ -21,72 +20,34 @@ var pro = pro || {};
                 rownumbers: true, //行号
                 singleSelect: true,
                 columns: [[
-         { field: 'ParnetDepartmentName', title: '单位名称', width: 200 },
-         { field: 'Zjxj', title: '增加小计', width: 100 },
-         { field: 'Bxdl', title: '本系统调入', width: 100 },
-         { field: 'Ly', title: '新录用', width: 100 },
-         { field: 'Dl', title: '调入', width: 100 },
-         { field: 'Jsxj', title: '减少小计', width: 100 },
-         { field: 'Tx', title: '退休', width: 100 },
-         { field: 'Cz', title: '调出或辞职', width: 100 },
-         { field: 'Bxttc', title: '(本系统)调出', width: 100 }
-        /* { field: 'EmployeeName', title: '员工名称', width: 100 },
-         { field: 'CertNo', title: '身份证', width: 100 },
-         {
-             field: 'Birthday', title: '生日', width: 100
-         },
-         {
-             field: 'Sex', title: '姓别', width: 100, formatter: function (value, row, index) {
-                 var ret = "";
-                 switch (value) {
-                     case 0:
-                         ret = '女'
-                         break;
-                     case 1:
-                         ret = '男'
-                         break;
-                     default:
-                         ret = '未知'
-                         break;
-                 }
-                 return ret;
-             }
-         },
-         { field: 'EmployeeTypeName', title: '员工类型', width: 100 },
-
-         { field: 'DepartmentName', title: '部门名称', width: 100 },
-         { field: 'InDepartmentName', title: '部门名称（修改后）', width: 100 },
-         { field: 'WorkStateName', title: '在职状态', width: 100 },
-         { field: 'InWorkStateName', title: '在职状态（修改后）', width: 100 },
-         {
-             field: 'IsDeleted', title: '删除状态', width: 100, formatter: function (value, row, index) {
-                 var ret = "";
-                 switch (value) {
-                     case 0:
-                         ret = '正常'
-                         break;
-                     case 1:
-                         ret = '删除'
-                         break;
-                 }
-                 return ret;
-             }
-         },
-         {
-             field: 'InOrOut', title: '进出类型', width: 100, formatter: function (value, row, index) {
-                 var ret = "";
-                 switch (value) {
-                     case 0:
-                         ret = '进'
-                         break;
-                     case 1:
-                         ret = '出'
-                         break;
-                 }
-                 return ret;
-             }
-         },*/
-
+                 { field: 'DepartmentName', title: '单位名称', width: 200, rowspan: 2 },
+                 { title: '专业技术人员', width: 100, colspan: 11 },
+                 { field: 'Glrysl', title: '管理人员', width: 100, rowspan: 2 },
+                  { title: '工勤人员', width: 100, colspan: 11 },
+                  { field: 'Ryzs', title: '实有在编人数', width: 100, rowspan: 2 }
+                ], [
+                    { field: 'Zyry3J', title: '三级', width: 100, rowspan: 1 },
+                    { field: 'Zyry4J', title: '四级', width: 100, rowspan: 1 },
+                    { field: 'Zyry5J', title: '五级', width: 100 },
+                    { field: 'Zyry6J', title: '六级', width: 100 },
+                    { field: 'Zyry7J', title: '七级', width: 100 },
+                    { field: 'Zyry8J', title: '八级', width: 100 },
+                    { field: 'Zyry9J', title: '九级', width: 100 },
+                    { field: 'Zyry10J', title: '十级', width: 100 },
+                    { field: 'Zyry11J', title: '十一级', width: 100 },
+                    { field: 'Zyry12J', title: '十二级', width: 100 },
+                    { field: 'Zyry13J', title: '十三级', width: 100 },
+                    { field: 'Gqry3J', title: '三级', width: 100, rowspan: 1 },
+                    { field: 'Gqry4J', title: '四级', width: 100, rowspan: 1 },
+                    { field: 'Gqry5J', title: '五级', width: 100 },
+                    { field: 'Gqry6J', title: '六级', width: 100 },
+                    { field: 'Gqry7J', title: '七级', width: 100 },
+                    { field: 'Gqry8J', title: '八级', width: 100 },
+                    { field: 'Gqry9J', title: '九级', width: 100 },
+                    { field: 'Gqry10J', title: '十级', width: 100 },
+                    { field: 'Gqry11J', title: '十一级', width: 100 },
+                    { field: 'Gqry12J', title: '十二级', width: 100 },
+                    { field: 'Gqry13J', title: '十三级', width: 100 },
                 ]],
                 pagination: true,
                 pageSize: 20, //每页显示的记录条数，默认为10     
