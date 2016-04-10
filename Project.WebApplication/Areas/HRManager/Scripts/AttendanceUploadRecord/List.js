@@ -21,7 +21,7 @@ var pro = pro || {};
                 rownumbers: true, //行号
                 singleSelect: true,
                 columns: [[
-         { field: 'DepartmentName', title: '部门', width: 100 },
+         { field: 'DepartmentName', title: '部门', width: 200 },
             { field: 'DepartmentCode', title: '部门编码', width: 100 },
          { field: 'Att_Date', title: '考勤月份', width: 100 },
          //{ field: 'CreatorUserCode', title: '创建人编码', width: 100 },
