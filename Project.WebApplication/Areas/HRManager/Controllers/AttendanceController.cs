@@ -63,11 +63,11 @@ namespace Project.WebApplication.Areas.HRManager.Controllers
             var where = new AttendanceEntity();
             where.DepartmentCode = RequestHelper.GetString("DepartmentCode");
             var date = RequestHelper.GetDateTime("Attr_ExportDate").GetValueOrDefault();
-             date = new DateTime(date.Year, date.Month, 1);
+            date = new DateTime(date.Year, date.Month, 1);
 
             where.Attr_StartDate = date;
             where.Attr_EndDate = date.AddMonths(1).AddDays(-1);
-            var searchList = AttendanceService.GetInstance().GetList(where).GroupBy(p => new { EmployeeCode= p.EmployeeCode, EmployeeName=p.EmployeeName})
+            var searchList = AttendanceService.GetInstance().GetList(where).GroupBy(p => new { EmployeeCode = p.EmployeeCode, EmployeeName = p.EmployeeName })
   .Select(g => g.First())
   .ToList();
 
@@ -107,7 +107,7 @@ namespace Project.WebApplication.Areas.HRManager.Controllers
             });
 
 
-       var excellist = new List<ExcelData>();
+            var excellist = new List<ExcelData>();
             excellist.Add(DayOfWeek);
             excellist.Add(DayOfMonth);
 
@@ -123,8 +123,12 @@ namespace Project.WebApplication.Areas.HRManager.Controllers
             datatable2.TableName = "Table4";
             designer.SetDataSource(datatable2);
 
+            var departmentInfo = DepartmentService.GetInstance().GetModelByDepartmentCode(where.DepartmentCode);
+            var parentDepartmentCode =
+                DepartmentService.GetInstance().GetModelByDepartmentCode(departmentInfo.ParentDepartmentCode).DepartmentName;
 
-            designer.SetDataSource("KS", DepartmentService.GetInstance().GetModelByDepartmentCode(where.DepartmentCode).DepartmentName);
+            designer.SetDataSource("BM", parentDepartmentCode);
+            designer.SetDataSource("KS", departmentInfo.DepartmentName);
             designer.SetDataSource("RQ", date.ToString("yyyy年MM月"));
 
             designer.Process();

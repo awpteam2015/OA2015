@@ -72,9 +72,8 @@ namespace Project.WebApplication.Areas.HRManager.Controllers
             Worksheet sheet = workbook.Worksheets[0];
             Cells cells = sheet.Cells;
 
-            var dateStr = cells[2, 9].StringValue.ToString();
 
-            var date = new DateTime(int.Parse(dateStr.Substring(0, 4)), int.Parse(dateStr.Substring(5, 2)), 1);
+            var date = cells[2, 25].DateTimeValue;
 
             for (int i = 5; i < cells.MaxDataRow + 1; i++)
             {

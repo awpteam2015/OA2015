@@ -194,7 +194,7 @@ namespace Project.Service.HRManager
                 expr = expr.And(p => p.DepartmentCode == where.DepartmentCode);
             // if (!string.IsNullOrEmpty(where.DepartmentName))
             //  expr = expr.And(p => p.DepartmentName == where.DepartmentName);
-            if (where.State != null)
+            if (!string.IsNullOrWhiteSpace(where.State)  )
                 expr = expr.And(p => p.State == where.State);
             if (where.Attr_StartDate != null)
                 expr = expr.And(p => p.Date >= where.Attr_StartDate);
