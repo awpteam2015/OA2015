@@ -4,10 +4,10 @@
     pro.EmployeeInfo.HdPage = pro.EmployeeInfo.HdPage || {};
     pro.EmployeeInfo.HdPage = {
         init: function () {
-            $('#tabs').tabs({
-                width: $("#tabs").parent().width(),
-                height: $(window).height()-550
-        });
+        //    $('#tabs').tabs({
+        //        width: $("#tabs").parent().width(),
+        //        height: $(window).height()-550
+        //});
             return {
                 tabObj: new pro.TabBase(),
                 gridObjWork: new pro.GridBase("#datagridwork", false),
