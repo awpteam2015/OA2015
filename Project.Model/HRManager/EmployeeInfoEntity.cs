@@ -39,7 +39,7 @@ namespace Project.Model.HRManager
 
         public virtual System.String EmployeeNameAndEmployeeCode
         {
-            get { return PayCode+EmployeeName; }
+            get { return PayCode + EmployeeName; }
         }
 
         /// <summary>
@@ -63,6 +63,11 @@ namespace Project.Model.HRManager
         /// 姓别
         /// </summary>
         public virtual System.Int32? Sex { get; set; }
+
+        /// <summary>
+        /// 性别中名
+        /// </summary>
+        public virtual System.String SexName { get; set; }
         /// <summary>
         /// 身份证
         /// </summary>
@@ -200,7 +205,7 @@ namespace Project.Model.HRManager
         /// <summary>
         /// 年度考核
         /// </summary>
-        public  virtual  ISet<YearAssessmentEntity> YearAssessmentList { get; set; }
+        public virtual ISet<YearAssessmentEntity> YearAssessmentList { get; set; }
 
 
         //public virtual DepartmentEntity DepartModel { get; set; }

@@ -4,7 +4,7 @@ var pro = pro || {};
     pro.FunctionDetail = pro.FunctionDetail || {};
     pro.FunctionDetail.ListPage = pro.FunctionDetail.ListPage || {};
     pro.FunctionDetail.ListPage = {
-      init: function () {
+        init: function () {
             return {
                 tabObj: new pro.TabBase(),
                 gridObj: new pro.GridBase("#datagrid", false)
@@ -40,7 +40,7 @@ var pro = pro || {};
                );
 
             $("#btnAdd").click(function () {
-               tabObj.add("/PermissionManager/FunctionDetail/Hd","新增");
+                tabObj.add("/PermissionManager/FunctionDetail/Hd", "新增");
             });
 
             $("#btnEdit").click(function () {
@@ -49,7 +49,9 @@ var pro = pro || {};
                     return;
                 }
                 var PkId = gridObj.getSelectedRow().PkId;
-                tabObj.add("/PermissionManager/FunctionDetail/Hd?PkId=" + PkId, "编辑" + PkId);
+                var functionDetailName = gridObj.getSelectedRow().FunctionDetailName;
+                alert(functionDetailName);
+                tabObj.add("/PermissionManager/FunctionDetail/Hd?PkId=" + PkId, "编辑" + functionDetailName);
             });
 
 
@@ -59,7 +61,7 @@ var pro = pro || {};
 
             $("#btnDel").click(function () {
                 if (!gridObj.isSelected()) {
-                $.alertExtend.infoOp();
+                    $.alertExtend.infoOp();
                     return;
                 }
                 $.messager.confirm("确认操作", "是否确认删除", function (bl) {
@@ -83,7 +85,7 @@ var pro = pro || {};
                 gridObj.refresh();
             });
         },
-         closeTab: function () {
+        closeTab: function () {
             this.init().tabObj.closeTab();
         }
     };

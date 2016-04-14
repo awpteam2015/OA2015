@@ -64,7 +64,7 @@ namespace Project.WebApplication.Areas.HRManager.Controllers
             where.EmployeeCode = RequestHelper.GetFormString("EmployeeCode");
             where.EmployeeName = RequestHelper.GetFormString("EmployeeName");
             where.DepartmentCode = RequestHelper.GetFormString("DepartmentCode");
-            where.DepartmentCode = string.Join(",", (DepartmentService.GetInstance().GetChiledArr(where.DepartmentCode,LoginUserInfo.UserDepartmentList.ToList(),LoginUserInfo.IsAdmin)));
+            where.DepartmentCode = string.Join(",", (DepartmentService.GetInstance().GetChiledArr(where.DepartmentCode, LoginUserInfo.UserDepartmentList.ToList(), LoginUserInfo.IsAdmin)));
             where.JobName = RequestHelper.GetFormString("JobName");
             //where.PayCode = RequestHelper.GetFormString("PayCode");
             //where.Sex = RequestHelper.GetFormString("Sex");
@@ -207,44 +207,60 @@ namespace Project.WebApplication.Areas.HRManager.Controllers
             Worksheet sheet = workbook.Worksheets[0];
             Cells cells = sheet.Cells;
             int sucessNum = 0, failNum = 0;
-            for (int i = 1; i < cells.MaxDataRow + 1; i++)
+            var ret = false;
+            try
             {
-                //var row = new AttendanceEntity();
-                //postData.RequestEntity.DepartmentCode = cells[i, 0].StringValue.Trim();
-                //postData.RequestEntity.DepartmentName = DepartmentService.GetInstance().GetModelByDepartmentCode(postData.RequestEntity.DepartmentCode).DepartmentName;
-                postData.RequestEntity.EmployeeCode = cells[i, 2].StringValue.Trim();
-                postData.RequestEntity.EmployeeName = cells[i, 1].StringValue.Trim();
-                postData.RequestEntity.Sex = cells[i, 3].IntValue;
-                postData.RequestEntity.CertNo = cells[i, 4].StringValue.Trim();
-                postData.RequestEntity.Birthday = cells[i, 5].DateTimeValue;
-                postData.RequestEntity.WorkState = cells[i, 6].StringValue.Trim();
-                postData.RequestEntity.WorkStateName = DictionaryService.GetInstance().GetModelByKeyCode("ZZZT", postData.RequestEntity.WorkState).KeyName;
-                postData.RequestEntity.EmployeeType = cells[i, 7].StringValue.Trim();
-                postData.RequestEntity.EmployeeTypeName = DictionaryService.GetInstance().GetModelByKeyCode("YGLY", postData.RequestEntity.EmployeeType).KeyName;
-                postData.RequestEntity.Duties = cells[i, 8].StringValue;
-                postData.RequestEntity.DutiesName = DictionaryService.GetInstance().GetModelByKeyCode("DWZW", postData.RequestEntity.Duties).KeyName; ;
-                postData.RequestEntity.WorkingYears = cells[i, 9].IntValue;
-                postData.RequestEntity.MobileNO = cells[i, 10].StringValue.Trim();
-                postData.RequestEntity.HomeAddress = cells[i, 11].StringValue.Trim();
-                postData.RequestEntity.State = 1;
-                Tuple<bool, string> addResult;
-                var oldentity = EmployeeInfoValidate.GetInstance().GetModelByCertNo(postData.RequestEntity.CertNo);
-                if (oldentity != null && oldentity.PkId > 0)
+                for (int i = 1; i < cells.MaxDataRow + 1; i++)
                 {
-                    postData.RequestEntity.PkId = oldentity.PkId;
-                    addResult = EmployeeInfoService.GetInstance().Update(postData.RequestEntity);
+                    //var row = new AttendanceEntity();
+                    //postData.RequestEntity.DepartmentCode = cells[i, 0].StringValue.Trim();
+                    //postData.RequestEntity.DepartmentName = DepartmentService.GetInstance().GetModelByDepartmentCode(postData.RequestEntity.DepartmentCode).DepartmentName;
+                    postData.RequestEntity.EmployeeCode = cells[i, 1].StringValue.Trim();
+                    postData.RequestEntity.EmployeeName = cells[i, 0].StringValue.Trim();
+                    postData.RequestEntity.Sex = cells[i, 2].IntValue;
+                    postData.RequestEntity.CertNo = cells[i, 3].StringValue.Trim();
+                    postData.RequestEntity.Birthday = cells[i, 4].DateTimeValue;
+                    postData.RequestEntity.StartWork = cells[i, 5].DateTimeValue;
+                    postData.RequestEntity.Duties = cells[i, 6].StringValue;
+                    postData.RequestEntity.DutiesName = DictionaryService.GetInstance().GetModelByKeyCode("DWZW", postData.RequestEntity.Duties).KeyName; ;
+                    postData.RequestEntity.PostProperty = cells[i, 7].StringValue.Trim();
+                    postData.RequestEntity.PostPropertyName = DictionaryService.GetInstance().GetModelByKeyCode("GWXZ", postData.RequestEntity.PostProperty).KeyName;
+                    postData.RequestEntity.JoinCommy = cells[i, 8].DateTimeValue;
+                    postData.RequestEntity.WorkState = cells[i, 9].StringValue.Trim();
+                    postData.RequestEntity.WorkStateName = DictionaryService.GetInstance().GetModelByKeyCode("ZZZT", postData.RequestEntity.WorkState).KeyName;
+                    postData.RequestEntity.EmployeeType = cells[i, 10].StringValue.Trim();
+                    postData.RequestEntity.EmployeeTypeName = DictionaryService.GetInstance().GetModelByKeyCode("YGLY", postData.RequestEntity.EmployeeType).KeyName;
+                    postData.RequestEntity.PostLevel = cells[i, 11].StringValue.Trim();
+                    postData.RequestEntity.PostLevelName = DictionaryService.GetInstance().GetModelByKeyCode("GWDJ", postData.RequestEntity.PostLevel).KeyName;
+                    
+                    postData.RequestEntity.MobileNO = cells[i, 10].StringValue.Trim();
+                    postData.RequestEntity.HomeAddress = cells[i, 11].StringValue.Trim();
+                    postData.RequestEntity.State = 1;
+                    Tuple<bool, string> addResult;
+                    var oldentity = EmployeeInfoValidate.GetInstance().GetModelByCertNo(postData.RequestEntity.CertNo);
+                    if (oldentity != null && oldentity.PkId > 0)
+                    {
+                        postData.RequestEntity.PkId = oldentity.PkId;
+                        addResult = EmployeeInfoService.GetInstance().Update(postData.RequestEntity);
+                    }
+                    else
+                        addResult = EmployeeInfoService.GetInstance().Add(postData.RequestEntity);
+                    if (addResult.Item1)
+                        sucessNum++;
+                    else
+                        failNum++;
                 }
-                else
-                    addResult = EmployeeInfoService.GetInstance().Add(postData.RequestEntity);
-                if (addResult.Item1)
-                    sucessNum++;
-                else
-                    failNum++;
-            }
+                ret = true;
 
+            }
+            catch (Exception)
+            {
+                ret = false;
+            }
+            
             var result = new AjaxResponse<EmployeeInfoEntity>()
             {
-                success = true,
+                success = ret,
                 error = new ErrorInfo(string.Format("成功条数：{0},失败条数：{1}", sucessNum, failNum))
             };
             return new AbpJsonResult(result, new NHibernateContractResolver());
@@ -259,11 +275,9 @@ namespace Project.WebApplication.Areas.HRManager.Controllers
             var where = new EmployeeInfoEntity();
             //where.DepartmentCode = RequestHelper.GetFormString("DepartmentCode");
             var searchList = EmployeeInfoService.GetInstance().GetList(where, false);
-
-
-            //var bl = AsposeCellsHelper.ExportToExcel<IList<EmployeeInfoEntity>>(searchList, "EmployeeInfo", $"{rootpath}/TemplateFile/EmployeeExport.xlsx", $"{rootpath}{filepath}{fileName}", new Dictionary<string, object>());
-            var bl = true;
-
+            searchList.ForEach(p => p.SexName = (p.Sex == 0 ? "女" : "男"));
+            var bl = AsposeCellsHelper.ExportToExcel<IList<EmployeeInfoEntity>>(searchList, "EmployeeInfo", $"{rootpath}/TemplateFile/EmployeeExport.xlsx", $"{rootpath}{filepath}{fileName}", new Dictionary<string, object>());
+            //var bl = true;
 
             var result = new AjaxResponse<EmployeeInfoEntity>()
             {
