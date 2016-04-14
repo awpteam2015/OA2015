@@ -151,8 +151,8 @@ namespace Project.Service.HRManager
                 expr = expr.And(p => p.EmployeeCode == where.EmployeeCode);
             if (!string.IsNullOrEmpty(where.DepartmentCode)&& where.DepartmentCode!="0")
                 expr = expr.And(p => p.DepartmentCode == where.DepartmentCode);
-            // if (!string.IsNullOrEmpty(where.DepartmentName))
-            //  expr = expr.And(p => p.DepartmentName == where.DepartmentName);
+            if (!string.IsNullOrEmpty(where.EmployeeName))
+                expr = expr.And(p => p.EmployeeName == where.EmployeeName);
             if (!string.IsNullOrEmpty(where.State))
                 expr = expr.And(p => p.State == where.State);
             if (where.Attr_StartDate != null)

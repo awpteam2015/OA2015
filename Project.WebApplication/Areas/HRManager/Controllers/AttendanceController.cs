@@ -147,6 +147,7 @@ namespace Project.WebApplication.Areas.HRManager.Controllers
             //where.PkId = RequestHelper.GetFormString("PkId");
             //where.AttendanceUploadRecordId = RequestHelper.GetFormString("AttendanceUploadRecordId");
             where.EmployeeCode = RequestHelper.GetString("EmployeeCode");
+            where.EmployeeName = RequestHelper.GetString("EmployeeName");
             where.Attr_StartDate = RequestHelper.GetDateTime("Attr_StartDate");
             where.Attr_EndDate = RequestHelper.GetDateTime("Attr_EndDate");
             where.DepartmentCode = string.Join(",", (DepartmentService.GetInstance().GetChiledArr(where.DepartmentCode, LoginUserInfo.UserDepartmentList.ToList(), LoginUserInfo.IsAdmin)));
