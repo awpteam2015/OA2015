@@ -40,8 +40,9 @@
             $("#btnAdd").click(function () {
                 pro.EmployeeInfo.HdPage.submit("Add");
             });
-
-
+            if (pro.commonKit.getUrlParam("PkId") > 0) {
+                $("#EmployeeCode").attr("disabled", "disabled");
+            }
 
             $("#btnClose").click(function () {
                 parent.pro.EmployeeInfo.ListPage.closeTab("");
