@@ -52,11 +52,11 @@ namespace Project.Repository.ReportManager
             string sqlStr = @"select a.*,b.WordkDays,c.NotWordkDays from
 (select distinct a.EmployeeCode,a.DepartmentCode,a.DepartmentName from  HR_Attendance a) as a
 left join 
-(select a.EmployeeCode,COUNT(*) as WordkDays from HR_Attendance a where a.State=1 " + whereStr + @" 
+(select a.EmployeeCode,COUNT(*) as WordkDays from HR_Attendance a where a.State not in('缺') " + whereStr + @" 
   group by a.EmployeeCode) as b
 on a.EmployeeCode=b.EmployeeCode
 left join 
-(select a.EmployeeCode,COUNT(*) as NotWordkDays from HR_Attendance a   where a.State=-1 " + whereStr + @"  group by a.EmployeeCode) as c
+(select a.EmployeeCode,COUNT(*) as NotWordkDays from HR_Attendance a   where a.State in('缺') " + whereStr + @"  group by a.EmployeeCode) as c
 on a.EmployeeCode=c.EmployeeCode";
 
             string countStr = "select count(*) as num from (" + sqlStr + ") as a ";
@@ -111,10 +111,10 @@ on a.EmployeeCode=c.EmployeeCode";
             string sqlStr = @"select a.*,b.WordkDays,c.NotWordkDays,d.EmployeeNum from
 (select distinct a.DepartmentCode,a.DepartmentName from  HR_Attendance a) as a
 left join 
-(select a.DepartmentCode,COUNT(*) as WordkDays from HR_Attendance a where a.State=1 " + whereStr + @"  group by a.DepartmentCode) as b
+(select a.DepartmentCode,COUNT(*) as WordkDays from HR_Attendance a where a.State not in('缺') " + whereStr + @"  group by a.DepartmentCode) as b
 on a.DepartmentCode=b.DepartmentCode
 left join 
-(select a.DepartmentCode,COUNT(*) as NotWordkDays from HR_Attendance a   where a.State=-1 " + whereStr + @"  group by a.DepartmentCode) as c
+(select a.DepartmentCode,COUNT(*) as NotWordkDays from HR_Attendance a   where a.State in('缺') " + whereStr + @"  group by a.DepartmentCode) as c
 on a.DepartmentCode=c.DepartmentCode
 left join 
 (select a.DepartmentCode,COUNT(EmployeeCode) as EmployeeNum from dbo.HR_EmployeeInfo a   group by a.DepartmentCode) as d
