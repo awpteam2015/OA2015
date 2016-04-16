@@ -51,7 +51,8 @@ namespace Project.WebApplication.Controllers
 
             var userData = ((FormsIdentity)User.Identity).Ticket.UserData;
             LoginUserInfo = JsonConvert.DeserializeObject<LoginUserInfoDTO>(userData);
-
+            if (LoginUserInfo.UserDepartmentIntList != null)
+                LoginUserInfo.UserDepartmentIntList.ForEach(p => LoginUserInfo.UserDepartmentList.Add(new UserDepartmentLoginModel() { DepartmentCode = p }));
             HttpContext.Items.Add("UserInfo", new HttpContextUserInfo()
             {
                 UserCode = LoginUserInfo.UserCode,

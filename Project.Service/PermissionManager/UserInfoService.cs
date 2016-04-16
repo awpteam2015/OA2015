@@ -57,6 +57,9 @@ namespace Project.Service.PermissionManager
 
                 var loginUserInfo = Mapper.Map<UserInfoEntity, LoginUserInfoDTO>(userInfoEntity);
                 loginUserInfo.IsAdmin = loginUserInfo.UserCode.ToUpper() == "ADMIN";
+                loginUserInfo.UserDepartmentIntList=new List<string>();
+                loginUserInfo.UserDepartmentList.ForEach(p => loginUserInfo.UserDepartmentIntList.Add(p.DepartmentCode));
+                loginUserInfo.UserDepartmentList.Clear();
                 return new Tuple<bool, string, LoginUserInfoDTO>(true, "", loginUserInfo);
             }
             else
