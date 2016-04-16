@@ -113,8 +113,6 @@ namespace Project.WebApplication.Areas.HRManager.Controllers
             return new AbpJsonResult(searchList, new NHibernateContractResolver());
         }
 
-
-
         [HttpPost]
         public AbpJsonResult Add(AjaxRequest<EmployeeInfoEntity> postData)
         {
@@ -137,7 +135,6 @@ namespace Project.WebApplication.Areas.HRManager.Controllers
             };
             return new AbpJsonResult(result, new NHibernateContractResolver());
         }
-
 
         [HttpPost]
         public AbpJsonResult Edit(AjaxRequest<EmployeeInfoEntity> postData)
@@ -196,74 +193,6 @@ namespace Project.WebApplication.Areas.HRManager.Controllers
             //var entity = EmployeeInfoService.GetInstance().GetModelByPk(pkId);
             //ViewBag.BindEntity = JsonHelper.JsonSerializer(entity);
             return View();
-        }
-
-        [HttpPost]
-        public AbpJsonResult Upload(AjaxRequest<EmployeeInfoEntity> postData)
-        {
-            var path = Server.MapPath(postData.RequestEntity.FileUrl + "/" + postData.RequestEntity.FileName);
-
-            Workbook workbook = new Workbook(path);
-            Worksheet sheet = workbook.Worksheets[0];
-            Cells cells = sheet.Cells;
-            int sucessNum = 0, failNum = 0;
-            var ret = false;
-            try
-            {
-                for (int i = 1; i < cells.MaxDataRow + 1; i++)
-                {
-                    //var row = new AttendanceEntity();
-                    //postData.RequestEntity.DepartmentCode = cells[i, 0].StringValue.Trim();
-                    //postData.RequestEntity.DepartmentName = DepartmentService.GetInstance().GetModelByDepartmentCode(postData.RequestEntity.DepartmentCode).DepartmentName;
-                    postData.RequestEntity.EmployeeCode = cells[i, 1].StringValue.Trim();
-                    postData.RequestEntity.EmployeeName = cells[i, 0].StringValue.Trim();
-                    postData.RequestEntity.Sex = cells[i, 2].IntValue;
-                    postData.RequestEntity.CertNo = cells[i, 3].StringValue.Trim();
-                    postData.RequestEntity.Birthday = cells[i, 4].DateTimeValue;
-                    postData.RequestEntity.StartWork = cells[i, 5].DateTimeValue;
-                    postData.RequestEntity.Duties = cells[i, 6].StringValue;
-                    postData.RequestEntity.DutiesName = DictionaryService.GetInstance().GetModelByKeyCode("DWZW", postData.RequestEntity.Duties).KeyName; ;
-                    postData.RequestEntity.PostProperty = cells[i, 7].StringValue.Trim();
-                    postData.RequestEntity.PostPropertyName = DictionaryService.GetInstance().GetModelByKeyCode("GWXZ", postData.RequestEntity.PostProperty).KeyName;
-                    postData.RequestEntity.JoinCommy = cells[i, 8].DateTimeValue;
-                    postData.RequestEntity.WorkState = cells[i, 9].StringValue.Trim();
-                    postData.RequestEntity.WorkStateName = DictionaryService.GetInstance().GetModelByKeyCode("ZZZT", postData.RequestEntity.WorkState).KeyName;
-                    postData.RequestEntity.EmployeeType = cells[i, 10].StringValue.Trim();
-                    postData.RequestEntity.EmployeeTypeName = DictionaryService.GetInstance().GetModelByKeyCode("YGLY", postData.RequestEntity.EmployeeType).KeyName;
-                    postData.RequestEntity.PostLevel = cells[i, 11].StringValue.Trim();
-                    postData.RequestEntity.PostLevelName = DictionaryService.GetInstance().GetModelByKeyCode("GWDJ", postData.RequestEntity.PostLevel).KeyName;
-                    
-                    postData.RequestEntity.MobileNO = cells[i, 10].StringValue.Trim();
-                    postData.RequestEntity.HomeAddress = cells[i, 11].StringValue.Trim();
-                    postData.RequestEntity.State = 1;
-                    Tuple<bool, string> addResult;
-                    var oldentity = EmployeeInfoValidate.GetInstance().GetModelByCertNo(postData.RequestEntity.CertNo);
-                    if (oldentity != null && oldentity.PkId > 0)
-                    {
-                        postData.RequestEntity.PkId = oldentity.PkId;
-                        addResult = EmployeeInfoService.GetInstance().Update(postData.RequestEntity);
-                    }
-                    else
-                        addResult = EmployeeInfoService.GetInstance().Add(postData.RequestEntity);
-                    if (addResult.Item1)
-                        sucessNum++;
-                    else
-                        failNum++;
-                }
-                ret = true;
-
-            }
-            catch (Exception)
-            {
-                ret = false;
-            }
-            
-            var result = new AjaxResponse<EmployeeInfoEntity>()
-            {
-                success = ret,
-                error = new ErrorInfo(string.Format("成功条数：{0},失败条数：{1}", sucessNum, failNum))
-            };
-            return new AbpJsonResult(result, new NHibernateContractResolver());
         }
 
         public AbpJsonResult ExportExcel()
@@ -376,7 +305,6 @@ namespace Project.WebApplication.Areas.HRManager.Controllers
             return new AbpJsonResult(result, new NHibernateContractResolver());
         }
 
-
         public ActionResult Look(int pkId = 0)
         {
             if (pkId > 0)
@@ -401,6 +329,369 @@ namespace Project.WebApplication.Areas.HRManager.Controllers
             return View();
         }
 
+        [HttpPost]
+        public AbpJsonResult Upload(AjaxRequest<EmployeeInfoEntity> postData)
+        {
+            var path = Server.MapPath(postData.RequestEntity.FileUrl + "/" + postData.RequestEntity.FileName);
+
+            Workbook workbook = new Workbook(path);
+
+            var tipInfo = string.Empty;
+            var ret = false;
+            var tuple = new Tuple<bool, string>(true, "");
+            try
+            {
+
+                for (int j = 0; j < workbook.Worksheets.Count; j++)
+                {
+                    var sheet = workbook.Worksheets[j];
+                    switch (j)
+                    {
+                        case 0:
+                            tuple = ImportExcelBaseInfo(sheet, postData.RequestEntity);//导入基本信息
+                            tipInfo += tuple.Item2;
+                            break;
+                        case 1:
+                            tuple = ImportExcelWorkInfo(sheet, postData.RequestEntity);//导入工作经历
+                            tipInfo += tuple.Item2;
+                            break;
+                        case 2:
+                            tuple = ImportExcelLearnInfo(sheet, postData.RequestEntity);//学习经历
+                            tipInfo += tuple.Item2;
+                            break;
+                        case 3:
+                            tuple = ImportExcelContinEducationInfo(sheet, postData.RequestEntity);//继续教育学分
+                            tipInfo += tuple.Item2;
+                            break;
+                        case 4:
+                            tuple = ImportExcelTechnicalInfo(sheet, postData.RequestEntity);//职称记录
+                            tipInfo += tuple.Item2;
+                            break;
+                        case 5:
+                            tuple = ImportExcelProfessionInfo(sheet, postData.RequestEntity);//专业技术
+                            tipInfo += tuple.Item2;
+                            break;
+                        case 6:
+                            tuple = ImportExcelYearAssessmentInfo(sheet, postData.RequestEntity);//年度考核
+                            tipInfo += tuple.Item2;
+                            break;
+                    }
+
+                }
+
+                ret = true;
+
+            }
+            catch (Exception)
+            {
+                ret = false;
+            }
+
+            var result = new AjaxResponse<EmployeeInfoEntity>()
+            {
+                success = ret,
+                error = new ErrorInfo()
+            };
+            return new AbpJsonResult(result, new NHibernateContractResolver());
+        }
+
+        /// <summary>
+        /// 基本信息经历
+        /// </summary>
+        /// <param name="baseSheet"></param>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        private Tuple<bool, string> ImportExcelBaseInfo(Worksheet baseSheet, EmployeeInfoEntity model)
+        {
+            int sucessNum = 0, failNum = 0;
+            try
+            {
+                Cells cells = baseSheet.Cells;
+                for (int i = 1; i < cells.MaxDataRow + 1; i++)
+                {
+                    //var row = new AttendanceEntity();
+                    //postData.RequestEntity.DepartmentCode = cells[i, 0].StringValue.Trim();
+                    //postData.RequestEntity.DepartmentName = DepartmentService.GetInstance().GetModelByDepartmentCode(postData.RequestEntity.DepartmentCode).DepartmentName;
+                    model.EmployeeCode = cells[i, 1].StringValue.Trim();
+                    model.EmployeeName = cells[i, 0].StringValue.Trim();
+                    model.Sex = cells[i, 2].IntValue;
+                    model.CertNo = cells[i, 3].StringValue.Trim();
+                    model.Birthday = cells[i, 4].DateTimeValue;
+                    model.StartWork = cells[i, 5].DateTimeValue;
+                    model.Duties = cells[i, 6].StringValue;
+                    model.DutiesName = DictionaryService.GetInstance().GetModelByKeyCode("DWZW", model.Duties).KeyName; ;
+                    model.PostProperty = cells[i, 7].StringValue.Trim();
+                    model.PostPropertyName = DictionaryService.GetInstance().GetModelByKeyCode("GWXZ", model.PostProperty).KeyName;
+                    model.JoinCommy = cells[i, 8].DateTimeValue;
+                    model.WorkState = cells[i, 9].StringValue.Trim();
+                    model.WorkStateName = DictionaryService.GetInstance().GetModelByKeyCode("ZZZT", model.WorkState).KeyName;
+                    model.EmployeeType = cells[i, 10].StringValue.Trim();
+                    model.EmployeeTypeName = DictionaryService.GetInstance().GetModelByKeyCode("YGLY", model.EmployeeType).KeyName;
+                    model.PostLevel = cells[i, 11].StringValue.Trim();
+                    model.PostLevelName = DictionaryService.GetInstance().GetModelByKeyCode("GWDJ", model.PostLevel).KeyName;
+
+                    model.MobileNO = cells[i, 10].StringValue.Trim();
+                    model.HomeAddress = cells[i, 11].StringValue.Trim();
+                    model.State = 1;
+                    Tuple<bool, string> addResult;
+                    var oldentity = EmployeeInfoValidate.GetInstance().GetModelByCertNo(model.CertNo);
+                    if (oldentity != null && oldentity.PkId > 0)
+                    {
+                        model.PkId = oldentity.PkId;
+                        addResult = EmployeeInfoService.GetInstance().Update(model);
+                    }
+                    else
+                        addResult = EmployeeInfoService.GetInstance().Add(model);
+                    if (addResult.Item1)
+                        sucessNum++;
+                    else
+                        failNum++;
+                }
+                return new Tuple<bool, string>(true, " 基本信息成功：" + sucessNum + "失败：" + failNum);
+            }
+            catch (Exception ex)
+            {
+                return new Tuple<bool, string>(false, string.Format(" 基本信息成功：{0},失败：{1}过程出错：{2}", sucessNum, failNum, ex.Message));
+            }
+
+        }
+
+        /// <summary>
+        /// 工作经历
+        /// </summary>
+        /// <param name="baseSheet"></param>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        private Tuple<bool, string> ImportExcelWorkInfo(Worksheet baseSheet, EmployeeInfoEntity model)
+        {
+            int sucessNum = 0, failNum = 0;
+            try
+            {
+                Cells cells = baseSheet.Cells;
+                for (int i = 1; i < cells.MaxDataRow + 1; i++)
+                {
+                    model.EmployeeCode = cells[i, 0].StringValue.Trim();
+                    model = EmployeeInfoService.GetInstance().GetEmployeeNameByCode2(model.EmployeeCode);
+                    if (model == null)
+                        continue;
+
+                    var workModel = new WorkExperienceEntity();
+                    workModel.WorkCompany = cells[i, 1].StringValue.Trim();
+                    workModel.Duties = cells[i, 2].StringValue.Trim();
+                    workModel.BeginDate = cells[i, 3].DateTimeValue;
+                    workModel.EndDate = cells[i, 4].DateTimeValue;
+                    workModel.WorkContent = cells[i, 5].StringValue.Trim();
+                    workModel.EmployeeID = model.PkId;
+                    if (WorkExperienceService.GetInstance().Add(workModel) > 0)
+                        sucessNum++;
+                    else
+                        failNum++;
+                }
+                return new Tuple<bool, string>(true, " 工作经历成功：" + sucessNum + "失败：" + failNum);
+            }
+            catch (Exception ex)
+            {
+                return new Tuple<bool, string>(false, string.Format(" 工作经历成功：{0},失败：{1}过程出错：{2}", sucessNum, failNum, ex.Message));
+            }
+
+        }
+
+        /// <summary>
+        /// 学习经历
+        /// </summary>
+        /// <param name="baseSheet"></param>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        private Tuple<bool, string> ImportExcelLearnInfo(Worksheet baseSheet, EmployeeInfoEntity model)
+        {
+            int sucessNum = 0, failNum = 0;
+            try
+            {
+                Cells cells = baseSheet.Cells;
+                for (int i = 1; i < cells.MaxDataRow + 1; i++)
+                {
+                    model.EmployeeCode = cells[i, 0].StringValue.Trim();
+                    model = EmployeeInfoService.GetInstance().GetEmployeeNameByCode2(model.EmployeeCode);
+                    if (model == null)
+                        continue;
+
+                    var learnModel = new LearningExperiencesEntity();
+                    learnModel.School = cells[i, 1].StringValue.Trim();
+                    learnModel.ProfessionCode = cells[i, 2].StringValue.Trim();
+                    learnModel.Degree = cells[i, 3].StringValue.Trim();
+                    learnModel.Education = cells[i, 4].StringValue.Trim();
+                    learnModel.SchoolYear = cells[i, 5].StringValue.Trim();
+                    learnModel.CertNumber = cells[i, 6].StringValue.Trim();
+                    learnModel.BeginDate = cells[i, 7].DateTimeValue;
+                    learnModel.EndDate = cells[i, 8].DateTimeValue;
+                    learnModel.Remark = cells[i, 9].StringValue.Trim();
+                    learnModel.EmployeeID = model.PkId;
+                    if (LearningExperiencesService.GetInstance().Add(learnModel) > 0)
+                        sucessNum++;
+                    else
+                        failNum++;
+                }
+                return new Tuple<bool, string>(true, " 学习经历成功：" + sucessNum + "失败：" + failNum);
+            }
+            catch (Exception ex)
+            {
+                return new Tuple<bool, string>(false, string.Format(" 学习经历成功：{0},失败：{1}过程出错：{2}", sucessNum, failNum, ex.Message));
+            }
+
+        }
+
+        /// <summary>
+        /// 继续教育学分
+        /// </summary>
+        /// <param name="baseSheet"></param>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        private Tuple<bool, string> ImportExcelContinEducationInfo(Worksheet baseSheet, EmployeeInfoEntity model)
+        {
+            int sucessNum = 0, failNum = 0;
+            try
+            {
+                Cells cells = baseSheet.Cells;
+                for (int i = 1; i < cells.MaxDataRow + 1; i++)
+                {
+                    model.EmployeeCode = cells[i, 0].StringValue.Trim();
+                    model = EmployeeInfoService.GetInstance().GetEmployeeNameByCode2(model.EmployeeCode);
+                    if (model == null)
+                        continue;
+
+                    var continEducationEntity = new ContinEducationEntity();
+                    continEducationEntity.CreditType = cells[i, 1].StringValue.Trim();
+                    continEducationEntity.Score = cells[i, 2].StringValue.Trim();
+                    continEducationEntity.GetTime = cells[i, 3].DateTimeValue;
+                    continEducationEntity.EmployeeID = model.PkId;
+                    if (ContinEducationService.GetInstance().Add(continEducationEntity) > 0)
+                        sucessNum++;
+                    else
+                        failNum++;
+                }
+                return new Tuple<bool, string>(true, " 继续教育学分成功：" + sucessNum + "失败：" + failNum);
+            }
+            catch (Exception ex)
+            {
+                return new Tuple<bool, string>(false, string.Format(" 继续教育学分成功：{0},失败：{1}过程出错：{2}", sucessNum, failNum, ex.Message));
+            }
+        }
+
+        /// <summary>
+        /// 职称记录
+        /// </summary>
+        /// <param name="baseSheet"></param>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        private Tuple<bool, string> ImportExcelTechnicalInfo(Worksheet baseSheet, EmployeeInfoEntity model)
+        {
+            int sucessNum = 0, failNum = 0;
+            try
+            {
+                Cells cells = baseSheet.Cells;
+                for (int i = 1; i < cells.MaxDataRow + 1; i++)
+                {
+                    model.EmployeeCode = cells[i, 0].StringValue.Trim();
+                    model = EmployeeInfoService.GetInstance().GetEmployeeNameByCode2(model.EmployeeCode);
+                    if (model == null)
+                        continue;
+
+                    var technicalEntity = new TechnicalEntity();
+                    technicalEntity.Title = cells[i, 1].StringValue.Trim();
+                    technicalEntity.LevNum = cells[i, 2].StringValue.Trim();
+                    technicalEntity.GetDate = cells[i, 3].DateTimeValue;
+                    technicalEntity.CerNo = cells[i, 4].StringValue.Trim();
+                    technicalEntity.EmployeeID = model.PkId;
+                    if (TechnicalService.GetInstance().Add(technicalEntity) > 0)
+                        sucessNum++;
+                    else
+                        failNum++;
+                }
+                return new Tuple<bool, string>(true, " 职称记录成功：" + sucessNum + "失败：" + failNum);
+            }
+            catch (Exception ex)
+            {
+                return new Tuple<bool, string>(false, string.Format(" 职称记录成功：{0},失败：{1}过程出错：{2}", sucessNum, failNum, ex.Message));
+            }
+
+        }
+
+        /// <summary>
+        /// 专业技术
+        /// </summary>
+        /// <param name="baseSheet"></param>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        private Tuple<bool, string> ImportExcelProfessionInfo(Worksheet baseSheet, EmployeeInfoEntity model)
+        {
+            int sucessNum = 0, failNum = 0;
+            try
+            {
+                Cells cells = baseSheet.Cells;
+                for (int i = 1; i < cells.MaxDataRow + 1; i++)
+                {
+                    model.EmployeeCode = cells[i, 0].StringValue.Trim();
+                    model = EmployeeInfoService.GetInstance().GetEmployeeNameByCode2(model.EmployeeCode);
+                    if (model == null)
+                        continue;
+
+                    var professionEntity = new ProfessionEntity();
+                    professionEntity.Title = cells[i, 1].StringValue.Trim();
+                    professionEntity.TypeName = cells[i, 2].StringValue.Trim();
+                    professionEntity.RangeName = cells[i, 3].StringValue.Trim();
+                    professionEntity.GetDate = cells[i, 4].DateTimeValue;
+                    professionEntity.CerNo = cells[i, 5].StringValue.Trim();
+                    professionEntity.EmployDate = cells[i, 6].DateTimeValue;
+                    professionEntity.EmployEndDate = cells[i, 7].DateTimeValue;
+                    professionEntity.EmployeeID = model.PkId;
+                    if (ProfessionService.GetInstance().Add(professionEntity) > 0)
+                        sucessNum++;
+                    else
+                        failNum++;
+                }
+                return new Tuple<bool, string>(true, " 专业技术成功：" + sucessNum + "失败：" + failNum);
+            }
+            catch (Exception ex)
+            {
+                return new Tuple<bool, string>(false, string.Format(" 专业技术成功：{0},失败：{1}过程出错：{2}", sucessNum, failNum, ex.Message));
+            }
+        }
+
+        /// <summary>
+        /// 年度考核
+        /// </summary>
+        /// <param name="baseSheet"></param>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        private Tuple<bool, string> ImportExcelYearAssessmentInfo(Worksheet baseSheet, EmployeeInfoEntity model)
+        {
+            int sucessNum = 0, failNum = 0;
+            try
+            {
+                Cells cells = baseSheet.Cells;
+                for (int i = 1; i < cells.MaxDataRow + 1; i++)
+                {
+                    model.EmployeeCode = cells[i, 0].StringValue.Trim();
+                    model = EmployeeInfoService.GetInstance().GetEmployeeNameByCode2(model.EmployeeCode);
+                    if (model == null)
+                        continue;
+
+                    var yearAssessmentEntity = new YearAssessmentEntity();
+                    yearAssessmentEntity.KHYear = cells[i, 1].StringValue.Trim();
+                    yearAssessmentEntity.KHComment = cells[i, 2].StringValue.Trim();
+                    yearAssessmentEntity.EmployeeID = model.PkId;
+                    if (YearAssessmentService.GetInstance().Add(yearAssessmentEntity) > 0)
+                        sucessNum++;
+                    else
+                        failNum++;
+                }
+                return new Tuple<bool, string>(true, " 年度考核成功：" + sucessNum + "失败：" + failNum);
+            }
+            catch (Exception ex)
+            {
+                return new Tuple<bool, string>(false, string.Format(" 年度考核成功：{0},失败：{1}过程出错：{2}", sucessNum, failNum, ex.Message));
+            }
+        }
     }
 }
 

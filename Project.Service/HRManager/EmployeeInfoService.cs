@@ -43,6 +43,7 @@ namespace Project.Service.HRManager
             this._continEducationRepository = new ContinEducationRepository();
             this._technicalRepository = new TechnicalRepository();
             this._professionRepository = new ProfessionRepository();
+            this._yearAssessmentRepository=new YearAssessmentRepository();
             this._employeeInfoHisRepository = new EmployeeInfoHisRepository();
         }
 
