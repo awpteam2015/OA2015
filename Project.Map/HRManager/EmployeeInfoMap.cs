@@ -70,6 +70,12 @@ namespace Project.Map.HRManager
             .Cascade.All().Inverse()
             .KeyColumn("EmployeeID");
 
+            HasMany(p => p.ContinEducationList)
+            .AsSet()
+            .LazyLoad()
+            .Cascade.All().Inverse()
+            .KeyColumn("EmployeeID");
+
             HasMany(p => p.TechnicalList)
             .AsSet()
             .LazyLoad()

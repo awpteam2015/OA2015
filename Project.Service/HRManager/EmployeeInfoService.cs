@@ -26,6 +26,7 @@ namespace Project.Service.HRManager
         private readonly EmployeeInfoRepository _employeeInfoRepository;
         private readonly WorkExperienceRepository _workExperienceRepository;
         private readonly LearningExperiencesRepository _learnExperienceRepository;
+        private readonly ContinEducationRepository _continEducationRepository;
         private readonly TechnicalRepository _technicalRepository;
         private readonly ProfessionRepository _professionRepository;
         private readonly YearAssessmentRepository _yearAssessmentRepository;
@@ -39,6 +40,7 @@ namespace Project.Service.HRManager
 
             this._workExperienceRepository = new WorkExperienceRepository();
             this._learnExperienceRepository = new LearningExperiencesRepository();
+            this._continEducationRepository = new ContinEducationRepository();
             this._technicalRepository = new TechnicalRepository();
             this._professionRepository = new ProfessionRepository();
             this._employeeInfoHisRepository = new EmployeeInfoHisRepository();
@@ -94,6 +96,10 @@ namespace Project.Service.HRManager
                         p.EmployeeID = pkId;
                     });
                     entity.LearningList.ToList().ForEach(p =>
+                    {
+                        p.EmployeeID = pkId;
+                    });
+                    entity.ContinEducationList.ToList().ForEach(p =>
                     {
                         p.EmployeeID = pkId;
                     });
@@ -196,12 +202,15 @@ namespace Project.Service.HRManager
             entity.WorkList.ToList().ForEach(item => item.EmployeeID = entity.PkId);
             entity.LearningList.ToList().ForEach(item => item.EmployeeID = entity.PkId);
             entity.TechnicalList.ToList().ForEach(item => item.EmployeeID = entity.PkId);
+            entity.ContinEducationList.ToList().ForEach(item => item.EmployeeID = entity.PkId);
             entity.ProfessionList.ToList().ForEach(item => item.EmployeeID = entity.PkId);
             entity.YearAssessmentList.ToList().ForEach(item => item.EmployeeID = entity.PkId);
             var deleteList = oldEntity.WorkList.Where(
                     p => entity.WorkList.All(x => x.PkId != p.PkId)).ToList();
             var deleteLearningList = oldEntity.LearningList.Where(
                               p => entity.LearningList.All(x => x.PkId != p.PkId)).ToList();
+            var deleteContinEducationList = oldEntity.ContinEducationList.Where(
+                           p => entity.ContinEducationList.All(x => x.PkId != p.PkId)).ToList();
 
             var deleteTechnicalList = oldEntity.TechnicalList.Where(
                               p => entity.TechnicalList.All(x => x.PkId != p.PkId)).ToList();
@@ -237,6 +246,7 @@ namespace Project.Service.HRManager
                     deleteList.ForEach(p => { _workExperienceRepository.Delete(p); });
                     deleteLearningList.ForEach(p => { _learnExperienceRepository.Delete(p); });
                     deleteTechnicalList.ForEach(p => { _technicalRepository.Delete(p); });
+                    deleteContinEducationList.ForEach(p => { _continEducationRepository.Delete(p); });
                     deleteProfessionList.ForEach(p => { _professionRepository.Delete(p); });
                     deleteYearAssessmentList.ForEach(p => { _yearAssessmentRepository.Delete(p); });
                     tx.Commit();

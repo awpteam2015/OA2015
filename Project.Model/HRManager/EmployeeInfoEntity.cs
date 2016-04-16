@@ -22,6 +22,7 @@ namespace Project.Model.HRManager
         {
             this.WorkList = new HashSet<WorkExperienceEntity>();
             this.LearningList = new HashSet<LearningExperiencesEntity>();
+            this.ContinEducationList = new HashSet<ContinEducationEntity>();
             this.TechnicalList = new HashSet<TechnicalEntity>();
             this.ProfessionList = new HashSet<ProfessionEntity>();
             this.YearAssessmentList = new HashSet<YearAssessmentEntity>();
@@ -191,7 +192,10 @@ namespace Project.Model.HRManager
         /// 学习经历
         /// </summary>
         public virtual ISet<LearningExperiencesEntity> LearningList { get; set; }
-
+        /// <summary>
+        /// 继续教育学分
+        /// </summary>
+        public virtual ISet<ContinEducationEntity> ContinEducationList { get; set; }
         /// <summary>
         /// 职务经历
         /// </summary>

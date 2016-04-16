@@ -49,6 +49,7 @@
   <ItemGroup>
     <Compile Include="HRManager\AttendanceRepository.cs" />
     <Compile Include="HRManager\AttendanceUploadRecordRepository.cs" />
+    <Compile Include="HRManager\ContinEducationRepository.cs" />
     <Compile Include="HRManager\ContractRepository.cs" />
     <Compile Include="HRManager\DictionaryRepository.cs" />
     <Compile Include="HRManager\EmployeeChildrenRepository.cs" />

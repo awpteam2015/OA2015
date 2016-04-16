@@ -187,7 +187,7 @@
                 </td>
             </tr>
         </table>
-        <div id="tabs" @*class="easyui-tabs" data-options="fit:true,border:false"*@>
+        <div id="tabs" class="easyui-tabs"  @*data-options="fit:true,border:false"*@>
             <div title="工作经历" style="padding:1px">
                 <table id="datagridwork" toolbar="#tbwork" style="height: 300px;width: 100%"></table>
                 <div id="tbwork" style="padding: 5px; height: auto">
@@ -199,14 +199,25 @@
                     </div>
                 </div>
             </div>
-            <div title="学习经历" style="padding:1px;">
-                <table id="datagridstudy" toolbar="#tbstudy" style="height: 300px;width: 100%"></table>
+            <div title="学习经历" style="padding: 1px;">
+                <table id="datagridstudy" toolbar="#tbstudy" style="height: 300px; width: 100%"></table>
                 <div id="tbstudy" style="padding: 5px; height: auto">
                     @*<div style="margin-bottom: 5px">
                             <a id="btnAddStudy_ToolBar" href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:true">添加</a>
                             <a id="btnDelStudy_ToolBar" href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-remove',plain:true">删除</a>
                         </div>*@
                     <div id="divSearchStudy">
+                    </div>
+                </div>
+            </div>
+            <div title="继续教育学分" style="padding:1px;">
+                <table id="datagridContinEducation" toolbar="#tbContinEducation" style="height: 300px;width: 100%"></table>
+                <div id="tbContinEducation" style="padding: 5px; height: auto">
+                    @*<div style="margin-bottom: 5px">
+                        <a id="btnAddContinEducation_ToolBar" href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:true">添加</a>
+                        <a id="btnDelContinEducation_ToolBar" href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-remove',plain:true">删除</a>
+                    </div>*@
+                    <div id="divSearchContinEducation">
                     </div>
                 </div>
             </div>
