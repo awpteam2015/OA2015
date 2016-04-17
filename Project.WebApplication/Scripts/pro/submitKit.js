@@ -4,6 +4,7 @@
     pro.submitKit = {
         config: {
             iscolumnPkidChecked: false,
+            isVerVal: true,//是否验证值大于0
             columnPkidName: "PkId",
             columns: new Array(),
             columnNamePreStr: '',//字段名前缀
@@ -53,19 +54,19 @@
             var columns = this.config.columns;
             var PkId = this.config.columnPkidName;
             var PreStr = this.config.columnNamePreStr;
-
+            var verVal = this.config.isVerVal;
             var json = "";
             var obj = this.config.iscolumnPkidChecked ? $("[name=" + PkId + "]:checked") : $("[name=" + PkId + "]");
 
             obj.each(
                 function () {
                     var rowJson = "";
-                    if ($(this).val() > 0) {
+                    if (!verVal || $(this).val() > 0) {
                         rowJson = '"' + PkId.replace(PreStr, '') + '":"' + $(this).val() + '",';
                     }
 
-                    for (var i = 0, max = columns.length; i < max; i++) {
 
+                    for (var i = 0, max = columns.length; i < max; i++) {
                         rowJson += '"' + columns[i] + '":"' + $("[name=" + PreStr + columns[i] + "_" + $(this).val() + "]").val() + '",';
                     }
 

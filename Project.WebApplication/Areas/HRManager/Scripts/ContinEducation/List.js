@@ -1,9 +1,9 @@
 ﻿
 var pro = pro || {};
 (function () {
-    pro.Module = pro.Module || {};
-    pro.Module.ListPage = pro.Module.ListPage || {};
-    pro.Module.ListPage = {
+    pro.ContinEducation = pro.ContinEducation || {};
+    pro.ContinEducation.ListPage = pro.ContinEducation.ListPage || {};
+    pro.ContinEducation.ListPage = {
       init: function () {
             return {
                 tabObj: new pro.TabBase(),
@@ -15,18 +15,25 @@ var pro = pro || {};
             var tabObj = initObj.tabObj;
             var gridObj = initObj.gridObj;
             gridObj.grid({
-                url: '/PermissionManager/Module/GetList',
+                url: '/HRManager/ContinEducation/GetList',
                 fitColumns: false,
                 nowrap: false,
                 rownumbers: true, //行号
                 singleSelect: true,
                 columns: [[
-         { field: 'PkId', title: 'ID', width: 100 },
-         { field: 'ModuleName', title: '模块名称', width: 200 },
-         //{ field: 'ParentId', title: '父级 预留', width: 100 },
-         //{ field: 'ModuleLevel', title: '层级', width: 100 },
-         { field: 'RankId', title: '排序', width: 100 },
-         { field: 'Remark', title: '备注', width: 100 }
+         { field: 'PkId', title: '', width: 100 },
+         { field: 'EmployeeID', title: '用户ID', width: 100 },
+         { field: 'EmployeeCode', title: '用户编号', width: 100 },
+         { field: 'DepartmentCode', title: '部门编号', width: 100 },
+         { field: 'CreditType', title: '学分类型', width: 100 },
+         { field: 'CreditTypeName', title: '学分类型名称', width: 100 },
+         { field: 'Score', title: '分数', width: 100 },
+         { field: 'GetTime', title: '时间', width: 100 },
+         { field: 'CreatorUserCode', title: '', width: 100 },
+         { field: 'CreattorUserName', title: '', width: 100 },
+         { field: 'CreationTime', title: '', width: 100 },
+         { field: 'LastModificationTime', title: '', width: 100 },
+         { field: 'LastModifierUserCode', title: '', width: 100 },
                 ]],
                 pagination: true,
                 pageSize: 20, //每页显示的记录条数，默认为10     
@@ -35,7 +42,7 @@ var pro = pro || {};
                );
 
             $("#btnAdd").click(function () {
-               tabObj.add("/PermissionManager/Module/Hd","新增");
+               tabObj.add("/HRManager/ContinEducation/Hd","新增");
             });
 
             $("#btnEdit").click(function () {
@@ -44,8 +51,7 @@ var pro = pro || {};
                     return;
                 }
                 var PkId = gridObj.getSelectedRow().PkId;
-                var moduleName = gridObj.getSelectedRow().ModuleName;
-                tabObj.add("/PermissionManager/Module/Hd?PkId=" + PkId, "编辑" + moduleName);
+                tabObj.add("/HRManager/ContinEducation/Hd?PkId=" + PkId, "编辑" + PkId);
             });
 
 
@@ -61,7 +67,7 @@ var pro = pro || {};
                 $.messager.confirm("确认操作", "是否确认删除", function (bl) {
                     if (!bl) return;
                     abp.ajax({
-                        url: "/PermissionManager/Module/Delete?PkId=" + gridObj.getSelectedRow().PkId
+                        url: "/HRManager/ContinEducation/Delete?PkId=" + gridObj.getSelectedRow().PkId
                     }).done(
                     function (dataresult, data) {
                         $.alertExtend.info();
@@ -88,7 +94,7 @@ var pro = pro || {};
 
 
 $(function () {
-    pro.Module.ListPage.initPage();
+    pro.ContinEducation.ListPage.initPage();
 });
 
 

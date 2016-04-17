@@ -28,7 +28,7 @@
                 { field: 'DepartmentName', title: '部门名称', width: 300 },
                 { field: 'ParentDepartmentCode', title: '上级部门编码', width: 100 },
                   {
-                      field: 'Attr_UserDepartmentPkId',hidden:true, title: 'Attr_UserDepartmentPkId', width: 200, formatter: function (value, row) {
+                      field: 'Attr_UserDepartmentPkId', hidden: true, title: 'Attr_UserDepartmentPkId', width: 200, formatter: function (value, row) {
                           return '<input   name="Attr_UserDepartmentPkId_' + row.DepartmentCode + '"  type="text" value="' + row.Attr_UserDepartmentPkId + '"  />';
                       }
                   }
@@ -103,7 +103,7 @@
             //    } else {
             //        $(this).removeAttr("checked");
             //    }
-            
+
             //    $("input[nameFz=DepartmentCode_" + $(this).val() + "]").each(function () {
             //        //alert(result);
             //        if (result) {
@@ -112,9 +112,9 @@
             //        } else {
             //            $(this).removeAttr("checked");
             //        }
-                 
+
             //    });
-               
+
             //});
 
 
@@ -131,6 +131,7 @@
             pro.submitKit.config.columnPkidName = "DepartmentCode";
             pro.submitKit.config.columns = ["Attr_UserDepartmentPkId"];
             pro.submitKit.config.iscolumnPkidChecked = true;
+            pro.submitKit.config.isVerVal = false;
             postData.RequestEntity.UserDepartmentList = pro.submitKit.getRowJson();
             $.each(postData.RequestEntity.UserDepartmentList, function (index, row) {
                 row.PkId = row.Attr_UserDepartmentPkId;
@@ -140,6 +141,7 @@
             pro.submitKit.config.columnPkidName = "RoleId";
             pro.submitKit.config.columns = ["Attr_UserRolePkId"];
             pro.submitKit.config.iscolumnPkidChecked = true;
+            pro.submitKit.config.isVerVal = true;
             postData.RequestEntity.UserRoleList = pro.submitKit.getRowJson();
             $.each(postData.RequestEntity.UserRoleList, function (index, row) {
                 row.PkId = row.Attr_UserRolePkId;

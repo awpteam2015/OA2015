@@ -4,26 +4,29 @@
     pro.EmployeeInfo.LookPage = pro.EmployeeInfo.LookPage || {};
     pro.EmployeeInfo.LookPage = {
         init: function () {
-            $('#tabs').tabs({
-                width: $("#tabs").parent().width(),
-                height: $(window).height() - 550
-            });
+            //$('#tabs').tabs({
+            //    width: $("#tabs").parent().width(),
+            //    height: $(window).height() - 550
+            //});
             return {
                 tabObj: new pro.TabBase(),
                 gridObjWork: new pro.GridBase("#datagridwork", false),
                 gridObjStudy: new pro.GridBase("#datagridstudy", false),
                 gridObjTechnical: new pro.GridBase("#datagridTechnical", false),
+                gridObjContinEducation: new pro.GridBase("#datagridContinEducation", false),
                 gridObjProfession: new pro.GridBase("#datagridProfession", false),
                 gridObjYear: new pro.GridBase("#datagridYear", false),
                 xlOptionHtml: '',//学历<option></option>
                 xzOptionHtml: '',//学制<option></option>
-                zcOptionHtml: ''//职称<option></option>
+                zcOptionHtml: '',//职称<option></option>
+                jxjyOptionHtml: ''//继续教育学分类型<option></option>
             };
         },
         initPage: function () {
             var initObj = this.init();
             var gridObjWork = initObj.gridObjWork;
             var gridObjStudy = initObj.gridObjStudy;
+            var gridObjContinEducation = initObj.gridObjContinEducation;
             var gridObjTechnical = initObj.gridObjTechnical;
             var gridObjProfession = initObj.gridObjProfession;
             var gridObjYear = initObj.gridObjYear;
@@ -99,6 +102,23 @@
                 //  $.alertExtend.error();
             }
            );
+
+            abp.ajax({
+                url: "/HRManager/Dictionary/GetListByCode?ParentKeyCode=JXJY"
+            }).done(
+             function (dataresult, data) {
+                 initObj.jxjyOptionHtml = "";
+
+                 $.each(dataresult, function (i, item) {
+                     initObj.jxjyOptionHtml += "<option value='" + item.KeyValue + "'>" + item.KeyName + "</option>";
+                 });
+
+             }
+         ).fail(
+          function (errordetails, errormessage) {
+              //  $.alertExtend.error();
+          }
+         );
 
             abp.ajax({
                 url: "/HRManager/Dictionary/GetListByCode?ParentKeyCode=JSZC"
@@ -343,6 +363,54 @@
                 pageList: [20, 30, 40] //可以设置每页记录条数的列表    
             }
             );
+
+            gridObjContinEducation.grid({
+                url: '/HRManager/ContinEducation/GetAllList?EmployeeID=' + (pro.commonKit.getUrlParam("PkId") ? pro.commonKit.getUrlParam("PkId") : 0),
+                fitColumns: false,
+                nowrap: false,
+                rownumbers: true, //行号
+                singleSelect: true,
+                idField: "PkId",
+                columns: [
+                    [
+                        {
+                            field: 'PkId', title: '', hidden: true, width: 100,
+                            formatter: function (value, row, index) {
+                                return pro.controlKit.getInputHtml("C_PkId", row.PkId);
+                            }
+                        },
+                        {
+                            field: 'CreditType',
+                            title: '学分类型',
+                            width: 120,
+                            formatter: function (value, row, index) {
+                                return pro.controlKit.getSelectHtml("C_CreditType_" + row.PkId, value, initObj.jxjyOptionHtml);
+                            }
+                        },
+                        {
+                            field: 'Score',
+                            title: '分数',
+                            width: 120,
+                            formatter: function (value, row, index) {
+                                return pro.controlKit.getInputHtml("C_Score_" + row.PkId, value);
+                            }
+                        },
+                        {
+                            field: 'GetTime',
+                            title: '时间',
+                            width: 110,
+                            formatter: function (value, row, index) {
+                                return pro.controlKit.getInputDateHtml("C_GetTime_" + row.PkId, value);
+                            }
+                        }
+                    ]
+                ],
+                pagination: false,
+                pageSize: 20, //每页显示的记录条数，默认为10     
+                pageList: [20, 30, 40] //可以设置每页记录条数的列表    
+            }
+       );
+
             gridObjTechnical.grid({
                 url: '/HRManager/Technical/GetAllList?EmployeeID=' + (pro.commonKit.getUrlParam("PkId") ? pro.commonKit.getUrlParam("PkId") : 0),
                 fitColumns: false,
@@ -458,6 +526,14 @@
                             width: 130,
                             formatter: function (value, row, index) {
                                 return pro.controlKit.getInputDateHtml("P_EmployDate_" + row.PkId, value);
+                            }
+                        },
+                        {
+                            field: 'EmployEndDate',
+                            title: '聘用结束时间',
+                            width: 130,
+                            formatter: function (value, row, index) {
+                                return pro.controlKit.getInputDateHtml("P_EmployEndDate_" + row.PkId, value);
                             }
                         }
                     ]

@@ -46,7 +46,8 @@ var pro = pro || {};
                     return;
                 }
                 var PkId = gridObj.getSelectedRow().PkId;
-                tabObj.add("/HRManager/Dictionary/Hd?PkId=" + PkId, "编辑" + PkId);
+                var keyName = gridObj.getSelectedRow().KeyName;
+                tabObj.add("/HRManager/Dictionary/Hd?PkId=" + PkId, "编辑" + keyName);
             });
 
 

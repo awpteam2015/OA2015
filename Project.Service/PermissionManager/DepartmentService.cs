@@ -230,7 +230,7 @@ namespace Project.Service.PermissionManager
             return list;
         }
 
-        public IList<DepartmentEntity> GetTreeList(DepartmentEntity entity, List<UserDepartmentEntity> sourceList, bool isAdmin, bool isShowTop = false)
+        public IList<DepartmentEntity> GetTreeList(DepartmentEntity entity, List<UserDepartmentLoginModel> sourceList, bool isAdmin, bool isShowTop = false)
         {
 
             var listAll = this.GetList(entity);
@@ -288,7 +288,7 @@ namespace Project.Service.PermissionManager
 
         }
 
-        public string[] GetChiledArr(System.String departmentCode, List<UserDepartmentEntity> userDepartList, bool isAdmin)
+        public string[] GetChiledArr(System.String departmentCode, List<UserDepartmentLoginModel> userDepartList, bool isAdmin)
         {
             if(isAdmin&& (string.IsNullOrEmpty(departmentCode)|| departmentCode == "0"))
                 return new string[] { };

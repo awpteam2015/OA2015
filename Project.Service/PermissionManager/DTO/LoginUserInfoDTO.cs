@@ -28,6 +28,7 @@ namespace Project.Service.PermissionManager.DTO
         /// </summary>
         public bool IsAdmin { get; set; }
 
-        public ISet<UserDepartmentEntity> UserDepartmentList { get; set; }
+        public ISet<UserDepartmentLoginModel> UserDepartmentList { get; set; }
+        public IList<string> UserDepartmentIntList { get; set; }
     }
 }
