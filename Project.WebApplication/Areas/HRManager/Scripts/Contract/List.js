@@ -61,7 +61,7 @@ var pro = pro || {};
                     return;
                 }
                 var PkId = gridObj.getSelectedRow().PkId;
-                tabObj.add("/HRManager/Contract/Hd?State=2&Title=续订&ParentId=" + PkId, "续订合同" + PkId);
+                tabObj.add("/HRManager/Contract/Hd?State=2&Title=续订&ParentId=" + PkId, "续订合同" + gridObj.getSelectedRow().SecondParty);
             });
 
             $("#btnAdd3").click(function () {
@@ -75,7 +75,7 @@ var pro = pro || {};
                     return;
                 }
                 var PkId = gridObj.getSelectedRow().PkId;
-                tabObj.add("/HRManager/Contract/Hd?State=3&Title=变更&ParentId=" + PkId, "变更合同" + PkId);
+                tabObj.add("/HRManager/Contract/Hd?State=3&Title=变更&ParentId=" + PkId, "变更合同" + gridObj.getSelectedRow().SecondParty);
             });
 
             $("#btnAdd4").click(function () {
@@ -89,7 +89,7 @@ var pro = pro || {};
                     return;
                 }
                 var PkId = gridObj.getSelectedRow().PkId;
-                tabObj.add("/HRManager/Contract/Hd?State=4&Title=终止&ParentId=" + PkId, "终止合同" + PkId);
+                tabObj.add("/HRManager/Contract/Hd?State=4&Title=终止&ParentId=" + PkId, "终止合同" + gridObj.getSelectedRow().SecondParty);
             });
 
 
@@ -99,7 +99,7 @@ var pro = pro || {};
                     return;
                 }
                 var PkId = gridObj.getSelectedRow().PkId;
-                tabObj.add("/HRManager/Contract/Hd?PkId=" + PkId, "编辑" + PkId);
+                tabObj.add("/HRManager/Contract/Hd?PkId=" + PkId, "编辑" + gridObj.getSelectedRow().SecondParty);
             });
 
             $("#btnView").click(function () {
@@ -108,7 +108,7 @@ var pro = pro || {};
                     return;
                 }
                 var PkId = gridObj.getSelectedRow().PkId;
-                tabObj.add("/HRManager/Contract/Hd?&Title=查看&PkId=" + PkId, "查看" + PkId);
+                tabObj.add("/HRManager/Contract/Hd?&Title=查看&PkId=" + PkId, "查看" + gridObj.getSelectedRow().SecondParty);
             });
 
 

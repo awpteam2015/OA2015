@@ -48,7 +48,7 @@ var pro = pro || {};
                     return;
                 }
                 var PkId = gridObj.getSelectedRow().PkId;
-                tabObj.add("/PermissionManager/UserInfo/Hd?PkId=" + PkId, "编辑" + PkId);
+                tabObj.add("/PermissionManager/UserInfo/Hd?PkId=" + PkId, "编辑" + gridObj.getSelectedRow().UserName);
             });
 
 

@@ -159,7 +159,7 @@ namespace Project.Service.HRManager
             if (!string.IsNullOrEmpty(where.EmployeeCode))
                 expr = expr.And(p => p.EmployeeCode == where.EmployeeCode);
             if (!string.IsNullOrEmpty(where.DepartmentCode))
-                expr = expr.And(p => p.DepartmentCode == where.DepartmentCode);
+                expr = expr.And(p => where.DepartmentCode.Contains(p.DepartmentCode));
 
             if (where.BeginDate != null && where.BeginDate != DateTime.MinValue)
                 expr = expr.And(p => p.BeginDate >= where.BeginDate);

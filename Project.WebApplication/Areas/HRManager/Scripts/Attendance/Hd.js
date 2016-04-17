@@ -45,6 +45,7 @@
                 for (var filedname in bindField) {
                     $("[name=" + filedname + "]").val(bindEntity[filedname]);
                 }
+                $("#DepartmentName_span").html(bindEntity.DepartmentName);
                 //行项目信息用json绑定控件
                 //alert(JSON.stringify(BindEntity.List));
             }

@@ -87,8 +87,8 @@ namespace Project.WebApplication.Areas.HRManager.Controllers
                         
                         var employeeInfo = EmployeeInfoService.GetInstance().GetEmployeeNameByCode2(row.EmployeeCode);
                         row.EmployeeName = employeeInfo.EmployeeName;
-                        row.DepartmentCode = employeeInfo.DepartmentCode;
-                        row.DepartmentName = employeeInfo.DepartmentName;
+                        row.DepartmentCode = postData.RequestEntity.DepartmentCode;
+                        row.DepartmentName = postData.RequestEntity.DepartmentName;
                         row.Date = date.AddDays(int.Parse(cells[4, j].StringValue) - 1);
                         row.State = cells[i, j].StringValue;
                         if (row.State=="")
