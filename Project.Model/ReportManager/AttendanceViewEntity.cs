@@ -18,9 +18,30 @@ namespace Project.Model.ReportManager
         /// </summary>
         public virtual System.String DepartmentName { get; set; }
 
-        public virtual System.Int32 WordkDays { get; set; }
+        /// <summary>
+        /// 日
+        /// </summary>
+        public virtual System.Int32 RiDays { get; set; }
 
-        public virtual System.Int32 NotWordkDays { get; set; }
+        /// <summary>
+        /// 夜
+        /// </summary>
+        public virtual System.Int32 YeDays { get; set; }
+
+        /// <summary>
+        /// 公
+        /// </summary>
+        public virtual System.Int32 GongDays { get; set; }
+
+        /// <summary>
+        /// 值
+        /// </summary>
+        public virtual System.Int32 ZhiDays { get; set; }
+
+        /// <summary>
+        /// 缺
+        /// </summary>
+        public virtual System.Int32 QueDays { get; set; }
 
         public virtual System.Int32 EmployeeNum { get; set; }
 

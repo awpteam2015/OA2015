@@ -80,7 +80,10 @@ namespace Project.WebApplication.Areas.ReportManager.Controllers
                 <tr>
                     <th>部门编码</th>
                     <th>部门名称</th>
-                    <th>在岗天数</th>
+                    <th>日班天数</th>
+                    <th>夜班天数</th>
+                    <th>公休天数</th>
+                    <th>值班天数</th>
                     <th>缺勤天数</th>
                     <th>工号</th></tr>");
             searchList.Item1.ForEach(p =>
@@ -88,8 +91,11 @@ namespace Project.WebApplication.Areas.ReportManager.Controllers
                 jsonBuilder.Append("<tr>");
                 jsonBuilder.AppendFormat("<td>{0}</td>", p.DepartmentCode);
                 jsonBuilder.AppendFormat("<td>{0}</td>", p.DepartmentName);
-                jsonBuilder.AppendFormat("<td>{0}</td>", p.WordkDays);
-                jsonBuilder.AppendFormat("<td>{0}</td>", p.NotWordkDays);
+                jsonBuilder.AppendFormat("<td>{0}</td>", p.RiDays);
+                jsonBuilder.AppendFormat("<td>{0}</td>", p.YeDays);
+                jsonBuilder.AppendFormat("<td>{0}</td>", p.GongDays);
+                jsonBuilder.AppendFormat("<td>{0}</td>", p.ZhiDays);
+                jsonBuilder.AppendFormat("<td>{0}</td>", p.QueDays);
                 jsonBuilder.AppendFormat("<td>{0}</td>", p.EmployeeCode);
                 jsonBuilder.Append("</tr>");
             });

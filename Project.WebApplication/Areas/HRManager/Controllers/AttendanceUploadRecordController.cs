@@ -44,7 +44,7 @@ namespace Project.WebApplication.Areas.HRManager.Controllers
             var pSize = this.Request["rows"].ConvertTo<int>();
             var where = new AttendanceUploadRecordEntity();
             //where.PkId = RequestHelper.GetFormString("PkId");
-            where.DepartmentCode = RequestHelper.GetFormString("DepartmentCode");
+            where.DepartmentCode = string.Join(",", (DepartmentService.GetInstance().GetChiledArr(where.DepartmentCode, LoginUserInfo.UserDepartmentList.ToList(), LoginUserInfo.IsAdmin)));
             where.Date = RequestHelper.GetDateTime("Date");
             //where.Remark = RequestHelper.GetFormString("Remark");
             //where.CreatorUserCode = RequestHelper.GetFormString("CreatorUserCode");
@@ -91,11 +91,10 @@ namespace Project.WebApplication.Areas.HRManager.Controllers
                         row.DepartmentName = postData.RequestEntity.DepartmentName;
                         row.Date = date.AddDays(int.Parse(cells[4, j].StringValue) - 1);
                         row.State = cells[i, j].StringValue;
-                        if (row.State=="")
+                        if (!string.IsNullOrWhiteSpace(row.State))
                         {
-                            row.State = "缺";
+                            postData.RequestEntity.AttendanceList.Add(row);
                         }
-                        postData.RequestEntity.AttendanceList.Add(row);
                     }
                 }
 

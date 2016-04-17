@@ -151,7 +151,7 @@ namespace Project.Service.HRManager
             // if (!string.IsNullOrEmpty(where.PkId))
             //  expr = expr.And(p => p.PkId == where.PkId);
             if (!string.IsNullOrEmpty(where.DepartmentCode))
-                expr = expr.And(p => p.DepartmentCode == where.DepartmentCode);
+                expr = expr.And(p => where.DepartmentCode.Split(',').Contains(p.DepartmentCode));
             if (where.Date != null)
                 expr = expr.And(p => p.Date == where.Date);
             // if (!string.IsNullOrEmpty(where.Remark))

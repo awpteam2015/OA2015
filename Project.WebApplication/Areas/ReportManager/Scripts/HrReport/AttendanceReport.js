@@ -21,11 +21,13 @@ var pro = pro || {};
                 rownumbers: true, //行号
                 singleSelect: true,
                 columns: [[
-         { field: 'EmployeeCode', title: '工号', width: 100 },
-         { field: 'DepartmentName', title: '部门', width: 100 },
-         { field: 'WordkDays', title: '在岗天数', width: 100 },
-         { field: 'NotWordkDays', title: '缺勤天数', width: 100 }
-     
+                { field: 'EmployeeCode', title: '工号', width: 100 },
+                { field: 'DepartmentName', title: '部门', width: 100 },
+                { field: 'RiDays', title: '日班天数', width: 100 },
+                { field: 'YeDays', title: '夜班天数', width: 100 },
+                { field: 'GongDays', title: '公休天数', width: 100 },
+                { field: 'ZhiDays', title: '值班天数', width: 100 },
+                { field: 'QueDays', title: '缺勤天数', width: 100 }
                 ]],
                 pagination: true,
                 pageSize: 20, //每页显示的记录条数，默认为10     
@@ -36,6 +38,7 @@ var pro = pro || {};
             pro.DepartmentControl.init();
 
             $("#btnSearch").click(function () {
+
                 gridObj.search();
             });
 
@@ -45,6 +48,16 @@ var pro = pro || {};
             });
 
             $('#btnExport').click(function () {
+                if ($("#Date").val() == "" || $('#DepartmentCode').combotree("getValue") == "") {
+                    $.alertExtend.infoOp("请选择导出部门及导出月份！");
+                    return false;
+                }
+
+                if ($('#DepartmentCode').combotree("getValue").length != 5) {
+                    $.alertExtend.infoOp("请选择科室（部门最后一级）！");
+                    return false;
+                }
+
                 var urlParam = pro.commonKit.parseParam(gridObj.searchForm());
                 location.href = "/ReportManager/HrReport/ExportReport1?" + urlParam;
             });

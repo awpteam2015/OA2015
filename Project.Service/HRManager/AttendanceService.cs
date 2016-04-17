@@ -125,7 +125,7 @@ namespace Project.Service.HRManager
             }
             else
             {
-                return "缺";
+                return "";
             }
 
         }
@@ -150,7 +150,7 @@ namespace Project.Service.HRManager
             if (!string.IsNullOrEmpty(where.EmployeeCode))
                 expr = expr.And(p => p.EmployeeCode == where.EmployeeCode);
             if (!string.IsNullOrEmpty(where.DepartmentCode)&& where.DepartmentCode!="0")
-                expr = expr.And(p => p.DepartmentCode == where.DepartmentCode);
+                expr = expr.And(p => where.DepartmentCode.Split(',').Contains(p.DepartmentCode));
             if (!string.IsNullOrEmpty(where.EmployeeName))
                 expr = expr.And(p => p.EmployeeName == where.EmployeeName);
             if (!string.IsNullOrEmpty(where.State))
@@ -191,7 +191,7 @@ namespace Project.Service.HRManager
             if (!string.IsNullOrEmpty(where.EmployeeCode))
                 expr = expr.And(p => p.EmployeeCode == where.EmployeeCode);
             if (!string.IsNullOrEmpty(where.DepartmentCode))
-                expr = expr.And(p => p.DepartmentCode == where.DepartmentCode);
+                expr = expr.And(p => p.DepartmentCode==where.DepartmentCode);
             // if (!string.IsNullOrEmpty(where.DepartmentName))
             //  expr = expr.And(p => p.DepartmentName == where.DepartmentName);
             if (!string.IsNullOrWhiteSpace(where.State)  )

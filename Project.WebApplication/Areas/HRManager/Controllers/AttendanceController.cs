@@ -150,6 +150,7 @@ namespace Project.WebApplication.Areas.HRManager.Controllers
             where.EmployeeName = RequestHelper.GetString("EmployeeName");
             where.Attr_StartDate = RequestHelper.GetDateTime("Attr_StartDate");
             where.Attr_EndDate = RequestHelper.GetDateTime("Attr_EndDate");
+            where.DepartmentCode= RequestHelper.GetString("DepartmentCode");
             where.DepartmentCode = string.Join(",", (DepartmentService.GetInstance().GetChiledArr(where.DepartmentCode, LoginUserInfo.UserDepartmentList.ToList(), LoginUserInfo.IsAdmin)));
             // RequestHelper.GetString("DepartmentCode");
             //where.DepartmentName = RequestHelper.GetFormString("DepartmentName");

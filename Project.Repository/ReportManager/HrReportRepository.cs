@@ -28,9 +28,11 @@ namespace Project.Repository.ReportManager
         /// <returns></returns>
         public Tuple<IList<AttendanceViewEntity>, int> GerAttendanceReport1(AttendanceViewEntity where, int skipResults, int maxResults, bool ifGetALL = false)
         {
+            var headStr = "";
             var whereStr = " ";
-            if (!string.IsNullOrWhiteSpace(where.DepartmentCode))
+            if (!string.IsNullOrWhiteSpace(where.DepartmentCode)&& where.DepartmentCode!="0")
             {
+                headStr += " and a.DepartmentCode=" + where.DepartmentCode;
                 whereStr += " and a.DepartmentCode=" + where.DepartmentCode;
             }
 
@@ -49,15 +51,25 @@ namespace Project.Repository.ReportManager
                 whereStr += " and a.Date<'" + where.Attr_EndDate + "'";
             }
 
-            string sqlStr = @"select a.*,b.WordkDays,c.NotWordkDays from
-(select distinct a.EmployeeCode,a.DepartmentCode,a.DepartmentName from  HR_Attendance a) as a
-left join 
-(select a.EmployeeCode,COUNT(*) as WordkDays from HR_Attendance a where a.State not in('缺') " + whereStr + @" 
+            string sqlStr = @"select a.*,b.RiDays,c.YeDays,d.GongDays,e.ZhiDays,f.QueDays from
+(select distinct a.EmployeeCode,a.DepartmentCode,a.DepartmentName from  HR_Attendance as a where 1=1 "+ headStr + ") as a left join (select a.EmployeeCode,COUNT(*) as RiDays from HR_Attendance a where a.State  ='日' " + whereStr + @" 
   group by a.EmployeeCode) as b
 on a.EmployeeCode=b.EmployeeCode
 left join 
-(select a.EmployeeCode,COUNT(*) as NotWordkDays from HR_Attendance a   where a.State in('缺') " + whereStr + @"  group by a.EmployeeCode) as c
-on a.EmployeeCode=c.EmployeeCode";
+(select a.EmployeeCode,COUNT(*) as YeDays from HR_Attendance a where a.State  ='夜' " + whereStr + @" 
+  group by a.EmployeeCode) as c
+on a.EmployeeCode=c.EmployeeCode
+left join 
+(select a.EmployeeCode,COUNT(*) as GongDays from HR_Attendance a where a.State  ='公' " + whereStr + @" 
+  group by a.EmployeeCode) as d
+on a.EmployeeCode=d.EmployeeCode
+left join 
+(select a.EmployeeCode,COUNT(*) as ZhiDays from HR_Attendance a where a.State ='值' " + whereStr + @" 
+  group by a.EmployeeCode) as e
+on a.EmployeeCode=e.EmployeeCode
+left join 
+(select a.EmployeeCode,COUNT(*) as QueDays from HR_Attendance a   where a.State ='缺' " + whereStr + @"  group by a.EmployeeCode) as f
+on a.EmployeeCode=f.EmployeeCode";
 
             string countStr = "select count(*) as num from (" + sqlStr + ") as a ";
             var count = SessionFactoryManager.GetCurrentSession().CreateSQLQuery(countStr).AddScalar("num", NHibernateUtil.Int32).UniqueResult<Int32>();
@@ -86,11 +98,12 @@ on a.EmployeeCode=c.EmployeeCode";
         /// <param name="maxResults"></param>
         /// <returns></returns>
         public Tuple<IList<AttendanceViewEntity2>, int> GerAttendanceReport2(AttendanceViewEntity2 where, int skipResults, int maxResults, bool ifGetALL = false)
-        {
+        { var headStr = " ";
             var whereStr = " ";
-            if (!string.IsNullOrWhiteSpace(where.DepartmentCode))
+            if (!string.IsNullOrWhiteSpace(where.DepartmentCode) && where.DepartmentCode != "0")
             {
                 whereStr += " and a.DepartmentCode=" + where.DepartmentCode;
+                headStr += " and a.DepartmentCode=" + where.DepartmentCode;
             }
 
             if (!string.IsNullOrWhiteSpace(where.EmployeeCode))
@@ -108,17 +121,24 @@ on a.EmployeeCode=c.EmployeeCode";
                 whereStr += " and a.Date<'" + where.Attr_EndDate + "'";
             }
 
-            string sqlStr = @"select a.*,b.WordkDays,c.NotWordkDays,d.EmployeeNum from
-(select distinct a.DepartmentCode,a.DepartmentName from  HR_Attendance a) as a
-left join 
-(select a.DepartmentCode,COUNT(*) as WordkDays from HR_Attendance a where a.State not in('缺') " + whereStr + @"  group by a.DepartmentCode) as b
+            string sqlStr = @"select a.*,b.RiDays,c.YeDays,d.GongDays,e.ZhiDays,f.QueDays,g.EmployeeNum from
+(select distinct a.DepartmentCode,a.DepartmentName from  HR_Attendance as a where 1=1 " + headStr + ") as a left join (select a.DepartmentCode,COUNT(*) as RiDays from HR_Attendance a where a.State  ='日' " + whereStr + @"  group by a.DepartmentCode) as b
 on a.DepartmentCode=b.DepartmentCode
 left join 
-(select a.DepartmentCode,COUNT(*) as NotWordkDays from HR_Attendance a   where a.State in('缺') " + whereStr + @"  group by a.DepartmentCode) as c
+(select a.DepartmentCode,COUNT(*) as YeDays from HR_Attendance a where a.State  ='夜' " + whereStr + @"  group by a.DepartmentCode) as c
 on a.DepartmentCode=c.DepartmentCode
 left join 
-(select a.DepartmentCode,COUNT(EmployeeCode) as EmployeeNum from dbo.HR_EmployeeInfo a   group by a.DepartmentCode) as d
-on a.DepartmentCode=c.DepartmentCode 
+(select a.DepartmentCode,COUNT(*) as GongDays from HR_Attendance a where a.State  ='公' " + whereStr + @"  group by a.DepartmentCode) as d
+on a.DepartmentCode=d.DepartmentCode
+left join 
+(select a.DepartmentCode,COUNT(*) as ZhiDays from HR_Attendance a   where a.State ='值' " + whereStr + @"  group by a.DepartmentCode) as e
+on a.DepartmentCode=e.DepartmentCode
+left join 
+(select a.DepartmentCode,COUNT(*) as QueDays from HR_Attendance a   where a.State ='缺' " + whereStr + @"  group by a.DepartmentCode) as f
+on a.DepartmentCode=f.DepartmentCode
+left join 
+(select a.DepartmentCode,COUNT(EmployeeCode) as EmployeeNum from dbo.HR_EmployeeInfo a   group by a.DepartmentCode) as g
+on a.DepartmentCode=g.DepartmentCode 
 ";
 
             string countStr = "select count(*) as num from (" + sqlStr + ") as a ";
