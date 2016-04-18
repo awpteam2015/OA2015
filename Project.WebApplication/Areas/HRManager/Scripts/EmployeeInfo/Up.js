@@ -41,7 +41,10 @@
                         parent.$("#btnSearch").trigger("click");
                         parent.pro.EmployeeInfo.ListPage.closeTab();
                     }
-                    parent.$.alertExtend.info("", afterSuccess());
+
+                  
+                    parent.$.alertExtend.info(data.error.message, afterSuccess());
+                    //parent.$.alertExtend.info("", afterSuccess());
                 }
             ).fail(
              function (errordetails, errormessage) {

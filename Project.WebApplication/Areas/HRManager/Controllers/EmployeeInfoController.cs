@@ -6,6 +6,7 @@ using System.Data;
 using System.Linq;
 using System.Web.Mvc;
 using Aspose.Cells;
+using AutoMapper;
 using Project.Infrastructure.FrameworkCore.DataNhibernate.Helpers;
 using Project.Infrastructure.FrameworkCore.ToolKit.JsonHandler;
 using Project.Infrastructure.FrameworkCore.ToolKit.LinqExpansion;
@@ -390,7 +391,7 @@ namespace Project.WebApplication.Areas.HRManager.Controllers
             var result = new AjaxResponse<EmployeeInfoEntity>()
             {
                 success = ret,
-                error = new ErrorInfo()
+                error = new ErrorInfo() { message = tipInfo }
             };
             return new AbpJsonResult(result, new NHibernateContractResolver());
         }
@@ -407,41 +408,58 @@ namespace Project.WebApplication.Areas.HRManager.Controllers
             try
             {
                 Cells cells = baseSheet.Cells;
+
+                var newModel = new EmployeeInfoEntity();
                 for (int i = 1; i < cells.MaxDataRow + 1; i++)
                 {
                     //var row = new AttendanceEntity();
                     //postData.RequestEntity.DepartmentCode = cells[i, 0].StringValue.Trim();
                     //postData.RequestEntity.DepartmentName = DepartmentService.GetInstance().GetModelByDepartmentCode(postData.RequestEntity.DepartmentCode).DepartmentName;
-                    model.EmployeeCode = cells[i, 1].StringValue.Trim();
-                    model.EmployeeName = cells[i, 0].StringValue.Trim();
-                    model.Sex = cells[i, 2].IntValue;
-                    model.CertNo = cells[i, 3].StringValue.Trim();
-                    model.Birthday = cells[i, 4].DateTimeValue;
-                    model.StartWork = cells[i, 5].DateTimeValue;
-                    model.Duties = cells[i, 6].StringValue;
-                    model.DutiesName = DictionaryService.GetInstance().GetModelByKeyCode("DWZW", model.Duties).KeyName; ;
-                    model.PostProperty = cells[i, 7].StringValue.Trim();
-                    model.PostPropertyName = DictionaryService.GetInstance().GetModelByKeyCode("GWXZ", model.PostProperty).KeyName;
-                    model.JoinCommy = cells[i, 8].DateTimeValue;
-                    model.WorkState = cells[i, 9].StringValue.Trim();
-                    model.WorkStateName = DictionaryService.GetInstance().GetModelByKeyCode("ZZZT", model.WorkState).KeyName;
-                    model.EmployeeType = cells[i, 10].StringValue.Trim();
-                    model.EmployeeTypeName = DictionaryService.GetInstance().GetModelByKeyCode("YGLY", model.EmployeeType).KeyName;
-                    model.PostLevel = cells[i, 11].StringValue.Trim();
-                    model.PostLevelName = DictionaryService.GetInstance().GetModelByKeyCode("GWDJ", model.PostLevel).KeyName;
+                    var insertModel = new EmployeeInfoEntity() { };
+                    // insertModel = Mapper.Map(newModel, model);
+                    insertModel.DepartmentCode = model.DepartmentCode;
+                    insertModel.DepartmentName = model.DepartmentName;
+                    insertModel.EmployeeCode = cells[i, 1].StringValue.Trim();
+                    insertModel.EmployeeName = cells[i, 0].StringValue.Trim();
+                    insertModel.Sex = cells[i, 2].IntValue;
+                    insertModel.CertNo = cells[i, 3].StringValue.Trim();
+                    if (cells[i, 4].StringValue.Length > 0)
+                        insertModel.Birthday = cells[i, 4].StringValue.ToDateTime();
+                    if (cells[i, 5].StringValue.Length > 0)
+                        insertModel.StartWork = cells[i, 5].StringValue.ToDateTime();
+                    insertModel.Duties = cells[i, 6].StringValue;
+                    if (insertModel.Duties.Trim().Length > 0)
+                    {
+                        var temp = DictionaryService.GetInstance().GetModelByKeyCode("DWZW", model.Duties);
+                        if (temp != null)
+                            insertModel.DutiesName = temp.KeyName;
 
-                    model.MobileNO = cells[i, 10].StringValue.Trim();
-                    model.HomeAddress = cells[i, 11].StringValue.Trim();
-                    model.State = 1;
+                    };
+                    insertModel.PostProperty = cells[i, 7].StringValue.Trim();
+                    insertModel.PostPropertyName = DictionaryService.GetInstance().GetModelByKeyCode("GWXZ", model.PostProperty).KeyName;
+                    if (cells[i, 8].StringValue.Length > 0)
+                        insertModel.JoinCommy = DateTime.Parse(cells[i, 8].StringValue);
+                    insertModel.WorkState = cells[i, 9].StringValue.Trim();
+                    insertModel.WorkStateName = DictionaryService.GetInstance().GetModelByKeyCode("ZZZT", model.WorkState).KeyName;
+                    insertModel.EmployeeType = cells[i, 10].StringValue.Trim();
+                    insertModel.EmployeeTypeName = DictionaryService.GetInstance().GetModelByKeyCode("YGLY", model.EmployeeType).KeyName;
+                    insertModel.PostLevel = cells[i, 11].StringValue.Trim();
+                    insertModel.PostLevelName = DictionaryService.GetInstance().GetModelByKeyCode("GWDJ", model.PostLevel).KeyName;
+
+                    insertModel.MobileNO = cells[i, 12].StringValue.Trim();
+                    insertModel.HomeAddress = cells[i, 13].StringValue.Trim();
+                    insertModel.State = 1;
                     Tuple<bool, string> addResult;
-                    var oldentity = EmployeeInfoValidate.GetInstance().GetModelByCertNo(model.CertNo);
+                    var oldentity = EmployeeInfoValidate.GetInstance().GetModelByCertNo(insertModel.CertNo);
                     if (oldentity != null && oldentity.PkId > 0)
                     {
-                        model.PkId = oldentity.PkId;
-                        addResult = EmployeeInfoService.GetInstance().Update(model);
+                        insertModel.PkId = oldentity.PkId;
+                        addResult = EmployeeInfoService.GetInstance().Update(insertModel);
                     }
                     else
-                        addResult = EmployeeInfoService.GetInstance().Add(model);
+                    {
+                        addResult = EmployeeInfoService.GetInstance().Add(insertModel);
+                    }
                     if (addResult.Item1)
                         sucessNum++;
                     else
@@ -471,15 +489,17 @@ namespace Project.WebApplication.Areas.HRManager.Controllers
                 for (int i = 1; i < cells.MaxDataRow + 1; i++)
                 {
                     model.EmployeeCode = cells[i, 0].StringValue.Trim();
-                    model = EmployeeInfoService.GetInstance().GetEmployeeNameByCode2(model.EmployeeCode);
-                    if (model == null)
+                    var tempmodel = EmployeeInfoService.GetInstance().GetEmployeeNameByCode2(model.EmployeeCode);
+                    if (tempmodel == null)
                         continue;
 
                     var workModel = new WorkExperienceEntity();
                     workModel.WorkCompany = cells[i, 1].StringValue.Trim();
                     workModel.Duties = cells[i, 2].StringValue.Trim();
-                    workModel.BeginDate = cells[i, 3].DateTimeValue;
-                    workModel.EndDate = cells[i, 4].DateTimeValue;
+                    if (cells[i, 3].StringValue.Length > 0)
+                        workModel.BeginDate = DateTime.Parse(cells[i, 3].StringValue);
+                    if (cells[i, 4].StringValue.Length > 0)
+                        workModel.EndDate = DateTime.Parse(cells[i, 4].StringValue);
                     workModel.WorkContent = cells[i, 5].StringValue.Trim();
                     workModel.EmployeeID = model.PkId;
                     if (WorkExperienceService.GetInstance().Add(workModel) > 0)
@@ -511,8 +531,8 @@ namespace Project.WebApplication.Areas.HRManager.Controllers
                 for (int i = 1; i < cells.MaxDataRow + 1; i++)
                 {
                     model.EmployeeCode = cells[i, 0].StringValue.Trim();
-                    model = EmployeeInfoService.GetInstance().GetEmployeeNameByCode2(model.EmployeeCode);
-                    if (model == null)
+                    var tempmodel = EmployeeInfoService.GetInstance().GetEmployeeNameByCode2(model.EmployeeCode);
+                    if (tempmodel == null)
                         continue;
 
                     var learnModel = new LearningExperiencesEntity();
@@ -522,8 +542,10 @@ namespace Project.WebApplication.Areas.HRManager.Controllers
                     learnModel.Education = cells[i, 4].StringValue.Trim();
                     learnModel.SchoolYear = cells[i, 5].StringValue.Trim();
                     learnModel.CertNumber = cells[i, 6].StringValue.Trim();
-                    learnModel.BeginDate = cells[i, 7].DateTimeValue;
-                    learnModel.EndDate = cells[i, 8].DateTimeValue;
+                    if (cells[i, 7].StringValue.Length > 0)
+                        learnModel.BeginDate = cells[i, 7].StringValue.ToDateTime();// cells[i, 7].DateTimeValue;
+                    if (cells[i, 8].StringValue.Length > 0)
+                        learnModel.EndDate = cells[i, 8].StringValue.ToDateTime();
                     learnModel.Remark = cells[i, 9].StringValue.Trim();
                     learnModel.EmployeeID = model.PkId;
                     if (LearningExperiencesService.GetInstance().Add(learnModel) > 0)
@@ -555,14 +577,15 @@ namespace Project.WebApplication.Areas.HRManager.Controllers
                 for (int i = 1; i < cells.MaxDataRow + 1; i++)
                 {
                     model.EmployeeCode = cells[i, 0].StringValue.Trim();
-                    model = EmployeeInfoService.GetInstance().GetEmployeeNameByCode2(model.EmployeeCode);
-                    if (model == null)
+                    var tempmodel = EmployeeInfoService.GetInstance().GetEmployeeNameByCode2(model.EmployeeCode);
+                    if (tempmodel == null)
                         continue;
 
                     var continEducationEntity = new ContinEducationEntity();
                     continEducationEntity.CreditType = cells[i, 1].StringValue.Trim();
                     continEducationEntity.Score = cells[i, 2].StringValue.Trim();
-                    continEducationEntity.GetTime = cells[i, 3].DateTimeValue;
+                    if (cells[i, 3].StringValue.Length > 0)
+                        continEducationEntity.GetTime = cells[i, 3].StringValue.ToDateTime();
                     continEducationEntity.EmployeeID = model.PkId;
                     if (ContinEducationService.GetInstance().Add(continEducationEntity) > 0)
                         sucessNum++;
@@ -592,14 +615,15 @@ namespace Project.WebApplication.Areas.HRManager.Controllers
                 for (int i = 1; i < cells.MaxDataRow + 1; i++)
                 {
                     model.EmployeeCode = cells[i, 0].StringValue.Trim();
-                    model = EmployeeInfoService.GetInstance().GetEmployeeNameByCode2(model.EmployeeCode);
-                    if (model == null)
+                    var tempmodel = EmployeeInfoService.GetInstance().GetEmployeeNameByCode2(model.EmployeeCode);
+                    if (tempmodel == null)
                         continue;
 
                     var technicalEntity = new TechnicalEntity();
                     technicalEntity.Title = cells[i, 1].StringValue.Trim();
                     technicalEntity.LevNum = cells[i, 2].StringValue.Trim();
-                    technicalEntity.GetDate = cells[i, 3].DateTimeValue;
+                    if (cells[i, 3].StringValue.Length > 0)
+                        technicalEntity.GetDate = cells[i, 3].StringValue.ToDateTime();
                     technicalEntity.CerNo = cells[i, 4].StringValue.Trim();
                     technicalEntity.EmployeeID = model.PkId;
                     if (TechnicalService.GetInstance().Add(technicalEntity) > 0)
@@ -631,18 +655,21 @@ namespace Project.WebApplication.Areas.HRManager.Controllers
                 for (int i = 1; i < cells.MaxDataRow + 1; i++)
                 {
                     model.EmployeeCode = cells[i, 0].StringValue.Trim();
-                    model = EmployeeInfoService.GetInstance().GetEmployeeNameByCode2(model.EmployeeCode);
-                    if (model == null)
+                    var tempmodel = EmployeeInfoService.GetInstance().GetEmployeeNameByCode2(model.EmployeeCode);
+                    if (tempmodel == null)
                         continue;
 
                     var professionEntity = new ProfessionEntity();
                     professionEntity.Title = cells[i, 1].StringValue.Trim();
                     professionEntity.TypeName = cells[i, 2].StringValue.Trim();
                     professionEntity.RangeName = cells[i, 3].StringValue.Trim();
-                    professionEntity.GetDate = cells[i, 4].DateTimeValue;
+                    if (cells[i, 4].StringValue.Length > 0)
+                        professionEntity.GetDate = cells[i, 4].StringValue.ToDateTime();
                     professionEntity.CerNo = cells[i, 5].StringValue.Trim();
-                    professionEntity.EmployDate = cells[i, 6].DateTimeValue;
-                    professionEntity.EmployEndDate = cells[i, 7].DateTimeValue;
+                    if (cells[i, 6].StringValue.Length > 0)
+                        professionEntity.EmployDate = cells[i, 6].StringValue.ToDateTime();
+                    if (cells[i, 7].StringValue.Length > 0)
+                        professionEntity.EmployEndDate = cells[i, 7].StringValue.ToDateTime();
                     professionEntity.EmployeeID = model.PkId;
                     if (ProfessionService.GetInstance().Add(professionEntity) > 0)
                         sucessNum++;
@@ -672,8 +699,8 @@ namespace Project.WebApplication.Areas.HRManager.Controllers
                 for (int i = 1; i < cells.MaxDataRow + 1; i++)
                 {
                     model.EmployeeCode = cells[i, 0].StringValue.Trim();
-                    model = EmployeeInfoService.GetInstance().GetEmployeeNameByCode2(model.EmployeeCode);
-                    if (model == null)
+                    var tmpmodel = EmployeeInfoService.GetInstance().GetEmployeeNameByCode2(model.EmployeeCode);
+                    if (tmpmodel == null)
                         continue;
 
                     var yearAssessmentEntity = new YearAssessmentEntity();

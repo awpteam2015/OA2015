@@ -19,5 +19,22 @@ namespace Project.Infrastructure.FrameworkCore.ToolKit
                return tDate.GetValueOrDefault().ToString(formatter);
            }
        }
+
+        
+
+        /// <summary>
+        /// 转DateTime
+        /// </summary>
+        /// <param name="str"></param>
+        /// <param name="defaultValue"></param>
+        /// <returns></returns>
+        public static DateTime ToDateTime(this string str)
+        {
+            DateTime ret;
+            if (!DateTime.TryParse(str, out ret))
+                ret = DateTime.MaxValue;
+            return ret;
+        }
+
     }
 }
