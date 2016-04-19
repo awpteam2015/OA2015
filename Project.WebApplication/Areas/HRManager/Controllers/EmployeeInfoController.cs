@@ -430,21 +430,21 @@ namespace Project.WebApplication.Areas.HRManager.Controllers
                     insertModel.Duties = cells[i, 6].StringValue;
                     if (insertModel.Duties.Trim().Length > 0)
                     {
-                        var temp = DictionaryService.GetInstance().GetModelByKeyCode("DWZW", model.Duties);
+                        var temp = DictionaryService.GetInstance().GetModelByKeyCode("DWZW", insertModel.Duties);
                         if (temp != null)
                             insertModel.DutiesName = temp.KeyName;
 
                     };
                     insertModel.PostProperty = cells[i, 7].StringValue.Trim();
-                    insertModel.PostPropertyName = DictionaryService.GetInstance().GetModelByKeyCode("GWXZ", model.PostProperty).KeyName;
+                    insertModel.PostPropertyName = DictionaryService.GetInstance().GetModelByKeyCode("GWXZ", insertModel.PostProperty).KeyName;
                     if (cells[i, 8].StringValue.Length > 0)
                         insertModel.JoinCommy = DateTime.Parse(cells[i, 8].StringValue);
                     insertModel.WorkState = cells[i, 9].StringValue.Trim();
-                    insertModel.WorkStateName = DictionaryService.GetInstance().GetModelByKeyCode("ZZZT", model.WorkState).KeyName;
+                    insertModel.WorkStateName = DictionaryService.GetInstance().GetModelByKeyCode("ZZZT", insertModel.WorkState).KeyName;
                     insertModel.EmployeeType = cells[i, 10].StringValue.Trim();
-                    insertModel.EmployeeTypeName = DictionaryService.GetInstance().GetModelByKeyCode("YGLY", model.EmployeeType).KeyName;
+                    insertModel.EmployeeTypeName = DictionaryService.GetInstance().GetModelByKeyCode("YGLY", insertModel.EmployeeType).KeyName;
                     insertModel.PostLevel = cells[i, 11].StringValue.Trim();
-                    insertModel.PostLevelName = DictionaryService.GetInstance().GetModelByKeyCode("GWDJ", model.PostLevel).KeyName;
+                    insertModel.PostLevelName = DictionaryService.GetInstance().GetModelByKeyCode("GWDJ", insertModel.PostLevel).KeyName;
 
                     insertModel.MobileNO = cells[i, 12].StringValue.Trim();
                     insertModel.HomeAddress = cells[i, 13].StringValue.Trim();
