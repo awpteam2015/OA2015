@@ -32,7 +32,7 @@ namespace Project.WebApplication.Areas.PermissionManager.Controllers
                 if (entity.UserRoleList.Count > 0) {
                     roleList.Where(p => entity.UserRoleList.Any(x => x.RoleId == p.PkId)).ForEach(p =>
                     {
-                        p.Attr_UserRolePkId = entity.UserRoleList.SingleOrDefault(x => x.RoleId == p.PkId).PkId;
+                        p.Attr_UserRolePkId = entity.UserRoleList.FirstOrDefault(x => x.RoleId == p.PkId).PkId;
                         p.Attr_IsCheck = true;
                     });
                 }
@@ -43,7 +43,7 @@ namespace Project.WebApplication.Areas.PermissionManager.Controllers
                         .ForEach(p =>
                         {
                             p.Attr_UserDepartmentPkId =
-                                entity.UserDepartmentList.SingleOrDefault(x => x.DepartmentCode == p.DepartmentCode)
+                                entity.UserDepartmentList.FirstOrDefault(x => x.DepartmentCode == p.DepartmentCode)
                                     .PkId;
                             p.Attr_IsCheck = true;
                         });
