@@ -21,7 +21,8 @@ var pro = pro || {};
                 rownumbers: true, //行号
                 singleSelect: true,
                 columns: [[
-                { field: 'EmployeeCode', title: '工号', width: 100 },
+                { field: 'EmployeeCode', title: '员工编号', width: 100 },
+                { field: 'EmployeeName', title: '员工姓名', width: 100 },
                 { field: 'DepartmentName', title: '部门', width: 100 },
                 { field: 'RiDays', title: '日班天数', width: 100 },
                 { field: 'YeDays', title: '夜班天数', width: 100 },

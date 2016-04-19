@@ -9,6 +9,8 @@ namespace Project.Model.ReportManager
   public  class AttendanceViewEntity
     {
         public virtual System.String EmployeeCode { get; set; }
+
+        public virtual  System.String EmployeeName { get; set; }
         /// <summary>
         /// 
         /// </summary>

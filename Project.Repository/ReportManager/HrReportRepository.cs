@@ -52,7 +52,7 @@ namespace Project.Repository.ReportManager
             }
 
             string sqlStr = @"select a.*,b.RiDays,c.YeDays,d.GongDays,e.ZhiDays,f.QueDays from
-(select distinct a.EmployeeCode,a.DepartmentCode,a.DepartmentName from  HR_Attendance as a where 1=1 "+ headStr + ") as a left join (select a.EmployeeCode,COUNT(*) as RiDays from HR_Attendance a where a.State  ='日' " + whereStr + @" 
+(select distinct a.EmployeeCode,a.EmployeeName,a.DepartmentCode,a.DepartmentName from  HR_Attendance as a where 1=1 " + headStr + ") as a left join (select a.EmployeeCode,COUNT(*) as RiDays from HR_Attendance a where a.State  ='日' " + whereStr + @" 
   group by a.EmployeeCode) as b
 on a.EmployeeCode=b.EmployeeCode
 left join 
