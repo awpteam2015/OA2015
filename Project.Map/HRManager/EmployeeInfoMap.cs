@@ -106,6 +106,13 @@ namespace Project.Map.HRManager
             //  .Cascade.Delete().Inverse()
             //.PropertyRef("EmployeeCode")
             //.KeyColumn("EmployeeCode");
+
+
+            HasMany(p => p.EmployeeFileList)
+            .AsSet()
+            .LazyLoad()
+            .Cascade.All().Inverse()
+            .KeyColumn("EmployeeID");
         }
     }
 }

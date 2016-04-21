@@ -10,6 +10,7 @@
 }
 <div style="display: none">
     <input id="BindEntity" type="text" value="@ViewBag.BindEntity" />
+    <input id="EmployeeFileList" type="text" />
     <input id="Command" type="hidden" />
 </div>
 <div class="mtable_div">
@@ -189,15 +190,15 @@
             </tr>
             <tr style="display: none">
                 @*<td colspan="4">
-                    <input id="CreationTime" name="CreationTime" style="width: 350px; height: 100px;" />
-                    <input id="CreatorUserCode" name="CreatorUserCode" style="width: 350px; height: 100px;" />
-                    <input id="CreatorUserName" name="CreatorUserName" style="width: 350px; height: 100px;" />
-                </td>*@
+                        <input id="CreationTime" name="CreationTime" style="width: 350px; height: 100px;" />
+                        <input id="CreatorUserCode" name="CreatorUserCode" style="width: 350px; height: 100px;" />
+                        <input id="CreatorUserName" name="CreatorUserName" style="width: 350px; height: 100px;" />
+                    </td>*@
             </tr>
         </table>
         <div id="tabs" class="easyui-tabs" @*data-options="fit:true,border:false"*@>
             <div title="工作经历" style="padding:1px; ">
-                <table id="datagridwork" toolbar="#tbwork" style="height: 300px;width: 100%" ></table>
+                <table id="datagridwork" toolbar="#tbwork" style="height: 300px;width: 100%"></table>
                 <div id="tbwork" style="padding: 5px; height: auto">
                     <div style="margin-bottom: 5px">
                         <a id="btnAddWork_ToolBar" href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:true">添加</a>
@@ -230,7 +231,7 @@
                 </div>
             </div>
             <div title="职称记录" style="padding:1px;">
-                <table id="datagridTechnical" toolbar="#tbTechnical" style="height: 300px;width: 100%" ></table>
+                <table id="datagridTechnical" toolbar="#tbTechnical" style="height: 300px;width: 100%"></table>
                 <div id="tbTechnical" style="padding: 5px; height: auto">
                     <div style="margin-bottom: 5px">
                         <a id="btnAddTechnical_ToolBar" href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:true">添加</a>
@@ -251,14 +252,33 @@
                     </div>
                 </div>
             </div>
-            <div title="年度考核" style="padding:1px;">
-                <table id="datagridYear" toolbar="#tbYear"  style="height: 300px;width: 100%"></table>
+            <div title="年度考核" style="padding: 1px;">
+                <table id="datagridYear" toolbar="#tbYear" style="height: 300px; width: 100%"></table>
                 <div id="tbYear" style="padding: 5px; height: auto">
                     <div style="margin-bottom: 5px">
                         <a id="btnAddYear_ToolBar" href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:true">添加</a>
                         <a id="btnDelYear_ToolBar" href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-remove',plain:true">删除</a>
                     </div>
                     <div id="divSearchYear">
+                    </div>
+                </div>
+            </div>
+            <div title="文档列表" style="padding: 1px;">
+                <table id="datagridfile" toolbar="#tbFile" style="height: 300px; width: 100%"></table>
+                <div id="tbFile" style="padding: 5px; height: auto">
+                    <div style="margin-bottom: 5px">
+                    </div>
+                    <div id="divSearchFile">
+                    </div>
+                </div>
+            </div>
+            <div title="上传文档" style="padding:1px;">
+                <div id="tbUpFile" style="padding: 5px; height: auto">
+                    <div style="margin-bottom: 5px">
+                        <input id="fileList_upload" name="fileList_upload" type="file"/>
+                        <a class="easyui-linkbutton" iconcls="icon-add" href="javascript:$('#fileList_upload').uploadify('upload','*');">上传</a>@*.uploadify('upload')*@
+                    </div>
+                    <div id="divSearchUplode">
                     </div>
                 </div>
             </div>
@@ -308,6 +328,57 @@
         $("#FileName").val("");
     }
 
+    var jsonStr = "";
+
+    $('#fileList_upload').uploadify({
+        'auto': false,
+        'formData': { "path": "employeeFile" },
+        'swf': '/Scripts/jqueryPlugins/jquery_uploadify/uploadify.swf',
+        'uploader': '/SystemSetManager/Upload/UploadImage',
+        'buttonText': '选择文件',
+        // 'height':'30px',
+        //'fileSizeLimit': '99999999999',//5MB
+        //'sizeLimit': '99999999999',
+        //'auto': true,
+        //'method':'Post ',
+        'removeCompleted': false,
+        'multi': true,
+        'fileTypeDesc': 'Files',
+        'fileTypeExts': '*.jpg;*.bmp;*.png;*.gif;*.txt;*.doc;*.docx;',
+        'onClearQueue': function (queueItemCount) {
+            alert(queueItemCount + ' file(s) were removed from the queue');
+        },
+        'onUploadSuccess': function (file, data, response) {
+            var json = $.parseJSON(data);
+            if (json.success) {
+                // $('#div_filename').html("<span ><img name=\"listP\" style=\"height:206px;width:148px;\" src=\"" + json.extension.fileFullPath + "\">" + "</img> <a href=\"javascript:void(0)\" onclick=\"delImg(this);\">删除</a></span>");//+ json.extension.orgfileName
+                var rowJson = "";
+                //rowJson += '"id":"' + file.id + '",';
+                rowJson += '"FileUrl":"' + json.extension.fileUrl + '",';
+                rowJson += '"FName":"' + json.extension.fileName + '",';
+                rowJson += '"FOrgName":"' + json.extension.orgfileName + '",';
+                jsonStr += "{" + rowJson.substring(0, rowJson.length - 1) + "},";
+                $('#fileList_upload-queue .uploadify-queue-item[id="' + file.id + '"]').find(".cancel a").hide();
+                $('#EmployeeFileList').val(jsonStr);
+                // var cancel = $('#fileList_upload-queue .uploadify-queue-item[id="' + file.id + '"]').find(".cancel a");
+                //if (cancel) {
+                //    debugger;
+                //    cancel.attr("rel", file.id);
+                //    cancel.click(function () {
+                //        var pjson = jQuery.parseJSON("[" + jsonStr.substring(0, jsonStr.length - 1) + "]");
+                //        for(var  i=0;i<pjson.length;i++) {
+                //            var item = pjson[i];
+                //            if (item.id == $(this).attr('rel')) {
+                //                pjson.splice(i,1);
+                //            }
+                //        }
+                //    });
+                //}
+            } else {
+                alert(json.msg);
+            }
+        }
+    });
 
 </script>
 

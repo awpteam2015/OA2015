@@ -26,6 +26,7 @@ namespace Project.Model.HRManager
             this.TechnicalList = new HashSet<TechnicalEntity>();
             this.ProfessionList = new HashSet<ProfessionEntity>();
             this.YearAssessmentList = new HashSet<YearAssessmentEntity>();
+            this.EmployeeFileList = new HashSet<EmployeeFileEntity>();
             //this.DepartModel = new DepartmentEntity();
         }
         #region 属性
@@ -211,7 +212,10 @@ namespace Project.Model.HRManager
         /// </summary>
         public virtual ISet<YearAssessmentEntity> YearAssessmentList { get; set; }
 
-
+        /// <summary>
+        /// 上传列表
+        /// </summary>
+        public virtual  ISet<EmployeeFileEntity> EmployeeFileList { get; set; }
         //public virtual DepartmentEntity DepartModel { get; set; }
         #endregion
     }

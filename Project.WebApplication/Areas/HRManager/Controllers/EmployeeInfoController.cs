@@ -501,7 +501,7 @@ namespace Project.WebApplication.Areas.HRManager.Controllers
                     if (cells[i, 4].StringValue.Length > 0)
                         workModel.EndDate = DateTime.Parse(cells[i, 4].StringValue);
                     workModel.WorkContent = cells[i, 5].StringValue.Trim();
-                    workModel.EmployeeID = model.PkId;
+                    workModel.EmployeeID = tempmodel.PkId;
                     if (WorkExperienceService.GetInstance().Add(workModel) > 0)
                         sucessNum++;
                     else
@@ -547,7 +547,7 @@ namespace Project.WebApplication.Areas.HRManager.Controllers
                     if (cells[i, 8].StringValue.Length > 0)
                         learnModel.EndDate = cells[i, 8].StringValue.ToDateTime();
                     learnModel.Remark = cells[i, 9].StringValue.Trim();
-                    learnModel.EmployeeID = model.PkId;
+                    learnModel.EmployeeID = tempmodel.PkId;
                     if (LearningExperiencesService.GetInstance().Add(learnModel) > 0)
                         sucessNum++;
                     else
@@ -586,7 +586,7 @@ namespace Project.WebApplication.Areas.HRManager.Controllers
                     continEducationEntity.Score = cells[i, 2].StringValue.Trim();
                     if (cells[i, 3].StringValue.Length > 0)
                         continEducationEntity.GetTime = cells[i, 3].StringValue.ToDateTime();
-                    continEducationEntity.EmployeeID = model.PkId;
+                    continEducationEntity.EmployeeID = tempmodel.PkId;
                     if (ContinEducationService.GetInstance().Add(continEducationEntity) > 0)
                         sucessNum++;
                     else
@@ -625,7 +625,7 @@ namespace Project.WebApplication.Areas.HRManager.Controllers
                     if (cells[i, 3].StringValue.Length > 0)
                         technicalEntity.GetDate = cells[i, 3].StringValue.ToDateTime();
                     technicalEntity.CerNo = cells[i, 4].StringValue.Trim();
-                    technicalEntity.EmployeeID = model.PkId;
+                    technicalEntity.EmployeeID = tempmodel.PkId;
                     if (TechnicalService.GetInstance().Add(technicalEntity) > 0)
                         sucessNum++;
                     else
@@ -670,7 +670,7 @@ namespace Project.WebApplication.Areas.HRManager.Controllers
                         professionEntity.EmployDate = cells[i, 6].StringValue.ToDateTime();
                     if (cells[i, 7].StringValue.Length > 0)
                         professionEntity.EmployEndDate = cells[i, 7].StringValue.ToDateTime();
-                    professionEntity.EmployeeID = model.PkId;
+                    professionEntity.EmployeeID = tempmodel.PkId;
                     if (ProfessionService.GetInstance().Add(professionEntity) > 0)
                         sucessNum++;
                     else
@@ -706,7 +706,7 @@ namespace Project.WebApplication.Areas.HRManager.Controllers
                     var yearAssessmentEntity = new YearAssessmentEntity();
                     yearAssessmentEntity.KHYear = cells[i, 1].StringValue.Trim();
                     yearAssessmentEntity.KHComment = cells[i, 2].StringValue.Trim();
-                    yearAssessmentEntity.EmployeeID = model.PkId;
+                    yearAssessmentEntity.EmployeeID = tmpmodel.PkId;
                     if (YearAssessmentService.GetInstance().Add(yearAssessmentEntity) > 0)
                         sucessNum++;
                     else

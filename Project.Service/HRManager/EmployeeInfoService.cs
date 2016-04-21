@@ -120,6 +120,14 @@ namespace Project.Service.HRManager
                     {
                         p.EmployeeID = pkId;
                     });
+                    entity.YearAssessmentList.ToList().ForEach(p =>
+                    {
+                        p.EmployeeID = pkId;
+                    });
+                    entity.EmployeeFileList.ToList().ForEach(p =>
+                    {
+                        p.EmployeeID = pkId;
+                    });
                     tx.Commit();
                     return new Tuple<bool, string>(true, ""); ;
                 }
@@ -206,6 +214,7 @@ namespace Project.Service.HRManager
             entity.ContinEducationList.ToList().ForEach(item => item.EmployeeID = entity.PkId);
             entity.ProfessionList.ToList().ForEach(item => item.EmployeeID = entity.PkId);
             entity.YearAssessmentList.ToList().ForEach(item => item.EmployeeID = entity.PkId);
+            entity.EmployeeFileList.ToList().ForEach(item => item.EmployeeID = entity.PkId);
             var deleteList = oldEntity.WorkList.Where(
                     p => entity.WorkList.All(x => x.PkId != p.PkId)).ToList();
             var deleteLearningList = oldEntity.LearningList.Where(

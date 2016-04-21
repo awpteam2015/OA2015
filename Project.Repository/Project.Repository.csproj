@@ -53,6 +53,7 @@
     <Compile Include="HRManager\ContractRepository.cs" />
     <Compile Include="HRManager\DictionaryRepository.cs" />
     <Compile Include="HRManager\EmployeeChildrenRepository.cs" />
+    <Compile Include="HRManager\EmployeeFileRepository.cs" />
     <Compile Include="HRManager\EmployeeInfoHisRepository.cs" />
     <Compile Include="HRManager\EmployeeInfoRepository.cs" />
     <Compile Include="HRManager\EmployeeRotateRepository.cs" />

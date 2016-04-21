@@ -58,6 +58,7 @@
     <Compile Include="HRManager\ContractService.cs" />
     <Compile Include="HRManager\DictionaryService.cs" />
     <Compile Include="HRManager\EmployeeChildrenService.cs" />
+    <Compile Include="HRManager\EmployeeFileService.cs" />
     <Compile Include="HRManager\EmployeeInfoHisService.cs" />
     <Compile Include="HRManager\EmployeeRotateService.cs" />
     <Compile Include="HRManager\EmployeeYearDetailService.cs" />

@@ -57,6 +57,7 @@
     <Compile Include="HRManager\ContractMap.cs" />
     <Compile Include="HRManager\DictionaryMap.cs" />
     <Compile Include="HRManager\EmployeeChildrenMap.cs" />
+    <Compile Include="HRManager\EmployeeFileMap.cs" />
     <Compile Include="HRManager\EmployeeInfoHisMap.cs" />
     <Compile Include="HRManager\EmployeeInfoMap.cs" />
     <Compile Include="HRManager\EmployeeRotateMap.cs" />

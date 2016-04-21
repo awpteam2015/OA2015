@@ -16,6 +16,7 @@
                 gridObjContinEducation: new pro.GridBase("#datagridContinEducation", false),
                 gridObjProfession: new pro.GridBase("#datagridProfession", false),
                 gridObjYear: new pro.GridBase("#datagridYear", false),
+                gridObjFile: new pro.GridBase("#datagridfile", false),
                 xlOptionHtml: '',//学历<option></option>
                 xzOptionHtml: '',//学制<option></option>
                 zcOptionHtml: '',//职称<option></option>
@@ -30,6 +31,7 @@
             var gridObjTechnical = initObj.gridObjTechnical;
             var gridObjProfession = initObj.gridObjProfession;
             var gridObjYear = initObj.gridObjYear;
+            var gridObjFile = initObj.gridObjFile;
 
             ////隐藏编辑按钮
             //if (pro.commonKit.getUrlParam("View")) {
@@ -581,6 +583,43 @@
                 pageList: [20, 30, 40] //可以设置每页记录条数的列表    
             }
           );
+            gridObjFile.grid({
+                url: '/HRManager/EmployeeFile/GetAllList?EmployeeID=' + (pro.commonKit.getUrlParam("PkId") ? pro.commonKit.getUrlParam("PkId") : 0),
+                fitColumns: false,
+                nowrap: false,
+                rownumbers: true, //行号
+                singleSelect: true,
+                idField: "PkId",
+                columns: [
+                    [
+                        {
+                            field: 'FOrgName',
+                            title: '名称',
+                            width: 350
+                        },
+                        {
+                            field: 'FileUrl',
+                            title: '下载',
+                            width: 120,
+                            formatter: function (value, row, index) {
+                                return "<a href='" + row.FileUrl + "/" + row.FName + "'>下载</a>";
+                            }
+                        },
+                        {
+                            field: 'PkId',
+                            title: '操作',
+                            width: 120,
+                            formatter: function (value, row, index) {
+                                return "<a href='javascript:pro.EmployeeInfo.HdPage.deletedFile(" + row.PkId + ")'>删除</a>";
+                            }
+                        }
+                    ]
+                ],
+                pagination: false,
+                pageSize: 20, //每页显示的记录条数，默认为10     
+                pageList: [20, 30, 40] //可以设置每页记录条数的列表    
+            }
+           );
 
             $("#btnAddWork_ToolBar").click(function () {
                 gridObjWork.insertRow({
