@@ -20,16 +20,40 @@ var pro = pro || {};
                 nowrap: false,
                 rownumbers: true, //行号
                 singleSelect: true,
+                frozenColumns: [[
+                      {
+                          field: 'EmployeeCode', title: '员工编号', width: 100, align: 'center',
+                          styler: function (value, row, index) {
+                              return 'vertical-align:middle;';
+                          }
+                      },
+                      {
+                          field: 'EmployeeName', title: '员工名称', width: 100, align: 'center',
+                          styler: function (value, row, index) {
+                              return 'vertical-align:middle;';
+                          }
+                      },
+                      {
+                          field: 'DepartmentName', title: '所属部门', width: 200, align: 'center',
+                          styler: function (value, row, index) {
+                              return 'vertical-align:middle;';
+                          }
+                      }
+                ]],
                 columns: [[
          //{ field: 'PkId', title: '', hidden: true, width: 100 },
-         //{ field: 'EmployeeID', title: '员工表ID', width: 100 },
-         { field: 'EmployeeCode', title: '员工编号', width: 100 },
-         { field: 'EmployeeName', title: '员工名称', width: 100 },
-         { field: 'DepartmentName', title: '所属部门', width: 100 },
-         { field: 'JobName', title: '工号', width: 100 },
-         { field: 'PayCode', title: '中文简拼', width: 100 },
          {
-             field: 'Sex', title: '姓别', width: 100, formatter: function (value, row, index) {
+             field: 'JobName', title: '工号', width: 100, align: 'center',
+             styler: function (value, row, index) {
+                 return 'vertical-align:middle;';
+             }
+         },
+         //{ field: 'PayCode', title: '中文简拼', width: 100 },
+         {
+             field: 'Sex', title: '姓别', width: 80, align: 'center',
+             styler: function (value, row, index) {
+                 return 'vertical-align:middle;';
+             }, formatter: function (value, row, index) {
                  var ret = "";
                  switch (value) {
                      case 0:
@@ -45,39 +69,79 @@ var pro = pro || {};
                  return ret;
              }
          },
-         { field: 'CertNo', title: '身份证', width: 100 },
-         { field: 'Birthday', title: '生日', width: 100 },
-
-         { field: 'DutiesName', title: '职务名称', width: 100 },
-         //{ field: 'Duties', title: '单位职务', width: 100 },
-         { field: 'WorkStateName', title: '在职状态', width: 100 },
-        // { field: 'EmployeeType', title: '员工类型', width: 100 },
-         { field: 'EmployeeTypeName', title: '员工类型', width: 100 },
-         //{ field: 'HomeAddress', title: '家庭地址', width: 100 },
-         //{ field: 'MobileNO', title: '手机号', width: 100 },
-         { field: 'Sort', title: '排序', width: 100 },
          {
-             field: 'State', title: '状态', width: 100, formatter: function (value, row, index) {
-                 var ret = "";
-                 switch (value) {
-                     case 0:
-                         ret = '停用'
-                         break;
-                     case 1:
-                         ret = '启用'
-                         break;
-                     default:
-                         ret = '停用'
-                         break;
-                 }
-                 return ret;
+             field: 'CertNo', title: '身份证', width: 150, align: 'center',
+             styler: function (value, row, index) {
+                 return 'vertical-align:middle;';
              }
          },
+         {
+             field: 'Birthday', title: '生日', width: 100, align: 'center',
+             styler: function (value, row, index) {
+                 return 'vertical-align:middle;';
+             }
+         },
+         {
+             field: 'DutiesName', title: '单位职务', width: 100, align: 'center',
+             styler: function (value, row, index) {
+                 return 'vertical-align:middle;';
+             }
+         },
+         {
+             field: 'WorkStateName', title: '在职状态', width: 100, align: 'center',
+             styler: function (value, row, index) {
+                 return 'vertical-align:middle;';
+             }
+         },
+         {
+             field: 'EmployeeTypeName', title: '员工类型', width: 100, align: 'center',
+             styler: function (value, row, index) {
+                 return 'vertical-align:middle;';
+             }
+         },
+         //{ field: 'HomeAddress', title: '家庭地址', width: 100 },
+         //{ field: 'MobileNO', title: '手机号', width: 100 },
+         //{ field: 'ImageUrl', title: '图片地址', width: 100 },
+         {
+             field: 'Sort', title: '排序', width: 100, align: 'center',
+             styler: function (value, row, index) {
+                 return 'vertical-align:middle;';
+             }
+         },
+         //{
+         //    field: 'State', title: '状态', width: 100, align: 'center',
+         //    styler: function (value, row, index) {
+         //        return 'vertical-align:middle;';
+         //    }, formatter: function (value, row, index) {
+         //        var ret = "";
+         //        switch (value) {
+         //            case 0:
+         //                ret = '停用'
+         //                break;
+         //            case 1:
+         //                ret = '启用'
+         //                break;
+         //            default:
+         //                ret = '停用'
+         //                break;
+         //        }
+         //        return ret;
+         //    }
+         //},
          //{ field: 'Remark', title: '备注', width: 100 },
          //{ field: 'CreatorUserCode', title: '操作员', width: 100 },
-         { field: 'CreatorUserName', title: '操作员名称', width: 100 },
-         { field: 'CreationTime', title: '创建时间', width: 100 },
-         { field: 'LastModificationTime', title: '修改时间', width: 100 },
+         {
+             field: 'CreatorUserName', title: '操作员名称', width: 100, align: 'center',
+             styler: function (value, row, index) {
+                 return 'vertical-align:middle;';
+             }
+         },
+         {
+             field: 'CreationTime', title: '创建时间', width: 100, align: 'center',
+             styler: function (value, row, index) {
+                 return 'vertical-align:middle;';
+             }
+         }
                 ]],
                 pagination: true,
                 pageSize: 20, //每页显示的记录条数，默认为10     
@@ -110,7 +174,7 @@ var pro = pro || {};
                 }
                 var PkId = gridObj.getSelectedRow().EmployeeID;
                 var EmployeeCode = gridObj.getSelectedRow().EmployeeCode;
-                tabObj.add("/HRManager/EmployeeInfo/Hd?PkId=" + PkId + "&EmployeeCode=" + EmployeeCode + "&View=true", "查看" + PkId);
+                tabObj.add("/HRManager/EmployeeInfo/Look?PkId=" + PkId + "&EmployeeCode=" + EmployeeCode + "&View=true", "查看" + PkId);
             });
 
             $("#btnDel").click(function () {

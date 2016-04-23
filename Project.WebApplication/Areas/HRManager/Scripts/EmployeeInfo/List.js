@@ -108,26 +108,26 @@ var pro = pro || {};
                  return 'vertical-align:middle;';
              }
          },
-         {
-             field: 'State', title: '状态', width: 100, align: 'center',
-             styler: function (value, row, index) {
-                 return 'vertical-align:middle;';
-             }, formatter: function (value, row, index) {
-                 var ret = "";
-                 switch (value) {
-                     case 0:
-                         ret = '停用'
-                         break;
-                     case 1:
-                         ret = '启用'
-                         break;
-                     default:
-                         ret = '停用'
-                         break;
-                 }
-                 return ret;
-             }
-         },
+         //{
+         //    field: 'State', title: '状态', width: 100, align: 'center',
+         //    styler: function (value, row, index) {
+         //        return 'vertical-align:middle;';
+         //    }, formatter: function (value, row, index) {
+         //        var ret = "";
+         //        switch (value) {
+         //            case 0:
+         //                ret = '停用'
+         //                break;
+         //            case 1:
+         //                ret = '启用'
+         //                break;
+         //            default:
+         //                ret = '停用'
+         //                break;
+         //        }
+         //        return ret;
+         //    }
+         //},
          //{ field: 'Remark', title: '备注', width: 100 },
          //{ field: 'CreatorUserCode', title: '操作员', width: 100 },
          {
