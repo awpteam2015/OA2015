@@ -20,7 +20,8 @@
                 xlOptionHtml: '',//学历<option></option>
                 xzOptionHtml: '',//学制<option></option>
                 zcOptionHtml: '',//职称<option></option>
-                jxjyOptionHtml: ''//继续教育学分类型<option></option>
+                jxjyOptionHtml: '',//继续教育学分类型<option></option>
+                ndkhOptionHtml: ''//年度考核评价<option></option>
             };
         },
         initPage: function () {
@@ -156,27 +157,57 @@
                //  $.alertExtend.error();
            }
       );
+            abp.ajax({
+                url: "/HRManager/Dictionary/GetListByCode?ParentKeyCode=NDKH_PJ"
+                //,data: JSON.stringify(postData)
+            }).done(
+                function (dataresult, data) {
+                    initObj.xlOptionHtml = "";
 
+                    $.each(dataresult, function (i, item) {
+                        initObj.ndkhOptionHtml += "<option value='" + item.KeyValue + "'>" + item.KeyName + "</option>";
+                    });
+                }).fail(
+                    function (errordetails, errormessage) {
+                        //  $.alertExtend.error();
+                    });
+
+            var bindEntity = JSON.parse($("#BindEntity").val());
             $('#TechnicalTitle').combobox({
                 required: true,
                 editable: false,
                 valueField: 'KeyValue',
                 textField: 'KeyName',
-                url: '/HRManager/Dictionary/GetListByCode?ParentKeyCode=JSZC'
+                url: '/HRManager/Dictionary/GetListByCode?ParentKeyCode=JSZC',
+                onLoadSuccess: function () {
+                    if (pro.commonKit.getUrlParam("PkId") > 0) {
+                        $("#TechnicalTitle").combobox('setValue', bindEntity['TechnicalTitle']);
+                    }
+                }
             });
             $('#Duties').combobox({
                 required: true,
                 editable: false,
                 valueField: 'KeyValue',
                 textField: 'KeyName',
-                url: '/HRManager/Dictionary/GetListByCode?ParentKeyCode=DWZW'
+                url: '/HRManager/Dictionary/GetListByCode?ParentKeyCode=DWZW',
+                onLoadSuccess: function () {
+                    if (pro.commonKit.getUrlParam("PkId") > 0) {
+                        $("#Duties").combobox('setValue', bindEntity['Duties']);
+                    }
+                }
             });
             $('#WorkState').combobox({
                 required: true,
                 editable: false,
                 valueField: 'KeyValue',
                 textField: 'KeyName',
-                url: '/HRManager/Dictionary/GetListByCode?ParentKeyCode=ZZZT'
+                url: '/HRManager/Dictionary/GetListByCode?ParentKeyCode=ZZZT',
+                onLoadSuccess: function () {
+                    if (pro.commonKit.getUrlParam("PkId") > 0) {
+                        $("#WorkState").combobox('setValue', bindEntity['WorkState']);
+                    }
+                }
             });
 
             $('#EmployeeType').combobox({
@@ -184,28 +215,48 @@
                 editable: false,
                 valueField: 'KeyValue',
                 textField: 'KeyName',
-                url: '/HRManager/Dictionary/GetListByCode?ParentKeyCode=YGLY'
+                url: '/HRManager/Dictionary/GetListByCode?ParentKeyCode=YGLY',
+                onLoadSuccess: function () {
+                    if (pro.commonKit.getUrlParam("PkId") > 0) {
+                        $("#EmployeeType").combobox('setValue', bindEntity['EmployeeType']);
+                    }
+                }
             });
             $('#State').combobox({
                 required: true,
                 editable: false,
                 valueField: 'KeyValue',
                 textField: 'KeyName',
-                url: '/HRManager/Dictionary/GetListByCode?ParentKeyCode=ZT'
+                url: '/HRManager/Dictionary/GetListByCode?ParentKeyCode=ZT',
+                onLoadSuccess: function () {
+                    if (pro.commonKit.getUrlParam("PkId") > 0) {
+                        $("#State").combobox('setValue', bindEntity['State']);
+                    }
+                }
             });
             $('#PostLevel').combobox({
                 required: true,
                 editable: false,
                 valueField: 'KeyValue',
                 textField: 'KeyName',
-                url: '/HRManager/Dictionary/GetListByCode?ParentKeyCode=GWDJ'
+                url: '/HRManager/Dictionary/GetListByCode?ParentKeyCode=GWDJ',
+                onLoadSuccess: function () {
+                    if (pro.commonKit.getUrlParam("PkId") > 0) {
+                        $("#PostLevel").combobox('setValue', bindEntity['PostLevel']);
+                    }
+                }
             });
             $('#PostProperty').combobox({
                 required: true,
                 editable: false,
                 valueField: 'KeyValue',
                 textField: 'KeyName',
-                url: '/HRManager/Dictionary/GetListByCode?ParentKeyCode=GWXZ'
+                url: '/HRManager/Dictionary/GetListByCode?ParentKeyCode=GWXZ',
+                onLoadSuccess: function () {
+                    if (pro.commonKit.getUrlParam("PkId") > 0) {
+                        $("#PostProperty").combobox('setValue', bindEntity['PostProperty']);
+                    }
+                }
             });
 
             gridObjWork.grid({
@@ -218,50 +269,50 @@
                 columns: [
                     [
                         {
-                            field: 'PkId', title: '', hidden: true, width: 100,
-                            formatter: function (value, row, index) {
-                                return pro.controlKit.getInputHtml("PkId", value);
-                            }
+                            field: 'PkId', title: '', hidden: true, width: 100
+                            //,formatter: function (value, row, index) {
+                            //    return pro.controlKit.getInputHtml("PkId", value);
+                            //}
                         },
                         {
                             field: 'WorkCompany',
                             title: '工作单位',
-                            width: 100,
-                            formatter: function (value, row, index) {
-                                return pro.controlKit.getInputHtml("WorkCompany_" + row.PkId, value);
-                            }
+                            width: 100
+                            //,formatter: function (value, row, index) {
+                            //    return pro.controlKit.getInputHtml("WorkCompany_" + row.PkId, value);
+                            //}
                         },
                         {
                             field: 'Duties',
                             title: '职务',
-                            width: 120,
-                            formatter: function (value, row, index) {
-                                return pro.controlKit.getInputHtml("Duties_" + row.PkId, value);
-                            }
+                            width: 120
+                            //,formatter: function (value, row, index) {
+                            //    return pro.controlKit.getInputHtml("Duties_" + row.PkId, value);
+                            //}
                         },
                         {
                             field: 'BeginDate',
                             title: '开始日期',
-                            width: 150,
-                            formatter: function (value, row, index) {
-                                return pro.controlKit.getInputDateHtml("BeginDate_" + row.PkId, value, 145);
-                            }
+                            width: 150
+                            //,formatter: function (value, row, index) {
+                            //    return pro.controlKit.getInputDateHtml("BeginDate_" + row.PkId, value, 145);
+                            //}
                         },
                         {
                             field: 'EndDate',
                             title: '结束日期',
-                            width: 120,
-                            formatter: function (value, row, index) {
-                                return pro.controlKit.getInputDateHtml("EndDate_" + row.PkId, value, 145);
-                            }
+                            width: 120
+                            //,formatter: function (value, row, index) {
+                            //    return pro.controlKit.getInputDateHtml("EndDate_" + row.PkId, value, 145);
+                            //}
                         },
                         {
                             field: 'WorkContent',
                             title: '工作内容',
-                            width: 160,
-                            formatter: function (value, row, index) {
-                                return pro.controlKit.getTextAreaHtml("WorkContent_" + row.PkId, value, 140, 50);
-                            }
+                            width: 160
+                            //,formatter: function (value, row, index) {
+                            //    return pro.controlKit.getTextAreaHtml("WorkContent_" + row.PkId, value, 140, 50);
+                            //}
                         }
                     ]
                 ],
@@ -289,74 +340,74 @@
                         {
                             field: 'School',
                             title: '毕业院校',
-                            width: 120,
-                            formatter: function (value, row, index) {
-                                return pro.controlKit.getInputHtml("S_School_" + row.PkId, value);
-                            }
+                            width: 200
+                            //,formatter: function (value, row, index) {
+                            //    return pro.controlKit.getInputHtml("S_School_" + row.PkId, value);
+                            //}
                         },
                         {
                             field: 'ProfessionCode',
                             title: '专业',
-                            width: 120,
-                            formatter: function (value, row, index) {
-                                return pro.controlKit.getInputHtml("S_ProfessionCode_" + row.PkId, value);
-                            }
+                            width: 150
+                            //,formatter: function (value, row, index) {
+                            //    return pro.controlKit.getInputHtml("S_ProfessionCode_" + row.PkId, value);
+                            //}
                         },
                         {
                             field: 'Degree',
                             title: '学位',
                             width: 100,
-                            formatter: function (value, row, index) {
-                                return pro.controlKit.getInputHtml("S_Degree_" + row.PkId, value);
-                            }
+                            //formatter: function (value, row, index) {
+                            //    return pro.controlKit.getInputHtml("S_Degree_" + row.PkId, value);
+                            //}
                         },
                         {
                             field: 'Education',
                             title: '学历',
-                            width: 100,
+                            width: 120,
                             formatter: function (value, row, index) {
-                                return pro.controlKit.getSelectHtml("S_Education_" + row.PkId, value, initObj.xlOptionHtml);
+                                return pro.controlKit.getSelectHtml("S_Education_" + row.PkId, value, initObj.xlOptionHtml, 110, true);
                             }
                         },
                         {
                             field: 'SchoolYear',
                             title: '学制',
-                            width: 100,
+                            width: 120,
                             formatter: function (value, row, index) {
-                                return pro.controlKit.getSelectHtml("S_SchoolYear_" + row.PkId, value, initObj.xzOptionHtml);
+                                return pro.controlKit.getSelectHtml("S_SchoolYear_" + row.PkId, value, initObj.xzOptionHtml, 110, true);
                             }
                         },
                         {
                             field: 'CertNumber',
                             title: '证书编号',
-                            width: 120,
-                            formatter: function (value, row, index) {
-                                return pro.controlKit.getInputHtml("S_CertNumber_" + row.PkId, value);
-                            }
+                            width: 120
+                            //,formatter: function (value, row, index) {
+                            //    return pro.controlKit.getInputHtml("S_CertNumber_" + row.PkId, value);
+                            //}
                         },
                         {
                             field: 'BeginDate',
                             title: '入学日期',
-                            width: 110,
-                            formatter: function (value, row, index) {
-                                return pro.controlKit.getInputDateHtml("S_BeginDate_" + row.PkId, value);
-                            }
+                            width: 110
+                            //,formatter: function (value, row, index) {
+                            //    return pro.controlKit.getInputDateHtml("S_BeginDate_" + row.PkId, value);
+                            //}
                         },
                         {
                             field: 'EndDate',
                             title: '毕业日期',
-                            width: 110,
-                            formatter: function (value, row, index) {
-                                return pro.controlKit.getInputDateHtml("S_EndDate_" + row.PkId, value);
-                            }
+                            width: 110
+                            //,formatter: function (value, row, index) {
+                            //    return pro.controlKit.getInputDateHtml("S_EndDate_" + row.PkId, value);
+                            //}
                         },
                         {
                             field: 'Remark',
                             title: '备注',
-                            width: 160,
-                            formatter: function (value, row, index) {
-                                return pro.controlKit.getTextAreaHtml("S_Remark_" + row.PkId, value, 170, 50);
-                            }
+                            width: 160
+                            //,formatter: function (value, row, index) {
+                            //    return pro.controlKit.getTextAreaHtml("S_Remark_" + row.PkId, value, 170, 50);
+                            //}
                         }
                     ]
                 ],
@@ -384,26 +435,26 @@
                         {
                             field: 'CreditType',
                             title: '学分类型',
-                            width: 120,
-                            formatter: function (value, row, index) {
-                                return pro.controlKit.getSelectHtml("C_CreditType_" + row.PkId, value, initObj.jxjyOptionHtml);
+                            width: 120
+                            , formatter: function (value, row, index) {
+                                return pro.controlKit.getSelectHtml("C_CreditType_" + row.PkId, value, initObj.jxjyOptionHtml, 110, true);
                             }
                         },
                         {
                             field: 'Score',
                             title: '分数',
-                            width: 120,
-                            formatter: function (value, row, index) {
-                                return pro.controlKit.getInputHtml("C_Score_" + row.PkId, value);
-                            }
+                            width: 120
+                            //,formatter: function (value, row, index) {
+                            //    return pro.controlKit.getInputHtml("C_Score_" + row.PkId, value);
+                            //}
                         },
                         {
                             field: 'GetTime',
                             title: '时间',
-                            width: 110,
-                            formatter: function (value, row, index) {
-                                return pro.controlKit.getInputDateHtml("C_GetTime_" + row.PkId, value);
-                            }
+                            width: 110
+                            //,formatter: function (value, row, index) {
+                            //    return pro.controlKit.getInputDateHtml("C_GetTime_" + row.PkId, value);
+                            //}
                         }
                     ]
                 ],
@@ -431,34 +482,44 @@
                         {
                             field: 'Title',
                             title: '名称',
-                            width: 120,
-                            formatter: function (value, row, index) {
-                                return pro.controlKit.getInputHtml("T_Title_" + row.PkId, value);
-                            }
+                            width: 120
+                            //,formatter: function (value, row, index) {
+                            //    return pro.controlKit.getInputHtml("T_Title_" + row.PkId, value);
+                            //}
                         },
                         {
                             field: 'LevNum',
                             title: '等级',
                             width: 120,
                             formatter: function (value, row, index) {
-                                return pro.controlKit.getSelectHtml("T_LevNum_" + row.PkId, value, initObj.zcOptionHtml, 110);
+                                return pro.controlKit.getSelectHtml("T_LevNum_" + row.PkId, value, initObj.zcOptionHtml, 110, true);
                             }
                         },
                         {
                             field: 'GetDate',
                             title: '取得时间',
-                            width: 120,
-                            formatter: function (value, row, index) {
-                                return pro.controlKit.getInputDateHtml("T_GetDate_" + row.PkId, value);
-                            }
+                            width: 120
+                            //,formatter: function (value, row, index) {
+                            //    return pro.controlKit.getInputDateHtml("T_GetDate_" + row.PkId, value);
+                            //}
                         },
                         {
                             field: 'CerNo',
                             title: '职称证书编号',
-                            width: 130,
-                            formatter: function (value, row, index) {
-                                return pro.controlKit.getInputHtml("T_CerNo_" + row.PkId, value);
-                            }
+                            width: 130
+                            //,formatter: function (value, row, index) {
+                            //    return pro.controlKit.getInputHtml("T_CerNo_" + row.PkId, value);
+                            //}
+                        },
+                        {
+                            field: 'EmployDate',
+                            title: '聘用时间',
+                            width: 130
+                        },
+                        {
+                            field: 'EmployEndDate',
+                            title: '聘用结束时间',
+                            width: 130
                         }
                     ]
                 ],
@@ -485,58 +546,58 @@
                         {
                             field: 'Title',
                             title: '名称',
-                            width: 120,
-                            formatter: function (value, row, index) {
-                                return pro.controlKit.getInputHtml("P_Title_" + row.PkId, value);
-                            }
+                            width: 120
+                            //,formatter: function (value, row, index) {
+                            //    return pro.controlKit.getInputHtml("P_Title_" + row.PkId, value);
+                            //}
                         },
                         {
                             field: 'TypeName',
                             title: '执业类别',
-                            width: 120,
-                            formatter: function (value, row, index) {
-                                return pro.controlKit.getInputHtml("P_TypeName_" + row.PkId, value);
-                            }
+                            width: 120
+                            //,formatter: function (value, row, index) {
+                            //    return pro.controlKit.getInputHtml("P_TypeName_" + row.PkId, value);
+                            //}
                         },
                         {
                             field: 'RangeName',
                             title: '执业范围',
-                            width: 120,
-                            formatter: function (value, row, index) {
-                                return pro.controlKit.getInputHtml("P_RangeName_" + row.PkId, value);
-                            }
+                            width: 120
+                            //,formatter: function (value, row, index) {
+                            //    return pro.controlKit.getInputHtml("P_RangeName_" + row.PkId, value);
+                            //}
                         },
                         {
                             field: 'GetDate',
                             title: '取得时间',
-                            width: 120,
-                            formatter: function (value, row, index) {
-                                return pro.controlKit.getInputDateHtml("P_GetDate_" + row.PkId, value);
-                            }
+                            width: 120
+                            //,formatter: function (value, row, index) {
+                            //    return pro.controlKit.getInputDateHtml("P_GetDate_" + row.PkId, value);
+                            //}
                         },
                         {
                             field: 'CerNo',
                             title: '职称证书编号',
-                            width: 130,
-                            formatter: function (value, row, index) {
-                                return pro.controlKit.getInputHtml("P_CerNo_" + row.PkId, value);
-                            }
+                            width: 130
+                            //,formatter: function (value, row, index) {
+                            //    return pro.controlKit.getInputHtml("P_CerNo_" + row.PkId, value);
+                            //}
                         },
                         {
                             field: 'EmployDate',
                             title: '聘用时间',
-                            width: 130,
-                            formatter: function (value, row, index) {
-                                return pro.controlKit.getInputDateHtml("P_EmployDate_" + row.PkId, value);
-                            }
+                            width: 130
+                            //,formatter: function (value, row, index) {
+                            //    return pro.controlKit.getInputDateHtml("P_EmployDate_" + row.PkId, value);
+                            //}
                         },
                         {
                             field: 'EmployEndDate',
                             title: '聘用结束时间',
-                            width: 130,
-                            formatter: function (value, row, index) {
-                                return pro.controlKit.getInputDateHtml("P_EmployEndDate_" + row.PkId, value);
-                            }
+                            width: 130
+                            //,formatter: function (value, row, index) {
+                            //    return pro.controlKit.getInputDateHtml("P_EmployEndDate_" + row.PkId, value);
+                            //}
                         }
                     ]
                 ],
@@ -563,17 +624,17 @@
                         {
                             field: 'KHYear',
                             title: '考核年度',
-                            width: 180,
-                            formatter: function (value, row, index) {
-                                return pro.controlKit.getInputDateHtml("Y_KHYear_" + row.PkId, value, 150, 'yyyy');
-                            }
+                            width: 180
+                            //,formatter: function (value, row, index) {
+                            //    return pro.controlKit.getInputDateHtml("Y_KHYear_" + row.PkId, value, 150, 'yyyy');
+                            //}
                         },
                         {
                             field: 'KHComment',
                             title: '评价',
-                            width: 200,
-                            formatter: function (value, row, index) {
-                                return pro.controlKit.getInputHtml("Y_KHComment_" + row.PkId, value, 180);
+                            width: 200
+                            , formatter: function (value, row, index) {
+                                return pro.controlKit.getSelectHtml("Y_KHComment_" + row.PkId, value, initObj.ndkhOptionHtml, 190, true);
                             }
                         }
                     ]
@@ -681,7 +742,7 @@
             if ($("#BindEntity").val()) {
                 var bindField = pro.bindKit.getHeadJson();
 
-                var bindEntity = JSON.parse($("#BindEntity").val());
+                //var bindEntity = JSON.parse($("#BindEntity").val());
                 for (var filedname in bindField) {
                     $("[name=" + filedname + "]").val(bindEntity[filedname]);
                 }
@@ -690,6 +751,8 @@
                     var fullPath = bindEntity["FileUrl"] + "\\" + bindEntity["FileName"];
                     $('#div_filename').html("<span ><img name=\"listP\" style=\"height:206px;width:148px;\" src=\"" + fullPath + "\">" + "</img> </span>");//+ json.extension.orgfileName
 
+                    if (filedname == "Sex")
+                        $("#Sex").combobox('setValue', bindEntity[filedname]);
                 }
                 //行项目信息用json绑定控件
                 //alert(JSON.stringify(BindEntity.List));

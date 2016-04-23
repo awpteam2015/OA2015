@@ -8,11 +8,12 @@
 * *************************************************************************/
 using System;
 using Project.Infrastructure.FrameworkCore.Domain.Entities;
+using Project.Infrastructure.FrameworkCore.Domain.Entities.Auditing.Interface;
 using Project.Infrastructure.FrameworkCore.Domain.Entities.Component;
 
 namespace Project.Model.HRManager
 {
-    public class ProfessionEntity : Entity
+    public class ProfessionEntity : Entity,IAudited
     {
         #region 属性
         /// <summary>

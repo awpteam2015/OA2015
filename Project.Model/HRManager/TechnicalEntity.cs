@@ -8,11 +8,12 @@
 * *************************************************************************/
 using System;
 using Project.Infrastructure.FrameworkCore.Domain.Entities;
+using Project.Infrastructure.FrameworkCore.Domain.Entities.Auditing.Interface;
 using Project.Infrastructure.FrameworkCore.Domain.Entities.Component;
 
 namespace Project.Model.HRManager
 {
-    public class TechnicalEntity : Entity
+    public class TechnicalEntity : Entity, IAudited
     {
         #region 属性
         /// <summary>
@@ -63,6 +64,14 @@ namespace Project.Model.HRManager
         /// 修改人
         /// </summary>
         public virtual System.String LastModifierUserCode { get; set; }
+        /// <summary>
+        /// 聘用时间
+        /// </summary>
+        public virtual System.DateTime? EmployDate { get; set; }
+        /// <summary>
+        /// 聘用结束时间
+        /// </summary>
+        public virtual System.DateTime? EmployEndDate { get; set; }
         #endregion
 
 

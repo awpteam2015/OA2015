@@ -116,7 +116,7 @@ namespace Project.Service.HRManager
         {
             DictionaryEntity where = new DictionaryEntity();
             where.ParentKeyCode = parentKeyCode;
-            where.KeyCode = keyValue;
+            where.KeyValue = keyValue;
             var list = GetList(where);
             if (list.Count > 0)
                 return list[0];

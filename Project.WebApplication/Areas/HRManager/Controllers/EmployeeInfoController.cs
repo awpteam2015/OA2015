@@ -421,13 +421,14 @@ namespace Project.WebApplication.Areas.HRManager.Controllers
                     insertModel.DepartmentName = model.DepartmentName;
                     insertModel.EmployeeCode = cells[i, 1].StringValue.Trim();
                     insertModel.EmployeeName = cells[i, 0].StringValue.Trim();
-                    insertModel.Sex = cells[i, 2].IntValue;
-                    insertModel.CertNo = cells[i, 3].StringValue.Trim();
-                    if (cells[i, 4].StringValue.Length > 0)
-                        insertModel.Birthday = cells[i, 4].StringValue.ToDateTime();
+                    insertModel.JobName = cells[i, 2].StringValue.Trim();
+                    insertModel.Sex = cells[i, 3].IntValue;
+                    insertModel.CertNo = cells[i, 4].StringValue.Trim();
                     if (cells[i, 5].StringValue.Length > 0)
-                        insertModel.StartWork = cells[i, 5].StringValue.ToDateTime();
-                    insertModel.Duties = cells[i, 6].StringValue;
+                        insertModel.Birthday = cells[i, 5].StringValue.ToDateTime();
+                    if (cells[i, 6].StringValue.Length > 0)
+                        insertModel.StartWork = cells[i, 6].StringValue.ToDateTime();
+                    insertModel.Duties = cells[i, 7].StringValue;
                     if (insertModel.Duties.Trim().Length > 0)
                     {
                         var temp = DictionaryService.GetInstance().GetModelByKeyCode("DWZW", insertModel.Duties);
@@ -435,19 +436,19 @@ namespace Project.WebApplication.Areas.HRManager.Controllers
                             insertModel.DutiesName = temp.KeyName;
 
                     };
-                    insertModel.PostProperty = cells[i, 7].StringValue.Trim();
+                    insertModel.PostProperty = cells[i, 8].StringValue.Trim();
                     insertModel.PostPropertyName = DictionaryService.GetInstance().GetModelByKeyCode("GWXZ", insertModel.PostProperty).KeyName;
-                    if (cells[i, 8].StringValue.Length > 0)
-                        insertModel.JoinCommy = DateTime.Parse(cells[i, 8].StringValue);
-                    insertModel.WorkState = cells[i, 9].StringValue.Trim();
+                    if (cells[i, 9].StringValue.Length > 0)
+                        insertModel.JoinCommy =cells[i, 9].StringValue.ToDateTime(); ;
+                    insertModel.WorkState = cells[i, 10].StringValue.Trim();
                     insertModel.WorkStateName = DictionaryService.GetInstance().GetModelByKeyCode("ZZZT", insertModel.WorkState).KeyName;
-                    insertModel.EmployeeType = cells[i, 10].StringValue.Trim();
+                    insertModel.EmployeeType = cells[i, 11].StringValue.Trim();
                     insertModel.EmployeeTypeName = DictionaryService.GetInstance().GetModelByKeyCode("YGLY", insertModel.EmployeeType).KeyName;
-                    insertModel.PostLevel = cells[i, 11].StringValue.Trim();
+                    insertModel.PostLevel = cells[i, 12].StringValue.Trim();
                     insertModel.PostLevelName = DictionaryService.GetInstance().GetModelByKeyCode("GWDJ", insertModel.PostLevel).KeyName;
 
-                    insertModel.MobileNO = cells[i, 12].StringValue.Trim();
-                    insertModel.HomeAddress = cells[i, 13].StringValue.Trim();
+                    insertModel.MobileNO = cells[i, 13].StringValue.Trim();
+                    insertModel.HomeAddress = cells[i, 14].StringValue.Trim();
                     insertModel.State = 1;
                     Tuple<bool, string> addResult;
                     var oldentity = EmployeeInfoValidate.GetInstance().GetModelByCertNo(insertModel.CertNo);
