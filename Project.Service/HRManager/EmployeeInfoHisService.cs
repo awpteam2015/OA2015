@@ -182,7 +182,7 @@ namespace Project.Service.HRManager
             //  expr = expr.And(p => p.WorkStateName == where.WorkStateName);
             expr = expr.And(p => p.IsInsert != 1);
             #endregion
-            var list = _employeeInfoHisRepository.Query().Where(expr).OrderBy(p => p.PkId).Skip(skipResults).Take(maxResults).ToList();
+            var list = _employeeInfoHisRepository.Query().Where(expr).OrderByDescending(p => p.PkId).Skip(skipResults).Take(maxResults).ToList();
             var count = _employeeInfoHisRepository.Query().Where(expr).Count();
             return new System.Tuple<IList<EmployeeInfoHisEntity>, int>(list, count);
         }

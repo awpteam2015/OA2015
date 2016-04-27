@@ -90,6 +90,8 @@ namespace Project.Service.HRManager
                     employeeHisEntity.InWorkStateName = entity.WorkStateName;
                     employeeHisEntity.IsInsert = 1;
                     employeeHisEntity.CreateTime = DateTime.Now;
+                    employeeHisEntity.CreatorUserName= entity.CreatorUserName;
+                    
                     _employeeInfoHisRepository.Save(employeeHisEntity);
 
                     entity.WorkList.ToList().ForEach(p =>
@@ -237,8 +239,9 @@ namespace Project.Service.HRManager
                 try
                 {
                     //记录条件 哪些条件需要记录
-                    //部门变动、类型变动、工作状态变动、单位职务
-                    if (oldEntity.DepartmentCode != entity.DepartmentCode || oldEntity.EmployeeType != entity.EmployeeType || oldEntity.WorkState != entity.WorkState || oldEntity.Duties != entity.Duties)
+                    //部门变动、类型变动、工作状态变动、单位职务、新增【岗位性质】、【岗位等级】、【手机号】、【家庭地址】 字段等需要加入
+                    if (oldEntity.DepartmentCode != entity.DepartmentCode || oldEntity.EmployeeType != entity.EmployeeType || oldEntity.WorkState != entity.WorkState || oldEntity.Duties != entity.Duties
+                        || oldEntity.MobileNO != entity.MobileNO|| oldEntity.HomeAddress != entity.HomeAddress||oldEntity.PostLevel!=entity.PostLevel|| oldEntity.PostProperty != entity.PostProperty)
                     {
                         var employeeHisEntity = Mapper.Map<EmployeeInfoEntity, EmployeeInfoHisEntity>(oldEntity);
                         employeeHisEntity.EmployeeID = employeeHisEntity.PkId;
@@ -248,6 +251,7 @@ namespace Project.Service.HRManager
                         employeeHisEntity.InWorkState = entity.WorkState;
                         employeeHisEntity.InWorkStateName = entity.WorkStateName;
                         employeeHisEntity.CreateTime = DateTime.Now;
+                        employeeHisEntity.CreatorUserName = entity.LastModifierUserName;
                         _employeeInfoHisRepository.Save(employeeHisEntity);
                     }
                     var mergInfo = Mapper.Map(entity, oldEntity);

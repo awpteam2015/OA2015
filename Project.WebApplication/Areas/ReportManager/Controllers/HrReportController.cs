@@ -322,6 +322,7 @@ namespace Project.WebApplication.Areas.ReportManager.Controllers
             where.PostLevel = RequestHelper.GetFormString("PostLevel");
             where.PostProperty = RequestHelper.GetFormString("PostProperty");
             where.Education = RequestHelper.GetFormString("Education");
+            where.PoliticsName = RequestHelper.GetFormString("PoliticsName");
             //where.PkId = RequestHelper.GetFormString("PkId");
             //where.AttendanceUploadRecordId = RequestHelper.GetFormString("AttendanceUploadRecordId");
             //where.EmployeeCode = RequestHelper.GetFormString("EmployeeCode");

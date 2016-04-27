@@ -20,8 +20,8 @@
             $("#btnEdit").click(function () {
                 pro.Dictionary.HdPage.submit("Edit");
             });
-            
-             $("#btnClose").click(function () {
+
+            $("#btnClose").click(function () {
                 parent.pro.Dictionary.ListPage.closeTab("");
             });
 
@@ -54,7 +54,7 @@
                 data: JSON.stringify(postData)
             }).done(
                 function (dataresult, data) {
-                   function afterSuccess() {
+                    function afterSuccess() {
                         parent.$("#btnSearch").trigger("click");
                         parent.pro.Dictionary.ListPage.closeTab();
                     }
@@ -62,7 +62,7 @@
                 }
             ).fail(
              function (errordetails, errormessage) {
-               //  $.alertExtend.error();
+                 //  $.alertExtend.error();
              }
             );
 
@@ -71,18 +71,18 @@
             addRule: function () {
                 $("#form1").validate({
                     rules: {
-          PkId: { required: true  },
-          KeyCode: { required: true  },
-          ParentKeyCode: { required: true  },
-          KeyName: { required: true  },
-          KeyValue: { required: true  },
+                        PkId: { required: true },
+                        KeyCode: { required: true },
+                        ParentKeyCode: { required: true },
+                        KeyName: { required: true }//,
+                        // KeyValue: { required: true  },
                     },
                     messages: {
-          PkId:  "必填!",
-          KeyCode:  "必填!",
-          ParentKeyCode:  "必填!",
-          KeyName:  "必填!",
-          KeyValue:  "必填!",
+                        PkId: "必填!",
+                        KeyCode: "必填!",
+                        ParentKeyCode: "必填!",
+                        KeyName: "必填!",
+                        KeyValue: "必填!"//,
                     },
                     errorPlacement: function (error, element) {
                         pro.commonKit.errorPlacementHd(error, element);

@@ -56,7 +56,8 @@ namespace Project.Map.HRManager
             Map(p => p.PostLevel);
             Map(p => p.PostLevelName);
             Map(p => p.PostProperty);
-            Map(p => p.PostPropertyName);
+            Map(p => p.PostPropertyName); 
+            Map(p => p.PoliticsName);
 
             HasMany(p => p.WorkList)
             .AsSet()

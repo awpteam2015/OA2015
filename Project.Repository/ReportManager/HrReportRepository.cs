@@ -522,15 +522,19 @@ on a.DepartmentCode=c.DepartmentCode
             }
             if (!string.IsNullOrWhiteSpace(where.PostLevel))
             {
-                whereStr += " and PostLevel=" + where.PostLevel;
+                whereStr += " and PostLevel='" + where.PostLevel + "'";
             }
             if (!string.IsNullOrWhiteSpace(where.PostProperty))
             {
-                whereStr += " and PostProperty=" + where.PostProperty;
+                whereStr += " and PostProperty='" + where.PostProperty + "'";
+            }
+            if (!string.IsNullOrWhiteSpace(where.PoliticsName))
+            {
+                whereStr += " and PoliticsName='" + where.PoliticsName+"'";
             }
             if (!string.IsNullOrWhiteSpace(where.Duties))
             {
-                whereStr += " and Duties=" + where.Duties;
+                whereStr += " and Duties='" + where.Duties+"'";
             }
             if (!string.IsNullOrWhiteSpace(where.Education))
             {
@@ -543,8 +547,8 @@ on a.DepartmentCode=c.DepartmentCode
                 a.WorkStateName,a.WorkStateName InWorkStateName,a.IsDeleted,1 InOrOut,JoinCommy,Duties,DutiesName,PostLevel,PostLevelName,PostProperty,PostPropertyName,
 			(	CASE WHEN ISNULL(JoinCommy,0)=0 THEN 0
             ELSE 1
-            END) IsCommy ,(select t.KeyName from SM_Dictionary t where t.ParentKeyCode='Education' and t.KeyValue =(select Max(b.Education) from HR_LearningExperiences b where b.EmployeeID=a.PkId))
-            EducationName    from [HR_EmployeeInfo] a where  a.IsDeleted=0 {0}", whereStr);
+            END) IsCommy ,(select top 1 t.KeyName from SM_Dictionary t where t.ParentKeyCode='Education' and t.KeyValue =(select Max(b.Education) from HR_LearningExperiences b where b.EmployeeID=a.PkId))
+            EducationName,a.PoliticsName   from [HR_EmployeeInfo] a where  a.IsDeleted=0 {0}", whereStr);
 
             string countStr = "select count(*) as num from (" + sqlStr.ToString() + ") as b ";
             var count = SessionFactoryManager.GetCurrentSession().CreateSQLQuery(countStr).AddScalar("num", NHibernateUtil.Int32).UniqueResult<Int32>();

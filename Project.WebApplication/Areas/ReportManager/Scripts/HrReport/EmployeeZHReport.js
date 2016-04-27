@@ -50,23 +50,24 @@ var pro = pro || {};
          { field: 'PostLevelName', title: '岗位等级', width: 100 },
          { field: 'DutiesName', title: '单位职务', width: 100 },
          { field: 'EducationName', title: '学历', width: 100 },
-         {
-             field: 'IsCommy', title: '是否党员', width: 100, formatter: function (value, row, index) {
-                 var ret = "";
-                 switch (value) {
-                     case 0:
-                         ret = '否'
-                         break;
-                     case 1:
-                         ret = '是'
-                         break;
-                     default:
-                         ret = '未知'
-                         break;
-                 }
-                 return ret;
-             }
-         },
+         { field: 'PoliticsName', title: '政治面貌', width: 160 },
+         //{
+         //    field: 'IsCommy', title: '是否党员', width: 100, formatter: function (value, row, index) {
+         //        var ret = "";
+         //        switch (value) {
+         //            case 0:
+         //                ret = '否'
+         //                break;
+         //            case 1:
+         //                ret = '是'
+         //                break;
+         //            default:
+         //                ret = '未知'
+         //                break;
+         //        }
+         //        return ret;
+         //    }
+         //},
          { field: 'JoinCommy', title: '入党时间', width: 120 }
 
                 ]],
@@ -79,7 +80,16 @@ var pro = pro || {};
 
             var ReportType = $('#ReportType').val();
 
-
+            $('#PoliticsName').combobox({
+                required: true,
+                editable: false,
+                valueField: 'KeyValue',
+                textField: 'KeyName',
+                url: '/HRManager/Dictionary/GetListByCode?ParentKeyCode=ZZMM&AllFlag=1',
+                onLoadSuccess: function () {
+                    $('#PoliticsName').combobox("setValue", "");
+                }
+            });
             if (ReportType == '' || ReportType == '3' || ReportType == '4' || ReportType == '5')
                 pro.DepartmentControl.init();
             if (ReportType == '' || ReportType == '1')

@@ -57,13 +57,13 @@ var pro = pro || {};
                  var ret = "";
                  switch (value) {
                      case 0:
-                         ret = '女'
+                         ret = '女';
                          break;
                      case 1:
-                         ret = '男'
+                         ret = '男';
                          break;
                      default:
-                         ret = '未知'
+                         ret = '未知';
                          break;
                  }
                  return ret;

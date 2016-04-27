@@ -155,6 +155,9 @@ namespace Project.Model.HRManager
         /// </summary>
         public virtual System.DateTime? LastModificationTime { get; set; }
         public virtual string LastModifierUserCode { get; set; }
+
+        //
+        public virtual string LastModifierUserName { get; set; }
         /// <summary>
         /// 在职状态名称
         /// </summary>
@@ -178,6 +181,10 @@ namespace Project.Model.HRManager
 
         public virtual System.String PostProperty { get; set; }
         public virtual System.String PostPropertyName { get; set; }
+        /// <summary>
+        /// 政治面貌
+        /// </summary>
+        public virtual System.String PoliticsName { get; set; }
 
         #endregion
 

@@ -99,15 +99,43 @@ var pro = pro || {};
                  return 'vertical-align:middle;';
              }
          },
-         //{ field: 'HomeAddress', title: '家庭地址', width: 100 },
-         //{ field: 'MobileNO', title: '手机号', width: 100 },
-         //{ field: 'ImageUrl', title: '图片地址', width: 100 },
          {
-             field: 'Sort', title: '排序', width: 100, align: 'center',
+             field: 'PoliticsName', title: '政治面貌', width: 160, align: 'center',
              styler: function (value, row, index) {
                  return 'vertical-align:middle;';
              }
          },
+         {
+             field: 'PostLevelName', title: '岗位等级', width: 100, align: 'center',
+             styler: function (value, row, index) {
+                 return 'vertical-align:middle;';
+             }
+         },
+         {
+             field: 'PostPropertyName', title: '岗位性质', width: 120, align: 'center',
+             styler: function (value, row, index) {
+                 return 'vertical-align:middle;';
+             }
+         },
+         {
+             field: 'MobileNO', title: '手机号', width: 110, align: 'center',
+             styler: function (value, row, index) {
+                 return 'vertical-align:middle;';
+             }
+         },
+         {
+             field: 'HomeAddress', title: '家庭地址', width: 190, align: 'center',
+             styler: function (value, row, index) {
+                 return 'vertical-align:middle;';
+             }
+         },
+         //{ field: 'ImageUrl', title: '图片地址', width: 100 },
+         //{
+         //    field: 'Sort', title: '排序', width: 100, align: 'center',
+         //    styler: function (value, row, index) {
+         //        return 'vertical-align:middle;';
+         //    }
+         //},
          //{
          //    field: 'State', title: '状态', width: 100, align: 'center',
          //    styler: function (value, row, index) {
@@ -135,13 +163,13 @@ var pro = pro || {};
              styler: function (value, row, index) {
                  return 'vertical-align:middle;';
              }
-         },
-         {
-             field: 'CreationTime', title: '创建时间', width: 100, align: 'center',
-             styler: function (value, row, index) {
-                 return 'vertical-align:middle;';
-             }
          }
+         //,{
+         //    field: 'CreationTime', title: '创建时间', width: 100, align: 'center',
+         //    styler: function (value, row, index) {
+         //        return 'vertical-align:middle;';
+         //    }
+         //}
                 ]],
                 pagination: true,
                 pageSize: 20, //每页显示的记录条数，默认为10     

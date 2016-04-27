@@ -99,6 +99,13 @@ var pro = pro || {};
                  return 'vertical-align:middle;';
              }
          },
+         {
+             field: 'PoliticsName', title: '政治面貌', width: 160, align: 'center',
+             styler: function (value, row, index) {
+                 return 'vertical-align:middle;';
+             }
+         },
+         
          //{ field: 'HomeAddress', title: '家庭地址', width: 100 },
          //{ field: 'MobileNO', title: '手机号', width: 100 },
          //{ field: 'ImageUrl', title: '图片地址', width: 100 },

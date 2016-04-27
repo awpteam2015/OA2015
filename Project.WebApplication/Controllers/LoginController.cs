@@ -85,7 +85,10 @@ namespace Project.WebApplication.Controllers
 
                 string result = HttpHelper.Helper.GetResponseString(System.Configuration.ConfigurationManager.AppSettings["Third_DepartmentWebServiceUrl"], "Get", new Dictionary<string, string> { }, Encoding.Default, Encoding.UTF8, 10000);
 
-                XDocument doc = XDocument.Parse(result);
+                var htmlstr = HttpUtility.HtmlDecode(result);
+                var start = htmlstr.IndexOf("?xml") - 1;
+                var end = htmlstr.LastIndexOf("/Response") + 11;
+                XDocument doc = XDocument.Parse(htmlstr.Substring(start, end - start));
 
                 //var path = Server.MapPath("/Config/XMLFile1.xml");
 
@@ -156,6 +159,22 @@ namespace Project.WebApplication.Controllers
 
 
             return View();
+        }
+
+        public string HtmlDecodeCus(string sText)
+        {
+            string stroutput = sText;
+
+            stroutput = stroutput.Replace("&quot;", "\"");
+            stroutput = stroutput.Replace("&lt;", "<");
+            stroutput = stroutput.Replace("&gt;", ">");
+            stroutput = stroutput.Replace("&#146;", "\'");
+            stroutput = stroutput.Replace("&nbsp;", " ");
+            stroutput = stroutput.Replace("<br>", "\r");
+            stroutput = stroutput.Replace("&nbsp;&nbsp;&nbsp;&nbsp;", "\t");
+
+
+            return stroutput.Replace("&nbsp;", " ").Replace("<br />", "\r\n");
         }
 
         [HttpPost]

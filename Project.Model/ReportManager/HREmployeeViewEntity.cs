@@ -104,5 +104,9 @@ namespace Project.Model.ReportManager
             get;
             set;
         }
+        /// <summary>
+        /// 政治面貌
+        /// </summary>
+        public virtual System.String PoliticsName { get; set; }
     }
 }

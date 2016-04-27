@@ -146,7 +146,7 @@
             }).done(
           function (dataresult, data) {
               initObj.xlOptionHtml = "";
-
+              
               $.each(dataresult, function (i, item) {
                   initObj.xlOptionHtml += "<option value='" + item.KeyValue + "'>" + item.KeyName + "</option>";
               });
@@ -162,7 +162,7 @@
                 //,data: JSON.stringify(postData)
             }).done(
                 function (dataresult, data) {
-                    initObj.xlOptionHtml = "";
+                    initObj.ndkhOptionHtml = "";
 
                     $.each(dataresult, function (i, item) {
                         initObj.ndkhOptionHtml += "<option value='" + item.KeyValue + "'>" + item.KeyName + "</option>";
@@ -206,6 +206,19 @@
                 onLoadSuccess: function () {
                     if (pro.commonKit.getUrlParam("PkId") > 0) {
                         $("#WorkState").combobox('setValue', bindEntity['WorkState']);
+                    }
+                }
+            });
+
+            $('#PoliticsName').combobox({
+                required: true,
+                editable: false,
+                valueField: 'KeyValue',
+                textField: 'KeyName',
+                url: '/HRManager/Dictionary/GetListByCode?ParentKeyCode=ZZMM',
+                onLoadSuccess: function () {
+                    if (pro.commonKit.getUrlParam("PkId") > 0) {
+                        $("#PoliticsName").combobox('setValue', bindEntity['PoliticsName']);
                     }
                 }
             });

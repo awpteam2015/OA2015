@@ -145,6 +145,9 @@ namespace Project.WebApplication.Areas.HRManager.Controllers
             {
                 postData.RequestEntity.PayCode = Chinese.GetFirstPinYin(postData.RequestEntity.EmployeeName).ToUpper();
             }
+
+            postData.RequestEntity.LastModifierUserCode = LoginUserInfo.UserCode;
+            postData.RequestEntity.LastModifierUserName = LoginUserInfo.UserName;
             var updateResult = EmployeeInfoService.GetInstance().Update(postData.RequestEntity);
             var result = new AjaxResponse<EmployeeInfoEntity>()
             {
@@ -447,9 +450,12 @@ namespace Project.WebApplication.Areas.HRManager.Controllers
                     insertModel.PostLevel = cells[i, 12].StringValue.Trim();
                     insertModel.PostLevelName = DictionaryService.GetInstance().GetModelByKeyCode("GWDJ", insertModel.PostLevel).KeyName;
 
-                    insertModel.MobileNO = cells[i, 13].StringValue.Trim();
-                    insertModel.HomeAddress = cells[i, 14].StringValue.Trim();
+                    insertModel.PoliticsName = cells[i, 13].StringValue.Trim();
+                    insertModel.MobileNO = cells[i, 14].StringValue.Trim();
+                    insertModel.HomeAddress = cells[i, 15].StringValue.Trim();
                     insertModel.State = 1;
+                    insertModel.LastModifierUserCode = LoginUserInfo.UserCode;
+                    insertModel.LastModifierUserName = LoginUserInfo.UserName;
                     Tuple<bool, string> addResult;
                     var oldentity = EmployeeInfoValidate.GetInstance().GetModelByCertNo(insertModel.CertNo);
                     if (oldentity != null && oldentity.PkId > 0)
@@ -459,6 +465,7 @@ namespace Project.WebApplication.Areas.HRManager.Controllers
                     }
                     else
                     {
+                        insertModel.CreatorUserName= LoginUserInfo.UserName;
                         addResult = EmployeeInfoService.GetInstance().Add(insertModel);
                     }
                     if (addResult.Item1)

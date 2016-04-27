@@ -162,6 +162,7 @@
                    function (errordetails, errormessage) {
                        //  $.alertExtend.error();
                    });
+
             var bindEntity = JSON.parse($("#BindEntity").val());
             $('#TechnicalTitle').combobox({
                 required: true,
@@ -200,6 +201,19 @@
                 }
             });
 
+            $('#PoliticsName').combobox({
+                required: true,
+                editable: false,
+                valueField: 'KeyValue',
+                textField: 'KeyName',
+                url: '/HRManager/Dictionary/GetListByCode?ParentKeyCode=ZZMM',
+                onLoadSuccess: function () {
+                    if (pro.commonKit.getUrlParam("PkId") > 0) {
+                        $("#PoliticsName").combobox('setValue', bindEntity['PoliticsName']);
+                    }
+                }
+            });
+
             $('#EmployeeType').combobox({
                 required: true,
                 editable: false,
@@ -234,6 +248,9 @@
                     if (pro.commonKit.getUrlParam("PkId") > 0) {
                         $("#PostLevel").combobox('setValue', bindEntity['PostLevel']);
                     }
+                    $("input[name='PostLevel']").parent().removeClass('textbox-invalid');
+                    $("input[name='PostLevel']").parent().children().removeClass('validatebox-invalid');
+                    // $("#PostLevel").parent().children().removeClass('validatebox-invalid');
                 }
             });
             $('#PostProperty').combobox({
@@ -631,7 +648,7 @@
                             width: 200,
                             formatter: function (value, row, index) {
                                 return pro.controlKit.getSelectHtml("Y_KHComment_" + row.PkId, value, initObj.ndkhOptionHtml, 190);
-                               // return pro.controlKit.getInputHtml("Y_KHComment_" + row.PkId, value, 180);
+                                // return pro.controlKit.getInputHtml("Y_KHComment_" + row.PkId, value, 180);
                             }
                         }
                     ]
@@ -872,7 +889,7 @@
                         //WorkState: { required: true  },
                         //EmployeeType: { required: true  },
                         //HomeAddress: { required: true  },
-                        MobileNO: { isMobile: '输入正确手机号' },
+                        MobileNO: { isMobile: '输入正确手机号' }
                         //ImageUrl: { required: true  },
                         //Sort: { required: true  },
                         //State: { required: true  },
