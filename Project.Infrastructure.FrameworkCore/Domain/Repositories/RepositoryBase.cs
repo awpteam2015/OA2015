@@ -201,7 +201,7 @@ namespace Project.Infrastructure.FrameworkCore.Domain.Repositories
 
         private void DealModification(TEntity entity)
         {
-            if (HttpContext.Current.Items.Contains("UserInfo"))
+            if (HttpContext.Current != null && HttpContext.Current.Items.Contains("UserInfo"))
             {
                 var t = (HttpContextUserInfo)HttpContext.Current.Items["UserInfo"];
 
@@ -218,7 +218,7 @@ namespace Project.Infrastructure.FrameworkCore.Domain.Repositories
 
         private void DealCreation(TEntity entity)
         {
-            if (HttpContext.Current.Items.Contains("UserInfo"))
+            if (HttpContext.Current != null && HttpContext.Current.Items.Contains("UserInfo"))
             {
                 var t = (HttpContextUserInfo)HttpContext.Current.Items["UserInfo"];
 

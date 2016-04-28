@@ -60,7 +60,7 @@
             this.Controls.Add(this.btnEnd);
             this.Controls.Add(this.btnStart);
             this.Name = "EmployeeUpload";
-            this.Text = "EmployeeUpload";
+            this.Text = "部门同步软件";
             this.ResumeLayout(false);
 
         }

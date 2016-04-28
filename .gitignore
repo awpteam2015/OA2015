@@ -190,3 +190,7 @@ ModelManifest.xml
 /Project.WebApplication/Logs/ErrorLog
 /Project.WebApplication/Logs/Order
 /.vs/config/applicationhost.config
+/Project.WebApplication/Logs/InfoLog
+/Project.WebApplication/Logs/Payment
+/Project.WebApplication/Logs/TradingPlatform
+/Project.WebApplication/Logs/ThirdPartyLogin/20160429.txt
