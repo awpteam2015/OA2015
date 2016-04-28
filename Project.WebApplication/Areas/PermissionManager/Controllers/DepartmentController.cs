@@ -77,7 +77,15 @@ namespace Project.WebApplication.Areas.PermissionManager.Controllers
 
             return new AbpJsonResult(searchList, new NHibernateContractResolver(new[] { "children" }));
         }
+        public AbpJsonResult GetAllist_Combotree()
+        {
+            var where = new DepartmentEntity();
+            where.DepartmentCode = RequestHelper.GetFormString("DepartmentCode");
+            where.DepartmentName = RequestHelper.GetFormString("DepartmentName");
+            var searchList = DepartmentService.GetInstance().GetTreeList(where, LoginUserInfo.UserDepartmentList.ToList(), true, true);
 
+            return new AbpJsonResult(searchList, new NHibernateContractResolver(new[] { "children" }));
+        }
 
         [HttpPost]
         public AbpJsonResult Add(AjaxRequest<DepartmentEntity> postData)

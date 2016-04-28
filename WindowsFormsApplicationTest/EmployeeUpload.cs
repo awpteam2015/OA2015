@@ -1,49 +1,37 @@
-﻿using System;
+﻿using Project.Infrastructure.FrameworkCore.Logging;
+using Project.Model.PermissionManager;
+using Project.Service.PermissionManager;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml.Linq;
-using Project.Infrastructure.FrameworkCore.DataNhibernate;
-using Project.Infrastructure.FrameworkCore.Logging;
-using Project.Model.PermissionManager;
-using Project.Service.PermissionManager;
 
 namespace WindowsFormsApplicationTest
 {
-    public partial class Form1 : Form
+    public partial class EmployeeUpload : Form
     {
-        public Form1()
+        public EmployeeUpload()
         {
             InitializeComponent();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void btnStart_Click(object sender, EventArgs e)
         {
-            var t = UserInfoService.GetInstance().GetModel(1);
-
-            var t2 = UserInfoService.GetInstance().GetModel(1);
-            // Thread.CurrentThread.Name = "1111";
-            textBox1.Text += Thread.CurrentThread.Name + "-----------" + t.UserName;
-
-            SessionFactoryManager.Clear();
+            upload();
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void btnEnd_Click(object sender, EventArgs e)
         {
-            var t = UserInfoService.GetInstance().GetModel(1);
-            textBox1.Text += Thread.CurrentThread.Name + "-----------" + t.UserName;
+
         }
 
-      
-
-        private void button4_Click(object sender, EventArgs e)
+        public void upload()
         {
             #region 动态调用 webservices地址
 
@@ -67,15 +55,15 @@ namespace WindowsFormsApplicationTest
                     string result = HttpHelper.Helper.GetResponseString(Third_DepartmentWebServiceUrl, "Get", new Dictionary<string, string> { }, Encoding.Default, Encoding.UTF8, 10000);
 
                     //XDocument doc = XDocument.Parse(result);
-                     //var path = System.Environment.CurrentDirectory + "/XMLFile1.xml";
+                    //var path = System.Environment.CurrentDirectory + "/XMLFile1.xml";
 
-                   // XDocument doc1 = XDocument.Load(path);
-
-                    //LoggerHelper.Info("get：" + HTMLDecodeNew(doc1+""));
+                    // XDocument doc1 = XDocument.Load(path);
                     var htmlstr = HTMLDecodeNew(result + "");
+
+                    LoggerHelper.Info("get：" + htmlstr);
                     var start = htmlstr.IndexOf("?xml") - 1;
                     var end = htmlstr.LastIndexOf("/Response") + 11;
-                    XDocument doc = XDocument.Parse(htmlstr.Substring(start, end-start));
+                    XDocument doc = XDocument.Parse(htmlstr.Substring(start, end - start));
                     //XDocument doc = XDocument.Load(path);
                     var text = from t in doc.Descendants("dept")                    //定位到节点 
                                select new DepatmentTemp()
@@ -147,7 +135,7 @@ namespace WindowsFormsApplicationTest
 
             catch (Exception ex)
             {
-                textBox1.Text = ex.Message;
+
                 MessageBox.Show(ex.Message);
             }
 
@@ -169,45 +157,5 @@ namespace WindowsFormsApplicationTest
 
             return stroutput.Replace("&nbsp;", " ").Replace("<br />", "\r\n");
         }
-    }
-    
-
-    public class DepatmentTemp
-    {
-        /// <summary>
-        /// 机构代码
-        /// </summary>
-        public string JGDM { get; set; }
-
-
-        /// <summary>
-        /// 医疗机构编码
-        /// </summary>
-        public string JGBM { get; set; }
-
-        /// <summary>
-        /// 机构名称
-        /// </summary>
-        public string JGMC { get; set; }
-
-        /// <summary>
-        /// 科室名称
-        /// </summary>
-        public string KSMC { get; set; }
-
-        /// <summary>
-        /// 科室代码
-        /// </summary>
-        public string KSDM { get; set; }
-
-        /// <summary>
-        /// 科室父级编码
-        /// </summary>
-        public string KSFJBM { get; set; }
-
-        /// <summary>
-        ///  机构/科室状态代码
-        /// </summary>
-        public string TYPE { get; set; }
     }
 }

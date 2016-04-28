@@ -20,7 +20,7 @@
             });
 
             //部门初始化
-            pro.DepartmentControl.init();
+            pro.AllDepartmentControl.init();
 
 
             if ($("#BindEntity").val()) {

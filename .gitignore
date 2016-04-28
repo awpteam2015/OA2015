@@ -187,3 +187,6 @@ FakesAssemblies/
 GeneratedArtifacts/
 _Pvt_Extensions/
 ModelManifest.xml
+/Project.WebApplication/Logs/ErrorLog
+/Project.WebApplication/Logs/Order
+/.vs/config/applicationhost.config

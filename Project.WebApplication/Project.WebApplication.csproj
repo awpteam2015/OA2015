@@ -21,7 +21,7 @@
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
     <UseGlobalApplicationHostFile />
-    <TypeScriptToolsVersion>1.7</TypeScriptToolsVersion>
+    <TypeScriptToolsVersion>1.8</TypeScriptToolsVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -220,6 +220,7 @@
     <Content Include="HtmlPage1.html" />
     <Content Include="HtmlPage12.html" />
     <Content Include="Resources\Css\Site.css" />
+    <Content Include="Scripts\Control\AllDepartmentControl.js" />
     <Content Include="Scripts\jqueryPlugins\jquery-easyui\jquery.messager.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
