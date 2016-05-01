@@ -17,6 +17,7 @@ using Project.Infrastructure.FrameworkCore.WebMvc.Controllers.Results;
 using Project.Infrastructure.FrameworkCore.WebMvc.Models;
 using Project.Model.HRManager;
 using Project.Model.Other;
+using Project.Model.PermissionManager;
 using Project.Model.ReportManager;
 using Project.Service.HRManager;
 using Project.Service.PermissionManager;
@@ -63,6 +64,11 @@ namespace Project.WebApplication.Areas.HRManager.Controllers
             var where = new AttendanceEntity();
             where.DepartmentCode = RequestHelper.GetString("DepartmentCode");
             var date = RequestHelper.GetDateTime("Attr_ExportDate").GetValueOrDefault();
+            if (RequestHelper.GetInt("Kind") == 1)
+            {
+                date = RequestHelper.GetDateTime("Date").GetValueOrDefault();
+            }
+
             date = new DateTime(date.Year, date.Month, 1);
 
             where.Attr_StartDate = date;
@@ -71,6 +77,15 @@ namespace Project.WebApplication.Areas.HRManager.Controllers
   .Select(g => g.First())
   .ToList();
 
+            if (RequestHelper.GetInt("Kind") == 1)
+            {
+                searchList = EmployeeInfoService.GetInstance()
+                    .GetList(new EmployeeInfoEntity() { DepartmentCode = where.DepartmentCode }).Select(p => new AttendanceEntity()
+                    {
+                        EmployeeCode = p.EmployeeCode,
+                        EmployeeName = p.EmployeeName
+                    }).ToList();
+            }
 
             string[] Day = new string[] { "日", "一", "二", "三", "四", "五", "六" };
 
@@ -150,7 +165,7 @@ namespace Project.WebApplication.Areas.HRManager.Controllers
             where.EmployeeName = RequestHelper.GetString("EmployeeName");
             where.Attr_StartDate = RequestHelper.GetDateTime("Attr_StartDate");
             where.Attr_EndDate = RequestHelper.GetDateTime("Attr_EndDate");
-            where.DepartmentCode= RequestHelper.GetString("DepartmentCode");
+            where.DepartmentCode = RequestHelper.GetString("DepartmentCode");
             where.DepartmentCode = string.Join(",", (DepartmentService.GetInstance().GetChiledArr(where.DepartmentCode, LoginUserInfo.UserDepartmentList.ToList(), LoginUserInfo.IsAdmin)));
             // RequestHelper.GetString("DepartmentCode");
             //where.DepartmentName = RequestHelper.GetFormString("DepartmentName");

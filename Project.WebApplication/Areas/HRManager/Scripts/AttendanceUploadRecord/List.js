@@ -78,6 +78,24 @@ var pro = pro || {};
             $("#btnRefresh").click(function () {
                 gridObj.refresh();
             });
+
+            $('#btnExport').click(function () {
+
+                if ($("#Date").val() == "" || $('#DepartmentCode').combotree("getValue") == "") {
+                    $.alertExtend.infoOp("请选择模版部门及模版月份！");
+                    return false;
+                }
+
+                if ($('#DepartmentCode').combotree("getValue").length != 5) {
+                    $.alertExtend.infoOp("请选择科室（部门最后一级）！");
+                    return false;
+                }
+
+
+                var urlParam = pro.commonKit.parseParam(gridObj.searchForm());
+                location.href = "/HRManager/Attendance/ExportReport?kind=1&" + urlParam;
+            });
+
         },
         closeTab: function () {
             this.init().tabObj.closeTab();
