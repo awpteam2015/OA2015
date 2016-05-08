@@ -40,7 +40,7 @@ namespace Project.WebApplication.Areas.HRManager.Controllers
                 ViewBag.BindEntity = JsonHelper.JsonSerializer(new EmployeeInfoEntity()
                 {
                     EmployeeCode = maxCode,
-                    Duties = "0",
+                    Duties = "1",
                     EmployeeType = "0",
                     Sex = 0,
                     WorkingYears = 1,

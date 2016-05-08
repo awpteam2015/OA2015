@@ -56,8 +56,9 @@ namespace Project.Map.HRManager
             Map(p => p.PostLevel);
             Map(p => p.PostLevelName);
             Map(p => p.PostProperty);
-            Map(p => p.PostPropertyName); 
+            Map(p => p.PostPropertyName);
             Map(p => p.PoliticsName);
+            Map(p => p.IntoCompanyTime);
 
             HasMany(p => p.WorkList)
             .AsSet()
@@ -110,10 +111,17 @@ namespace Project.Map.HRManager
 
 
             HasMany(p => p.EmployeeFileList)
-            .AsSet()
-            .LazyLoad()
-            .Cascade.All().Inverse()
-            .KeyColumn("EmployeeID");
+                .AsSet()
+                .LazyLoad()
+                .Cascade.All().Inverse()
+                .KeyColumn("EmployeeID");
+
+            HasMany(p => p.WageList)
+           .AsSet()
+           .LazyLoad()
+           .Cascade.All().Inverse()
+           .KeyColumn("EmployeeID");
+
         }
     }
 }

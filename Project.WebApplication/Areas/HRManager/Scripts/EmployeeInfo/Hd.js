@@ -19,11 +19,15 @@
                 gridObjTechnical: new pro.GridBase("#datagridTechnical", false),
                 gridObjProfession: new pro.GridBase("#datagridProfession", false),
                 gridObjYear: new pro.GridBase("#datagridYear", false),
+                gridObjWage: new pro.GridBase("#datagridWage", false),
                 gridObjFile: this.vars.gridObjFile,
+                xwOptionHtml: '',//学位<option></option>
                 xlOptionHtml: '',//学历<option></option>
                 xzOptionHtml: '',//学制<option></option>
                 zcOptionHtml: '',//职称<option></option>
                 jxjyOptionHtml: '',//继续教育学分类型<option></option>
+                gwgzOptionHtml: '',//岗位工资<option></option>
+                xzgzOptionHtml: '',//薪资工资<option></option>
                 ndkhOptionHtml: ''//年度考核评价<option></option>
             };
         },
@@ -35,6 +39,7 @@
             var gridObjTechnical = initObj.gridObjTechnical;
             var gridObjProfession = initObj.gridObjProfession;
             var gridObjYear = initObj.gridObjYear;
+            var gridObjWage = initObj.gridObjWage;
             var gridObjFile = initObj.gridObjFile;
 
 
@@ -131,6 +136,25 @@
            }
           );
 
+
+            abp.ajax({
+                url: "/HRManager/Dictionary/GetListByCode?ParentKeyCode=Degree"
+                //,data: JSON.stringify(postData)
+            }).done(
+            function (dataresult, data) {
+                initObj.xwOptionHtml = "";
+
+                $.each(dataresult, function (i, item) {
+                    initObj.xwOptionHtml += "<option value='" + item.KeyValue + "'>" + item.KeyName + "</option>";
+                });
+
+            }
+            ).fail(
+             function (errordetails, errormessage) {
+                 //  $.alertExtend.error();
+             }
+        );
+
             abp.ajax({
                 url: "/HRManager/Dictionary/GetListByCode?ParentKeyCode=Education"
                 //,data: JSON.stringify(postData)
@@ -153,7 +177,7 @@
                 //,data: JSON.stringify(postData)
             }).done(
                function (dataresult, data) {
-                   initObj.xlOptionHtml = "";
+                   initObj.ndkhOptionHtml = "";
 
                    $.each(dataresult, function (i, item) {
                        initObj.ndkhOptionHtml += "<option value='" + item.KeyValue + "'>" + item.KeyName + "</option>";
@@ -163,6 +187,34 @@
                        //  $.alertExtend.error();
                    });
 
+            abp.ajax({
+                url: "/HRManager/Dictionary/GetListByCode?ParentKeyCode=RY_GWGZ"
+                //,data: JSON.stringify(postData)
+            }).done(
+              function (dataresult, data) {
+                  initObj.gwgzOptionHtml = "";
+
+                  $.each(dataresult, function (i, item) {
+                      initObj.gwgzOptionHtml += "<option value='" + item.KeyValue + "'>" + item.KeyName + "</option>";
+                  });
+              }).fail(
+                  function (errordetails, errormessage) {
+                      //  $.alertExtend.error();
+                  });
+            abp.ajax({
+                url: "/HRManager/Dictionary/GetListByCode?ParentKeyCode=RY_YZGZ"
+                //,data: JSON.stringify(postData)
+            }).done(
+             function (dataresult, data) {
+                 initObj.xzgzOptionHtml = "";
+
+                 $.each(dataresult, function (i, item) {
+                     initObj.xzgzOptionHtml += "<option value='" + item.KeyValue + "'>" + item.KeyName + "</option>";
+                 });
+             }).fail(
+                 function (errordetails, errormessage) {
+                     //  $.alertExtend.error();
+                 });
             var bindEntity = JSON.parse($("#BindEntity").val());
             $('#TechnicalTitle').combobox({
                 required: true,
@@ -284,9 +336,9 @@
                         {
                             field: 'WorkCompany',
                             title: '工作单位',
-                            width: 100,
+                            width: 150,
                             formatter: function (value, row, index) {
-                                return pro.controlKit.getInputHtml("WorkCompany_" + row.PkId, value);
+                                return pro.controlKit.getInputHtml("WorkCompany_" + row.PkId, value,140);
                             }
                         },
                         {
@@ -349,7 +401,7 @@
                             title: '毕业院校',
                             width: 200,
                             formatter: function (value, row, index) {
-                                return pro.controlKit.getInputHtml("S_School_" + row.PkId, value);
+                                return pro.controlKit.getInputHtml("S_School_" + row.PkId, value, 180);
                             }
                         },
                         {
@@ -357,7 +409,7 @@
                             title: '专业',
                             width: 150,
                             formatter: function (value, row, index) {
-                                return pro.controlKit.getInputHtml("S_ProfessionCode_" + row.PkId, value);
+                                return pro.controlKit.getInputHtml("S_ProfessionCode_" + row.PkId, value, 130);
                             }
                         },
                         {
@@ -365,15 +417,15 @@
                             title: '学位',
                             width: 100,
                             formatter: function (value, row, index) {
-                                return pro.controlKit.getInputHtml("S_Degree_" + row.PkId, value);
+                                return pro.controlKit.getSelectHtml("S_Degree_" + row.PkId, value, initObj.xwOptionHtml, 90);
                             }
                         },
                         {
                             field: 'Education',
                             title: '学历',
-                            width: 140,
+                            width: 120,
                             formatter: function (value, row, index) {
-                                return pro.controlKit.getSelectHtml("S_Education_" + row.PkId, value, initObj.xlOptionHtml);
+                                return pro.controlKit.getSelectHtml("S_Education_" + row.PkId, value, initObj.xlOptionHtml, 110);
                             }
                         },
                         {
@@ -658,6 +710,46 @@
                 pageList: [20, 30, 40] //可以设置每页记录条数的列表    
             }
             );
+
+            gridObjWage.grid({
+                url: '/HRManager/YGWage/GetAllList?EmployeeID=' + (pro.commonKit.getUrlParam("PkId") ? pro.commonKit.getUrlParam("PkId") : 0),
+                fitColumns: false,
+                nowrap: false,
+                rownumbers: true, //行号
+                singleSelect: true,
+                idField: "PkId",
+                columns: [
+                    [
+                        {
+                            field: 'PkId', title: '', hidden: true, width: 100,
+                            formatter: function (value, row, index) {
+                                return pro.controlKit.getInputHtml("W_PkId", row.PkId);
+                            }
+                        },
+                        {
+                            field: 'GWGZ',
+                            title: '岗位工资',
+                            width: 180,
+                            formatter: function (value, row, index) {
+                                return pro.controlKit.getSelectHtml("W_GWGZ_" + row.PkId, value, initObj.gwgzOptionHtml, 150);
+                            }
+                        },
+                        {
+                            field: 'XZGZ',
+                            title: '薪级工资',
+                            width: 200,
+                            formatter: function (value, row, index) {
+                                return pro.controlKit.getSelectHtml("W_XZGZ_" + row.PkId, value, initObj.xzgzOptionHtml, 190);
+                                // return pro.controlKit.getInputHtml("Y_KHComment_" + row.PkId, value, 180);
+                            }
+                        }
+                    ]
+                ],
+                pagination: false,
+                pageSize: 20, //每页显示的记录条数，默认为10     
+                pageList: [20, 30, 40] //可以设置每页记录条数的列表    
+            }
+            );
             gridObjFile.grid({
                 url: '/HRManager/EmployeeFile/GetAllList?EmployeeID=' + (pro.commonKit.getUrlParam("PkId") ? pro.commonKit.getUrlParam("PkId") : 0),
                 fitColumns: false,
@@ -744,7 +836,16 @@
                     PkId: gridObjYear.PkId
                 });
 
-                $("#datagridYear").datagrid('selectRecord', gridObjYear.P_PkId + 1);
+                $("#datagridYear").datagrid('selectRecord', gridObjYear.Y_PkId + 1);
+            });
+
+
+            $("#btnAddWage_ToolBar").click(function () {
+                gridObjWage.insertRow({
+                    PkId: gridObjWage.PkId
+                });
+
+                $("#datagridWage").datagrid('selectRecord', gridObjWage.W_PkId + 1);
             });
 
             $("#btnDelWork_ToolBar").click(function () {
@@ -764,6 +865,10 @@
             });
             $("#btnDelYear_ToolBar").click(function () {
                 gridObjYear.delRow();
+            });
+
+            $("#btnDelWage_ToolBar").click(function () {
+                gridObjWage.delRow();
             });
 
             if ($("#BindEntity").val()) {
@@ -832,6 +937,11 @@
             pro.submitKit.config.columnNamePreStr = "Y_";
             pro.submitKit.config.columns = ["KHYear", "KHComment"];
             postData.RequestEntity.YearAssessmentList = pro.submitKit.getRowJson();
+
+            pro.submitKit.config.columnPkidName = "W_PkId";
+            pro.submitKit.config.columnNamePreStr = "W_";
+            pro.submitKit.config.columns = ["GWGZ", "XZGZ"];
+            postData.RequestEntity.WageList = pro.submitKit.getRowJson();
 
 
             var tempstr = $('#EmployeeFileList').val();

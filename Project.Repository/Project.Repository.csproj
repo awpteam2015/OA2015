@@ -71,6 +71,7 @@
     <Compile Include="HRManager\TechnicalRepository.cs" />
     <Compile Include="HRManager\WorkExperienceRepository.cs" />
     <Compile Include="HRManager\YearHolidayDefinitionRepository.cs" />
+    <Compile Include="HRManager\YGWageRepository.cs" />
     <Compile Include="PermissionManager\DepartmentRepository.cs" />
     <Compile Include="PermissionManager\FunctionDetailRepository.cs" />
     <Compile Include="PermissionManager\FunctionRepository.cs" />

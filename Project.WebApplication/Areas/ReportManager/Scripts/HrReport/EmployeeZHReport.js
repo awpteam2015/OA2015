@@ -45,7 +45,7 @@ var pro = pro || {};
              }
          },
          { field: 'EmployeeTypeName', title: '员工类型', width: 100 },
-         { field: 'DepartmentName', title: '部门名称', width: 100 },
+         { field: 'DepartmentName', title: '部门名称', width: 200 },
          { field: 'PostPropertyName', title: '岗位性质', width: 100 },
          { field: 'PostLevelName', title: '岗位等级', width: 100 },
          { field: 'DutiesName', title: '单位职务', width: 100 },
@@ -147,6 +147,39 @@ var pro = pro || {};
                         $('#Education').combobox("setValue", "");
                     }
                 });
+            if (ReportType == '') {
+                $('#LevNum').combobox({
+                    required: true,
+                    editable: false,
+                    valueField: 'KeyValue',
+                    textField: 'KeyName',
+                    url: '/HRManager/Dictionary/GetListByCode?ParentKeyCode=JSZC&AllFlag=1',
+                    onLoadSuccess: function () {
+                        $('#LevNum').combobox("setValue", "");
+                    }
+                });
+                $('#KHComment').combobox({
+                    required: true,
+                    editable: false,
+                    valueField: 'KeyValue',
+                    textField: 'KeyName',
+                    url: '/HRManager/Dictionary/GetListByCode?ParentKeyCode=NDKH_PJ&AllFlag=1',
+                    onLoadSuccess: function () {
+                        $('#KHComment').combobox("setValue", "");
+                    }
+                });
+                $('#Degree').combobox({
+                    required: true,
+                    editable: false,
+                    valueField: 'KeyValue',
+                    textField: 'KeyName',
+                    url: '/HRManager/Dictionary/GetListByCode?ParentKeyCode=Degree&AllFlag=1',
+                    onLoadSuccess: function () {
+                        $('#Degree').combobox("setValue", "");
+                    }
+                });
+                
+            }
 
             $("#btnSearch").click(function () {
                 gridObj.search();

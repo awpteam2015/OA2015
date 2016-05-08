@@ -72,7 +72,13 @@
                     参加工作时间<span style="color: Red">*</span>:
                 </td>
                 <td>
-                    <input id="StartWork" name="StartWork" type="text" class="Wdate" onclick="WdatePicker();" />
+                    <input id="StartWork" name="StartWork" type="text" class="Wdate" onclick="WdatePicker();"/>
+                </td>
+                <td>
+                    进入本单位时间:
+                </td>
+                <td>
+                    <input id="IntoCompanyTime" name="IntoCompanyTime" type="text" class="Wdate" onclick="WdatePicker();" />
                 </td>
                 <td style="display: none">
                     工龄<span style="color: Red">*</span>:
@@ -86,22 +92,16 @@
                     <td>
                         <input id="TechnicalTitle" name="TechnicalTitle" type="text" />
                     </td>*@
-
+                
+            </tr>
+            <tr>
                 <td>
                     单位职务<span style="color: Red">*</span>:
                 </td>
                 <td>
                     <input id="Duties" name="Duties" type="text" />
                 </td>
-            </tr>
-            <tr>
-
-                <td>
-                    岗位性质<span style="color: Red">*</span>:
-                </td>
-                <td>
-                    <input id="PostProperty" name="PostProperty" type="text" />
-                </td>
+               
                 <td>
                     政治面貌:
                 </td>
@@ -117,24 +117,25 @@
             </tr>
             <tr>
                 <td>
+                    岗位性质<span style="color: Red">*</span>:
+                </td>
+                <td>
+                    <input id="PostProperty" name="PostProperty" type="text" />
+                </td>
+                <td>
                     在职状态<span style="color: Red">*</span>:
                 </td>
                 <td>
-                    <input id="WorkState" name="WorkState" type="text" />
+                    <input id="WorkState" name="WorkState" type="text"/>
                 </td>
 
                 <td>
                     员工类型<span style="color: Red">*</span>:
                 </td>
                 <td>
-                    <input id="EmployeeType" name="EmployeeType" type="text" />
+                    <input id="EmployeeType" name="EmployeeType" type="text"/>
                 </td>
-                <td>
-                    岗位等级:
-                </td>
-                <td>
-                    <input id="PostLevel" name="PostLevel" type="text" />
-                </td>
+                
                 <td style="display: none">
                     状态:
                 </td>
@@ -148,13 +149,34 @@
             </tr>
             <tr>
                 <td>
+                    岗位等级:
+                </td>
+                <td>
+                    <input id="PostLevel" name="PostLevel" type="text" />
+                </td>
+                <td>
                     手机号:
                 </td>
                 <td>
-                    <input id="MobileNO" name="MobileNO" type="text" />
+                    <input id="MobileNO" name="MobileNO" type="text"/>
                 </td>
+                <td>
+                    图片地址:
+                </td>
+                <td rowspan="3">
+                    @*<input id="ImageUrl" name="ImageUrl" type="text" />*@
+                    <div style="display: none">
+                        <input id="FileUrl" name="FileUrl" type="text"/>
+                        <input id="FileName" name="FileName" type="text"/>
+                    </div>
 
-
+                    <div style="float: left; width: 150px;">
+                        <input id="file_upload" name="file_upload" type="file"/>
+                    </div>
+                    <div style="float: left; line-height: 40px;" id="div_filename"></div>
+                </td>
+            </tr>
+            <tr>
 
                 <td>
                     排序:
@@ -163,27 +185,10 @@
                     <input id="Sort" name="Sort" type="text" />
                 </td>
                 <td>
-                    图片地址:
-                </td>
-                <td rowspan="3">
-                    @*<input id="ImageUrl" name="ImageUrl" type="text" />*@
-                    <div style="display: none">
-                        <input id="FileUrl" name="FileUrl" type="text" />
-                        <input id="FileName" name="FileName" type="text" />
-                    </div>
-
-                    <div style="float: left; width: 150px;">
-                        <input id="file_upload" name="file_upload" type="file" />
-                    </div>
-                    <div style="float: left; line-height: 40px;" id="div_filename"></div>
-                </td>
-            </tr>
-            <tr>
-                <td>
                     家庭地址:
                 </td>
-                <td colspan="4">
-                    <input id="HomeAddress" name="HomeAddress" type="text" style="width:350px" />
+                <td colspan="2">
+                    <input id="HomeAddress" name="HomeAddress" type="text" style="width: 350px"/>
                 </td>
             </tr>
             <tr>
@@ -266,6 +271,17 @@
                         <a id="btnDelYear_ToolBar" href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-remove',plain:true">删除</a>
                     </div>
                     <div id="divSearchYear">
+                    </div>
+                </div>
+            </div>
+            <div title="人事工资" style="padding: 1px;">
+                <table id="datagridWage" toolbar="#tbWage" style="height: 300px; width: 100%"></table>
+                <div id="tbWage" style="padding: 5px; height: auto">
+                    <div style="margin-bottom: 5px">
+                        <a id="btnAddWage_ToolBar" href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:true">添加</a>
+                        <a id="btnDelWage_ToolBar" href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-remove',plain:true">删除</a>
+                    </div>
+                    <div id="divSearchWage">
                     </div>
                 </div>
             </div>

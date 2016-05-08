@@ -75,6 +75,7 @@
     <Compile Include="HRManager\TechnicalMap.cs" />
     <Compile Include="HRManager\WorkExperienceMap.cs" />
     <Compile Include="HRManager\YearHolidayDefinitionMap.cs" />
+    <Compile Include="HRManager\YGWageMap.cs" />
     <Compile Include="PermissionManager\DepartmentMap.cs" />
     <Compile Include="PermissionManager\FunctionDetailMap.cs" />
     <Compile Include="PermissionManager\FunctionMap.cs" />

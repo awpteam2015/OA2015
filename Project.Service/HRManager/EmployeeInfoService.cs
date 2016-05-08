@@ -10,6 +10,8 @@ using System;
 using System.Linq;
 using NHibernate.Linq;
 using System.Collections.Generic;
+using System.Web.UI;
+using System.Web.UI.WebControls;
 using Project.Infrastructure.FrameworkCore.DataNhibernate.Helpers;
 using Project.Model.HRManager;
 using Project.Repository.HRManager;
@@ -30,6 +32,7 @@ namespace Project.Service.HRManager
         private readonly TechnicalRepository _technicalRepository;
         private readonly ProfessionRepository _professionRepository;
         private readonly YearAssessmentRepository _yearAssessmentRepository;
+        private readonly YGWageRepository _ygWageRepository;
         private readonly EmployeeInfoHisRepository _employeeInfoHisRepository;
 
         private static readonly EmployeeInfoService Instance = new EmployeeInfoService();
@@ -45,6 +48,7 @@ namespace Project.Service.HRManager
             this._professionRepository = new ProfessionRepository();
             this._yearAssessmentRepository=new YearAssessmentRepository();
             this._employeeInfoHisRepository = new EmployeeInfoHisRepository();
+            this._ygWageRepository=new YGWageRepository();
         }
 
         public static EmployeeInfoService GetInstance()
@@ -127,6 +131,10 @@ namespace Project.Service.HRManager
                         p.EmployeeID = pkId;
                     });
                     entity.EmployeeFileList.ToList().ForEach(p =>
+                    {
+                        p.EmployeeID = pkId;
+                    });
+                    entity.WageList.ToList().ForEach(p =>
                     {
                         p.EmployeeID = pkId;
                     });
@@ -217,6 +225,7 @@ namespace Project.Service.HRManager
             entity.ProfessionList.ToList().ForEach(item => item.EmployeeID = entity.PkId);
             entity.YearAssessmentList.ToList().ForEach(item => item.EmployeeID = entity.PkId);
             entity.EmployeeFileList.ToList().ForEach(item => item.EmployeeID = entity.PkId);
+            entity.WageList.ToList().ForEach(item => { item.EmployeeID = entity.PkId;  item.CreationTime=DateTime.Now; });
             var deleteList = oldEntity.WorkList.Where(
                     p => entity.WorkList.All(x => x.PkId != p.PkId)).ToList();
             var deleteLearningList = oldEntity.LearningList.Where(
@@ -233,6 +242,8 @@ namespace Project.Service.HRManager
 
             var deleteYearAssessmentList = oldEntity.YearAssessmentList.Where(
                               p => entity.YearAssessmentList.All(x => x.PkId != p.PkId)).ToList();
+            var deleteWageList = oldEntity.WageList.Where(
+                            p => entity.WageList.All(x => x.PkId != p.PkId)).ToList();
 
             using (var tx = NhTransactionHelper.BeginTransaction())
             {
@@ -263,6 +274,7 @@ namespace Project.Service.HRManager
                     deleteContinEducationList.ForEach(p => { _continEducationRepository.Delete(p); });
                     deleteProfessionList.ForEach(p => { _professionRepository.Delete(p); });
                     deleteYearAssessmentList.ForEach(p => { _yearAssessmentRepository.Delete(p); });
+                    deleteWageList.ForEach(p => { _ygWageRepository.Delete(p); });
                     tx.Commit();
                     return new Tuple<bool, string>(true, "");
                 }

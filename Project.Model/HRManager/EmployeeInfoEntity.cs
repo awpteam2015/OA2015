@@ -27,6 +27,7 @@ namespace Project.Model.HRManager
             this.ProfessionList = new HashSet<ProfessionEntity>();
             this.YearAssessmentList = new HashSet<YearAssessmentEntity>();
             this.EmployeeFileList = new HashSet<EmployeeFileEntity>();
+            this.WageList=new HashSet<YGWageEntity>();
             //this.DepartModel = new DepartmentEntity();
         }
         #region 属性
@@ -185,6 +186,10 @@ namespace Project.Model.HRManager
         /// 政治面貌
         /// </summary>
         public virtual System.String PoliticsName { get; set; }
+        /// <summary>
+        /// 进入本单位时间
+        /// </summary>
+        public virtual System.DateTime? IntoCompanyTime { get; set; }
 
         #endregion
 
@@ -223,6 +228,11 @@ namespace Project.Model.HRManager
         /// 上传列表
         /// </summary>
         public virtual  ISet<EmployeeFileEntity> EmployeeFileList { get; set; }
+
+        /// <summary>
+        /// 人事工资列表
+        /// </summary>
+        public virtual ISet<YGWageEntity> WageList { get; set; }
         //public virtual DepartmentEntity DepartModel { get; set; }
         #endregion
     }

@@ -161,6 +161,8 @@
     <Content Include="Areas\HRManager\Scripts\WorkExperience\List.js" />
     <Content Include="Areas\HRManager\Scripts\YearHolidayDefinition\Hd.js" />
     <Content Include="Areas\HRManager\Scripts\YearHolidayDefinition\List.js" />
+    <Content Include="Areas\HRManager\Scripts\YGWage\Hd.js" />
+    <Content Include="Areas\HRManager\Scripts\YGWage\List.js" />
     <Content Include="Areas\HRManager\Views\EmployeeInfoDutiesTransfer\Hd.cshtml" />
     <Content Include="Areas\HRManager\Views\EmployeeInfoDutiesTransfer\List.cshtml" />
     <Content Include="Areas\HRManager\Views\EmployeeInfoTechnical\List.cshtml" />
@@ -311,6 +313,8 @@
     <Content Include="Areas\HRManager\Views\ContinEducation\List.cshtml" />
     <Content Include="Areas\HRManager\Views\EmployeeFile\Hd.cshtml" />
     <Content Include="Areas\HRManager\Views\EmployeeFile\List.cshtml" />
+    <Content Include="Areas\HRManager\Views\YGWage\Hd.cshtml" />
+    <Content Include="Areas\HRManager\Views\YGWage\List.cshtml" />
     <None Include="Properties\PublishProfiles\OA.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\Control\DepartmentControl.js" />
@@ -982,6 +986,7 @@
     <Compile Include="Areas\HRManager\Controllers\WorkExperienceController.cs" />
     <Compile Include="Areas\HRManager\Controllers\YearAssessmentController.cs" />
     <Compile Include="Areas\HRManager\Controllers\YearHolidayDefinitionController.cs" />
+    <Compile Include="Areas\HRManager\Controllers\YGWageController.cs" />
     <Compile Include="Areas\HRManager\HRManagerAreaRegistration.cs" />
     <Compile Include="Areas\PermissionManager\Controllers\DepartmentController.cs" />
     <Compile Include="Areas\PermissionManager\Controllers\FunctionController.cs" />

@@ -304,9 +304,11 @@ namespace Project.WebApplication.Areas.ReportManager.Controllers
             if (!string.IsNullOrWhiteSpace(RequestHelper.GetFormString("Date")))
             {
                 var date = RequestHelper.GetDateTime("Date").GetValueOrDefault();
-                var dateEnd = RequestHelper.GetDateTime("EndDate").GetValueOrDefault();
-                //int days = DateTime.DaysInMonth(date.Year, date.Month);
                 where.CreationTime = date;
+            }
+            if (!string.IsNullOrWhiteSpace(RequestHelper.GetFormString("EndDate")))
+            {
+                var dateEnd = RequestHelper.GetDateTime("EndDate").GetValueOrDefault();
                 where.CreationTimeEnd = dateEnd.AddDays(1);
             }
             where.DepartmentCode = RequestHelper.GetFormString("DepartmentCode");
@@ -322,7 +324,12 @@ namespace Project.WebApplication.Areas.ReportManager.Controllers
             where.PostLevel = RequestHelper.GetFormString("PostLevel");
             where.PostProperty = RequestHelper.GetFormString("PostProperty");
             where.Education = RequestHelper.GetFormString("Education");
+            where.Degree = RequestHelper.GetFormString("Degree");
+            
             where.PoliticsName = RequestHelper.GetFormString("PoliticsName");
+
+            where.LevNum = RequestHelper.GetFormString("LevNum");
+            where.KHComment = RequestHelper.GetFormString("KHComment");
             //where.PkId = RequestHelper.GetFormString("PkId");
             //where.AttendanceUploadRecordId = RequestHelper.GetFormString("AttendanceUploadRecordId");
             //where.EmployeeCode = RequestHelper.GetFormString("EmployeeCode");

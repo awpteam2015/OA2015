@@ -79,6 +79,7 @@
     <Compile Include="HRManager\Validate\GroupValidate.cs" />
     <Compile Include="HRManager\Validate\EmployeeInfoValidate.cs" />
     <Compile Include="HRManager\WorkExperienceService.cs" />
+    <Compile Include="HRManager\YGWageService.cs" />
     <Compile Include="PermissionManager\DepartmentService.cs" />
     <Compile Include="PermissionManager\DTO\MenuDTO.cs" />
     <Compile Include="PermissionManager\DTO\LoginUserInfoDTO.cs" />

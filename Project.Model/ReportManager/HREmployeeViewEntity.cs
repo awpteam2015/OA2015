@@ -89,6 +89,11 @@ namespace Project.Model.ReportManager
         public virtual System.String Education { get; set; }
 
         /// <summary>
+        /// 学位
+        /// </summary>
+        public virtual  System.String Degree { get; set; }
+
+        /// <summary>
         /// 学历名称
         /// </summary>
         public virtual System.String EducationName { get; set; }
@@ -108,5 +113,16 @@ namespace Project.Model.ReportManager
         /// 政治面貌
         /// </summary>
         public virtual System.String PoliticsName { get; set; }
+
+        /// <summary>
+        /// 职称等级
+        /// </summary>
+        public virtual System.String LevNum { get; set; }
+
+
+        /// <summary>
+        /// 年度考核
+        /// </summary>
+        public virtual System.String KHComment { get; set; }
     }
 }

@@ -16,11 +16,15 @@
                 gridObjContinEducation: new pro.GridBase("#datagridContinEducation", false),
                 gridObjProfession: new pro.GridBase("#datagridProfession", false),
                 gridObjYear: new pro.GridBase("#datagridYear", false),
+                gridObjWage: new pro.GridBase("#datagridWage", false),
                 gridObjFile: new pro.GridBase("#datagridfile", false),
+                xwOptionHtml: '',//学位<option></option>
                 xlOptionHtml: '',//学历<option></option>
                 xzOptionHtml: '',//学制<option></option>
                 zcOptionHtml: '',//职称<option></option>
                 jxjyOptionHtml: '',//继续教育学分类型<option></option>
+                gwgzOptionHtml: '',//岗位工资<option></option>
+                xzgzOptionHtml: '',//薪资工资<option></option>
                 ndkhOptionHtml: ''//年度考核评价<option></option>
             };
         },
@@ -32,6 +36,7 @@
             var gridObjTechnical = initObj.gridObjTechnical;
             var gridObjProfession = initObj.gridObjProfession;
             var gridObjYear = initObj.gridObjYear;
+            var gridObjWage = initObj.gridObjWage;
             var gridObjFile = initObj.gridObjFile;
 
             ////隐藏编辑按钮
@@ -140,13 +145,32 @@
                //  $.alertExtend.error();
            }
           );
+
+            abp.ajax({
+                url: "/HRManager/Dictionary/GetListByCode?ParentKeyCode=Degree"
+                //,data: JSON.stringify(postData)
+            }).done(
+           function (dataresult, data) {
+               initObj.xwOptionHtml = "";
+
+               $.each(dataresult, function (i, item) {
+                   initObj.xwOptionHtml += "<option value='" + item.KeyValue + "'>" + item.KeyName + "</option>";
+               });
+
+           }
+           ).fail(
+            function (errordetails, errormessage) {
+                //  $.alertExtend.error();
+            }
+       );
+
             abp.ajax({
                 url: "/HRManager/Dictionary/GetListByCode?ParentKeyCode=Education"
                 //,data: JSON.stringify(postData)
             }).done(
           function (dataresult, data) {
               initObj.xlOptionHtml = "";
-              
+
               $.each(dataresult, function (i, item) {
                   initObj.xlOptionHtml += "<option value='" + item.KeyValue + "'>" + item.KeyName + "</option>";
               });
@@ -171,6 +195,36 @@
                     function (errordetails, errormessage) {
                         //  $.alertExtend.error();
                     });
+
+            abp.ajax({
+                url: "/HRManager/Dictionary/GetListByCode?ParentKeyCode=RY_GWGZ"
+                //,data: JSON.stringify(postData)
+            }).done(
+
+          function (dataresult, data) {
+                 initObj.gwgzOptionHtml = "";
+
+                 $.each(dataresult, function (i, item) {
+                     initObj.gwgzOptionHtml += "<option value='" + item.KeyValue + "'>" + item.KeyName + "</option>";
+                 });
+             }).fail(
+                 function (errordetails, errormessage) {
+                     //  $.alertExtend.error();
+                 });
+            abp.ajax({
+                url: "/HRManager/Dictionary/GetListByCode?ParentKeyCode=RY_YZGZ"
+                //,data: JSON.stringify(postData)
+            }).done(
+             function (dataresult, data) {
+                 initObj.xzgzOptionHtml = "";
+
+                 $.each(dataresult, function (i, item) {
+                     initObj.xzgzOptionHtml += "<option value='" + item.KeyValue + "'>" + item.KeyName + "</option>";
+                 });
+             }).fail(
+                 function (errordetails, errormessage) {
+                     //  $.alertExtend.error();
+                 });
 
             var bindEntity = JSON.parse($("#BindEntity").val());
             $('#TechnicalTitle').combobox({
@@ -290,7 +344,7 @@
                         {
                             field: 'WorkCompany',
                             title: '工作单位',
-                            width: 100
+                            width: 150
                             //,formatter: function (value, row, index) {
                             //    return pro.controlKit.getInputHtml("WorkCompany_" + row.PkId, value);
                             //}
@@ -369,7 +423,10 @@
                         {
                             field: 'Degree',
                             title: '学位',
-                            width: 100,
+                            width: 120,
+                            formatter: function (value, row, index) {
+                                return pro.controlKit.getSelectHtml("S_Degree_" + row.PkId, value, initObj.xwOptionHtml, 110, true);
+                            }
                             //formatter: function (value, row, index) {
                             //    return pro.controlKit.getInputHtml("S_Degree_" + row.PkId, value);
                             //}
@@ -657,6 +714,47 @@
                 pageList: [20, 30, 40] //可以设置每页记录条数的列表    
             }
           );
+
+
+            gridObjWage.grid({
+                url: '/HRManager/YGWage/GetAllList?EmployeeID=' + (pro.commonKit.getUrlParam("PkId") ? pro.commonKit.getUrlParam("PkId") : 0),
+                fitColumns: false,
+                nowrap: false,
+                rownumbers: true, //行号
+                singleSelect: true,
+                idField: "PkId",
+                columns: [
+                    [
+                        {
+                            field: 'PkId', title: '', hidden: true, width: 100,
+                            formatter: function (value, row, index) {
+                                return pro.controlKit.getInputHtml("W_PkId", row.PkId);
+                            }
+                        },
+                        {
+                            field: 'GWGZ',
+                            title: '岗位工资',
+                            width: 180,
+                            formatter: function (value, row, index) {
+                                return pro.controlKit.getSelectHtml("W_GWGZ_" + row.PkId, value, initObj.gwgzOptionHtml, 150, true);
+                            }
+                        },
+                        {
+                            field: 'XZGZ',
+                            title: '薪级工资',
+                            width: 200,
+                            formatter: function (value, row, index) {
+                                return pro.controlKit.getSelectHtml("W_XZGZ_" + row.PkId, value, initObj.xzgzOptionHtml, 190, true);
+                                // return pro.controlKit.getInputHtml("Y_KHComment_" + row.PkId, value, 180);
+                            }
+                        }
+                    ]
+                ],
+                pagination: false,
+                pageSize: 20, //每页显示的记录条数，默认为10     
+                pageList: [20, 30, 40] //可以设置每页记录条数的列表    
+            }
+            );
             gridObjFile.grid({
                 url: '/HRManager/EmployeeFile/GetAllList?EmployeeID=' + (pro.commonKit.getUrlParam("PkId") ? pro.commonKit.getUrlParam("PkId") : 0),
                 fitColumns: false,
@@ -758,14 +856,13 @@
                 //var bindEntity = JSON.parse($("#BindEntity").val());
                 for (var filedname in bindField) {
                     $("[name=" + filedname + "]").val(bindEntity[filedname]);
+                    if (filedname == "Sex")
+                        $("#Sex").combobox('setValue', bindEntity[filedname]);
                 }
 
                 if (bindEntity["FileName"] != undefined && bindEntity["FileName"] != "") {
                     var fullPath = bindEntity["FileUrl"] + "\\" + bindEntity["FileName"];
                     $('#div_filename').html("<span ><img name=\"listP\" style=\"height:206px;width:148px;\" src=\"" + fullPath + "\">" + "</img> </span>");//+ json.extension.orgfileName
-
-                    if (filedname == "Sex")
-                        $("#Sex").combobox('setValue', bindEntity[filedname]);
                 }
                 //行项目信息用json绑定控件
                 //alert(JSON.stringify(BindEntity.List));

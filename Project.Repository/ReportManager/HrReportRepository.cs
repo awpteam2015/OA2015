@@ -542,6 +542,37 @@ on a.DepartmentCode=c.DepartmentCode
                     string.Format(
                         " and a.PkId in(select c.EmployeeID  from HR_LearningExperiences c where c.Education='{0}')", where.Education);
             }
+            if (!string.IsNullOrWhiteSpace(where.Degree))
+            {
+                whereStr +=
+                    string.Format(
+                        " and a.PkId in(select c.EmployeeID  from HR_LearningExperiences c where c.Degree='{0}')", where.Degree);
+            }
+            
+            if (!string.IsNullOrWhiteSpace(where.LevNum))
+            {
+                whereStr +=
+                    string.Format(
+                        " and a.PkId in(select d.EmployeeID  from HR_Technical d where d.LevNum='{0}')", where.LevNum);
+            }
+            if (!string.IsNullOrWhiteSpace(where.KHComment))
+            {
+                var tempStr =
+                    string.Format(
+                        " and a.PkId in(select e.EmployeeID  from HR_YearAssessment e where e.KHComment='{0}'", where.KHComment);
+
+                if (where.CreationTime != null)
+                {
+                    tempStr += " and e.KHYear>='" + where.CreationTime + "'";
+                }
+
+                if (where.CreationTimeEnd != null)
+                {
+                    tempStr += " and e.KHYear<='" + where.CreationTimeEnd + "'";
+                }
+                tempStr += " )";
+                whereStr += tempStr;
+            }
             StringBuilder sqlStr = new StringBuilder();
             sqlStr.AppendFormat(@"select  a.EmployeeCode,a.EmployeeName,a.Sex,a.CertNo,a.Birthday,a.EmployeeTypeName,a.DepartmentName,a.DepartmentName InDepartmentName,
                 a.WorkStateName,a.WorkStateName InWorkStateName,a.IsDeleted,1 InOrOut,JoinCommy,Duties,DutiesName,PostLevel,PostLevelName,PostProperty,PostPropertyName,
