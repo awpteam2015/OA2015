@@ -27,8 +27,8 @@ var pro = pro || {};
          { field: 'KeyCode', title: '字典Code', width: 200 },
          { field: 'ParentKeyCode', title: '父级Code', width: 100 },
          { field: 'KeyName', title: '名称', width: 180 },
-         { field: 'KeyValue', title: '值', width: 100 },
-         { field: 'Instruction', title: '说明', width: 280 },
+         { field: 'KeyValue', title: '值', width: 180 },
+         { field: 'Instruction', title: '说明', width: 200 }
                 ]],
                 // pagination: true,
                 pageSize: 20, //每页显示的记录条数，默认为10     

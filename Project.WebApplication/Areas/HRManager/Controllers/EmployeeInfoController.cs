@@ -379,6 +379,11 @@ namespace Project.WebApplication.Areas.HRManager.Controllers
                             tuple = ImportExcelYearAssessmentInfo(sheet, postData.RequestEntity);//年度考核
                             tipInfo += tuple.Item2;
                             break;
+                        case 7:
+                            tuple = ImportExcelWageInfo(sheet, postData.RequestEntity);//人事工资
+                            tipInfo += tuple.Item2;
+                            break;
+                            
                     }
 
                 }
@@ -431,7 +436,9 @@ namespace Project.WebApplication.Areas.HRManager.Controllers
                         insertModel.Birthday = cells[i, 5].StringValue.ToDateTime();
                     if (cells[i, 6].StringValue.Length > 0)
                         insertModel.StartWork = cells[i, 6].StringValue.ToDateTime();
-                    insertModel.Duties = cells[i, 7].StringValue;
+                    if (cells[i, 7].StringValue.Length > 0)
+                        insertModel.IntoCompanyTime = cells[i, 7].StringValue.ToDateTime();
+                    insertModel.Duties = cells[i, 8].StringValue;
                     if (insertModel.Duties.Trim().Length > 0)
                     {
                         var temp = DictionaryService.GetInstance().GetModelByKeyCode("DWZW", insertModel.Duties);
@@ -439,20 +446,20 @@ namespace Project.WebApplication.Areas.HRManager.Controllers
                             insertModel.DutiesName = temp.KeyName;
 
                     };
-                    insertModel.PostProperty = cells[i, 8].StringValue.Trim();
+                    insertModel.PostProperty = cells[i, 9].StringValue.Trim();
                     insertModel.PostPropertyName = DictionaryService.GetInstance().GetModelByKeyCode("GWXZ", insertModel.PostProperty).KeyName;
-                    if (cells[i, 9].StringValue.Length > 0)
-                        insertModel.JoinCommy =cells[i, 9].StringValue.ToDateTime(); ;
-                    insertModel.WorkState = cells[i, 10].StringValue.Trim();
+                    if (cells[i, 10].StringValue.Length > 0)
+                        insertModel.JoinCommy = cells[i, 10].StringValue.ToDateTime(); ;
+                    insertModel.WorkState = cells[i, 11].StringValue.Trim();
                     insertModel.WorkStateName = DictionaryService.GetInstance().GetModelByKeyCode("ZZZT", insertModel.WorkState).KeyName;
-                    insertModel.EmployeeType = cells[i, 11].StringValue.Trim();
+                    insertModel.EmployeeType = cells[i, 12].StringValue.Trim();
                     insertModel.EmployeeTypeName = DictionaryService.GetInstance().GetModelByKeyCode("YGLY", insertModel.EmployeeType).KeyName;
-                    insertModel.PostLevel = cells[i, 12].StringValue.Trim();
+                    insertModel.PostLevel = cells[i, 13].StringValue.Trim();
                     insertModel.PostLevelName = DictionaryService.GetInstance().GetModelByKeyCode("GWDJ", insertModel.PostLevel).KeyName;
 
-                    insertModel.PoliticsName = cells[i, 13].StringValue.Trim();
-                    insertModel.MobileNO = cells[i, 14].StringValue.Trim();
-                    insertModel.HomeAddress = cells[i, 15].StringValue.Trim();
+                    insertModel.PoliticsName = cells[i, 14].StringValue.Trim();
+                    insertModel.MobileNO = cells[i, 15].StringValue.Trim();
+                    insertModel.HomeAddress = cells[i, 16].StringValue.Trim();
                     insertModel.State = 1;
                     insertModel.LastModifierUserCode = LoginUserInfo.UserCode;
                     insertModel.LastModifierUserName = LoginUserInfo.UserName;
@@ -465,7 +472,7 @@ namespace Project.WebApplication.Areas.HRManager.Controllers
                     }
                     else
                     {
-                        insertModel.CreatorUserName= LoginUserInfo.UserName;
+                        insertModel.CreatorUserName = LoginUserInfo.UserName;
                         addResult = EmployeeInfoService.GetInstance().Add(insertModel);
                     }
                     if (addResult.Item1)
@@ -634,6 +641,10 @@ namespace Project.WebApplication.Areas.HRManager.Controllers
                         technicalEntity.GetDate = cells[i, 3].StringValue.ToDateTime();
                     technicalEntity.CerNo = cells[i, 4].StringValue.Trim();
                     technicalEntity.EmployeeID = tempmodel.PkId;
+                    if (cells[i, 5].StringValue.Length > 0)
+                        technicalEntity.EmployDate = cells[i, 5].StringValue.ToDateTime();
+                    if (cells[i, 6].StringValue.Length > 0)
+                        technicalEntity.EmployEndDate = cells[i, 6].StringValue.ToDateTime();
                     if (TechnicalService.GetInstance().Add(technicalEntity) > 0)
                         sucessNum++;
                     else
@@ -725,6 +736,43 @@ namespace Project.WebApplication.Areas.HRManager.Controllers
             catch (Exception ex)
             {
                 return new Tuple<bool, string>(false, string.Format(" 年度考核成功：{0},失败：{1}过程出错：{2}", sucessNum, failNum, ex.Message));
+            }
+        }
+
+
+        /// <summary>
+        /// 人事工资
+        /// </summary>
+        /// <param name="baseSheet"></param>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        private Tuple<bool, string> ImportExcelWageInfo(Worksheet baseSheet, EmployeeInfoEntity model)
+        {
+            int sucessNum = 0, failNum = 0;
+            try
+            {
+                Cells cells = baseSheet.Cells;
+                for (int i = 1; i < cells.MaxDataRow + 1; i++)
+                {
+                    model.EmployeeCode = cells[i, 0].StringValue.Trim();
+                    var tmpmodel = EmployeeInfoService.GetInstance().GetEmployeeNameByCode2(model.EmployeeCode);
+                    if (tmpmodel == null)
+                        continue;
+
+                    var ygWageEntity = new YGWageEntity();
+                    ygWageEntity.GWGZ = cells[i, 1].StringValue.Trim();
+                    ygWageEntity.XZGZ = cells[i, 2].StringValue.Trim();
+                    ygWageEntity.EmployeeID = tmpmodel.PkId;
+                    if (YGWageService.GetInstance().Add(ygWageEntity) > 0)
+                        sucessNum++;
+                    else
+                        failNum++;
+                }
+                return new Tuple<bool, string>(true, " 人事工资成功：" + sucessNum + "失败：" + failNum);
+            }
+            catch (Exception ex)
+            {
+                return new Tuple<bool, string>(false, string.Format(" 人事工资成功：{0},失败：{1}过程出错：{2}", sucessNum, failNum, ex.Message));
             }
         }
     }
