@@ -67,6 +67,7 @@
     <Compile Include="HRManager\YearHolidayDefinitionEntity.cs" />
     <Compile Include="HRManager\YGWageEntity.cs" />
     <Compile Include="Other\ExcelData.cs" />
+    <Compile Include="Other\UploadEntity.cs" />
     <Compile Include="PermissionManager\DepartmentExtEntity.cs" />
     <Compile Include="PermissionManager\DepartmentEntity.cs" />
     <Compile Include="PermissionManager\FunctionDetailModel.cs" />

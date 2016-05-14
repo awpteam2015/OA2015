@@ -4,7 +4,7 @@
     <!--<property name="current_session_context_class">wcf</property>-->
     <property name="connection.driver_class">NHibernate.Driver.SqlClientDriver</property>
     <property name="connection.connection_string">
-      data source=.;database=OA;user id=sa;password=123456;connection reset=false;connection lifetime=5; min pool size=1; max pool size=50
+      data source=.;database=OA2;user id=sa;password=123456;connection reset=false;connection lifetime=5; min pool size=1; max pool size=50
       <!--data source=localhost;database=OA;user id=sa;password=123456;connection reset=false;connection lifetime=5; min pool size=1; max pool size=50-->
     </property>
     <property name="adonet.batch_size">10</property>

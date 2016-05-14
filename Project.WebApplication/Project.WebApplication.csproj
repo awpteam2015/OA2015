@@ -113,6 +113,7 @@
     <Content Include="Areas\HRManager\Scripts\Attendance\List.js" />
     <Content Include="Areas\HRManager\Scripts\ContinEducation\Hd.js" />
     <Content Include="Areas\HRManager\Scripts\ContinEducation\List.js" />
+    <Content Include="Areas\HRManager\Scripts\Contract\Upload.js" />
     <Content Include="Areas\HRManager\Scripts\Contract\Hd.js" />
     <Content Include="Areas\HRManager\Scripts\Contract\List.js" />
     <Content Include="Areas\HRManager\Scripts\Dictionary\Hd.js" />
@@ -315,6 +316,7 @@
     <Content Include="Areas\HRManager\Views\EmployeeFile\List.cshtml" />
     <Content Include="Areas\HRManager\Views\YGWage\Hd.cshtml" />
     <Content Include="Areas\HRManager\Views\YGWage\List.cshtml" />
+    <Content Include="Areas\HRManager\Views\Contract\Upload.cshtml" />
     <None Include="Properties\PublishProfiles\OA.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\Control\DepartmentControl.js" />
@@ -1047,6 +1049,7 @@
     <Content Include="TemplateFile\EmployeeExport.xlsx" />
     <Content Include="TemplateFile\EmployeeTemplate.doc" />
     <Content Include="TemplateFile\考勤模版2.xlsx" />
+    <Content Include="TemplateFile\合同上传模版.xlsx" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -50,6 +50,12 @@ var pro = pro || {};
                 tabObj.add("/HRManager/Contract/Hd?State=1&ParentId=0", "新增");
             });
 
+            $("#btnUpload").click(function () {
+                tabObj.add("/HRManager/Contract/Upload", "批量上传合同");
+            });
+
+
+
             $("#btnAdd2").click(function () {
                 if (!gridObj.isSelected()) {
                     $.alertExtend.infoOp();
