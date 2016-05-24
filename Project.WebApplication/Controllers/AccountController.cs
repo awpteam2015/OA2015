@@ -1,6 +1,7 @@
 ﻿using System.Web.Mvc;
 using Project.Config;
 using Project.Infrastructure.FrameworkCore.Logging;
+using Project.Infrastructure.FrameworkCore.ToolKit;
 using Project.Infrastructure.FrameworkCore.WebMvc.Controllers.Results;
 using Project.Infrastructure.FrameworkCore.WebMvc.Models;
 using Project.Model.HRManager;
@@ -48,7 +49,12 @@ namespace Project.WebApplication.Controllers
             };
         }
 
-
+        [HttpPost]
+        public AbpJsonResult<string> ChangePassword()
+        {
+            var result = UserInfoService.GetInstance().ChangePassword(this.LoginUserInfo.UserCode, RequestHelper.GetString("Password"));
+            return new AbpJsonResult<string>(result);
+        }
 
 
         public ActionResult Default()

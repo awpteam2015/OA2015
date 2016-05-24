@@ -152,6 +152,25 @@ namespace Project.Service.PermissionManager
             }
         }
 
+
+        public Tuple<bool, string> ChangePassword(string userCode,string password)
+        {
+            var model = this.GetUserInfo(userCode);
+            model.Password= Encrypt.MD5Encrypt(password);//加密
+            try
+            {
+                _userInfoRepository.Update(model);
+                return  new Tuple<bool, string>(true,"");
+            }
+            catch (Exception)
+            {
+                
+                throw;
+            }
+           
+        }
+
+
         public Tuple<bool, string> Update(UserInfoEntity entity)
         {
             var validateResult = UserInfoValidate.GetInstance().IsHasSameUserCode(entity.UserCode, entity.PkId);

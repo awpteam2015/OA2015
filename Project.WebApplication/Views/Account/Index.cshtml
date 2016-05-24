@@ -28,6 +28,7 @@
                 <div class="datagrid-btn-separator" style="height: 15px; margin: 7px 2px 0; float: right;"></div>
                 <a href="javascript:void(0)" id="btnLogoff" class="easyui-linkbutton" data-options="iconCls:'icon-lock_go',plain:true" style="float: right;">注销</a>
                 <div class="datagrid-btn-separator" style="height: 15px; margin: 7px 2px 0; float: right;"></div>
+                <a href="javascript:void(0)" id="btnChangePassword" class="easyui-linkbutton" data-options="iconCls:'icon-lock_go',plain:true" style="float: right;">修改密码</a>
             </div>
             <div style="clear: both;">
             </div>
@@ -114,7 +115,23 @@
             </div>
         </div>
     </div>
+    <div style="display: none;">
+        <div id="divChangePassword" iconcls="icon-user_edit" style="padding: 10px;">
+            <table>
+                <tr>
+                    <td>新密码：</td>
+                    <td><input id="newPwd"  type="password" name="newPwd" style="width:150px;" /></td>
+                </tr>
+                <tr>
+                    <td colspan="2" style="text-align: center">
+                        <input type="button" value="保存" id="btn_Save"/>
 
+                    </td>
+                </tr>
+            </table>
+        </div>
+      
+    </div>
     @*<div id="updatePwdWin" class="easyui-dialog" title="修改密码" style="width:300px;height:200px; padding:10px 10px; background-color:#fff;"
              data-options="iconCls:'icon-save',modal:true,closed:true,buttons:[{
                     text:'确认修改',iconCls:'icon-ok',handler: $.Index.updatePwdHandler
