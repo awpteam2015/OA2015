@@ -72,6 +72,7 @@
     <Compile Include="HRManager\ProfessionService.cs" />
     <Compile Include="HRManager\SanctionService.cs" />
     <Compile Include="HRManager\Validate\AttendanceUploadValidate.cs" />
+    <Compile Include="HRManager\Validate\DictionaryValidate.cs" />
     <Compile Include="HRManager\YearAssessmentService.cs" />
     <Compile Include="HRManager\TechnicalService.cs" />
     <Compile Include="HRManager\Validate\ContractValidate.cs" />
