@@ -85,6 +85,10 @@
     <Compile Include="PermissionManager\UserRoleRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ReportManager\HrReportRepository.cs" />
+    <Compile Include="RiverManager\RiverCheckRepository.cs" />
+    <Compile Include="RiverManager\RiverOwerRepository.cs" />
+    <Compile Include="RiverManager\RiverProblemApplyRepository.cs" />
+    <Compile Include="RiverManager\RiverRepository.cs" />
     <Compile Include="SystemSetManager\HolidayDetailRepository.cs" />
     <Compile Include="SystemSetManager\IndexPageSetRepository.cs" />
   </ItemGroup>

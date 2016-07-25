@@ -11,7 +11,9 @@ using Project.Infrastructure.FrameworkCore.ToolKit.LinqExpansion;
 using Project.Infrastructure.FrameworkCore.WebMvc.Controllers.Results;
 using Project.Infrastructure.FrameworkCore.WebMvc.Models;
 using Project.Model.PermissionManager;
+using Project.Model.RiverManager;
 using Project.Service.PermissionManager;
+using Project.Service.RiverManager;
 using Project.WebApplication.Controllers;
 
 namespace Project.WebApplication.Areas.PermissionManager.Controllers
@@ -23,6 +25,7 @@ namespace Project.WebApplication.Areas.PermissionManager.Controllers
         {
             var roleList = RoleService.GetInstance().GetList(new RoleEntity());
             var departmentList = DepartmentService.GetInstance().GetList(new DepartmentEntity());
+            var riverList = RiverService.GetInstance().GetList(new RiverEntity());
             if (pkId > 0)
             {
                 var entity = UserInfoService.GetInstance().GetModel(pkId);
@@ -33,6 +36,15 @@ namespace Project.WebApplication.Areas.PermissionManager.Controllers
                     roleList.Where(p => entity.UserRoleList.Any(x => x.RoleId == p.PkId)).ForEach(p =>
                     {
                         p.Attr_UserRolePkId = entity.UserRoleList.FirstOrDefault(x => x.RoleId == p.PkId).PkId;
+                        p.Attr_IsCheck = true;
+                    });
+                }
+
+                if (entity.RiverOwerList.Count > 0)
+                {
+                    riverList.Where(p => entity.RiverOwerList.Any(x => x.RiverId == p.PkId)).ForEach(p =>
+                    {
+                        p.Attr_RiverOwerPkId = entity.RiverOwerList.FirstOrDefault(x => x.RiverId == p.PkId).PkId;
                         p.Attr_IsCheck = true;
                     });
                 }
@@ -54,6 +66,14 @@ namespace Project.WebApplication.Areas.PermissionManager.Controllers
             {
                 total = roleList.Count,
                 rows = roleList
+            }, new NHibernateContractResolver());
+
+
+
+            ViewBag.RiverList = JsonHelper.JsonSerializer(new DataGridResponse()
+            {
+                total = riverList.Count,
+                rows = riverList
             }, new NHibernateContractResolver());
 
             ViewBag.DepartmentList = JsonHelper.JsonSerializer(new DataGridTreeResponse<DepartmentEntity>(departmentList.Count, departmentList), new NHibernateContractResolver());
@@ -122,7 +142,14 @@ namespace Project.WebApplication.Areas.PermissionManager.Controllers
             postData.RequestEntity.CreatorUserCode = "";
             postData.RequestEntity.Password = Encrypt.MD5Encrypt(postData.RequestEntity.Password);
 
-            var addResult = UserInfoService.GetInstance().Add(postData.RequestEntity);
+            postData.RequestEntity.RiverOwerList.ForEach(p =>
+            {
+                p.UserCode = postData.RequestEntity.UserCode;
+                p.RiverName = RiverService.GetInstance().GetModelByPk(p.RiverId.GetValueOrDefault()).RiverName;
+                p.UserName = UserInfoService.GetInstance().GetUserInfo(p.UserCode).UserName;
+            });
+
+           var addResult = UserInfoService.GetInstance().Add(postData.RequestEntity);
             var result = new AjaxResponse<UserInfoEntity>()
                {
                    success = addResult.Item1,
@@ -140,6 +167,12 @@ namespace Project.WebApplication.Areas.PermissionManager.Controllers
             postData.RequestEntity.UserRoleList.ForEach(p => p.UserCode = postData.RequestEntity.UserCode);
             postData.RequestEntity.LastModificationTime = DateTime.Now;
             postData.RequestEntity.LastModifierUserCode = "";
+            postData.RequestEntity.RiverOwerList.ForEach(p =>
+            {
+                p.UserCode = postData.RequestEntity.UserCode;
+                p.RiverName = RiverService.GetInstance().GetModelByPk(p.RiverId.GetValueOrDefault()).RiverName;
+                p.UserName = UserInfoService.GetInstance().GetUserInfo(p.UserCode).UserName;
+            });
             var updateResult = UserInfoService.GetInstance().Update(postData.RequestEntity);
             var result = new AjaxResponse<UserInfoEntity>()
             {
@@ -176,5 +209,20 @@ namespace Project.WebApplication.Areas.PermissionManager.Controllers
             };
             return new AbpJsonResult(result, null);
         }
+
+
+
+        public AbpJsonResult GetListNoPage()
+        {
+
+            var where = new UserInfoEntity();
+        
+            var searchList = UserInfoService.GetInstance().GetList(where);
+
+
+            return new AbpJsonResult(searchList, new NHibernateContractResolver());
+        }
+
+
     }
 }

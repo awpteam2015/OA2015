@@ -1,10 +1,10 @@
 ﻿
 var pro = pro || {};
 (function () {
-    pro.UserInfo = pro.UserInfo || {};
-    pro.UserInfo.ListPage = pro.UserInfo.ListPage || {};
-    pro.UserInfo.ListPage = {
-        init: function () {
+    pro.River = pro.River || {};
+    pro.River.ListPage = pro.River.ListPage || {};
+    pro.River.ListPage = {
+      init: function () {
             return {
                 tabObj: new pro.TabBase(),
                 gridObj: new pro.GridBase("#datagrid", false)
@@ -15,22 +15,25 @@ var pro = pro || {};
             var tabObj = initObj.tabObj;
             var gridObj = initObj.gridObj;
             gridObj.grid({
-                url: '/PermissionManager/UserInfo/GetList',
+                url: '/RiverManager/River/GetList',
                 fitColumns: false,
                 nowrap: false,
                 rownumbers: true, //行号
                 singleSelect: true,
                 columns: [[
-         { field: 'UserCode', title: '登录账号', width: 100 },
-         { field: 'UserName', title: '登录姓名', width: 100 },
-         { field: 'Email', title: '电子邮件', width: 100 },
-         { field: 'Mobile', title: '手机号', width: 100 },
-         { field: 'Tel', title: '家庭电话', width: 100 },
+         { field: 'RiverName', title: '河道名称', width: 100 },
+         { field: 'DepartmentName', title: '归属部门', width: 100 },
+         { field: 'RiverRank', title: '河道等级', width: 100 },
+         { field: 'RiverArea', title: '河道范围', width: 100 },
+         { field: 'RiverLength', title: '长度', width: 100 },
+         { field: 'RiverCrossArea', title: '流经乡（镇）', width: 100 },
+         { field: 'Coords', title: '坐标', width: 100 },
          { field: 'IsActive', title: '是否有效', width: 100 },
          { field: 'CreatorUserCode', title: '创建人', width: 100 },
          { field: 'CreationTime', title: '创建时间', width: 100 },
          { field: 'LastModifierUserCode', title: '修改人', width: 100 },
          { field: 'LastModificationTime', title: '修改时间', width: 100 },
+         { field: 'Remark', title: '备注', width: 100 }
                 ]],
                 pagination: true,
                 pageSize: 20, //每页显示的记录条数，默认为10     
@@ -39,7 +42,7 @@ var pro = pro || {};
                );
 
             $("#btnAdd").click(function () {
-                tabObj.add("/PermissionManager/UserInfo/Hd", "新增");
+               tabObj.add("/RiverManager/River/Hd","新增");
             });
 
             $("#btnEdit").click(function () {
@@ -48,8 +51,7 @@ var pro = pro || {};
                     return;
                 }
                 var PkId = gridObj.getSelectedRow().PkId;
-                var userName = gridObj.getSelectedRow().UserName;
-                tabObj.add("/PermissionManager/UserInfo/Hd?PkId=" + PkId, "编辑" + userName);
+                tabObj.add("/RiverManager/River/Hd?PkId=" + PkId, "编辑" + PkId);
             });
 
 
@@ -59,13 +61,13 @@ var pro = pro || {};
 
             $("#btnDel").click(function () {
                 if (!gridObj.isSelected()) {
-                    $.alertExtend.infoOp();
+                $.alertExtend.infoOp();
                     return;
                 }
                 $.messager.confirm("确认操作", "是否确认删除", function (bl) {
                     if (!bl) return;
                     abp.ajax({
-                        url: "/PermissionManager/UserInfo/Delete?PkId=" + gridObj.getSelectedRow().PkId
+                        url: "/RiverManager/River/Delete?PkId=" + gridObj.getSelectedRow().PkId
                     }).done(
                     function (dataresult, data) {
                         $.alertExtend.info();
@@ -83,7 +85,7 @@ var pro = pro || {};
                 gridObj.refresh();
             });
         },
-        closeTab: function () {
+         closeTab: function () {
             this.init().tabObj.closeTab();
         }
     };
@@ -92,7 +94,7 @@ var pro = pro || {};
 
 
 $(function () {
-    pro.UserInfo.ListPage.initPage();
+    pro.River.ListPage.initPage();
 });
 
 

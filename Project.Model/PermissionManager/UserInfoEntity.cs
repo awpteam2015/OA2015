@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using Project.Infrastructure.FrameworkCore.Domain.Entities;
 using Project.Infrastructure.FrameworkCore.Domain.Entities.Component;
+using Project.Model.RiverManager;
 
 namespace Project.Model.PermissionManager
 {
@@ -14,6 +15,7 @@ namespace Project.Model.PermissionManager
             UserDepartmentList = new HashSet<UserDepartmentEntity>();
             UserRoleList = new HashSet<UserRoleEntity>();
             UserFunctionDetailList = new HashSet<UserFunctionDetailEntity>();
+            RiverOwerList=new HashSet<RiverOwerEntity>();
         }
 
         #region 属性
@@ -59,6 +61,17 @@ namespace Project.Model.PermissionManager
         /// 描述:备注
         /// </summary>
         public virtual System.String Remark { get; set; }
+
+        /// <summary>
+        ///职务
+        /// </summary>
+
+        public virtual System.String Duty { get; set; }
+
+        /// <summary>
+        /// 等级
+        /// </summary>
+        public virtual System.String Lever { get; set; }
         #endregion
 
 
@@ -67,6 +80,11 @@ namespace Project.Model.PermissionManager
         public virtual ISet<UserDepartmentEntity> UserDepartmentList { get; set; }
 
         public virtual ISet<UserRoleEntity> UserRoleList { get; set; }
+
+        /// <summary>
+        ///河流列表
+        /// </summary>
+        public virtual ISet<RiverOwerEntity> RiverOwerList { get; set; }
 
 
         /// <summary>

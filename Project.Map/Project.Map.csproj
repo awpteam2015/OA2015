@@ -88,6 +88,10 @@
     <Compile Include="PermissionManager\UserInfoMap.cs" />
     <Compile Include="PermissionManager\UserRoleMap.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RiverManager\RiverCheckMap.cs" />
+    <Compile Include="RiverManager\RiverMap.cs" />
+    <Compile Include="RiverManager\RiverOwerMap.cs" />
+    <Compile Include="RiverManager\RiverProblemApplyMap.cs" />
     <Compile Include="SystemSetManager\HolidayDetailMap.cs" />
     <Compile Include="SystemSetManager\IndexPageSetMap.cs" />
   </ItemGroup>

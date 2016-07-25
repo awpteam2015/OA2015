@@ -1,0 +1,371 @@
+﻿
+
+  
+
+
+
+@{
+    ViewBag.Title = "List";
+    Layout = "~/Views/Shared/_LayoutList.cshtml";
+}
+
+@section JavaScript{
+    <script src="/Areas/RiverManager/Scripts/RiverProblemApply/List.js?JsParamter=@SiteConfig.GetConfig().JsParamter" type="text/javascript"></script>
+}
+
+<div title="河道问题申请单" style="padding:1px;">
+    <table id="datagrid" style="height:auto;" iconcls=".icon-save" singleselect="true"  toolbar="#tb" fit="true"></table>
+    <div id="tb" style="padding:5px;height:auto">
+        <div  style="margin-bottom: 5px">
+            <a id="btnAdd" href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:true" >添加</a>
+  
+            <a id="btnDel" href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-remove',plain:true" >删除</a>
+           
+            <a id="btnEdit" href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-edit',plain:true" >编辑</a>
+          
+            <a id="btnRefresh" href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-reload',plain:true" >刷新</a>
+           
+        </div>
+      
+        <div id="divSearch">
+            <form>
+            
+             <table class="mtable">
+            
+              <tr>
+            <td >
+                :
+            </td>
+            <td >
+                <input id="PkId" name="PkId"  type="text"  />
+            </td>
+        </tr>
+            
+              <tr>
+            <td >
+                :
+            </td>
+            <td >
+                <input id="Title" name="Title"  type="text"  />
+            </td>
+        </tr>
+            
+              <tr>
+            <td >
+                问题描述:
+            </td>
+            <td >
+                <input id="Des" name="Des"  type="text"  />
+            </td>
+        </tr>
+            
+              <tr>
+            <td >
+                问题类型 1日常巡河 2问题上报:
+            </td>
+            <td >
+                <input id="ProblemType" name="ProblemType"  type="text"  />
+            </td>
+        </tr>
+            
+              <tr>
+            <td >
+                图片地址 多个:
+            </td>
+            <td >
+                <input id="PicUrl" name="PicUrl"  type="text"  />
+            </td>
+        </tr>
+            
+              <tr>
+            <td >
+                所属部门:
+            </td>
+            <td >
+                <input id="DepartmentCode" name="DepartmentCode"  type="text"  />
+            </td>
+        </tr>
+            
+              <tr>
+            <td >
+                :
+            </td>
+            <td >
+                <input id="RiverId" name="RiverId"  type="text"  />
+            </td>
+        </tr>
+            
+              <tr>
+            <td >
+                :
+            </td>
+            <td >
+                <input id="RiverName" name="RiverName"  type="text"  />
+            </td>
+        </tr>
+            
+              <tr>
+            <td >
+                :
+            </td>
+            <td >
+                <input id="UserCode" name="UserCode"  type="text"  />
+            </td>
+        </tr>
+            
+              <tr>
+            <td >
+                :
+            </td>
+            <td >
+                <input id="UserName" name="UserName"  type="text"  />
+            </td>
+        </tr>
+            
+              <tr>
+            <td >
+                坐标:
+            </td>
+            <td >
+                <input id="Coords" name="Coords"  type="text"  />
+            </td>
+        </tr>
+            
+              <tr>
+            <td >
+                问题状态 1.部门待处理 2河长待处理 3完结 4重新申请作废 5回退部门待处理 :
+            </td>
+            <td >
+                <input id="State" name="State"  type="text"  />
+            </td>
+        </tr>
+            
+              <tr>
+            <td >
+                部门转发备注:
+            </td>
+            <td >
+                <input id="DepartmentRemark" name="DepartmentRemark"  type="text"  />
+            </td>
+        </tr>
+            
+              <tr>
+            <td >
+                部门操作时间:
+            </td>
+            <td >
+                <input id="DepartmentOpTime" name="DepartmentOpTime"  type="text"  />
+            </td>
+        </tr>
+            
+              <tr>
+            <td >
+                顶级部门批注:
+            </td>
+            <td >
+                <input id="TopDepartmentRemark" name="TopDepartmentRemark"  type="text"  />
+            </td>
+        </tr>
+            
+              <tr>
+            <td >
+                顶级部门批注时间:
+            </td>
+            <td >
+                <input id="TopDepartmentOpTime" name="TopDepartmentOpTime"  type="text"  />
+            </td>
+        </tr>
+            
+              <tr>
+            <td >
+                河长结束问题时间:
+            </td>
+            <td >
+                <input id="FinishOpTime" name="FinishOpTime"  type="text"  />
+            </td>
+        </tr>
+            
+              <tr>
+            <td >
+                河长结束问题备注:
+            </td>
+            <td >
+                <input id="FinishRemark" name="FinishRemark"  type="text"  />
+            </td>
+        </tr>
+            
+              <tr>
+            <td >
+                河长回退问题备注:
+            </td>
+            <td >
+                <input id="ReturnRemark" name="ReturnRemark"  type="text"  />
+            </td>
+        </tr>
+            
+              <tr>
+            <td >
+                河长回退问题时间:
+            </td>
+            <td >
+                <input id="ReturnOpTime" name="ReturnOpTime"  type="text"  />
+            </td>
+        </tr>
+            
+              <tr>
+            <td >
+                是否曝光:
+            </td>
+            <td >
+                <input id="IsExposure" name="IsExposure"  type="text"  />
+            </td>
+        </tr>
+            
+              <tr>
+            <td >
+                曝光等级:
+            </td>
+            <td >
+                <input id="ExposureLever" name="ExposureLever"  type="text"  />
+            </td>
+        </tr>
+            
+              <tr>
+            <td >
+                是否已发送短信:
+            </td>
+            <td >
+                <input id="IsSendMessage" name="IsSendMessage"  type="text"  />
+            </td>
+        </tr>
+            
+              <tr>
+            <td >
+                是否有效:
+            </td>
+            <td >
+                <input id="IsActive" name="IsActive"  type="text"  />
+            </td>
+        </tr>
+            
+              <tr>
+            <td >
+                :
+            </td>
+            <td >
+                <input id="CreatorUserName" name="CreatorUserName"  type="text"  />
+            </td>
+        </tr>
+            
+              <tr>
+            <td >
+                创建人:
+            </td>
+            <td >
+                <input id="CreatorUserCode" name="CreatorUserCode"  type="text"  />
+            </td>
+        </tr>
+            
+              <tr>
+            <td >
+                创建时间:
+            </td>
+            <td >
+                <input id="CreationTime" name="CreationTime"  type="text"  />
+            </td>
+        </tr>
+            
+              <tr>
+            <td >
+                :
+            </td>
+            <td >
+                <input id="LastModifierUserName" name="LastModifierUserName"  type="text"  />
+            </td>
+        </tr>
+            
+              <tr>
+            <td >
+                修改人:
+            </td>
+            <td >
+                <input id="LastModifierUserCode" name="LastModifierUserCode"  type="text"  />
+            </td>
+        </tr>
+            
+              <tr>
+            <td >
+                修改时间:
+            </td>
+            <td >
+                <input id="LastModificationTime" name="LastModificationTime"  type="text"  />
+            </td>
+        </tr>
+            
+              <tr>
+            <td >
+                备注:
+            </td>
+            <td >
+                <input id="Remark" name="Remark"  type="text"  />
+            </td>
+        </tr>
+            
+              <tr>
+            <td >
+                删除原因:
+            </td>
+            <td >
+                <input id="DeleteRemark" name="DeleteRemark"  type="text"  />
+            </td>
+        </tr>
+            
+              <tr>
+            <td >
+                是否删除:
+            </td>
+            <td >
+                <input id="IsDeleted" name="IsDeleted"  type="text"  />
+            </td>
+        </tr>
+            
+              <tr>
+            <td >
+                删除人:
+            </td>
+            <td >
+                <input id="DeleteUserName" name="DeleteUserName"  type="text"  />
+            </td>
+        </tr>
+            
+              <tr>
+            <td >
+                删除人编码:
+            </td>
+            <td >
+                <input id="DeleteUserCode" name="DeleteUserCode"  type="text"  />
+            </td>
+        </tr>
+            
+              <tr>
+            <td >
+                删除时间:
+            </td>
+            <td >
+                <input id="DeleteTime" name="DeleteTime"  type="text"  />
+            </td>
+        </tr>
+          <tr>
+        <td colspan="2">   <a href="#" class="easyui-linkbutton" iconcls="icon-search" id="btnSearch">搜索</a>
+        </td>
+        </tr>
+        </table>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+
+

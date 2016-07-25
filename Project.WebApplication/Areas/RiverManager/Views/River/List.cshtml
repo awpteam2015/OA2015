@@ -1,62 +1,62 @@
-﻿@{
+﻿
+
+
+@{
     ViewBag.Title = "List";
     Layout = "~/Views/Shared/_LayoutList.cshtml";
 }
+
 @section JavaScript{
-    <script src="/Areas/PermissionManager/Scripts/UserInfo/List.js?JsParamter=@SiteConfig.GetConfig().JsParamter" type="text/javascript"></script>
+    <script src="/Areas/RiverManager/Scripts/River/List.js?JsParamter=@SiteConfig.GetConfig().JsParamter" type="text/javascript"></script>
 }
-<div title="用户信息表" style="padding:1px;">
+
+<div title="河道信息" style="padding:1px;">
     <table id="datagrid" style="height:auto;" iconcls=".icon-save" singleselect="true" toolbar="#tb" fit="true"></table>
     <div id="tb" style="padding:5px;height:auto">
         <div style="margin-bottom: 5px">
             <a id="btnAdd" href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:true">添加</a>
+
             <a id="btnDel" href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-remove',plain:true">删除</a>
+
             <a id="btnEdit" href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-edit',plain:true">编辑</a>
+
             <a id="btnRefresh" href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-reload',plain:true">刷新</a>
+
         </div>
+
         <div id="divSearch">
             <form>
+
                 <table class="mtable">
                     <tr>
-                        <td>
-                           登录账号:
+                        <td style="width: 100px">
+                            河道名称:
                         </td>
-                        <td>
-                            <input id="UserCode" name="UserCode" type="text" />
-                        </td>
-
-                        <td>
-                            登录姓名:
-                        </td>
-                        <td>
-                            <input id="UserName" name="UserName" type="text" />
+                        <td style="width: 100px">
+                            <input id="RiverName" name="RiverName" type="text" />
                         </td>
 
-                        <td>
-                            手机号:
+                        <td style="width: 100px">
+                            河道等级:
                         </td>
-                        <td>
-                            <input id="Mobile" name="Mobile" type="text" />
-                        </td>
-                        <td>
-                            是否有效:
-                        </td>
-                        <td>
-                            <select id="IsActive" name="IsActive">
-                                <option value="0">全部</option>
-                                <option value="1">是</option>
-                                <option value="-1">否</option>
+                        <td style="width: 100px">
+                            <select id="RiverRank" name="RiverRank">
+                                <option value="区级">区级</option>
+                                <option value="镇级">镇级</option>
                             </select>
                         </td>
+
                         <td>
                             <a href="#" class="easyui-linkbutton" iconcls="icon-search" id="btnSearch">搜索</a>
                         </td>
                     </tr>
-
                 </table>
             </form>
         </div>
     </div>
 </div>
+
+
+
 
 

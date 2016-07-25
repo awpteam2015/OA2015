@@ -1,0 +1,191 @@
+﻿
+
+
+
+
+@{
+    ViewBag.Title = "Hd";
+    Layout = "~/Views/Shared/_LayoutHandler.cshtml";
+}
+
+@section JavaScript{
+    <script src="/Areas/RiverManager/Scripts/RiverProblemApply/Hd.js?JsParamter=@SiteConfig.GetConfig().JsParamter"></script>
+}
+<div style="display: none">
+    <input id="BindEntity" type="text" value="@ViewBag.BindEntity" />
+    <input id="Command" type="hidden" />
+</div>
+<div class="mtable_div">
+    <form id="form1">
+        <table class="mtable">
+            <tr>
+                <td style="width: 100px;">
+                    河流名称<span style="color: Red">*</span>:
+                </td>
+                <td>
+                    <input id="RiverId" name="RiverId" type="text" />
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    所属部门<span style="color: Red">*</span>:
+                </td>
+                <td>
+                    <select id="DepartmentCode" name="DepartmentCode"></select>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    河长名称<span style="color: Red">*</span>:
+                </td>
+                <td>
+                    <select id="UserCode" name="UserCode"></select>
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    标题<span style="color: Red">*</span>:
+                </td>
+                <td>
+                    <input id="Title" name="Title" type="text" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    问题类型<span style="color: Red">*</span>:
+                </td>
+                <td>
+                    <select id="ProblemType" name="ProblemType">
+                        <option value="">请选择</option>
+                        <option value="1">日常巡河</option>
+                        <option value="2">问题上报</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    问题描述<span style="color: Red">*</span>:
+                </td>
+                <td>
+                    <textarea id="Des" name="Des" style="width: 300px;height: 200px"></textarea>
+                </td>
+            </tr>
+
+            @*<tr>
+                    <td>
+                        坐标<span style="color: Red">*</span>:
+                    </td>
+                    <td>
+                        <input id="Coords" name="Coords" type="text" />
+                    </td>
+                </tr>*@
+
+            @*<tr>
+                    <td>
+                        问题状态 <span style="color: Red">*</span>:
+                    </td>
+                    <td>
+                        <input id="State" name="State" type="text" />
+                    </td>
+                </tr>*@
+
+            @*<tr>
+                    <td>
+                        部门转发备注<span style="color: Red">*</span>:
+                    </td>
+                    <td>
+                        <input id="DepartmentRemark" name="DepartmentRemark" type="text" />
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        部门操作时间<span style="color: Red">*</span>:
+                    </td>
+                    <td>
+                        <input id="DepartmentOpTime" name="DepartmentOpTime" type="text" />
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        顶级部门批注<span style="color: Red">*</span>:
+                    </td>
+                    <td>
+                        <input id="TopDepartmentRemark" name="TopDepartmentRemark" type="text" />
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        顶级部门批注时间<span style="color: Red">*</span>:
+                    </td>
+                    <td>
+                        <input id="TopDepartmentOpTime" name="TopDepartmentOpTime" type="text" />
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        河长结束问题时间<span style="color: Red">*</span>:
+                    </td>
+                    <td>
+                        <input id="FinishOpTime" name="FinishOpTime" type="text" />
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        河长结束问题备注<span style="color: Red">*</span>:
+                    </td>
+                    <td>
+                        <input id="FinishRemark" name="FinishRemark" type="text" />
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        河长回退问题备注<span style="color: Red">*</span>:
+                    </td>
+                    <td>
+                        <input id="ReturnRemark" name="ReturnRemark" type="text" />
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        河长回退问题时间<span style="color: Red">*</span>:
+                    </td>
+                    <td>
+                        <input id="ReturnOpTime" name="ReturnOpTime" type="text" />
+                    </td>
+                </tr>*@
+
+
+
+
+
+
+
+
+
+
+        </table>
+    </form>
+</div>
+<div style="padding: 10px 10px 0 10px; text-align: center;">
+    @if (Request["PkId"] == null || int.Parse(Request["PkId"]) == 0)
+    {
+        <a id="btnAdd" class="easyui-linkbutton" iconcls="icon-add" href="javascript:void(0)">新增</a>
+    }
+    else
+    {
+        <a id="btnEdit" class="easyui-linkbutton" iconcls="icon-ok" href="javascript:void(0)">编辑</a>
+    }
+    <a id="btnClose" class="easyui-linkbutton" iconcls="icon-cancel" href="javascript:void(0)">关闭</a>
+</div>
+
+
+

@@ -6,7 +6,8 @@
         init: function () {
             return {
                 gridObj: new pro.GridBase("#datagrid", true),
-                gridObj2: new pro.GridBase("#datagrid2", false)
+                gridObj2: new pro.GridBase("#datagrid2", false),
+                gridObj3: new pro.GridBase("#datagrid3", false)
             };
         },
         initPage: function () {
@@ -70,6 +71,38 @@
               );
             initObj.gridObj2.grid('loadData', JSON.parse($("#RoleList").val()));
 
+            initObj.gridObj3.grid({
+                nowrap: false,
+                rownumbers: true, //行号
+                fitColumns: false,
+                singleSelect: false,
+                columns: [
+                    [
+         {
+             field: 'PkId', title: '河流ID', width: 100, formatter: function (value, row) {
+                 var checkHtml = row.Attr_IsCheck ? 'checked="checked"' : "";
+
+                 return '<input name="RiverId"  value="' + value + '"   type="checkbox"  value="' + row.PkId + '" ' + checkHtml + '/>' + value;
+             }
+         },
+         { field: 'RiverName', title: '河流名称', width: 100 },
+           {
+               field: 'Attr_RiverOwerPkId', hidden: false, title: 'Attr_RiverOwerPkId', width: 100, formatter: function (value, row) {
+                   return '<input  name="Attr_RiverOwerPkId_' + row.PkId + '" type="text" value="' + value + '" />';
+               }
+           }
+                    ]
+                ],
+                pagination: false,
+                pageSize: 20, //每页显示的记录条数，默认为10     
+                pageList: [20, 30, 40], //可以设置每页记录条数的列表,
+                onLoadSuccess: function () {
+
+                }
+            }
+           );
+            initObj.gridObj3.grid('loadData', JSON.parse($("#RiverList").val()));
+
 
             $("#btnAdd").click(function () {
                 pro.UserInfo.HdPage.submit("Add");
@@ -83,8 +116,38 @@
                 parent.pro.UserInfo.ListPage.closeTab("");
             });
 
+
+            $('#Duty').combobox({
+                required: true,
+                editable: false,
+                valueField: 'KeyValue',
+                textField: 'KeyName',
+                url: '/HRManager/Dictionary/GetListByCode?ParentKeyCode=Duty',
+                onLoadSuccess: function () {
+                    if (pro.commonKit.getUrlParam("PkId") > 0) {
+                        $("#Duty").combobox('setValue', bindEntity['Duty']);
+                    }
+                }
+            });
+
+
+            $('#Lever').combobox({
+                required: true,
+                editable: false,
+                valueField: 'KeyValue',
+                textField: 'KeyName',
+                url: '/HRManager/Dictionary/GetListByCode?ParentKeyCode=Lever',
+                onLoadSuccess: function () {
+                    if (pro.commonKit.getUrlParam("PkId") > 0) {
+                        $("#Lever").combobox('setValue', bindEntity['Lever']);
+                    }
+                }
+            });
+
+
+
             if ($("#BindEntity").val()) {
-                pro.bindKit.config.excludeAreaIds = "div_datagrid,div_datagrid2";
+                pro.bindKit.config.excludeAreaIds = "div_datagrid,div_datagrid2,div_datagrid3";
                 var bindField = pro.bindKit.getHeadJson();
                 var bindEntity = JSON.parse($("#BindEntity").val());
                 for (var filedname in bindField) {
@@ -147,6 +210,18 @@
                 row.PkId = row.Attr_UserRolePkId;
             }
           );
+
+
+            pro.submitKit.config.columnPkidName = "RiverId";
+            pro.submitKit.config.columns = ["Attr_RiverOwerPkId"];
+            pro.submitKit.config.iscolumnPkidChecked = true;
+            pro.submitKit.config.isVerVal = true;
+            postData.RequestEntity.RiverOwerList = pro.submitKit.getRowJson();
+            $.each(postData.RequestEntity.RiverOwerList, function (index, row) {
+                row.PkId = row.Attr_RiverOwerPkId;
+            }
+          );
+
 
             this.submitExtend.addRule();
             if (!$("#form1").valid() && this.submitExtend.logicValidate()) {

@@ -1,0 +1,102 @@
+﻿
+
+
+
+
+@{
+    ViewBag.Title = "Hd";
+    Layout = "~/Views/Shared/_LayoutHandler.cshtml";
+}
+
+@section JavaScript{
+    <script src="/Areas/RiverManager/Scripts/RiverProblemApply/DbHd.js?JsParamter=@SiteConfig.GetConfig().JsParamter"></script>
+}
+<div style="display: none">
+    <input id="BindEntity" type="text" value="@ViewBag.BindEntity" />
+    <input id="Command" type="hidden" />
+</div>
+<div class="mtable_div">
+    <form id="form1">
+        <table class="mtable">
+            <tr>
+                <td style="width: 100px;">
+                    河流名称:
+                </td>
+                <td>
+                    <input id="RiverName" name="RiverName" type="text" disabled="disabled" />
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    所属部门:
+                </td>
+                <td>
+                    <input id="DepartmentName" name="DepartmentName" type="text" disabled="disabled" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    河长名称:
+                </td>
+                <td>
+                    <input id="UserName" name="UserName" type="text" disabled="disabled" />
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    标题:
+                </td>
+                <td>
+                    <input id="Title" name="Title" type="text" disabled="disabled" />
+
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    问题类型<span style="color: Red">*</span>:
+                </td>
+                <td>
+                    <select id="ProblemType" name="ProblemType" disabled="disabled">
+                        <option value="">请选择</option>
+                        <option value="1">日常巡河</option>
+                        <option value="2">问题上报</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    问题描述:
+                </td>
+                <td>
+                    <textarea id="Des" name="Des" style="width: 300px;height: 200px" disabled="disabled"></textarea>
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    督办备注<span style="color: Red">*</span>:
+                </td>
+                <td>
+                    <textarea id="UrgentRemark" name="UrgentRemark" style="width: 300px;height: 200px"></textarea>
+                </td>
+            </tr>
+
+        </table>
+    </form>
+</div>
+<div style="padding: 10px 10px 0 10px; text-align: center;">
+    @if (Request["PkId"] == null || int.Parse(Request["PkId"]) == 0)
+    {
+        <a id="btnAdd" class="easyui-linkbutton" iconcls="icon-add" href="javascript:void(0)">新增</a>
+    }
+    else
+    {
+        <a id="btnEdit" class="easyui-linkbutton" iconcls="icon-ok" href="javascript:void(0)">编辑</a>
+    }
+    <a id="btnClose" class="easyui-linkbutton" iconcls="icon-cancel" href="javascript:void(0)">关闭</a>
+</div>
+
+
+
