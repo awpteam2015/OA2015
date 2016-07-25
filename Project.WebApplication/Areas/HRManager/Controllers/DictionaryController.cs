@@ -91,8 +91,9 @@ namespace Project.WebApplication.Areas.HRManager.Controllers
             var addResult = DictionaryService.GetInstance().Add(postData.RequestEntity);
             var result = new AjaxResponse<DictionaryEntity>()
             {
-                success = true,
-                result = postData.RequestEntity
+                success = addResult.Item1,
+                result = postData.RequestEntity,
+                error = addResult.Item1 ? null : new ErrorInfo(addResult.Item2)
             };
             return new AbpJsonResult(result, new NHibernateContractResolver());
         }

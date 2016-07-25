@@ -10,6 +10,8 @@ using System.Collections.Generic;
 using Project.Infrastructure.FrameworkCore.DataNhibernate.Helpers;
 using Project.Model.HRManager;
 using Project.Repository.HRManager;
+using Project.Service.HRManager.Validate;
+using System;
 
 namespace Project.Service.HRManager
 {
@@ -38,9 +40,15 @@ namespace Project.Service.HRManager
         /// </summary>
         /// <param name="entity"></param>
         /// <returns></returns>
-        public System.Int32 Add(DictionaryEntity entity)
+        public Tuple<bool, string> Add(DictionaryEntity entity)
         {
-            return _dictionaryRepository.Save(entity);
+            var validateResult = DictionaryValidate.GetInstance().IsHasSameKeyCode(entity.KeyCode);
+            if (!validateResult.Item1)
+            {
+                return validateResult;
+            }
+            var bl = _dictionaryRepository.Save(entity);
+            return new Tuple<bool, string>(bl > 0, ""); ;
         }
 
 
@@ -163,8 +171,8 @@ namespace Project.Service.HRManager
             #region
             // if (!string.IsNullOrEmpty(where.PkId))
             //  expr = expr.And(p => p.PkId == where.PkId);
-            // if (!string.IsNullOrEmpty(where.KeyCode))
-            //  expr = expr.And(p => p.KeyCode == where.KeyCode);
+            if (!string.IsNullOrEmpty(where.KeyCode))
+                expr = expr.And(p => p.KeyCode == where.KeyCode);
             if (!string.IsNullOrEmpty(where.ParentKeyCode))
                 expr = expr.And(p => p.ParentKeyCode == where.ParentKeyCode);
             // if (!string.IsNullOrEmpty(where.KeyName))
