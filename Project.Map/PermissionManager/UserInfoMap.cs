@@ -18,8 +18,6 @@ namespace Project.Map.PermissionManager
             Map(p => p.Mobile);
             Map(p => p.IsActive);
 
-            Map(p => p.Duty);
-            Map(p => p.Lever);
 
             HasMany(p => p.UserDepartmentList)
     .AsSet()
@@ -43,13 +41,6 @@ namespace Project.Map.PermissionManager
 .PropertyRef("UserCode")
 .KeyColumn("UserCode");
 
-
-            HasMany(p => p.RiverOwerList)
-.AsSet()
-.LazyLoad()
-.Cascade.All().Inverse()
-.PropertyRef("UserCode")
-.KeyColumn("UserCode");
 
         }
     }

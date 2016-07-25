@@ -88,10 +88,6 @@
     <Compile Include="ReportManager\EmployeeInOutEntity.cs" />
     <Compile Include="ReportManager\EmployeeRsEntity.cs" />
     <Compile Include="ReportManager\HREmployeeViewEntity.cs" />
-    <Compile Include="RiverManager\RiverCheckEntity.cs" />
-    <Compile Include="RiverManager\RiverEntity.cs" />
-    <Compile Include="RiverManager\RiverOwerEntity.cs" />
-    <Compile Include="RiverManager\RiverProblemApplyEntity.cs" />
     <Compile Include="SystemSetManager\HolidayDetailEntity.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SystemSetManager\IndexPageSetEntity.cs" />

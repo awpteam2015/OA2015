@@ -21,8 +21,8 @@ var pro = pro || {};
                 rownumbers: true, //行号
                 singleSelect: true,
                 columns: [[
-         { field: 'UserCode', title: '登录账号', width: 100 },
-         { field: 'UserName', title: '登录姓名', width: 100 },
+         { field: 'UserCode', title: '用户名', width: 100 },
+         { field: 'UserName', title: '姓名', width: 100 },
          { field: 'Email', title: '电子邮件', width: 100 },
          { field: 'Mobile', title: '手机号', width: 100 },
          { field: 'Tel', title: '家庭电话', width: 100 },

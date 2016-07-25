@@ -104,9 +104,6 @@
     <Compile Include="HRManager\EmployeeInfoService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ReportManager\HrReportService.cs" />
-    <Compile Include="RiverManager\RiverCheckService.cs" />
-    <Compile Include="RiverManager\RiverProblemApplyService.cs" />
-    <Compile Include="RiverManager\RiverService.cs" />
     <Compile Include="SystemSetManager\HolidayDetailService.cs" />
     <Compile Include="HRManager\YearHholidayDefinitionService.cs" />
     <Compile Include="SystemSetManager\IndexPageSetService.cs" />

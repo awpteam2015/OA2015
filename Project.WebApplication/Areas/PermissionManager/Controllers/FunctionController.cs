@@ -203,7 +203,7 @@ namespace Project.WebApplication.Areas.PermissionManager.Controllers
                     Action = urlRoute[3],
                     CreationTime = DateTime.Now,
                     CreatorUserCode = LoginUserInfo.UserCode,
-                    FunctionDetailCode = "btnView",
+                    FunctionDetailCode = "btn_View",
                     FunctionDetailName = "浏览"
                 });
             }

@@ -7,7 +7,6 @@ using AutoMapper;
 using Project.Infrastructure.FrameworkCore.AutoMapper;
 using Project.Model.HRManager;
 using Project.Model.PermissionManager;
-using Project.Model.RiverManager;
 using Project.Service.PermissionManager.DTO;
 
 namespace Project.Service
@@ -21,11 +20,6 @@ namespace Project.Service
 
         private static void InitAutoMapper()
         {
-            Mapper.CreateMap<RiverEntity, RiverEntity>().IgnoreAllNull();
-            Mapper.CreateMap<RiverCheckEntity, RiverCheckEntity>().IgnoreAllNull();
-            Mapper.CreateMap<RiverProblemApplyEntity, RiverProblemApplyEntity>().IgnoreAllNull();
-            Mapper.CreateMap<RiverOwerEntity, RiverOwerEntity>().IgnoreAllNull();
-
             Mapper.CreateMap<UserDepartmentEntity, UserDepartmentLoginModel>().IgnoreAllNull();
             Mapper.CreateMap<EmployeeInfoEntity, TechnicalEntity>().IgnoreAllNull();
             Mapper.CreateMap<EmployeeInfoEntity, EmployeeInfoEntity>().IgnoreAllNull();

@@ -11,7 +11,6 @@ using Project.Infrastructure.FrameworkCore.Domain.Entities;
 using Project.Infrastructure.FrameworkCore.ToolKit;
 using Project.Model.PermissionManager;
 using Project.Repository.PermissionManager;
-using Project.Repository.RiverManager;
 using Project.Service.PermissionManager.DTO;
 using Project.Service.PermissionManager.Validate;
 
@@ -24,7 +23,6 @@ namespace Project.Service.PermissionManager
         private readonly UserInfoRepository _userInfoRepository;
         private readonly UserDepartmentRepository _userDepartmentRepository;
         private readonly UserRoleRepository _userRoleRepository;
-        private readonly RiverOwerRepository _riverOwerRepository;
         private readonly FunctionDetailRepository _functionDetailRepository;
         private readonly UserFunctionDetailRepository _userFunctionDetailRepository;
 
@@ -35,7 +33,6 @@ namespace Project.Service.PermissionManager
             _userRoleRepository = new UserRoleRepository();
             this._functionDetailRepository = new FunctionDetailRepository();
             _userFunctionDetailRepository = new UserFunctionDetailRepository();
-            _riverOwerRepository=new RiverOwerRepository();
         }
 
         public static UserInfoService GetInstance()
@@ -196,9 +193,6 @@ namespace Project.Service.PermissionManager
             var deleteList2 = oldEntity.UserRoleList.Where(
                   p => entity.UserRoleList.All(x => x.RoleId != p.RoleId)).ToList();
 
-            var deleteList3 = oldEntity.RiverOwerList.Where(
-                 p => entity.RiverOwerList.All(x => x.RiverId != p.RiverId)).ToList();
-
             using (var tx = NhTransactionHelper.BeginTransaction())
             {
                 try
@@ -206,14 +200,13 @@ namespace Project.Service.PermissionManager
                     _userInfoRepository.Merge(entity);
                     deleteList.ForEach(p => { _userDepartmentRepository.Delete(p); });
                     deleteList2.ForEach(p => { _userRoleRepository.Delete(p); });
-                    deleteList3.ForEach(p => { _riverOwerRepository.Delete(p); });
                     tx.Commit();
                     return new Tuple<bool, string>(true, "");
                 }
-                catch(Exception e)
+                catch
                 {
                     tx.Rollback();
-                    throw e;
+                    throw;
                 }
             }
         }
