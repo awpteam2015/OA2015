@@ -299,7 +299,7 @@ namespace Project.Service.PermissionManager
                     return new string[] {"999999"};
                 return retList;
             }
-            return new string[] { departmentCode };
+            //return new string[] { departmentCode };
 
             var parentDepartmentEntity = GetModelByDepartmentCode(departmentCode);
             var extEntity = new DepartmentExtEntity() { childrenAll = new List<DepartmentEntity>() };

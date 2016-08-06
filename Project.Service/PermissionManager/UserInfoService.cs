@@ -57,7 +57,7 @@ namespace Project.Service.PermissionManager
 
                 var loginUserInfo = Mapper.Map<UserInfoEntity, LoginUserInfoDTO>(userInfoEntity);
                 loginUserInfo.IsAdmin = loginUserInfo.UserCode.ToUpper() == "ADMIN";
-                loginUserInfo.UserDepartmentIntList=new List<string>();
+                loginUserInfo.UserDepartmentIntList = new List<string>();
                 loginUserInfo.UserDepartmentList.ForEach(p => loginUserInfo.UserDepartmentIntList.Add(p.DepartmentCode));
                 loginUserInfo.UserDepartmentList.Clear();
                 return new Tuple<bool, string, LoginUserInfoDTO>(true, "", loginUserInfo);
@@ -153,21 +153,21 @@ namespace Project.Service.PermissionManager
         }
 
 
-        public Tuple<bool, string> ChangePassword(string userCode,string password)
+        public Tuple<bool, string> ChangePassword(string userCode, string password)
         {
             var model = this.GetUserInfo(userCode);
-            model.Password= Encrypt.MD5Encrypt(password);//加密
+            model.Password = Encrypt.MD5Encrypt(password);//加密
             try
             {
                 _userInfoRepository.Update(model);
-                return  new Tuple<bool, string>(true,"");
+                return new Tuple<bool, string>(true, "");
             }
             catch (Exception)
             {
-                
+
                 throw;
             }
-           
+
         }
 
 
@@ -184,7 +184,10 @@ namespace Project.Service.PermissionManager
             entity.CreatorUserCode = oldEntity.CreatorUserCode;
             if (entity.Password != oldEntity.Password)
             {
-                entity.Password = Encrypt.MD5Encrypt(entity.Password);//加密
+                if (string.IsNullOrEmpty(entity.Password))
+                    entity.Password = oldEntity.Password;//加密
+                else
+                    entity.Password = Encrypt.MD5Encrypt(entity.Password);//加密
             }
 
             var deleteList = oldEntity.UserDepartmentList.Where(

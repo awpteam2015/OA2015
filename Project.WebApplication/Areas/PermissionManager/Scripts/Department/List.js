@@ -41,7 +41,7 @@ var pro = pro || {};
                             //        return ret;               
                             //    }
                             //},
-                            { field: 'Remark', title: '备注', width: 200 }
+                            { field: 'Remark', title: '单位别称', width: 200 }
                         ]
                     ]
                 }
