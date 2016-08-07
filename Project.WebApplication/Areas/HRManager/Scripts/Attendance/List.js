@@ -40,6 +40,24 @@ var pro = pro || {};
 
             pro.DepartmentControl.init();
 
+            abp.ajax({
+                url: "/HRManager/Dictionary/GetListByCode?ParentKeyCode=KQZT"
+                //,data: JSON.stringify(postData)
+            }).done(
+             function (dataresult, data) {
+                 var html = '<option value="">全部</option>';
+
+                 $.each(dataresult, function (i, item) {
+                     html += "<option value='" + item.KeyValue + "'>" + item.KeyName + "</option>";
+                 });
+                 $("#State").html(html);
+             }
+         ).fail(
+          function (errordetails, errormessage) {
+              //  $.alertExtend.error();
+          }
+         );
+
 
             $('#btnExport').click(function () {
 

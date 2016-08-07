@@ -190,6 +190,10 @@ namespace Project.Service.HRManager
             //  expr = expr.And(p => p.AttendanceUploadRecordId == where.AttendanceUploadRecordId);
             if (!string.IsNullOrEmpty(where.EmployeeCode))
                 expr = expr.And(p => p.EmployeeCode == where.EmployeeCode);
+            if (!string.IsNullOrEmpty(where.EmployeeName))
+                expr = expr.And(p => p.EmployeeName == where.EmployeeName);
+            if (!string.IsNullOrEmpty(where.State))
+                expr = expr.And(p => p.State == where.State);
             if (!string.IsNullOrEmpty(where.DepartmentCode))
                 expr = expr.And(p => p.DepartmentCode==where.DepartmentCode);
             // if (!string.IsNullOrEmpty(where.DepartmentName))
@@ -200,6 +204,8 @@ namespace Project.Service.HRManager
                 expr = expr.And(p => p.Date >= where.Attr_StartDate);
             if (where.Attr_EndDate != null)
                 expr = expr.And(p => p.Date < where.Attr_EndDate);
+            if (where.Date != null)
+                expr = expr.And(p => p.Date== where.Date);
             // if (!string.IsNullOrEmpty(where.Remark))
             //  expr = expr.And(p => p.Remark == where.Remark);
             // if (!string.IsNullOrEmpty(where.CreatorUserCode))

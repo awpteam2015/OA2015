@@ -27,6 +27,7 @@
 
             });
 
+
             $("#btnAdd").click(function () {
                 pro.Attendance.HdPage.submit("Add");
             });

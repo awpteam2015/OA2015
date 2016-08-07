@@ -113,6 +113,16 @@ namespace Project.Model.HRManager
         #endregion
 
     }
+
+
+    [Serializable]
+    public class AttendanceResponse
+    {
+        public string EmployeeCode { get; set; }
+        public string EmployeeName { get; set; }
+        public string State { get; set; }
+        public DateTime Date { get; set; }
+    }
 }
 
 

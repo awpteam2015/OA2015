@@ -20,6 +20,8 @@ namespace Project.Service
 
         private static void InitAutoMapper()
         {
+            Mapper.CreateMap<AttendanceEntity, AttendanceResponse>().IgnoreAllNull();
+
             Mapper.CreateMap<UserDepartmentEntity, UserDepartmentLoginModel>().IgnoreAllNull();
             Mapper.CreateMap<EmployeeInfoEntity, TechnicalEntity>().IgnoreAllNull();
             Mapper.CreateMap<EmployeeInfoEntity, EmployeeInfoEntity>().IgnoreAllNull();
