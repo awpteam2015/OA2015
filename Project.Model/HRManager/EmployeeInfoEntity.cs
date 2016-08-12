@@ -27,7 +27,7 @@ namespace Project.Model.HRManager
             this.ProfessionList = new HashSet<ProfessionEntity>();
             this.YearAssessmentList = new HashSet<YearAssessmentEntity>();
             this.EmployeeFileList = new HashSet<EmployeeFileEntity>();
-            this.WageList=new HashSet<YGWageEntity>();
+            this.WageList = new HashSet<YGWageEntity>();
             //this.DepartModel = new DepartmentEntity();
         }
         #region 属性
@@ -227,13 +227,137 @@ namespace Project.Model.HRManager
         /// <summary>
         /// 上传列表
         /// </summary>
-        public virtual  ISet<EmployeeFileEntity> EmployeeFileList { get; set; }
+        public virtual ISet<EmployeeFileEntity> EmployeeFileList { get; set; }
 
         /// <summary>
         /// 人事工资列表
         /// </summary>
         public virtual ISet<YGWageEntity> WageList { get; set; }
         //public virtual DepartmentEntity DepartModel { get; set; }
+        #endregion
+    }
+
+    public class EmployeeInfoResponse
+    {
+        #region 属性
+        /// <summary>
+        /// 员工编号
+        /// </summary>
+        public virtual System.String EmployeeCode { get; set; }
+        /// <summary>
+        /// 员工名称
+        /// </summary>
+        public virtual System.String EmployeeName { get; set; }
+
+        public virtual System.String EmployeeNameAndEmployeeCode
+        {
+            get { return PayCode + EmployeeName; }
+        }
+
+        /// <summary>
+        /// 所属部门
+        /// </summary>
+        public virtual System.String DepartmentCode { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public virtual System.String DepartmentName { get; set; }
+        /// <summary>
+        /// 工号
+        /// </summary>
+        public virtual System.String JobName { get; set; }
+        /// <summary>
+        /// 中文简拼
+        /// </summary>
+        public virtual System.String PayCode { get; set; }
+        /// <summary>
+        /// 姓别
+        /// </summary>
+        public virtual System.Int32? Sex { get; set; }
+
+        /// <summary>
+        /// 性别中名
+        /// </summary>
+        public virtual System.String SexName { get; set; }
+        /// <summary>
+        /// 身份证
+        /// </summary>
+        public virtual System.String CertNo { get; set; }
+        /// <summary>
+        /// 生日
+        /// </summary>
+        public virtual System.DateTime? Birthday { get; set; }
+        /// <summary>
+        /// 技术职称名称
+        /// </summary>
+        public virtual System.String TechnicalTitleName { get; set; }
+        /// <summary>
+        /// 技术职称
+        /// </summary>
+        public virtual System.String TechnicalTitle { get; set; }
+        /// <summary>
+        /// 职务名称
+        /// </summary>
+        public virtual System.String DutiesName { get; set; }
+        /// <summary>
+        /// 单位职务
+        /// </summary>
+        public virtual System.String Duties { get; set; }
+        /// <summary>
+        /// 在职状态
+        /// </summary>
+        public virtual System.String WorkState { get; set; }
+        /// <summary>
+        /// 工龄
+        /// </summary>
+        public virtual System.Int32? WorkingYears { get; set; }
+        /// <summary>
+        /// 员工类型
+        /// </summary>
+        public virtual System.String EmployeeType { get; set; }
+        /// <summary>
+        /// 员工类型名称
+        /// </summary>
+        public virtual System.String EmployeeTypeName { get; set; }
+        /// <summary>
+        /// 家庭地址
+        /// </summary>
+        public virtual System.String HomeAddress { get; set; }
+        /// <summary>
+        /// 手机号
+        /// </summary>
+        public virtual System.String MobileNO { get; set; }
+
+        /// <summary>
+        /// 状态
+        /// </summary>
+        public virtual System.Int32? State { get; set; }
+
+        /// <summary>
+        /// 备注
+        /// </summary>
+        public virtual System.String Remark { get; set; }
+
+        //
+        public virtual string LastModifierUserName { get; set; }
+        /// <summary>
+        /// 在职状态名称
+        /// </summary>
+        public virtual System.String WorkStateName { get; set; }
+
+
+        public virtual System.String PostLevel { get; set; }
+
+        public virtual System.String PostLevelName { get; set; }
+
+        public virtual System.String PostProperty { get; set; }
+        public virtual System.String PostPropertyName { get; set; }
+        /// <summary>
+        /// 政治面貌
+        /// </summary>
+        public virtual System.String PoliticsName { get; set; }
+
         #endregion
     }
 }

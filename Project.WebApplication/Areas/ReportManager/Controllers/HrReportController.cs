@@ -105,6 +105,169 @@ namespace Project.WebApplication.Areas.ReportManager.Controllers
             Response.End();
         }
 
+
+        public AbpJsonResult ExportEmployeeExcel()
+        {
+            var type = RequestHelper.GetQueryString("ReportType");
+            var filepath = "/UploadFile/Temp/";
+            var rootpath = this.Request.MapPath("/");
+            var fileName = DateTime.Now.ToString("yyyyMMHHddmmssfff") + ".xls";
+
+            var where = new HREmployeeViewEntity();
+            if (!string.IsNullOrWhiteSpace(RequestHelper.GetQueryString("Date")))
+            {
+                var date = RequestHelper.GetDateTime("Date").GetValueOrDefault();
+                where.CreationTime = date;
+            }
+            if (!string.IsNullOrWhiteSpace(RequestHelper.GetQueryString("EndDate")))
+            {
+                var dateEnd = RequestHelper.GetDateTime("EndDate").GetValueOrDefault();
+                where.CreationTimeEnd = dateEnd.AddDays(1);
+            }
+            where.DepartmentCode = RequestHelper.GetQueryString("DepartmentCode");
+            if (!string.IsNullOrWhiteSpace(where.DepartmentCode))
+            {
+                where.DepartmentCode = string.Join("','", (DepartmentService.GetInstance().GetChiledArr(where.DepartmentCode, LoginUserInfo.UserDepartmentList.ToList(), LoginUserInfo.IsAdmin)));
+            }
+            where.Sex = RequestHelper.GetQueryInt("Sex", -1);
+            where.IsCommy = RequestHelper.GetQueryInt("IsCommy", -1);
+
+            where.EmployeeType = RequestHelper.GetQueryString("EmployeeType");
+            where.Duties = RequestHelper.GetQueryString("Duties");
+            where.PostLevel = RequestHelper.GetQueryString("PostLevel");
+            where.PostProperty = RequestHelper.GetQueryString("PostProperty");
+            where.Education = RequestHelper.GetQueryString("Education");
+            where.Degree = RequestHelper.GetQueryString("Degree");
+
+            where.PoliticsName = RequestHelper.GetQueryString("PoliticsName");
+
+            where.LevNum = RequestHelper.GetQueryString("LevNum");
+            where.KHComment = RequestHelper.GetQueryString("KHComment");
+            //where.DepartmentCode = RequestHelper.GetFormString("DepartmentCode");
+            var searchList = HrReportService.GetInstance().GetEmployeeZHReport(where, 0, 0, true);
+            //var searchList = EmployeeInfoService.GetInstance().GetList(where, false);
+            searchList.Item1.ForEach(p => p.SexName = (p.Sex == 0 ? "女" : "男"));
+            var tempFileName = "EmployeeReportExport.xlsx";//模板名称
+                                                           //switch(type)
+                                                           //{
+
+            //    case "1":
+            //        tempFileName = "LXEmployeeReportExport.xlsx";//员工类型统计报表
+            //        break;
+            //    case "2":
+            //        ViewBag.TitleStr = "员工岗位统计报表";
+            //        break;
+            //    case "3":
+            //        ViewBag.TitleStr = "员工部门统计报表";
+            //        break;
+            //    case "4":
+            //        ViewBag.TitleStr = "员工党员统计报表";
+            //        break;
+            //    case "5":
+            //        ViewBag.TitleStr = "员工学历统计报表";
+            //        break;
+            //    default:
+            //        break;
+            //}
+            var bl = AsposeCellsHelper.ExportToExcel<IList<HREmployeeViewEntity>>(searchList.Item1, "EmployeeInfo",
+                $"{rootpath}/TemplateFile/{tempFileName}", $"{rootpath}{filepath}{fileName}"
+                , new Dictionary<string, object>());
+            //var bl = true;
+
+            var result = new AjaxResponse<EmployeeInfoEntity>()
+            {
+                success = bl,
+                targeturl = filepath + fileName
+            };
+            return new AbpJsonResult(result, new NHibernateContractResolver());
+
+        }
+
+
+        public AbpJsonResult ExportRsEmployeeExcel()
+        {
+            var type = RequestHelper.GetQueryString("ReportType");
+            var filepath = "/UploadFile/Temp/";
+            var rootpath = this.Request.MapPath("/");
+            var fileName = DateTime.Now.ToString("yyyyMMHHddmmssfff") + ".xls";
+
+            var where = new HREmployeeViewEntity();
+            if (!string.IsNullOrWhiteSpace(RequestHelper.GetQueryString("Date")))
+            {
+                var date = RequestHelper.GetDateTime("Date").GetValueOrDefault();
+                where.CreationTime = date;
+            }
+            if (!string.IsNullOrWhiteSpace(RequestHelper.GetQueryString("EndDate")))
+            {
+                var dateEnd = RequestHelper.GetDateTime("EndDate").GetValueOrDefault();
+                where.CreationTimeEnd = dateEnd.AddDays(1);
+            }
+            where.DepartmentCode = RequestHelper.GetQueryString("DepartmentCode");
+            if (!string.IsNullOrWhiteSpace(where.DepartmentCode))
+            {
+                where.DepartmentCode = string.Join("','", (DepartmentService.GetInstance().GetChiledArr(where.DepartmentCode, LoginUserInfo.UserDepartmentList.ToList(), LoginUserInfo.IsAdmin)));
+            }
+
+
+            var searchList = HrReportService.GetInstance().GerEmployeeRsReport(where, 0, 0, true);
+            var tempFileName = "EmployeeRsReportExport.xlsx";//模板名称
+                                                         
+            var bl = AsposeCellsHelper.ExportToExcel<IList<EmployeeRsEntity>>(searchList.Item1, "EmployeeInfo",
+                $"{rootpath}/TemplateFile/{tempFileName}", $"{rootpath}{filepath}{fileName}"
+                , new Dictionary<string, object>());
+            //var bl = true;
+
+            var result = new AjaxResponse<EmployeeInfoEntity>()
+            {
+                success = bl,
+                targeturl = filepath + fileName
+            };
+            return new AbpJsonResult(result, new NHibernateContractResolver());
+
+        }
+
+        public AbpJsonResult ExportInOrOutEmployeeExcel()
+        {
+            var type = RequestHelper.GetQueryString("ReportType");
+            var filepath = "/UploadFile/Temp/";
+            var rootpath = this.Request.MapPath("/");
+            var fileName = DateTime.Now.ToString("yyyyMMHHddmmssfff") + ".xls";
+
+            var where = new HREmployeeViewEntity();
+            if (!string.IsNullOrWhiteSpace(RequestHelper.GetQueryString("Date")))
+            {
+                var date = RequestHelper.GetDateTime("Date").GetValueOrDefault();
+                where.CreationTime = date;
+            }
+            if (!string.IsNullOrWhiteSpace(RequestHelper.GetQueryString("EndDate")))
+            {
+                var dateEnd = RequestHelper.GetDateTime("EndDate").GetValueOrDefault();
+                where.CreationTimeEnd = dateEnd.AddDays(1);
+            }
+            where.DepartmentCode = RequestHelper.GetQueryString("DepartmentCode");
+            if (!string.IsNullOrWhiteSpace(where.DepartmentCode))
+            {
+                where.DepartmentCode = string.Join("','", (DepartmentService.GetInstance().GetChiledArr(where.DepartmentCode, LoginUserInfo.UserDepartmentList.ToList(), LoginUserInfo.IsAdmin)));
+            }
+
+
+            var searchList = HrReportService.GetInstance().GetHREmployeeReport(where, 0, 0, true);
+            var tempFileName = "EmployeeInOrOutReportExport.xlsx";//模板名称
+
+            var bl = AsposeCellsHelper.ExportToExcel<IList<EmployeeInOutEntity>>(searchList.Item1, "EmployeeInfo",
+                $"{rootpath}/TemplateFile/{tempFileName}", $"{rootpath}{filepath}{fileName}"
+                , new Dictionary<string, object>());
+            //var bl = true;
+
+            var result = new AjaxResponse<EmployeeInfoEntity>()
+            {
+                success = bl,
+                targeturl = filepath + fileName
+            };
+            return new AbpJsonResult(result, new NHibernateContractResolver());
+
+        }
+
         public AttendanceViewEntity GetWhere1()
         {
             var where = new AttendanceViewEntity();
@@ -325,7 +488,7 @@ namespace Project.WebApplication.Areas.ReportManager.Controllers
             where.PostProperty = RequestHelper.GetFormString("PostProperty");
             where.Education = RequestHelper.GetFormString("Education");
             where.Degree = RequestHelper.GetFormString("Degree");
-            
+
             where.PoliticsName = RequestHelper.GetFormString("PoliticsName");
 
             where.LevNum = RequestHelper.GetFormString("LevNum");

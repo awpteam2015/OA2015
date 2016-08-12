@@ -26,6 +26,8 @@ namespace Project.Model.ReportManager
 
         public virtual int? Sex { get; set; }
 
+        public virtual System.String SexName { get; set; }
+
         public virtual System.String Duties { get; set; }
 
         /// <summary>
@@ -91,7 +93,7 @@ namespace Project.Model.ReportManager
         /// <summary>
         /// 学位
         /// </summary>
-        public virtual  System.String Degree { get; set; }
+        public virtual System.String Degree { get; set; }
 
         /// <summary>
         /// 学历名称

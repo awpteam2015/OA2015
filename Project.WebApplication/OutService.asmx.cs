@@ -28,7 +28,7 @@ namespace Project.WebApplication
         }
 
         [WebMethod]
- 
+
         public List<AttendanceResponse> GetAttendanceList(string EmployeeCode, string EmployeeName, string State, string Date)
         {
             var where = new AttendanceEntity();
@@ -45,8 +45,18 @@ namespace Project.WebApplication
             return mergInfo;
         }
 
+        [WebMethod]
+        public List<EmployeeInfoResponse> GetEmployeeList(string DepartCode)
+        {
+            var where = new EmployeeInfoEntity();
+            where.DepartmentCode = DepartCode;
+            var list = EmployeeInfoService.GetInstance().GetList(where);
+            var newlist = new List<EmployeeInfoResponse>();
+            var mergInfo = Mapper.Map(list, newlist);
+            return mergInfo;
+        }
     }
 
 
-    
+
 }

@@ -99,12 +99,30 @@ var pro = pro || {};
             $("#btnSearch").click(function () {
                 gridObj.search();
             });
-
-            //$('#btnExport').click(function () {
-            //    var urlParam = pro.commonKit.parseParam(gridObj.searchForm());
-            //    location.href = "/ReportManager/HrReport/ExportReport1?" + urlParam;
-            //});
-
+            $('#btnExport').click(function () {
+                var urlParam = pro.commonKit.parseParam(gridObj.searchForm());
+                // location.href = "/ReportManager/HrReport/ExportEmployeeExcel?" + urlParam;
+                $.messager.confirm("确认操作", "是否确认导出", function (bl) {
+                    if (!bl) return;
+                    abp.ajax({
+                        url: "/ReportManager/HrReport/ExportInOrOutEmployeeExcel?ReportType=" + $("#ReportType").val() + "&" + urlParam
+                    }).done(
+                    function (dataresult, data) {
+                        //
+                        if (data && data.success) {
+                            location.href = data.targeturl;
+                        }
+                        //$.alertExtend.info();
+                        //gridObj.search();
+                    }
+                    ).fail(
+                    function (errordetails, errormessage) {
+                        $.alertExtend.error();
+                    }
+                    );
+                });
+            });
+        
         },
         closeTab: function () {
             this.init().tabObj.closeTab();
