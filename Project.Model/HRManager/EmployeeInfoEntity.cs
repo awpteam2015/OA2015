@@ -182,6 +182,10 @@ namespace Project.Model.HRManager
 
         public virtual System.String PostProperty { get; set; }
         public virtual System.String PostPropertyName { get; set; }
+
+
+        public virtual System.String EngageInPost { get; set; }
+        public virtual System.String EngageInPostName { get; set; }
         /// <summary>
         /// 政治面貌
         /// </summary>
@@ -263,6 +267,16 @@ namespace Project.Model.HRManager
         /// 
         /// </summary>
         public virtual System.String DepartmentName { get; set; }
+
+        /// <summary>
+        ///父级编号
+        /// </summary>
+        public virtual string PDepartmentCode { get; set; }
+
+        /// <summary>
+        ///父级名称
+        /// </summary>
+        public virtual string PDepartmentName { get; set; }
         /// <summary>
         /// 工号
         /// </summary>
@@ -357,6 +371,10 @@ namespace Project.Model.HRManager
         /// 政治面貌
         /// </summary>
         public virtual System.String PoliticsName { get; set; }
+
+
+        public virtual System.String EngageInPost { get; set; }
+        public virtual System.String EngageInPostName { get; set; }
 
         #endregion
     }

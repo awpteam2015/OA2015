@@ -206,6 +206,8 @@ namespace Project.WebApplication.Areas.HRManager.Controllers
             var fileName = DateTime.Now.ToString("yyyyMMHHddmmssfff") + ".xls";
 
             var where = new EmployeeInfoEntity();
+            where.DepartmentCode = string.Join(",", (DepartmentService.GetInstance().GetChiledArr(where.DepartmentCode, LoginUserInfo.UserDepartmentList.ToList(), LoginUserInfo.IsAdmin)));
+
             //where.DepartmentCode = RequestHelper.GetFormString("DepartmentCode");
             var searchList = EmployeeInfoService.GetInstance().GetList(where, false);
             searchList.ForEach(p => p.SexName = (p.Sex == 0 ? "女" : "男"));
@@ -641,10 +643,11 @@ namespace Project.WebApplication.Areas.HRManager.Controllers
                         technicalEntity.GetDate = cells[i, 3].StringValue.ToDateTime();
                     technicalEntity.CerNo = cells[i, 4].StringValue.Trim();
                     technicalEntity.EmployeeID = tempmodel.PkId;
-                    if (cells[i, 5].StringValue.Length > 0)
-                        technicalEntity.EmployDate = cells[i, 5].StringValue.ToDateTime();
-                    if (cells[i, 6].StringValue.Length > 0)
-                        technicalEntity.EmployEndDate = cells[i, 6].StringValue.ToDateTime();
+                    //关闭聘用时间等等
+                    //if (cells[i, 5].StringValue.Length > 0)
+                    //    technicalEntity.EmployDate = cells[i, 5].StringValue.ToDateTime();
+                    //if (cells[i, 6].StringValue.Length > 0)
+                    //    technicalEntity.EmployEndDate = cells[i, 6].StringValue.ToDateTime();
                     if (TechnicalService.GetInstance().Add(technicalEntity) > 0)
                         sucessNum++;
                     else

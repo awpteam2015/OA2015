@@ -59,6 +59,8 @@ namespace Project.Map.HRManager
             Map(p => p.PostPropertyName);
             Map(p => p.PoliticsName);
             Map(p => p.IntoCompanyTime);
+            Map(p => p.EngageInPost);
+            Map(p => p.EngageInPostName);
 
             HasMany(p => p.WorkList)
             .AsSet()

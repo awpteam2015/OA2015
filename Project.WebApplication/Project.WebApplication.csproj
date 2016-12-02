@@ -208,6 +208,7 @@
     <Content Include="Areas\SystemSetManager\Scripts\IndexPageSet\List.js" />
     <Content Include="Config\hibernate.cfg.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
     </Content>
     <Content Include="Config\XMLFile1.xml" />
     <Content Include="Content\bootstrap.css" />
@@ -333,9 +334,9 @@
     <Content Include="Scripts\jqueryPlugins\jquery_tip\tip-yellow\tip-yellow.png" />
     <Content Include="Scripts\jqueryPlugins\jquery_tip\tip-yellow\tip-yellow_arrows.png" />
     <Content Include="Scripts\Account\Index.js" />
+    <Content Include="Scripts\jqueryPlugins\jquery_uploadify\jquery.uploadify.min.js" />
     <Content Include="Scripts\jqueryPlugins\jquery_validate\card.js" />
     <Content Include="Scripts\jqueryPlugins\jquery_uploadify\jquery.uploadify.js" />
-    <Content Include="Scripts\jqueryPlugins\jquery_uploadify\jquery.uploadify.min.js" />
     <Content Include="Scripts\jqueryPlugins\jquery_uploadify\uploadify-cancel.png" />
     <Content Include="Scripts\jqueryPlugins\jquery_uploadify\uploadify.css" />
     <Content Include="Scripts\jqueryPlugins\jquery_uploadify\uploadify.swf" />

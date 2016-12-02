@@ -22,6 +22,7 @@
                 xlOptionHtml: '',//学历<option></option>
                 xzOptionHtml: '',//学制<option></option>
                 zcOptionHtml: '',//职称<option></option>
+                zYLXOptionHtml: '',//专业类型<option></option>
                 jxjyOptionHtml: '',//继续教育学分类型<option></option>
                 gwgzOptionHtml: '',//岗位工资<option></option>
                 xzgzOptionHtml: '',//薪资工资<option></option>
@@ -145,6 +146,25 @@
                //  $.alertExtend.error();
            }
           );
+            //专业类型
+            abp.ajax({
+                url: "/HRManager/Dictionary/GetListByCode?ParentKeyCode=ZYLX"
+                //,data: JSON.stringify(postData)
+            }).done(
+            function (dataresult, data) {
+                initObj.zYLXOptionHtml = "";
+
+                $.each(dataresult, function (i, item) {
+                    initObj.zYLXOptionHtml += "<option value='" + item.KeyValue + "'>" + item.KeyName + "</option>";
+                });
+
+            }
+        ).fail(
+         function (errordetails, errormessage) {
+             //  $.alertExtend.error();
+         }
+        );
+
 
             abp.ajax({
                 url: "/HRManager/Dictionary/GetListByCode?ParentKeyCode=Degree"
@@ -202,12 +222,12 @@
             }).done(
 
           function (dataresult, data) {
-                 initObj.gwgzOptionHtml = "";
+              initObj.gwgzOptionHtml = "";
 
-                 $.each(dataresult, function (i, item) {
-                     initObj.gwgzOptionHtml += "<option value='" + item.KeyValue + "'>" + item.KeyName + "</option>";
-                 });
-             }).fail(
+              $.each(dataresult, function (i, item) {
+                  initObj.gwgzOptionHtml += "<option value='" + item.KeyValue + "'>" + item.KeyName + "</option>";
+              });
+          }).fail(
                  function (errordetails, errormessage) {
                      //  $.alertExtend.error();
                  });
@@ -325,6 +345,20 @@
                     }
                 }
             });
+
+            $('#EngageInPost').combobox({
+                required: true,
+                editable: false,
+                valueField: 'KeyValue',
+                textField: 'KeyName',
+                url: '/HRManager/Dictionary/GetListByCode?ParentKeyCode=EngageInPost',
+                onLoadSuccess: function () {
+                    if (pro.commonKit.getUrlParam("PkId") > 0) {
+                        $("#EngageInPost").combobox('setValue', bindEntity['EngageInPost']);
+                    }
+                }
+            });
+
 
             gridObjWork.grid({
                 url: '/HRManager/WorkExperience/GetAllList?EmployeeID=' + (pro.commonKit.getUrlParam("PkId") ? pro.commonKit.getUrlParam("PkId") : 0),
@@ -646,29 +680,38 @@
                             //}
                         },
                         {
+                            field: 'ZYLX',
+                            title: '专业类型',
+                            width: 120,
+                            formatter: function (value, row, index) {
+                                return pro.controlKit.getSelectHtml("T_ZYLX_" + row.PkId, value, initObj.zYLXOptionHtml, 110, true);
+                            }
+                        },
+                        {
                             field: 'CerNo',
                             title: '职称证书编号',
                             width: 130
                             //,formatter: function (value, row, index) {
                             //    return pro.controlKit.getInputHtml("P_CerNo_" + row.PkId, value);
                             //}
-                        },
-                        {
-                            field: 'EmployDate',
-                            title: '聘用时间',
-                            width: 130
-                            //,formatter: function (value, row, index) {
-                            //    return pro.controlKit.getInputDateHtml("P_EmployDate_" + row.PkId, value);
-                            //}
-                        },
-                        {
-                            field: 'EmployEndDate',
-                            title: '聘用结束时间',
-                            width: 130
-                            //,formatter: function (value, row, index) {
-                            //    return pro.controlKit.getInputDateHtml("P_EmployEndDate_" + row.PkId, value);
-                            //}
                         }
+                        //,
+                        //{
+                        //    field: 'EmployDate',
+                        //    title: '聘用时间',
+                        //    width: 130
+                        //    //,formatter: function (value, row, index) {
+                        //    //    return pro.controlKit.getInputDateHtml("P_EmployDate_" + row.PkId, value);
+                        //    //}
+                        //},
+                        //{
+                        //    field: 'EmployEndDate',
+                        //    title: '聘用结束时间',
+                        //    width: 130
+                        //    //,formatter: function (value, row, index) {
+                        //    //    return pro.controlKit.getInputDateHtml("P_EmployEndDate_" + row.PkId, value);
+                        //    //}
+                        //}
                     ]
                 ],
                 pagination: false,

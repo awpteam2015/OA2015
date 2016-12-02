@@ -13,7 +13,7 @@ using Project.Infrastructure.FrameworkCore.Domain.Entities.Component;
 
 namespace Project.Model.HRManager
 {
-    public class ProfessionEntity : Entity,IAudited
+    public class ProfessionEntity : Entity, IAudited
     {
         #region 属性
         /// <summary>
@@ -68,6 +68,14 @@ namespace Project.Model.HRManager
         /// 修改人
         /// </summary>
         public virtual System.String LastModifierUserCode { get; set; }
+
+
+        /// <summary>
+        /// 专业类别
+        /// </summary>
+        public virtual System.String ZYLX { get; set; }
+
+
 
         /// <summary>
         /// 聘用时间

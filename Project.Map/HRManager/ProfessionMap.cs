@@ -25,7 +25,8 @@ namespace  Project.Map.HRManager
             Map(p => p.TypeName);    
             Map(p => p.RangeName);    
             Map(p => p.GetDate);    
-            Map(p => p.CerNo);    
+            Map(p => p.CerNo);
+            Map(p => p.ZYLX);    
             Map(p => p.CreatorUserCode);    
             Map(p => p.CreatorUserName);    
             Map(p => p.CreationTime);    
