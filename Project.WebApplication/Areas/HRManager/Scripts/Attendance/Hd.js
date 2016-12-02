@@ -39,10 +39,10 @@
             $("#btnClose").click(function () {
                 parent.pro.Attendance.ListPage.closeTab("");
             });
-
+            var bindEntity = "";
             if ($("#BindEntity").val()) {
                 var bindField = pro.bindKit.getHeadJson();
-                var bindEntity = JSON.parse($("#BindEntity").val());
+                 bindEntity = JSON.parse($("#BindEntity").val());
                 for (var filedname in bindField) {
                     $("[name=" + filedname + "]").val(bindEntity[filedname]);
                 }
@@ -50,6 +50,20 @@
                 //行项目信息用json绑定控件
                 //alert(JSON.stringify(BindEntity.List));
             }
+
+
+            $('#State').combobox({
+                required: true,
+                editable: false,
+                valueField: 'KeyValue',
+                textField: 'KeyName',
+                url: '/HRManager/Dictionary/GetListByCode?ParentKeyCode=KQZT',
+                onLoadSuccess: function () {
+                    if (pro.commonKit.getUrlParam("PkId") > 0) {
+                        $("#State").combobox('setValue', bindEntity['State']);
+                    }
+                }
+            });
         },
         submit: function (command) {
             var postData = {};
